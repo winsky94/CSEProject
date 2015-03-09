@@ -1,28 +1,136 @@
 package po;
 
 public class TeamPO {
-	String teamName;               //球队全名
-	String location;               //所在地
-	String abLocation;             //所在地(缩写)
-	String conference;             //赛区
-	String partition;              //分区
-	String homeCourt;              //主场
-	String setUpTime;              //建立时间
-	int matchesNum;                //比赛场数
-	int shootHitNum;               //投篮命中率
-	int shootAttemptNum;           //投篮出手次数   
-	int threeHitNum;               //三分命中数
-	int threeAttemptNum;           //三分出手数    
-	int freeThrowHitNum;           //罚球命中数   
-	int freeThrowAttemptNum;       //罚球出手数       
-	int offenReboundNum;           //进攻篮板数
-	int defenReboundNum;           //防守篮板数
-    double winRate;                 //胜率
-    double offenRound;              //进攻回合
-    double offenEfficiency;         //进攻效率
-    double defenEfficiency;         //防守效率
-    double offenReboundEfficiency;  //进攻篮板效率
-    double defenReboundEfficiency;  //防守篮板效率
-    double stealEfficiency;         //抢断效率
-    double assistEfficiency;        //助攻率
+	private String id;                     //编号
+	private String teamName;               //球队全名
+	private String location;               //所在地
+	private String abLocation;             //所在地(缩写)
+	private String conference;             //赛区
+	private String partition;              //分区
+	private String homeCourt;              //主场
+	private String setUpTime;              //建立时间
+	
+	private CommonPO commonPO;
+	private int matchesNum;                //比赛场数
+	private int shootHitNum;               //投篮命中率
+	private int shootAttemptNum;           //投篮出手次数   
+	private int threeHitNum;               //三分命中数
+	private int threeAttemptNum;           //三分出手数    
+	private int freeThrowHitNum;           //罚球命中数   
+	private int freeThrowAttemptNum;       //罚球出手数       
+	private int offenReboundNum;           //进攻篮板数
+	private int defenReboundNum;           //防守篮板数
+	private double winRate;                 //胜率
+	private double offenRound;              //进攻回合
+	private double offenEfficiency;         //进攻效率
+	private double defenEfficiency;         //防守效率
+	private double offenReboundEfficiency;  //进攻篮板效率
+	private double defenReboundEfficiency;  //防守篮板效率
+	private double stealEfficiency;         //抢断效率
+	private double assistEfficiency;        //助攻率
+	
+	public String getId() {
+		return id;
+	}
+	
+	public String getTeamName() {
+		return teamName;
+	}
+	
+	public String getLocation() {
+		return location;
+	}
+	
+	public String getAbLocation() {
+		return abLocation;
+	}
+	
+	public String getConference() {
+		return conference;
+	}
+	
+	public String getPartition() {
+		return partition;
+	}
+	
+	public String getHomeCourt() {
+		return homeCourt;
+	}
+	
+	public String getSetUpTime() {
+		return setUpTime;
+	}
+	
+	public CommonPO getCommonPO() {
+		return commonPO;
+	}
+	
+	
+	public int getMatchesNum() {
+		return matchesNum;
+	}
+	
+	public int getShootHitNum() {
+		return shootHitNum;
+	}
+	
+	public int getShootAttemptNum() {
+		return shootAttemptNum;
+	}
+	
+	public int getThreeHitNum() {
+		return threeHitNum;
+	}
+	
+	public int getThreeAttemptNum() {
+		return threeAttemptNum;
+	}
+	
+	public int getFreeThrowHitNum() {
+		return freeThrowHitNum;
+	}
+	
+	public int getFreeThrowAttemptNum() {
+		return freeThrowAttemptNum;
+	}
+	
+	public int getOffenReboundNum() {
+		return offenReboundNum;
+	}
+	
+	public int getDefenReboundNum() {
+		return defenReboundNum;
+	}
+	
+	public double getWinRate() {
+		return winRate;
+	}
+	
+	public double getOffenRound() {
+		return offenRound;
+	}
+	
+	public double getOffenEfficiency() {
+		return offenEfficiency;
+	}
+	
+	public double getDefenEfficiency() {
+		return defenEfficiency;
+	}
+	
+	public double getOffenReboundEfficiency() {
+		return offenReboundEfficiency;
+	}
+	
+	public double getDefenReboundEfficiency() {
+		return defenReboundEfficiency;
+	}
+	
+	public double getStealEfficiency() {
+		return stealEfficiency;
+	}
+	
+	public double getAssistEfficiency() {
+		return assistEfficiency;
+	}
 }
