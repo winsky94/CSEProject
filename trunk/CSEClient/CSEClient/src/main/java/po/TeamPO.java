@@ -133,4 +133,109 @@ public class TeamPO {
 	public double getAssistEfficiency() {
 		return assistEfficiency;
 	}
+	
+	public void setId(String id) {
+		this.id=id;
+	}
+	
+	public void setTeamName(String teamName) {
+		this.teamName=teamName;
+	}
+	
+	public void setLocation(String location) {
+		this.location=location;
+	}
+	
+	public void setAbLocation(String abLocation) {
+		this.abLocation=abLocation;
+	}
+	
+	public void setConference(String conference) {
+		this.conference=conference;
+	}
+	
+	public void setPartition(String partition) {
+		this.partition=partition;
+	}
+	
+	public void setHomeCourt(String homeCourt) {
+		this.homeCourt=homeCourt;
+	}
+	
+	public void setSetUpTime(String setUpTime) {
+		this.setUpTime=setUpTime;
+	}
+	
+	public void setCommonPO(CommonPO po) {
+		this.commonPO=po;
+	}
+	
+	
+	public void setMatchesNum(int matchesNum) {
+		this.matchesNum=matchesNum;
+	}
+	
+	public void setShootHitNum(int shootHitNum) {
+		this.shootHitNum=shootHitNum;
+	}
+	
+	public void setShootAttemptNum(int shootAttemptNum) {
+		this.shootAttemptNum=shootAttemptNum;
+	}
+	
+	public void setThreeHitNum(int threeHitNum) {
+		this.threeHitNum=threeHitNum;
+	}
+	
+	public void setThreeAttemptNum(int threeAttemptNum) {
+		this.threeAttemptNum=threeAttemptNum;
+	}
+	
+	public void setFreeThrowHitNum(int freeThrowHitNum) {
+		this.freeThrowHitNum=freeThrowHitNum;
+	}
+	
+	public void setFreeThrowAttemptNum(int freeThrowAttemptNum) {
+		this.freeThrowAttemptNum=freeThrowAttemptNum;
+	}
+	
+	public void setOffenReboundNum(int offenReboundNum) {
+		this.offenReboundNum=offenReboundNum;
+	}
+	
+	public void setDefenReboundNum(int defenReboundNum) {
+		this.defenReboundNum=defenReboundNum;
+	}
+	
+	public void setWinRate(double winRate) {
+		this.winRate=winRate;
+	}
+	
+	public void setOffenRound(double offenRound) {
+		this.offenRound=offenRound;
+	}
+	
+	public void setOffenEfficiency(double offenEfficiency) {
+		this.offenEfficiency=offenEfficiency;
+	}
+	
+	public void setDefenEfficiency(double defenEfficiency) {
+		this.defenEfficiency=defenEfficiency;
+	}
+	
+	public void setOffenReboundEfficiency(double offenReboundEfficiency) {
+		this.offenReboundEfficiency=offenReboundEfficiency;
+	}
+	
+	public void setDefenReboundEfficiency(double defenReboundEfficiency) {
+		this.defenReboundEfficiency=defenReboundEfficiency;
+	}
+	
+	public void setStealEfficiency(double stealEfficiency) {
+		this.stealEfficiency=stealEfficiency;
+	}
+	
+	public void setAssistEfficiency(double assistEfficiency) {
+		this.assistEfficiency=assistEfficiency;
+	}
 }

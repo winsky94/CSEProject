@@ -6,7 +6,7 @@ public class PlayerPO {
 	private int number;// 球衣号码
 	private String position;// 位置
 	private String height;// 身高（英尺-英存）
-	private int weight;// 体重（英镑）
+	private String weight;// 体重（英镑）
 	private String birth;// （月 日，年）
 	private int age;// 年龄
 	private int exp;// 球龄
@@ -30,6 +30,20 @@ public class PlayerPO {
 	private double stealRate;// 抢断率
 	private double blockRate;// 盖帽率
 	private double turnOverRate;// 失误率
+	
+	public PlayerPO(String mid,String mname,int mnumber,String mposition,String mheight,String mweight,String mbirth,int mage,int mexp,String mschool){
+		id=mid;
+		name=mname;
+		number=mnumber;
+		position=mposition;
+		height=mheight;
+		weight=mweight;
+		birth=mbirth;
+		age=mage;
+		exp=mexp;
+		school=mschool;
+	}
+	
 
 	public String getId() {
 		return id;
@@ -51,7 +65,7 @@ public class PlayerPO {
 		return height;
 	}
 
-	public int getWeight() {
+	public String getWeight() {
 		return weight;
 	}
 
@@ -163,7 +177,7 @@ public class PlayerPO {
 		this.height = height;
 	}
 
-	public void setWeight(int weight) {
+	public void setWeight(String weight) {
 		this.weight = weight;
 	}
 
