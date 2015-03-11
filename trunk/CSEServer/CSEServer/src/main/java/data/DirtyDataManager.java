@@ -11,10 +11,10 @@ public class DirtyDataManager {
 	 * @return 如果数据符合要求，直接返回int型;如果数据记录是R即NBA新秀，返回0，如果数据超过合理范围（0-100），返回-1
 	 */
 	public static String checkName(String fileName,String name){
-		if(name.contains("'")){
-			String[] it=name.split("\\'");
-			name=it[0]+it[1];
-		}
+		
+		 if(name.indexOf("'") != -1){//判断字符串是否含有单引号  
+	            name= name.replace("'", "''");     //SQL是用两个单引号来代替一个单引号的
+	        }  
 		
 		return name;
 	}
@@ -65,10 +65,9 @@ public class DirtyDataManager {
 	}
 	
 	public static String checkSchool(String fileName,String school){
-		if(school.contains("'")){
-			String[] it=school.split("\\'");
-			school=it[0]+it[1];
-		}
+		 if(school.indexOf("'") != -1){//判断字符串是否含有单引号  
+	            school= school.replace("'", "''");    
+	        }  
 		
 		return school;
 	}
