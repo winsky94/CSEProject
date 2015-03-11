@@ -1,7 +1,8 @@
 package po;
 
 public class RecordPO {
-	private int id;// 比赛编号 1314_0101_CHALAC
+	private int id;
+	private String match;// 比赛编号 1314_0101_CHALAC
 	private String team;// 球队
 	private String playerName;// 球员名
 	private String position;// 位置
@@ -22,14 +23,14 @@ public class RecordPO {
 	private int foulNum;// 犯规数
 	private int score;// 个人得分
 
-	public RecordPO(int id, String team, String playerName, String position,
-			double presentTime, int shootHitNum, int shootAttemptNum,
-			int threeHitNum, int threeAttemptNum, int freeThrowHitNum,
-			int freeThrowAttemptNum, int offenReboundNum, int defenReboundNum,
-			int reboundNum, int assistNum, int stealNum, int blockNum,
-			int turnOverNum, int foulNum, int score) {
+	public RecordPO(String match, String team, String playerName,
+			String position, double presentTime, int shootHitNum,
+			int shootAttemptNum, int threeHitNum, int threeAttemptNum,
+			int freeThrowHitNum, int freeThrowAttemptNum, int offenReboundNum,
+			int defenReboundNum, int reboundNum, int assistNum, int stealNum,
+			int blockNum, int turnOverNum, int foulNum, int score) {
 		super();
-		this.id = id;
+		this.match = match;
 		this.team = team;
 		this.playerName = playerName;
 		this.position = position;
@@ -133,6 +134,14 @@ public class RecordPO {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public String getMatch() {
+		return match;
+	}
+
+	public void setMatch(String match) {
+		this.match = match;
 	}
 
 	public void setTeam(String team) {
