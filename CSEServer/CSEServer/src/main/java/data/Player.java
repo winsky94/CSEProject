@@ -106,8 +106,7 @@ public class Player implements PlayerDataService{
 	         sql.execute("insert players values("+(count++)+",'"+player.getName()+"',"+player.getNumber()+
 	        		 ",'"+player.getPosition()+"','"+player.getHeight()+"',"+player.getWeight()+",'"+
 	        		 player.getBirth()+"',"+player.getAge()+","+player.getExp()+",'"+player.getSchool()+"')");
-	             
-	   
+	             	   
 	        	 System.out.println(count);
 	         }
 	         String query = "select * from players";
