@@ -6,7 +6,6 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.sql.Connection;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -205,7 +204,7 @@ public class Match {
 			// sql.execute("insert players values(" + (count++)
 			// + ",'Lucy',1,'F','1-1',1,'1111',1,1,'11')");
 			// System.out.println(count);
-			int test=1;
+			int test = 1;
 			for (MatchPO matchPO : matches) {
 				// 向matches表中插入数据
 				sql.execute("insert matches values(" + matchIndex + ","
