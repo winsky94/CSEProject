@@ -16,7 +16,7 @@ import dataservice.PlayerDataService;
 
 public class Player implements PlayerDataService{
 	
-	public PlayerPO readFromPlayerFile(String fileName) {
+	public PlayerPO readFromFile(String fileName) {
 		PlayerPO player;
 		String mname;
 		int mnumber;
@@ -77,7 +77,7 @@ public class Player implements PlayerDataService{
 			FileList fl=new FileList("D:/LUCY/Documents/软件工程与计算III/data/迭代一数据/players/info");
 			ArrayList<String> names = fl.getList();
 			for (String name : names) {
-				players.add(readFromPlayerFile(name));
+				players.add(readFromFile(name));
 			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
