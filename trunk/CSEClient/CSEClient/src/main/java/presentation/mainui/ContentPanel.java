@@ -1,5 +1,6 @@
 package presentation.mainui;
 
+import java.awt.Cursor;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -19,20 +20,28 @@ public class ContentPanel extends JPanel {
 	private JLabel player,team;
 	private ImageIcon p,t;
 	private double X,Y;
+	private int width,height;
+	private int bw=180,by=90;
 	
 	
-	public ContentPanel(Rectangle r){
+	public ContentPanel(Rectangle r,int w,int h){
 		
 		
 	    this.setOpaque(false);
 		t=new ImageIcon("img/main/beforeteam.png");
+		
+		X=r.getX(); Y=r.getY();
+		width=w;height=h;
+		Image i=t.getImage().getScaledInstance(bw, by, Image.SCALE_SMOOTH);
+		
+		t=new ImageIcon(i);
+		
 		team=new JLabel(t);
 		add(team);
-		X=r.getX(); Y=r.getY();
-		
-		
-		team.setBounds((int)(X+X/3), (int)(Y+Y/2), t.getImage().getWidth(t.getImageObserver()), 
-				t.getImage().getHeight(t.getImageObserver()));
+		this.setLayout(null);
+		team.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		team.setBounds((int)(X+570),(int)(Y+298), 160, 
+				70);
 		initView();
 		
 		
@@ -86,12 +95,14 @@ public class ContentPanel extends JPanel {
 			public void mouseExited(MouseEvent e) {
 				// TODO Auto-generated method stub
 				t=new ImageIcon("img/main/beforeteam.png");
+				t.setImage(t.getImage().getScaledInstance(bw, by, Image.SCALE_DEFAULT));
 				team.setIcon(t);
 			}
 			
 			public void mouseEntered(MouseEvent e) {
 				// TODO Auto-generated method stub
 				t=new ImageIcon("img/main/enterteam.png");
+				t.setImage(t.getImage().getScaledInstance(bw, by, Image.SCALE_DEFAULT));
 				team.setIcon(t);
 			}
 			

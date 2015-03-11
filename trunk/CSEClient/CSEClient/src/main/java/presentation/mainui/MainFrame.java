@@ -93,14 +93,7 @@ public class MainFrame extends JFrame {
 		 MediaTracker mt=new MediaTracker(this);
 		 img=Toolkit.getDefaultToolkit().createImage("img/main/backmain.png");
 		 final ImageIcon ic=new ImageIcon(img);
-		 
-		//img=img.getScaledInstance(getWidth(),getHeight(),Image.SCALE_DEFAULT);
-		 
-	
 
-	
-
-		//=====
 		 this.origin=new Point();
 		 this.setUndecorated(true);
 	
@@ -142,8 +135,8 @@ public class MainFrame extends JFrame {
 		
 		
 		
-	  this.setLayout(null);
-	  ContentPanel c=new ContentPanel(this.getBounds()){
+	 
+	  ContentPanel c=new ContentPanel(this.getBounds(),frameWidth,frameHeight){
 		  public void paintComponent(Graphics g){
 				super.paintComponent(g);
 				Graphics2D gg=(Graphics2D) g;
