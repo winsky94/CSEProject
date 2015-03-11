@@ -21,7 +21,7 @@ public class IndexPanel extends JPanel{
 		this.setLayout(gbl);
 		// -------topBar---------------
 		JPanel topBar = new JPanel();
-		topBar.setBackground(Color.GREEN);
+		//topBar.setBackground(Color.GREEN);
 		gbc.gridx=0;
 		gbc.gridy = 0;
 		gbc.gridwidth = 7;
@@ -32,7 +32,7 @@ public class IndexPanel extends JPanel{
 		this.add(topBar);
 		// -----imageRollerPnl---------
 		JPanel imgRollerPnl = new JPanel();
-		imgRollerPnl.setBackground(Color.RED);
+		//imgRollerPnl.setBackground(Color.RED);
 		gbc.gridy =4;
 		gbc.gridwidth = 4;
 		gbc.gridheight = 7;
@@ -42,7 +42,7 @@ public class IndexPanel extends JPanel{
 		this.add(imgRollerPnl);
 		// ------ourPnl----------------
 		JPanel ourPnl = new JPanel();
-		ourPnl.setBackground(Color.blue);
+		//ourPnl.setBackground(Color.blue);
 		gbc.gridx = 4;
 		gbc.gridy =4;
 		gbc.gridwidth = 3;
@@ -53,7 +53,7 @@ public class IndexPanel extends JPanel{
 		this.add(ourPnl);
 		// ------enterPnl----------------
 		JPanel enterPnl = new JPanel();
-		enterPnl.setBackground(Color.gray);
+		//enterPnl.setBackground(Color.gray);
 		gbc.gridx = 4;
 		gbc.gridy = 7;
 		gbc.gridwidth = 3;
