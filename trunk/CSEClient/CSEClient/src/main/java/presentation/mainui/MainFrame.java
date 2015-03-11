@@ -1,4 +1,4 @@
-package presentation;
+package presentation.mainui;
 
 /*2015.3.9 wangning 创建
  * 2015.3.10 wangning 界面分区
@@ -35,6 +35,8 @@ import javax.swing.JPanel;
 
 import com.sun.awt.AWTUtilities;
 
+import presentation.IndexPanel;
+import presentation.UIhelper;
 import presentation.team.TeamIndexPanel;
 
 public class MainFrame extends JFrame {
@@ -62,7 +64,7 @@ public class MainFrame extends JFrame {
 		this.setLayout(gbl);
 		// ---------title---------------
 		titlePnl = new JPanel();
-		//titlePnl.setBackground(Color.white);
+		titlePnl.setBackground(Color.white);
 		gbc.gridx = 0;
 		gbc.gridy = 0;
 		gbc.gridwidth = 7;
@@ -70,7 +72,7 @@ public class MainFrame extends JFrame {
 		gbc.weightx = 10;
 		gbc.weighty = 0.3;
 		gbl.setConstraints(titlePnl, gbc);
-		//this.add(titlePnl);
+		
 		setPanel(new IndexPanel());
 		//-------content----------------
 		contentPnl = new JPanel();
@@ -79,7 +81,7 @@ public class MainFrame extends JFrame {
 		gbc.weightx = 10;
 		gbc.weighty = 13;
 		gbl.setConstraints(contentPnl, gbc);
-		//this.add(contentPnl);
+		
 		setPanel(new IndexPanel());
 		//
 		
@@ -102,14 +104,7 @@ public class MainFrame extends JFrame {
 			e.printStackTrace();
 		}
 
-	/*	((JPanel)this.getContentPane()).setOpaque(false);
-		ImageIcon back=new ImageIcon("img/main/backmain.png");
-		JLabel b=new JLabel(back);
-		back.setImage
-		(back.getImage().getScaledInstance(getWidth(),getHeight(),Image.SCALE_DEFAULT));
-		b.setBounds(0, 0,back.getIconWidth() , back.getIconHeight());
-		this.getLayeredPane().setLayout(null);
-		this.getLayeredPane().add(b, new Integer(Integer.MIN_VALUE));*/
+	
 
 		//=====
 		 this.origin=new Point();
@@ -152,7 +147,8 @@ public class MainFrame extends JFrame {
 		
 		
 		
-		
+	 //   this.add(titlePnl);
+	   // this.add(contentPnl);
 		this.setVisible(true);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
