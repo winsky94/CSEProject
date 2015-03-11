@@ -25,15 +25,20 @@ public class SqlManager {
          Connection con = getConnection();
          Statement sql = con.createStatement();
          sql.execute("drop table if exists players");
-         sql.execute("create table student(id int not null auto_increment,name varchar(20) not null default 'name',"
+         sql.execute("create table players(id int not null auto_increment,name varchar(40) not null default 'name',"
          		+ "number int not null default 0,position varchar(20) not null default 'null',"
-         		+ "height varchar(20) not null default 'null',weight varchar(20) not null default 'null',"
+         		+ "height varchar(20) not null default 'null',weight int not null default 0,"
          		+ "brith varchar(20) not null default 'null',age int not null default 0,exp int not null default 0,"
-         		+ "school varchar(20)not null default 'null',primary key(id));");
+         		+ "school varchar(40)not null default 'null',primary key(id));");
+         int count=1;
          for(PlayerPO player:players){
-         sql.execute("insert players values('"+player.getId()+"','"+player.getName()+"','"+player.getNumber()+
-        		 "','"+player.getPosition()+"','"+player.getHeight()+"','"+player.getWeight()+"','"+
-        		 player.getBirth()+"','"+player.getAge()+"','"+player.getExp()+"','"+player.getSchool()+"')");
+   //     	 sql.execute("insert players values("+(count++)+",'Lucy',1,'F','1-1',1,'1111',1,1,'11')");
+         sql.execute("insert players values("+(count++)+",'"+player.getName()+"',"+player.getNumber()+
+        		 ",'"+player.getPosition()+"','"+player.getHeight()+"',"+player.getWeight()+",'"+
+        		 player.getBirth()+"',"+player.getAge()+","+player.getExp()+",'"+player.getSchool()+"')");
+             
+   
+        	 System.out.println(count);
          }
          String query = "select * from players";
          ResultSet result = sql.executeQuery(query);

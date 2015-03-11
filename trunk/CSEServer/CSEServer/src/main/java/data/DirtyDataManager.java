@@ -10,6 +10,15 @@ public class DirtyDataManager {
 	 *            文件记录中的String类型的数据
 	 * @return 如果数据符合要求，直接返回int型;如果数据记录是R即NBA新秀，返回0，如果数据超过合理范围（0-100），返回-1
 	 */
+	public static String checkName(String fileName,String name){
+		if(name.contains("'")){
+			String[] it=name.split("\\'");
+			name=it[0]+it[1];
+		}
+		
+		return name;
+	}
+	
 	public static int checkExp(String fileName, String data) {
 		int result = -1;
 		try {
@@ -44,7 +53,7 @@ public class DirtyDataManager {
 			result = Integer.parseInt(data);
 		} catch (NumberFormatException e) {
 			if (data.equals("N/A")) {
-				String[] tp = fileName.split("src");
+				String[] tp = fileName.split("info\\\\");
 				fileName = tp[1].substring(1);
 				System.out.println("fileName为：" + fileName + "：球衣号码为非数字");
 			} else {
@@ -53,5 +62,14 @@ public class DirtyDataManager {
 
 		}
 		return result;
+	}
+	
+	public static String checkSchool(String fileName,String school){
+		if(school.contains("'")){
+			String[] it=school.split("\\'");
+			school=it[0]+it[1];
+		}
+		
+		return school;
 	}
 }
