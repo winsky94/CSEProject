@@ -1,14 +1,14 @@
 package po;
 
 public class TeamPO {
-	private String id; // 编号 00001
+	private int id; // 编号
 	private String teamName; // 球队全名
+	private String abLocation; // 所在地(缩写)	
 	private String location; // 所在地
-	private String abLocation; // 所在地(缩写)
 	private String conference; // 赛区
 	private String partition; // 分区
 	private String homeCourt; // 主场
-	private String setUpTime; // 建立时间
+	private int setUpTime; // 建立时间
 
 	private CommonPO commonPO;
 	private int matchesNum; // 比赛场数
@@ -29,9 +29,9 @@ public class TeamPO {
 	private double stealEfficiency; // 抢断效率
 	private double assistEfficiency; // 助攻率
 
-	public TeamPO(String id, String teamName, String location,
-			String abLocation, String conference, String partition,
-			String homeCourt, String setUpTime, CommonPO commonPO,
+	public TeamPO(int id, String teamName, String abLocation,
+			String location, String conference, String partition,
+			String homeCourt, int setUpTime, CommonPO commonPO,
 			int matchesNum, int shootHitNum, int shootAttemptNum,
 			int threeHitNum, int threeAttemptNum, int freeThrowHitNum,
 			int freeThrowAttemptNum, int offenReboundNum, int defenReboundNum,
@@ -68,7 +68,7 @@ public class TeamPO {
 		this.assistEfficiency = assistEfficiency;
 	}
 
-	public String getId() {
+	public int getId() {
 		return id;
 	}
 
@@ -96,7 +96,7 @@ public class TeamPO {
 		return homeCourt;
 	}
 
-	public String getSetUpTime() {
+	public int getSetUpTime() {
 		return setUpTime;
 	}
 
@@ -172,7 +172,7 @@ public class TeamPO {
 		return assistEfficiency;
 	}
 
-	public void setId(String id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
@@ -200,7 +200,7 @@ public class TeamPO {
 		this.homeCourt = homeCourt;
 	}
 
-	public void setSetUpTime(String setUpTime) {
+	public void setSetUpTime(int setUpTime) {
 		this.setUpTime = setUpTime;
 	}
 
