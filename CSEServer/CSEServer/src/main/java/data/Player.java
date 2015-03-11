@@ -95,7 +95,7 @@ public class Player implements PlayerDataService{
 	         Connection con = SqlManager.getConnection();
 	         Statement sql = con.createStatement();
 	         sql.execute("drop table if exists players");
-	         sql.execute("create table players(id int not null auto_increment,name varchar(40) not null default 'name',"
+	         sql.execute("create table players(id int not null auto_increment,name varchar(40) not null default 'null',"
 	         		+ "number int not null default 0,position varchar(20) not null default 'null',"
 	         		+ "height varchar(20) not null default 'null',weight int not null default 0,"
 	         		+ "brith varchar(20) not null default 'null',age int not null default 0,exp int not null default 0,"
