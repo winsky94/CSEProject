@@ -71,12 +71,12 @@ public class PlayerIndexPanel extends JPanel {
 		//"球龄", "毕业学校"}
 		for (PlayerVO VO : vo) {
 			ArrayList<String> lineInfo = new ArrayList<String>();
-			lineInfo.add(VO.getId());
+			lineInfo.add(VO.getId()+"");
 			lineInfo.add(VO.getName());
 			lineInfo.add(VO.getNumber()+"");
 			lineInfo.add(VO.getPosition());
 			lineInfo.add(VO.getHeight());
-			lineInfo.add(VO.getWeight());
+			lineInfo.add(VO.getWeight()+"");
 			lineInfo.add(VO.getBirth());
 			lineInfo.add(VO.getAge()+"");
 			lineInfo.add(VO.getExp()+"");
