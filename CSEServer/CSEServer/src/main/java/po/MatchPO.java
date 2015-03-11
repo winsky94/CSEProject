@@ -3,23 +3,20 @@ package po;
 public class MatchPO {
 	private int id;// 编号——构造函数里不要做参数
 	private String date;// 时间
-	private String homeTeam;// 主场
-	private String visitingTeam;// 客场
-	private int score; // 比分
-	private int firstScore;// 第一节比分
-	private int secondScore;// 第二节比分
-	private int thirdScore;// 第三节比分
-	private int fourthScore;// 第四节比分
-	private int overTimeScore;// 加时赛比分
+	private String teams;// 对阵队伍
+	private String score; // 比分
+	private String firstScore;// 第一节比分
+	private String secondScore;// 第二节比分
+	private String thirdScore;// 第三节比分
+	private String fourthScore;// 第四节比分
+	private String overTimeScore;// 加时赛比分
 
-	public MatchPO(int id, String date, String homeTeam, String visitingTeam,
-			int score, int firstScore, int secondScore, int thirdScore,
-			int fourthScore, int overTimeScore) {
+	public MatchPO(String date, String teams, String score, String firstScore,
+			String secondScore, String thirdScore, String fourthScore,
+			String overTimeScore) {
 		super();
-		this.id = id;
 		this.date = date;
-		this.homeTeam = homeTeam;
-		this.visitingTeam = visitingTeam;
+		this.teams = teams;
 		this.score = score;
 		this.firstScore = firstScore;
 		this.secondScore = secondScore;
@@ -36,35 +33,31 @@ public class MatchPO {
 		return date;
 	}
 
-	public String getHomeTeam() {
-		return homeTeam;
+	public String getTeams() {
+		return teams;
 	}
 
-	public String getVisitingTeam() {
-		return visitingTeam;
-	}
-
-	public int getScore() {
+	public String getScore() {
 		return score;
 	}
 
-	public int getFirstScore() {
+	public String getFirstScore() {
 		return firstScore;
 	}
 
-	public int getSecondScore() {
+	public String getSecondScore() {
 		return secondScore;
 	}
 
-	public int getThirdScore() {
+	public String getThirdScore() {
 		return thirdScore;
 	}
 
-	public int getFourthScore() {
+	public String getFourthScore() {
 		return fourthScore;
 	}
 
-	public int getOverTimeScore() {
+	public String getOverTimeScore() {
 		return overTimeScore;
 	}
 
@@ -76,35 +69,32 @@ public class MatchPO {
 		this.date = date;
 	}
 
-	public void setHomeTeam(String homeTeam) {
-		this.homeTeam = homeTeam;
+	public void setTeams(String teams) {
+		this.teams = teams;
 	}
 
-	public void setVisitingTeam(String visitingTeam) {
-		this.visitingTeam = visitingTeam;
-	}
-
-	public void setScore(int score) {
+	public void setScore(String score) {
 		this.score = score;
 	}
 
-	public void setFirstScore(int firstScore) {
+	public void setFirstScore(String firstScore) {
 		this.firstScore = firstScore;
 	}
 
-	public void setSecondScore(int secondScore) {
+	public void setSecondScore(String secondScore) {
 		this.secondScore = secondScore;
 	}
 
-	public void setThirdScore(int thirdScore) {
+	public void setThirdScore(String thirdScore) {
 		this.thirdScore = thirdScore;
 	}
 
-	public void setFourthScore(int fourthScore) {
+	public void setFourthScore(String fourthScore) {
 		this.fourthScore = fourthScore;
 	}
 
-	public void setOverTimeScore(int overTimeScore) {
+	public void setOverTimeScore(String overTimeScore) {
 		this.overTimeScore = overTimeScore;
 	}
+
 }
