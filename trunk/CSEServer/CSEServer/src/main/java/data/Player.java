@@ -133,5 +133,12 @@ public class Player implements PlayerDataService{
 	    }
 	  
 	}
+	
+	public String getActionPhotoPath(String name){
+		return "D:/LUCY/Documents/软件工程与计算III/data/迭代一数据/players/action/"+name+".png";
+	}
 
+	public String getPortraitPhotoPath(String name){
+		return "D:/LUCY/Documents/软件工程与计算III/data/迭代一数据/players/protrait/"+name+".png";
+	}
 }
