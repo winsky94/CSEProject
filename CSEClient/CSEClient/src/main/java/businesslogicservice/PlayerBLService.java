@@ -1,4 +1,4 @@
-package businesslogic;
+package businesslogicservice;
 
 import java.util.ArrayList;
 

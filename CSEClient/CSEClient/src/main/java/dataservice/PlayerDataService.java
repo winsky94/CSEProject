@@ -1,4 +1,4 @@
-package data;
+package dataservice;
 
 import java.util.ArrayList;
 
