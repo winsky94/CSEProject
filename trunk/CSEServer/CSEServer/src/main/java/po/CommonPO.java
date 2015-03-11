@@ -1,20 +1,20 @@
 package po;
 
 public class CommonPO {
-	private double reboundNum;// 篮板数
-	private double assistNum;// 助攻数
+	private int reboundNum;// 篮板数
+	private int assistNum;// 助攻数
 	private double shootHitRate;// 投篮命中率
 	private double threeHitRate;// 三分命中率
 	private double freeThrowHitRate;// 罚球命中率
-	private double stealNum;// 抢断数
-	private double blockNum;// 盖帽数
-	private double turnOverNum;// 失误数
-	private double foulNum;// 犯规数
-	private double score;// 得分
+	private int stealNum;// 抢断数
+	private int blockNum;// 盖帽数
+	private int turnOverNum;// 失误数
+	private int foulNum;// 犯规数
+	private int score;// 得分
 
-	public CommonPO(double reboundNum, double assistNum, double shootHitRate,
-			double threeHitRate, double freeThrowHitRate, double stealNum,
-			double blockNum, double turnOverNum, double foulNum, double score) {
+	public CommonPO(int reboundNum, int assistNum, double shootHitRate,
+			double threeHitRate, double freeThrowHitRate, int stealNum,
+			int blockNum, int turnOverNum, int foulNum, int score) {
 		super();
 		this.reboundNum = reboundNum;
 		this.assistNum = assistNum;
@@ -28,11 +28,11 @@ public class CommonPO {
 		this.score = score;
 	}
 
-	public double getReboundNum() {
+	public int getReboundNum() {
 		return reboundNum;
 	}
 
-	public double getAssistNum() {
+	public int getAssistNum() {
 		return assistNum;
 	}
 
@@ -48,31 +48,31 @@ public class CommonPO {
 		return freeThrowHitRate;
 	}
 
-	public double getStealNum() {
+	public int getStealNum() {
 		return stealNum;
 	}
 
-	public double getBlockNum() {
+	public int getBlockNum() {
 		return blockNum;
 	}
 
-	public double getTurnOverNum() {
+	public int getTurnOverNum() {
 		return turnOverNum;
 	}
 
-	public double getFoulNum() {
+	public int getFoulNum() {
 		return foulNum;
 	}
 
-	public double getScore() {
+	public int getScore() {
 		return score;
 	}
 
-	public void setReboundNum(double reboundNum) {
+	public void setReboundNum(int reboundNum) {
 		this.reboundNum = reboundNum;
 	}
 
-	public void setAssistNum(double assistNum) {
+	public void setAssistNum(int assistNum) {
 		this.assistNum = assistNum;
 	}
 
@@ -88,23 +88,24 @@ public class CommonPO {
 		this.freeThrowHitRate = freeThrowHitRate;
 	}
 
-	public void setStealNum(double stealNum) {
+	public void setStealNum(int stealNum) {
 		this.stealNum = stealNum;
 	}
 
-	public void setBlockNum(double blockNum) {
+	public void setBlockNum(int blockNum) {
 		this.blockNum = blockNum;
 	}
 
-	public void setTurnOverNum(double turnOverNum) {
+	public void setTurnOverNum(int turnOverNum) {
 		this.turnOverNum = turnOverNum;
 	}
 
-	public void setFoulNum(double foulNum) {
+	public void setFoulNum(int foulNum) {
 		this.foulNum = foulNum;
 	}
 
-	public void setScore(double score) {
+	public void setScore(int score) {
 		this.score = score;
 	}
+
 }
