@@ -12,23 +12,23 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import po.MatchPO;
-import po.PlayerPO;
 import po.RecordPO;
 
 public class Match {
+	int count = 1;
 
 	public MatchPO readFromMatchFile(String fileName) {
 		MatchPO matchPO;
-		String date;// 比赛日期
-		String teams;// 对阵队伍
-		String score;// 比分
-		String firstScore;// 第一节比分
-		String secondScore;// 第二节比分
-		String thirdScore;// 第三节比分
-		String fourthScore;// 第四节比分
-		String overTimeScore;// 加时赛比分
-		String[] fisrtContent = new String[3];
-		String[] detailScores = new String[5];
+		String season;// 赛季
+		String date = null;// 比赛日期
+		String teams = null;// 对阵队伍
+		String score = null;// 比分
+		ArrayList<String> detailScores = new ArrayList<String>();// 各节比分
+		ArrayList<RecordPO> records = new ArrayList<RecordPO>();// 球员比分数据记录
+
+		// System.out.println("fileName" + fileName);
+		String tp[] = fileName.split("matches");
+		season = tp[1].substring(1, 6);
 
 		try {
 			// File file=new File("13-14_01-01_CHA-LAC");
@@ -39,89 +39,99 @@ public class Match {
 			BufferedReader br = new BufferedReader(new InputStreamReader(
 					new FileInputStream(file), "UTF-8"));
 			String temp = null;
+
 			temp = br.readLine();
-			fisrtContent = temp.split(";");
+			String[] fisrtContent = temp.split(";");
+			date = fisrtContent[0];
+			teams = fisrtContent[1];
+			score = fisrtContent[2];
+
 			temp = br.readLine();
-			detailScores = temp.split(";");
+			String[] scoresData = temp.split(";");
+			for (int i = 0; i < scoresData.length; i++) {
+				detailScores.add(scoresData[i]);
+			}
+
+			String team = null;// 球队
+			String playerName = null;// 球员名
+			String position = null;// 位置
+			String presentTime = null;// 在场时间
+			int shootHitNum = 0;// 投篮命中数
+			int shootAttemptNum = 0;// 投篮出手数
+			int threeHitNum = 0;// 三分命中数
+			int threeAttemptNum = 0;// 三分出手数
+			int freeThrowHitNum = 0;// 罚球命中数
+			int freeThrowAttemptNum = 0;// 罚球出手数
+			int offenReboundNum = 0;// 进攻（前场）篮板数
+			int defenReboundNum = 0;// 防守（后场）篮板数
+			int reboundNum = 0;// 总篮板数
+			int assistNum = 0;// 助攻数
+			int stealNum = 0;// 抢断数
+			int blockNum = 0;// 盖帽数
+			int turnOverNum = 0;// 失误数
+			int foulNum = 0;// 犯规数
+			int personScore = 0;// 个人得分
+
+			boolean isComplete = false;
+			temp = br.readLine();
+			while (temp != null) {
+				if (fileName.contains(temp)) {
+					team = temp;
+					isComplete = false;
+				} else {
+					String[] line = temp.split(";");
+					playerName = line[0];
+					position = line[1];
+					presentTime = line[2];// 在场时间
+					shootHitNum = Integer.parseInt(line[3]);// 投篮命中数
+					shootAttemptNum = Integer.parseInt(line[4]);// 投篮出手数
+					threeHitNum = Integer.parseInt(line[5]);// 三分命中数
+					threeAttemptNum = Integer.parseInt(line[6]);// 三分出手数
+					freeThrowHitNum = Integer.parseInt(line[7]);// 罚球命中数
+					freeThrowAttemptNum = Integer.parseInt(line[8]);// 罚球出手数
+					offenReboundNum = Integer.parseInt(line[9]);// 进攻（前场）篮板数
+					defenReboundNum = Integer.parseInt(line[10]);// 防守（后场）篮板数
+					reboundNum = Integer.parseInt(line[11]);// 总篮板数
+					assistNum = Integer.parseInt(line[12]);// 助攻数
+					stealNum = Integer.parseInt(line[13]);// 抢断数
+					blockNum = Integer.parseInt(line[14]);// 盖帽数
+					turnOverNum = Integer.parseInt(line[15]);// 失误数
+					foulNum = Integer.parseInt(line[16]);// 犯规数
+					personScore = DirtyDataManager.checkPersonScore(fileName,
+							line[17], temp);// 个人得分
+
+					isComplete = true;
+				}
+				if (isComplete) {
+					RecordPO recordPO = new RecordPO(team, playerName,
+							position, presentTime, shootHitNum,
+							shootAttemptNum, threeHitNum, threeAttemptNum,
+							freeThrowHitNum, freeThrowAttemptNum,
+							offenReboundNum, defenReboundNum, reboundNum,
+							assistNum, stealNum, blockNum, turnOverNum,
+							foulNum, personScore);
+					records.add(recordPO);
+					// System.out.println(playerName);
+					isComplete = false;
+				}
+				temp = br.readLine();
+			}
 
 			br.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 
-		date = fisrtContent[0];
-		teams = fisrtContent[1];
-		score = fisrtContent[2];
-
-		firstScore = detailScores[0];
-		secondScore = detailScores[1];
-		thirdScore = detailScores[2];
-		fourthScore = detailScores[3];
-		if (detailScores.length > 4) {
-			overTimeScore = detailScores[4];
-		} else {
-			overTimeScore = null;
-		}
-		matchPO = new MatchPO(date, teams, score, firstScore, secondScore,
-				thirdScore, fourthScore, overTimeScore);
+		matchPO = new MatchPO(count, season, date, teams, score, detailScores,
+				records);
+		count++;
 		return matchPO;
 	}
 
-	public ArrayList<RecordPO> readFromMatchRecordFile(String fileName) {
-		String id;
-		String team;// 球队
-		String playerName;// 球员名
-		String position;// 位置
-		double presentTime;// 在场时间
-		int shootHitNum;// 投篮命中数
-		int shootAttemptNum;// 投篮出手数
-		int threeHitNum;// 三分命中数
-		int threeAttemptNum;// 三分出手数
-		int freeThrowHitNum;// 罚球命中数
-		int freeThrowAttemptNum;// 罚球出手数
-		int offenReboundNum;// 进攻（前场）篮板数
-		int defenReboundNum;// 防守（后场）篮板数
-		int reboundNum;// 总篮板数
-		int assistNum;// 助攻数
-		int stealNum;// 抢断数
-		int blockNum;// 盖帽数
-		int turnOverNum;// 失误数
-		int foulNum;// 犯规数
-		int score;// 个人得分
-
-		String tp[] = fileName.split("matches");
-		id = tp[1].substring(1);
-
-		try {
-			// File file=new File("13-14_01-01_CHA-LAC");
-			File file = new File(fileName);
-			if (!file.exists()) {
-				file.createNewFile();
-			}
-			BufferedReader br = new BufferedReader(new InputStreamReader(
-					new FileInputStream(file), "UTF-8"));
-			String temp = null;
-			temp = br.readLine();
-			temp = br.readLine();
-			temp = br.readLine();
-			while (temp != null) {
-				if(id.contains(temp)){
-					
-				}
-			}
-
-			br.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
-		return null;
-	}
-
-	public ArrayList<MatchPO> getPlayerList() {
+	public ArrayList<MatchPO> getMatchesList() {
 		ArrayList<MatchPO> matches = new ArrayList<MatchPO>();
 		try {
-			FileList fl = new FileList("src/迭代一数据/players/info");
+			FileList fl = new FileList("src/迭代一数据/matches");
 			// FileList fl = new FileList(
 			// "D:/LUCY/Documents/软件工程与计算III/data/迭代一数据/players/info");
 			ArrayList<String> names = fl.getList();
@@ -139,73 +149,116 @@ public class Match {
 	}
 
 	public static void main(String[] args) {
-		FileList fl;
-		try {
-			fl = new FileList("src/迭代一数据/matches");
-			// FileList fl = new FileList(
-			// "D:/LUCY/Documents/软件工程与计算III/data/迭代一数据/players/info");
-			ArrayList<String> names = fl.getList();
-			for (String name : names) {
-				String tp[] = name.split("matches");
-				String result = tp[1].substring(1);
-				System.out.println(result);
-			}
-		} catch (Exception e) {
-			// TODO 自动生成的 catch 块
-			e.printStackTrace();
-		}
-
+		Match Match = new Match();
+		Match.exportToSql();
 	}
 
-	// public void exportToSql() {
-	// ArrayList<PlayerPO> players = getPlayerList();
-	// try {
-	// Connection con = SqlManager.getConnection();
-	// Statement sql = con.createStatement();
-	// sql.execute("drop table if exists players");
-	// sql.execute("create table players(id int not null auto_increment,name varchar(40) not null default 'name',"
-	// +
-	// "number int not null default 0,position varchar(20) not null default 'null',"
-	// +
-	// "height varchar(20) not null default 'null',weight int not null default 0,"
-	// +
-	// "brith varchar(20) not null default 'null',age int not null default 0,exp int not null default 0,"
-	// + "school varchar(40)not null default 'null',primary key(id));");
-	// int count = 1;
-	// for (PlayerPO player : players) {
-	// //
-	// sql.execute("insert players values("+(count++)+",'Lucy',1,'F','1-1',1,'1111',1,1,'11')");
-	// sql.execute("insert players values(" + (count++) + ",'"
-	// + player.getName() + "'," + player.getNumber() + ",'"
-	// + player.getPosition() + "','" + player.getHeight()
-	// + "'," + player.getWeight() + ",'" + player.getBirth()
-	// + "'," + player.getAge() + "," + player.getExp() + ",'"
-	// + player.getSchool() + "')");
-	//
-	// System.out.println(count);
-	// }
-	// String query = "select * from players";
-	// ResultSet result = sql.executeQuery(query);
-	// System.out.println("players表数据如下：");
-	// System.out.println("---------------------------------");
-	// System.out.println("学号" + " " + "姓名" + " " + "数学成绩");
-	// System.out.println("---------------------------------");
-	// int number;
-	// String name;
-	// int math;
-	// while (result.next()) {
-	// number = result.getInt("id");
-	// name = result.getString("name");
-	// math = result.getInt("number");
-	// System.out.println(number + " " + name + " " + math);
-	// }
-	// sql.close();
-	// con.close();
-	// } catch (java.lang.ClassNotFoundException e) {
-	// System.err.println("ClassNotFoundException:" + e.getMessage());
-	// } catch (SQLException ex) {
-	// System.err.println("SQLException:" + ex.getMessage());
-	// }
-	//
-	// }
+	public void exportToSql() {
+		ArrayList<MatchPO> matches = getMatchesList();
+		try {
+			Connection con = SqlManager.getConnection();
+			Statement sql = con.createStatement();
+			sql.execute("drop table if exists players");
+			// 创建matches表
+			sql.execute("create table matches(id int not null auto_increment,"
+					+ "matchID int not null default -1,"
+					+ "season varchar(20) not null default 'null',"
+					+ "date varchar(20) not null default 'null',"
+					+ "teams varchar(20) not null default 'null',"
+					+ "score varchar(20) not null default 'null',"
+					+ "primary key(id));");
+
+			// 创建detailScores表
+			sql.execute("create table detailScores(id int not null auto_increment,"
+					+ "matchID int not null default -1,"
+					+ "part int not null default -1,"
+					+ "score varchar(20) not null default 'null',"
+					+ "primary key(id));");
+
+			// 创建records表
+			sql.execute("create table records(id int not null auto_increment,"
+					+ "matchID int not null default -1,"
+					+ "team varchar(20) not null default 'null',"
+					+ "playerName varchar(40) not null default 'null',"
+					+ "presentTime varchar(20) not null default 'null',"
+					+ "position varchar(20) not null default 'null',"
+					+ "shootHitNum int not null default 0,"
+					+ "shootAttemptNum int not null default 0,"
+					+ "threeHitNum int not null default 0,"
+					+ "threeAttemptNum int not null default 0,"
+					+ "freeThrowHitNum int not null default 0,"
+					+ "freeThrowAttemptNum int not null default 0,"
+					+ "offenReboundNum int not null default 0,"
+					+ "defenReboundNum int not null default 0,"
+					+ "reboundNum int not null default 0,"
+					+ "assistNum int not null default 0,"
+					+ "stealNum int not null default 0,"
+					+ "blockNum int not null default 0,"
+					+ "turnOverNum int not null default 0,"
+					+ "foulNum int not null default 0,"
+					+ "score int not null default 0," + "primary key(id));");
+
+			// index分别表示各表的id
+			int matchIndex = 1;
+			int scoreIndex = 1;
+			int recordIndex = 1;
+			// sql.execute("insert players values(" + (count++)
+			// + ",'Lucy',1,'F','1-1',1,'1111',1,1,'11')");
+			// System.out.println(count);
+			int test=1;
+			for (MatchPO matchPO : matches) {
+				// 向matches表中插入数据
+				sql.execute("insert matches values(" + matchIndex + ","
+						+ matchPO.getMatchID() + ",'" + matchPO.getSeason()
+						+ "','" + matchPO.getDate() + "','"
+						+ matchPO.getTeams() + "','" + matchPO.getScore()
+						+ "')");
+				matchIndex++;
+
+				// 向detailScores表中插入数据
+				ArrayList<String> detailScore = matchPO.getDetailScores();
+				int partIndex = 1;
+				for (String s : detailScore) {
+					sql.execute("insert detailScores values(" + scoreIndex
+							+ "," + matchPO.getMatchID() + "," + partIndex
+							+ ",'" + s + "')");
+					partIndex++;
+					scoreIndex++;
+				}
+
+				// 向records表中插入数据
+				ArrayList<RecordPO> records = matchPO.getRecords();
+				for (RecordPO recordPO : records) {
+					sql.execute("insert records values(" + recordIndex + ","
+							+ matchPO.getMatchID() + ",'" + recordPO.getTeam()
+							+ "','" + recordPO.getPlayerName() + "','"
+							+ recordPO.getPosition() + "','"
+							+ recordPO.getPresentTime() + "',"
+							+ recordPO.getShootHitNum() + ","
+							+ recordPO.getShootAttemptNum() + ","
+							+ recordPO.getThreeHitNum() + ","
+							+ recordPO.getThreeAttemptNum() + ","
+							+ recordPO.getFreeThrowHitNum() + ","
+							+ recordPO.getFreeThrowAttemptNum() + ","
+							+ recordPO.getOffenReboundNum() + ","
+							+ recordPO.getDefenReboundNum() + ","
+							+ recordPO.getReboundNum() + ","
+							+ recordPO.getAssistNum() + ","
+							+ recordPO.getStealNum() + ","
+							+ recordPO.getBlockNum() + ","
+							+ recordPO.getTurnOverNum() + ","
+							+ recordPO.getFoulNum() + "," + recordPO.getScore()
+							+ ")");
+					recordIndex++;
+				}
+				System.out.println(test++);
+			}
+			sql.close();
+			con.close();
+		} catch (java.lang.ClassNotFoundException e) {
+			System.err.println("ClassNotFoundException:" + e.getMessage());
+		} catch (SQLException ex) {
+			System.out.println("SQLException:" + ex.getMessage());
+		}
+	}
 }
