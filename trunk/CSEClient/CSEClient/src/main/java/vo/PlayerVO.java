@@ -1,26 +1,24 @@
 package vo;
 
-import po.CommonPO;
-
 public class PlayerVO {
-	private String id;// 编号
+	private int id;// 编号
 	private String name;// 球员名称
 	private int number;// 球衣号码
 	private String position;// 位置
 	private String height;// 身高（英尺-英存）
-	private String weight;// 体重（英镑）
+	private int weight;// 体重（英镑）
 	private String birth;// （月 日，年）
 	private int age;// 年龄
 	private int exp;// 球龄
 	private String school;// 毕业学校
 
-	private CommonPO commonPO;
+	private CommonVO commonVO;
 	private String teamName;// 所属球队
-	private String playedGames;// 参赛场数
-	private double gameStartingNum;// 先发场数
+	private int playedGames;// 参赛场数
+	private int gameStartingNum;// 先发场数
 	private double presentTime;// 在场时间
-	private double offenNum;// 进攻数
-	private double defenNum;// 防守数
+	private int offenNum;// 进攻数
+	private int defenNum;// 防守数
 	private double efficiency;// 效率
 	private double GmScEfficiencyValue;// GmSc效率值
 	private double trueHitRate;// 真实命中率
@@ -33,12 +31,11 @@ public class PlayerVO {
 	private double blockRate;// 盖帽率
 	private double turnOverRate;// 失误率
 
-	public PlayerVO(String id, String name, int number, String position,
-			String height, String weight, String birth, int age, int exp,
-			String school, CommonPO commonPO, String teamName,
-			String playedGames, double gameStartingNum, double presentTime,
-			double offenNum, double defenNum, double efficiency,
-			double gmScEfficiencyValue, double trueHitRate,
+	public PlayerVO(int id, String name, int number, String position,
+			String height, int weight, String birth, int age, int exp,
+			String school, CommonVO commonVO, String teamName, int playedGames,
+			int gameStartingNum, double presentTime, int offenNum, int defenNum,
+			double efficiency, double gmScEfficiencyValue, double trueHitRate,
 			double shootHitEfficiency, double reboundRate,
 			double offenReboundRate, double defenReboundRate,
 			double assistRate, double stealRate, double blockRate,
@@ -54,7 +51,7 @@ public class PlayerVO {
 		this.age = age;
 		this.exp = exp;
 		this.school = school;
-		this.commonPO = commonPO;
+		this.commonVO = commonVO;
 		this.teamName = teamName;
 		this.playedGames = playedGames;
 		this.gameStartingNum = gameStartingNum;
@@ -74,7 +71,7 @@ public class PlayerVO {
 		this.turnOverRate = turnOverRate;
 	}
 
-	public String getId() {
+	public int getId() {
 		return id;
 	}
 
@@ -94,7 +91,7 @@ public class PlayerVO {
 		return height;
 	}
 
-	public String getWeight() {
+	public int getWeight() {
 		return weight;
 	}
 
@@ -114,19 +111,19 @@ public class PlayerVO {
 		return school;
 	}
 
-	public CommonPO getCommonPO() {
-		return commonPO;
+	public CommonVO getCommonPO() {
+		return commonVO;
 	}
 
 	public String getTeamName() {
 		return teamName;
 	}
 
-	public String getPlayedGames() {
+	public int getPlayedGames() {
 		return playedGames;
 	}
 
-	public double getGameStartingNum() {
+	public int getGameStartingNum() {
 		return gameStartingNum;
 	}
 
@@ -134,11 +131,11 @@ public class PlayerVO {
 		return presentTime;
 	}
 
-	public double getOffenNum() {
+	public int getOffenNum() {
 		return offenNum;
 	}
 
-	public double getDefenNum() {
+	public int getDefenNum() {
 		return defenNum;
 	}
 

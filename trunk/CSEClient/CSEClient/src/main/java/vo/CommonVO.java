@@ -1,20 +1,20 @@
 package vo;
 
 public class CommonVO {
-	private double reboundNum;// 篮板数
-	private double assistNum;// 助攻数
+	private int reboundNum;// 篮板数
+	private int assistNum;// 助攻数
 	private double shootHitRate;// 投篮命中率
 	private double threeHitRate;// 三分命中率
 	private double freeThrowHitRate;// 罚球命中率
-	private double stealNum;// 抢断数
-	private double blockNum;// 盖帽数
-	private double turnOverNum;// 失误数
-	private double foulNum;// 犯规数
-	private double score;// 得分
+	private int stealNum;// 抢断数
+	private int blockNum;// 盖帽数
+	private int turnOverNum;// 失误数
+	private int foulNum;// 犯规数
+	private int score;// 得分
 
-	public CommonVO(double reboundNum, double assistNum, double shootHitRate,
-			double threeHitRate, double freeThrowHitRate, double stealNum,
-			double blockNum, double turnOverNum, double foulNum, double score) {
+	public CommonVO(int reboundNum, int assistNum, double shootHitRate,
+			double threeHitRate, double freeThrowHitRate, int stealNum,
+			int blockNum, int turnOverNum, int foulNum, int score) {
 		super();
 		this.reboundNum = reboundNum;
 		this.assistNum = assistNum;
@@ -28,11 +28,11 @@ public class CommonVO {
 		this.score = score;
 	}
 
-	public double getReboundNum() {
+	public int getReboundNum() {
 		return reboundNum;
 	}
 
-	public double getAssistNum() {
+	public int getAssistNum() {
 		return assistNum;
 	}
 
@@ -48,23 +48,23 @@ public class CommonVO {
 		return freeThrowHitRate;
 	}
 
-	public double getStealNum() {
+	public int getStealNum() {
 		return stealNum;
 	}
 
-	public double getBlockNum() {
+	public int getBlockNum() {
 		return blockNum;
 	}
 
-	public double getTurnOverNum() {
+	public int getTurnOverNum() {
 		return turnOverNum;
 	}
 
-	public double getFoulNum() {
+	public int getFoulNum() {
 		return foulNum;
 	}
 
-	public double getScore() {
+	public int getScore() {
 		return score;
 	}
 }
