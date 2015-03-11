@@ -37,7 +37,7 @@ import com.sun.awt.AWTUtilities;
 
 import presentation.IndexPanel;
 import presentation.UIhelper;
-import presentation.team.TeamIndexPanel;
+import presentation.teamui.TeamIndexPanel;
 
 public class MainFrame extends JFrame {
 	/**

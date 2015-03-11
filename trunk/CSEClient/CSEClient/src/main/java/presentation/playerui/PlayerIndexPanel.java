@@ -1,4 +1,4 @@
-package presentation.player;
+package presentation.playerui;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
