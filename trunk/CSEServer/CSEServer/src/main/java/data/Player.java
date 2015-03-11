@@ -56,7 +56,7 @@ public class Player implements PlayerDataService{
 			e.printStackTrace();
 		}
 
-		mname = DirtyDataManager.checkName(fileName, content[0]);
+		mname = DirtyDataManager.checkString(fileName, content[0]);
 		mnumber = DirtyDataManager.checkNum(fileName, content[1]);
 		mposition = content[2];
 		mheight = content[3];
@@ -64,7 +64,7 @@ public class Player implements PlayerDataService{
 		mbirth = content[5];
 		mage = Integer.parseInt(content[6]);
 		mexp = DirtyDataManager.checkExp(fileName, content[7]);
-		mschool = DirtyDataManager.checkSchool(fileName,content[8]);
+		mschool = DirtyDataManager.checkString(fileName,content[8]);
 		player = new PlayerPO(0,mname, mnumber, mposition, mheight, mweight,
 				mbirth, mage, mexp, mschool);
 		return player;
