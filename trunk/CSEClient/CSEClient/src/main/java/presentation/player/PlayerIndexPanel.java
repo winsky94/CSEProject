@@ -12,6 +12,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.AbstractTableModel;
 
+import businesslogic.Player;
+import businesslogicservice.PlayerBLService;
 import vo.PlayerVO;
 
 public class PlayerIndexPanel extends JPanel {
@@ -65,40 +67,42 @@ public class PlayerIndexPanel extends JPanel {
 	
 	public void RefreshPlayerTable(ArrayList<PlayerVO> vo) {
 		cm.clear();
-
+//"编号", "姓名", "球衣号码", "位置", "身高", "体重", "出生日期", "年龄",
+		//"球龄", "毕业学校"}
 		for (PlayerVO VO : vo) {
 			ArrayList<String> lineInfo = new ArrayList<String>();
-			lineInfo.add(VO.getMemberID());
-			if (VO.getmType() == MemberType.JHS)
-				lineInfo.add("进货商");
-			else
-				lineInfo.add("销售商");
-			lineInfo.add(VO.getmLevel().toString());
+			lineInfo.add(VO.getId());
 			lineInfo.add(VO.getName());
-			lineInfo.add(VO.getTel());
-			lineInfo.add(VO.getAddress());
-			lineInfo.add(VO.getPostcode());
-			lineInfo.add(VO.getEMail());
-			lineInfo.add(Double.toString(VO.getMaxOwe()));
-			lineInfo.add(Double.toString(VO.getToReceive()));
-			lineInfo.add(Double.toString(VO.getToPay()));
-			lineInfo.add(VO.getDefaultClerk());
+			lineInfo.add(VO.getNumber()+"");
+			lineInfo.add(VO.getPosition());
+			lineInfo.add(VO.getHeight());
+			lineInfo.add(VO.getWeight());
+			lineInfo.add(VO.getBirth());
+			lineInfo.add(VO.getAge()+"");
+			lineInfo.add(VO.getExp()+"");
+			lineInfo.add(VO.getSchool());
+			
 			cm.add(lineInfo);
 
 		}
-		memberTable.revalidate();
-		MemberMgrPanel.this.repaint();
+		player.revalidate();
+		PlayerIndexPanel.this.repaint();
 
 	}
 
 	
 	public static void main(String[] args) {
 		JFrame frame=new JFrame();
-		frame.add(new PlayerIndexPanel());
+		PlayerIndexPanel index=new PlayerIndexPanel();
+		frame.add(index);
 		frame.setVisible(true);
 		frame.setLocation(100,100);
 		frame.setSize(1000, 800);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		PlayerBLService p=new Player();
+	    ArrayList<PlayerVO> plist=p.getPlayerList();
+	    if(plist!=null)
+	    	index.RefreshPlayerTable(plist);
 		
 		
 	}
