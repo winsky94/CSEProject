@@ -29,7 +29,7 @@ public class FileManager {
 		try{
 			
 			//File file=new File("13-14_01-01_CHA-LAC");
-			File file=new File("Aaron Brooks");
+			File file=new File(fileName);
 	        if(!file.exists()){
 	        	
 	        	file.createNewFile();	            
@@ -71,8 +71,23 @@ public class FileManager {
 		return player;
 	}
 	 
-	 public static void main(String[] args){
-		 FileManager fm=new FileManager();
-		 fm.readFromPlayerFile("");
+	 public ArrayList<PlayerPO> readAllPlayers(){
+		 ArrayList<PlayerPO> players=new ArrayList<PlayerPO>();
+		 try {
+			FileList fl=new FileList("D:/LUCY/Documents/软件工程与计算III/data/迭代一数据/players/info");
+			ArrayList<String> names=fl.getList();
+			for(String name:names){
+				players.add(readFromPlayerFile(name));
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		 return players;
 	 }
+	 
+	
 }
