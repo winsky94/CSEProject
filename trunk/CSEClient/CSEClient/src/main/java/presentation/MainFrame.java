@@ -90,7 +90,9 @@ public class MainFrame extends JFrame {
 		 MediaTracker mt=new MediaTracker(this);
 		 img=Toolkit.getDefaultToolkit().createImage("img/main/backmain.png");
 		 ImageIcon ic=new ImageIcon(img);
-		 img.getScaledInstance(getWidth(),getHeight(),Image.SCALE_DEFAULT);
+		 
+		img=img.getScaledInstance(getWidth(),getHeight(),Image.SCALE_DEFAULT);
+		 
 		 
 		 mt.addImage(img, 0);
 		 try {
