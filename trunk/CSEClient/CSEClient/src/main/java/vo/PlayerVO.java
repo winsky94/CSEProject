@@ -33,6 +33,47 @@ public class PlayerVO {
 	private double blockRate;// 盖帽率
 	private double turnOverRate;// 失误率
 
+	public PlayerVO(String id, String name, int number, String position,
+			String height, String weight, String birth, int age, int exp,
+			String school, CommonPO commonPO, String teamName,
+			String playedGames, double gameStartingNum, double presentTime,
+			double offenNum, double defenNum, double efficiency,
+			double gmScEfficiencyValue, double trueHitRate,
+			double shootHitEfficiency, double reboundRate,
+			double offenReboundRate, double defenReboundRate,
+			double assistRate, double stealRate, double blockRate,
+			double turnOverRate) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.number = number;
+		this.position = position;
+		this.height = height;
+		this.weight = weight;
+		this.birth = birth;
+		this.age = age;
+		this.exp = exp;
+		this.school = school;
+		this.commonPO = commonPO;
+		this.teamName = teamName;
+		this.playedGames = playedGames;
+		this.gameStartingNum = gameStartingNum;
+		this.presentTime = presentTime;
+		this.offenNum = offenNum;
+		this.defenNum = defenNum;
+		this.efficiency = efficiency;
+		GmScEfficiencyValue = gmScEfficiencyValue;
+		this.trueHitRate = trueHitRate;
+		this.shootHitEfficiency = shootHitEfficiency;
+		this.reboundRate = reboundRate;
+		this.offenReboundRate = offenReboundRate;
+		this.defenReboundRate = defenReboundRate;
+		this.assistRate = assistRate;
+		this.stealRate = stealRate;
+		this.blockRate = blockRate;
+		this.turnOverRate = turnOverRate;
+	}
+
 	public String getId() {
 		return id;
 	}

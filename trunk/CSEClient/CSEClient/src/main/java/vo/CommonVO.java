@@ -12,6 +12,22 @@ public class CommonVO {
 	private double foulNum;// 犯规数
 	private double score;// 得分
 
+	public CommonVO(double reboundNum, double assistNum, double shootHitRate,
+			double threeHitRate, double freeThrowHitRate, double stealNum,
+			double blockNum, double turnOverNum, double foulNum, double score) {
+		super();
+		this.reboundNum = reboundNum;
+		this.assistNum = assistNum;
+		this.shootHitRate = shootHitRate;
+		this.threeHitRate = threeHitRate;
+		this.freeThrowHitRate = freeThrowHitRate;
+		this.stealNum = stealNum;
+		this.blockNum = blockNum;
+		this.turnOverNum = turnOverNum;
+		this.foulNum = foulNum;
+		this.score = score;
+	}
+
 	public double getReboundNum() {
 		return reboundNum;
 	}
