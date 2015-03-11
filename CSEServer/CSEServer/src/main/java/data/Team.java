@@ -11,10 +11,11 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import dataservice.TeamDataService;
 import po.TeamPO;
 
 
-public class Team {
+public class Team implements TeamDataService{
 	public ArrayList<String[]> readFromFile(String fileName) {
 		
 		ArrayList<String[]> result=new ArrayList<String[]>();
