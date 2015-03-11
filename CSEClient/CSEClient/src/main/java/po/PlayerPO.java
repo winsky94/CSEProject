@@ -14,11 +14,11 @@ public class PlayerPO {
 
 	private CommonPO commonPO;
 	private String teamName;// 所属球队
-	private String playedGames;// 参赛场数
-	private double gameStartingNum;// 先发场数
+	private int playedGames;// 参赛场数
+	private int gameStartingNum;// 先发场数
 	private double presentTime;// 在场时间
-	private double offenNum;// 进攻数
-	private double defenNum;// 防守数
+	private int offenNum;// 进攻数
+	private int defenNum;// 防守数
 	private double efficiency;// 效率
 	private double GmScEfficiencyValue;// GmSc效率值
 	private double trueHitRate;// 真实命中率
@@ -94,11 +94,11 @@ public class PlayerPO {
 		return teamName;
 	}
 
-	public String getPlayedGames() {
+	public int getPlayedGames() {
 		return playedGames;
 	}
 
-	public double getGameStartingNum() {
+	public int getGameStartingNum() {
 		return gameStartingNum;
 	}
 
@@ -106,11 +106,11 @@ public class PlayerPO {
 		return presentTime;
 	}
 
-	public double getOffenNum() {
+	public int getOffenNum() {
 		return offenNum;
 	}
 
-	public double getDefenNum() {
+	public int getDefenNum() {
 		return defenNum;
 	}
 
@@ -206,11 +206,11 @@ public class PlayerPO {
 		this.teamName = teamName;
 	}
 
-	public void setPlayedGames(String playedGames) {
+	public void setPlayedGames(int playedGames) {
 		this.playedGames = playedGames;
 	}
 
-	public void setGameStartingNum(double gameStartingNum) {
+	public void setGameStartingNum(int gameStartingNum) {
 		this.gameStartingNum = gameStartingNum;
 	}
 
@@ -218,11 +218,11 @@ public class PlayerPO {
 		this.presentTime = presentTime;
 	}
 
-	public void setOffenNum(double offenNum) {
+	public void setOffenNum(int offenNum) {
 		this.offenNum = offenNum;
 	}
 
-	public void setDefenNum(double defenNum) {
+	public void setDefenNum(int defenNum) {
 		this.defenNum = defenNum;
 	}
 
