@@ -31,6 +31,45 @@ public class TeamVO {
 	private double stealEfficiency;         //抢断效率
 	private double assistEfficiency;        //助攻率
 	
+	public TeamVO(String id, String teamName, String location,
+			String abLocation, String conference, String partition,
+			String homeCourt, String setUpTime, CommonPO commonPO,
+			int matchesNum, int shootHitNum, int shootAttemptNum,
+			int threeHitNum, int threeAttemptNum, int freeThrowHitNum,
+			int freeThrowAttemptNum, int offenReboundNum, int defenReboundNum,
+			double winRate, double offenRound, double offenEfficiency,
+			double defenEfficiency, double offenReboundEfficiency,
+			double defenReboundEfficiency, double stealEfficiency,
+			double assistEfficiency) {
+		super();
+		this.id = id;
+		this.teamName = teamName;
+		this.location = location;
+		this.abLocation = abLocation;
+		this.conference = conference;
+		this.partition = partition;
+		this.homeCourt = homeCourt;
+		this.setUpTime = setUpTime;
+		this.commonPO = commonPO;
+		this.matchesNum = matchesNum;
+		this.shootHitNum = shootHitNum;
+		this.shootAttemptNum = shootAttemptNum;
+		this.threeHitNum = threeHitNum;
+		this.threeAttemptNum = threeAttemptNum;
+		this.freeThrowHitNum = freeThrowHitNum;
+		this.freeThrowAttemptNum = freeThrowAttemptNum;
+		this.offenReboundNum = offenReboundNum;
+		this.defenReboundNum = defenReboundNum;
+		this.winRate = winRate;
+		this.offenRound = offenRound;
+		this.offenEfficiency = offenEfficiency;
+		this.defenEfficiency = defenEfficiency;
+		this.offenReboundEfficiency = offenReboundEfficiency;
+		this.defenReboundEfficiency = defenReboundEfficiency;
+		this.stealEfficiency = stealEfficiency;
+		this.assistEfficiency = assistEfficiency;
+	}
+
 	public String getId() {
 		return id;
 	}
