@@ -5,7 +5,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.text.NumberFormat;
 import java.util.ArrayList;
 
 import po.PlayerPO;
@@ -13,9 +12,7 @@ import po.PlayerPO;
 public class FileManager {
 
 	public PlayerPO readFromPlayerFile(String fileName) {
-		int count = 0;
 		PlayerPO player;
-		String mid;
 		String mname;
 		int mnumber;
 		String mposition;
@@ -54,10 +51,6 @@ public class FileManager {
 			e.printStackTrace();
 		}
 
-		NumberFormat nf = NumberFormat.getInstance();
-		nf.setMinimumIntegerDigits(5);
-		nf.setGroupingUsed(false);
-		mid = nf.format(count);
 		mname = DirtyDataManager.checkName(fileName, content[0]);
 		mnumber = DirtyDataManager.checkNum(fileName, content[1]);
 		mposition = content[2];
@@ -67,7 +60,7 @@ public class FileManager {
 		mage = Integer.parseInt(content[6]);
 		mexp = DirtyDataManager.checkExp(fileName, content[7]);
 		mschool = DirtyDataManager.checkSchool(fileName,content[8]);
-		player = new PlayerPO(mid, mname, mnumber, mposition, mheight, mweight,
+		player = new PlayerPO(0,mname, mnumber, mposition, mheight, mweight,
 				mbirth, mage, mexp, mschool);
 		return player;
 	}
