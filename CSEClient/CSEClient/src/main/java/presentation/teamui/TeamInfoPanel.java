@@ -1,4 +1,4 @@
-package presentation.team;
+package presentation.teamui;
 
 import javax.swing.JPanel;
 

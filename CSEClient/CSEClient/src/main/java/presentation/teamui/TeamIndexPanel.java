@@ -1,4 +1,4 @@
-package presentation.team;
+package presentation.teamui;
 
 import java.awt.Color;
 import java.awt.GridBagConstraints;
