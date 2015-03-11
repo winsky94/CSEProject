@@ -1,7 +1,7 @@
 package po;
 
 public class PlayerPO {
-	private int id;// 编号00001
+	private int id;// 编号
 	private String name;// 球员名称
 	private int number;// 球衣号码
 	private String position;// 位置
