@@ -1,7 +1,7 @@
 package po;
 
 public class TeamPO {
-	private String id;                     //编号
+	private String id;                     //编号 00001
 	private String teamName;               //球队全名
 	private String location;               //所在地
 	private String abLocation;             //所在地(缩写)
