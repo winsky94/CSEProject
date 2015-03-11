@@ -1,32 +1,35 @@
 package po;
 
+import java.util.ArrayList;
+
 public class MatchPO {
-	private int id;// 编号——构造函数里不要做参数
+	private int matchID;// 编号
+	private String season;// 赛季
 	private String date;// 时间
 	private String teams;// 对阵队伍
 	private String score; // 比分
-	private String firstScore;// 第一节比分
-	private String secondScore;// 第二节比分
-	private String thirdScore;// 第三节比分
-	private String fourthScore;// 第四节比分
-	private String overTimeScore;// 加时赛比分
+	private ArrayList<String> detailScores;// 各节比分
+	private ArrayList<RecordPO> records;// 球员比分数据记录
 
-	public MatchPO(String date, String teams, String score, String firstScore,
-			String secondScore, String thirdScore, String fourthScore,
-			String overTimeScore) {
+	public MatchPO(int id, String season, String date, String teams,
+			String score, ArrayList<String> detailScores,
+			ArrayList<RecordPO> records) {
 		super();
+		this.matchID = id;
+		this.season = season;
 		this.date = date;
 		this.teams = teams;
 		this.score = score;
-		this.firstScore = firstScore;
-		this.secondScore = secondScore;
-		this.thirdScore = thirdScore;
-		this.fourthScore = fourthScore;
-		this.overTimeScore = overTimeScore;
+		this.detailScores = detailScores;
+		this.records = records;
 	}
 
-	public int getId() {
-		return id;
+	public int getMatchID() {
+		return matchID;
+	}
+
+	public String getSeason() {
+		return season;
 	}
 
 	public String getDate() {
@@ -41,28 +44,20 @@ public class MatchPO {
 		return score;
 	}
 
-	public String getFirstScore() {
-		return firstScore;
+	public ArrayList<String> getDetailScores() {
+		return detailScores;
 	}
 
-	public String getSecondScore() {
-		return secondScore;
-	}
-
-	public String getThirdScore() {
-		return thirdScore;
-	}
-
-	public String getFourthScore() {
-		return fourthScore;
-	}
-
-	public String getOverTimeScore() {
-		return overTimeScore;
+	public ArrayList<RecordPO> getRecords() {
+		return records;
 	}
 
 	public void setId(int id) {
-		this.id = id;
+		this.matchID = id;
+	}
+
+	public void setSeason(String season) {
+		this.season = season;
 	}
 
 	public void setDate(String date) {
@@ -77,24 +72,12 @@ public class MatchPO {
 		this.score = score;
 	}
 
-	public void setFirstScore(String firstScore) {
-		this.firstScore = firstScore;
+	public void setDetailScores(ArrayList<String> detailScores) {
+		this.detailScores = detailScores;
 	}
 
-	public void setSecondScore(String secondScore) {
-		this.secondScore = secondScore;
-	}
-
-	public void setThirdScore(String thirdScore) {
-		this.thirdScore = thirdScore;
-	}
-
-	public void setFourthScore(String fourthScore) {
-		this.fourthScore = fourthScore;
-	}
-
-	public void setOverTimeScore(String overTimeScore) {
-		this.overTimeScore = overTimeScore;
+	public void setRecords(ArrayList<RecordPO> records) {
+		this.records = records;
 	}
 
 }
