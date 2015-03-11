@@ -1,7 +1,7 @@
 package po;
 
 public class PlayerPO {
-	private String id;// 编号00001
+	private int id;// 编号00001
 	private String name;// 球员名称
 	private int number;// 球衣号码
 	private String position;// 位置
@@ -31,7 +31,7 @@ public class PlayerPO {
 	private double blockRate;// 盖帽率
 	private double turnOverRate;// 失误率
 
-	public PlayerPO(String id, String name, int number, String position,
+	public PlayerPO(int id, String name, int number, String position,
 			String height, int weight, String birth, int age, int exp,
 			String school) {
 		this.id = id;
@@ -46,7 +46,7 @@ public class PlayerPO {
 		this.school = school;
 	}
 
-	public String getId() {
+	public int getId() {
 		return id;
 	}
 
@@ -158,7 +158,7 @@ public class PlayerPO {
 		return turnOverRate;
 	}
 
-	public void setId(String id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
