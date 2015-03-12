@@ -1,9 +1,12 @@
 package po;
 
-public class TeamPO {
+import java.io.Serializable;
+
+public class TeamPO implements Serializable {
+	private static final long serialVersionUID = 1L;
 	private int id; // 编号
 	private String teamName; // 球队全名
-	private String abLocation; // 所在地(缩写)	
+	private String abLocation; // 所在地(缩写)
 	private String location; // 所在地
 	private String conference; // 赛区
 	private String partition; // 分区
@@ -29,9 +32,8 @@ public class TeamPO {
 	private double stealEfficiency; // 抢断效率
 	private double assistEfficiency; // 助攻率
 
-	public TeamPO(int id, String teamName, String abLocation,
-			String location, String conference, String partition,
-			String homeCourt, int setUpTime) {
+	public TeamPO(int id, String teamName, String abLocation, String location,
+			String conference, String partition, String homeCourt, int setUpTime) {
 		super();
 		this.id = id;
 		this.teamName = teamName;

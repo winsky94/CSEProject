@@ -1,6 +1,9 @@
 package po;
 
-public class CommonPO {
+import java.io.Serializable;
+
+public class CommonPO implements Serializable {
+	private static final long serialVersionUID = 1L;
 	private int reboundNum;// 篮板数
 	private int assistNum;// 助攻数
 	private double shootHitRate;// 投篮命中率
