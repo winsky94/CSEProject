@@ -1,6 +1,9 @@
 package po;
 
-public class RecordPO {
+import java.io.Serializable;
+
+public class RecordPO implements Serializable {
+	private static final long serialVersionUID = 1L;
 	private String team;// 球队
 	private String playerName;// 球员名
 	private String position;// 位置

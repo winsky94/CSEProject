@@ -1,7 +1,10 @@
 package po;
 
-public class PlayerMatchDataPO extends MatchDataPO{
-	private int playerID;    //player编号
+import java.io.Serializable;
+
+public class PlayerMatchDataPO extends MatchDataPO implements Serializable {
+	private static final long serialVersionUID = 1L;
+	private int playerID; // player编号
 	private String teamName;// 所属球队
 	private int playedGames;// 参赛场数
 	private int gameStartingNum;// 先发场数
@@ -19,38 +22,43 @@ public class PlayerMatchDataPO extends MatchDataPO{
 	private double stealRate;// 抢断率
 	private double blockRate;// 盖帽率
 	private double turnOverRate;// 失误率
-	public PlayerMatchDataPO(int id,String teamName,int playedGames,int gameStartingNum,String presentTime,
-			int offenNum,int defenNum,double efficiency,double GmScEfficiencyValue,double trueHitRate,
-			double shootHitEfficiency,double reboundRate,double offenReboundRate,double defenReboundRate,
-			double assistRate,double stealRate,double blockRate,double turnOverRate,
-			int reboundNum, int assistNum,double shootHitRate, double threeHitRate, double freeThrowHitRate,
+
+	public PlayerMatchDataPO(int id, String teamName, int playedGames,
+			int gameStartingNum, String presentTime, int offenNum,
+			int defenNum, double efficiency, double GmScEfficiencyValue,
+			double trueHitRate, double shootHitEfficiency, double reboundRate,
+			double offenReboundRate, double defenReboundRate,
+			double assistRate, double stealRate, double blockRate,
+			double turnOverRate, int reboundNum, int assistNum,
+			double shootHitRate, double threeHitRate, double freeThrowHitRate,
 			int stealNum, int blockNum, int turnOverNum, int foulNum, int score) {
-		super(reboundNum, assistNum, shootHitRate, threeHitRate, freeThrowHitRate,
-				stealNum, blockNum, turnOverNum, foulNum, score);
-		this.playerID=id;
-		this.teamName=teamName;
-		this.playedGames=playedGames;
-		this.gameStartingNum=gameStartingNum;
-		this.presentTime=presentTime;
-		this.offenNum=offenNum;
-		this.defenNum=defenNum;
-		this.efficiency=efficiency;
-		this.GmScEfficiencyValue=GmScEfficiencyValue;
-		this.trueHitRate=trueHitRate;
-		this.shootHitEfficiency=shootHitEfficiency;
-		this.reboundRate=reboundRate;
-		this.offenReboundRate=offenReboundRate;
-		this.defenReboundRate=defenReboundRate;
-		this.assistRate=assistRate;
-		this.stealRate=stealRate;
-		this.blockRate=blockRate;
-	    this.turnOverRate=turnOverRate;
+		super(reboundNum, assistNum, shootHitRate, threeHitRate,
+				freeThrowHitRate, stealNum, blockNum, turnOverNum, foulNum,
+				score);
+		this.playerID = id;
+		this.teamName = teamName;
+		this.playedGames = playedGames;
+		this.gameStartingNum = gameStartingNum;
+		this.presentTime = presentTime;
+		this.offenNum = offenNum;
+		this.defenNum = defenNum;
+		this.efficiency = efficiency;
+		this.GmScEfficiencyValue = GmScEfficiencyValue;
+		this.trueHitRate = trueHitRate;
+		this.shootHitEfficiency = shootHitEfficiency;
+		this.reboundRate = reboundRate;
+		this.offenReboundRate = offenReboundRate;
+		this.defenReboundRate = defenReboundRate;
+		this.assistRate = assistRate;
+		this.stealRate = stealRate;
+		this.blockRate = blockRate;
+		this.turnOverRate = turnOverRate;
 	}
-	
-	public int getPlayerID(){
+
+	public int getPlayerID() {
 		return playerID;
 	}
-	
+
 	public String getTeamName() {
 		return teamName;
 	}
@@ -118,9 +126,9 @@ public class PlayerMatchDataPO extends MatchDataPO{
 	public double getTurnOverRate() {
 		return turnOverRate;
 	}
-	
-	public void setPlayerID(int id){
-		this.playerID=id;
+
+	public void setPlayerID(int id) {
+		this.playerID = id;
 	}
 
 	public void setTeamName(String teamName) {
