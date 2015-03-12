@@ -1,6 +1,9 @@
 package po;
 
-public class MatchDataPO {
+import java.io.Serializable;
+
+public class MatchDataPO implements Serializable {
+	private static final long serialVersionUID = 1L;
 	private int reboundNum;// 篮板数
 	private int assistNum;// 助攻数
 	private double shootHitRate;// 投篮命中率

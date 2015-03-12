@@ -1,6 +1,9 @@
 package po;
 
-public class PlayerPO {
+import java.io.Serializable;
+
+public class PlayerPO implements Serializable {
+	private static final long serialVersionUID = 1L;
 	private int id;// 编号
 	private String name;// 球员名称
 	private int number;// 球衣号码
