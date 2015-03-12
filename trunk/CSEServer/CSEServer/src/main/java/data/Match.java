@@ -116,7 +116,14 @@ public class Match {
 						freeThrowAttemptNum = freeThrowHitNum;
 					}
 
-					
+					// 检查总篮板数是否等于前场篮板数+后场篮板数
+					// 如果不是，将总篮板数置为前场篮板数+后场篮板数
+					boolean checkReboundNum = DirtyDataManager.checkReboundNum(
+							fileName, offenReboundNum, defenReboundNum,
+							reboundNum);
+					if (!checkReboundNum) {
+						reboundNum = offenReboundNum + defenReboundNum;
+					}
 					isComplete = true;
 				}
 				if (isComplete) {
