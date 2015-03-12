@@ -118,33 +118,37 @@ public class DirtyDataManager {
 	 *            出手次数
 	 * @param hitNum
 	 *            命中次数
-	 * @return true表明出手次数大于等于命中次数， false表明出手次数小于命中次数
+	 * @return 正确的出手次数——出手次数大于等于命中次数，如果给出的出手次数小于命中次数，就将出手次数置为命中次数
 	 */
-	public static boolean checkShootAndHitNum(String fileName, int attemptNumNum,
+	public static int checkShootAndHitNum(String fileName, int attemptNumNum,
 			int hitNum) {
 		if (attemptNumNum >= hitNum) {
-			return true;
+			return attemptNumNum;
 		} else {
-			System.out.println(fileName+" 出手次数小于命中次数");
-			return false;
+			// System.out.println(fileName+" 出手次数小于命中次数");
+			return hitNum;
 		}
 	}
 
 	/**
 	 * 
-	 * @param fileName 数据文件名
-	 * @param offenReboundNum 前场篮板数
-	 * @param defenReboundNum 后场篮板数
-	 * @param reboundNum 总篮板数
-	 * @return true表明前场篮板数与后场篮板数之和等于总篮板数 false表明篮板数与后场篮板数之和不等于总篮板数
+	 * @param fileName
+	 *            数据文件名
+	 * @param offenReboundNum
+	 *            前场篮板数
+	 * @param defenReboundNum
+	 *            后场篮板数
+	 * @param reboundNum
+	 *            总篮板数
+	 * @return 正确的总篮板数 总篮板数=前场篮板数+后场篮板数
 	 */
-	public static boolean checkReboundNum(String fileName, int offenReboundNum,
+	public static int checkReboundNum(String fileName, int offenReboundNum,
 			int defenReboundNum, int reboundNum) {
 		if ((offenReboundNum + defenReboundNum) == reboundNum) {
-			return true;
+			return reboundNum;
 		} else {
 			// System.out.println(fileName+" 篮板数");
-			return false;
+			return (offenReboundNum + defenReboundNum);
 		}
 	}
 }

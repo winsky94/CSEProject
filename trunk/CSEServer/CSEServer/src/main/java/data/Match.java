@@ -82,14 +82,20 @@ public class Match {
 					position = line[1];
 					presentTime = line[2];// 在场时间
 					shootHitNum = Integer.parseInt(line[3]);// 投篮命中数
-					shootAttemptNum = Integer.parseInt(line[4]);// 投篮出手数
+					shootAttemptNum = DirtyDataManager.checkShootAndHitNum(
+							fileName, Integer.parseInt(line[4]), shootHitNum);// 投篮出手数
 					threeHitNum = Integer.parseInt(line[5]);// 三分命中数
-					threeAttemptNum = Integer.parseInt(line[6]);// 三分出手数
+					threeAttemptNum = DirtyDataManager.checkShootAndHitNum(
+							fileName, Integer.parseInt(line[6]), threeHitNum);// 三分出手数
 					freeThrowHitNum = Integer.parseInt(line[7]);// 罚球命中数
-					freeThrowAttemptNum = Integer.parseInt(line[8]);// 罚球出手数
+					freeThrowAttemptNum = DirtyDataManager.checkShootAndHitNum(
+							fileName, Integer.parseInt(line[8]),
+							freeThrowHitNum);// 罚球出手数
 					offenReboundNum = Integer.parseInt(line[9]);// 进攻（前场）篮板数
 					defenReboundNum = Integer.parseInt(line[10]);// 防守（后场）篮板数
-					reboundNum = Integer.parseInt(line[11]);// 总篮板数
+					reboundNum = DirtyDataManager.checkReboundNum(fileName,
+							offenReboundNum, defenReboundNum,
+							Integer.parseInt(line[11]));// 总篮板数
 					assistNum = Integer.parseInt(line[12]);// 助攻数
 					stealNum = Integer.parseInt(line[13]);// 抢断数
 					blockNum = Integer.parseInt(line[14]);// 盖帽数
@@ -98,32 +104,6 @@ public class Match {
 					personScore = DirtyDataManager.checkPersonScore(fileName,
 							line[17], temp);// 个人得分
 
-					// 检查出手次数是否大于等于命中次数
-					// 如果不是，将出手次数置为命中次数
-					boolean checkShoot = DirtyDataManager.checkShootAndHitNum(
-							fileName, shootAttemptNum, shootHitNum);
-					if (!checkShoot) {
-						shootAttemptNum = shootHitNum;
-					}
-					boolean checkThree = DirtyDataManager.checkShootAndHitNum(
-							fileName, threeAttemptNum, threeHitNum);
-					if (!checkThree) {
-						threeAttemptNum = threeHitNum;
-					}
-					boolean checkFree = DirtyDataManager.checkShootAndHitNum(
-							fileName, freeThrowAttemptNum, freeThrowHitNum);
-					if (!checkFree) {
-						freeThrowAttemptNum = freeThrowHitNum;
-					}
-
-					// 检查总篮板数是否等于前场篮板数+后场篮板数
-					// 如果不是，将总篮板数置为前场篮板数+后场篮板数
-					boolean checkReboundNum = DirtyDataManager.checkReboundNum(
-							fileName, offenReboundNum, defenReboundNum,
-							reboundNum);
-					if (!checkReboundNum) {
-						reboundNum = offenReboundNum + defenReboundNum;
-					}
 					isComplete = true;
 				}
 				if (isComplete) {
