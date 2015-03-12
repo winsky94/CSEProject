@@ -1,5 +1,6 @@
 package presentation.teamui.cardmode;
 
+import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 
@@ -30,6 +31,7 @@ public class TeamCardIndexPanel extends JPanel{
 		this.add(tcp);
 		//---右侧为球队详细信息列表即tdp----
 		tdp=new TeamDetailPanel();
+		tdp.setBackground(Color.black);
 		gbc.gridx=3;
 		gbc.gridwidth=6;
 		gbc.weightx=6;
