@@ -4,9 +4,9 @@ import java.io.Serializable;
 
 public class TeamMatchDataPO extends MatchDataPO implements Serializable {
 	private static final long serialVersionUID = 1L;
-	private int teamID; // 队伍编号
+	private String teamName; // 队伍地区缩写
 	private int matchesNum; // 比赛场数
-	private int shootHitNum; // 投篮命中率
+	private int shootHitNum; // 投篮命中数
 	private int shootAttemptNum; // 投篮出手次数
 	private int threeHitNum; // 三分命中数
 	private int threeAttemptNum; // 三分出手数
@@ -23,7 +23,7 @@ public class TeamMatchDataPO extends MatchDataPO implements Serializable {
 	private double stealEfficiency; // 抢断效率
 	private double assistEfficiency; // 助攻率
 
-	public TeamMatchDataPO(int teamID, int matchesNum, int shootHitNum,
+	public TeamMatchDataPO(String teamName, int matchesNum, int shootHitNum,
 			int shootAttemptNum, int threeHitNum, int threeAttemptNum,
 			int freeThrowHitNum, int freeThrowAttemptNum, int offenReboundNum,
 			int defenReboundNum, double winRate, double offenRound,
@@ -36,7 +36,7 @@ public class TeamMatchDataPO extends MatchDataPO implements Serializable {
 		super(reboundNum, assistNum, shootHitRate, threeHitRate,
 				freeThrowHitRate, stealNum, blockNum, turnOverNum, foulNum,
 				score);
-		this.teamID = teamID;
+		this.teamName = teamName;
 		this.matchesNum = matchesNum;
 		this.shootHitNum = shootHitNum;
 		this.shootAttemptNum = shootAttemptNum;
@@ -56,8 +56,8 @@ public class TeamMatchDataPO extends MatchDataPO implements Serializable {
 		this.assistEfficiency = assistEfficiency;
 	}
 
-	public int getTeamID() {
-		return teamID;
+	public String getTeamName() {
+		return teamName;
 	}
 
 	public int getMatchesNum() {
@@ -128,8 +128,8 @@ public class TeamMatchDataPO extends MatchDataPO implements Serializable {
 		return assistEfficiency;
 	}
 
-	public void setTeamID(int id) {
-		this.teamID = id;
+	public void setTeamName(String name) {
+		this.teamName = name;
 	}
 
 	public void setMatchesNum(int matchesNum) {

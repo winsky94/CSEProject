@@ -15,7 +15,7 @@ public class TeamPO implements Serializable {
 
 	private CommonPO commonPO;
 	private int matchesNum; // 比赛场数
-	private int shootHitNum; // 投篮命中率
+	private int shootHitNum; // 投篮命中数
 	private int shootAttemptNum; // 投篮出手次数
 	private int threeHitNum; // 三分命中数
 	private int threeAttemptNum; // 三分出手数
