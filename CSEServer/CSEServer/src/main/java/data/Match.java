@@ -259,7 +259,7 @@ public class Match {
 	public static void main(String[] args) {
 		Match Match = new Match();
 		Match.exportToSql();
-		// Match.getMatchesList();
-		// System.out.println("success!");
+		Match.getMatchesList();
+		System.out.println("success!");
 	}
 }
