@@ -6,7 +6,6 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.sql.Connection;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -73,8 +72,8 @@ public class Player implements PlayerDataService{
 	public ArrayList<PlayerPO> getPlayerList() {
 		ArrayList<PlayerPO> players = new ArrayList<PlayerPO>();
 		try {
-			//FileList fl = new FileList("src/迭代一数据/players/info");
-			FileList fl=new FileList("D:/LUCY/Documents/软件工程与计算III/data/迭代一数据/players/info");
+			FileList fl = new FileList("src/迭代一数据/players/info");
+//			FileList fl=new FileList("D:/LUCY/Documents/软件工程与计算III/data/迭代一数据/players/info");
 			ArrayList<String> names = fl.getList();
 			for (String name : names) {
 				players.add(readFromFile(name));
@@ -102,28 +101,13 @@ public class Player implements PlayerDataService{
 	         		+ "school varchar(40)not null default 'null',primary key(id));");
 	         int count=1;
 	         for(PlayerPO player:players){
-	   //     	 sql.execute("insert players values("+(count++)+",'Lucy',1,'F','1-1',1,'1111',1,1,'11')");
 	         sql.execute("insert players values("+(count++)+",'"+player.getName()+"',"+player.getNumber()+
 	        		 ",'"+player.getPosition()+"','"+player.getHeight()+"',"+player.getWeight()+",'"+
 	        		 player.getBirth()+"',"+player.getAge()+","+player.getExp()+",'"+player.getSchool()+"')");
 	             	   
 	        	 System.out.println(count);
 	         }
-	         String query = "select * from players";
-	         ResultSet result = sql.executeQuery(query);
-	         System.out.println("players表数据如下：");
-	         System.out.println("---------------------------------");
-	         System.out.println("学号"+" "+"姓名"+" "+"数学成绩");
-	         System.out.println("---------------------------------");
-	         int number;
-	         String name;
-	         int math;
-	         while(result.next()){
-	           number = result.getInt("id");
-	           name = result.getString("name");
-	           math = result.getInt("number");
-	           System.out.println(number + " " + name + " " + math);
-	         }
+	         
 	         sql.close();
 	         con.close();
 	    }catch(java.lang.ClassNotFoundException e){
@@ -135,10 +119,17 @@ public class Player implements PlayerDataService{
 	}
 	
 	public String getActionPhotoPath(String name){
-		return "D:/LUCY/Documents/软件工程与计算III/data/迭代一数据/players/action/"+name+".png";
+//		return "D:/LUCY/Documents/软件工程与计算III/data/迭代一数据/players/action/"+name+".png";
+		return "src/迭代一数据/players/action/"+name+".png";
 	}
 
 	public String getPortraitPhotoPath(String name){
-		return "D:/LUCY/Documents/软件工程与计算III/data/迭代一数据/players/protrait/"+name+".png";
+//		return "D:/LUCY/Documents/软件工程与计算III/data/迭代一数据/players/protrait/"+name+".png";
+		return "src/迭代一数据/players/protrait/"+name+".png";
+	}
+	
+	public static void main(String[] args) {
+		Player player=new Player();
+		player.exportToSql();
 	}
 }

@@ -25,12 +25,10 @@ public class Match {
 		ArrayList<String> detailScores = new ArrayList<String>();// 各节比分
 		ArrayList<RecordPO> records = new ArrayList<RecordPO>();// 球员比分数据记录
 
-		// System.out.println("fileName" + fileName);
 		String tp[] = fileName.split("matches");
 		season = tp[1].substring(1, 6);
 
 		try {
-			// File file=new File("13-14_01-01_CHA-LAC");
 			File file = new File(fileName);
 			if (!file.exists()) {
 				file.createNewFile();
@@ -158,7 +156,10 @@ public class Match {
 		try {
 			Connection con = SqlManager.getConnection();
 			Statement sql = con.createStatement();
-			sql.execute("drop table if exists players");
+			sql.execute("drop table if exists matches");
+			sql.execute("drop table if exists detailScores");
+			sql.execute("drop table if exists records");
+			
 			// 创建matches表
 			sql.execute("create table matches(id int not null auto_increment,"
 					+ "matchID int not null default -1,"

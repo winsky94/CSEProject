@@ -64,9 +64,9 @@ public class DirtyDataManager {
 			if (data.equals("N/A")) {
 				String[] tp = fileName.split("info\\\\");
 				fileName = tp[1].substring(1);
-				System.out.println("fileName为：" + fileName + "：球衣号码为非数字");
+//				System.out.println("fileName为：" + fileName + "：球衣号码为非数字");
 			} else {
-				System.out.println("其他错误");
+//				System.out.println("其他错误");
 			}
 
 		}
