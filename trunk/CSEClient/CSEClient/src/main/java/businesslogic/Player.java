@@ -18,7 +18,7 @@ public class Player implements PlayerBLService {
 		try {
 			String host = "localhost";
 			// String host = getServer.getServerHost();
-			String url = "rmi://" + host + "/goodsService";
+			String url = "rmi://" + host + "/playerService";
 			service = (PlayerDataService) Naming.lookup(url);
 		} catch (Exception e) {
 			// TODO 自动生成的 catch 块
@@ -46,14 +46,15 @@ public class Player implements PlayerBLService {
 	}
 
 	public PlayerVO poTovo(PlayerPO po) {
-		CommonPO commonPO = po.getCommonPO();
-		CommonVO commonVO = new CommonVO(commonPO.getReboundNum(),
-				commonPO.getAssistNum(), commonPO.getShootHitRate(),
-				commonPO.getThreeHitRate(), commonPO.getFreeThrowHitRate(),
-				commonPO.getStealNum(), commonPO.getBlockNum(),
-				commonPO.getTurnOverNum(), commonPO.getFoulNum(),
-				commonPO.getScore());
+		// CommonPO commonPO = po.getCommonPO();
+		// CommonVO commonVO = new CommonVO(commonPO.getReboundNum(),
+		// commonPO.getAssistNum(), commonPO.getShootHitRate(),
+		// commonPO.getThreeHitRate(), commonPO.getFreeThrowHitRate(),
+		// commonPO.getStealNum(), commonPO.getBlockNum(),
+		// commonPO.getTurnOverNum(), commonPO.getFoulNum(),
+		// commonPO.getScore());
 
+		CommonVO commonVO = null;
 		PlayerVO vo = new PlayerVO(po.getId(), po.getName(), po.getNumber(),
 				po.getPosition(), po.getHeight(), po.getWeight(),
 				po.getBirth(), po.getAge(), po.getExp(), po.getSchool(),
