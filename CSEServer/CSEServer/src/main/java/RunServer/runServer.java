@@ -190,9 +190,10 @@ public class runServer extends JFrame implements ActionListener {
 
 	public void init(String port) {
 		try {
-
 			String hostIP = InetAddress.getLocalHost().getHostAddress();
+			
 			int portNum = Integer.parseInt(port);
+			System.out.println(hostIP);
 			LocateRegistry.createRegistry(portNum);
 			Player player = new Player();
 			Naming.rebind("playerService", player);
