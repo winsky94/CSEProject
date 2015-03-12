@@ -1,7 +1,5 @@
 package vo;
 
-import po.CommonPO;
-
 public class TeamVO {
 	private int id; // 编号
 	private String teamName; // 球队全名
@@ -12,7 +10,7 @@ public class TeamVO {
 	private String homeCourt; // 主场
 	private String setUpTime; // 建立时间
 
-	private CommonPO commonPO;
+	private CommonVO commonVO;
 	private int matchesNum; // 比赛场数
 	private int shootHitNum; // 投篮命中率
 	private int shootAttemptNum; // 投篮出手次数
@@ -33,7 +31,7 @@ public class TeamVO {
 
 	public TeamVO(int id, String teamName, String location, String abLocation,
 			String conference, String partition, String homeCourt,
-			String setUpTime, CommonPO commonPO, int matchesNum,
+			String setUpTime, CommonVO commonVO, int matchesNum,
 			int shootHitNum, int shootAttemptNum, int threeHitNum,
 			int threeAttemptNum, int freeThrowHitNum, int freeThrowAttemptNum,
 			int offenReboundNum, int defenReboundNum, double winRate,
@@ -49,7 +47,7 @@ public class TeamVO {
 		this.partition = partition;
 		this.homeCourt = homeCourt;
 		this.setUpTime = setUpTime;
-		this.commonPO = commonPO;
+		this.commonVO = commonVO;
 		this.matchesNum = matchesNum;
 		this.shootHitNum = shootHitNum;
 		this.shootAttemptNum = shootAttemptNum;
@@ -101,8 +99,8 @@ public class TeamVO {
 		return setUpTime;
 	}
 
-	public CommonPO getCommonPO() {
-		return commonPO;
+	public CommonVO getCommonVO() {
+		return commonVO;
 	}
 
 	public int getMatchesNum() {
@@ -205,8 +203,8 @@ public class TeamVO {
 		this.setUpTime = setUpTime;
 	}
 
-	public void setCommonPO(CommonPO po) {
-		this.commonPO = po;
+	public void setCommonVO(CommonVO vo) {
+		this.commonVO = vo;
 	}
 
 	public void setMatchesNum(int matchesNum) {
