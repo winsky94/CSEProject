@@ -1,8 +1,8 @@
-package presentation.teamui;
+package presentation.teamui.cardmode;
 
 import javax.swing.JPanel;
 
-public class TeamInfoPanel extends JPanel{
+public class TeamDetailPanel extends JPanel{
 
 	/**
 	 * 
