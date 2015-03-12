@@ -135,9 +135,10 @@ public class Match {
 	public ArrayList<MatchPO> getMatchesList() {
 		ArrayList<MatchPO> matches = new ArrayList<MatchPO>();
 		try {
-			FileList fl = new FileList("src/迭代一数据/matches");
+			//FileList fl = new FileList("src/迭代一数据/matches");
 			// FileList fl = new FileList(
 			// "D:/LUCY/Documents/软件工程与计算III/data/迭代一数据/players/info");
+			FileList fl=new FileList("D:/LUCY/Documents/软件工程与计算III/data/迭代一数据/matches");
 			ArrayList<String> names = fl.getList();
 			for (String name : names) {
 				matches.add(readFromMatchFile(name));
@@ -154,7 +155,7 @@ public class Match {
 
 	public static void main(String[] args) {
 		Match Match = new Match();
-		// Match.exportToSql();
+		Match.exportToSql();
 		Match.getMatchesList();
 		System.out.println("success!");
 	}
