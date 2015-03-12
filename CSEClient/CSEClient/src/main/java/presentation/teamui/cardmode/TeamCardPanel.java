@@ -9,6 +9,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import presentation.ModeChangeButton;
+import presentation.OrderChangeButton;
 
 public class TeamCardPanel extends JPanel{
 
@@ -22,6 +23,7 @@ public class TeamCardPanel extends JPanel{
 	JComboBox<String> seasonBox;
 	JLabel conditionLbl;
 	ModeChangeButton modeBtn;
+	OrderChangeButton orderBtn;
 	
 	public TeamCardPanel(){
 		GridBagLayout gbl = new GridBagLayout();
