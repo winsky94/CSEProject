@@ -6,7 +6,6 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.sql.Connection;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -69,7 +68,8 @@ public class Team implements TeamDataService{
 		
 		ArrayList<TeamPO> teams = new ArrayList<TeamPO>();
 		TeamPO team;
-		ArrayList<String[]> result=readFromFile("D:/LUCY/Documents/软件工程与计算III/data/迭代一数据/teams/teams");
+//		ArrayList<String[]> result=readFromFile("D:/LUCY/Documents/软件工程与计算III/data/迭代一数据/teams/teams");
+		ArrayList<String[]> result=readFromFile("src/迭代一数据/teams/teams");
         for(String[] content:result){
 		    name =content[0];
 		    abLocation =content[1];
@@ -98,27 +98,11 @@ public class Team implements TeamDataService{
 	         		+ "homeCourt varchar(40) not null default 'null',setUpTime int not null default 0,primary key(id));");
 	         int count=1;
 	         for(TeamPO team:teams){
-	   //     	 sql.execute("insert Teams values("+(count++)+",'Lucy',1,'F','1-1',1,'1111',1,1,'11')");
 	         sql.execute("insert teams values("+(count++)+",'"+team.getTeamName()+"','"+team.getAbLocation()+
 	        		 "','"+team.getLocation()+"','"+team.getConference()+"','"+team.getPartition()+"','"+
 	        		team.getHomeCourt()+"',"+team.getSetUpTime()+")");
 	             	   
 	        	 System.out.println(count);
-	         }
-	         String query = "select * from teams";
-	         ResultSet result = sql.executeQuery(query);
-	         System.out.println("teams表数据如下：");
-	         System.out.println("---------------------------------");
-	         System.out.println("学号"+" "+"姓名"+" "+"数学成绩");
-	         System.out.println("---------------------------------");
-	         int number;
-	         String name;
-	         String math;
-	         while(result.next()){
-	           number = result.getInt("id");
-	           name = result.getString("teamName");
-	           math = result.getString("abLocation");
-	           System.out.println(number + " " + name + " " + math);
 	         }
 	         sql.close();
 	         con.close();
@@ -131,7 +115,8 @@ public class Team implements TeamDataService{
 	}
 	
 	public String getPhotoPath(String abLocation){
-		return "D:/LUCY/Documents/软件工程与计算III/data/迭代一数据/teams/"+abLocation+".svg";
+//		return "D:/LUCY/Documents/软件工程与计算III/data/迭代一数据/teams/"+abLocation+".svg";
+		return "src/迭代一数据/teams/"+abLocation+".svg";
 	}
 	
 	public static void main(String[] args){

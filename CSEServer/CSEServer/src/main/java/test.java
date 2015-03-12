@@ -9,9 +9,9 @@ public class test {
 		try {
 			Connection con = SqlManager.getConnection();
 			Statement sql = con.createStatement();
-			sql.execute("drop table if exists players");
+			sql.execute("drop table if exists test");
 
-			sql.execute("create table test5(id int not null auto_increment,"
+			sql.execute("create table test(id int not null auto_increment,"
 					+ "matchID int not null default -1,"
 					+ "part int not null default -1,"
 					+ "score varchar(20) not null default 'null',"
@@ -21,7 +21,7 @@ public class test {
 			String[] data = dataString.split(";");
 			System.out.println(data[0]);
 			int count = 1;
-			sql.execute("insert test5 values(" + (count++) + ",1,1,'" + data[0]
+			sql.execute("insert test values(" + (count++) + ",1,1,'" + data[0]
 					+ "','" + data[1] + "')");
 			System.out.println(count);
 		} catch (ClassNotFoundException e) {
