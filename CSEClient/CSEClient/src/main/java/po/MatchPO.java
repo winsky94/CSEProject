@@ -3,7 +3,7 @@ package po;
 import java.util.ArrayList;
 
 public class MatchPO {
-	private int id;// 编号
+	private int matchID;// 编号
 	private String season;// 赛季
 	private String date;// 时间
 	private String teams;// 对阵队伍
@@ -15,7 +15,7 @@ public class MatchPO {
 			String score, ArrayList<String> detailScores,
 			ArrayList<RecordPO> records) {
 		super();
-		this.id = id;
+		this.matchID = id;
 		this.season = season;
 		this.date = date;
 		this.teams = teams;
@@ -24,8 +24,8 @@ public class MatchPO {
 		this.records = records;
 	}
 
-	public int getId() {
-		return id;
+	public int getMatchID() {
+		return matchID;
 	}
 
 	public String getSeason() {
@@ -53,7 +53,7 @@ public class MatchPO {
 	}
 
 	public void setId(int id) {
-		this.id = id;
+		this.matchID = id;
 	}
 
 	public void setSeason(String season) {

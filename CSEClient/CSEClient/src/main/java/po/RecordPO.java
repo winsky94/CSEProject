@@ -1,12 +1,10 @@
 package po;
 
 public class RecordPO {
-	private int id;
-	private String match;// 比赛编号 1314_0101_CHALAC
 	private String team;// 球队
 	private String playerName;// 球员名
 	private String position;// 位置
-	private double presentTime;// 在场时间
+	private String presentTime;// 在场时间
 	private int shootHitNum;// 投篮命中数
 	private int shootAttemptNum;// 投篮出手数
 	private int threeHitNum;// 三分命中数
@@ -23,14 +21,13 @@ public class RecordPO {
 	private int foulNum;// 犯规数
 	private int score;// 个人得分
 
-	public RecordPO(String match, String team, String playerName,
-			String position, double presentTime, int shootHitNum,
-			int shootAttemptNum, int threeHitNum, int threeAttemptNum,
-			int freeThrowHitNum, int freeThrowAttemptNum, int offenReboundNum,
-			int defenReboundNum, int reboundNum, int assistNum, int stealNum,
-			int blockNum, int turnOverNum, int foulNum, int score) {
+	public RecordPO(String team, String playerName, String position,
+			String presentTime, int shootHitNum, int shootAttemptNum,
+			int threeHitNum, int threeAttemptNum, int freeThrowHitNum,
+			int freeThrowAttemptNum, int offenReboundNum, int defenReboundNum,
+			int reboundNum, int assistNum, int stealNum, int blockNum,
+			int turnOverNum, int foulNum, int score) {
 		super();
-		this.match = match;
 		this.team = team;
 		this.playerName = playerName;
 		this.position = position;
@@ -52,10 +49,6 @@ public class RecordPO {
 		this.score = score;
 	}
 
-	public int getId() {
-		return id;
-	}
-
 	public String getTeam() {
 		return team;
 	}
@@ -68,7 +61,7 @@ public class RecordPO {
 		return position;
 	}
 
-	public double getPresentTime() {
+	public String getPresentTime() {
 		return presentTime;
 	}
 
@@ -132,18 +125,6 @@ public class RecordPO {
 		return score;
 	}
 
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public String getMatch() {
-		return match;
-	}
-
-	public void setMatch(String match) {
-		this.match = match;
-	}
-
 	public void setTeam(String team) {
 		this.team = team;
 	}
@@ -156,7 +137,7 @@ public class RecordPO {
 		this.position = position;
 	}
 
-	public void setPresentTime(double presentTime) {
+	public void setPresentTime(String presentTime) {
 		this.presentTime = presentTime;
 	}
 
