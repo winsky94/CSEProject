@@ -143,6 +143,7 @@ public class DirtyDataManager {
 		if ((offenReboundNum + defenReboundNum) == reboundNum) {
 			return true;
 		} else {
+			// System.out.println(fileName+" 篮板数");
 			return false;
 		}
 	}
