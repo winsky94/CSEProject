@@ -29,18 +29,24 @@ public class ContentPanel extends JPanel {
 		
 	    this.setOpaque(false);
 		t=new ImageIcon("img/main/beforeteam.png");
+		p=new ImageIcon("img/main/beforeplay.png");
 		
 		X=r.getX(); Y=r.getY();
 		width=w;height=h;
 		Image i=t.getImage().getScaledInstance(bw, by, Image.SCALE_SMOOTH);
 		
 		t=new ImageIcon(i);
-		
+		p.setImage(p.getImage().getScaledInstance(bw, by , Image.SCALE_DEFAULT));
+		player=new JLabel(p);
 		team=new JLabel(t);
 		add(team);
+		add(player);
 		this.setLayout(null);
 		team.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		player.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		team.setBounds((int)(X+570),(int)(Y+298), 160, 
+				70);
+		player.setBounds((int)(X+760),(int)(Y+298), 160, 
 				70);
 		initView();
 		
@@ -52,7 +58,7 @@ public class ContentPanel extends JPanel {
 	private void initView() {
 		// TODO Auto-generated method stub
 		//player.setOpaque(false);
-	/*	player.addMouseListener(new MouseListener() {
+		player.addMouseListener(new MouseListener() {
 			
 			public void mouseReleased(MouseEvent e) {
 				// TODO Auto-generated method stub
@@ -66,20 +72,25 @@ public class ContentPanel extends JPanel {
 			
 			public void mouseExited(MouseEvent e) {
 				// TODO Auto-generated method stub
-				
+				p=new ImageIcon("img/main/beforeplay.png");
+				p.setImage(p.getImage().getScaledInstance(bw, by, Image.SCALE_DEFAULT));
+				player.setIcon(p);
 			}
 			
 			public void mouseEntered(MouseEvent e) {
 				// TODO Auto-generated method stub
-				
+				p=new ImageIcon("img/main/afterplay.png");
+				p.setImage(p.getImage().getScaledInstance(bw, by, Image.SCALE_DEFAULT));
+				player.setIcon(p);
 			}
 			
 			public void mouseClicked(MouseEvent e) {
 				// TODO Auto-generated method stub
 				
+				
 			}
 		});
-		*/
+		
 		team.addMouseListener(new MouseListener() {
 			
 			public void mouseReleased(MouseEvent e) {

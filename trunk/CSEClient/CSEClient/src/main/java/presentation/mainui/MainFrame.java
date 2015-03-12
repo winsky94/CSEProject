@@ -150,11 +150,8 @@ public class MainFrame extends JFrame {
 			}
 	  };
 	  setContentPane(c);
-	 
-	 // c.setBounds(getBounds());
-	  
-		this.setVisible(true);
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	this.setVisible(true);
+	this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 	
 	
@@ -172,6 +169,10 @@ public class MainFrame extends JFrame {
 		contentPnl.removeAll();
 		contentPnl.setLayout(new GridLayout(1, 1));
 		contentPnl.add(pnl);
+	}
+	
+	public void Refresh(ContentPanel c,ImageIcon icon){
+		//MainFrame.this.getContentPane()
 	}
 
 	public static void main(String[] args) {
