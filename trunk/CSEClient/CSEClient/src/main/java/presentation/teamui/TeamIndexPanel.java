@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 public class TeamIndexPanel extends JPanel {
@@ -41,5 +42,11 @@ public class TeamIndexPanel extends JPanel {
 		gbc.weighty = 10;
 		gbl.setConstraints(contentPnl, gbc);
 		this.add(contentPnl);
+	}
+	public static void main(String args[]){
+		JFrame jf=new JFrame();
+		jf.setBounds(100,100,1162,679);
+		jf.setVisible(true);
+		jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 }
