@@ -15,6 +15,10 @@ public class CommonPO implements Serializable {
 	private int foulNum;// 犯规数
 	private int score;// 得分
 
+	public CommonPO() {
+		super();
+	}
+
 	public CommonPO(int reboundNum, int assistNum, double shootHitRate,
 			double threeHitRate, double freeThrowHitRate, int stealNum,
 			int blockNum, int turnOverNum, int foulNum, int score) {

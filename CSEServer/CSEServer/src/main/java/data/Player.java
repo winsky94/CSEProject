@@ -8,6 +8,7 @@ import java.io.InputStreamReader;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -77,7 +78,7 @@ public class Player extends UnicastRemoteObject implements PlayerDataService {
 		return player;
 	}
 
-	public ArrayList<PlayerPO> getPlayerList() {
+	public ArrayList<PlayerPO> getPlayerListFromFile() {
 		ArrayList<PlayerPO> players = new ArrayList<PlayerPO>();
 		try {
 			FileList fl = new FileList("src/迭代一数据/players/info");
@@ -97,8 +98,45 @@ public class Player extends UnicastRemoteObject implements PlayerDataService {
 		return players;
 	}
 
+	// 尝试中
+	public ArrayList<PlayerPO> getPlayerList() {
+		ArrayList<PlayerPO> players = new ArrayList<PlayerPO>();
+		try {
+			Connection con = SqlManager.getConnection();
+			Statement sql = con.createStatement();
+			ResultSet resultSet = sql.executeQuery("select * from players");
+
+			while (resultSet.next()) {
+				int id = resultSet.getInt("id");// 编号
+				String name = resultSet.getString("name");// 球员名称
+				System.out.println(name);
+				int number = resultSet.getInt("number");// 球衣号码
+				String position = resultSet.getString("position");// 位置
+				String height = resultSet.getString("height");// 身高（英尺-英存）
+				int weight = resultSet.getInt("weight");// 体重（英镑）
+				String birth = resultSet.getString("birth");// （月 日，年）
+				int age = resultSet.getInt("age");// 年龄
+				int exp = resultSet.getInt("exp");// 球龄
+				String school = resultSet.getString("school");// 毕业学校
+
+				PlayerPO playerPO = new PlayerPO(id, name, number, position,
+						height, weight, birth, age, exp, school);
+				players.add(playerPO);
+				break;
+			}
+		} catch (ClassNotFoundException e) {
+			// TODO 自动生成的 catch 块
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO 自动生成的 catch 块
+			e.printStackTrace();
+		}
+
+		return players;
+	}
+
 	public void exportToSql() {
-		ArrayList<PlayerPO> players = getPlayerList();
+		ArrayList<PlayerPO> players = getPlayerListFromFile();
 		try {
 			Connection con = SqlManager.getConnection();
 			Statement sql = con.createStatement();
@@ -106,7 +144,7 @@ public class Player extends UnicastRemoteObject implements PlayerDataService {
 			sql.execute("create table players(id int not null auto_increment,name varchar(40) not null default 'null',"
 					+ "number int not null default 0,position varchar(20) not null default 'null',"
 					+ "height varchar(20) not null default 'null',weight int not null default 0,"
-					+ "brith varchar(20) not null default 'null',age int not null default 0,exp int not null default 0,"
+					+ "birth varchar(20) not null default 'null',age int not null default 0,exp int not null default 0,"
 					+ "school varchar(40)not null default 'null',primary key(id));");
 			int count = 1;
 			for (PlayerPO player : players) {
@@ -146,10 +184,12 @@ public class Player extends UnicastRemoteObject implements PlayerDataService {
 		Player player;
 		try {
 			player = new Player();
-			player.exportToSql();
+			 player.getPlayerList();
+//			player.exportToSql();
 		} catch (RemoteException e) {
 			// TODO 自动生成的 catch 块
 			e.printStackTrace();
 		}
 	}
+
 }
