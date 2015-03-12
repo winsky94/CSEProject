@@ -1,6 +1,7 @@
 package businesslogic;
 
 import java.rmi.Naming;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import po.CommonPO;
@@ -16,7 +17,7 @@ public class Player implements PlayerBLService {
 	public Player() {
 		try {
 			String host = "localhost";
-//			String host = getServer.getServer();
+			// String host = getServer.getServerHost();
 			String url = "rmi://" + host + "/goodsService";
 			service = (PlayerDataService) Naming.lookup(url);
 		} catch (Exception e) {
@@ -27,13 +28,21 @@ public class Player implements PlayerBLService {
 
 	public ArrayList<PlayerVO> getPlayerList() {
 		// TODO 自动生成的方法存根
-		ArrayList<PlayerPO> data = service.getPlayerList();
-		ArrayList<PlayerVO> result = new ArrayList<PlayerVO>();
-		for (PlayerPO po : data) {
-			PlayerVO vo = poTovo(po);
-			result.add(vo);
+		try {
+			ArrayList<PlayerPO> data = service.getPlayerList();
+
+			ArrayList<PlayerVO> result = new ArrayList<PlayerVO>();
+			for (PlayerPO po : data) {
+				PlayerVO vo = poTovo(po);
+				result.add(vo);
+			}
+			return result;
+		} catch (RemoteException e) {
+			// TODO 自动生成的 catch 块
+			e.printStackTrace();
+			return null;
 		}
-		return result;
+
 	}
 
 	public PlayerVO poTovo(PlayerPO po) {

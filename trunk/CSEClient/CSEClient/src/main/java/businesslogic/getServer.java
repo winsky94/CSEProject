@@ -7,7 +7,7 @@ import java.io.IOException;
 public class getServer {
 	private static String host=null;
 	
-	public static String getServer() throws IOException {
+	public static String getServerHost() throws IOException {
 		if(host==null){
 			BufferedReader br=new BufferedReader(new FileReader("Port.txt"));
 			String str=null;
