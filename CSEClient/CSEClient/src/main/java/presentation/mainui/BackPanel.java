@@ -4,22 +4,14 @@ import java.awt.Cursor;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
-import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import javax.swing.ImageIcon;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import presentation.playerui.PlayerIndexPanel;
-/*
- * 覆盖在mainFrame背景之上
- * by jin
- * 
- * */
-public class ContentPanel {
+public class BackPanel extends JPanel{
 	private JLabel player,team;
 	private ImageIcon p,t;
 	private double X,Y;
@@ -29,7 +21,7 @@ public class ContentPanel {
 	private MainFrame frame;
 	
 	
-	public ContentPanel(MainFrame frame){
+	public BackPanel(MainFrame frame){
 		
 		this.frame=frame;
 		t=new ImageIcon("img/main/beforeteam.png");
@@ -44,9 +36,9 @@ public class ContentPanel {
 		p.setImage(p.getImage().getScaledInstance(bw, by , Image.SCALE_DEFAULT));
 		player=new JLabel(p);
 		team=new JLabel(t);
-		pane.add(team);
-		pane.add(player);
-		pane.setLayout(null);
+		add(team);
+		add(player);
+		setLayout(null);
 		team.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		player.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		team.setBounds((int)(X+570),(int)(Y+298), 160, 
@@ -59,17 +51,17 @@ public class ContentPanel {
 		
 	}
 	
-	/*public void paintComponent(Graphics g){
+	public void paintComponent(Graphics g){
 	
 		super.paintComponent(g);
-		ImageIcon ic=new ImageIcon("img/main/backmain.png");
+		ImageIcon ic=new ImageIcon("img/back/backmain.png");
 		Graphics2D gg=(Graphics2D) g;
 		if(ic!=null){
 			gg.drawImage(ic.getImage(), 0,0,
 					width,height,this);
 		}
 
-	}*/
+	}
 	private void initView() {
 		// TODO Auto-generated method stub
 		//player.setOpaque(false);
@@ -143,7 +135,6 @@ public class ContentPanel {
 			
 			public void mouseClicked(MouseEvent e) {
 				// TODO Auto-generated method stub
-				frame.refresh(new BackPanel(frame));
 				
 			}
 		});

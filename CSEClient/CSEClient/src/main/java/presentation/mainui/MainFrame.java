@@ -7,6 +7,7 @@ package presentation.mainui;
  * 
  */
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.GridBagConstraints;
@@ -45,12 +46,18 @@ public class MainFrame extends JFrame {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	int screenWidth, screenHeight, frameWidth, frameHeight;
-	private Image img;
+	static int screenWidth;
+	static int screenHeight;
+	static int frameWidth;
+	static int frameHeight;
+	//private Image img;
 	private Point origin;
 	JPanel titlePnl, contentPnl= new JPanel();
+	private JPanel backpanel;
+	private ImageIcon ic;
 	
-	public MainFrame() {
+	
+	public MainFrame(final ImageIcon ic) {
 		// ------设置窗口大小、位置---------
 		screenWidth = UIhelper.getScreenWidth();
 		screenHeight = UIhelper.getScreenHeight();
@@ -58,7 +65,8 @@ public class MainFrame extends JFrame {
 		frameHeight = screenHeight * 90 / 100;
 		this.setBounds((screenWidth - frameWidth) / 2,
 				(screenHeight - frameHeight) / 2, frameWidth, frameHeight);
-		// --------分配Panel-------------
+		this.ic=ic;
+	/*	// --------分配Panel-------------
 		GridBagLayout gbl = new GridBagLayout();
 		GridBagConstraints gbc = new GridBagConstraints();
 		gbc.fill = GridBagConstraints.BOTH;
@@ -74,7 +82,7 @@ public class MainFrame extends JFrame {
 		gbc.weighty = 0.3;
 		gbl.setConstraints(titlePnl, gbc);
 		
-		setPanel(new IndexPanel());
+	//	setPanel(new IndexPanel());
 		//-------content----------------
 		contentPnl = new JPanel();
 		gbc.gridy = 1;
@@ -83,16 +91,16 @@ public class MainFrame extends JFrame {
 		gbc.weighty = 13;
 		gbl.setConstraints(contentPnl, gbc);
 		
-		setPanel(new IndexPanel());
-		//
+		//setPanel(new IndexPanel());
+		//*/
 		
 		
 		this.setIconImage(new ImageIcon("img/main/logo.jpg").getImage());
 		
 		//====不规则窗体背景======
-		 MediaTracker mt=new MediaTracker(this);
-		 img=Toolkit.getDefaultToolkit().createImage("img/main/backmain.png");
-		 final ImageIcon ic=new ImageIcon(img);
+	//	MediaTracker mt=new MediaTracker(this);
+		// img=Toolkit.getDefaultToolkit().createImage("img/main/backmain.png");
+	//	  ic=new ImageIcon("img/main/backmain.png");
 
 		 this.origin=new Point();
 		 this.setUndecorated(true);
@@ -132,52 +140,58 @@ public class MainFrame extends JFrame {
 	        }
 	    );  
 		
-		
-		
+	 
 		
 	 
-	  ContentPanel c=new ContentPanel(this.getBounds(),frameWidth,frameHeight){
-		  public void paintComponent(Graphics g){
-				super.paintComponent(g);
-				Graphics2D gg=(Graphics2D) g;
-				if(ic!=null){
-					gg.drawImage(ic.getImage(), 0,0,
-							frameWidth,frameHeight,MainFrame.this);
-				}
-				
-				
-				
+	backpanel=new JPanel(){public void paintComponent(Graphics g){
+			
+			super.paintComponent(g);
+			Graphics2D gg=(Graphics2D) g;
+			if(ic!=null){
+				gg.drawImage(ic.getImage(), 0,0,
+						frameWidth,frameHeight,MainFrame.this);
 			}
-	  };
-	  setContentPane(c);
+
+		}
+	 };
+	backpanel.setOpaque(false);
+	setContentPane(backpanel);
 	this.setVisible(true);
 	this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 	
 	
 	  
-
+/*
 	public void paintComponent(Graphics g) {
 		super.paintComponents(g);
 	    
 	    g.drawImage(img, 0, 0, null);
 	   
-	  }
-
-
-	public void setPanel(JPanel pnl) {
-		contentPnl.removeAll();
-		contentPnl.setLayout(new GridLayout(1, 1));
-		contentPnl.add(pnl);
+	  }*/
+	
+	//====修改主界面=====
+	public void RefreshBack(ImageIcon icon){
+		
+		ic=icon;
+	    MainFrame.this.dispose();
+	    new MainFrame(icon);
+		
+		
 	}
 	
-	public void Refresh(ContentPanel c,ImageIcon icon){
-		//MainFrame.this.getContentPane()
+	public void refresh(JPanel panel){
+		MainFrame.this.setContentPane(panel);
 	}
 
+	
+	
+	
+	
+
 	public static void main(String[] args) {
-		MainFrame mainFrame = new MainFrame();
-		//mainFrame.setPanel(new TeamIndexPanel());
+		MainFrame mainFrame = new MainFrame(new ImageIcon("img/main/backmain.png"));
+		new ContentPanel(mainFrame);
 	}
 
 }
