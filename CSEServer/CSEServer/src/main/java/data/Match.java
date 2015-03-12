@@ -98,6 +98,25 @@ public class Match {
 					personScore = DirtyDataManager.checkPersonScore(fileName,
 							line[17], temp);// 个人得分
 
+					// 检查出手次数是否大于等于命中次数
+					// 如果不是，将出手次数置为命中次数
+					boolean checkShoot = DirtyDataManager.checkShootAndHitNum(
+							fileName, shootAttemptNum, shootHitNum);
+					if (!checkShoot) {
+						shootAttemptNum = shootHitNum;
+					}
+					boolean checkThree = DirtyDataManager.checkShootAndHitNum(
+							fileName, threeAttemptNum, threeHitNum);
+					if (!checkThree) {
+						threeAttemptNum = threeHitNum;
+					}
+					boolean checkFree = DirtyDataManager.checkShootAndHitNum(
+							fileName, freeThrowAttemptNum, freeThrowHitNum);
+					if (!checkFree) {
+						freeThrowAttemptNum = freeThrowHitNum;
+					}
+
+					
 					isComplete = true;
 				}
 				if (isComplete) {
@@ -148,7 +167,9 @@ public class Match {
 
 	public static void main(String[] args) {
 		Match Match = new Match();
-		Match.exportToSql();
+		// Match.exportToSql();
+		Match.getMatchesList();
+		System.out.println("success!");
 	}
 
 	public void exportToSql() {
@@ -159,7 +180,7 @@ public class Match {
 			sql.execute("drop table if exists matches");
 			sql.execute("drop table if exists detailScores");
 			sql.execute("drop table if exists records");
-			
+
 			// 创建matches表
 			sql.execute("create table matches(id int not null auto_increment,"
 					+ "matchID int not null default -1,"
