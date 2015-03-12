@@ -135,10 +135,7 @@ public class Match {
 	public ArrayList<MatchPO> getMatchesList() {
 		ArrayList<MatchPO> matches = new ArrayList<MatchPO>();
 		try {
-			//FileList fl = new FileList("src/迭代一数据/matches");
-			// FileList fl = new FileList(
-			// "D:/LUCY/Documents/软件工程与计算III/data/迭代一数据/players/info");
-			FileList fl=new FileList("D:/LUCY/Documents/软件工程与计算III/data/迭代一数据/matches");
+			FileList fl = new FileList("src/迭代一数据/matches");
 			ArrayList<String> names = fl.getList();
 			for (String name : names) {
 				matches.add(readFromMatchFile(name));
@@ -153,13 +150,6 @@ public class Match {
 		return matches;
 	}
 
-	public static void main(String[] args) {
-		Match Match = new Match();
-		Match.exportToSql();
-		Match.getMatchesList();
-		System.out.println("success!");
-	}
-
 	public void exportToSql() {
 		ArrayList<MatchPO> matches = getMatchesList();
 		try {
@@ -170,13 +160,12 @@ public class Match {
 			sql.execute("drop table if exists records");
 
 			// 创建matches表
-			sql.execute("create table matches(id int not null auto_increment,"
-					+ "matchID int not null default -1,"
+			sql.execute("create table matches(matchID int not null auto_increment,"
 					+ "season varchar(20) not null default 'null',"
 					+ "date varchar(20) not null default 'null',"
 					+ "teams varchar(20) not null default 'null',"
 					+ "score varchar(20) not null default 'null',"
-					+ "primary key(id));");
+					+ "primary key(matchID));");
 
 			// 创建detailScores表
 			sql.execute("create table detailScores(id int not null auto_increment,"
@@ -209,19 +198,16 @@ public class Match {
 					+ "score int not null default 0," + "primary key(id));");
 
 			// index分别表示各表的id
-			int matchIndex = 1;
 			int scoreIndex = 1;
 			int recordIndex = 1;
 
 			int test = 1;// 用于标示数据录入过程的，无多大实际意义
 			for (MatchPO matchPO : matches) {
 				// 向matches表中插入数据
-				sql.execute("insert matches values(" + matchIndex + ","
-						+ matchPO.getMatchID() + ",'" + matchPO.getSeason()
-						+ "','" + matchPO.getDate() + "','"
-						+ matchPO.getTeams() + "','" + matchPO.getScore()
-						+ "')");
-				matchIndex++;
+				sql.execute("insert matches values(" + matchPO.getMatchID()
+						+ ",'" + matchPO.getSeason() + "','"
+						+ matchPO.getDate() + "','" + matchPO.getTeams()
+						+ "','" + matchPO.getScore() + "')");
 
 				// 向detailScores表中插入数据
 				ArrayList<String> detailScore = matchPO.getDetailScores();
@@ -240,8 +226,8 @@ public class Match {
 					sql.execute("insert records values(" + recordIndex + ","
 							+ matchPO.getMatchID() + ",'" + recordPO.getTeam()
 							+ "','" + recordPO.getPlayerName() + "','"
-							+ recordPO.getPosition() + "','"
-							+ recordPO.getPresentTime() + "',"
+							+ recordPO.getPresentTime() + "','"
+							+ recordPO.getPosition() + "',"
 							+ recordPO.getShootHitNum() + ","
 							+ recordPO.getShootAttemptNum() + ","
 							+ recordPO.getThreeHitNum() + ","
@@ -268,5 +254,12 @@ public class Match {
 		} catch (SQLException ex) {
 			System.out.println("SQLException:" + ex.getMessage());
 		}
+	}
+
+	public static void main(String[] args) {
+		Match Match = new Match();
+		Match.exportToSql();
+		// Match.getMatchesList();
+		// System.out.println("success!");
 	}
 }
