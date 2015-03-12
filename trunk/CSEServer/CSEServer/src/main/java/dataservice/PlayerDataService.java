@@ -7,5 +7,5 @@ import java.util.ArrayList;
 import po.PlayerPO;
 
 public interface PlayerDataService extends Remote {
-	public ArrayList<PlayerPO> getPlayerListFromFile() throws RemoteException;
+	public ArrayList<PlayerPO> getPlayerList() throws RemoteException;
 }
