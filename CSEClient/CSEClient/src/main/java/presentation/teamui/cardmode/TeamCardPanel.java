@@ -44,7 +44,18 @@ public class TeamCardPanel extends JPanel{
 		this.add(sortPnl);
 		//----------------------------------------------------------------------排序栏组件区
 		//----赛季选择ComboBox-------
-		
+		String[] boxContent={"请选择赛季"};
+		seasonBox=new JComboBox<String>(boxContent);
+		sortPnl.add(seasonBox);
+		//----排序条件Label----------
+		conditionLbl=new JLabel("请选择排序条件");
+		sortPnl.add(conditionLbl);
+		//----模式按钮，不应该有文字只有个小图片就好--
+		modeBtn=new ModeChangeButton(0);
+		sortPnl.add(modeBtn);
+		//----升降序按钮--------------
+		orderBtn=new OrderChangeButton(0);
+		sortPnl.add(orderBtn);
 		//----列表区---------
 		listPnl=new JPanel();
 		listPnl.setBackground(Color.red);
