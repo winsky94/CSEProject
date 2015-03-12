@@ -79,7 +79,8 @@ public class Match {
 					isComplete = false;
 				} else {
 					String[] line = temp.split(";");
-					playerName = line[0];
+					playerName = DirtyDataManager
+							.checkString(fileName, line[0]);
 					position = line[1];
 					presentTime = line[2];// 在场时间
 					shootHitNum = Integer.parseInt(line[3]);// 投篮命中数
@@ -201,10 +202,8 @@ public class Match {
 			int matchIndex = 1;
 			int scoreIndex = 1;
 			int recordIndex = 1;
-			// sql.execute("insert players values(" + (count++)
-			// + ",'Lucy',1,'F','1-1',1,'1111',1,1,'11')");
-			// System.out.println(count);
-			int test = 1;
+
+			int test = 1;// 用于标示数据录入过程的，无多大实际意义
 			for (MatchPO matchPO : matches) {
 				// 向matches表中插入数据
 				sql.execute("insert matches values(" + matchIndex + ","

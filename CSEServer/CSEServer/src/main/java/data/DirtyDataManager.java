@@ -1,6 +1,16 @@
 package data;
 
 public class DirtyDataManager {
+	
+	public static String checkString(String fileName, String string) {
+
+		if (string.indexOf("'") != -1) {// 判断字符串是否含有单引号
+			string = string.replace("'", "''"); // SQL是用两个单引号来代替一个单引号的
+		}
+
+		return string;
+	}
+	
 	/**
 	 * 判断球龄是否符合要求的方法
 	 * 
@@ -10,15 +20,6 @@ public class DirtyDataManager {
 	 *            文件记录中的String类型的数据
 	 * @return 如果数据符合要求，直接返回int型;如果数据记录是R即NBA新秀，返回0，如果数据超过合理范围（0-100），返回-1
 	 */
-	public static String checkString(String fileName, String string) {
-
-		if (string.indexOf("'") != -1) {// 判断字符串是否含有单引号
-			string = string.replace("'", "''"); // SQL是用两个单引号来代替一个单引号的
-		}
-
-		return string;
-	}
-
 	public static int checkExp(String fileName, String data) {
 		int result = -1;
 		try {
@@ -64,6 +65,13 @@ public class DirtyDataManager {
 		return result;
 	}
 
+	/**
+	 * 检查每场比赛每位球员的得分是否合理的方法
+	 * @param fileName 文件名
+	 * @param data 个人得分数据
+	 * @param allData 这一行的所有数据
+	 * @return 如果得分合理，返回int型得分，否则根据球员该场比赛的表现计算出相应的得分并返回
+	 */
 	public static int checkPersonScore(String fileName, String data,
 			String allData) {
 		int result = -1;
