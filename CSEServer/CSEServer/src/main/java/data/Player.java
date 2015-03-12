@@ -109,7 +109,6 @@ public class Player extends UnicastRemoteObject implements PlayerDataService {
 			while (resultSet.next()) {
 				int id = resultSet.getInt("id");// 编号
 				String name = resultSet.getString("name");// 球员名称
-				System.out.println(name);
 				int number = resultSet.getInt("number");// 球衣号码
 				String position = resultSet.getString("position");// 位置
 				String height = resultSet.getString("height");// 身高（英尺-英存）
@@ -122,7 +121,6 @@ public class Player extends UnicastRemoteObject implements PlayerDataService {
 				PlayerPO playerPO = new PlayerPO(id, name, number, position,
 						height, weight, birth, age, exp, school);
 				players.add(playerPO);
-				break;
 			}
 		} catch (ClassNotFoundException e) {
 			// TODO 自动生成的 catch 块
