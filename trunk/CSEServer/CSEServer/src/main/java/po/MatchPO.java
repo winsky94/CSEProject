@@ -1,8 +1,10 @@
 package po;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class MatchPO {
+public class MatchPO implements Serializable {
+	private static final long serialVersionUID = 1L;
 	private int matchID;// 编号
 	private String season;// 赛季
 	private String date;// 时间

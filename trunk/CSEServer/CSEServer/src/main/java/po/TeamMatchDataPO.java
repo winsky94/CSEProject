@@ -1,7 +1,10 @@
-package po;  
+package po;
 
-public class TeamMatchDataPO extends MatchDataPO{
-	private int teamID;    //队伍编号
+import java.io.Serializable;
+
+public class TeamMatchDataPO extends MatchDataPO implements Serializable {
+	private static final long serialVersionUID = 1L;
+	private int teamID; // 队伍编号
 	private int matchesNum; // 比赛场数
 	private int shootHitNum; // 投篮命中率
 	private int shootAttemptNum; // 投篮出手次数
@@ -19,39 +22,44 @@ public class TeamMatchDataPO extends MatchDataPO{
 	private double defenReboundEfficiency; // 防守篮板效率
 	private double stealEfficiency; // 抢断效率
 	private double assistEfficiency; // 助攻率
-	public TeamMatchDataPO(int teamID,int matchesNum,int shootHitNum,int shootAttemptNum,int threeHitNum,
-			int threeAttemptNum,int freeThrowHitNum,int freeThrowAttemptNum,int offenReboundNum,
-			int defenReboundNum,double winRate,double offenRound,double offenEfficiency,double defenEfficiency,
-			double offenReboundEfficiency,double defenReboundEfficiency,double stealEfficiency,double assistEfficiency,
-			int reboundNum, int assistNum, double shootHitRate,
-			double threeHitRate, double freeThrowHitRate, int stealNum,
-			int blockNum, int turnOverNum, int foulNum, int score) {
-		super(reboundNum, assistNum, shootHitRate, threeHitRate, freeThrowHitRate,
-				stealNum, blockNum, turnOverNum, foulNum, score);
-		this.teamID=teamID;
-		this.matchesNum=matchesNum;
-		this.shootHitNum=shootHitNum;
-		this.shootAttemptNum=shootAttemptNum;
-		this.threeHitNum=threeHitNum;
-		this.threeAttemptNum=threeAttemptNum;
-		this.freeThrowHitNum=freeThrowHitNum;
-		this.freeThrowAttemptNum=freeThrowAttemptNum;
-		this.offenReboundNum=offenReboundNum;
-		this.defenReboundNum=defenReboundNum;
-		this.winRate=winRate;
-		this.offenRound=offenRound;
-		this.offenEfficiency=offenEfficiency;
-		this.defenEfficiency=defenEfficiency;
-		this.offenReboundEfficiency=offenReboundEfficiency;
-		this.defenReboundEfficiency=defenReboundEfficiency;
-		this.stealEfficiency=stealEfficiency;
-		this.assistEfficiency=assistEfficiency;
+
+	public TeamMatchDataPO(int teamID, int matchesNum, int shootHitNum,
+			int shootAttemptNum, int threeHitNum, int threeAttemptNum,
+			int freeThrowHitNum, int freeThrowAttemptNum, int offenReboundNum,
+			int defenReboundNum, double winRate, double offenRound,
+			double offenEfficiency, double defenEfficiency,
+			double offenReboundEfficiency, double defenReboundEfficiency,
+			double stealEfficiency, double assistEfficiency, int reboundNum,
+			int assistNum, double shootHitRate, double threeHitRate,
+			double freeThrowHitRate, int stealNum, int blockNum,
+			int turnOverNum, int foulNum, int score) {
+		super(reboundNum, assistNum, shootHitRate, threeHitRate,
+				freeThrowHitRate, stealNum, blockNum, turnOverNum, foulNum,
+				score);
+		this.teamID = teamID;
+		this.matchesNum = matchesNum;
+		this.shootHitNum = shootHitNum;
+		this.shootAttemptNum = shootAttemptNum;
+		this.threeHitNum = threeHitNum;
+		this.threeAttemptNum = threeAttemptNum;
+		this.freeThrowHitNum = freeThrowHitNum;
+		this.freeThrowAttemptNum = freeThrowAttemptNum;
+		this.offenReboundNum = offenReboundNum;
+		this.defenReboundNum = defenReboundNum;
+		this.winRate = winRate;
+		this.offenRound = offenRound;
+		this.offenEfficiency = offenEfficiency;
+		this.defenEfficiency = defenEfficiency;
+		this.offenReboundEfficiency = offenReboundEfficiency;
+		this.defenReboundEfficiency = defenReboundEfficiency;
+		this.stealEfficiency = stealEfficiency;
+		this.assistEfficiency = assistEfficiency;
 	}
-	
-	public int getTeamID(){
+
+	public int getTeamID() {
 		return teamID;
 	}
-	
+
 	public int getMatchesNum() {
 		return matchesNum;
 	}
@@ -120,10 +128,10 @@ public class TeamMatchDataPO extends MatchDataPO{
 		return assistEfficiency;
 	}
 
-	public void setTeamID(int id){
-		this.teamID=id;
+	public void setTeamID(int id) {
+		this.teamID = id;
 	}
-	
+
 	public void setMatchesNum(int matchesNum) {
 		this.matchesNum = matchesNum;
 	}
