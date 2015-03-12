@@ -1,7 +1,15 @@
 package data;
 
 public class DirtyDataManager {
-	
+	/**
+	 * 处理字符串中含有'导致数据录入数据库过程中导致的数据库语句错误的问题
+	 * 
+	 * @param fileName
+	 *            文件名
+	 * @param string
+	 *            待检查的字符串
+	 * @return 如果字符串含有单引号，就用两个单引号来代替一个单引号
+	 */
 	public static String checkString(String fileName, String string) {
 
 		if (string.indexOf("'") != -1) {// 判断字符串是否含有单引号
@@ -10,7 +18,7 @@ public class DirtyDataManager {
 
 		return string;
 	}
-	
+
 	/**
 	 * 判断球龄是否符合要求的方法
 	 * 
@@ -67,9 +75,13 @@ public class DirtyDataManager {
 
 	/**
 	 * 检查每场比赛每位球员的得分是否合理的方法
-	 * @param fileName 文件名
-	 * @param data 个人得分数据
-	 * @param allData 这一行的所有数据
+	 * 
+	 * @param fileName
+	 *            文件名
+	 * @param data
+	 *            个人得分数据
+	 * @param allData
+	 *            这一行的所有数据
 	 * @return 如果得分合理，返回int型得分，否则根据球员该场比赛的表现计算出相应的得分并返回
 	 */
 	public static int checkPersonScore(String fileName, String data,
