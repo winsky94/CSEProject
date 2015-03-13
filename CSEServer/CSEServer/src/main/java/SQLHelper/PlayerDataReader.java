@@ -116,4 +116,9 @@ public class PlayerDataReader {
 		}
 
 	}
+
+	public static void main(String[] args) {
+		PlayerDataReader playerDataReader = new PlayerDataReader();
+		playerDataReader.exportToSql();
+	}
 }
