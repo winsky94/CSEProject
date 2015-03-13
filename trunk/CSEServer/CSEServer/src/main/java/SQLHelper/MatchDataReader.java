@@ -12,8 +12,6 @@ import java.util.ArrayList;
 
 import po.MatchPO;
 import po.RecordPO;
-import data.DirtyDataManager;
-import data.FileList;
 
 public class MatchDataReader {
 	int count = 1;
