@@ -36,9 +36,11 @@ public class BackPanel extends JPanel{
 		p.setImage(p.getImage().getScaledInstance(bw, by , Image.SCALE_DEFAULT));
 		player=new JLabel(p);
 		team=new JLabel(t);
+		repaint();
 		add(team);
 		add(player);
 		setLayout(null);
+	    this.setOpaque(false);
 		team.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		player.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		team.setBounds((int)(X+570),(int)(Y+298), 160, 
@@ -46,6 +48,7 @@ public class BackPanel extends JPanel{
 		player.setBounds((int)(X+760),(int)(Y+298), 160, 
 				70);
 		initView();
+		
 		
 		
 		
