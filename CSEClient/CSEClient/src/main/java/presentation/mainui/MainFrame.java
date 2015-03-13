@@ -142,7 +142,7 @@ public class MainFrame extends JFrame {
 		
 	 
 		
-	 
+	//========必须在frame里 paint为何？？？？========= 
 	backpanel=new JPanel(){public void paintComponent(Graphics g){
 			
 			super.paintComponent(g);
@@ -162,15 +162,9 @@ public class MainFrame extends JFrame {
 	
 	
 	  
-/*
-	public void paintComponent(Graphics g) {
-		super.paintComponents(g);
-	    
-	    g.drawImage(img, 0, 0, null);
-	   
-	  }*/
+
 	
-	//====修改主界面=====
+	//====修改主界面   有跳闪缺陷=====
 	public void RefreshBack(ImageIcon icon){
 		
 		ic=icon;
@@ -179,7 +173,7 @@ public class MainFrame extends JFrame {
 		
 		
 	}
-	
+	//==第二种 切换背景  失败=====
 	public void refresh(JPanel panel){
 		MainFrame.this.setContentPane(panel);
 	}
@@ -191,6 +185,7 @@ public class MainFrame extends JFrame {
 
 	public static void main(String[] args) {
 		MainFrame mainFrame = new MainFrame(new ImageIcon("img/main/backmain.png"));
+		//=====会明显有组件变动的痕迹  肿么办=========
 		new ContentPanel(mainFrame);
 	}
 
