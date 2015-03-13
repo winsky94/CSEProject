@@ -122,6 +122,11 @@ public class TeamMatchData {
                    //得分
            		   score+=result.getInt("score");
             	}
+            	//三分命中率
+            	threeHitRate=threeHitNum/threeAttemptNum;           	
+            	//罚球命中率
+            	freeThrowHitRate=freeThrowHitNum/freeThrowAttemptNum;
+            	
             }
             	sql.close();
                 con.close();
