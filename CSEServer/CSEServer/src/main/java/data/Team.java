@@ -29,6 +29,10 @@ public class Team extends UnicastRemoteObject implements TeamDataService {
 		return teams;
 	}
 
+	public String getPhotoPath(String abLocation) {
+		return "src/迭代一数据/teams/" + abLocation + ".svg";
+	}
+
 	public static void main(String[] args) {
 		Team team;
 		try {

@@ -110,9 +110,6 @@ public class TeamDataReader {
 		}
 	}
 
-	public String getPhotoPath(String abLocation) {
-		return "src/迭代一数据/teams/" + abLocation + ".svg";
-	}
 
 	public static void main(String[] args) {
 		TeamDataReader teamDataReader = new TeamDataReader();
