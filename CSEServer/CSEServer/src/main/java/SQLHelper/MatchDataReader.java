@@ -14,7 +14,6 @@ import po.MatchPO;
 import po.RecordPO;
 import data.DirtyDataManager;
 import data.FileList;
-import data.SqlManager;
 
 public class MatchDataReader {
 	int count = 1;

@@ -13,7 +13,6 @@ import java.util.ArrayList;
 import po.PlayerPO;
 import data.DirtyDataManager;
 import data.FileList;
-import data.SqlManager;
 
 public class PlayerDataReader {
 	public PlayerPO readFromFile(String fileName) {

@@ -2,7 +2,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import data.SqlManager;
+import SQLHelper.SqlManager;
 
 public class test {
 	public static void main(String[] args) {
