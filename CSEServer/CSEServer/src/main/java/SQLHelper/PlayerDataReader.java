@@ -11,8 +11,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import po.PlayerPO;
-import data.DirtyDataManager;
-import data.FileList;
 
 public class PlayerDataReader {
 	public PlayerPO readFromFile(String fileName) {
