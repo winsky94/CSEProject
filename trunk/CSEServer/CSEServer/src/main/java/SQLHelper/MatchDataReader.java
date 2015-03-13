@@ -266,4 +266,8 @@ public class MatchDataReader {
 		}
 	}
 
+	public static void main(String[] args) {
+		MatchDataReader matchDataReader = new MatchDataReader();
+		matchDataReader.exportToSql();
+	}
 }
