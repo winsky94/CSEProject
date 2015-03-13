@@ -1,62 +1,11 @@
 package data;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 
-import SQLHelper.SqlManager;
-import dataservice.TeamDataService;
 import po.TeamPO;
+import dataservice.TeamDataService;
 
-
-public class Team implements TeamDataService{
-	public ArrayList<String[]> readFromFile(String fileName) {
-		
-		ArrayList<String[]> result=new ArrayList<String[]>();
-		
-		String[] content;
-		try {
-
-			File file = new File(fileName);
-			if (!file.exists()) {
-
-				file.createNewFile();
-			}
-			BufferedReader br = new BufferedReader(new InputStreamReader(
-					new FileInputStream(file), "UTF-8"));
-			String temp = null;
-			temp = br.readLine();
-			while (temp != null) {
-				content = new String[7];
-				if (temp.contains("│")) {
-					String[] it = temp.split("│");
-					String[] first = it[0].split("║");
-					content[0]=first[1].trim();
-					content[1]=it[1].trim();
-					content[2]=it[2].trim();
-					content[3]=it[3].trim();
-					content[4]=it[4].trim();
-					content[5]=it[5].trim();
-					String[] last=it[6].split("║");
-					content[6]=last[0].trim();
-					result.add(content);
-				}
-				temp = br.readLine();
-			}
-
-			br.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
-		return result;
-	}
+public class Team implements TeamDataService {
 
 	public ArrayList<TeamPO> getTeamList() {
 		String name;
@@ -66,63 +15,15 @@ public class Team implements TeamDataService{
 		String partition;
 		String homeCourt;
 		int setUpTime;
-		
+
 		ArrayList<TeamPO> teams = new ArrayList<TeamPO>();
 		TeamPO team;
-//		ArrayList<String[]> result=readFromFile("D:/LUCY/Documents/软件工程与计算III/data/迭代一数据/teams/teams");
-		ArrayList<String[]> result=readFromFile("src/迭代一数据/teams/teams");
-        for(String[] content:result){
-		    name =content[0];
-		    abLocation =content[1];
-		    location = content[2];
-		    conference= content[3];
-		    partition= content[4];
-		    homeCourt = content[5];
-		    setUpTime = Integer.parseInt(content[6]);
-		    
-		    team = new TeamPO(0,name, abLocation, location, conference, partition,
-		 		homeCourt, setUpTime);
-		    teams.add(team);
-        }
-        return teams;
+		return teams;
 	}
-	
-	public void exportToSql(){
-		 ArrayList<TeamPO> teams=getTeamList();
-	     try{
-	         Connection con = SqlManager.getConnection();
-	         Statement sql = con.createStatement();
-	         sql.execute("drop table if exists teams");
-	         sql.execute("create table teams(id int not null auto_increment,teamName varchar(40) not null default 'null',"
-	         		+ "abLocation varchar(20) not null default 'null',location varchar(20) not null default 'null',"
-	         		+ "conference varchar(20) not null default 'null',partition varchar(20) not null default 'null',"
-	         		+ "homeCourt varchar(40) not null default 'null',setUpTime int not null default 0,primary key(id));");
-	         int count=1;
-	         for(TeamPO team:teams){
-	         sql.execute("insert teams values("+(count++)+",'"+team.getTeamName()+"','"+team.getAbLocation()+
-	        		 "','"+team.getLocation()+"','"+team.getConference()+"','"+team.getPartition()+"','"+
-	        		team.getHomeCourt()+"',"+team.getSetUpTime()+")");
-	             	   
-	        	 System.out.println(count);
-	         }
-	         sql.close();
-	         con.close();
-	    }catch(java.lang.ClassNotFoundException e){
-	         System.err.println("ClassNotFoundException:" + e.getMessage());
-	    }catch(SQLException ex){
-	         System.err.println("SQLException:" + ex.getMessage());
-	    }
-	  
-	}
-	
-	public String getPhotoPath(String abLocation){
-//		return "D:/LUCY/Documents/软件工程与计算III/data/迭代一数据/teams/"+abLocation+".svg";
-		return "src/迭代一数据/teams/"+abLocation+".svg";
-	}
-	
-	public static void main(String[] args){
-		Team team=new Team();
-		team.exportToSql();
+
+	public static void main(String[] args) {
+		Team team = new Team();
+		team.getTeamList();
 	}
 
 }
