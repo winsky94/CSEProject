@@ -1,11 +1,19 @@
 package data;
 
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 
 import po.TeamPO;
 import dataservice.TeamDataService;
 
-public class Team implements TeamDataService {
+public class Team extends UnicastRemoteObject implements TeamDataService {
+	private static final long serialVersionUID = 1L;
+
+	public Team() throws RemoteException {
+		super();
+		// TODO 自动生成的构造函数存根
+	}
 
 	public ArrayList<TeamPO> getTeamList() {
 		String name;
@@ -22,8 +30,15 @@ public class Team implements TeamDataService {
 	}
 
 	public static void main(String[] args) {
-		Team team = new Team();
-		team.getTeamList();
+		Team team;
+		try {
+			team = new Team();
+			team.getTeamList();
+		} catch (RemoteException e) {
+			// TODO 自动生成的 catch 块
+			e.printStackTrace();
+		}
+
 	}
 
 }
