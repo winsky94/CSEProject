@@ -122,6 +122,8 @@ public class Player extends UnicastRemoteObject implements PlayerDataService {
 						height, weight, birth, age, exp, school);
 				players.add(playerPO);
 			}
+			resultSet.close();
+			con.close();
 		} catch (ClassNotFoundException e) {
 			// TODO 自动生成的 catch 块
 			e.printStackTrace();
