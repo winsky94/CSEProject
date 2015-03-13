@@ -1,4 +1,4 @@
-package data;
+package SQLHelper;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
