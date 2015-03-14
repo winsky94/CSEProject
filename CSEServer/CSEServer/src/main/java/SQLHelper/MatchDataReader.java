@@ -15,6 +15,7 @@ import po.RecordPO;
 
 public class MatchDataReader {
 	int count = 1;
+	int time = 0;// 比赛时间
 
 	public MatchPO readFromMatchFile(String fileName) {
 		MatchPO matchPO;
@@ -22,6 +23,8 @@ public class MatchDataReader {
 		String date = null;// 比赛日期
 		String teams = null;// 对阵队伍
 		String score = null;// 比分
+		int parts = 0;// 比赛节数
+
 		ArrayList<String> detailScores = new ArrayList<String>();// 各节比分
 		ArrayList<RecordPO> records = new ArrayList<RecordPO>();// 球员比分数据记录
 
@@ -48,6 +51,12 @@ public class MatchDataReader {
 			for (int i = 0; i < scoresData.length; i++) {
 				detailScores.add(scoresData[i]);
 			}
+//			parts = scoresData.length;
+//			if (parts <= 4) {
+//				time = 48;
+//			} else {
+//				time = 48 + (parts - 4) * 5;
+//			}
 
 			String team = null;// 球队
 			String playerName = null;// 球员名
@@ -168,42 +177,42 @@ public class MatchDataReader {
 					+ "visitingScore int not null default 0,"
 					+ "homeTeam varchar(20) not null default 'null',"
 					+ "homeScore int not null default 0,"
-					+ "primary key(matchID));");
+					+ "time int not null default 0," + "primary key(matchID));");
 
-			// 创建detailScores表
-			sql.execute("create table detailScores(id int not null auto_increment,"
-					+ "matchID int not null default -1,"
-					+ "part int not null default -1,"
-					+ "score varchar(20) not null default 'null',"
-					+ "primary key(id));");
-
-			// 创建records表
-			sql.execute("create table records(id int not null auto_increment,"
-					+ "matchID int not null default -1,"
-					+ "team varchar(20) not null default 'null',"
-					+ "playerName varchar(40) not null default 'null',"
-					+ "presentTime varchar(20) not null default 'null',"
-					+ "position varchar(20) not null default 'null',"
-					+ "shootHitNum int not null default 0,"
-					+ "shootAttemptNum int not null default 0,"
-					+ "threeHitNum int not null default 0,"
-					+ "threeAttemptNum int not null default 0,"
-					+ "freeThrowHitNum int not null default 0,"
-					+ "freeThrowAttemptNum int not null default 0,"
-					+ "offenReboundNum int not null default 0,"
-					+ "defenReboundNum int not null default 0,"
-					+ "reboundNum int not null default 0,"
-					+ "assistNum int not null default 0,"
-					+ "stealNum int not null default 0,"
-					+ "blockNum int not null default 0,"
-					+ "turnOverNum int not null default 0,"
-					+ "foulNum int not null default 0,"
-					+ "score int not null default 0," + "primary key(id));");
-
-			// index分别表示各表的id
-			int scoreIndex = 1;
-			int recordIndex = 1;
-
+			// // 创建detailScores表
+			// sql.execute("create table detailScores(id int not null auto_increment,"
+			// + "matchID int not null default -1,"
+			// + "part int not null default -1,"
+			// + "score varchar(20) not null default 'null',"
+			// + "primary key(id));");
+			//
+			// // 创建records表
+			// sql.execute("create table records(id int not null auto_increment,"
+			// + "matchID int not null default -1,"
+			// + "team varchar(20) not null default 'null',"
+			// + "playerName varchar(40) not null default 'null',"
+			// + "presentTime varchar(20) not null default 'null',"
+			// + "position varchar(20) not null default 'null',"
+			// + "shootHitNum int not null default 0,"
+			// + "shootAttemptNum int not null default 0,"
+			// + "threeHitNum int not null default 0,"
+			// + "threeAttemptNum int not null default 0,"
+			// + "freeThrowHitNum int not null default 0,"
+			// + "freeThrowAttemptNum int not null default 0,"
+			// + "offenReboundNum int not null default 0,"
+			// + "defenReboundNum int not null default 0,"
+			// + "reboundNum int not null default 0,"
+			// + "assistNum int not null default 0,"
+			// + "stealNum int not null default 0,"
+			// + "blockNum int not null default 0,"
+			// + "turnOverNum int not null default 0,"
+			// + "foulNum int not null default 0,"
+			// + "score int not null default 0," + "primary key(id));");
+			//
+			// // index分别表示各表的id
+			// int scoreIndex = 1;
+			// int recordIndex = 1;
+			//
 			int test = 1;// 用于标示数据录入过程的，无多大实际意义
 			for (MatchPO matchPO : matches) {
 				// 向matches表中插入数据
@@ -213,48 +222,54 @@ public class MatchDataReader {
 				String[] scores = matchPO.getScore().split("-");
 				int visitingScore = Integer.parseInt(scores[0]);
 				int homeScore = Integer.parseInt(scores[1]);
+				int parts=matchPO.getDetailScores().size();
+				if (parts <= 4) {
+					time = 48;
+				} else {
+					time = 48 + (parts - 4) * 5;
+				}
 				sql.execute("insert matches values(" + matchPO.getMatchID()
 						+ ",'" + matchPO.getSeason() + "','"
 						+ matchPO.getDate() + "','" + visitingTeam + "',"
 						+ visitingScore + ",'" + homeTeam + "'," + homeScore
-						+ ")");
-
-				// 向detailScores表中插入数据
-				ArrayList<String> detailScore = matchPO.getDetailScores();
-				int partIndex = 1;
-				for (String s : detailScore) {
-					sql.execute("insert detailScores values(" + scoreIndex
-							+ "," + matchPO.getMatchID() + "," + partIndex
-							+ ",'" + s + "')");
-					partIndex++;
-					scoreIndex++;
-				}
-
-				// 向records表中插入数据
-				ArrayList<RecordPO> records = matchPO.getRecords();
-				for (RecordPO recordPO : records) {
-					sql.execute("insert records values(" + recordIndex + ","
-							+ matchPO.getMatchID() + ",'" + recordPO.getTeam()
-							+ "','" + recordPO.getPlayerName() + "','"
-							+ recordPO.getPresentTime() + "','"
-							+ recordPO.getPosition() + "',"
-							+ recordPO.getShootHitNum() + ","
-							+ recordPO.getShootAttemptNum() + ","
-							+ recordPO.getThreeHitNum() + ","
-							+ recordPO.getThreeAttemptNum() + ","
-							+ recordPO.getFreeThrowHitNum() + ","
-							+ recordPO.getFreeThrowAttemptNum() + ","
-							+ recordPO.getOffenReboundNum() + ","
-							+ recordPO.getDefenReboundNum() + ","
-							+ recordPO.getReboundNum() + ","
-							+ recordPO.getAssistNum() + ","
-							+ recordPO.getStealNum() + ","
-							+ recordPO.getBlockNum() + ","
-							+ recordPO.getTurnOverNum() + ","
-							+ recordPO.getFoulNum() + "," + recordPO.getScore()
-							+ ")");
-					recordIndex++;
-				}
+						+ "," + time + ")");
+				//
+				// // 向detailScores表中插入数据
+				// ArrayList<String> detailScore = matchPO.getDetailScores();
+				// int partIndex = 1;
+				// for (String s : detailScore) {
+				// sql.execute("insert detailScores values(" + scoreIndex
+				// + "," + matchPO.getMatchID() + "," + partIndex
+				// + ",'" + s + "')");
+				// partIndex++;
+				// scoreIndex++;
+				// }
+				//
+				// // 向records表中插入数据
+				// ArrayList<RecordPO> records = matchPO.getRecords();
+				// for (RecordPO recordPO : records) {
+				// sql.execute("insert records values(" + recordIndex + ","
+				// + matchPO.getMatchID() + ",'" + recordPO.getTeam()
+				// + "','" + recordPO.getPlayerName() + "','"
+				// + recordPO.getPresentTime() + "','"
+				// + recordPO.getPosition() + "',"
+				// + recordPO.getShootHitNum() + ","
+				// + recordPO.getShootAttemptNum() + ","
+				// + recordPO.getThreeHitNum() + ","
+				// + recordPO.getThreeAttemptNum() + ","
+				// + recordPO.getFreeThrowHitNum() + ","
+				// + recordPO.getFreeThrowAttemptNum() + ","
+				// + recordPO.getOffenReboundNum() + ","
+				// + recordPO.getDefenReboundNum() + ","
+				// + recordPO.getReboundNum() + ","
+				// + recordPO.getAssistNum() + ","
+				// + recordPO.getStealNum() + ","
+				// + recordPO.getBlockNum() + ","
+				// + recordPO.getTurnOverNum() + ","
+				// + recordPO.getFoulNum() + "," + recordPO.getScore()
+				// + ")");
+				// recordIndex++;
+				// }
 				System.out.println(test++);
 			}
 			sql.close();
