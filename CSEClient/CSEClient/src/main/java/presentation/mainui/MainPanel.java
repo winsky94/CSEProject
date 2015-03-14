@@ -14,9 +14,10 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import presentation.playerui.PlayerIndexPanel;
+import presentation.teamui.cardmode.TeamCardIndexPanel;
 import presentation.teamui.cardmode.TeamIndex;
 /*
- * 覆盖在mainFrame背景之上
+ * 首页
  * by jin
  * 
  * */
@@ -25,18 +26,18 @@ public class MainPanel extends ContentPanel{
 	private ImageIcon p,t;
 	private int bw=180,by=90;
 	private JPanel pane;
-	private MainFrame frame;
+
 	
 	
-	public MainPanel(MainFrame frame){
-		super(frame);
+	public MainPanel(){
+		super();
 	//	this.setOpaque(false);
 		back=new ImageIcon("img/main/backmain.png");
-		this.frame=frame;
+	
 		t=new ImageIcon("img/main/beforeteam.png");
 		p=new ImageIcon("img/main/beforeplay.png");
 		//====关键===
-		pane=(JPanel) frame.getContentPane();
+	
 	
 		Image i=t.getImage().getScaledInstance(bw, by, Image.SCALE_SMOOTH);
 		
@@ -52,10 +53,9 @@ public class MainPanel extends ContentPanel{
 		setLayout(null);
 		team.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		player.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		team.setBounds((int)(x+570),(int)(y+298), 160, 
-				70);
-		player.setBounds((int)(x+760),(int)(y+298), 160, 
-				70);
+		team.setBounds(672,336, 160, 70);
+		player.setBounds(862,336, 160,70);
+		
 		initView();
 		
 		
@@ -95,7 +95,7 @@ public class MainPanel extends ContentPanel{
 			public void mouseClicked(MouseEvent e) {
 				// TODO Auto-generated method stub
 	
-				frame.refresh(new TeamIndex(frame));
+				frame.refresh(new TeamIndex());
 				
 			}
 		});
@@ -128,7 +128,9 @@ public class MainPanel extends ContentPanel{
 			
 			public void mouseClicked(MouseEvent e) {
 				// TODO Auto-generated method stub
-				
+				JPanel p=new JPanel();
+				frame.refresh(new ListModelFPanel(1,p));
+				MainPanel.this.RefreshAddress("首页", MainPanel.this);
 				
 				
 				
