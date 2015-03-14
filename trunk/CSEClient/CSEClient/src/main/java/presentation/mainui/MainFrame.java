@@ -31,9 +31,11 @@ import java.awt.image.PixelGrabber;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JToolBar;
 
 import com.sun.awt.AWTUtilities;
 
@@ -50,6 +52,7 @@ public class MainFrame extends JFrame {
 	static int screenHeight;
 	static int frameWidth;
 	static int frameHeight;
+	private int fx,fy;//实时坐标位置
 	//private Image img;
 	private Point origin;
 	JPanel titlePnl, contentPnl= new JPanel();
@@ -66,7 +69,7 @@ public class MainFrame extends JFrame {
 		this.setBounds((screenWidth - frameWidth) / 2,
 				(screenHeight - frameHeight) / 2, frameWidth, frameHeight);
 		this.ic=ic;
-	/*	// --------分配Panel-------------
+			/*	// --------分配Panel-------------
 		GridBagLayout gbl = new GridBagLayout();
 		GridBagConstraints gbc = new GridBagConstraints();
 		gbc.fill = GridBagConstraints.BOTH;
@@ -135,6 +138,8 @@ public class MainFrame extends JFrame {
 	        new MouseMotionAdapter(){
 	          public void mouseDragged(MouseEvent e){
 	            Point p = getLocation();
+	            fx=p.x + e.getX() - origin.x;
+	            fy=p.y + e.getY() - origin.y;
 	            setLocation(p.x + e.getX() - origin.x, p.y + e.getY() - origin.y );
 	          }          
 	        }
@@ -143,19 +148,7 @@ public class MainFrame extends JFrame {
 	 
 		
 	//========必须在frame里 paint为何？？？？========= 
-	backpanel=new JPanel(){public void paintComponent(Graphics g){
-			
-			super.paintComponent(g);
-			Graphics2D gg=(Graphics2D) g;
-			if(ic!=null){
-				gg.drawImage(ic.getImage(), 0,0,
-						frameWidth,frameHeight,MainFrame.this);
-			}
-
-		}
-	 };
-	backpanel.setOpaque(false);
-	setContentPane(backpanel);
+	
 	this.setVisible(true);
 	this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
@@ -164,18 +157,26 @@ public class MainFrame extends JFrame {
 	  
 
 	
-	//====修改主界面   有跳闪缺陷=====
-	public void RefreshBack(ImageIcon icon){
+	/*//====修改主界面   有跳闪缺陷=====
+	public MainFrame RefreshBack(ImageIcon icon){
 		
 		ic=icon;
 	    MainFrame.this.dispose();
-	    new MainFrame(icon);
+	   return( new MainFrame(icon));
 		
 		
-	}
+	}*/
 	//==第二种 切换背景  失败=====
 	public void refresh(JPanel panel){
 		MainFrame.this.setContentPane(panel);
+		MainFrame.this.getContentPane().revalidate();;
+	}
+	
+	public int getFX(){
+		return this.fx;
+	}
+	public int getFY(){
+		return this.fy;
 	}
 
 	
@@ -186,7 +187,7 @@ public class MainFrame extends JFrame {
 	public static void main(String[] args) {
 		MainFrame mainFrame = new MainFrame(new ImageIcon("img/main/backmain.png"));
 		//=====会明显有组件变动的痕迹  肿么办=========
-		new ContentPanel(mainFrame);
+		mainFrame.refresh(new MainPanel(mainFrame));
 	}
 
 }
