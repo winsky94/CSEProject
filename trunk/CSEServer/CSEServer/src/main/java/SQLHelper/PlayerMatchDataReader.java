@@ -152,15 +152,18 @@ public class PlayerMatchDataReader {
 							.getInt("shootHitNum") + 0.5 * resultSet
 							.getInt("threeHitNum"))
 							/ resultSet.getInt("shootAttemptNum");
+					int allReboundNum = getReboundNum(
+							resultSet.getString("team"),
+							resultSet.getInt("matchID"));
+					int dsAllReboundNum = getReboundNum(
+							getDSTeamName(resultSet.getString("team"),
+									resultSet.getInt("matchID")),
+							resultSet.getInt("matchID"));
 					reboundRate += resultSet.getInt("reboundNum")
 							* getMatchTime(resultSet.getInt("matchID"))
 							/ (double) changeTimeToMinute(resultSet
 									.getString("presentTime"))
-							/ (getReboundNum(resultSet.getString("team"),
-									resultSet.getInt("matchID")) + getReboundNum(
-									getDSTeamName(resultSet.getString("team"),
-											resultSet.getInt("matchID")),
-									resultSet.getInt("matchID")));
+							/ (allReboundNum + dsAllReboundNum);
 				}
 				ArrayList<Integer> orderMatchIDs = new ArrayList<Integer>();
 				while (rs.next()) {
