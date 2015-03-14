@@ -4,6 +4,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -11,6 +12,9 @@ import javax.swing.JButton;
 
 
 
+
+
+import javax.swing.JLabel;
 
 import presentation.mainui.ContentPanel;
 import presentation.mainui.MainFrame;
@@ -20,8 +24,9 @@ public class TeamIndex extends ContentPanel{
 	private JButton backbtn;
 	private ImageIcon ic;
 	
-	public TeamIndex(final MainFrame frame){
-		super(frame);
+	public TeamIndex(){
+		super();
+		addTitleBar(new ArrayList<JLabel>());
 		back=new ImageIcon("img/main/back.png");
 		ic=new ImageIcon("img/main/1.jpg");
 		backbtn=new JButton(ic);
@@ -51,7 +56,7 @@ public class TeamIndex extends ContentPanel{
 			
 			public void mouseClicked(MouseEvent e) {
 			
-				frame.refresh(new MainPanel(frame));
+				frame.refresh(new MainPanel());
 				
 			}
 		});

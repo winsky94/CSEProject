@@ -41,8 +41,11 @@ import com.sun.awt.AWTUtilities;
 
 import presentation.IndexPanel;
 import presentation.UIhelper;
-import presentation.teamui.TeamIndexPanel;
 
+/*bug1: 界面可以完全移动到 边界直至消失
+ *
+ * 
+ * */
 public class MainFrame extends JFrame {
 	/**
 	 * 
@@ -58,45 +61,20 @@ public class MainFrame extends JFrame {
 	JPanel titlePnl, contentPnl= new JPanel();
 	private JPanel backpanel;
 	private ImageIcon ic;
+	private static MainFrame instance=null;
 	
 	
-	public MainFrame(final ImageIcon ic) {
+	private MainFrame(final ImageIcon ic) {
 		// ------设置窗口大小、位置---------
 		screenWidth = UIhelper.getScreenWidth();
 		screenHeight = UIhelper.getScreenHeight();
 		frameWidth = screenWidth * 85 / 100;
 		frameHeight = screenHeight * 90 / 100;
+		
 		this.setBounds((screenWidth - frameWidth) / 2,
 				(screenHeight - frameHeight) / 2, frameWidth, frameHeight);
 		this.ic=ic;
-			/*	// --------分配Panel-------------
-		GridBagLayout gbl = new GridBagLayout();
-		GridBagConstraints gbc = new GridBagConstraints();
-		gbc.fill = GridBagConstraints.BOTH;
-		this.setLayout(gbl);
-		// ---------title---------------
-		titlePnl = new JPanel();
-		titlePnl.setBackground(Color.white);
-		gbc.gridx = 0;
-		gbc.gridy = 0;
-		gbc.gridwidth = 7;
-		gbc.gridheight = 1;
-		gbc.weightx = 10;
-		gbc.weighty = 0.3;
-		gbl.setConstraints(titlePnl, gbc);
-		
-	//	setPanel(new IndexPanel());
-		//-------content----------------
-		contentPnl = new JPanel();
-		gbc.gridy = 1;
-		gbc.gridheight =12;
-		gbc.weightx = 10;
-		gbc.weighty = 13;
-		gbl.setConstraints(contentPnl, gbc);
-		
-		//setPanel(new IndexPanel());
-		//*/
-		
+		this.setTitle("NBA信息查询平台");
 		
 		this.setIconImage(new ImageIcon("img/main/logo.jpg").getImage());
 		
@@ -157,29 +135,24 @@ public class MainFrame extends JFrame {
 	  
 
 	
-	/*//====修改主界面   有跳闪缺陷=====
-	public MainFrame RefreshBack(ImageIcon icon){
-		
-		ic=icon;
-	    MainFrame.this.dispose();
-	   return( new MainFrame(icon));
-		
-		
-	}*/
-	//==第二种 切换背景  失败=====
+
 	public void refresh(JPanel panel){
 		MainFrame.this.setContentPane(panel);
 		MainFrame.this.getContentPane().revalidate();;
 	}
 	
-	public int getFX(){
-		return this.fx;
-	}
-	public int getFY(){
-		return this.fy;
-	}
 
+
+	public static MainFrame getInstance(){
+		if(instance==null){
+			instance=new MainFrame(new ImageIcon("img/main/backmain.png"));
+		}
+		return instance;
+	}
 	
+	public void setInstance(MainFrame frame){
+		MainFrame.this.instance=frame;
+	}
 	
 	
 	
@@ -187,7 +160,8 @@ public class MainFrame extends JFrame {
 	public static void main(String[] args) {
 		MainFrame mainFrame = new MainFrame(new ImageIcon("img/main/backmain.png"));
 		//=====会明显有组件变动的痕迹  肿么办=========
-		mainFrame.refresh(new MainPanel(mainFrame));
+		mainFrame.setInstance(mainFrame);
+		mainFrame.refresh(new MainPanel());
 	}
 
 }

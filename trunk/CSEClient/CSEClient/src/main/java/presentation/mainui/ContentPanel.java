@@ -17,18 +17,38 @@ public class ContentPanel extends JPanel {
 	protected JPanel pane;
 	protected MainFrame frame;
 	protected ImageIcon back;//操作背景
-	protected JPanel toolbar;
-	protected ArrayList<JLabel> address;//地址栏
-	public ContentPanel(MainFrame frame){
+	protected static AddressBar toolbar;
+	protected static ArrayList<JLabel> address;//地址栏
+	static int i=0;
+  
+	public ContentPanel(/*MainFrame frame*/){
+		this.frame=MainFrame.getInstance();
 		back=new ImageIcon("img/main/back.png");
 		this.setOpaque(false);
-		x=frame.getY();y=frame.getY();
+		x=frame.getX();y=frame.getY();
 		width=frame.getWidth();
 		height=frame.getHeight();
 		this.setLayout(null);
-		this.frame=frame;
+	
 		address=new ArrayList<JLabel>();
 	
+		
+	
+		
+	}
+	
+	
+	public void addTitleBar(ArrayList<JLabel> address){
+		toolbar=AddressBar.getInstance();/*{
+			public void paintComponent(Graphics g){
+				super.paintComponent(g);
+				ImageIcon bar=new ImageIcon("img/main/titlebar.png");
+				g.drawImage(bar.getImage(), 0, 0, bar.getImageObserver());
+			}
+		};*/
+		
+			add(toolbar);
+			toolbar.setBounds(Scale.TITLEBAR);			
 		
 	}
 	public void paintComponent(Graphics g){
@@ -45,7 +65,7 @@ public class ContentPanel extends JPanel {
 	
 	
 	
-	public void RefreshAddress(String addex,JFrame f){
+	public void RefreshAddress(String addex,JPanel p){
 		
 		
 	}
