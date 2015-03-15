@@ -3,16 +3,15 @@ package vo;
 public class TeamVO {
 	private int id; // 编号
 	private String teamName; // 球队全名
-	private String location; // 所在地
 	private String abLocation; // 所在地(缩写)
+	private String location; // 所在地
 	private String conference; // 赛区
 	private String partition; // 分区
 	private String homeCourt; // 主场
-	private String setUpTime; // 建立时间
+	private int setUpTime; // 建立时间
 
-	private CommonVO commonVO;
 	private int matchesNum; // 比赛场数
-	private int shootHitNum; // 投篮命中率
+	private int shootHitNum; // 投篮命中数
 	private int shootAttemptNum; // 投篮出手次数
 	private int threeHitNum; // 三分命中数
 	private int threeAttemptNum; // 三分出手数
@@ -20,24 +19,28 @@ public class TeamVO {
 	private int freeThrowAttemptNum; // 罚球出手数
 	private int offenReboundNum; // 进攻篮板数
 	private int defenReboundNum; // 防守篮板数
+	private int reboundNum;// 篮板数
+	private int assistNum;// 助攻数
+	private int stealNum;// 抢断数
+	private int blockNum;// 盖帽数
+	private int turnOverNum;// 失误数
+	private int foulNum;// 犯规数
+	private int score;// 比赛得分
+	private double shootHitRate;// 投篮命中率
+	private double threeHitRate;// 三分命中率
+	private double freeThrowHitRate;// 罚球命中率
 	private double winRate; // 胜率
 	private double offenRound; // 进攻回合
 	private double offenEfficiency; // 进攻效率
 	private double defenEfficiency; // 防守效率
+	private double reboundEfficiency;// 篮板效率
 	private double offenReboundEfficiency; // 进攻篮板效率
 	private double defenReboundEfficiency; // 防守篮板效率
 	private double stealEfficiency; // 抢断效率
 	private double assistEfficiency; // 助攻率
 
-	public TeamVO(int id, String teamName, String location, String abLocation,
-			String conference, String partition, String homeCourt,
-			String setUpTime, CommonVO commonVO, int matchesNum,
-			int shootHitNum, int shootAttemptNum, int threeHitNum,
-			int threeAttemptNum, int freeThrowHitNum, int freeThrowAttemptNum,
-			int offenReboundNum, int defenReboundNum, double winRate,
-			double offenRound, double offenEfficiency, double defenEfficiency,
-			double offenReboundEfficiency, double defenReboundEfficiency,
-			double stealEfficiency, double assistEfficiency) {
+	public TeamVO(int id, String teamName, String abLocation, String location,
+			String conference, String partition, String homeCourt, int setUpTime) {
 		super();
 		this.id = id;
 		this.teamName = teamName;
@@ -47,7 +50,29 @@ public class TeamVO {
 		this.partition = partition;
 		this.homeCourt = homeCourt;
 		this.setUpTime = setUpTime;
-		this.commonVO = commonVO;
+	}
+
+	public TeamVO(int id, String teamName, String abLocation, String location,
+			String conference, String partition, String homeCourt,
+			int setUpTime, int matchesNum, int shootHitNum,
+			int shootAttemptNum, int threeHitNum, int threeAttemptNum,
+			int freeThrowHitNum, int freeThrowAttemptNum, int offenReboundNum,
+			int defenReboundNum, int reboundNum, int assistNum, int stealNum,
+			int blockNum, int turnOverNum, int foulNum, int score,
+			double shootHitRate, double threeHitRate, double freeThrowHitRate,
+			double winRate, double offenRound, double offenEfficiency,
+			double defenEfficiency, double reboundEfficiency,
+			double offenReboundEfficiency, double defenReboundEfficiency,
+			double stealEfficiency, double assistEfficiency) {
+		super();
+		this.id = id;
+		this.teamName = teamName;
+		this.abLocation = abLocation;
+		this.location = location;
+		this.conference = conference;
+		this.partition = partition;
+		this.homeCourt = homeCourt;
+		this.setUpTime = setUpTime;
 		this.matchesNum = matchesNum;
 		this.shootHitNum = shootHitNum;
 		this.shootAttemptNum = shootAttemptNum;
@@ -57,10 +82,21 @@ public class TeamVO {
 		this.freeThrowAttemptNum = freeThrowAttemptNum;
 		this.offenReboundNum = offenReboundNum;
 		this.defenReboundNum = defenReboundNum;
+		this.reboundNum = reboundNum;
+		this.assistNum = assistNum;
+		this.stealNum = stealNum;
+		this.blockNum = blockNum;
+		this.turnOverNum = turnOverNum;
+		this.foulNum = foulNum;
+		this.score = score;
+		this.shootHitRate = shootHitRate;
+		this.threeHitRate = threeHitRate;
+		this.freeThrowHitRate = freeThrowHitRate;
 		this.winRate = winRate;
 		this.offenRound = offenRound;
 		this.offenEfficiency = offenEfficiency;
 		this.defenEfficiency = defenEfficiency;
+		this.reboundEfficiency = reboundEfficiency;
 		this.offenReboundEfficiency = offenReboundEfficiency;
 		this.defenReboundEfficiency = defenReboundEfficiency;
 		this.stealEfficiency = stealEfficiency;
@@ -75,12 +111,12 @@ public class TeamVO {
 		return teamName;
 	}
 
-	public String getLocation() {
-		return location;
-	}
-
 	public String getAbLocation() {
 		return abLocation;
+	}
+
+	public String getLocation() {
+		return location;
 	}
 
 	public String getConference() {
@@ -95,12 +131,8 @@ public class TeamVO {
 		return homeCourt;
 	}
 
-	public String getSetUpTime() {
+	public int getSetUpTime() {
 		return setUpTime;
-	}
-
-	public CommonVO getCommonVO() {
-		return commonVO;
 	}
 
 	public int getMatchesNum() {
@@ -139,6 +171,46 @@ public class TeamVO {
 		return defenReboundNum;
 	}
 
+	public int getReboundNum() {
+		return reboundNum;
+	}
+
+	public int getAssistNum() {
+		return assistNum;
+	}
+
+	public int getStealNum() {
+		return stealNum;
+	}
+
+	public int getBlockNum() {
+		return blockNum;
+	}
+
+	public int getTurnOverNum() {
+		return turnOverNum;
+	}
+
+	public int getFoulNum() {
+		return foulNum;
+	}
+
+	public int getScore() {
+		return score;
+	}
+
+	public double getShootHitRate() {
+		return shootHitRate;
+	}
+
+	public double getThreeHitRate() {
+		return threeHitRate;
+	}
+
+	public double getFreeThrowHitRate() {
+		return freeThrowHitRate;
+	}
+
 	public double getWinRate() {
 		return winRate;
 	}
@@ -155,6 +227,10 @@ public class TeamVO {
 		return defenEfficiency;
 	}
 
+	public double getReboundEfficiency() {
+		return reboundEfficiency;
+	}
+
 	public double getOffenReboundEfficiency() {
 		return offenReboundEfficiency;
 	}
@@ -169,109 +245,5 @@ public class TeamVO {
 
 	public double getAssistEfficiency() {
 		return assistEfficiency;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public void setTeamName(String teamName) {
-		this.teamName = teamName;
-	}
-
-	public void setLocation(String location) {
-		this.location = location;
-	}
-
-	public void setAbLocation(String abLocation) {
-		this.abLocation = abLocation;
-	}
-
-	public void setConference(String conference) {
-		this.conference = conference;
-	}
-
-	public void setPartition(String partition) {
-		this.partition = partition;
-	}
-
-	public void setHomeCourt(String homeCourt) {
-		this.homeCourt = homeCourt;
-	}
-
-	public void setSetUpTime(String setUpTime) {
-		this.setUpTime = setUpTime;
-	}
-
-	public void setCommonVO(CommonVO vo) {
-		this.commonVO = vo;
-	}
-
-	public void setMatchesNum(int matchesNum) {
-		this.matchesNum = matchesNum;
-	}
-
-	public void setShootHitNum(int shootHitNum) {
-		this.shootHitNum = shootHitNum;
-	}
-
-	public void setShootAttemptNum(int shootAttemptNum) {
-		this.shootAttemptNum = shootAttemptNum;
-	}
-
-	public void setThreeHitNum(int threeHitNum) {
-		this.threeHitNum = threeHitNum;
-	}
-
-	public void setThreeAttemptNum(int threeAttemptNum) {
-		this.threeAttemptNum = threeAttemptNum;
-	}
-
-	public void setFreeThrowHitNum(int freeThrowHitNum) {
-		this.freeThrowHitNum = freeThrowHitNum;
-	}
-
-	public void setFreeThrowAttemptNum(int freeThrowAttemptNum) {
-		this.freeThrowAttemptNum = freeThrowAttemptNum;
-	}
-
-	public void setOffenReboundNum(int offenReboundNum) {
-		this.offenReboundNum = offenReboundNum;
-	}
-
-	public void setDefenReboundNum(int defenReboundNum) {
-		this.defenReboundNum = defenReboundNum;
-	}
-
-	public void setWinRate(double winRate) {
-		this.winRate = winRate;
-	}
-
-	public void setOffenRound(double offenRound) {
-		this.offenRound = offenRound;
-	}
-
-	public void setOffenEfficiency(double offenEfficiency) {
-		this.offenEfficiency = offenEfficiency;
-	}
-
-	public void setDefenEfficiency(double defenEfficiency) {
-		this.defenEfficiency = defenEfficiency;
-	}
-
-	public void setOffenReboundEfficiency(double offenReboundEfficiency) {
-		this.offenReboundEfficiency = offenReboundEfficiency;
-	}
-
-	public void setDefenReboundEfficiency(double defenReboundEfficiency) {
-		this.defenReboundEfficiency = defenReboundEfficiency;
-	}
-
-	public void setStealEfficiency(double stealEfficiency) {
-		this.stealEfficiency = stealEfficiency;
-	}
-
-	public void setAssistEfficiency(double assistEfficiency) {
-		this.assistEfficiency = assistEfficiency;
 	}
 }
