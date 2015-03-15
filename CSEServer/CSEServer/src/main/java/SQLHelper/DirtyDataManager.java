@@ -183,8 +183,8 @@ public class DirtyDataManager {
 			result = "0:00";
 		} else {
 			result = calculatePresentTime(fileName, team, playerName);
-			System.out.println(fileName + " " + playerName + " " + result);
-			System.out.println("----------------------------");
+//			System.out.println(fileName + " " + playerName + " " + result);
+//			System.out.println("----------------------------");
 		}
 		return result;
 	}
