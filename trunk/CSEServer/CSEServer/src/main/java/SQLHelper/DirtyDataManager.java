@@ -151,4 +151,43 @@ public class DirtyDataManager {
 			return (offenReboundNum + defenReboundNum);
 		}
 	}
+
+	/**
+	 * 校验在场时间是否符合要求
+	 * 
+	 * @param fileName
+	 *            数据文件名
+	 * @param playerName
+	 *            球员姓名
+	 * @param presentTime
+	 *            球员在场时间
+	 * @return 如果在场时间是x:xx格式的，直接返回，如果是None（即该球员未上场比赛），统一置为“0：00”，其他数据缺失置为null的，
+	 *         读文件计算出正确时间返回
+	 */
+	public static String checkPresentTime(String fileName, String playerName,
+			String presentTime) {
+		String result = "0:00";
+		if (presentTime.contains(":")) {
+			result = presentTime;
+		} else if (presentTime.equals("None")) {
+			result = "0:00";
+		} else {
+
+		}
+		return result;
+	}
+
+	/**
+	 * 球员在场时间丢失，读取比赛记录，利用公式：所有球员在场时间之和=比赛总时间*5，求得该时间
+	 * 
+	 * @param fileName
+	 *            数据文件
+	 * @param playerName
+	 * @return 该球员实际在场时间
+	 */
+	private static String calculatePresentTime(String fileName,
+			String playerName) {
+		
+		return null;
+	}
 }
