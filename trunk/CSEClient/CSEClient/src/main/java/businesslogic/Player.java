@@ -4,9 +4,7 @@ import java.rmi.Naming;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
-import po.CommonPO;
 import po.PlayerPO;
-import vo.CommonVO;
 import vo.PlayerVO;
 import businesslogicservice.PlayerBLService;
 import dataservice.PlayerDataService;
@@ -46,26 +44,9 @@ public class Player implements PlayerBLService {
 	}
 
 	public PlayerVO poTovo(PlayerPO po) {
-		// CommonPO commonPO = po.getCommonPO();
-		// CommonVO commonVO = new CommonVO(commonPO.getReboundNum(),
-		// commonPO.getAssistNum(), commonPO.getShootHitRate(),
-		// commonPO.getThreeHitRate(), commonPO.getFreeThrowHitRate(),
-		// commonPO.getStealNum(), commonPO.getBlockNum(),
-		// commonPO.getTurnOverNum(), commonPO.getFoulNum(),
-		// commonPO.getScore());
-
-		CommonVO commonVO = null;
 		PlayerVO vo = new PlayerVO(po.getId(), po.getName(), po.getNumber(),
 				po.getPosition(), po.getHeight(), po.getWeight(),
-				po.getBirth(), po.getAge(), po.getExp(), po.getSchool(),
-				commonVO, po.getTeamName(), po.getPlayedGames(),
-				po.getGameStartingNum(), po.getPresentTime(), po.getOffenNum(),
-				po.getDefenNum(), po.getEfficiency(),
-				po.getGmScEfficiencyValue(), po.getTrueHitRate(),
-				po.getShootHitEfficiency(), po.getReboundRate(),
-				po.getOffenReboundRate(), po.getDefenReboundRate(),
-				po.getAssistRate(), po.getStealRate(), po.getBlockRate(),
-				po.getTurnOverRate());
+				po.getBirth(), po.getAge(), po.getExp(), po.getSchool());
 		return vo;
 	}
 }
