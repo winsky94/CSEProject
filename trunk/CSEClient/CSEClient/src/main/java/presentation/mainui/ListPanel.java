@@ -11,7 +11,7 @@ import javax.swing.table.AbstractTableModel;
 
 import presentation.playerui.PlayerInfoPanel;
 import presentation.playerui.PlayerTableModel;
-import presentation.teamui.TableModel.TeamTableModel;
+import presentation.teamui.tablemodel.TeamTableModel;
 
 /*
  * 列表模式下的表格所在JPanel
