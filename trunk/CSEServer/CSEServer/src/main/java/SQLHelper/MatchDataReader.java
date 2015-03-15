@@ -23,7 +23,6 @@ public class MatchDataReader {
 		String date = null;// 比赛日期
 		String teams = null;// 对阵队伍
 		String score = null;// 比分
-		int parts = 0;// 比赛节数
 
 		ArrayList<String> detailScores = new ArrayList<String>();// 各节比分
 		ArrayList<RecordPO> records = new ArrayList<RecordPO>();// 球员比分数据记录
