@@ -1,4 +1,4 @@
-package presentation.playerui;
+package presentation.playerui.tablemodel;
 
 import java.util.ArrayList;
 
