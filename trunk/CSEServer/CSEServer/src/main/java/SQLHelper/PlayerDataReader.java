@@ -26,8 +26,6 @@ public class PlayerDataReader {
 		String mschool;
 		String[] content = new String[9];
 		try {
-
-			// File file=new File("13-14_01-01_CHA-LAC");
 			File file = new File(fileName);
 			if (!file.exists()) {
 
