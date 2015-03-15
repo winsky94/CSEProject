@@ -9,7 +9,7 @@ public final class PlayerListModePanel extends ContentPanel{
 	JTable table;
 	
 	public PlayerListModePanel(MainFrame frame) {
-		super(frame);
+		super();
 		
 	}
 
