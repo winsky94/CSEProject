@@ -17,6 +17,7 @@ public class ContentPanel extends JPanel {
 	protected JPanel pane;
 	protected MainFrame frame;
 	protected ImageIcon back;//操作背景
+	protected boolean isMain=false;
 	protected static AddressBar toolbar;
 	protected static ArrayList<JLabel> address;//地址栏
 	static int i=0;
@@ -38,7 +39,7 @@ public class ContentPanel extends JPanel {
 	}
 	
 	
-	public void addTitleBar(ArrayList<JLabel> address){
+	public void addTitleBar(){
 		toolbar=AddressBar.getInstance();/*{
 			public void paintComponent(Graphics g){
 				super.paintComponent(g);
@@ -46,6 +47,8 @@ public class ContentPanel extends JPanel {
 				g.drawImage(bar.getImage(), 0, 0, bar.getImageObserver());
 			}
 		};*/
+			if(isMain)
+				toolbar.setBackground(null);
 		
 			add(toolbar);
 			toolbar.setBounds(Scale.TITLEBAR);			
@@ -65,8 +68,5 @@ public class ContentPanel extends JPanel {
 	
 	
 	
-	public void RefreshAddress(String addex,JPanel p){
-		
-		
-	}
+	
 }

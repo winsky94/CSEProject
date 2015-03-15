@@ -65,7 +65,11 @@ public class MainPanel extends ContentPanel{
 	
 	private void initView() {
 		// TODO Auto-generated method stub
-		//player.setOpaque(false);
+	//====给个三按钮
+		isMain=true;
+		
+		addTitleBar();
+	
 		player.addMouseListener(new MouseListener() {
 			
 			public void mouseReleased(MouseEvent e) {
@@ -130,9 +134,8 @@ public class MainPanel extends ContentPanel{
 				// TODO Auto-generated method stub
 				JPanel p=new JPanel();
 				frame.refresh(new ListModelFPanel(1,p));
-				MainPanel.this.RefreshAddress("首页", MainPanel.this);
-				
-				
+			
+					
 				
 			}
 		});

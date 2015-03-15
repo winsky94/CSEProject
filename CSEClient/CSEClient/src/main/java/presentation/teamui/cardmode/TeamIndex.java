@@ -26,7 +26,7 @@ public class TeamIndex extends ContentPanel{
 	
 	public TeamIndex(){
 		super();
-		addTitleBar(new ArrayList<JLabel>());
+		addTitleBar();
 		back=new ImageIcon("img/main/back.png");
 		ic=new ImageIcon("img/main/1.jpg");
 		backbtn=new JButton(ic);
