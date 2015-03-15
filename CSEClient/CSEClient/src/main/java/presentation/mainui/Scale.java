@@ -19,7 +19,7 @@ public interface Scale {
 	final Rectangle FILTER=new Rectangle(0,0,150,50);//条件筛选
 	final Rectangle SEASON=new Rectangle(160,0,60,50);//赛季选择
 	final Rectangle SEARCH=new Rectangle(230,0,200,50);//搜索框
-    final Rectangle SEARCHBUTTON=new Rectangle(440,0,35,50);//搜索按钮
+    final Rectangle SEARCHBUTTON=new Rectangle(440,0,80,50);//搜索按钮
     final Rectangle REFRESH=new Rectangle(840,0,40,40);//刷新按钮
     final Rectangle MODEL=new Rectangle(880,0,40,40);//模式切换按钮
     final Rectangle UP=new Rectangle(920,0,40,40);//升序按钮

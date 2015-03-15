@@ -28,6 +28,7 @@ public class AddressBar extends JPanel implements MouseListener{
 	private static JLabel voice,min,close;
 	private JLabel more=new JLabel("....");
 	private MainFrame frame;
+	private JLabel first;
 	private AddressBar(){
 		frame=MainFrame.getInstance();
 		showAddress=new ArrayList<JLabel>();
@@ -50,36 +51,70 @@ public class AddressBar extends JPanel implements MouseListener{
 		close.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		
 		//=======初始化地址栏数据====
-		JLabel first=new JLabel("首页》");
-		showAddress.add(first);
-		address.add(first);
+		first=new JLabel("首页》");
+		first.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		//showAddress.add(first);
+		//address.add(first);
 		
 		
 	}
 	
 	
-	public void RefreshAddress(String addex,final JPanel p){
-		JLabel temp=new JLabel(addex);
+	public void RefreshAddress(String addex, final JPanel p){
+		final JLabel temp=new JLabel(addex);
+	
 		temp.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		temp.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
 				// TODO Auto-generated method stub
 				//地址栏 数据更新
-					MainFrame.getInstance().refresh(p);
-					
-				
+					//int index1=showAddress.indexOf(temp);
+					int index2=address.indexOf(temp);
+					//for(int i=index1;i<showAddress.size();i++)
+					//	showAddress.remove(i);
+					for(int i=index2;i<address.size();i++)
+						address.remove(i);
+					paintAddress();
+					p.revalidate();
+					MainFrame.getInstance().refresh(p);				
 			}
 		});
+		if(addex.equals("首页》"))
+			first=temp;
 		address.add(temp);
 		//若多余最大显示数 则表示为: 首页》...地址》地址》地址》
-		if(address.size()>=MAXSIZE){
-			showAddress.clear();
-		}
+	
+		paintAddress();
 		
 		
 	}
 	
-	
+	public void paintAddress(){
+		showAddress.clear();
+		if(address.size()>=MAXSIZE){
+			
+			showAddress.add(first);showAddress.add(more);
+			int start=address.size()-MAXSIZE+1;
+			for(int i=start;i<address.size();i++)
+				showAddress.add(address.get(i));
+			
+		}else{
+			int i=address.size();
+			if(i>0){
+				for(JLabel temp:address)
+				showAddress.add(temp);
+			}				
+		}
+		
+		//===添加到TitleBar上
+		int i=0;
+		for(JLabel add:showAddress){
+			add(add);
+			add.setBounds(0,i*100,100,35);
+			i++;
+		}
+		
+	}
 
 	public static AddressBar getInstance(){
 		if(instance==null){
