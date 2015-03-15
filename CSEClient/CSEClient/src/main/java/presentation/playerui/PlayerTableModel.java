@@ -7,8 +7,9 @@ import javax.swing.table.AbstractTableModel;
 public class PlayerTableModel extends AbstractTableModel{
 
 	/**
-	 * 
+	 * 表格球员信息列表模式model
 	 */
+	String[] all,average;//总数据  场均数据
 	ArrayList<ArrayList<String>> content=new ArrayList<ArrayList<String>>();
 	private static final long serialVersionUID = 1L;
 	
