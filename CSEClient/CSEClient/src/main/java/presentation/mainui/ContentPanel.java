@@ -48,7 +48,7 @@ public class ContentPanel extends JPanel {
 			}
 		};*/
 			if(isMain)
-				toolbar.setBackground(null);
+				toolbar.setOpaque(false);;
 		
 			add(toolbar);
 			toolbar.setBounds(Scale.TITLEBAR);			

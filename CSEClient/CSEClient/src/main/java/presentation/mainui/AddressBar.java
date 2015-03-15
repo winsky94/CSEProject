@@ -48,6 +48,7 @@ public class AddressBar extends JPanel implements MouseListener{
 		voice.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		min.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		close.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		
 		//=======初始化地址栏数据====
 		JLabel first=new JLabel("首页》");
 		showAddress.add(first);
@@ -85,6 +86,7 @@ public class AddressBar extends JPanel implements MouseListener{
 			instance=new AddressBar();
 			
 		}
+		instance.setOpaque(true);
 		return instance;
 	}
 
