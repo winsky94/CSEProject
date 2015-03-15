@@ -13,9 +13,8 @@ public class TeamPO implements Serializable {
 	private String homeCourt; // 主场
 	private int setUpTime; // 建立时间
 
-	private CommonPO commonPO;
 	private int matchesNum; // 比赛场数
-	private int shootHitNum; // 投篮命中率
+	private int shootHitNum; // 投篮命中数
 	private int shootAttemptNum; // 投篮出手次数
 	private int threeHitNum; // 三分命中数
 	private int threeAttemptNum; // 三分出手数
@@ -23,10 +22,21 @@ public class TeamPO implements Serializable {
 	private int freeThrowAttemptNum; // 罚球出手数
 	private int offenReboundNum; // 进攻篮板数
 	private int defenReboundNum; // 防守篮板数
+	private int reboundNum;// 篮板数
+	private int assistNum;// 助攻数
+	private int stealNum;// 抢断数
+	private int blockNum;// 盖帽数
+	private int turnOverNum;// 失误数
+	private int foulNum;// 犯规数
+	private int score;// 比赛得分
+	private double shootHitRate;// 投篮命中率
+	private double threeHitRate;// 三分命中率
+	private double freeThrowHitRate;// 罚球命中率	
 	private double winRate; // 胜率
 	private double offenRound; // 进攻回合
 	private double offenEfficiency; // 进攻效率
 	private double defenEfficiency; // 防守效率
+	private double reboundEfficiency;//篮板效率
 	private double offenReboundEfficiency; // 进攻篮板效率
 	private double defenReboundEfficiency; // 防守篮板效率
 	private double stealEfficiency; // 抢断效率
@@ -75,10 +85,6 @@ public class TeamPO implements Serializable {
 
 	public int getSetUpTime() {
 		return setUpTime;
-	}
-
-	public CommonPO getCommonPO() {
-		return commonPO;
 	}
 
 	public int getMatchesNum() {
@@ -148,6 +154,58 @@ public class TeamPO implements Serializable {
 	public double getAssistEfficiency() {
 		return assistEfficiency;
 	}
+	
+	public int getReboundNum() {
+		return reboundNum;
+	}
+
+	public int getAssistNum() {
+		return assistNum;
+	}
+
+	public double getShootHitRate() {
+		return shootHitRate;
+	}
+
+	public double getThreeHitRate() {
+		return threeHitRate;
+	}
+
+	public double getFreeThrowHitRate() {
+		return freeThrowHitRate;
+	}
+
+	public int getStealNum() {
+		return stealNum;
+	}
+
+	public int getBlockNum() {
+		return blockNum;
+	}
+
+	public int getTurnOverNum() {
+		return turnOverNum;
+	}
+
+	public int getFoulNum() {
+		return foulNum;
+	}
+
+	public int getScore() {
+		return score;
+	}
+	
+	public double getReboundEfficiency(){
+		return reboundEfficiency;
+	}
+	
+
+	
+	
+	
+	
+	
+	
 
 	public void setId(int id) {
 		this.id = id;
@@ -179,10 +237,6 @@ public class TeamPO implements Serializable {
 
 	public void setSetUpTime(int setUpTime) {
 		this.setUpTime = setUpTime;
-	}
-
-	public void setCommonPO(CommonPO po) {
-		this.commonPO = po;
 	}
 
 	public void setMatchesNum(int matchesNum) {
@@ -252,4 +306,51 @@ public class TeamPO implements Serializable {
 	public void setAssistEfficiency(double assistEfficiency) {
 		this.assistEfficiency = assistEfficiency;
 	}
+	
+
+
+	public void setReboundNum(int reboundNum) {
+		this.reboundNum = reboundNum;
+	}
+
+	public void setAssistNum(int assistNum) {
+		this.assistNum = assistNum;
+	}
+
+	public void setShootHitRate(double shootHitRate) {
+		this.shootHitRate = shootHitRate;
+	}
+
+	public void setThreeHitRate(double threeHitRate) {
+		this.threeHitRate = threeHitRate;
+	}
+
+	public void setFreeThrowHitRate(double freeThrowHitRate) {
+		this.freeThrowHitRate = freeThrowHitRate;
+	}
+
+	public void setStealNum(int stealNum) {
+		this.stealNum = stealNum;
+	}
+
+	public void setBlockNum(int blockNum) {
+		this.blockNum = blockNum;
+	}
+
+	public void setTurnOverNum(int turnOverNum) {
+		this.turnOverNum = turnOverNum;
+	}
+
+	public void setFoulNum(int foulNum) {
+		this.foulNum = foulNum;
+	}
+
+	public void setScore(int score) {
+		this.score = score;
+	}
+	
+	public void setSeboundEfficiency(double reboundEfficiency){
+		this.reboundEfficiency=reboundEfficiency;
+	}
+
 }

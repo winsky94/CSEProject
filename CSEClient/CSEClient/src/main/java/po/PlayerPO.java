@@ -14,15 +14,25 @@ public class PlayerPO implements Serializable {
 	private int age;// 年龄
 	private int exp;// 球龄
 	private String school;// 毕业学校
-
-	private CommonPO commonPO;
+	
 	private String teamName;// 所属球队
 	private int playedGames;// 参赛场数
 	private int gameStartingNum;// 先发场数
-	private double presentTime;// 在场时间
+	private int reboundNum;// 篮板数
+	private int assistNum;// 助攻数
+	private String presentTime;// 在场时间
+	private double shootHitRate;// 投篮命中率
+	private double threeHitRate;// 三分命中率
+	private double freeThrowHitRate;// 罚球命中率
 	private int offenNum;// 进攻数
 	private int defenNum;// 防守数
+	private int stealNum;// 抢断数
+	private int blockNum;// 盖帽数
+	private int turnOverNum;// 失误数
+	private int foulNum;// 犯规数
+	private int score;// 得分	
 	private double efficiency;// 效率
+	private double recentFiveMatchesUpRate;//近五场的提升率
 	private double GmScEfficiencyValue;// GmSc效率值
 	private double trueHitRate;// 真实命中率
 	private double shootHitEfficiency;// 投篮效率
@@ -33,6 +43,8 @@ public class PlayerPO implements Serializable {
 	private double stealRate;// 抢断率
 	private double blockRate;// 盖帽率
 	private double turnOverRate;// 失误率
+	private double usageRate;//使用率
+
 
 	public PlayerPO(int id, String name, int number, String position,
 			String height, int weight, String birth, int age, int exp,
@@ -89,10 +101,6 @@ public class PlayerPO implements Serializable {
 		return school;
 	}
 
-	public CommonPO getCommonPO() {
-		return commonPO;
-	}
-
 	public String getTeamName() {
 		return teamName;
 	}
@@ -105,7 +113,7 @@ public class PlayerPO implements Serializable {
 		return gameStartingNum;
 	}
 
-	public double getPresentTime() {
+	public String getPresentTime() {
 		return presentTime;
 	}
 
@@ -160,6 +168,58 @@ public class PlayerPO implements Serializable {
 	public double getTurnOverRate() {
 		return turnOverRate;
 	}
+	
+	public int getReboundNum() {
+		return reboundNum;
+	}
+
+	public int getAssistNum() {
+		return assistNum;
+	}
+
+	public double getShootHitRate() {
+		return shootHitRate;
+	}
+
+	public double getThreeHitRate() {
+		return threeHitRate;
+	}
+
+	public double getFreeThrowHitRate() {
+		return freeThrowHitRate;
+	}
+
+	public int getStealNum() {
+		return stealNum;
+	}
+
+	public int getBlockNum() {
+		return blockNum;
+	}
+
+	public int getTurnOverNum() {
+		return turnOverNum;
+	}
+
+	public int getFoulNum() {
+		return foulNum;
+	}
+
+	public int getScore() {
+		return score;
+	}
+	
+	public double getRecentFiveMatchesUpRate(){
+		return recentFiveMatchesUpRate;
+	}
+	
+	public double getUsageRate(){
+		return usageRate;
+	}
+	
+	
+	
+	
 
 	public void setId(int id) {
 		this.id = id;
@@ -201,9 +261,6 @@ public class PlayerPO implements Serializable {
 		this.school = school;
 	}
 
-	public void setCommonPO(CommonPO commonPO) {
-		this.commonPO = commonPO;
-	}
 
 	public void setTeamName(String teamName) {
 		this.teamName = teamName;
@@ -217,7 +274,7 @@ public class PlayerPO implements Serializable {
 		this.gameStartingNum = gameStartingNum;
 	}
 
-	public void setPresentTime(double presentTime) {
+	public void setPresentTime(String presentTime) {
 		this.presentTime = presentTime;
 	}
 
@@ -272,5 +329,53 @@ public class PlayerPO implements Serializable {
 	public void setTurnOverRate(double turnOverRate) {
 		this.turnOverRate = turnOverRate;
 	}
+    
 
+	public void setReboundNum(int reboundNum) {
+		this.reboundNum = reboundNum;
+	}
+
+	public void setAssistNum(int assistNum) {
+		this.assistNum = assistNum;
+	}
+
+	public void setShootHitRate(double shootHitRate) {
+		this.shootHitRate = shootHitRate;
+	}
+
+	public void setThreeHitRate(double threeHitRate) {
+		this.threeHitRate = threeHitRate;
+	}
+
+	public void setFreeThrowHitRate(double freeThrowHitRate) {
+		this.freeThrowHitRate = freeThrowHitRate;
+	}
+
+	public void setStealNum(int stealNum) {
+		this.stealNum = stealNum;
+	}
+
+	public void setBlockNum(int blockNum) {
+		this.blockNum = blockNum;
+	}
+
+	public void setTurnOverNum(int turnOverNum) {
+		this.turnOverNum = turnOverNum;
+	}
+
+	public void setFoulNum(int foulNum) {
+		this.foulNum = foulNum;
+	}
+
+	public void setScore(int score) {
+		this.score = score;
+	}
+
+	public void setRecentFiveMatchesUpRate(double recentFiveMatchesUpRate){
+		this.recentFiveMatchesUpRate=recentFiveMatchesUpRate;
+	}
+	
+	public void setUsageRate(double usageRate){
+		this.usageRate=usageRate;
+	}
 }
