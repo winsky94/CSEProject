@@ -12,14 +12,24 @@ public class PlayerVO {
 	private int exp;// 球龄
 	private String school;// 毕业学校
 
-	private CommonVO commonVO;
 	private String teamName;// 所属球队
 	private int playedGames;// 参赛场数
 	private int gameStartingNum;// 先发场数
-	private double presentTime;// 在场时间
+	private int reboundNum;// 篮板数
+	private int assistNum;// 助攻数
+	private String presentTime;// 在场时间
+	private double shootHitRate;// 投篮命中率
+	private double threeHitRate;// 三分命中率
+	private double freeThrowHitRate;// 罚球命中率
 	private int offenNum;// 进攻数
 	private int defenNum;// 防守数
+	private int stealNum;// 抢断数
+	private int blockNum;// 盖帽数
+	private int turnOverNum;// 失误数
+	private int foulNum;// 犯规数
+	private int score;// 得分
 	private double efficiency;// 效率
+	private double recentFiveMatchesUpRate;// 近五场的提升率
 	private double GmScEfficiencyValue;// GmSc效率值
 	private double trueHitRate;// 真实命中率
 	private double shootHitEfficiency;// 投篮效率
@@ -30,17 +40,11 @@ public class PlayerVO {
 	private double stealRate;// 抢断率
 	private double blockRate;// 盖帽率
 	private double turnOverRate;// 失误率
+	private double usageRate;// 使用率
 
 	public PlayerVO(int id, String name, int number, String position,
 			String height, int weight, String birth, int age, int exp,
-			String school, CommonVO commonVO, String teamName, int playedGames,
-			int gameStartingNum, double presentTime, int offenNum, int defenNum,
-			double efficiency, double gmScEfficiencyValue, double trueHitRate,
-			double shootHitEfficiency, double reboundRate,
-			double offenReboundRate, double defenReboundRate,
-			double assistRate, double stealRate, double blockRate,
-			double turnOverRate) {
-		super();
+			String school) {
 		this.id = id;
 		this.name = name;
 		this.number = number;
@@ -51,24 +55,6 @@ public class PlayerVO {
 		this.age = age;
 		this.exp = exp;
 		this.school = school;
-		this.commonVO = commonVO;
-		this.teamName = teamName;
-		this.playedGames = playedGames;
-		this.gameStartingNum = gameStartingNum;
-		this.presentTime = presentTime;
-		this.offenNum = offenNum;
-		this.defenNum = defenNum;
-		this.efficiency = efficiency;
-		GmScEfficiencyValue = gmScEfficiencyValue;
-		this.trueHitRate = trueHitRate;
-		this.shootHitEfficiency = shootHitEfficiency;
-		this.reboundRate = reboundRate;
-		this.offenReboundRate = offenReboundRate;
-		this.defenReboundRate = defenReboundRate;
-		this.assistRate = assistRate;
-		this.stealRate = stealRate;
-		this.blockRate = blockRate;
-		this.turnOverRate = turnOverRate;
 	}
 
 	public int getId() {
@@ -111,10 +97,6 @@ public class PlayerVO {
 		return school;
 	}
 
-	public CommonVO getCommonPO() {
-		return commonVO;
-	}
-
 	public String getTeamName() {
 		return teamName;
 	}
@@ -127,8 +109,28 @@ public class PlayerVO {
 		return gameStartingNum;
 	}
 
-	public double getPresentTime() {
+	public int getReboundNum() {
+		return reboundNum;
+	}
+
+	public int getAssistNum() {
+		return assistNum;
+	}
+
+	public String getPresentTime() {
 		return presentTime;
+	}
+
+	public double getShootHitRate() {
+		return shootHitRate;
+	}
+
+	public double getThreeHitRate() {
+		return threeHitRate;
+	}
+
+	public double getFreeThrowHitRate() {
+		return freeThrowHitRate;
 	}
 
 	public int getOffenNum() {
@@ -139,8 +141,32 @@ public class PlayerVO {
 		return defenNum;
 	}
 
+	public int getStealNum() {
+		return stealNum;
+	}
+
+	public int getBlockNum() {
+		return blockNum;
+	}
+
+	public int getTurnOverNum() {
+		return turnOverNum;
+	}
+
+	public int getFoulNum() {
+		return foulNum;
+	}
+
+	public int getScore() {
+		return score;
+	}
+
 	public double getEfficiency() {
 		return efficiency;
+	}
+
+	public double getRecentFiveMatchesUpRate() {
+		return recentFiveMatchesUpRate;
 	}
 
 	public double getGmScEfficiencyValue() {
@@ -181,5 +207,9 @@ public class PlayerVO {
 
 	public double getTurnOverRate() {
 		return turnOverRate;
+	}
+
+	public double getUsageRate() {
+		return usageRate;
 	}
 }
