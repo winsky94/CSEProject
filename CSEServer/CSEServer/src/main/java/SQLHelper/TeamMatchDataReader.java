@@ -30,6 +30,23 @@ public class TeamMatchDataReader {
 	int turnOverNum = 0;// 失误数
 	int foulNum = 0;// 犯规数
 	int score = 0;
+
+	double shootHitNumAverage = 0;// 投篮命中数
+	double shootAttemptNumAverage = 0;// 投篮出手次数
+	double threeHitNumAverage = 0;// 三分命中数
+	double threeAttemptNumAverage = 0;// 三分出手次数
+	double freeThrowHitNumAverage = 0;// 罚球命中数
+	double freeThrowAttemptNumAverage = 0;// 罚球出手次数
+	double offenReboundNumAverage = 0;
+	double defenReboundNumAverage = 0;
+	double reboundNumAverage = 0;
+	double assistNumAverage = 0;
+	double stealNumAverage = 0;
+	double blockNumAverage = 0;
+	double turnOverNumAverage = 0;// 失误数
+	double foulNumAverage = 0;// 犯规数
+	double scoreAverage = 0;
+
 	double shootHitRate = 0;// 投篮命中率
 	double threeHitRate = 0;// 三分命中率
 	double freeThrowHitRate = 0;// 罚球命中率
@@ -100,35 +117,7 @@ public class TeamMatchDataReader {
 				}
 
 				// 上面计算的的是每场比赛的效率和，接下来除以总的比赛场数得到场均
-				shootHitRate = (double) shootHitRate / matchesNum;
-				threeHitRate = (double) threeHitRate / matchesNum;
-				freeThrowHitRate = (double) freeThrowHitRate / matchesNum;
-				winRate = (double) winNum / matchesNum;
-				offenRound = (double) offenRound / matchesNum;
-				offenEfficiency = (double) offenEfficiency / matchesNum;
-				defenEfficiency = (double) defenEfficiency / matchesNum;
-				offenReboundEfficiency = (double) offenReboundEfficiency
-						/ matchesNum;
-				defenReboundEfficiency = (double) defenReboundEfficiency
-						/ matchesNum;
-				stealEfficiency = (double) stealEfficiency / matchesNum;
-				assistEfficiency = (double) assistEfficiency / matchesNum;
-
-				// 计算赛季的总数据平均，对于数量而言，场均和赛季平均一样，胜率也是一样的
-				shootHitRateSeason = (double) shootHitNum / shootAttemptNum;
-				threeHitRateSeason = (double) threeHitNum / threeAttemptNum;
-				freeThrowHitRateSeason = (double) freeThrowHitNum
-						/ freeThrowAttemptNum;
-				offenRoundSeason = (double) offenRound / matchesNum;
-				offenEfficiencySeason = (double) score / offenRound * 100;
-				defenEfficiencySeason = (double) dsScoreSeason
-						/ dsOffenRoundSeason;
-				offenReboundEfficiencySeason = (double) offenReboundNum
-						/ (offenReboundNum + dsDefenReboundNumSeason);
-				defenReboundEfficiencySeason = (double) defenReboundNum
-						/ (defenReboundNum + dsOffenReboundNumSeason);
-				stealEfficiencySeason = (double) stealNum / dsOffenRoundSeason;
-				assistEfficiencySeason = (double) assistNum / offenRound;
+				getAverageData();
 
 				exportToSQL();
 				// 将resultSet光标返回,便于进行下一次遍历
@@ -140,6 +129,53 @@ public class TeamMatchDataReader {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+
+	/**
+	 * 计算篮板数、投篮数等的赛季场均数据
+	 */
+	private void getAverageData() {
+		shootHitNumAverage = (double) shootHitNum / matchesNum;// 投篮命中数
+		shootAttemptNumAverage = (double) shootAttemptNum / matchesNum;// 投篮出手次数
+		threeHitNumAverage = (double) threeHitNum / matchesNum;// 三分命中数
+		threeAttemptNumAverage = (double) threeAttemptNum / matchesNum;// 三分出手次数
+		freeThrowHitNumAverage = (double) freeThrowHitNum / matchesNum;// 罚球命中数
+		freeThrowAttemptNumAverage = (double) freeThrowAttemptNum / matchesNum;// 罚球出手次数
+		offenReboundNumAverage = (double) offenReboundNum / matchesNum;
+		defenReboundNumAverage = (double) defenReboundNum / matchesNum;
+		reboundNumAverage = (double) reboundNum / matchesNum;
+		assistNumAverage = (double) assistNum / matchesNum;
+		stealNumAverage = (double) stealNum / matchesNum;
+		blockNumAverage = (double) blockNum / matchesNum;
+		turnOverNumAverage = (double) turnOverNum / matchesNum;// 失误数
+		foulNumAverage = (double) foulNum / matchesNum;// 犯规数
+		scoreAverage = (double) score / matchesNum;
+
+		shootHitRate = (double) shootHitRate / matchesNum;
+		threeHitRate = (double) threeHitRate / matchesNum;
+		freeThrowHitRate = (double) freeThrowHitRate / matchesNum;
+		winRate = (double) winNum / matchesNum;
+		offenRound = (double) offenRound / matchesNum;
+		offenEfficiency = (double) offenEfficiency / matchesNum;
+		defenEfficiency = (double) defenEfficiency / matchesNum;
+		offenReboundEfficiency = (double) offenReboundEfficiency / matchesNum;
+		defenReboundEfficiency = (double) defenReboundEfficiency / matchesNum;
+		stealEfficiency = (double) stealEfficiency / matchesNum;
+		assistEfficiency = (double) assistEfficiency / matchesNum;
+
+		// 计算赛季的总数据平均，对于数量而言，场均和赛季平均一样，胜率也是一样的
+		shootHitRateSeason = (double) shootHitNum / shootAttemptNum;
+		threeHitRateSeason = (double) threeHitNum / threeAttemptNum;
+		freeThrowHitRateSeason = (double) freeThrowHitNum / freeThrowAttemptNum;
+		offenRoundSeason = (double) offenRound / matchesNum;
+		offenEfficiencySeason = (double) score / offenRound * 100;
+		defenEfficiencySeason = (double) dsScoreSeason / dsOffenRoundSeason;
+		offenReboundEfficiencySeason = (double) offenReboundNum
+				/ (offenReboundNum + dsDefenReboundNumSeason);
+		defenReboundEfficiencySeason = (double) defenReboundNum
+				/ (defenReboundNum + dsOffenReboundNumSeason);
+		stealEfficiencySeason = (double) stealNum / dsOffenRoundSeason;
+		assistEfficiencySeason = (double) assistNum / offenRound;
 	}
 
 	private void createTable() {
@@ -225,6 +261,29 @@ public class TeamMatchDataReader {
 	 */
 	private void foramt() {
 		DecimalFormat dec = new DecimalFormat("0.000");
+
+		shootHitNumAverage = Double.parseDouble(dec.format(shootHitNumAverage));// 投篮命中数
+		shootAttemptNumAverage = Double.parseDouble(dec
+				.format(shootAttemptNumAverage));// 投篮出手次数
+		threeHitNumAverage = Double.parseDouble(dec.format(threeHitNumAverage));// 三分命中数
+		threeAttemptNumAverage = Double.parseDouble(dec
+				.format(threeAttemptNumAverage));// 三分出手次数
+		freeThrowHitNumAverage = Double.parseDouble(dec
+				.format(freeThrowHitNumAverage));// 罚球命中数
+		freeThrowAttemptNumAverage = Double.parseDouble(dec
+				.format(freeThrowAttemptNumAverage));// 罚球出手次数
+		offenReboundNumAverage = Double.parseDouble(dec
+				.format(offenReboundNumAverage));
+		defenReboundNumAverage = Double.parseDouble(dec
+				.format(defenReboundNumAverage));
+		reboundNumAverage = Double.parseDouble(dec.format(reboundNumAverage));
+		assistNumAverage = Double.parseDouble(dec.format(assistNumAverage));
+		stealNumAverage = Double.parseDouble(dec.format(stealNumAverage));
+		blockNumAverage = Double.parseDouble(dec.format(blockNumAverage));
+		turnOverNumAverage = Double.parseDouble(dec.format(turnOverNumAverage));// 失误数
+		foulNumAverage = Double.parseDouble(dec.format(foulNumAverage));// 犯规数
+		scoreAverage = Double.parseDouble(dec.format(scoreAverage));
+
 		shootHitRate = Double.parseDouble(dec.format(shootHitRate));
 		shootHitRateSeason = Double.parseDouble(dec.format(shootHitRateSeason));
 		threeHitRate = Double.parseDouble(dec.format(threeHitRate));
@@ -264,16 +323,18 @@ public class TeamMatchDataReader {
 			Statement sql = connection.createStatement();
 
 			sql.execute("insert teamMatchDataSeason values(" + sqlID + ",'"
-					+ teamName + "'," + matchesNum + "," + shootHitNum + ","
-					+ shootAttemptNum + "," + threeHitNum + ","
-					+ threeAttemptNum + "," + freeThrowHitNum + ","
-					+ freeThrowAttemptNum + "," + offenReboundNum + ","
-					+ defenReboundNum + "," + reboundNum + "," + assistNum
-					+ "," + stealNum + "," + blockNum + "," + turnOverNum + ","
-					+ foulNum + "," + score + "," + shootHitRateSeason + ","
-					+ threeHitRateSeason + "," + freeThrowHitRateSeason + ","
-					+ offenRoundSeason + "," + offenEfficiencySeason + ","
-					+ defenEfficiencySeason + ","
+					+ teamName + "'," + matchesNum + "," + shootHitNumAverage
+					+ "," + shootAttemptNumAverage + "," + threeHitNumAverage
+					+ "," + threeAttemptNumAverage + ","
+					+ freeThrowHitNumAverage + "," + freeThrowAttemptNumAverage
+					+ "," + offenReboundNumAverage + ","
+					+ defenReboundNumAverage + "," + reboundNumAverage + ","
+					+ assistNumAverage + "," + stealNumAverage + ","
+					+ blockNumAverage + "," + turnOverNumAverage + ","
+					+ foulNumAverage + "," + scoreAverage + ","
+					+ shootHitRateSeason + "," + threeHitRateSeason + ","
+					+ freeThrowHitRateSeason + "," + offenRoundSeason + ","
+					+ offenEfficiencySeason + "," + defenEfficiencySeason + ","
 					+ offenReboundEfficiencySeason + ","
 					+ defenReboundEfficiencySeason + ","
 					+ stealEfficiencySeason + "," + assistEfficiencySeason
@@ -282,17 +343,20 @@ public class TeamMatchDataReader {
 
 			Statement sql2 = connection.createStatement();
 			sql2.execute("insert teamMatchDataAverage values(" + sqlID + ",'"
-					+ teamName + "'," + matchesNum + "," + shootHitNum + ","
-					+ shootAttemptNum + "," + threeHitNum + ","
-					+ threeAttemptNum + "," + freeThrowHitNum + ","
-					+ freeThrowAttemptNum + "," + offenReboundNum + ","
-					+ defenReboundNum + "," + reboundNum + "," + assistNum
-					+ "," + stealNum + "," + blockNum + "," + turnOverNum + ","
-					+ foulNum + "," + score + "," + shootHitRate + ","
-					+ threeHitRate + "," + freeThrowHitRate + "," + offenRound
-					+ "," + offenEfficiency + "," + defenEfficiency + ","
-					+ offenReboundEfficiency + "," + defenReboundEfficiency
-					+ "," + stealEfficiency + "," + assistEfficiency + ")");
+					+ teamName + "'," + matchesNum + "," + shootHitNumAverage
+					+ "," + shootAttemptNumAverage + "," + threeHitNumAverage
+					+ "," + threeAttemptNumAverage + ","
+					+ freeThrowHitNumAverage + "," + freeThrowAttemptNumAverage
+					+ "," + offenReboundNumAverage + ","
+					+ defenReboundNumAverage + "," + reboundNumAverage + ","
+					+ assistNumAverage + "," + stealNumAverage + ","
+					+ blockNumAverage + "," + turnOverNumAverage + ","
+					+ foulNumAverage + "," + scoreAverage + "," + shootHitRate
+					+ "," + threeHitRate + "," + freeThrowHitRate + ","
+					+ offenRound + "," + offenEfficiency + ","
+					+ defenEfficiency + "," + offenReboundEfficiency + ","
+					+ defenReboundEfficiency + "," + stealEfficiency + ","
+					+ assistEfficiency + ")");
 			sql2.close();
 
 			sqlID++;
@@ -462,6 +526,23 @@ public class TeamMatchDataReader {
 		turnOverNum = 0;// 失误数
 		foulNum = 0;// 犯规数
 		score = 0;
+
+		shootHitNumAverage = 0;// 投篮命中数
+		shootAttemptNumAverage = 0;// 投篮出手次数
+		threeHitNumAverage = 0;// 三分命中数
+		threeAttemptNumAverage = 0;// 三分出手次数
+		freeThrowHitNumAverage = 0;// 罚球命中数
+		freeThrowAttemptNumAverage = 0;// 罚球出手次数
+		offenReboundNumAverage = 0;
+		defenReboundNumAverage = 0;
+		reboundNumAverage = 0;
+		assistNumAverage = 0;
+		stealNumAverage = 0;
+		blockNumAverage = 0;
+		turnOverNumAverage = 0;// 失误数
+		foulNumAverage = 0;// 犯规数
+		scoreAverage = 0;
+
 		shootHitRate = 0;// 投篮命中率
 		threeHitRate = 0;// 三分命中率
 		freeThrowHitRate = 0;// 罚球命中率
