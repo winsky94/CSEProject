@@ -1,5 +1,13 @@
 package SQLHelper;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
 public class DirtyDataManager {
 	/**
 	 * 处理字符串中含有'导致数据录入数据库过程中导致的数据库语句错误的问题
@@ -157,6 +165,8 @@ public class DirtyDataManager {
 	 * 
 	 * @param fileName
 	 *            数据文件名
+	 * @param team
+	 *            球员所在球队名
 	 * @param playerName
 	 *            球员姓名
 	 * @param presentTime
@@ -164,15 +174,17 @@ public class DirtyDataManager {
 	 * @return 如果在场时间是x:xx格式的，直接返回，如果是None（即该球员未上场比赛），统一置为“0：00”，其他数据缺失置为null的，
 	 *         读文件计算出正确时间返回
 	 */
-	public static String checkPresentTime(String fileName, String playerName,
-			String presentTime) {
+	public static String checkPresentTime(String fileName, String team,
+			String playerName, String presentTime) {
 		String result = "0:00";
 		if (presentTime.contains(":")) {
 			result = presentTime;
 		} else if (presentTime.equals("None")) {
 			result = "0:00";
 		} else {
-
+			result = calculatePresentTime(fileName, team, playerName);
+			System.out.println(fileName + " " + playerName + " " + result);
+			System.out.println("----------------------------");
 		}
 		return result;
 	}
@@ -182,12 +194,87 @@ public class DirtyDataManager {
 	 * 
 	 * @param fileName
 	 *            数据文件
+	 * @param team
+	 *            球员所在球队
 	 * @param playerName
+	 * 
 	 * @return 该球员实际在场时间
 	 */
-	private static String calculatePresentTime(String fileName,
+	private static String calculatePresentTime(String fileName, String team,
 			String playerName) {
-		
-		return null;
+		String result = "0:00";
+		int time = 0;
+		ArrayList<Map<String, String>> players = new ArrayList<Map<String, String>>();
+		try {
+			File file = new File(fileName);
+			if (!file.exists()) {
+				file.createNewFile();
+			}
+			BufferedReader br = new BufferedReader(new InputStreamReader(
+					new FileInputStream(file), "UTF-8"));
+			String temp = null;
+			temp = br.readLine();
+			temp = br.readLine();
+			String[] scoresData = temp.split(";");
+			int parts = scoresData.length;
+			if (parts <= 4) {
+				time = 48;
+			} else {
+				time = 48 + (parts - 4) * 5;
+			}
+
+			temp = br.readLine();
+			boolean start = false;
+			boolean hasDone = false;
+			while (temp != null) {
+				if (start) {
+					hasDone = true;
+					Map<String, String> presentTimeMap = new HashMap<String, String>();
+					String[] line = temp.split(";");
+					String player = DirtyDataManager.checkString(fileName,
+							line[0]);
+					String presentTime = line[2];// 在场时间
+					presentTimeMap.put("playerName", player);
+					presentTimeMap.put("presentTime", presentTime);
+					players.add(presentTimeMap);
+				}
+
+				if (fileName.contains(temp) && temp.equals(team)) {
+					start = true;
+				}
+				if (fileName.contains(temp) && (!temp.equals(team)) && hasDone) {
+					break;
+				}
+				temp = br.readLine();
+				if (temp != null && fileName.contains(temp)) {
+					start = false;
+				}
+
+			}
+
+			br.close();
+
+			int others = 0;
+			for (int i = 0; i < players.size(); i++) {
+				Map<String, String> playerPresentTime = players.get(i);
+				String player = playerPresentTime.get("playerName");
+				String presentTime = playerPresentTime.get("presentTime");
+
+				if (!player.equals(playerName)) {
+					String[] times = presentTime.split(":");
+					others += Integer.parseInt(times[0]) * 60
+							+ Integer.parseInt(times[1]);
+				}
+			}
+			int realTime = time * 5 * 60 - others;
+			int m = realTime / 60;
+			int s = realTime % 60;
+			result = m + ":" + s;
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		return result;
 	}
+
 }
