@@ -57,6 +57,61 @@ public class PlayerVO {
 		this.school = school;
 	}
 
+	public PlayerVO(int id, String name, int number, String position,
+			String height, int weight, String birth, int age, int exp,
+			String school, String teamName, int playedGames,
+			int gameStartingNum, int reboundNum, int assistNum,
+			String presentTime, double shootHitRate, double threeHitRate,
+			double freeThrowHitRate, int offenNum, int defenNum, int stealNum,
+			int blockNum, int turnOverNum, int foulNum, int score,
+			double efficiency, double recentFiveMatchesUpRate,
+			double gmScEfficiencyValue, double trueHitRate,
+			double shootHitEfficiency, double reboundRate,
+			double offenReboundRate, double defenReboundRate,
+			double assistRate, double stealRate, double blockRate,
+			double turnOverRate, double usageRate) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.number = number;
+		this.position = position;
+		this.height = height;
+		this.weight = weight;
+		this.birth = birth;
+		this.age = age;
+		this.exp = exp;
+		this.school = school;
+		this.teamName = teamName;
+		this.playedGames = playedGames;
+		this.gameStartingNum = gameStartingNum;
+		this.reboundNum = reboundNum;
+		this.assistNum = assistNum;
+		this.presentTime = presentTime;
+		this.shootHitRate = shootHitRate;
+		this.threeHitRate = threeHitRate;
+		this.freeThrowHitRate = freeThrowHitRate;
+		this.offenNum = offenNum;
+		this.defenNum = defenNum;
+		this.stealNum = stealNum;
+		this.blockNum = blockNum;
+		this.turnOverNum = turnOverNum;
+		this.foulNum = foulNum;
+		this.score = score;
+		this.efficiency = efficiency;
+		this.recentFiveMatchesUpRate = recentFiveMatchesUpRate;
+		GmScEfficiencyValue = gmScEfficiencyValue;
+		this.trueHitRate = trueHitRate;
+		this.shootHitEfficiency = shootHitEfficiency;
+		this.reboundRate = reboundRate;
+		this.offenReboundRate = offenReboundRate;
+		this.defenReboundRate = defenReboundRate;
+		this.assistRate = assistRate;
+		this.stealRate = stealRate;
+		this.blockRate = blockRate;
+		this.turnOverRate = turnOverRate;
+		this.usageRate = usageRate;
+	}
+
 	public int getId() {
 		return id;
 	}
