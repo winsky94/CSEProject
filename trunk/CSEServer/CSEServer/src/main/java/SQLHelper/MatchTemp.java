@@ -38,39 +38,8 @@ public class MatchTemp {
 
 		try {
 			Connection con = SqlManager.getConnection();
-
 			Statement sql3 = con.createStatement();
-			sql3.execute("drop table if exists MatchTemp");
-			sql3.execute("create table MatchTemp(id int not null auto_increment,"
-					+ "matchID int not null default 0,"
-					+ "visitingShootHitNum int not null default 0,"
-					+ "visitingShootAttemptNum int not null default 0,"
-					+ "visitingThreeHitNum int not null default 0,"
-					+ "visitingThreeAttemptNum int not null default 0,"
-					+ "visitingFreeThrowHitNum int not null default 0,"
-					+ "visitingFreeThrowAttemptNum int not null default 0,"
-					+ "visitingOffenReboundNum int not null default 0,"
-					+ "visitingDefenReboundNum int not null default 0,"
-					+ "visitingAssistNum int not null default 0,"
-					+ "visitingStealNum int not null default 0,"
-					+ "visitingBlockNum int not null default 0,"
-					+ "visitingTurnOverNum int not null default 0,"
-					+ "visitingFoulNum int not null default 0,"
-					+ "visitingScore int not null default 0,"
-					+ "homeShootHitNum int not null default 0,"
-					+ "homeShootAttemptNum int not null default 0,"
-					+ "homeThreeHitNum int not null default 0,"
-					+ "homeThreeAttemptNum int not null default 0,"
-					+ "homeFreeThrowHitNum int not null default 0,"
-					+ "homeFreeThrowAttemptNum int not null default 0,"
-					+ "homeOffenReboundNum int not null default 0,"
-					+ "homeDefenReboundNum int not null default 0,"
-					+ "homeAssistNum int not null default 0,"
-					+ "homeStealNum int not null default 0,"
-					+ "homeBlockNum int not null default 0,"
-					+ "homeTurnOverNum int not null default 0,"
-					+ "homeFoulNum int not null default 0,"
-					+ "homeScore int not null default 0," + "primary key(id));");
+			createTable();
 			int count = 1;
 			Statement sql = con.createStatement();
 			String query = "select * from records";
@@ -258,6 +227,49 @@ public class MatchTemp {
 
 			sql3.close();
 			resultSet.close();
+			sql.close();
+			con.close();
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+	}
+
+	private static void createTable() {
+		try {
+			Connection con = SqlManager.getConnection();
+			Statement sql = con.createStatement();
+			sql.execute("drop table if exists MatchTemp");
+			sql.execute("create table MatchTemp(id int not null auto_increment,"
+					+ "matchID int not null default 0,"
+					+ "visitingShootHitNum int not null default 0,"
+					+ "visitingShootAttemptNum int not null default 0,"
+					+ "visitingThreeHitNum int not null default 0,"
+					+ "visitingThreeAttemptNum int not null default 0,"
+					+ "visitingFreeThrowHitNum int not null default 0,"
+					+ "visitingFreeThrowAttemptNum int not null default 0,"
+					+ "visitingOffenReboundNum int not null default 0,"
+					+ "visitingDefenReboundNum int not null default 0,"
+					+ "visitingAssistNum int not null default 0,"
+					+ "visitingStealNum int not null default 0,"
+					+ "visitingBlockNum int not null default 0,"
+					+ "visitingTurnOverNum int not null default 0,"
+					+ "visitingFoulNum int not null default 0,"
+					+ "visitingScore int not null default 0,"
+					+ "homeShootHitNum int not null default 0,"
+					+ "homeShootAttemptNum int not null default 0,"
+					+ "homeThreeHitNum int not null default 0,"
+					+ "homeThreeAttemptNum int not null default 0,"
+					+ "homeFreeThrowHitNum int not null default 0,"
+					+ "homeFreeThrowAttemptNum int not null default 0,"
+					+ "homeOffenReboundNum int not null default 0,"
+					+ "homeDefenReboundNum int not null default 0,"
+					+ "homeAssistNum int not null default 0,"
+					+ "homeStealNum int not null default 0,"
+					+ "homeBlockNum int not null default 0,"
+					+ "homeTurnOverNum int not null default 0,"
+					+ "homeFoulNum int not null default 0,"
+					+ "homeScore int not null default 0," + "primary key(id));");
 			sql.close();
 			con.close();
 		} catch (Exception e) {
