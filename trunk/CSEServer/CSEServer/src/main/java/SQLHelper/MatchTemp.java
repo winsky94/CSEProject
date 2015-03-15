@@ -45,19 +45,13 @@ public class MatchTemp {
 			String query = "select * from records";
 			ResultSet resultSet = sql.executeQuery(query);
 			int tempID = 0;
+			String visitingTeam = null;
+			String homeTeam = null;
 			while (resultSet.next()) {
 				int matchID = resultSet.getInt("matchID");
-				Statement sql2 = con.createStatement();
-				String query2 = "select visitingTeam,homeTeam from matches where matchID="
-						+ matchID;
-				ResultSet rs = sql2.executeQuery(query2);
-				rs.first();
-				String visitingTeam = rs.getString("visitingTeam");
-				String homeTeam = rs.getString("homeTeam");
-
-				rs.close();
-				sql2.close();
-
+				
+				
+				
 				if (tempID == matchID || tempID == 0) {
 					tempID = matchID;
 					String team = resultSet.getString("team");
@@ -106,7 +100,8 @@ public class MatchTemp {
 					}
 				} else {
 					sql3.execute("insert MatchTemp values(" + (count++) + ","
-							+ tempID + "," + visitingShootHitNum + ","
+							+ tempID + ",'" + visitingTeam + "',"
+							+ visitingShootHitNum + ","
 							+ visitingShootAttemptNum + ","
 							+ visitingThreeHitNum + ","
 							+ visitingThreeAttemptNum + ","
@@ -116,10 +111,11 @@ public class MatchTemp {
 							+ visitingDefenReboundNum + "," + visitingAssistNum
 							+ "," + visitingStealNum + "," + visitingBlockNum
 							+ "," + visitingTurnOverNum + "," + visitingFoulNum
-							+ "," + visitingScore + "," + homeShootHitNum + ","
-							+ homeShootAttemptNum + "," + homeThreeHitNum + ","
-							+ homeThreeAttemptNum + "," + homeFreeThrowHitNum
-							+ "," + homeFreeThrowAttemptNum + ","
+							+ "," + visitingScore + ",'" + homeTeam + "',"
+							+ homeShootHitNum + "," + homeShootAttemptNum + ","
+							+ homeThreeHitNum + "," + homeThreeAttemptNum + ","
+							+ homeFreeThrowHitNum + ","
+							+ homeFreeThrowAttemptNum + ","
 							+ homeOffenReboundNum + "," + homeDefenReboundNum
 							+ "," + homeAssistNum + "," + homeStealNum + ","
 							+ homeBlockNum + "," + homeTurnOverNum + ","
@@ -202,22 +198,33 @@ public class MatchTemp {
 						homeFoulNum += resultSet.getInt("foulNum");// 犯规数
 						homeScore += resultSet.getInt("score");// 得分
 					}
-
 					System.out.println(count);
-
 				}
+
+				
+				Statement sql2 = con.createStatement();
+				String query2 = "select visitingTeam,homeTeam from matches where matchID="
+						+ matchID;
+				ResultSet rs = sql2.executeQuery(query2);
+				rs.next();
+				visitingTeam = rs.getString("visitingTeam");
+				homeTeam = rs.getString("homeTeam");
+
+				rs.close();
+				sql2.close();
+				
 			}
 
 			sql3.execute("insert MatchTemp values(" + (count++) + "," + tempID
-					+ "," + visitingShootHitNum + "," + visitingShootAttemptNum
-					+ "," + visitingThreeHitNum + "," + visitingThreeAttemptNum
-					+ "," + visitingFreeThrowHitNum + ","
-					+ visitingFreeThrowAttemptNum + ","
+					+ ",'" + visitingTeam + "'," + visitingShootHitNum + ","
+					+ visitingShootAttemptNum + "," + visitingThreeHitNum + ","
+					+ visitingThreeAttemptNum + "," + visitingFreeThrowHitNum
+					+ "," + visitingFreeThrowAttemptNum + ","
 					+ visitingOffenReboundNum + "," + visitingDefenReboundNum
 					+ "," + visitingAssistNum + "," + visitingStealNum + ","
 					+ visitingBlockNum + "," + visitingTurnOverNum + ","
-					+ visitingFoulNum + "," + visitingScore + ","
-					+ homeShootHitNum + "," + homeShootAttemptNum + ","
+					+ visitingFoulNum + "," + visitingScore + ",'" + homeTeam
+					+ "'," + homeShootHitNum + "," + homeShootAttemptNum + ","
 					+ homeThreeHitNum + "," + homeThreeAttemptNum + ","
 					+ homeFreeThrowHitNum + "," + homeFreeThrowAttemptNum + ","
 					+ homeOffenReboundNum + "," + homeDefenReboundNum + ","
@@ -242,6 +249,7 @@ public class MatchTemp {
 			sql.execute("drop table if exists MatchTemp");
 			sql.execute("create table MatchTemp(id int not null auto_increment,"
 					+ "matchID int not null default 0,"
+					+ "visitingTeam varchar(20) not null default 'null',"
 					+ "visitingShootHitNum int not null default 0,"
 					+ "visitingShootAttemptNum int not null default 0,"
 					+ "visitingThreeHitNum int not null default 0,"
@@ -256,6 +264,7 @@ public class MatchTemp {
 					+ "visitingTurnOverNum int not null default 0,"
 					+ "visitingFoulNum int not null default 0,"
 					+ "visitingScore int not null default 0,"
+					+ "homeTeam varchar(20) not null default 'null',"
 					+ "homeShootHitNum int not null default 0,"
 					+ "homeShootAttemptNum int not null default 0,"
 					+ "homeThreeHitNum int not null default 0,"

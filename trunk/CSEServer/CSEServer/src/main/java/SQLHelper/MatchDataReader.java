@@ -82,7 +82,8 @@ public class MatchDataReader {
 					playerName = DirtyDataManager
 							.checkString(fileName, line[0]);
 					position = line[1];
-					presentTime = DirtyDataManager.checkPresentTime(fileName, team, playerName, line[2]) ;// 在场时间
+					presentTime = DirtyDataManager.checkPresentTime(fileName,
+							team, playerName, line[2]);// 在场时间
 					shootHitNum = Integer.parseInt(line[3]);// 投篮命中数
 					shootAttemptNum = DirtyDataManager.checkShootAndHitNum(
 							fileName, Integer.parseInt(line[4]), shootHitNum);// 投篮出手数
