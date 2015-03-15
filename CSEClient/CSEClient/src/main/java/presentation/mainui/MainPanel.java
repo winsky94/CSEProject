@@ -136,7 +136,7 @@ public class MainPanel extends ContentPanel{
 			
 			public void mouseClicked(MouseEvent e) {
 				// TODO Auto-generated method stub
-				JPanel p=new JPanel();
+				JPanel p=new ListPanel(0);
 				frame.refresh(new ListModelFPanel(1,p));
 				AddressBar.getInstance().RefreshAddress("首页》", MainPanel.this);
 			

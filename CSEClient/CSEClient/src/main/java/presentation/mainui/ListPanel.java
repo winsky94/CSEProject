@@ -1,6 +1,12 @@
 package presentation.mainui;
 
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.table.AbstractTableModel;
+
+import presentation.playerui.PlayerTableModel;
+import presentation.teamui.TableModel.TeamTableModel;
 
 /*
  * 列表模式下的表格所在JPanel
@@ -10,9 +16,23 @@ import javax.swing.JPanel;
  * 根据选择的筛选排序条件 将条件列置前
  * */
 public class ListPanel extends JPanel{
-	
-	public ListPanel(){
+	private int model;//模式 0球队，1球员
+	private JTable table;
+	private JScrollPane jsp;
+	private AbstractTableModel tablemodel;
+	public ListPanel(int mod){
+		this.model=mod;
+		if(mod==0)
+			tablemodel=new TeamTableModel();
+		else
+			tablemodel=new PlayerTableModel();
 		
+		table=new JTable(tablemodel);
+		jsp=new JScrollPane();
+		jsp.add(table);
+		setLayout(null);
+		add(jsp);
+		jsp.setBounds(Scale.LISTTABLE);
 	}
 
 }

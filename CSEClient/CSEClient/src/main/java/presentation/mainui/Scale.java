@@ -13,6 +13,7 @@ public interface Scale {
 	
 	final Rectangle SEARCHPANE=new Rectangle(69,118,1000,45);//地址栏下的主pane 的bounds
 	final Rectangle LISTPANE=new Rectangle(69,163,1000,450);
+	final Rectangle LISTTABLE=new Rectangle(0,0,1000,450);
 	
 	
 	//======搜索栏设置；
