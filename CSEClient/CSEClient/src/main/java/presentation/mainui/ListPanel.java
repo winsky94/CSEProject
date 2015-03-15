@@ -1,10 +1,15 @@
 package presentation.mainui;
 
+import java.awt.Point;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.AbstractTableModel;
 
+import presentation.playerui.PlayerInfoPanel;
 import presentation.playerui.PlayerTableModel;
 import presentation.teamui.TableModel.TeamTableModel;
 
@@ -15,7 +20,7 @@ import presentation.teamui.TableModel.TeamTableModel;
  * 
  * 根据选择的筛选排序条件 将条件列置前
  * */
-public class ListPanel extends JPanel{
+public class ListPanel extends JPanel {
 	private int model;//模式 0球队，1球员
 	private JTable table;
 	private JScrollPane jsp;
@@ -34,6 +39,19 @@ public class ListPanel extends JPanel{
 		setLayout(null);
 		add(jsp);
 		jsp.setBounds(Scale.LISTTABLE);
+		
+		//====双击显示详细信息===
+		table.addMouseListener(new MouseAdapter(){
+			public void mouseClicked(MouseEvent e){
+				if(e.getClickCount()==2){
+					Point p=e.getPoint();
+					int row=table.rowAtPoint(p);//获取所在行
+					if(model==1)//查看球员详细信息
+						MainFrame.getInstance().refresh(new PlayerInfoPanel());
+					
+				}
+			}
+		});
 	}
 
 }
