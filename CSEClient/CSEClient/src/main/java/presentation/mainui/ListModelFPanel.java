@@ -69,7 +69,7 @@ public class ListModelFPanel extends ContentPanel{
 		
 	}
 	
-	
+	//=====选中某一列 参数 进行升降序排序
 	private void initSearchPanel(int model) {
 		// TODO Auto-generated method stub
 		searchPanel=new JPanel();
@@ -80,10 +80,13 @@ public class ListModelFPanel extends ContentPanel{
 		JLabel refresh=new JLabel("刷新");
 		String[] s={"赛季","13-14"};
 		JComboBox<String> season=new JComboBox<String>(s);
+		String[] type={"汇总","场均"};
+		JComboBox<String> allOrAve=new JComboBox<String>(type);
 		JTextField search=new JTextField(20);
 		JButton searchBtn=new JButton("搜索");
 		searchPanel.setLayout(null);
 		searchPanel.add(refresh);
+		searchPanel.add(allOrAve);
 		searchPanel.add(down);searchPanel.add(up);searchPanel.add(card);
 		searchPanel.add(filter);searchPanel.add(season);searchPanel.add(search);
 		searchPanel.add(searchBtn);
@@ -96,7 +99,7 @@ public class ListModelFPanel extends ContentPanel{
 		card.setBounds(Scale.MODEL);
 		up.setBounds(Scale.UP);
 		down.setBounds(Scale.DOWN);
-		
+		allOrAve.setBounds(Scale.TYPE);
 		
 		
 	}
