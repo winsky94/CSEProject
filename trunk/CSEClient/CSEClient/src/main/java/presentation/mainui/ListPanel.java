@@ -10,5 +10,9 @@ import javax.swing.JPanel;
  * 根据选择的筛选排序条件 将条件列置前
  * */
 public class ListPanel extends JPanel{
+	
+	public ListPanel(){
+		
+	}
 
 }
