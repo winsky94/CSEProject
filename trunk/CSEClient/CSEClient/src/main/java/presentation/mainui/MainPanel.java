@@ -69,6 +69,10 @@ public class MainPanel extends ContentPanel{
 		isMain=true;
 		
 		addTitleBar();
+		/*JPanel pane=AddressBar.getInstance();
+		pane.setOpaque(false);
+		add(pane);
+		pane.setBounds(Scale.TITLEBAR);*/
 	
 		player.addMouseListener(new MouseListener() {
 			
@@ -134,6 +138,7 @@ public class MainPanel extends ContentPanel{
 				// TODO Auto-generated method stub
 				JPanel p=new JPanel();
 				frame.refresh(new ListModelFPanel(1,p));
+				AddressBar.getInstance().RefreshAddress("首页》", MainPanel.this);
 			
 					
 				

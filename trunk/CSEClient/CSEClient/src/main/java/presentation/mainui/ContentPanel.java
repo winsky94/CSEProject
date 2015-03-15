@@ -55,7 +55,7 @@ public class ContentPanel extends JPanel {
 		
 	}
 	public void paintComponent(Graphics g){
-		
+		addTitleBar();
 		super.paintComponent(g);
 		
 		Graphics2D gg=(Graphics2D) g;
