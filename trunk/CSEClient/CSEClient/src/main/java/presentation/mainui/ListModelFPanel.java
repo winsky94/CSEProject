@@ -78,7 +78,7 @@ public class ListModelFPanel extends ContentPanel{
 		ModeChangeButton card=new ModeChangeButton(model);
 		JLabel filter=new JLabel("按条件筛选");
 		JLabel refresh=new JLabel("刷新");
-		String[] s={"赛季","2012","2013"};
+		String[] s={"赛季","13-14"};
 		JComboBox<String> season=new JComboBox<String>(s);
 		JTextField search=new JTextField(20);
 		JButton searchBtn=new JButton("搜索");
