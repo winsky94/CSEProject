@@ -28,8 +28,8 @@ public class ListPanel extends JPanel{
 			tablemodel=new PlayerTableModel();
 		
 		table=new JTable(tablemodel);
-		jsp=new JScrollPane();
-		jsp.add(table);
+		jsp=new JScrollPane(table);
+		
 		setLayout(null);
 		add(jsp);
 		jsp.setBounds(Scale.LISTTABLE);

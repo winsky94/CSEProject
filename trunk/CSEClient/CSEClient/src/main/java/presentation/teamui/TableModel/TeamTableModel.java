@@ -25,5 +25,9 @@ public class TeamTableModel extends AbstractTableModel{
 		// TODO Auto-generated method stub
 		return content.get(rowIndex).get(columnIndex);
 	}
+	
+	public String getColumnName(int col) {
+		return head[col];
+	}
 
 }
