@@ -103,7 +103,9 @@ public class MainPanel extends ContentPanel{
 			public void mouseClicked(MouseEvent e) {
 				// TODO Auto-generated method stub
 	
-				frame.refresh(new TeamIndex());
+				JPanel p=new ListPanel(1);
+				frame.refresh(new ListModelFPanel(1,p));
+				AddressBar.getInstance().RefreshAddress("首页》", MainPanel.this);
 				
 			}
 		});

@@ -29,6 +29,7 @@ public class ListPanel extends JPanel{
 		
 		table=new JTable(tablemodel);
 		jsp=new JScrollPane(table);
+		table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 		
 		setLayout(null);
 		add(jsp);
