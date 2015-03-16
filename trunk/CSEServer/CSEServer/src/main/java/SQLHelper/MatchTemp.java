@@ -5,6 +5,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+/**
+ * 
+ * 从records表中读取数据，统计每场比赛主客队的相应的技术数据 存储于表：matchtemp
+ *
+ */
 public class MatchTemp {
 	Connection con;
 

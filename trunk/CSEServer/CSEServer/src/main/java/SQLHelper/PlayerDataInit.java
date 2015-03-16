@@ -12,7 +12,13 @@ import java.util.ArrayList;
 
 import po.PlayerPO;
 
-public class PlayerDataReader {
+/**
+ * 
+ * 从文件中读取数据，用于将球员基本数据存储到数据库中 表名：players
+ * 
+ *
+ */
+public class PlayerDataInit {
 	public PlayerPO readFromFile(String fileName) {
 		PlayerPO player;
 		String mname;
@@ -116,7 +122,7 @@ public class PlayerDataReader {
 	}
 
 	public static void main(String[] args) {
-		PlayerDataReader playerDataReader = new PlayerDataReader();
+		PlayerDataInit playerDataReader = new PlayerDataInit();
 		playerDataReader.exportToSql();
 	}
 }
