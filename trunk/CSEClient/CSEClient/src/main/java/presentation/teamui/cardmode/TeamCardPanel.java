@@ -54,7 +54,7 @@ public class TeamCardPanel extends JPanel{
 		modeBtn=new ModeChangeButton(0);
 		sortPnl.add(modeBtn);
 		//----升降序按钮--------------
-		orderBtn=new OrderChangeButton(0);
+		orderBtn=new OrderChangeButton(0,0);
 		sortPnl.add(orderBtn);
 		//----列表区---------
 		listPnl=new JPanel();

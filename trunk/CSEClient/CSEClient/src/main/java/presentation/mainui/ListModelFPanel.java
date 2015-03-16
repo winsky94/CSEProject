@@ -73,8 +73,8 @@ public class ListModelFPanel extends ContentPanel{
 	private void initSearchPanel(int model) {
 		// TODO Auto-generated method stub
 		searchPanel=new JPanel();
-		OrderChangeButton down=new OrderChangeButton(0);
-		OrderChangeButton up=new OrderChangeButton(1);
+		OrderChangeButton down=new OrderChangeButton(0,model);
+		OrderChangeButton up=new OrderChangeButton(1,model);
 		ModeChangeButton card=new ModeChangeButton(model);
 		JLabel filter=new JLabel("按条件筛选");
 		JLabel refresh=new JLabel("刷新");
