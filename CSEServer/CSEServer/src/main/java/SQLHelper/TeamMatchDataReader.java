@@ -10,6 +10,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class TeamMatchDataReader {
+	Connection con;
 	int sqlID = 1;
 	String teamName = null;
 	int matchesNum = 0;
@@ -77,6 +78,18 @@ public class TeamMatchDataReader {
 	int dsScoreSeason = 0;// 总赛季对手得分
 	int dsOffenRoundSeason = 0;// 总赛季对手进攻回合，即总赛季球队防守回合
 
+	public TeamMatchDataReader(){
+		try {
+			con = SqlManager.getConnection();
+		} catch (ClassNotFoundException e) {
+			// TODO 自动生成的 catch 块
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO 自动生成的 catch 块
+			e.printStackTrace();
+		}
+	}
+	
 	public static void main(String[] args) {
 		TeamMatchDataReader teamMatchDataReader = new TeamMatchDataReader();
 		teamMatchDataReader.calculate();
@@ -87,7 +100,6 @@ public class TeamMatchDataReader {
 		ArrayList<String> names = new ArrayList<String>();
 		names = getTeams();
 		try {
-			Connection con = SqlManager.getConnection();
 			Statement sql = con.createStatement(
 					ResultSet.TYPE_SCROLL_INSENSITIVE,
 					ResultSet.CONCUR_READ_ONLY);
@@ -125,6 +137,7 @@ public class TeamMatchDataReader {
 				reset();
 			}
 			result.close();
+			con.close();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -180,7 +193,6 @@ public class TeamMatchDataReader {
 
 	private void createTable() {
 		try {
-			Connection con = SqlManager.getConnection();
 			Statement sql = con.createStatement();
 			sql.execute("drop table if exists teamMatchDataAverage");
 			sql.execute("create table teamMatchDataAverage(id int not null auto_increment,"
@@ -319,8 +331,7 @@ public class TeamMatchDataReader {
 		foramt();
 
 		try {
-			Connection connection = SqlManager.getConnection();
-			Statement sql = connection.createStatement();
+			Statement sql = con.createStatement();
 
 			sql.execute("insert teamMatchDataSeason values(" + sqlID + ",'"
 					+ teamName + "'," + matchesNum + "," + shootHitNumAverage
@@ -341,7 +352,7 @@ public class TeamMatchDataReader {
 					+ ")");
 			sql.close();
 
-			Statement sql2 = connection.createStatement();
+			Statement sql2 = con.createStatement();
 			sql2.execute("insert teamMatchDataAverage values(" + sqlID + ",'"
 					+ teamName + "'," + matchesNum + "," + shootHitNumAverage
 					+ "," + shootAttemptNumAverage + "," + threeHitNumAverage
@@ -360,7 +371,6 @@ public class TeamMatchDataReader {
 			sql2.close();
 
 			sqlID++;
-			connection.close();
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
@@ -581,7 +591,6 @@ public class TeamMatchDataReader {
 	private Map<String, String> getTeamsByMathcID(int id) {
 		Map<String, String> result = new HashMap<String, String>();
 		try {
-			Connection con = SqlManager.getConnection();
 			Statement sql = con.createStatement(
 					ResultSet.TYPE_SCROLL_INSENSITIVE,
 					ResultSet.CONCUR_READ_ONLY);
@@ -597,7 +606,6 @@ public class TeamMatchDataReader {
 
 			resultSet.close();
 			sql.close();
-			con.close();
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
@@ -609,7 +617,6 @@ public class TeamMatchDataReader {
 	private ArrayList<String> getTeams() {
 		ArrayList<String> result = new ArrayList<String>();
 		try {
-			Connection con = SqlManager.getConnection();
 			Statement sql = con.createStatement();
 			String query = "select abLocation from teams";
 			ResultSet resultSet = sql.executeQuery(query);
@@ -621,7 +628,6 @@ public class TeamMatchDataReader {
 
 			resultSet.close();
 			sql.close();
-			con.close();
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
