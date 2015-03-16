@@ -125,8 +125,8 @@ public class MainFrame extends JFrame {
 		
 	 
 		
-	//========必须在frame里 paint为何？？？？========= 
 	
+	this.setLayout(null);
 	this.setVisible(true);
 	this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
