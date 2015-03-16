@@ -24,29 +24,46 @@ public class Player implements PlayerBLService {
 		}
 	}
 
-	public ArrayList<PlayerVO> getPlayerList() {
+	/**
+	 * 得到球员信息
+	 * 
+	 * @return 返回ArrayList<PlayerVO>
+	 */
+	public ArrayList<PlayerVO> getPlayerInfo() {
 		// TODO 自动生成的方法存根
+		ArrayList<PlayerVO> result = new ArrayList<PlayerVO>();
 		try {
 			ArrayList<PlayerPO> data = service.getPlayerList();
 
-			ArrayList<PlayerVO> result = new ArrayList<PlayerVO>();
 			for (PlayerPO po : data) {
 				PlayerVO vo = poTovo(po);
 				result.add(vo);
 			}
-			return result;
+
 		} catch (RemoteException e) {
 			// TODO 自动生成的 catch 块
 			e.printStackTrace();
-			return null;
 		}
-
+		return result;
 	}
 
 	public PlayerVO poTovo(PlayerPO po) {
 		PlayerVO vo = new PlayerVO(po.getId(), po.getName(), po.getNumber(),
 				po.getPosition(), po.getHeight(), po.getWeight(),
-				po.getBirth(), po.getAge(), po.getExp(), po.getSchool());
+				po.getBirth(), po.getAge(), po.getExp(), po.getSchool(),
+				po.getTeamName(), po.getPlayedGames(), po.getGameStartingNum(),
+				po.getReboundNum(), po.getAssistNum(), po.getPresentTime(),
+				po.getShootHitRate(), po.getThreeHitRate(),
+				po.getFreeThrowHitRate(), po.getOffenNum(), po.getDefenNum(),
+				po.getStealNum(), po.getBlockNum(), po.getTurnOverNum(),
+				po.getFoulNum(), po.getScore(), po.getEfficiency(),
+				po.getRecentFiveMatchesUpRate(), po.getGmScEfficiencyValue(),
+				po.getTrueHitRate(), po.getShootHitEfficiency(),
+				po.getReboundRate(), po.getOffenReboundRate(),
+				po.getDefenReboundRate(), po.getAssistRate(),
+				po.getStealRate(), po.getBlockRate(), po.getTurnOverRate(),
+				po.getUsageRate());
 		return vo;
 	}
+
 }
