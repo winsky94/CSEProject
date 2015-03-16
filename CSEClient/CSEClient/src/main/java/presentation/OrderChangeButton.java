@@ -1,9 +1,14 @@
 package presentation;
 
+import java.awt.Cursor;
+import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.JButton;
+import javax.swing.JWindow;
 
 import presentation.mainui.MainFrame;
 import presentation.mainui.SequencePane;
@@ -23,15 +28,20 @@ public class OrderChangeButton extends JButton{
 		super();
 		this.model=model;
 		btnMode=orderNow;
+		this.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		switch(btnMode){
 		case 0:this.setText("降序");break;
 		case 1:this.setText("升序");break;
 		}
-		this.addActionListener(new ActionListener() {
+		this.addMouseListener(new MouseAdapter() {
 			
-			public void actionPerformed(ActionEvent e) {
+			public void mouseClicked(MouseEvent e) {
+				Point p=e.getPoint();//是否对
 				SequencePane se=new SequencePane(model);
-				MainFrame.getInstance().add(se);
+				se.setVisible(true);
+				
+				se.setBounds(e.getXOnScreen(), e.getYOnScreen(), 100, 400);
+			
 				switch(btnMode){
 				
 				case 0:changeToAscending();break;
