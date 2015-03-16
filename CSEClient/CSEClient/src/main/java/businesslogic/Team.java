@@ -9,7 +9,7 @@ import businesslogicservice.TeamBLService;
 public class Team implements TeamBLService {
 
 	/**
-	 * 查找球队信息
+	 *  查找球队信息
 	 * 
 	 * @return 返回球队的ArrayList<TeamVO>
 	 */
