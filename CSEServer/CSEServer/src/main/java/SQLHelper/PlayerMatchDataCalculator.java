@@ -7,7 +7,12 @@ import java.sql.Statement;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
-public class PlayerMatchDataReader {
+/**
+ * 
+ * 统计分析球员所有比赛中的数据，计算出赛季和场均的技术数据
+ *
+ */
+public class PlayerMatchDataCalculator {
 	Connection con;
 	int sqlID = 1;
 	String playerName = null;
@@ -96,7 +101,7 @@ public class PlayerMatchDataReader {
 	int teamFreeThrowAttemptNumSeason = 0;
 	int teamTurnOverNumSeason = 0;
 
-	public PlayerMatchDataReader() {
+	public PlayerMatchDataCalculator() {
 		try {
 			con = SqlManager.getConnection();
 		} catch (ClassNotFoundException e) {
@@ -1118,7 +1123,7 @@ public class PlayerMatchDataReader {
 	}
 
 	public static void main(String[] args) {
-		PlayerMatchDataReader playerMatchDataReader = new PlayerMatchDataReader();
+		PlayerMatchDataCalculator playerMatchDataReader = new PlayerMatchDataCalculator();
 		playerMatchDataReader.calculate();
 	}
 }

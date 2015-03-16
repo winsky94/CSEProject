@@ -13,7 +13,14 @@ import java.util.ArrayList;
 import po.MatchPO;
 import po.RecordPO;
 
-public class MatchDataReader {
+/**
+ * 
+ * 从文件中读取数据，用于将比赛数据读到数据库中 数据分为三个表存储
+ * matches：存储比赛的编号、赛季、日期、主客队名称、比分等（主客队和相应的比分都分开存）
+ * records：存储比赛的每个球员的比赛ID、所属球队名称以及一些基本的技术数据
+ * detailscores：存储比赛的ID，每节的比分信息(考虑到加时赛，所以一节比分是一个元组)
+ */
+public class MatchDataInit {
 	int count = 1;
 	int time = 0;// 比赛时间
 
@@ -276,7 +283,7 @@ public class MatchDataReader {
 	}
 
 	public static void main(String[] args) {
-		MatchDataReader matchDataReader = new MatchDataReader();
+		MatchDataInit matchDataReader = new MatchDataInit();
 		matchDataReader.exportToSql();
 	}
 }

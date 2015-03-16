@@ -9,7 +9,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class TeamMatchDataReader {
+/**
+ * 
+ * 统计分析球队所有比赛中的数据，计算出赛季和场均的技术数据
+ *
+ */
+public class TeamMatchDataCalculator {
 	Connection con;
 	int sqlID = 1;
 	String teamName = null;
@@ -78,7 +83,7 @@ public class TeamMatchDataReader {
 	int dsScoreSeason = 0;// 总赛季对手得分
 	int dsOffenRoundSeason = 0;// 总赛季对手进攻回合，即总赛季球队防守回合
 
-	public TeamMatchDataReader(){
+	public TeamMatchDataCalculator() {
 		try {
 			con = SqlManager.getConnection();
 		} catch (ClassNotFoundException e) {
@@ -89,9 +94,9 @@ public class TeamMatchDataReader {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public static void main(String[] args) {
-		TeamMatchDataReader teamMatchDataReader = new TeamMatchDataReader();
+		TeamMatchDataCalculator teamMatchDataReader = new TeamMatchDataCalculator();
 		teamMatchDataReader.calculate();
 	}
 

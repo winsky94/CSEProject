@@ -12,7 +12,12 @@ import java.util.ArrayList;
 
 import po.TeamPO;
 
-public class TeamDataReader {
+/**
+ * 
+ * 从文件中读取数据，用于将球队的基本数据存储到数据库中 表名：teams
+ *
+ */
+public class TeamDataInit {
 	public ArrayList<String[]> readFromFile(String fileName) {
 
 		ArrayList<String[]> result = new ArrayList<String[]>();
@@ -112,7 +117,7 @@ public class TeamDataReader {
 
 
 	public static void main(String[] args) {
-		TeamDataReader teamDataReader = new TeamDataReader();
+		TeamDataInit teamDataReader = new TeamDataInit();
 		teamDataReader.exportToSql();
 	}
 }
