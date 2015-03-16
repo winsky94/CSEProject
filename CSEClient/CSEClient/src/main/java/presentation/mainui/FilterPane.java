@@ -1,13 +1,14 @@
 package presentation.mainui;
 
 import javax.swing.JPanel;
+import javax.swing.JWindow;
 /*
  * author: jin
  * 筛选panel
  * 考虑复用
  * 
  * */
-public class FilterPane extends JPanel {
+public class FilterPane extends JWindow {
 /*筛选条件  筛选前50位
  * 球员位置(前锋，中锋，后卫)
  * 球员联盟（东部，西部及各自分区）
@@ -24,7 +25,11 @@ public class FilterPane extends JPanel {
 	private String[] double_double={"得分","篮板","助攻","抢断","盖帽"};
 	
 	public FilterPane(){
+		this.setVisible(false);
+		
 		
 		
 	}
+	
+	
 }
