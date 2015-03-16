@@ -8,6 +8,8 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.AbstractTableModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 
 import presentation.playerui.PlayerInfoPanel;
 import presentation.playerui.tablemodel.PlayerTableModel;
@@ -52,6 +54,8 @@ public class ListPanel extends JPanel {
 				}
 			}
 		});
+		TableRowSorter<TableModel> sorter=new TableRowSorter<TableModel>(tablemodel);
+		table.setRowSorter(sorter);
 	}
 
 }
