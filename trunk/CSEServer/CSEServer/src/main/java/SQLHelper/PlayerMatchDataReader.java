@@ -259,6 +259,7 @@ public class PlayerMatchDataReader {
 	public void exportToSQL(){
 		
 		System.out.println(sqlID);
+		
 		format();
 		
 		try {
@@ -474,7 +475,7 @@ public class PlayerMatchDataReader {
 					}
 
 					int teamShootHitNum=getShootHitNum(resultSet.getString("team"),resultSet.getInt("matchID"));
-	                if((double) resultSet.getInt("presentTime")!=0&&getMatchTime(resultSet.getInt("matchID"))!=0){
+	                if( ((double) resultSet.getInt("presentTime")/ getMatchTime(resultSet.getInt("matchID"))* teamShootHitNum - resultSet.getInt("shootHitNum"))!=0&&getMatchTime(resultSet.getInt("matchID"))!=0){
 					    assistRate += (double) resultSet.getInt("assistNum")
 							/ ((double) resultSet.getInt("presentTime")
 									/ getMatchTime(resultSet.getInt("matchID"))
@@ -652,9 +653,17 @@ public class PlayerMatchDataReader {
 			fiveScoreAverage=(double)fiveScore/5;
 			fiveReboundAverage=(double)fiveReboundNum/5;
 			fiveAssistAverage=(double)fiveAssistNum/5;
-			exFiveScoreAverage=(double)exFiveScore/exFiveMatchesNum;
-			exFiveReboundAverage=(double)exfiveReboundNum/exFiveMatchesNum;
-			exFiveAssistAverage=(double)exfiveAssistNum/exFiveMatchesNum;
+			if(exFiveMatchesNum>0){
+			  exFiveScoreAverage=(double)exFiveScore/exFiveMatchesNum;
+			  exFiveReboundAverage=(double)exfiveReboundNum/exFiveMatchesNum;
+			  exFiveAssistAverage=(double)exfiveAssistNum/exFiveMatchesNum;
+			}
+			else{
+				recentFiveMatchesScoreUpRate=0;
+				recentFiveMatchesReboundUpRate=0;
+				recentFiveMatchesAssistUpRate=0;
+				return;
+			}
 			
 			resultSet.close();
 			sql.close();
@@ -664,11 +673,14 @@ public class PlayerMatchDataReader {
 			e.printStackTrace();
 		}
 		
-		recentFiveMatchesScoreUpRate=(fiveScoreAverage-exFiveScoreAverage)/exFiveScoreAverage;
+		if(exFiveScoreAverage!=0)
+		   recentFiveMatchesScoreUpRate=(fiveScoreAverage-exFiveScoreAverage)/exFiveScoreAverage;
 		
-		recentFiveMatchesReboundUpRate= (fiveReboundAverage-exFiveReboundAverage)/exFiveReboundAverage;
+		if(exFiveReboundAverage!=0)
+		   recentFiveMatchesReboundUpRate= (fiveReboundAverage-exFiveReboundAverage)/exFiveReboundAverage;
 
-		recentFiveMatchesAssistUpRate=(fiveAssistAverage-exFiveAssistAverage)/exFiveAssistAverage;
+		if(exFiveAssistAverage!=0)
+		   recentFiveMatchesAssistUpRate=(fiveAssistAverage-exFiveAssistAverage)/exFiveAssistAverage;
 		
 	}
 	
@@ -891,7 +903,7 @@ public class PlayerMatchDataReader {
 		  double xiaoshu = Double.parseDouble("0." + tempp[1]);
 		
 		  DecimalFormat dec = new DecimalFormat("0");
-		  double xiaoshu60=Double.parseDouble(dec.format(xiaoshu*60));       
+		 String xiaoshu60=dec.format(xiaoshu*60);       
 		  result = result + xiaoshu60;
 		}
 		else {
@@ -1053,5 +1065,7 @@ public class PlayerMatchDataReader {
 		playerMatchDataReader.calculate();
 	//	DecimalFormat dec = new DecimalFormat("0");
 	//	System.out.println(dec.format(9.12));
+	//	PlayerMatchDataReader playerMatchDataReader = new PlayerMatchDataReader();
+	//	System.out.println(playerMatchDataReader.changeMinuteToTime(20.5));
 	}
 }
