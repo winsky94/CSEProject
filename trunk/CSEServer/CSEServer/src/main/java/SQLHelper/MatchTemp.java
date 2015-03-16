@@ -2,10 +2,25 @@ package SQLHelper;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 
 public class MatchTemp {
-	public static void matchTempInit() {
+	Connection con;
+
+	public MatchTemp() {
+		try {
+			con = SqlManager.getConnection();
+		} catch (ClassNotFoundException e) {
+			// TODO 自动生成的 catch 块
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO 自动生成的 catch 块
+			e.printStackTrace();
+		}
+	}
+
+	public void matchTempInit() {
 		int visitingShootHitNum = 0; // 投篮命中数
 		int visitingShootAttemptNum = 0; // 投篮出手次数
 		int visitingThreeHitNum = 0; // 三分命中数
@@ -37,7 +52,6 @@ public class MatchTemp {
 		int homeScore = 0;// 得分
 
 		try {
-			Connection con = SqlManager.getConnection();
 			Statement sql3 = con.createStatement();
 			createTable();
 			int count = 1;
@@ -49,9 +63,7 @@ public class MatchTemp {
 			String homeTeam = null;
 			while (resultSet.next()) {
 				int matchID = resultSet.getInt("matchID");
-				
-				
-				
+
 				if (tempID == matchID || tempID == 0) {
 					tempID = matchID;
 					String team = resultSet.getString("team");
@@ -201,7 +213,6 @@ public class MatchTemp {
 					System.out.println(count);
 				}
 
-				
 				Statement sql2 = con.createStatement();
 				String query2 = "select visitingTeam,homeTeam from matches where matchID="
 						+ matchID;
@@ -212,7 +223,7 @@ public class MatchTemp {
 
 				rs.close();
 				sql2.close();
-				
+
 			}
 
 			sql3.execute("insert MatchTemp values(" + (count++) + "," + tempID
@@ -242,9 +253,8 @@ public class MatchTemp {
 		}
 	}
 
-	private static void createTable() {
+	private void createTable() {
 		try {
-			Connection con = SqlManager.getConnection();
 			Statement sql = con.createStatement();
 			sql.execute("drop table if exists MatchTemp");
 			sql.execute("create table MatchTemp(id int not null auto_increment,"
@@ -280,7 +290,6 @@ public class MatchTemp {
 					+ "homeFoulNum int not null default 0,"
 					+ "homeScore int not null default 0," + "primary key(id));");
 			sql.close();
-			con.close();
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
@@ -288,6 +297,7 @@ public class MatchTemp {
 	}
 
 	public static void main(String[] args) {
-		matchTempInit();
+		MatchTemp matchTemp = new MatchTemp();
+		matchTemp.matchTempInit();
 	}
 }
