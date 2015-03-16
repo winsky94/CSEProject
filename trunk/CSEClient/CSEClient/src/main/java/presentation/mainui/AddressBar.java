@@ -90,6 +90,7 @@ public class AddressBar extends JPanel implements MouseListener{
 	}
 	
 	public void paintAddress(){
+		for(JLabel old)
 		showAddress.clear();
 		if(address.size()>=MAXSIZE){
 			
