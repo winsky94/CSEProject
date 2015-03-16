@@ -38,5 +38,15 @@ public class PlayerTableModel extends AbstractTableModel{
 	public static String[] getHead(){
 		return head;
 	}
+	
+	//改变表头顺序  同时列内容也要变动
+	public void setHead(int front){
+		//front为被置前的搜索项  球队名称和所属球队始终置前
+		int len=head.length;
+		String[] newHead=new String[head.length];
+		newHead[0]=head[0];newHead[1]=head[1];
+	//	newHead[]
+		
+	}
 
 }
