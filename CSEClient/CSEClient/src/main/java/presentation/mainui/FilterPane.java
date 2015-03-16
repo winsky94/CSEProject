@@ -16,4 +16,15 @@ public class FilterPane extends JPanel {
   断、盖帽中任何两项 ））
  * 
  * */
+	private final int FILTERNUMBER=50;
+	private String[] position={"前锋","中锋","后卫"};
+	private String[] union={"东部","西部","各自分区？"};
+	private String[] sequence={"得分","篮板","助攻","得分/篮板/助攻","盖帽","抢断","犯规"
+			,"失误","分钟","效率","投篮","三分","罚球","两双"};
+	private String[] double_double={"得分","篮板","助攻","抢断","盖帽"};
+	
+	public FilterPane(){
+		
+		
+	}
 }
