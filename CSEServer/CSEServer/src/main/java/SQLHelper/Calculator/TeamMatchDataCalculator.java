@@ -268,7 +268,6 @@ public class TeamMatchDataCalculator {
 					+ "primary key(id));");
 
 			sql2.close();
-			con.close();
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
