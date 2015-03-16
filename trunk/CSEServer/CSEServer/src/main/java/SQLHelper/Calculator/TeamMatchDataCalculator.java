@@ -1,4 +1,4 @@
-package SQLHelper;
+package SQLHelper.Calculator;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -8,6 +8,8 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+
+import SQLHelper.SqlManager;
 
 /**
  * 

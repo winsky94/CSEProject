@@ -1,4 +1,4 @@
-package SQLHelper;
+package SQLHelper.DataInit;
 
 import java.io.BufferedReader;
 import java.io.File;

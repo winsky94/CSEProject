@@ -1,4 +1,4 @@
-package SQLHelper;
+package SQLHelper.DataInit;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import SQLHelper.SqlManager;
 import po.TeamPO;
 
 /**
