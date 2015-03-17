@@ -28,10 +28,8 @@ public class Team extends UnicastRemoteObject implements TeamDataService {
 		Team team;
 		try {
 			team = new Team();
-			TeamPO po=team.getTeamSeasonInfo("13-14", "ATL");
+			TeamPO po = team.getTeamSeasonInfo("13-14", "WAS");
 			System.out.println(po.getScore());
-			TeamPO po2=team.getTeamSeasonInfo("13-14", "Hawks");
-			System.out.println(po2.getScore());
 		} catch (RemoteException e) {
 			// TODO 自动生成的 catch 块
 			e.printStackTrace();
@@ -185,17 +183,84 @@ public class Team extends UnicastRemoteObject implements TeamDataService {
 	 * @return
 	 */
 	public TeamPO getTeamSeasonInfo(String season, String name) {
-		TeamPO teamPO = null;
-		ArrayList<TeamPO> teams = new ArrayList<TeamPO>();
-		teams = getTeamSeasonInfo(season);
-		for (TeamPO po : teams) {
-			if (po.getAbLocation().equals(name)
-					|| po.getTeamName().equals(name)) {
-				teamPO = po;
-				break;
-			}
+		// TeamPO teamPO = null;
+		// ArrayList<TeamPO> teams = new ArrayList<TeamPO>();
+		// teams = getTeamSeasonInfo(season);
+		// for (TeamPO po : teams) {
+		// if (po.getAbLocation().equals(name)
+		// || po.getTeamName().equals(name)) {
+		// teamPO = po;
+		// break;
+		// }
+		// }
+		// return teamPO;
+
+		TeamPO po = null;
+		try {
+			connection = SqlManager.getConnection();
+			sql = connection.createStatement();
+			String query = "select * from teams where teamName='" + name
+					+ "' or abLocation='" + name + "'";
+			resultSet = sql.executeQuery(query);
+			resultSet.next();
+
+			int id = resultSet.getInt("id");
+			String teamName = resultSet.getString("teamName");
+			String location = resultSet.getString("location");
+			String abLocation = resultSet.getString("abLocation");
+			String conference = resultSet.getString("conference");
+			String partition = resultSet.getString("partition");
+			String homeCourt = resultSet.getString("homeCourt");
+			int setUpTime = resultSet.getInt("setUpTime");
+			po = new TeamPO(id, teamName, abLocation, location, conference,
+					partition, homeCourt, setUpTime);
+			resultSet.close();
+
+			query = "select * from teamMatchDataSeason where team='"
+					+ abLocation + "' and season ='" + season + "'";
+			resultSet = sql.executeQuery(query);
+			resultSet.next();
+
+			po.setMatchesNum(resultSet.getInt("matchesNum")); // 比赛场数
+			po.setShootHitNum(resultSet.getInt("shootHitNum")); // 投篮命中数
+			po.setShootAttemptNum(resultSet.getInt("shootAttemptNum")); // 投篮出手次数
+			po.setThreeHitNum(resultSet.getInt("threeHitNum")); // 三分命中数
+			po.setThreeAttemptNum(resultSet.getInt("threeAttemptNum")); // 三分出手数
+			po.setFreeThrowHitNum(resultSet.getInt("freeThrowHitNum")); // 罚球命中数
+			po.setFreeThrowAttemptNum(resultSet.getInt("freeThrowAttemptNum")); // 罚球出手数
+			po.setOffenReboundNum(resultSet.getInt("offenReboundNum")); // 进攻篮板数
+			po.setDefenReboundNum(resultSet.getInt("defenReboundNum")); // 防守篮板数
+			po.setReboundNum(resultSet.getInt("reboundNum"));// 篮板数
+			po.setAssistNum(resultSet.getInt("assistNum"));// 助攻数
+			po.setStealNum(resultSet.getInt("stealNum"));// 抢断数
+			po.setBlockNum(resultSet.getInt("blockNum"));// 盖帽数
+			po.setTurnOverNum(resultSet.getInt("turnOverNum")); // 失误数
+			po.setFoulNum(resultSet.getInt("foulNum"));// 犯规数
+			po.setScore(resultSet.getInt("score"));// 比赛得分
+			po.setShootHitRate(resultSet.getDouble("shootHitRate"));// 投篮命中率
+			po.setThreeHitRate(resultSet.getDouble("threeHitRate"));// 三分命中率
+			po.setFreeThrowHitRate(resultSet.getDouble("freeThrowHitRate"));// 罚球命中率
+			po.setWinRate(resultSet.getDouble("winRate")); // 胜率
+			po.setOffenRound(resultSet.getDouble("offenRound")); // 进攻回合
+			po.setOffenEfficiency(resultSet.getDouble("offenEfficiency")); // 进攻效率
+			po.setDefenEfficiency(resultSet.getDouble("defenEfficiency")); // 防守效率
+			po.setOffenReboundEfficiency(resultSet
+					.getDouble("offenReboundEfficiency")); // 进攻篮板效率
+			po.setDefenReboundEfficiency(resultSet
+					.getDouble("defenReboundEfficiency")); // 防守篮板效率
+			po.setStealEfficiency(resultSet.getDouble("stealEfficiency")); // 抢断效率
+			po.setAssistRate(resultSet.getDouble("assistRate")); // 助攻率
+
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			closeMySql();
 		}
-		return teamPO;
+		return po;
 	}
 
 	public String getPhotoPath(String abLocation) {
