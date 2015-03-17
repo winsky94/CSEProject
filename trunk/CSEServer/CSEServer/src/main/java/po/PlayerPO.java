@@ -37,7 +37,7 @@ public class PlayerPO implements Serializable {
 	private double recentFiveMatchesAssistUpRate;//近五场助攻提升率
 	private double GmScEfficiencyValue;// GmSc效率值
 	private double trueHitRate;// 真实命中率
-	private double shootHitEfficiency;// 投篮效率
+	private double shootEfficiency;// 投篮效率
 	private double reboundRate;// 篮板率
 	private double offenReboundRate;// 进攻篮板率
 	private double defenReboundRate;// 防守篮板率
@@ -142,8 +142,8 @@ public class PlayerPO implements Serializable {
 		return trueHitRate;
 	}
 
-	public double getShootHitEfficiency() {
-		return shootHitEfficiency;
+	public double getShootEfficiency() {
+		return shootEfficiency;
 	}
 
 	public double getReboundRate() {
@@ -311,8 +311,8 @@ public class PlayerPO implements Serializable {
 		this.trueHitRate = trueHitRate;
 	}
 
-	public void setShootHitEfficiency(double shootHitEfficiency) {
-		this.shootHitEfficiency = shootHitEfficiency;
+	public void setShootEfficiency(double shootEfficiency) {
+		this.shootEfficiency = shootEfficiency;
 	}
 
 	public void setReboundRate(double reboundRate) {
