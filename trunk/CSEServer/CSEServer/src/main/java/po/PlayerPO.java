@@ -32,7 +32,9 @@ public class PlayerPO implements Serializable {
 	private int foulNum;// 犯规数
 	private int score;// 得分	
 	private double efficiency;// 效率
-	private double recentFiveMatchesUpRate;//近五场的提升率
+	private double recentFiveMatchesScoreUpRate;//近五场得分提升率
+	private double recentFiveMatchesReboundUpRate;//近五场篮板提升率
+	private double recentFiveMatchesAssistUpRate;//近五场助攻提升率
 	private double GmScEfficiencyValue;// GmSc效率值
 	private double trueHitRate;// 真实命中率
 	private double shootHitEfficiency;// 投篮效率
@@ -212,8 +214,16 @@ public class PlayerPO implements Serializable {
 		return score;
 	}
 	
-	public double getRecentFiveMatchesUpRate(){
-		return recentFiveMatchesUpRate;
+	public double getRecentFiveMatchesScoreUpRate(){
+		return recentFiveMatchesScoreUpRate;
+	}
+	
+	public double getRecentFiveMatchesReboundUpRate(){
+		return recentFiveMatchesReboundUpRate;
+	}
+	
+	public double getRecentFiveMatchesAssistUpRate(){
+		return recentFiveMatchesAssistUpRate;
 	}
 	
 	public double getUsageRate(){
@@ -374,8 +384,16 @@ public class PlayerPO implements Serializable {
 		this.score = score;
 	}
 
-	public void setRecentFiveMatchesUpRate(double recentFiveMatchesUpRate){
-		this.recentFiveMatchesUpRate=recentFiveMatchesUpRate;
+	public void setRecentFiveMatchesScoreUpRate(double recentFiveMatchesScoreUpRate){
+		this.recentFiveMatchesScoreUpRate=recentFiveMatchesScoreUpRate;
+	}
+	
+	public void setRecentFiveMatchesReboundUpRate(double recentFiveMatchesReboundUpRate){
+		this.recentFiveMatchesReboundUpRate=recentFiveMatchesReboundUpRate;
+	}
+	
+	public void setRecentFiveMatchesAssistUpRate(double recentFiveMatchesAssistUpRate){
+		this.recentFiveMatchesAssistUpRate=recentFiveMatchesAssistUpRate;
 	}
 	
 	public void setUsageRate(double usageRate){
