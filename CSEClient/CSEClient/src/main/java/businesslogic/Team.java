@@ -1,24 +1,93 @@
 package businesslogic;
 
+import java.rmi.Naming;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import po.TeamPO;
 import vo.TeamVO;
 import businesslogicservice.TeamBLService;
+import dataservice.TeamDataService;
 
 public class Team implements TeamBLService {
+	private TeamDataService service = null;
+
+	public Team() {
+		try {
+			String host = "localhost";
+			// String host = getServer.getServerHost();
+			String url = "rmi://" + host + "/teamService";
+			service = (TeamDataService) Naming.lookup(url);
+		} catch (Exception e) {
+			// TODO 自动生成的 catch 块
+			e.printStackTrace();
+		}
+	}
 
 	/**
-	 *  查找球队信息
+	 * 查找球队信息
 	 * 
 	 * @return 返回球队的ArrayList<TeamVO>
 	 */
-	public ArrayList<TeamVO> getTeamInfo() {
+	public ArrayList<TeamVO> getTeamBaseInfo() {
 		// TODO 自动生成的方法存根
-		return null;
+		ArrayList<TeamVO> result = new ArrayList<TeamVO>();
+		try {
+			ArrayList<TeamPO> teams = service.getTeamBaseInfo();
+			for (TeamPO po : teams) {
+				TeamVO vo = poToVo(po);
+				result.add(vo);
+			}
+		} catch (RemoteException e) {
+			// TODO 自动生成的 catch 块
+			e.printStackTrace();
+		}
+		return result;
 	}
 
-	public TeamVO voToPo(TeamPO po) {
+	public ArrayList<TeamVO> getTeamSeasonInfo(String season) {
+		// TODO 自动生成的方法存根
+		ArrayList<TeamVO> result = new ArrayList<TeamVO>();
+		try {
+			ArrayList<TeamPO> teams = service.getTeamSeasonInfo(season);
+			for (TeamPO po : teams) {
+				TeamVO vo = poToVo(po);
+				result.add(vo);
+			}
+		} catch (RemoteException e) {
+			// TODO 自动生成的 catch 块
+			e.printStackTrace();
+		}
+		return result;
+	}
+
+	public TeamVO getTeamBaseInfo(String name) {
+		// TODO 自动生成的方法存根
+		TeamVO teamVO = null;
+		try {
+			TeamPO po = service.getTeamBaseInfo(name);
+			teamVO = poToVo(po);
+		} catch (RemoteException e) {
+			// TODO 自动生成的 catch 块
+			e.printStackTrace();
+		}
+		return teamVO;
+	}
+
+	public TeamVO getTeamSeasonInfo(String season, String name) {
+		// TODO 自动生成的方法存根
+		TeamVO teamVO = null;
+		try {
+			TeamPO po = service.getTeamSeasonInfo(season,name);
+			teamVO = poToVo(po);
+		} catch (RemoteException e) {
+			// TODO 自动生成的 catch 块
+			e.printStackTrace();
+		}
+		return teamVO;
+	}
+
+	public TeamVO poToVo(TeamPO po) {
 		TeamVO teamVO = new TeamVO(po.getId(), po.getTeamName(),
 				po.getAbLocation(), po.getLocation(), po.getConference(),
 				po.getPartition(), po.getHomeCourt(), po.getSetUpTime(),
@@ -33,7 +102,7 @@ public class Team implements TeamBLService {
 				po.getWinRate(), po.getOffenRound(), po.getOffenEfficiency(),
 				po.getDefenEfficiency(), po.getReboundEfficiency(),
 				po.getOffenReboundEfficiency(), po.getDefenReboundEfficiency(),
-				po.getStealEfficiency(), po.getAssistEfficiency());
+				po.getStealEfficiency(), po.getAssistRate());
 
 		return teamVO;
 	}
