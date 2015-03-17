@@ -204,7 +204,9 @@ public class TeamMatchDataCalculator {
 			sql.execute("drop table if exists teamMatchDataAverage");
 			sql.execute("create table teamMatchDataAverage(id int not null auto_increment,"
 					+ "team varchar(20) not null default 'null',"
+					+ "season varchar(20) not null default 'null',"
 					+ "matchesNum int not null default 0,"
+					+ "winRate double not null default 0,"
 					+ "shootHitNum int not null default 0,"
 					+ "shootAttemptNum int not null default 0,"
 					+ "threeHitNum int not null default 0,"
@@ -227,9 +229,9 @@ public class TeamMatchDataCalculator {
 					+ "offenRound double not null default 0,"
 					+ "offenEfficiency double not null default 0,"
 					+ "defenEfficiency double not null default 0,"
-					+ "offenReboundRate double not null default 0,"
-					+ "defenReboundRate double not null default 0,"
-					+ "stealRate double not null default 0,"
+					+ "offenReboundEfficiency double not null default 0,"
+					+ "defenReboundEfficiency double not null default 0,"
+					+ "stealEfficiency double not null default 0,"
 					+ "assistRate double not null default 0,"
 					+ "primary key(id));");
 			sql.close();
@@ -238,7 +240,9 @@ public class TeamMatchDataCalculator {
 			sql2.execute("drop table if exists teamMatchDataSeason");
 			sql2.execute("create table teamMatchDataSeason(id int not null auto_increment,"
 					+ "team varchar(20) not null default 'null',"
+					+ "season varchar(20) not null default 'null',"
 					+ "matchesNum int not null default 0,"
+					+ "winRate double not null default 0,"
 					+ "shootHitNum int not null default 0,"
 					+ "shootAttemptNum int not null default 0,"
 					+ "threeHitNum int not null default 0,"
@@ -261,9 +265,9 @@ public class TeamMatchDataCalculator {
 					+ "offenRound double not null default 0,"
 					+ "offenEfficiency double not null default 0,"
 					+ "defenEfficiency double not null default 0,"
-					+ "offenReboundRate double not null default 0,"
-					+ "defenReboundRate double not null default 0,"
-					+ "stealRate double not null default 0,"
+					+ "offenReboundEfficiency double not null default 0,"
+					+ "defenReboundEfficiency double not null default 0,"
+					+ "stealEfficiency double not null default 0,"
 					+ "assistRate double not null default 0,"
 					+ "primary key(id));");
 
@@ -279,7 +283,7 @@ public class TeamMatchDataCalculator {
 	 */
 	private void foramt() {
 		DecimalFormat dec = new DecimalFormat("0.000");
-
+		winRate = Double.parseDouble(dec.format(winRate));
 		shootHitNumAverage = Double.parseDouble(dec.format(shootHitNumAverage));// 投篮命中数
 		shootAttemptNumAverage = Double.parseDouble(dec
 				.format(shootAttemptNumAverage));// 投篮出手次数
@@ -340,9 +344,9 @@ public class TeamMatchDataCalculator {
 			Statement sql = con.createStatement();
 
 			sql.execute("insert teamMatchDataSeason values(" + sqlID + ",'"
-					+ teamName + "'," + matchesNum + "," + shootHitNumAverage
-					+ "," + shootAttemptNumAverage + "," + threeHitNumAverage
-					+ "," + threeAttemptNumAverage + ","
+					+ teamName + "','"+"13-14"+"'," + matchesNum + "," + winRate + ","
+					+ shootHitNumAverage + "," + shootAttemptNumAverage + ","
+					+ threeHitNumAverage + "," + threeAttemptNumAverage + ","
 					+ freeThrowHitNumAverage + "," + freeThrowAttemptNumAverage
 					+ "," + offenReboundNumAverage + ","
 					+ defenReboundNumAverage + "," + reboundNumAverage + ","
@@ -360,9 +364,9 @@ public class TeamMatchDataCalculator {
 
 			Statement sql2 = con.createStatement();
 			sql2.execute("insert teamMatchDataAverage values(" + sqlID + ",'"
-					+ teamName + "'," + matchesNum + "," + shootHitNumAverage
-					+ "," + shootAttemptNumAverage + "," + threeHitNumAverage
-					+ "," + threeAttemptNumAverage + ","
+					+ teamName + "','"+"13-14"+"'," + matchesNum + "," + winRate + ","
+					+ shootHitNumAverage + "," + shootAttemptNumAverage + ","
+					+ threeHitNumAverage + "," + threeAttemptNumAverage + ","
 					+ freeThrowHitNumAverage + "," + freeThrowAttemptNumAverage
 					+ "," + offenReboundNumAverage + ","
 					+ defenReboundNumAverage + "," + reboundNumAverage + ","
