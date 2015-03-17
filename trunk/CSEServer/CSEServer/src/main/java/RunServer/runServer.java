@@ -28,7 +28,9 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import po.TeamPO;
 import data.Player;
+import data.Team;
 
 public class runServer extends JFrame implements ActionListener {
 	/**
@@ -196,7 +198,9 @@ public class runServer extends JFrame implements ActionListener {
 			System.out.println(hostIP);
 			LocateRegistry.createRegistry(portNum);
 			Player player = new Player();
+			Team team=new Team();
 			Naming.rebind("playerService", player);
+			Naming.rebind("teamService", team);
 
 			new ServerMainFrame(hostIP, port);
 		} catch (Exception e) {
