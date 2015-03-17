@@ -7,5 +7,5 @@ import java.util.ArrayList;
 import po.TeamPO;
 
 public interface TeamDataService extends Remote {
-	public ArrayList<TeamPO> getTeamList() throws RemoteException;
+	public ArrayList<TeamPO> getTeamBaseInfo() throws RemoteException;
 }
