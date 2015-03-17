@@ -110,7 +110,7 @@ public class PlayerDataInit {
 						+ "'," + player.getWeight() + ",'" + player.getBirth()
 						+ "'," + player.getAge() + "," + player.getExp() + ",'"
 						+ player.getSchool() + "')");
-				System.out.println(count);
+				System.out.println(count-1);
 			}
 
 			sql.close();
