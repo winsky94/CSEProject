@@ -5,5 +5,12 @@ import java.util.ArrayList;
 import vo.TeamVO;
 
 public interface TeamBLService {
-	public ArrayList<TeamVO> getTeamInfo();
+	public ArrayList<TeamVO> getTeamBaseInfo();
+
+	public ArrayList<TeamVO> getTeamSeasonInfo(String season);
+
+	public TeamVO getTeamBaseInfo(String name);
+
+	public TeamVO getTeamSeasonInfo(String season, String name);
+
 }
