@@ -31,16 +31,16 @@ public class TeamPO implements Serializable {
 	private int score;// 比赛得分
 	private double shootHitRate;// 投篮命中率
 	private double threeHitRate;// 三分命中率
-	private double freeThrowHitRate;// 罚球命中率	
+	private double freeThrowHitRate;// 罚球命中率
 	private double winRate; // 胜率
 	private double offenRound; // 进攻回合
 	private double offenEfficiency; // 进攻效率
 	private double defenEfficiency; // 防守效率
-	private double reboundEfficiency;//篮板效率
+	private double reboundEfficiency;// 篮板效率
 	private double offenReboundEfficiency; // 进攻篮板效率
 	private double defenReboundEfficiency; // 防守篮板效率
 	private double stealEfficiency; // 抢断效率
-	private double assistEfficiency; // 助攻率
+	private double assistRate; // 助攻率
 
 	public TeamPO(int id, String teamName, String abLocation, String location,
 			String conference, String partition, String homeCourt, int setUpTime) {
@@ -151,10 +151,10 @@ public class TeamPO implements Serializable {
 		return stealEfficiency;
 	}
 
-	public double getAssistEfficiency() {
-		return assistEfficiency;
+	public double getAssistRate() {
+		return assistRate;
 	}
-	
+
 	public int getReboundNum() {
 		return reboundNum;
 	}
@@ -194,18 +194,10 @@ public class TeamPO implements Serializable {
 	public int getScore() {
 		return score;
 	}
-	
-	public double getReboundEfficiency(){
+
+	public double getReboundEfficiency() {
 		return reboundEfficiency;
 	}
-	
-
-	
-	
-	
-	
-	
-	
 
 	public void setId(int id) {
 		this.id = id;
@@ -303,11 +295,9 @@ public class TeamPO implements Serializable {
 		this.stealEfficiency = stealEfficiency;
 	}
 
-	public void setAssistEfficiency(double assistEfficiency) {
-		this.assistEfficiency = assistEfficiency;
+	public void setAssistRate(double assistRate) {
+		this.assistRate = assistRate;
 	}
-	
-
 
 	public void setReboundNum(int reboundNum) {
 		this.reboundNum = reboundNum;
@@ -348,9 +338,9 @@ public class TeamPO implements Serializable {
 	public void setScore(int score) {
 		this.score = score;
 	}
-	
-	public void setSeboundEfficiency(double reboundEfficiency){
-		this.reboundEfficiency=reboundEfficiency;
+
+	public void setReboundEfficiency(double reboundEfficiency) {
+		this.reboundEfficiency = reboundEfficiency;
 	}
 
 }
