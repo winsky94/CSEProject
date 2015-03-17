@@ -66,8 +66,6 @@ public class PlayerMatchDataCalculator {
 	double threeHitNumSeason = 0;
 	double threeAttemptNumSeason = 0;
 	double freeThrowHitRateSeason = 0;
-	int offenNumSeason = 0;
-	int defenNumSeason = 0;
 	int stealNumSeason = 0;
 	int blockNumSeason = 0;
 	int foulNumSeason = 0;
@@ -166,8 +164,6 @@ public class PlayerMatchDataCalculator {
 		threeHitNumSeason = 0;
 		threeAttemptNumSeason = 0;
 		freeThrowHitRateSeason = 0;
-		offenNumSeason = 0;
-		defenNumSeason = 0;
 		stealNumSeason = 0;
 		blockNumSeason = 0;
 		foulNumSeason = 0;
@@ -283,8 +279,8 @@ public class PlayerMatchDataCalculator {
 					+ gameStartingNum + "," + reboundNumSeason + ","
 					+ assistNumSeason + ",'" + presentTimeSeason + "',"
 					+ shootHitRateSeason + "," + threeHitRateSeason + ","
-					+ freeThrowHitRateSeason + "," + offenNumSeason + ","
-					+ defenNumSeason + "," + stealNumSeason + ","
+					+ freeThrowHitRateSeason + "," + offenReboundNumSeason + ","
+					+ defenReboundNumSeason + "," + stealNumSeason + ","
 					+ blockNumSeason + "," + foulNumSeason + ","
 					+ turnOverNumSeason + "," + scoreSeason + ","
 					+ efficiencySeason + "," + recentFiveMatchesScoreUpRate
@@ -580,8 +576,8 @@ public class PlayerMatchDataCalculator {
 								/ freeThrowAttemptNum;
 					}
 					freeThrowHitRate = freeThrowHitRate / playedGames;
-					offenNum = offenNumSeason / playedGames;
-					defenNum = defenNumSeason / playedGames;
+					offenNum = offenReboundNumSeason / playedGames;
+					defenNum = defenReboundNumSeason / playedGames;
 					stealNum = stealNumSeason / playedGames;
 					blockNum = blockNumSeason / playedGames;
 					turnOverNum = turnOverNumSeason / playedGames;
