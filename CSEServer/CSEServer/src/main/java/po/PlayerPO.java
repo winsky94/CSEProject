@@ -45,6 +45,9 @@ public class PlayerPO implements Serializable {
 	private double turnOverRate;// 失误率
 	private double usageRate;//使用率
 
+	public PlayerPO(){
+		this(0, null, 0, null, null, 0, null, 0, 0, null);
+	}
 
 	public PlayerPO(int id, String name, int number, String position,
 			String height, int weight, String birth, int age, int exp,
