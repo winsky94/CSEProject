@@ -219,12 +219,14 @@ public class Player implements PlayerBLService {
 				po.getFreeThrowHitRate(), po.getOffenNum(), po.getDefenNum(),
 				po.getStealNum(), po.getBlockNum(), po.getTurnOverNum(),
 				po.getFoulNum(), po.getScore(), po.getEfficiency(),
-				po.getRecentFiveMatchesUpRate(), po.getGmScEfficiencyValue(),
-				po.getTrueHitRate(), po.getShootHitEfficiency(),
-				po.getReboundRate(), po.getOffenReboundRate(),
-				po.getDefenReboundRate(), po.getAssistRate(),
-				po.getStealRate(), po.getBlockRate(), po.getTurnOverRate(),
-				po.getUsageRate());
+				po.getRecentFiveMatchesScoreUpRate(),
+				po.getRecentFiveMatchesReboundUpRate(),
+				po.getGmScEfficiencyValue(), po.getTrueHitRate(),
+				po.getShootEfficiency(), po.getReboundRate(),
+				po.getOffenReboundRate(), po.getDefenReboundRate(),
+				po.getAssistRate(), po.getStealRate(), po.getBlockRate(),
+				po.getTurnOverRate(), po.getUsageRate(),
+				po.getDoubleDoubleNum());
 		return vo;
 	}
 }
