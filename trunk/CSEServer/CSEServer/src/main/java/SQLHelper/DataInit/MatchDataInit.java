@@ -183,14 +183,14 @@ public class MatchDataInit {
 					+ "time int not null default 0," + "primary key(matchID));");
 
 			// 创建detailScores表
-			sql.execute("create table detailScores(id int not null auto_increment,"
+			sql.execute("create table detailScores(detailID int not null auto_increment,"
 					+ "matchID int not null default -1,"
 					+ "part int not null default -1,"
 					+ "score varchar(20) not null default 'null',"
-					+ "primary key(id));");
+					+ "primary key(detailID));");
 
 			// 创建records表
-			sql.execute("create table records(id int not null auto_increment,"
+			sql.execute("create table records(recordID int not null auto_increment,"
 					+ "matchID int not null default -1,"
 					+ "team varchar(20) not null default 'null',"
 					+ "season varchar(20) not null default 'null',"
@@ -211,7 +211,7 @@ public class MatchDataInit {
 					+ "blockNum int not null default 0,"
 					+ "turnOverNum int not null default 0,"
 					+ "foulNum int not null default 0,"
-					+ "score int not null default 0," + "primary key(id));");
+					+ "score int not null default 0," + "primary key(recordID));");
 
 			// index分别表示各表的id
 			int scoreIndex = 1;

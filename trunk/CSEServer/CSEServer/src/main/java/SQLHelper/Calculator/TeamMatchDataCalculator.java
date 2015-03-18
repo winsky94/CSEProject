@@ -205,7 +205,7 @@ public class TeamMatchDataCalculator {
 		try {
 			Statement sql = con.createStatement();
 			sql.execute("drop table if exists teamMatchDataAverage");
-			sql.execute("create table teamMatchDataAverage(id int not null auto_increment,"
+			sql.execute("create table teamMatchDataAverage(teamDataID int not null auto_increment,"
 					+ "team varchar(20) not null default 'null',"
 					+ "season varchar(20) not null default 'null',"
 					+ "matchesNum int not null default 0,"
@@ -236,12 +236,12 @@ public class TeamMatchDataCalculator {
 					+ "defenReboundEfficiency double not null default 0,"
 					+ "stealEfficiency double not null default 0,"
 					+ "assistRate double not null default 0,"
-					+ "primary key(id));");
+					+ "primary key(teamDataID));");
 			sql.close();
 
 			Statement sql2 = con.createStatement();
 			sql2.execute("drop table if exists teamMatchDataSeason");
-			sql2.execute("create table teamMatchDataSeason(id int not null auto_increment,"
+			sql2.execute("create table teamMatchDataSeason(teamDataID int not null auto_increment,"
 					+ "team varchar(20) not null default 'null',"
 					+ "season varchar(20) not null default 'null',"
 					+ "matchesNum int not null default 0,"
@@ -272,7 +272,7 @@ public class TeamMatchDataCalculator {
 					+ "defenReboundEfficiency double not null default 0,"
 					+ "stealEfficiency double not null default 0,"
 					+ "assistRate double not null default 0,"
-					+ "primary key(id));");
+					+ "primary key(teamDataID));");
 
 			sql2.close();
 		} catch (Exception e) {
