@@ -203,9 +203,16 @@ public class Player implements PlayerBLService {
 	}
 
 	public PlayerVO poTovo(PlayerPO po) {
+		int exp = po.getExp();
+		String expString = "";
+		if (exp > 0) {
+			expString = String.valueOf(exp);
+		} else if (exp == 0) {
+			expString = "R";
+		}
 		PlayerVO vo = new PlayerVO(po.getId(), po.getName(), po.getNumber(),
 				po.getPosition(), po.getHeight(), po.getWeight(),
-				po.getBirth(), po.getAge(), po.getExp(), po.getSchool(),
+				po.getBirth(), po.getAge(), expString, po.getSchool(),
 				po.getTeamName(), po.getPlayedGames(), po.getGameStartingNum(),
 				po.getReboundNum(), po.getAssistNum(), po.getPresentTime(),
 				po.getShootHitRate(), po.getThreeHitRate(),
