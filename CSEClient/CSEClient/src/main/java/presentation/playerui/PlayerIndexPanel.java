@@ -100,7 +100,7 @@ public class PlayerIndexPanel extends JPanel {
 		frame.setSize(1000, 800);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		PlayerBLService p=new Player();
-	    ArrayList<PlayerVO> plist=p.getPlayerInfo();
+	    ArrayList<PlayerVO> plist=p.getPlayerBaseInfo();
 	    if(plist!=null)
 	    	index.RefreshPlayerTable(plist);
 		
