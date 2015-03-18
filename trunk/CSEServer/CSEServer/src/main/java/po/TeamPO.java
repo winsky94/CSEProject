@@ -36,7 +36,6 @@ public class TeamPO implements Serializable {
 	private double offenRound; // 进攻回合
 	private double offenEfficiency; // 进攻效率
 	private double defenEfficiency; // 防守效率
-	private double reboundEfficiency;// 篮板效率
 	private double offenReboundEfficiency; // 进攻篮板效率
 	private double defenReboundEfficiency; // 防守篮板效率
 	private double stealEfficiency; // 抢断效率
@@ -53,6 +52,47 @@ public class TeamPO implements Serializable {
 		this.partition = partition;
 		this.homeCourt = homeCourt;
 		this.setUpTime = setUpTime;
+	}
+
+	public TeamPO(String abLocation, int matchesNum, int shootHitNum,
+			int shootAttemptNum, int threeHitNum, int threeAttemptNum,
+			int freeThrowHitNum, int freeThrowAttemptNum, int offenReboundNum,
+			int defenReboundNum, int reboundNum, int assistNum, int stealNum,
+			int blockNum, int turnOverNum, int foulNum, int score,
+			double shootHitRate, double threeHitRate, double freeThrowHitRate,
+			double winRate, double offenRound, double offenEfficiency,
+			double defenEfficiency, double offenReboundEfficiency,
+			double defenReboundEfficiency, double stealEfficiency,
+			double assistRate) {
+		super();
+		this.abLocation = abLocation;
+		this.matchesNum = matchesNum;
+		this.shootHitNum = shootHitNum;
+		this.shootAttemptNum = shootAttemptNum;
+		this.threeHitNum = threeHitNum;
+		this.threeAttemptNum = threeAttemptNum;
+		this.freeThrowHitNum = freeThrowHitNum;
+		this.freeThrowAttemptNum = freeThrowAttemptNum;
+		this.offenReboundNum = offenReboundNum;
+		this.defenReboundNum = defenReboundNum;
+		this.reboundNum = reboundNum;
+		this.assistNum = assistNum;
+		this.stealNum = stealNum;
+		this.blockNum = blockNum;
+		this.turnOverNum = turnOverNum;
+		this.foulNum = foulNum;
+		this.score = score;
+		this.shootHitRate = shootHitRate;
+		this.threeHitRate = threeHitRate;
+		this.freeThrowHitRate = freeThrowHitRate;
+		this.winRate = winRate;
+		this.offenRound = offenRound;
+		this.offenEfficiency = offenEfficiency;
+		this.defenEfficiency = defenEfficiency;
+		this.offenReboundEfficiency = offenReboundEfficiency;
+		this.defenReboundEfficiency = defenReboundEfficiency;
+		this.stealEfficiency = stealEfficiency;
+		this.assistRate = assistRate;
 	}
 
 	public int getId() {
@@ -195,10 +235,6 @@ public class TeamPO implements Serializable {
 		return score;
 	}
 
-	public double getReboundEfficiency() {
-		return reboundEfficiency;
-	}
-
 	public void setId(int id) {
 		this.id = id;
 	}
@@ -338,9 +374,4 @@ public class TeamPO implements Serializable {
 	public void setScore(int score) {
 		this.score = score;
 	}
-
-	public void setReboundEfficiency(double reboundEfficiency) {
-		this.reboundEfficiency = reboundEfficiency;
-	}
-
 }
