@@ -290,7 +290,7 @@ public class Team extends UnicastRemoteObject implements TeamDataService {
 	}
 
 	/**
-	 * 根据某一项技术分析项，将球队按某个赛季的该项数据进行升降序排序
+	 * 根据某一项技术分析项，将球队按某个赛季的场均该项数据进行升降序排序
 	 * 
 	 * @param season
 	 *            赛季
@@ -309,6 +309,44 @@ public class Team extends UnicastRemoteObject implements TeamDataService {
 		return result;
 	}
 
+	public String getPhotoPath(String abLocation) {
+		return "src/迭代一数据/teams/" + abLocation + ".svg";
+	}
+
+	private void closeMySql() {
+		try {
+			if (resultSet != null) {
+				resultSet.close();
+				resultSet = null;
+			}
+			if (sql != null) {
+				sql.close();
+				sql = null;
+			}
+			if (connection != null) {
+				connection.close();
+				connection = null;
+			}
+
+		} catch (SQLException e) {
+			// TODO 自动生成的 catch 块
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * 排序抽象方法，用于按赛季或场均的排序
+	 * 
+	 * @param table
+	 *            表名，区分是按赛季还是按场均
+	 * @param season
+	 *            赛季
+	 * @param condition
+	 *            排序条件
+	 * @param order
+	 *            升序还是降序 asc 表示升序 , desc表示降序 , 未明确写明排序方式时默认是升序
+	 * @return
+	 */
 	private ArrayList<TeamPO> getOrderedTeams(String table, String season,
 			String condition, String order) {
 		ArrayList<TeamPO> result = new ArrayList<TeamPO>();
@@ -324,7 +362,6 @@ public class Team extends UnicastRemoteObject implements TeamDataService {
 			resultSet = sql.executeQuery(query);
 			while (resultSet.next()) {
 				String name = resultSet.getString("team");
-				System.out.println(name);
 				int matchesNum = resultSet.getInt("matchesNum"); // 比赛场数
 				int shootHitNum = resultSet.getInt("shootHitNum"); // 投篮命中数
 				int shootAttemptNum = resultSet.getInt("shootAttemptNum"); // 投篮出手次数
@@ -378,31 +415,6 @@ public class Team extends UnicastRemoteObject implements TeamDataService {
 			closeMySql();
 		}
 		return result;
-	}
-
-	public String getPhotoPath(String abLocation) {
-		return "src/迭代一数据/teams/" + abLocation + ".svg";
-	}
-
-	private void closeMySql() {
-		try {
-			if (resultSet != null) {
-				resultSet.close();
-				resultSet = null;
-			}
-			if (sql != null) {
-				sql.close();
-				sql = null;
-			}
-			if (connection != null) {
-				connection.close();
-				connection = null;
-			}
-
-		} catch (SQLException e) {
-			// TODO 自动生成的 catch 块
-			e.printStackTrace();
-		}
 	}
 
 }

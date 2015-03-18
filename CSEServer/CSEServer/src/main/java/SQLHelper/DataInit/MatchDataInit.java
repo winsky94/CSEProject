@@ -193,6 +193,7 @@ public class MatchDataInit {
 			sql.execute("create table records(id int not null auto_increment,"
 					+ "matchID int not null default -1,"
 					+ "team varchar(20) not null default 'null',"
+					+ "season varchar(20) not null default 'null',"
 					+ "playerName varchar(40) not null default 'null',"
 					+ "presentTime varchar(20) not null default 'null',"
 					+ "position varchar(20) not null default 'null',"
@@ -253,7 +254,8 @@ public class MatchDataInit {
 				for (RecordPO recordPO : records) {
 					sql.execute("insert records values(" + recordIndex + ","
 							+ matchPO.getMatchID() + ",'" + recordPO.getTeam()
-							+ "','" + recordPO.getPlayerName() + "','"
+							+ "','" + matchPO.getSeason() + "','"
+							+ recordPO.getPlayerName() + "','"
 							+ recordPO.getPresentTime() + "','"
 							+ recordPO.getPosition() + "',"
 							+ recordPO.getShootHitNum() + ","

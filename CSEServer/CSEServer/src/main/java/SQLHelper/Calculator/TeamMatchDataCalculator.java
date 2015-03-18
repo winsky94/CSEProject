@@ -20,6 +20,7 @@ public class TeamMatchDataCalculator {
 	Connection con;
 	int sqlID = 1;
 	String teamName = null;
+	String season = null;
 	int matchesNum = 0;
 	int winNum = 0;
 	// 场均
@@ -344,18 +345,19 @@ public class TeamMatchDataCalculator {
 			Statement sql = con.createStatement();
 
 			sql.execute("insert teamMatchDataSeason values(" + sqlID + ",'"
-					+ teamName + "','"+"13-14"+"'," + matchesNum + "," + winRate + ","
-					+ shootHitNumAverage + "," + shootAttemptNumAverage + ","
-					+ threeHitNumAverage + "," + threeAttemptNumAverage + ","
-					+ freeThrowHitNumAverage + "," + freeThrowAttemptNumAverage
-					+ "," + offenReboundNumAverage + ","
-					+ defenReboundNumAverage + "," + reboundNumAverage + ","
-					+ assistNumAverage + "," + stealNumAverage + ","
-					+ blockNumAverage + "," + turnOverNumAverage + ","
-					+ foulNumAverage + "," + scoreAverage + ","
-					+ shootHitRateSeason + "," + threeHitRateSeason + ","
-					+ freeThrowHitRateSeason + "," + offenRoundSeason + ","
-					+ offenEfficiencySeason + "," + defenEfficiencySeason + ","
+					+ teamName + "','" + "13-14" + "'," + matchesNum + ","
+					+ winRate + "," + shootHitNumAverage + ","
+					+ shootAttemptNumAverage + "," + threeHitNumAverage + ","
+					+ threeAttemptNumAverage + "," + freeThrowHitNumAverage
+					+ "," + freeThrowAttemptNumAverage + ","
+					+ offenReboundNumAverage + "," + defenReboundNumAverage
+					+ "," + reboundNumAverage + "," + assistNumAverage + ","
+					+ stealNumAverage + "," + blockNumAverage + ","
+					+ turnOverNumAverage + "," + foulNumAverage + ","
+					+ scoreAverage + "," + shootHitRateSeason + ","
+					+ threeHitRateSeason + "," + freeThrowHitRateSeason + ","
+					+ offenRoundSeason + "," + offenEfficiencySeason + ","
+					+ defenEfficiencySeason + ","
 					+ offenReboundEfficiencySeason + ","
 					+ defenReboundEfficiencySeason + ","
 					+ stealEfficiencySeason + "," + assistEfficiencySeason
@@ -364,20 +366,20 @@ public class TeamMatchDataCalculator {
 
 			Statement sql2 = con.createStatement();
 			sql2.execute("insert teamMatchDataAverage values(" + sqlID + ",'"
-					+ teamName + "','"+"13-14"+"'," + matchesNum + "," + winRate + ","
-					+ shootHitNumAverage + "," + shootAttemptNumAverage + ","
-					+ threeHitNumAverage + "," + threeAttemptNumAverage + ","
-					+ freeThrowHitNumAverage + "," + freeThrowAttemptNumAverage
-					+ "," + offenReboundNumAverage + ","
-					+ defenReboundNumAverage + "," + reboundNumAverage + ","
-					+ assistNumAverage + "," + stealNumAverage + ","
-					+ blockNumAverage + "," + turnOverNumAverage + ","
-					+ foulNumAverage + "," + scoreAverage + "," + shootHitRate
-					+ "," + threeHitRate + "," + freeThrowHitRate + ","
-					+ offenRound + "," + offenEfficiency + ","
-					+ defenEfficiency + "," + offenReboundEfficiency + ","
-					+ defenReboundEfficiency + "," + stealEfficiency + ","
-					+ assistEfficiency + ")");
+					+ teamName + "','" + "13-14" + "'," + matchesNum + ","
+					+ winRate + "," + shootHitNumAverage + ","
+					+ shootAttemptNumAverage + "," + threeHitNumAverage + ","
+					+ threeAttemptNumAverage + "," + freeThrowHitNumAverage
+					+ "," + freeThrowAttemptNumAverage + ","
+					+ offenReboundNumAverage + "," + defenReboundNumAverage
+					+ "," + reboundNumAverage + "," + assistNumAverage + ","
+					+ stealNumAverage + "," + blockNumAverage + ","
+					+ turnOverNumAverage + "," + foulNumAverage + ","
+					+ scoreAverage + "," + shootHitRate + "," + threeHitRate
+					+ "," + freeThrowHitRate + "," + offenRound + ","
+					+ offenEfficiency + "," + defenEfficiency + ","
+					+ offenReboundEfficiency + "," + defenReboundEfficiency
+					+ "," + stealEfficiency + "," + assistEfficiency + ")");
 			sql2.close();
 
 			sqlID++;
@@ -528,6 +530,7 @@ public class TeamMatchDataCalculator {
 	 */
 	private void reset() {
 		teamName = null;
+		season = null;
 		matchesNum = 0;
 		winNum = 0;
 		// 场均
