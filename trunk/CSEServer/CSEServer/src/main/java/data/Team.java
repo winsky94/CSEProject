@@ -56,7 +56,7 @@ public class Team extends UnicastRemoteObject implements TeamDataService {
 			String query = "select * from teams";
 			resultSet = sql.executeQuery(query);
 			while (resultSet.next()) {
-				int id = resultSet.getInt("id");
+				int id = resultSet.getInt("teamID");
 				String teamName = resultSet.getString("teamName");
 				String location = resultSet.getString("location");
 				String abLocation = resultSet.getString("abLocation");
