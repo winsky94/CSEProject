@@ -1039,7 +1039,7 @@ public class PlayerMatchDataCalculator {
 			// Connection con = SqlManager.getConnection();
 			Statement sql = con.createStatement();
 			sql.execute("drop table if exists playerMatchDataAverage");
-			String query = "create table playerMatchDataAverage(id int not null auto_increment,"
+			String query = "create table playerMatchDataAverage(playerDataID int not null auto_increment,"
 					+ "playerName varchar(40) not null default 'null',"
 					+ "owingTeam varchar(20) not null default 'null',"
 					+ "playedGames int not null default 0,"
@@ -1072,13 +1072,13 @@ public class PlayerMatchDataCalculator {
 					+ "blockRate double not null default 0,"
 					+ "turnOverRate double not null default 0,"
 					+ "usageRate double not null default 0,"
-					+ "primary key(id));";
+					+ "primary key(playerDataID));";
 			sql.execute(query);
 			sql.close();
 
 			Statement sql2 = con.createStatement();
 			sql2.execute("drop table if exists playerMatchDataSeason");
-			String query2 = "create table playerMatchDataSeason(id int not null auto_increment,"
+			String query2 = "create table playerMatchDataSeason(playerDataID int not null auto_increment,"
 					+ "playerName varchar(40) not null default 'null',"
 					+ "owingTeam varchar(20) not null default 'null',"
 					+ "playedGames int not null default 0,"
@@ -1111,7 +1111,7 @@ public class PlayerMatchDataCalculator {
 					+ "blockRate double not null default 0,"
 					+ "turnOverRate double not null default 0,"
 					+ "usageRate double not null default 0,"
-					+ "primary key(id));";
+					+ "primary key(playerDataID));";
 			sql2.execute(query2);
 			sql2.close();
 		} catch (Exception e) {
