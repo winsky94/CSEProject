@@ -68,8 +68,10 @@ public class MatchTemp {
 			int tempID = 0;
 			String visitingTeam = null;
 			String homeTeam = null;
+			String season = null;
 			while (resultSet.next()) {
 				int matchID = resultSet.getInt("matchID");
+				season = resultSet.getString("season");
 
 				if (tempID == matchID || tempID == 0) {
 					tempID = matchID;
@@ -119,8 +121,8 @@ public class MatchTemp {
 					}
 				} else {
 					sql3.execute("insert MatchTemp values(" + (count++) + ","
-							+ tempID + ",'" + visitingTeam + "',"
-							+ visitingShootHitNum + ","
+							+ tempID + ",'" + season + "','" + visitingTeam
+							+ "'," + visitingShootHitNum + ","
 							+ visitingShootAttemptNum + ","
 							+ visitingThreeHitNum + ","
 							+ visitingThreeAttemptNum + ","
@@ -234,10 +236,11 @@ public class MatchTemp {
 			}
 
 			sql3.execute("insert MatchTemp values(" + (count++) + "," + tempID
-					+ ",'" + visitingTeam + "'," + visitingShootHitNum + ","
-					+ visitingShootAttemptNum + "," + visitingThreeHitNum + ","
-					+ visitingThreeAttemptNum + "," + visitingFreeThrowHitNum
-					+ "," + visitingFreeThrowAttemptNum + ","
+					+ ",'" + season + "','" + visitingTeam + "',"
+					+ visitingShootHitNum + "," + visitingShootAttemptNum + ","
+					+ visitingThreeHitNum + "," + visitingThreeAttemptNum + ","
+					+ visitingFreeThrowHitNum + ","
+					+ visitingFreeThrowAttemptNum + ","
 					+ visitingOffenReboundNum + "," + visitingDefenReboundNum
 					+ "," + visitingAssistNum + "," + visitingStealNum + ","
 					+ visitingBlockNum + "," + visitingTurnOverNum + ","
@@ -266,6 +269,7 @@ public class MatchTemp {
 			sql.execute("drop table if exists MatchTemp");
 			sql.execute("create table MatchTemp(id int not null auto_increment,"
 					+ "matchID int not null default 0,"
+					+ "season varchar(20) not null default 'null',"
 					+ "visitingTeam varchar(20) not null default 'null',"
 					+ "visitingShootHitNum int not null default 0,"
 					+ "visitingShootAttemptNum int not null default 0,"
