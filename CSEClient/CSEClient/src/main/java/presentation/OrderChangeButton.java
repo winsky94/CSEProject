@@ -36,11 +36,11 @@ public class OrderChangeButton extends JButton{
 		this.addMouseListener(new MouseAdapter() {
 			
 			public void mouseClicked(MouseEvent e) {
-				Point p=e.getPoint();//是否对
-				SequencePane se=new SequencePane(model);
-				se.setVisible(true);
+			//	Point p=e.getPoint();//是否对
+			//	SequencePane se=new SequencePane(model);
+			//	se.setVisible(true);
 				
-				se.setBounds(e.getXOnScreen(), e.getYOnScreen(), 100, 400);
+			//	se.setBounds(e.getXOnScreen(), e.getYOnScreen(), 100, 400);
 			
 				switch(btnMode){
 				
