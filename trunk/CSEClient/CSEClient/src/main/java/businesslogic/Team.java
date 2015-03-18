@@ -25,7 +25,7 @@ public class Team implements TeamBLService {
 	}
 
 	/**
-	 * 查找球队信息
+	 * 查找球队基本信息
 	 * 
 	 * @return 返回球队的ArrayList<TeamVO>
 	 */
@@ -45,6 +45,12 @@ public class Team implements TeamBLService {
 		return result;
 	}
 
+	/**
+	 * 查找球队某个赛季的技术数据
+	 * 
+	 * @param season
+	 *            赛季
+	 */
 	public ArrayList<TeamVO> getTeamSeasonInfo(String season) {
 		// TODO 自动生成的方法存根
 		ArrayList<TeamVO> result = new ArrayList<TeamVO>();
@@ -60,7 +66,13 @@ public class Team implements TeamBLService {
 		}
 		return result;
 	}
-	
+
+	/**
+	 * 查找球队某个赛季的场均技术数据
+	 * 
+	 * @param season
+	 *            赛季
+	 */
 	public ArrayList<TeamVO> getTeamAverageInfo(String season) {
 		// TODO 自动生成的方法存根
 		ArrayList<TeamVO> result = new ArrayList<TeamVO>();
@@ -77,6 +89,12 @@ public class Team implements TeamBLService {
 		return result;
 	}
 
+	/**
+	 * 查找某个球员的基本信息
+	 * 
+	 * @param name
+	 *            姓名
+	 */
 	public TeamVO getTeamBaseInfo(String name) {
 		// TODO 自动生成的方法存根
 		TeamVO teamVO = null;
@@ -90,11 +108,19 @@ public class Team implements TeamBLService {
 		return teamVO;
 	}
 
+	/**
+	 * 查找某个球队某个赛季的技术数据
+	 * 
+	 * @param season
+	 *            赛季
+	 * @param name
+	 *            球队名
+	 */
 	public TeamVO getTeamSeasonInfo(String season, String name) {
 		// TODO 自动生成的方法存根
 		TeamVO teamVO = null;
 		try {
-			TeamPO po = service.getTeamSeasonInfo(season,name);
+			TeamPO po = service.getTeamSeasonInfo(season, name);
 			teamVO = poToVo(po);
 		} catch (RemoteException e) {
 			// TODO 自动生成的 catch 块
@@ -102,12 +128,20 @@ public class Team implements TeamBLService {
 		}
 		return teamVO;
 	}
-	
+
+	/**
+	 * 查找某个球队某个赛季的场均技术数据
+	 * 
+	 * @param season
+	 *            赛季
+	 * @param name
+	 *            球队名
+	 */
 	public TeamVO getTeamAverageInfo(String season, String name) {
 		// TODO 自动生成的方法存根
 		TeamVO teamVO = null;
 		try {
-			TeamPO po = service.getTeamAverageInfo(season,name);
+			TeamPO po = service.getTeamAverageInfo(season, name);
 			teamVO = poToVo(po);
 		} catch (RemoteException e) {
 			// TODO 自动生成的 catch 块
@@ -132,7 +166,11 @@ public class Team implements TeamBLService {
 				po.getDefenEfficiency(), po.getReboundEfficiency(),
 				po.getOffenReboundEfficiency(), po.getDefenReboundEfficiency(),
 				po.getStealEfficiency(), po.getAssistRate());
-
 		return teamVO;
 	}
+
+//	public TeamPO voToPo(TeamVO vo) {
+//		TeamPO teamPO = new TeamPO(id, teamName, abLocation, location,
+//				conference, partition, homeCourt, setUpTime);
+//	}
 }
