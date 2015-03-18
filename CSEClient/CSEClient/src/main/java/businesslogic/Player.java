@@ -122,6 +122,86 @@ public class Player implements PlayerBLService {
 		return result;
 	}
 
+	public ArrayList<PlayerVO> getOrderedPlayersBySeason(String season,
+			String condition, String order) throws RemoteException {
+		// TODO 自动生成的方法存根
+		ArrayList<PlayerVO> result = new ArrayList<PlayerVO>();
+		try {
+			ArrayList<PlayerPO> data = service.getOrderedPlayersBySeason(
+					season, condition, order);
+
+			for (PlayerPO po : data) {
+				PlayerVO vo = poTovo(po);
+				result.add(vo);
+			}
+
+		} catch (RemoteException e) {
+			// TODO 自动生成的 catch 块
+			e.printStackTrace();
+		}
+		return result;
+	}
+
+	public ArrayList<PlayerVO> getOrderedPlayersByAverage(String season,
+			String condition, String order) {
+		// TODO 自动生成的方法存根
+		ArrayList<PlayerVO> result = new ArrayList<PlayerVO>();
+		try {
+			ArrayList<PlayerPO> data = service.getOrderedPlayersByAverage(
+					season, condition, order);
+
+			for (PlayerPO po : data) {
+				PlayerVO vo = poTovo(po);
+				result.add(vo);
+			}
+
+		} catch (RemoteException e) {
+			// TODO 自动生成的 catch 块
+			e.printStackTrace();
+		}
+		return result;
+	}
+
+	public ArrayList<PlayerVO> selectPlayersBySeason(String season,
+			String position, String union, String column) {
+		// TODO 自动生成的方法存根
+		ArrayList<PlayerVO> result = new ArrayList<PlayerVO>();
+		try {
+			ArrayList<PlayerPO> data = service.selectPlayersBySeason(season,
+					position, union, column);
+
+			for (PlayerPO po : data) {
+				PlayerVO vo = poTovo(po);
+				result.add(vo);
+			}
+
+		} catch (RemoteException e) {
+			// TODO 自动生成的 catch 块
+			e.printStackTrace();
+		}
+		return result;
+	}
+
+	public ArrayList<PlayerVO> selectPlayersByAverage(String season,
+			String position, String union, String column) {
+		// TODO 自动生成的方法存根
+		ArrayList<PlayerVO> result = new ArrayList<PlayerVO>();
+		try {
+			ArrayList<PlayerPO> data = service.selectPlayersByAverage(season,
+					position, union, column);
+
+			for (PlayerPO po : data) {
+				PlayerVO vo = poTovo(po);
+				result.add(vo);
+			}
+
+		} catch (RemoteException e) {
+			// TODO 自动生成的 catch 块
+			e.printStackTrace();
+		}
+		return result;
+	}
+
 	public PlayerVO poTovo(PlayerPO po) {
 		PlayerVO vo = new PlayerVO(po.getId(), po.getName(), po.getNumber(),
 				po.getPosition(), po.getHeight(), po.getWeight(),
