@@ -267,7 +267,7 @@ public class MatchTemp {
 		try {
 			Statement sql = con.createStatement();
 			sql.execute("drop table if exists MatchTemp");
-			sql.execute("create table MatchTemp(id int not null auto_increment,"
+			sql.execute("create table MatchTemp(matchTempID int not null auto_increment,"
 					+ "matchID int not null default 0,"
 					+ "season varchar(20) not null default 'null',"
 					+ "visitingTeam varchar(20) not null default 'null',"
@@ -299,7 +299,7 @@ public class MatchTemp {
 					+ "homeBlockNum int not null default 0,"
 					+ "homeTurnOverNum int not null default 0,"
 					+ "homeFoulNum int not null default 0,"
-					+ "homeScore int not null default 0," + "primary key(id));");
+					+ "homeScore int not null default 0," + "primary key(matchTempID));");
 			sql.close();
 		} catch (Exception e) {
 			// TODO: handle exception
