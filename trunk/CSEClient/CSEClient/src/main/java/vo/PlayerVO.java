@@ -29,7 +29,8 @@ public class PlayerVO {
 	private int foulNum;// 犯规数
 	private int score;// 得分
 	private double efficiency;// 效率
-	private double recentFiveMatchesUpRate;// 近五场的提升率
+	private double recentFiveMatchesScoreUpRate;// 近五场得分提升率
+	private double recentFiveMatchesReboundUpRate;// 近五场篮板提升率
 	private double GmScEfficiencyValue;// GmSc效率值
 	private double trueHitRate;// 真实命中率
 	private double shootHitEfficiency;// 投篮效率
@@ -41,6 +42,7 @@ public class PlayerVO {
 	private double blockRate;// 盖帽率
 	private double turnOverRate;// 失误率
 	private double usageRate;// 使用率
+	private int doubleDoubleNum;// 两双
 
 	public PlayerVO(int id, String name, int number, String position,
 			String height, int weight, String birth, int age, String exp,
@@ -64,12 +66,12 @@ public class PlayerVO {
 			String presentTime, double shootHitRate, double threeHitRate,
 			double freeThrowHitRate, int offenNum, int defenNum, int stealNum,
 			int blockNum, int turnOverNum, int foulNum, int score,
-			double efficiency, double recentFiveMatchesUpRate,
-			double gmScEfficiencyValue, double trueHitRate,
-			double shootHitEfficiency, double reboundRate,
+			double efficiency, double recentFiveMatchesScoreUpRate,
+			double recentFiveMatchesReboundUpRate, double gmScEfficiencyValue,
+			double trueHitRate, double shootHitEfficiency, double reboundRate,
 			double offenReboundRate, double defenReboundRate,
 			double assistRate, double stealRate, double blockRate,
-			double turnOverRate, double usageRate) {
+			double turnOverRate, double usageRate, int doubleDoubleNum) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -98,7 +100,8 @@ public class PlayerVO {
 		this.foulNum = foulNum;
 		this.score = score;
 		this.efficiency = efficiency;
-		this.recentFiveMatchesUpRate = recentFiveMatchesUpRate;
+		this.recentFiveMatchesReboundUpRate = recentFiveMatchesReboundUpRate;
+		this.recentFiveMatchesScoreUpRate = recentFiveMatchesScoreUpRate;
 		GmScEfficiencyValue = gmScEfficiencyValue;
 		this.trueHitRate = trueHitRate;
 		this.shootHitEfficiency = shootHitEfficiency;
@@ -110,6 +113,7 @@ public class PlayerVO {
 		this.blockRate = blockRate;
 		this.turnOverRate = turnOverRate;
 		this.usageRate = usageRate;
+		this.doubleDoubleNum = doubleDoubleNum;
 	}
 
 	public int getId() {
@@ -220,8 +224,12 @@ public class PlayerVO {
 		return efficiency;
 	}
 
-	public double getRecentFiveMatchesUpRate() {
-		return recentFiveMatchesUpRate;
+	public double getRecentFiveMatchesReboundUpRate() {
+		return recentFiveMatchesReboundUpRate;
+	}
+	
+	public double getRecentFiveMatchesScoreUpRate() {
+		return recentFiveMatchesScoreUpRate;
 	}
 
 	public double getGmScEfficiencyValue() {
@@ -266,5 +274,9 @@ public class PlayerVO {
 
 	public double getUsageRate() {
 		return usageRate;
+	}
+
+	public int getDoubleDoubleNum() {
+		return doubleDoubleNum;
 	}
 }
