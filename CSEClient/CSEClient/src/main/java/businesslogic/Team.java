@@ -60,6 +60,22 @@ public class Team implements TeamBLService {
 		}
 		return result;
 	}
+	
+	public ArrayList<TeamVO> getTeamAverageInfo(String season) {
+		// TODO 自动生成的方法存根
+		ArrayList<TeamVO> result = new ArrayList<TeamVO>();
+		try {
+			ArrayList<TeamPO> teams = service.getTeamAverageInfo(season);
+			for (TeamPO po : teams) {
+				TeamVO vo = poToVo(po);
+				result.add(vo);
+			}
+		} catch (RemoteException e) {
+			// TODO 自动生成的 catch 块
+			e.printStackTrace();
+		}
+		return result;
+	}
 
 	public TeamVO getTeamBaseInfo(String name) {
 		// TODO 自动生成的方法存根
@@ -79,6 +95,19 @@ public class Team implements TeamBLService {
 		TeamVO teamVO = null;
 		try {
 			TeamPO po = service.getTeamSeasonInfo(season,name);
+			teamVO = poToVo(po);
+		} catch (RemoteException e) {
+			// TODO 自动生成的 catch 块
+			e.printStackTrace();
+		}
+		return teamVO;
+	}
+	
+	public TeamVO getTeamAverageInfo(String season, String name) {
+		// TODO 自动生成的方法存根
+		TeamVO teamVO = null;
+		try {
+			TeamPO po = service.getTeamAverageInfo(season,name);
 			teamVO = poToVo(po);
 		} catch (RemoteException e) {
 			// TODO 自动生成的 catch 块
