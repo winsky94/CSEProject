@@ -26,7 +26,7 @@ public class Player extends UnicastRemoteObject implements PlayerDataService {
 	 * 
 	 * @return 球员最基本信息的列表
 	 */
-	public ArrayList<PlayerPO> getPlayerBaseInfo() {
+	public ArrayList<PlayerPO> getPlayerBaseInfo()throws RemoteException {
 		ArrayList<PlayerPO> players = new ArrayList<PlayerPO>();
 		try {
 			con=SqlManager.getConnection();
@@ -67,7 +67,7 @@ public class Player extends UnicastRemoteObject implements PlayerDataService {
 	 * @param 赛季
 	 * @return
 	 */
-	public ArrayList<PlayerPO> getPlayerSeasonInfo(String season) {
+	public ArrayList<PlayerPO> getPlayerSeasonInfo(String season) throws RemoteException{
 		ArrayList<PlayerPO> players = new ArrayList<PlayerPO>();
 		PlayerPO player;
 		try {
@@ -133,7 +133,7 @@ public class Player extends UnicastRemoteObject implements PlayerDataService {
 	 *            球员名称
 	 * @return PlayerPO对象
 	 */
-	public PlayerPO getPlayerBaseInfo(String name) {
+	public PlayerPO getPlayerBaseInfo(String name) throws RemoteException{
 		String playername=name.replace("'", "''");
 		PlayerPO player = null;
 		try {
@@ -176,7 +176,7 @@ public class Player extends UnicastRemoteObject implements PlayerDataService {
 	 * @param name
 	 * @return
 	 */
-	public PlayerPO getPlayerSeasonInfo(String season, String name) {
+	public PlayerPO getPlayerSeasonInfo(String season, String name) throws RemoteException{
 		String playername=name.replace("'", "''");
 		PlayerPO player = null;
 		try {
@@ -238,7 +238,7 @@ public class Player extends UnicastRemoteObject implements PlayerDataService {
 	 * @param name
 	 * @return
 	 */
-	public PlayerPO getPlayerAverageInfo(String season, String name) {
+	public PlayerPO getPlayerAverageInfo(String season, String name) throws RemoteException{
 		String playername=name.replace("'", "''");
 		PlayerPO player = null;
 		try {
@@ -403,7 +403,7 @@ public class Player extends UnicastRemoteObject implements PlayerDataService {
 	 * @param 筛选属性的输入值
 	 * @return  符合条件的球员列表
 	 */
-	public ArrayList<PlayerPO> selectPlayersBySeason(String season,String column, String word){
+	public ArrayList<PlayerPO> selectPlayersBySeason(String season,String column, String word) throws RemoteException{
 		ArrayList<PlayerPO> result = new ArrayList<PlayerPO>();
 		return result;
 	}
@@ -415,7 +415,7 @@ public class Player extends UnicastRemoteObject implements PlayerDataService {
 	 * @param 筛选属性的输入值
 	 * @return  符合条件的球员列表
 	 */
-	public ArrayList<PlayerPO> selectPlayersByAverage(String season,String column,String word){
+	public ArrayList<PlayerPO> selectPlayersByAverage(String season,String column,String word) throws RemoteException{
 		ArrayList<PlayerPO> result = new ArrayList<PlayerPO>();
 		return result;
 	}
@@ -425,11 +425,11 @@ public class Player extends UnicastRemoteObject implements PlayerDataService {
 		return result;
 	}
 	
-	public String getActionPhotoPath(String name) {
+	public String getActionPhotoPath(String name) throws RemoteException{
 		return "src/迭代一数据/players/action/" + name + ".png";
 	}
 
-	public String getPortraitPhotoPath(String name) {
+	public String getPortraitPhotoPath(String name) throws RemoteException{
 		return "src/迭代一数据/players/protrait/" + name + ".png";
 	}
 
