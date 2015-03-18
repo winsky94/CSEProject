@@ -3,7 +3,6 @@ package businesslogicservice;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
-import po.PlayerPO;
 import vo.PlayerVO;
 
 public interface PlayerBLService {
