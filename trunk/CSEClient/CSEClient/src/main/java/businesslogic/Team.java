@@ -168,9 +168,4 @@ public class Team implements TeamBLService {
 				po.getStealEfficiency(), po.getAssistRate());
 		return teamVO;
 	}
-
-//	public TeamPO voToPo(TeamVO vo) {
-//		TeamPO teamPO = new TeamPO(id, teamName, abLocation, location,
-//				conference, partition, homeCourt, setUpTime);
-//	}
 }
