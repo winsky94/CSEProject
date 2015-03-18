@@ -150,6 +150,42 @@ public class Team implements TeamBLService {
 		return teamVO;
 	}
 
+	public ArrayList<TeamVO> getOrderedTeamsBySeason(String season,
+			String condition, String order) {
+		// TODO 自动生成的方法存根
+		ArrayList<TeamVO> result = new ArrayList<TeamVO>();
+		try {
+			ArrayList<TeamPO> teams = service.getOrderedTeamsBySeason(season,
+					condition, order);
+			for (TeamPO po : teams) {
+				TeamVO vo = poToVo(po);
+				result.add(vo);
+			}
+		} catch (RemoteException e) {
+			// TODO 自动生成的 catch 块
+			e.printStackTrace();
+		}
+		return result;
+	}
+
+	public ArrayList<TeamVO> getOrderedTeamsByAverage(String season,
+			String condition, String order) {
+		// TODO 自动生成的方法存根
+		ArrayList<TeamVO> result = new ArrayList<TeamVO>();
+		try {
+			ArrayList<TeamPO> teams = service.getOrderedTeamsByAverage(season,
+					condition, order);
+			for (TeamPO po : teams) {
+				TeamVO vo = poToVo(po);
+				result.add(vo);
+			}
+		} catch (RemoteException e) {
+			// TODO 自动生成的 catch 块
+			e.printStackTrace();
+		}
+		return result;
+	}
+
 	public TeamVO poToVo(TeamPO po) {
 		TeamVO teamVO = new TeamVO(po.getId(), po.getTeamName(),
 				po.getAbLocation(), po.getLocation(), po.getConference(),
@@ -168,4 +204,5 @@ public class Team implements TeamBLService {
 				po.getStealEfficiency(), po.getAssistRate());
 		return teamVO;
 	}
+
 }
