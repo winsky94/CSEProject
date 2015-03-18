@@ -18,6 +18,7 @@ public class PlayerMatchDataCalculator {
 	Connection con;
 	int sqlID = 1;
 	String playerName = null;
+	String season = null;
 	String owingTeam = "";
 	int playedGames = 0;
 	int gameStartingNum = 0;
@@ -275,16 +276,17 @@ public class PlayerMatchDataCalculator {
 			Statement sql = con.createStatement();
 
 			sql.execute("insert playerMatchDataSeason values(" + sqlID + ",'"
-					+ playerName + "','" + owingTeam + "'," + playedGames + ","
-					+ gameStartingNum + "," + reboundNumSeason + ","
-					+ assistNumSeason + ",'" + presentTimeSeason + "',"
-					+ shootHitRateSeason + "," + threeHitRateSeason + ","
-					+ freeThrowHitRateSeason + "," + offenReboundNumSeason + ","
-					+ defenReboundNumSeason + "," + stealNumSeason + ","
-					+ blockNumSeason + "," + foulNumSeason + ","
-					+ turnOverNumSeason + "," + scoreSeason + ","
-					+ efficiencySeason + "," + recentFiveMatchesScoreUpRate
-					+ "," + recentFiveMatchesReboundUpRate + ","
+					+ playerName + "','" + season + "','" + owingTeam + "',"
+					+ playedGames + "," + gameStartingNum + ","
+					+ reboundNumSeason + "," + assistNumSeason + ",'"
+					+ presentTimeSeason + "'," + shootHitRateSeason + ","
+					+ threeHitRateSeason + "," + freeThrowHitRateSeason + ","
+					+ offenReboundNumSeason + "," + defenReboundNumSeason + ","
+					+ stealNumSeason + "," + blockNumSeason + ","
+					+ foulNumSeason + "," + turnOverNumSeason + ","
+					+ scoreSeason + "," + efficiencySeason + ","
+					+ recentFiveMatchesScoreUpRate + ","
+					+ recentFiveMatchesReboundUpRate + ","
 					+ recentFiveMatchesAssistUpRate + ","
 					+ GmScEfficiencyValueSeason + "," + trueHitRateSeason + ","
 					+ shootEfficiencySeason + "," + reboundRateSeason + ","
@@ -296,13 +298,14 @@ public class PlayerMatchDataCalculator {
 
 			Statement sql2 = con.createStatement();
 			sql2.execute("insert playerMatchDataAverage values(" + sqlID + ",'"
-					+ playerName + "','" + owingTeam + "'," + playedGames + ","
-					+ gameStartingNum + "," + reboundNum + "," + assistNum
-					+ ",'" + presentTime + "'," + shootHitRate + ","
-					+ threeHitRate + "," + freeThrowHitRate + "," + offenNum
-					+ "," + defenNum + "," + stealNum + "," + blockNum + ","
-					+ foulNum + "," + turnOverNum + "," + score + ","
-					+ efficiency + "," + recentFiveMatchesScoreUpRate + ","
+					+ playerName + "','" + season + "','" + owingTeam + "',"
+					+ playedGames + "," + gameStartingNum + "," + reboundNum
+					+ "," + assistNum + ",'" + presentTime + "',"
+					+ shootHitRate + "," + threeHitRate + ","
+					+ freeThrowHitRate + "," + offenNum + "," + defenNum + ","
+					+ stealNum + "," + blockNum + "," + foulNum + ","
+					+ turnOverNum + "," + score + "," + efficiency + ","
+					+ recentFiveMatchesScoreUpRate + ","
 					+ recentFiveMatchesReboundUpRate + ","
 					+ recentFiveMatchesAssistUpRate + "," + GmScEfficiencyValue
 					+ "," + trueHitRate + "," + shootEfficiency + ","
@@ -319,7 +322,7 @@ public class PlayerMatchDataCalculator {
 		}
 	}
 
-	public void calculate() {
+	public void calculate(String season) {
 
 		createTable();
 		ArrayList<String> names = findPlayerNames();
@@ -331,7 +334,7 @@ public class PlayerMatchDataCalculator {
 				if (name.contains("'")) {
 					playerName = playerName.replace("'", "''");
 				}
-				String query = "select * from records where playerName='"
+				String query = "select * from records where season='"+season+"' and playerName='"
 						+ playerName + "'";
 				ResultSet resultSet = sql.executeQuery(query);
 				ArrayList<Integer> matchIDs = new ArrayList<Integer>();
@@ -662,6 +665,7 @@ public class PlayerMatchDataCalculator {
 
 				}
 				sql.close();
+				this.season = season;
 				exportToSQL();
 
 			}
@@ -1036,11 +1040,11 @@ public class PlayerMatchDataCalculator {
 
 	private void createTable() {
 		try {
-			// Connection con = SqlManager.getConnection();
 			Statement sql = con.createStatement();
 			sql.execute("drop table if exists playerMatchDataAverage");
 			String query = "create table playerMatchDataAverage(playerDataID int not null auto_increment,"
 					+ "playerName varchar(40) not null default 'null',"
+					+ "season varchar(20) not null default 'null',"
 					+ "owingTeam varchar(20) not null default 'null',"
 					+ "playedGames int not null default 0,"
 					+ "gameStartingNum int not null default 0,"
@@ -1080,6 +1084,7 @@ public class PlayerMatchDataCalculator {
 			sql2.execute("drop table if exists playerMatchDataSeason");
 			String query2 = "create table playerMatchDataSeason(playerDataID int not null auto_increment,"
 					+ "playerName varchar(40) not null default 'null',"
+					+ "season varchar(20) not null default 'null',"
 					+ "owingTeam varchar(20) not null default 'null',"
 					+ "playedGames int not null default 0,"
 					+ "gameStartingNum int not null default 0,"
@@ -1122,6 +1127,6 @@ public class PlayerMatchDataCalculator {
 
 	public static void main(String[] args) {
 		PlayerMatchDataCalculator playerMatchDataReader = new PlayerMatchDataCalculator();
-		playerMatchDataReader.calculate();
+		playerMatchDataReader.calculate("13-14");
 	}
 }
