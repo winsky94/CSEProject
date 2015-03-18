@@ -20,6 +20,8 @@ public interface PlayerDataService extends Remote {
 	public ArrayList<PlayerPO> getOrderedPlayersBySeason(String season,
 			String condition, String order) throws RemoteException;
 
+	public ArrayList<PlayerPO> getPlayerAverageInfo(String season) throws RemoteException;
+	
 	public ArrayList<PlayerPO> getOrderedPlayersByAverage(String season,
 			String condition, String order) throws RemoteException;
 
