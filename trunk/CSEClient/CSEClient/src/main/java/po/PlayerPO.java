@@ -14,7 +14,7 @@ public class PlayerPO implements Serializable {
 	private int age;// 年龄
 	private int exp;// 球龄
 	private String school;// 毕业学校
-
+	
 	private String teamName;// 所属球队
 	private int playedGames;// 参赛场数
 	private int gameStartingNum;// 先发场数
@@ -30,12 +30,14 @@ public class PlayerPO implements Serializable {
 	private int blockNum;// 盖帽数
 	private int turnOverNum;// 失误数
 	private int foulNum;// 犯规数
-	private int score;// 得分
+	private int score;// 得分	
 	private double efficiency;// 效率
-	private double recentFiveMatchesUpRate;// 近五场的提升率
+	private double recentFiveMatchesScoreUpRate;//近五场得分提升率
+	private double recentFiveMatchesReboundUpRate;//近五场篮板提升率
+	private double recentFiveMatchesAssistUpRate;//近五场助攻提升率
 	private double GmScEfficiencyValue;// GmSc效率值
 	private double trueHitRate;// 真实命中率
-	private double shootHitEfficiency;// 投篮效率
+	private double shootEfficiency;// 投篮效率
 	private double reboundRate;// 篮板率
 	private double offenReboundRate;// 进攻篮板率
 	private double defenReboundRate;// 防守篮板率
@@ -43,7 +45,12 @@ public class PlayerPO implements Serializable {
 	private double stealRate;// 抢断率
 	private double blockRate;// 盖帽率
 	private double turnOverRate;// 失误率
-	private double usageRate;// 使用率
+	private double usageRate;//使用率
+	private int doubleDoubleNum;//两双
+
+	public PlayerPO(){
+		this(0, null, 0, null, null, 0, null, 0, 0, null);
+	}
 
 	public PlayerPO(int id, String name, int number, String position,
 			String height, int weight, String birth, int age, int exp,
@@ -136,8 +143,8 @@ public class PlayerPO implements Serializable {
 		return trueHitRate;
 	}
 
-	public double getShootHitEfficiency() {
-		return shootHitEfficiency;
+	public double getShootEfficiency() {
+		return shootEfficiency;
 	}
 
 	public double getReboundRate() {
@@ -167,7 +174,7 @@ public class PlayerPO implements Serializable {
 	public double getTurnOverRate() {
 		return turnOverRate;
 	}
-
+	
 	public int getReboundNum() {
 		return reboundNum;
 	}
@@ -207,14 +214,30 @@ public class PlayerPO implements Serializable {
 	public int getScore() {
 		return score;
 	}
-
-	public double getRecentFiveMatchesUpRate() {
-		return recentFiveMatchesUpRate;
+	
+	public double getRecentFiveMatchesScoreUpRate(){
+		return recentFiveMatchesScoreUpRate;
 	}
-
-	public double getUsageRate() {
+	
+	public double getRecentFiveMatchesReboundUpRate(){
+		return recentFiveMatchesReboundUpRate;
+	}
+	
+	public double getRecentFiveMatchesAssistUpRate(){
+		return recentFiveMatchesAssistUpRate;
+	}
+	
+	public double getUsageRate(){
 		return usageRate;
 	}
+	
+	public int getDoubleDoubleNum(){
+		return doubleDoubleNum;
+	}
+	
+	
+	
+	
 
 	public void setId(int id) {
 		this.id = id;
@@ -256,6 +279,7 @@ public class PlayerPO implements Serializable {
 		this.school = school;
 	}
 
+
 	public void setTeamName(String teamName) {
 		this.teamName = teamName;
 	}
@@ -292,8 +316,8 @@ public class PlayerPO implements Serializable {
 		this.trueHitRate = trueHitRate;
 	}
 
-	public void setShootHitEfficiency(double shootHitEfficiency) {
-		this.shootHitEfficiency = shootHitEfficiency;
+	public void setShootEfficiency(double shootEfficiency) {
+		this.shootEfficiency = shootEfficiency;
 	}
 
 	public void setReboundRate(double reboundRate) {
@@ -323,6 +347,7 @@ public class PlayerPO implements Serializable {
 	public void setTurnOverRate(double turnOverRate) {
 		this.turnOverRate = turnOverRate;
 	}
+    
 
 	public void setReboundNum(int reboundNum) {
 		this.reboundNum = reboundNum;
@@ -364,12 +389,24 @@ public class PlayerPO implements Serializable {
 		this.score = score;
 	}
 
-	public void setRecentFiveMatchesUpRate(double recentFiveMatchesUpRate) {
-		this.recentFiveMatchesUpRate = recentFiveMatchesUpRate;
+	public void setRecentFiveMatchesScoreUpRate(double recentFiveMatchesScoreUpRate){
+		this.recentFiveMatchesScoreUpRate=recentFiveMatchesScoreUpRate;
 	}
-
-	public void setUsageRate(double usageRate) {
-		this.usageRate = usageRate;
+	
+	public void setRecentFiveMatchesReboundUpRate(double recentFiveMatchesReboundUpRate){
+		this.recentFiveMatchesReboundUpRate=recentFiveMatchesReboundUpRate;
+	}
+	
+	public void setRecentFiveMatchesAssistUpRate(double recentFiveMatchesAssistUpRate){
+		this.recentFiveMatchesAssistUpRate=recentFiveMatchesAssistUpRate;
+	}
+	
+	public void setUsageRate(double usageRate){
+		this.usageRate=usageRate;
+	}
+	
+	public void setDoubleDouble(int doubleDoubleNum){
+		this.doubleDoubleNum=doubleDoubleNum;
 	}
 
 }
