@@ -16,4 +16,10 @@ public interface TeamDataService extends Remote {
 
 	public TeamPO getTeamSeasonInfo(String season, String name)
 			throws RemoteException;
+
+	public ArrayList<TeamPO> getOrderedTeamsBySeason(String season,
+			String condition, String order) throws RemoteException;
+
+	public ArrayList<TeamPO> getOrderedTeamsByAverage(String season,
+			String condition, String order) throws RemoteException;
 }
