@@ -16,4 +16,10 @@ public interface TeamBLService {
 	public TeamVO getTeamSeasonInfo(String season, String name);
 
 	public TeamVO getTeamAverageInfo(String season, String name);
+
+	public ArrayList<TeamVO> getOrderedTeamsBySeason(String season,
+			String condition, String order);
+
+	public ArrayList<TeamVO> getOrderedTeamsByAverage(String season,
+			String condition, String order);
 }
