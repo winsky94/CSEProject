@@ -4,7 +4,10 @@ import java.util.ArrayList;
 
 import javax.swing.table.AbstractTableModel;
 
-public class PlayerTableModel extends AbstractTableModel{
+import businesslogic.Player;
+import presentation.mainui.MyTableModel;
+
+public class PlayerTableModel extends MyTableModel{
 
 	/**
 	 * 表格球员信息列表模式model
@@ -19,11 +22,19 @@ public class PlayerTableModel extends AbstractTableModel{
 	String[] example={"金翠","英雄联盟","30","12","100","50","24h","100%","100%","100%",
 			"10","5","1","3","0","0","100","100%","100%","99%","100%","50%","100%",
 			"100%","100%","100%","100%","0%","100%"};
+	String[] ex={"金翠","英雄联盟","30","1","100","70","24h","100%","100%","100%",
+			"10","5","1","3","0","0","100","100%","100%","99%","100%","50%","100%",
+			"100%","100%","100%","100%","0%","100%"};
 	public PlayerTableModel(){
-		ArrayList<String>e=new ArrayList<String>();
+		ArrayList<String> e=new ArrayList<String>();
 		for(String str:example)
 			e.add(str);
 		content.add(e);
+		
+		ArrayList<String> f=new ArrayList<String>();
+		for(String str:ex)
+			f.add(str);
+		content.add(f);
 	}
 	public int getRowCount() {
 		// TODO Auto-generated method stub
@@ -54,6 +65,12 @@ public class PlayerTableModel extends AbstractTableModel{
 		String[] newHead=new String[head.length];
 		newHead[0]=head[0];newHead[1]=head[1];
 	//	newHead[]
+		
+	}
+	
+	public void Refresh(){
+	//	Player player=new Player();
+		
 		
 	}
 

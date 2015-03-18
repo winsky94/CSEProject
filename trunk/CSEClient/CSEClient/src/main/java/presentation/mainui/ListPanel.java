@@ -26,7 +26,7 @@ public class ListPanel extends JPanel {
 	private int model;//模式 0球队，1球员
 	private JTable table;
 	private JScrollPane jsp;
-	private AbstractTableModel tablemodel;
+	private MyTableModel tablemodel;
 	public ListPanel(int mod){
 		this.model=mod;
 		if(mod==0)
@@ -61,6 +61,13 @@ public class ListPanel extends JPanel {
 		});
 		TableRowSorter<TableModel> sorter=new TableRowSorter<TableModel>(tablemodel);
 		table.setRowSorter(sorter);
+		//tablemodel.Refresh();
+		table.revalidate();
 	}
+	
+	
+	
+	
+	
 
 }

@@ -4,7 +4,9 @@ import java.util.ArrayList;
 
 import javax.swing.table.AbstractTableModel;
 
-public class TeamTableModel extends AbstractTableModel{
+import presentation.mainui.MyTableModel;
+
+public class TeamTableModel extends MyTableModel{
 	ArrayList<ArrayList<String>> content=new ArrayList<ArrayList<String>>();
 	static String[] head={"球队名称","比赛场数","投篮命中数","投篮出手次数","投篮命中率","三分命中数","三分出手数",
 			"三分命中率","罚球命中数","罚球出手数","罚球命中率","进攻篮板数","防守篮板数","篮板数","篮板效率","进攻回合",
@@ -41,6 +43,10 @@ public class TeamTableModel extends AbstractTableModel{
 	
 	public static String[] getHead(){
 		return head;
+	}
+	
+	public void Refresh(){
+		
 	}
 
 }
