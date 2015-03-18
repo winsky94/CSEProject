@@ -28,8 +28,14 @@ public class Team extends UnicastRemoteObject implements TeamDataService {
 		Team team;
 		try {
 			team = new Team();
-			TeamPO po = team.getTeamSeasonInfo("13-14", "WAS");
-			System.out.println(po.getScore());
+			// TeamPO po = team.getTeamSeasonInfo("13-14", "WAS");
+			// System.out.println(po.getScore());
+
+			ArrayList<TeamPO> teams = team.getOrderedTeamsBySeason("13-14",
+					"score", null);
+			for (TeamPO po : teams) {
+				System.out.println(po.getScore());
+			}
 		} catch (RemoteException e) {
 			// TODO 自动生成的 catch 块
 			e.printStackTrace();
@@ -261,6 +267,117 @@ public class Team extends UnicastRemoteObject implements TeamDataService {
 			closeMySql();
 		}
 		return po;
+	}
+
+	/**
+	 * 根据某一项技术分析项，将球队按某个赛季的该项数据进行升降序排序
+	 * 
+	 * @param season
+	 *            赛季
+	 * @param condition
+	 *            排序条件，即某一项技术分析项，如：篮板率
+	 * @param order
+	 *            升序还是降序 asc 表示升序 , desc表示降序 , 未明确写明排序方式时默认是升序
+	 * 
+	 * @return 按照所给条件排好序的球队列表
+	 */
+	public ArrayList<TeamPO> getOrderedTeamsBySeason(String season,
+			String condition, String order) throws RemoteException {
+		ArrayList<TeamPO> result = new ArrayList<TeamPO>();
+		result = getOrderedTeams("teamMatchDataSeason", season, condition,
+				order);
+		return result;
+	}
+
+	/**
+	 * 根据某一项技术分析项，将球队按某个赛季的该项数据进行升降序排序
+	 * 
+	 * @param season
+	 *            赛季
+	 * @param condition
+	 *            排序条件，即某一项技术分析项，如：篮板率
+	 * @param order
+	 *            升序还是降序 asc 表示升序 , desc表示降序 , 未明确写明排序方式时默认是升序
+	 * 
+	 * @return 按照所给条件排好序的球队列表
+	 */
+	public ArrayList<TeamPO> getOrderedTeamsByAverage(String season,
+			String condition, String order) throws RemoteException {
+		ArrayList<TeamPO> result = new ArrayList<TeamPO>();
+		result = getOrderedTeams("teamMatchDataAverage", season, condition,
+				order);
+		return result;
+	}
+
+	private ArrayList<TeamPO> getOrderedTeams(String table, String season,
+			String condition, String order) {
+		ArrayList<TeamPO> result = new ArrayList<TeamPO>();
+		// 未明确写明排序方式时默认是升序
+		if (order == null || order.equals("null")) {
+			order = "asc";
+		}
+		try {
+			connection = SqlManager.getConnection();
+			sql = connection.createStatement();
+			String query = "select * from " + table + " where season='"
+					+ season + "' order by " + condition + " " + order;
+			resultSet = sql.executeQuery(query);
+			while (resultSet.next()) {
+				String name = resultSet.getString("team");
+				System.out.println(name);
+				int matchesNum = resultSet.getInt("matchesNum"); // 比赛场数
+				int shootHitNum = resultSet.getInt("shootHitNum"); // 投篮命中数
+				int shootAttemptNum = resultSet.getInt("shootAttemptNum"); // 投篮出手次数
+				int threeHitNum = resultSet.getInt("threeHitNum"); // 三分命中数
+				int threeAttemptNum = resultSet.getInt("threeAttemptNum"); // 三分出手数
+				int freeThrowHitNum = resultSet.getInt("freeThrowHitNum"); // 罚球命中数
+				int freeThrowAttemptNum = resultSet
+						.getInt("freeThrowAttemptNum"); // 罚球出手数
+				int offenReboundNum = resultSet.getInt("offenReboundNum"); // 进攻篮板数
+				int defenReboundNum = resultSet.getInt("defenReboundNum"); // 防守篮板数
+				int reboundNum = resultSet.getInt("reboundNum");// 篮板数
+				int assistNum = resultSet.getInt("assistNum");// 助攻数
+				int stealNum = resultSet.getInt("stealNum");// 抢断数
+				int blockNum = resultSet.getInt("blockNum");// 盖帽数
+				int turnOverNum = resultSet.getInt("turnOverNum");// 失误数
+				int foulNum = resultSet.getInt("foulNum");// 犯规数
+				int score = resultSet.getInt("score");// 比赛得分
+				double shootHitRate = resultSet.getDouble("shootHitRate");// 投篮命中率
+				double threeHitRate = resultSet.getDouble("threeHitRate");// 三分命中率
+				double freeThrowHitRate = resultSet
+						.getDouble("freeThrowHitRate");// 罚球命中率
+				double winRate = resultSet.getDouble("winRate"); // 胜率
+				double offenRound = resultSet.getDouble("offenRound"); // 进攻回合
+				double offenEfficiency = resultSet.getDouble("offenEfficiency"); // 进攻效率
+				double defenEfficiency = resultSet.getDouble("defenEfficiency"); // 防守效率
+				double offenReboundEfficiency = resultSet
+						.getDouble("offenReboundEfficiency"); // 进攻篮板效率
+				double defenReboundEfficiency = resultSet
+						.getDouble("defenReboundEfficiency"); // 防守篮板效率
+				double stealEfficiency = resultSet.getDouble("stealEfficiency"); // 抢断效率
+				double assistRate = resultSet.getDouble("assistRate"); // 助攻率
+
+				TeamPO po = new TeamPO(name, matchesNum, shootHitNum,
+						shootAttemptNum, threeHitNum, threeAttemptNum,
+						freeThrowHitNum, freeThrowAttemptNum, offenReboundNum,
+						defenReboundNum, reboundNum, assistNum, stealNum,
+						blockNum, turnOverNum, foulNum, score, shootHitRate,
+						threeHitRate, freeThrowHitRate, winRate, offenRound,
+						offenEfficiency, defenEfficiency,
+						offenReboundEfficiency, defenReboundEfficiency,
+						stealEfficiency, assistRate);
+				result.add(po);
+			}
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			closeMySql();
+		}
+		return result;
 	}
 
 	public String getPhotoPath(String abLocation) {
