@@ -14,12 +14,12 @@ public interface TeamDataService extends Remote {
 
 	public ArrayList<TeamPO> getTeamAverageInfo(String season)
 			throws RemoteException;
-	
+
 	public TeamPO getTeamBaseInfo(String name) throws RemoteException;
 
 	public TeamPO getTeamSeasonInfo(String season, String name)
 			throws RemoteException;
-	
+
 	public TeamPO getTeamAverageInfo(String season, String name)
 			throws RemoteException;
 
