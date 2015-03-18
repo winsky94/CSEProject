@@ -101,6 +101,7 @@ public class PlayerMatchDataCalculator {
 	int teamShootAttemptNumSeason = 0;
 	int teamFreeThrowAttemptNumSeason = 0;
 	int teamTurnOverNumSeason = 0;
+	int doubleDoubleNum=0;
 
 	public PlayerMatchDataCalculator() {
 		try {
@@ -199,6 +200,7 @@ public class PlayerMatchDataCalculator {
 		teamShootAttemptNumSeason = 0;
 		teamFreeThrowAttemptNumSeason = 0;
 		teamTurnOverNumSeason = 0;
+		doubleDoubleNum=0;
 	}
 
 	public void format() {
@@ -293,7 +295,7 @@ public class PlayerMatchDataCalculator {
 					+ offenReboundRateSeason + "," + defenReboundRateSeason
 					+ "," + assistRateSeason + "," + stealRateSeason + ","
 					+ blockRateSeason + "," + turnOverRateSeason + ","
-					+ usageRateSeason + ")");
+					+ usageRateSeason +","+doubleDoubleNum+")");
 			sql.close();
 
 			Statement sql2 = con.createStatement();
@@ -312,7 +314,7 @@ public class PlayerMatchDataCalculator {
 					+ reboundRate + "," + offenReboundRate + ","
 					+ defenReboundRate + "," + assistRate + "," + stealRate
 					+ "," + blockRate + "," + turnOverRate + "," + usageRate
-					+ ")");
+					+","+doubleDoubleNum+ ")");
 			sql2.close();
 
 			sqlID++;
@@ -559,6 +561,20 @@ public class PlayerMatchDataCalculator {
 					teamShootAttemptNumSeason += teamShootAttemptNum;
 					teamFreeThrowAttemptNumSeason += teamFreeThrowAttemptNum;
 					teamTurnOverNumSeason += teamTurnOverNum;
+					
+					int temp=0;
+				    if(resultSet.getInt("score")>=10)
+				    	temp++;
+				    if(resultSet.getInt("reboundNum")>=10)
+				    	temp++;
+				    if(resultSet.getInt("assistNum")>=10)
+				    	temp++;
+				    if(resultSet.getInt("stealNum")>=10)
+				    	temp++;
+				    if(resultSet.getInt("blockNum")>=10)
+				    	temp++;
+				    if(temp>=2)
+				    	doubleDoubleNum++;
 				}
 				resultSet.close();
 				if (playedGames != 0) {
@@ -1076,6 +1092,7 @@ public class PlayerMatchDataCalculator {
 					+ "blockRate double not null default 0,"
 					+ "turnOverRate double not null default 0,"
 					+ "usageRate double not null default 0,"
+					+ "doubleDoubleNum int not null default 0,"
 					+ "primary key(playerDataID));";
 			sql.execute(query);
 			sql.close();
@@ -1116,6 +1133,7 @@ public class PlayerMatchDataCalculator {
 					+ "blockRate double not null default 0,"
 					+ "turnOverRate double not null default 0,"
 					+ "usageRate double not null default 0,"
+					+ "doubleDoubleNum int not null default 0,"
 					+ "primary key(playerDataID));";
 			sql2.execute(query2);
 			sql2.close();

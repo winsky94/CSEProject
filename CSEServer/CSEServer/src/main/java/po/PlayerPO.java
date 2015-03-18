@@ -46,6 +46,7 @@ public class PlayerPO implements Serializable {
 	private double blockRate;// 盖帽率
 	private double turnOverRate;// 失误率
 	private double usageRate;//使用率
+	private int doubleDoubleNum;//两双
 
 	public PlayerPO(){
 		this(0, null, 0, null, null, 0, null, 0, 0, null);
@@ -230,6 +231,10 @@ public class PlayerPO implements Serializable {
 		return usageRate;
 	}
 	
+	public int getDoubleDoubleNum(){
+		return doubleDoubleNum;
+	}
+	
 	
 	
 	
@@ -398,6 +403,10 @@ public class PlayerPO implements Serializable {
 	
 	public void setUsageRate(double usageRate){
 		this.usageRate=usageRate;
+	}
+	
+	public void setDoubleDouble(int doubleDoubleNum){
+		this.doubleDoubleNum=doubleDoubleNum;
 	}
 
 }
