@@ -293,6 +293,138 @@ public class Player extends UnicastRemoteObject implements PlayerDataService {
 		return player;
 	}
 	
+	/**
+	 * 根据某一项技术分析项，将球员按某个赛季的该项数据进行升降序排序
+	 * 
+	 * @param season
+	 *            赛季
+	 * @param condition
+	 *            排序条件，即某一项技术分析项，如：篮板率
+	 * @param order
+	 *            升序还是降序 asc 表示升序 , desc表示降序 , 未明确写明排序方式时默认是升序
+	 * 
+	 * @return 按照所给条件排好序的球队列表
+	 */
+	public ArrayList<PlayerPO> getOrderedPlayersBySeason(String season,
+			String condition, String order) throws RemoteException {
+		ArrayList<PlayerPO> result = new ArrayList<PlayerPO>();
+		result = getOrderedPlayers("playermatchdataseason", season, condition,
+				order);
+		return result;
+	}
+
+	/**
+	 * 根据某一项技术分析项，将球员按某个赛季的该项数据进行升降序排序
+	 * 
+	 * @param season
+	 *            赛季
+	 * @param condition
+	 *            排序条件，即某一项技术分析项，如：篮板率
+	 * @param order
+	 *            升序还是降序 asc 表示升序 , desc表示降序 , 未明确写明排序方式时默认是升序
+	 * 
+	 * @return 按照所给条件排好序的球员列表
+	 */
+	public ArrayList<PlayerPO> getOrderedPlayersByAverage(String season,
+			String condition, String order) throws RemoteException {
+		ArrayList<PlayerPO> result = new ArrayList<PlayerPO>();
+		result = getOrderedPlayers("playermatchdataaverage", season, condition,
+				order);
+		return result;
+	}
+	
+	private ArrayList<PlayerPO> getOrderedPlayers(String table, String season,
+			String condition, String order) {
+		ArrayList<PlayerPO> players = new ArrayList<PlayerPO>();
+		PlayerPO player;
+		// 未明确写明排序方式时默认是升序
+		if (order == null || order.equals("null")) {
+			order = "asc";
+		}
+		try {
+			con = SqlManager.getConnection();
+			Statement sql = con.createStatement();
+			String query = "select * from " + table + " where season='"
+					+ season + "' order by " + condition + " " + order;
+			ResultSet rs= sql.executeQuery(query);
+			while (rs.next()) {
+				player=new PlayerPO();
+				player.setName(rs.getString("playerName"));
+				player.setTeamName(rs.getString("owingTeam"));
+				player.setPlayedGames(rs.getInt("playedGames"));
+				player.setGameStartingNum(rs.getInt("gameStartingNum"));
+				player.setReboundNum(rs.getInt("reboundNum"));
+				player.setAssistNum(rs.getInt("assistNum"));
+				player.setPresentTime(rs.getString("presentTime"));
+				player.setShootHitRate(rs.getDouble("shootHitRate"));
+				player.setThreeHitRate(rs.getDouble("threeHitRate"));
+				player.setFreeThrowHitRate(rs.getDouble("freeThrowHitRate"));
+				player.setOffenNum(rs.getInt("offenNum"));
+				player.setDefenNum(rs.getInt("defenNum"));
+				player.setStealNum(rs.getInt("stealNum"));
+				player.setBlockNum(rs.getInt("blockNum"));
+				player.setFoulNum(rs.getInt("foulNum"));
+				player.setTurnOverNum(rs.getInt("turnOverNum"));
+				player.setScore(rs.getInt("score"));
+				player.setEfficiency(rs.getDouble("efficiency"));
+				player.setRecentFiveMatchesScoreUpRate(rs.getDouble("recentFiveMatchesScoreUpRate"));
+				player.setRecentFiveMatchesReboundUpRate(rs.getDouble("recentFiveMatchesReboundUpRate"));
+				player.setRecentFiveMatchesAssistUpRate(rs.getDouble("recentFiveMatchesAssistUpRate"));
+				player.setGmScEfficiencyValue(rs.getDouble("GmScEfficiencyValue"));
+				player.setTrueHitRate(rs.getDouble("trueHitRate"));
+				player.setShootEfficiency(rs.getDouble("shootEfficiency"));
+				player.setReboundRate(rs.getDouble("reboundRate"));
+				player.setOffenReboundRate(rs.getDouble("offenReboundRate"));
+				player.setDefenReboundRate(rs.getDouble("defenReboundRate"));
+				player.setAssistRate(rs.getDouble("assistRate"));
+				player.setStealRate(rs.getDouble("stealRate"));
+				player.setBlockRate(rs.getDouble("blockRate"));
+				player.setTurnOverRate(rs.getDouble("turnOverRate"));
+				player.setUsageRate(rs.getDouble("usageRate"));
+				players.add(player);
+			}
+			rs.close();
+			con.close();
+			sql.close();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return players;
+	}
+	
+	/**
+	 * 对某个赛季中的球员信息，根据某一项属性里的值进行筛选
+	 * @param 赛季  
+	 * @param 哪一项属性，如"name"
+	 * @param 筛选属性的输入值
+	 * @return  符合条件的球员列表
+	 */
+	public ArrayList<PlayerPO> selectPlayersBySeason(String season,String column, String word){
+		ArrayList<PlayerPO> result = new ArrayList<PlayerPO>();
+		return result;
+	}
+	
+	/**
+	 * 对某个赛季中的球员信息，根据某一项属性里的值进行筛选
+	 * @param 赛季  
+	 * @param 哪一项属性，如"name"
+	 * @param 筛选属性的输入值
+	 * @return  符合条件的球员列表
+	 */
+	public ArrayList<PlayerPO> selectPlayersByAverage(String season,String column,String word){
+		ArrayList<PlayerPO> result = new ArrayList<PlayerPO>();
+		return result;
+	}
+	
+	private ArrayList<PlayerPO> selectPlayers(String table,String season,String column,String word){
+		ArrayList<PlayerPO> result = new ArrayList<PlayerPO>();
+		return result;
+	}
+	
 	public String getActionPhotoPath(String name) {
 		return "src/迭代一数据/players/action/" + name + ".png";
 	}
