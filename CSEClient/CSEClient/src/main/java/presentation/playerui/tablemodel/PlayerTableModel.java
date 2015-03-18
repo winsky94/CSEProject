@@ -16,7 +16,15 @@ public class PlayerTableModel extends AbstractTableModel{
 			"失误数","犯规数","得分","效率","GmSc效率值","真实命中率","投篮效率","篮板率",
 			"进攻篮板率","防守篮板率","助攻率","抢断率","盖帽率","失误率","使用率"};
 	
-	
+	String[] example={"金翠","英雄联盟","30","12","100","50","24h","100%","100%","100%",
+			"10","5","1","3","0","0","100","100%","100%","99%","100%","50%","100%",
+			"100%","100%","100%","100%","0%","100%"};
+	public PlayerTableModel(){
+		ArrayList<String>e=new ArrayList<String>();
+		for(String str:example)
+			e.add(str);
+		content.add(e);
+	}
 	public int getRowCount() {
 		// TODO Auto-generated method stub
 		return content.size();

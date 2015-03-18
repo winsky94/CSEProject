@@ -49,7 +49,12 @@ public class ListPanel extends JPanel {
 					Point p=e.getPoint();
 					int row=table.rowAtPoint(p);//获取所在行
 					if(model==1)//查看球员详细信息
+					{	
+						AddressBar.getInstance().RefreshAddress("球员查询》", (JPanel)ListPanel.this.getParent());
 						MainFrame.getInstance().refresh(new PlayerInfoPanel());
+						
+					
+					}
 					
 				}
 			}
