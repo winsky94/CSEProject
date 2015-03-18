@@ -34,7 +34,7 @@ public class Player extends UnicastRemoteObject implements PlayerDataService {
 			ResultSet resultSet = sql.executeQuery("select * from players");
 
 			while (resultSet.next()) {
-				int id = resultSet.getInt("id");// 编号
+				int id = resultSet.getInt("playerID");// 编号
 				String name = resultSet.getString("name");// 球员名称
 				int number = resultSet.getInt("number");// 球衣号码
 				String position = resultSet.getString("position");// 位置
@@ -670,7 +670,6 @@ public class Player extends UnicastRemoteObject implements PlayerDataService {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
 		
 	}
 
