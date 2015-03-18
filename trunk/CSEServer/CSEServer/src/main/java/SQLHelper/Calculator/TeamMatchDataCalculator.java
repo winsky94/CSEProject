@@ -104,7 +104,7 @@ public class TeamMatchDataCalculator {
 	}
 
 	public void calculate(String season) {
-		this.season = season;
+
 		createTable();
 		ArrayList<String> names = new ArrayList<String>();
 		names = getTeams();
@@ -112,19 +112,16 @@ public class TeamMatchDataCalculator {
 			Statement sql = con.createStatement(
 					ResultSet.TYPE_SCROLL_INSENSITIVE,
 					ResultSet.CONCUR_READ_ONLY);
-			System.out.println("season="+season);
-			String query = "select * from matchTemp where season=" + season;
+			String query = "select * from matchTemp where season='" + season
+					+ "'";
 			ResultSet result = sql.executeQuery(query);
 
-			
 			for (String name : names) {
 				System.out.println(name);
 				teamName = name;
 				// 遍历一次matchTemp找该球队的信息
-				System.out.println("hah");
 				while (result.next()) {
 					int matchID = result.getInt("matchID");
-					System.out.println(result.getString("season"));
 					Map<String, String> teams = getTeamsByMathcID(matchID);
 					String homeTeam = teams.get("homeTeam");
 					String visitingTeam = teams.get("visitingTeam");
@@ -140,11 +137,10 @@ public class TeamMatchDataCalculator {
 						continue;
 					}
 				}
-				System.out.println("hah end");
 
 				// 上面计算的的是每场比赛的效率和，接下来除以总的比赛场数得到场均
 				getAverageData();
-
+				this.season = season;
 				exportToSQL();
 				// 将resultSet光标返回,便于进行下一次遍历
 				result.beforeFirst();
@@ -372,7 +368,7 @@ public class TeamMatchDataCalculator {
 
 			Statement sql2 = con.createStatement();
 			sql2.execute("insert teamMatchDataAverage values(" + sqlID + ",'"
-					+ teamName + "','" + "13-14" + "'," + matchesNum + ","
+					+ teamName + "','" + season + "'," + matchesNum + ","
 					+ winRate + "," + shootHitNumAverage + ","
 					+ shootAttemptNumAverage + "," + threeHitNumAverage + ","
 					+ threeAttemptNumAverage + "," + freeThrowHitNumAverage
