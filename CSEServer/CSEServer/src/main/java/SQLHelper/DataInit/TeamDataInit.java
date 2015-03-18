@@ -92,10 +92,10 @@ public class TeamDataInit {
 			Connection con = SqlManager.getConnection();
 			Statement sql = con.createStatement();
 			sql.execute("drop table if exists teams");
-			sql.execute("create table teams(id int not null auto_increment,teamName varchar(40) not null default 'null',"
+			sql.execute("create table teams(teamID int not null auto_increment,teamName varchar(40) not null default 'null',"
 					+ "abLocation varchar(20) not null default 'null',location varchar(20) not null default 'null',"
 					+ "conference varchar(20) not null default 'null',partition varchar(20) not null default 'null',"
-					+ "homeCourt varchar(40) not null default 'null',setUpTime int not null default 0,primary key(id));");
+					+ "homeCourt varchar(40) not null default 'null',setUpTime int not null default 0,primary key(teamID));");
 			int count = 1;
 			for (TeamPO team : teams) {
 				sql.execute("insert teams values(" + (count++) + ",'"
