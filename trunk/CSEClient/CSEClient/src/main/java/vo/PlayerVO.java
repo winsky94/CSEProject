@@ -9,7 +9,7 @@ public class PlayerVO {
 	private int weight;// 体重（英镑）
 	private String birth;// （月 日，年）
 	private int age;// 年龄
-	private int exp;// 球龄
+	private String exp;// 球龄
 	private String school;// 毕业学校
 
 	private String teamName;// 所属球队
@@ -43,7 +43,7 @@ public class PlayerVO {
 	private double usageRate;// 使用率
 
 	public PlayerVO(int id, String name, int number, String position,
-			String height, int weight, String birth, int age, int exp,
+			String height, int weight, String birth, int age, String exp,
 			String school) {
 		this.id = id;
 		this.name = name;
@@ -58,7 +58,7 @@ public class PlayerVO {
 	}
 
 	public PlayerVO(int id, String name, int number, String position,
-			String height, int weight, String birth, int age, int exp,
+			String height, int weight, String birth, int age, String exp,
 			String school, String teamName, int playedGames,
 			int gameStartingNum, int reboundNum, int assistNum,
 			String presentTime, double shootHitRate, double threeHitRate,
@@ -144,7 +144,7 @@ public class PlayerVO {
 		return age;
 	}
 
-	public int getExp() {
+	public String getExp() {
 		return exp;
 	}
 
