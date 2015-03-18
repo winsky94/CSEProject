@@ -8,6 +8,8 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
@@ -179,7 +181,12 @@ public class FilterWindow extends JWindow {
 		surePnl.add(exitBtn);
 		// ----------------------
 		this.setSize(400, 450);
-		this.setVisible(true);
+	//	this.setVisible(true);
+		exitBtn.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				FilterWindow.this.setVisible(false);
+			}
+		});
 	}
 
 	public static void main(String[] args) {

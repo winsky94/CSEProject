@@ -59,18 +59,18 @@ public class AddressBar extends JPanel implements MouseListener{
 		
 	}
 	
-	
+	//===bug  bug又有bug了==========
 	public void RefreshAddress(String addex, final JPanel p){
-		final JLabel temp=new JLabel(addex);
-	
+	final JLabel temp=new JLabel(addex);
 		temp.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		
 		temp.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
 				// TODO Auto-generated method stub
 				//地址栏 数据更新
 					//int index1=showAddress.indexOf(temp);
 					int index2=address.indexOf(temp);
-					//for(int i=index1;i<showAddress.size();i++)
+					//for(int i=index1;i<showAddress.size();i++)j
 					//	showAddress.remove(i);
 					for(int i=index2;i<address.size();i++)
 						address.remove(i);
@@ -115,6 +115,7 @@ public class AddressBar extends JPanel implements MouseListener{
 			add.setBounds(0,i*100,100,35);
 			i++;
 		}
+		revalidate();
 		
 	}
 

@@ -1,5 +1,7 @@
 package presentation.mainui;
 
+import java.awt.Cursor;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -13,6 +15,7 @@ import javax.swing.JTextField;
 
 import presentation.ModeChangeButton;
 import presentation.OrderChangeButton;
+import presentation.playerui.FilterWindow;
 
 /*
  * author:jin
@@ -90,6 +93,7 @@ public class ListModelFPanel extends ContentPanel{
 		searchPanel.add(down);searchPanel.add(up);searchPanel.add(card);
 		searchPanel.add(filter);searchPanel.add(season);searchPanel.add(search);
 		searchPanel.add(searchBtn);
+		filter.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		//=====位位置设定======
 		filter.setBounds(Scale.FILTER);
 		season.setBounds(Scale.SEASON);
@@ -100,6 +104,13 @@ public class ListModelFPanel extends ContentPanel{
 		up.setBounds(Scale.UP);
 		down.setBounds(Scale.DOWN);
 		allOrAve.setBounds(Scale.TYPE);
+		filter.addMouseListener(new MouseAdapter(){
+			public void mouseClicked(MouseEvent e){
+				FilterWindow f=new FilterWindow();
+				f.setVisible(true);
+				f.setBounds(e.getXOnScreen(), e.getYOnScreen(), 500, 600);
+			}
+		});
 		
 		
 	}
