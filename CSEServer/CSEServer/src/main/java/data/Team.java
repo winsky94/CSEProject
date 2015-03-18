@@ -31,10 +31,11 @@ public class Team extends UnicastRemoteObject implements TeamDataService {
 			// TeamPO po = team.getTeamSeasonInfo("13-14", "WAS");
 			// System.out.println(po.getScore());
 
-			ArrayList<TeamPO> teams = team.getOrderedTeamsBySeason("13-14",
-					"score", null);
+//			ArrayList<TeamPO> teams = team.getOrderedTeamsBySeason("13-14",
+//					"score", null);
+			ArrayList<TeamPO> teams = team.getTeamBaseInfo();
 			for (TeamPO po : teams) {
-				System.out.println(po.getScore());
+				System.out.println(po.getTeamName());
 			}
 		} catch (RemoteException e) {
 			// TODO 自动生成的 catch 块
@@ -211,6 +212,13 @@ public class Team extends UnicastRemoteObject implements TeamDataService {
 		return result;
 	}
 
+	/**
+	 * 根据球队缩写得到球队队徽
+	 * 
+	 * @param abLocation
+	 *            球队缩写
+	 * @return
+	 */
 	public String getPhotoPath(String abLocation) {
 		return "src/迭代一数据/teams/" + abLocation + ".svg";
 	}
