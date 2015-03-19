@@ -20,12 +20,10 @@ public class MyTableModel extends AbstractTableModel{
 	}
 	
 	//====更新数据=====0汇总，1场均
-	public void Refresh(int model){
+	public void Refresh(String model){
 		
 	}
 	
-	public void selectRefresh(FilterCondition filter){
-		
-	}
+	
 
 }

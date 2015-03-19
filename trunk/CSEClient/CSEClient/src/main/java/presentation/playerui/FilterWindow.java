@@ -12,7 +12,9 @@ import java.awt.Image;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Enumeration;
 
+import javax.swing.AbstractButton;
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
@@ -25,6 +27,9 @@ import javax.swing.JRadioButton;
 import javax.swing.JWindow;
 import javax.swing.ListCellRenderer;
 import javax.swing.border.TitledBorder;
+
+import presentation.mainui.ListModelFPanel;
+import presentation.mainui.ListPanel;
 
 public class FilterWindow extends JWindow {
 
@@ -41,7 +46,7 @@ public class FilterWindow extends JWindow {
 			threePointBtn, freeThrowBtn, double_doubleBtn;
 	Font font = new Font("微软雅黑", Font.PLAIN, 15);
 
-	public FilterWindow() {
+	public FilterWindow(final ListModelFPanel list) {
 		// ----底层panel--------------------
 		this.setLayout(new GridLayout(1, 1));
 		pnl = new JPanel(){
@@ -127,6 +132,7 @@ public class FilterWindow extends JWindow {
 		scoreBtn=new MyRadioButton("得分");
 		pnl1.add(scoreBtn);
 		bg.add(scoreBtn);
+		scoreBtn.setSelected(true);
 		reboundBtn=new MyRadioButton("篮板");
 		pnl1.add(reboundBtn);
 		bg.add(reboundBtn);
@@ -184,6 +190,26 @@ public class FilterWindow extends JWindow {
 		submitBtn = new MyButton("筛选");
 		submitBtn.setForeground(new Color(166, 210, 121));
 		surePnl.add(submitBtn);
+		submitBtn.addActionListener(new ActionListener(){
+
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				String pos=locationBox.getSelectedItem().toString();
+				String union=partitionBox.getSelectedItem().toString();
+				String sort=scoreBtn.getText();
+				Enumeration<AbstractButton> radioBtns=bg.getElements();   
+				while (radioBtns.hasMoreElements()) {   
+				    AbstractButton btn = radioBtns.nextElement();   
+				    if(btn.isSelected()){   
+				        sort=btn.getText();   
+				        break;   
+				    }   
+				}
+				list.filterList(pos, union, sort);
+				
+			}
+			
+		});
 		// ----exitBtn-----------
 		exitBtn = new MyButton("取消");
 		exitBtn.setForeground(new Color(251, 147, 121));
@@ -199,7 +225,7 @@ public class FilterWindow extends JWindow {
 	}
 
 	public static void main(String[] args) {
-		new FilterWindow();
+		//new FilterWindow();
 	}
 
 	class MyRenderer extends JLabel implements ListCellRenderer {
