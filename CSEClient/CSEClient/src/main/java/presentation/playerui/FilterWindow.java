@@ -4,16 +4,19 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.Graphics;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JList;
@@ -21,6 +24,7 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JWindow;
 import javax.swing.ListCellRenderer;
+import javax.swing.border.TitledBorder;
 
 public class FilterWindow extends JWindow {
 
@@ -35,14 +39,24 @@ public class FilterWindow extends JWindow {
 	MyRadioButton scoreBtn, reboundBtn, assistBtn, sraBtn, blockShotBtn,
 			stealBtn, foulBtn, turnOverBtn, minuteBtn, efficiencyBtn, shootBtn,
 			threePointBtn, freeThrowBtn, double_doubleBtn;
-	MyCheckBox scoreCheckBox, reboundCheckBox, assistCheckBox,
-			blockShotCheckBox, stealCheckBox;
 	Font font = new Font("微软雅黑", Font.PLAIN, 15);
 
 	public FilterWindow() {
 		// ----底层panel--------------------
 		this.setLayout(new GridLayout(1, 1));
-		pnl = new JPanel();
+		pnl = new JPanel(){
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+
+			protected void paintComponent(Graphics g) {
+				ImageIcon icon = new ImageIcon("img/main/metal.jpg");
+				Image img = icon.getImage();
+				g.drawImage(img, 0,0, icon.getIconWidth(),
+						icon.getIconHeight(), icon.getImageObserver());
+			}
+		};
 		this.add(pnl);
 		// --------------------------------
 		GridBagLayout gbl = new GridBagLayout();
@@ -52,6 +66,7 @@ public class FilterWindow extends JWindow {
 		pnl.setLayout(gbl);
 		// ---------------------------------球员位置PNL
 		JPanel locationPnl = new JPanel();
+		locationPnl.setOpaque(false);
 		gbc.gridx = 0;
 		gbc.gridy = 0;
 		gbc.gridheight = 1;
@@ -65,6 +80,7 @@ public class FilterWindow extends JWindow {
 		locationPnl.setLayout(fl);
 		// ---------locationLbl----------
 		JLabel locationLbl = new JLabel("球员位置 ");
+		locationLbl.setForeground(Color.lightGray);
 		locationLbl.setFont(font);
 		locationPnl.add(locationLbl);
 		// -------locationBox-----------
@@ -74,6 +90,7 @@ public class FilterWindow extends JWindow {
 		locationPnl.add(locationBox);
 		// --------partitionLbl-----------
 		JLabel partitionLbl = new JLabel("               联盟/分区 ");
+		partitionLbl.setForeground(Color.lightGray);
 		partitionLbl.setFont(font);
 		locationPnl.add(partitionLbl);
 		// ------partitionBox--------------
@@ -87,25 +104,24 @@ public class FilterWindow extends JWindow {
 		locationPnl.add(partitionBox);
 		// ----------------------------------排序条件Pnl
 		JPanel rankPnl = new JPanel();
+		rankPnl.setOpaque(false);
 		gbc.gridy = 1;
 		gbc.gridheight = 9;
 		gbc.weighty = 9;
 		gbl.setConstraints(rankPnl, gbc);
 		pnl.add(rankPnl);
+		rankPnl.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY), "排序条件",TitledBorder.DEFAULT_JUSTIFICATION,TitledBorder.DEFAULT_POSITION , font, Color.lightGray));
 		// ----排序条件------------
-		rankPnl.setLayout(new GridLayout(6, 1));
+		rankPnl.setLayout(new GridLayout(3, 1));
 		JPanel pnl1 = new JPanel();
 		JPanel pnl2 = new JPanel();
 		JPanel pnl3 = new JPanel();
-		JPanel pnl4 = new JPanel();
-		JPanel pnl5 = new JPanel();
-		JPanel pnl6 = new JPanel();
+		pnl1.setOpaque(false);
+		pnl2.setOpaque(false);
+		pnl3.setOpaque(false);
 		rankPnl.add(pnl1);
 		rankPnl.add(pnl2);
 		rankPnl.add(pnl3);
-		rankPnl.add(pnl4);
-		rankPnl.add(pnl5);
-		rankPnl.add(pnl6);
 		bg = new ButtonGroup();
 		// ----------------------------------------pnl1
 		scoreBtn=new MyRadioButton("得分");
@@ -133,40 +149,31 @@ public class FilterWindow extends JWindow {
 		bg.add(foulBtn);
 		//------------------------------------------pnl4
 		turnOverBtn=new MyRadioButton("失误");
-		pnl4.add(turnOverBtn);
+		pnl3.add(turnOverBtn);
 		bg.add(turnOverBtn);
 		minuteBtn=new MyRadioButton("分钟");
-		pnl4.add(minuteBtn);
+		pnl3.add(minuteBtn);
 		bg.add(minuteBtn);
 		efficiencyBtn=new MyRadioButton("效率");
-		pnl4.add(efficiencyBtn);
+		pnl3.add(efficiencyBtn);
 		bg.add(efficiencyBtn);
 		//------------------------------------------pnl5
 		shootBtn=new MyRadioButton("投篮");
-		pnl5.add(shootBtn);
+		pnl2.add(shootBtn);
 		bg.add(shootBtn);
 		threePointBtn=new MyRadioButton("三分");
-		pnl5.add(threePointBtn);
+		pnl2.add(threePointBtn);
 		bg.add(threePointBtn);
 		freeThrowBtn=new MyRadioButton("罚球");
-		pnl5.add(freeThrowBtn);
+		pnl1.add(freeThrowBtn);
 		bg.add(freeThrowBtn);
 		//-------------------------------------------pnl6
 		double_doubleBtn=new MyRadioButton("两双");
-		pnl6.add(double_doubleBtn);
+		pnl1.add(double_doubleBtn);
 		bg.add(double_doubleBtn);
-		scoreCheckBox=new MyCheckBox("得分",true);
-		pnl6.add(scoreCheckBox);
-		reboundCheckBox=new MyCheckBox("篮板",true);
-		pnl6.add(reboundCheckBox);
-		assistCheckBox=new MyCheckBox("助攻");
-		pnl6.add(assistCheckBox);
-		blockShotCheckBox=new MyCheckBox("盖帽");
-		pnl6.add(blockShotCheckBox);
-		stealCheckBox=new MyCheckBox("抢断");
-		pnl6.add(stealCheckBox);
 		// ------------------------------------确定取消Pnl
 		JPanel surePnl = new JPanel();
+		surePnl.setOpaque(false);
 		gbc.gridy = 10;
 		gbc.gridheight = 1;
 		gbc.weighty = 0.1;
@@ -175,13 +182,15 @@ public class FilterWindow extends JWindow {
 
 		// ----submitBtn---------
 		submitBtn = new MyButton("筛选");
+		submitBtn.setForeground(new Color(166, 210, 121));
 		surePnl.add(submitBtn);
 		// ----exitBtn-----------
 		exitBtn = new MyButton("取消");
+		exitBtn.setForeground(new Color(251, 147, 121));
 		surePnl.add(exitBtn);
 		// ----------------------
-		this.setSize(400, 450);
-	//	this.setVisible(true);
+		this.setSize(400, 280);
+		this.setVisible(true);
 		exitBtn.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				FilterWindow.this.setVisible(false);
@@ -194,6 +203,11 @@ public class FilterWindow extends JWindow {
 	}
 
 	class MyRenderer extends JLabel implements ListCellRenderer {
+
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
 
 		public Component getListCellRendererComponent(JList list, Object value,
 				int index, boolean isSelected, boolean cellHasFocus) {
@@ -219,28 +233,24 @@ public class FilterWindow extends JWindow {
 		public MyRadioButton(String text) {
 			super(text);
 			this.setFont(font);
+			this.setForeground(Color.lightGray);
+			this.setOpaque(false);
 		}
 
 	}
 
 	class MyButton extends JButton {
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+
 		public MyButton(String text) {
 			super(text);
 			this.setFont(font);
 			this.setFocusPainted(false);
-		}
-	}
-
-	class MyCheckBox extends JCheckBox {
-		public MyCheckBox(String text) {
-			super(text);
-			this.setFont(font);
-			
-		}
-		public MyCheckBox(String text,boolean isSelected) {
-			super(text,isSelected);
-			this.setFont(font);
-			
+			this.setBackground(Color.white);
+			this.setOpaque(false);
 		}
 	}
 }
