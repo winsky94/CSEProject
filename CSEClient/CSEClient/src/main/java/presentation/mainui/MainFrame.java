@@ -39,7 +39,7 @@ import javax.swing.JToolBar;
 
 import com.sun.awt.AWTUtilities;
 
-import presentation.IndexPanel;
+
 import presentation.UIhelper;
 
 /*bug1: 界面可以完全移动到 边界直至消失
