@@ -13,7 +13,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import presentation.playerui.PlayerIndexPanel;
+
 import presentation.teamui.cardmode.TeamCardIndexPanel;
 import presentation.teamui.cardmode.TeamIndex;
 /*

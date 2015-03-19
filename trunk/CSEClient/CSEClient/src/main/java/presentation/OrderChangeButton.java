@@ -11,7 +11,6 @@ import javax.swing.JButton;
 import javax.swing.JWindow;
 
 import presentation.mainui.MainFrame;
-import presentation.mainui.SequencePane;
 
 public class OrderChangeButton extends JButton{
 
