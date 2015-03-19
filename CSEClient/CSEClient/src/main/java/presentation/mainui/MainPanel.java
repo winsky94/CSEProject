@@ -103,7 +103,7 @@ public class MainPanel extends ContentPanel{
 			public void mouseClicked(MouseEvent e) {
 				// TODO Auto-generated method stub
 	
-				JPanel p=new ListPanel(1);
+				ListPanel p=new ListPanel(1);
 				frame.refresh(new ListModelFPanel(1,p));
 				AddressBar.getInstance().RefreshAddress("首页》", MainPanel.this);
 				
@@ -138,7 +138,7 @@ public class MainPanel extends ContentPanel{
 			
 			public void mouseClicked(MouseEvent e) {
 				// TODO Auto-generated method stub
-				JPanel p=new ListPanel(0);
+				ListPanel p=new ListPanel(0);
 				frame.refresh(new ListModelFPanel(0,p));
 				AddressBar.getInstance().RefreshAddress("首页》", MainPanel.this);
 			

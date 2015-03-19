@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import javax.swing.table.AbstractTableModel;
 
 import businesslogic.Player;
+import presentation.mainui.FilterCondition;
 import presentation.mainui.MyTableModel;
 import vo.PlayerVO;
 
@@ -13,6 +14,7 @@ public class PlayerTableModel extends MyTableModel{
 	/**
 	 * 表格球员信息列表模式model
 	 */
+	Player player=new Player();
 	private static final long serialVersionUID = 1L;
 	ArrayList<ArrayList<String>> content=new ArrayList<ArrayList<String>>();
 	static String[] head={"球员名称","所属球队","参赛场数","先发场数","篮板数","助攻数","在场时间",
@@ -69,46 +71,16 @@ public class PlayerTableModel extends MyTableModel{
 		
 	}
 	
-	public void Refresh(int model){
-		/*
-		Player player=new Player();
-		ArrayList<PlayerVO> result=player.getPlayerSeasonInfo("13-14");
+	public void Refresh(String model){
+		ArrayList<PlayerVO> result;
+		if(model.equals("汇总"))
+			 result=player.getPlayerSeasonInfo("13-14");
+		else
+			result=player.getPlayerAverageInfo("13-14");
 		if(result!=null&&result.size()!=0){
-			content.clear();
-			for(PlayerVO vo:result){
-				ArrayList<String> line=new ArrayList<String>();
-				line.add(vo.getName());
-				line.add(vo.getTeamName());
-				line.add(vo.getPlayedGames()+"");
-				line.add(vo.getGameStartingNum()+"");
-				line.add(vo.getReboundNum()+"");
-				line.add(vo.getAssistNum()+"");
-			    line.add(vo.getPresentTime());
-			    line.add(vo.getShootHitRate()+"");
-			    line.add(vo.getThreeHitRate()+"");
-			    line.add(vo.getFreeThrowHitRate()+"");
-			    line.add(vo.getOffenNum()+"");
-			    line.add(vo.getDefenNum()+"");
-			    line.add(vo.getStealNum()+"");
-			    line.add(vo.getBlockNum()+"");
-			    line.add(vo.getTurnOverNum()+"");
-			    line.add(vo.getFoulNum()+"");
-			    line.add(vo.getScore()+"");
-			    line.add(vo.getEfficiency()+"");
-			    line.add(vo.getGmScEfficiencyValue()+"");
-			    line.add(vo.getTrueHitRate()+"");
-			    line.add(vo.getShootHitEfficiency()+"");
-			    line.add(vo.getReboundRate()+"");
-			    line.add(vo.getOffenReboundRate()+"");
-			    line.add(vo.getDefenReboundRate()+"");
-			    line.add(vo.getAssistRate()+"");
-			    line.add(vo.getStealRate()+"");
-			    line.add(vo.getBlockRate()+"");
-			    line.add(vo.getTurnOverRate()+"");
-			    line.add(vo.getUsageRate()+"");
-			    content.add(line);
+			Refresh(result);
 			    
-			}
+			
 		}
 			
 	/*d={"球员名称","所属球队","参赛场数","先发场数","篮板数","助攻数","在场时间",
@@ -117,6 +89,57 @@ public class PlayerTableModel extends MyTableModel{
 			"进攻篮板率","防守篮板率","助攻率","抢断率","盖帽率","失误率","使用率"}*/	
 		
 		
+	}
+	
+	public void Filter(FilterCondition f){
+		ArrayList<PlayerVO> v;
+		if(f.getAllOrAve().equals("汇总"))
+			v=player.selectPlayersBySeason(f.getSeason(), f.getPosition(), f.getUnion(), 
+					f.getSort());
+		else
+			v=player.selectPlayersByAverage(f.getSeason(), f.getPosition(), f.getUnion(), 
+					f.getSort());
+		if(v!=null&&v.size()!=0)
+			Refresh(v);
+		
+	}
+	
+	public void Refresh(ArrayList<PlayerVO> result){
+		content.clear();
+		for(PlayerVO vo:result){
+			ArrayList<String> line=new ArrayList<String>();
+			line.add(vo.getName());
+			line.add(vo.getTeamName());
+			line.add(vo.getPlayedGames()+"");
+			line.add(vo.getGameStartingNum()+"");
+			line.add(vo.getReboundNum()+"");
+			line.add(vo.getAssistNum()+"");
+		    line.add(vo.getPresentTime());
+		    line.add(vo.getShootHitRate()+"");
+		    line.add(vo.getThreeHitRate()+"");
+		    line.add(vo.getFreeThrowHitRate()+"");
+		    line.add(vo.getOffenNum()+"");
+		    line.add(vo.getDefenNum()+"");
+		    line.add(vo.getStealNum()+"");
+		    line.add(vo.getBlockNum()+"");
+		    line.add(vo.getTurnOverNum()+"");
+		    line.add(vo.getFoulNum()+"");
+		    line.add(vo.getScore()+"");
+		    line.add(vo.getEfficiency()+"");
+		    line.add(vo.getGmScEfficiencyValue()+"");
+		    line.add(vo.getTrueHitRate()+"");
+		    line.add(vo.getShootHitEfficiency()+"");
+		    line.add(vo.getReboundRate()+"");
+		    line.add(vo.getOffenReboundRate()+"");
+		    line.add(vo.getDefenReboundRate()+"");
+		    line.add(vo.getAssistRate()+"");
+		    line.add(vo.getStealRate()+"");
+		    line.add(vo.getBlockRate()+"");
+		    line.add(vo.getTurnOverRate()+"");
+		    line.add(vo.getUsageRate()+"");
+		    content.add(line);
+		    
+		}
 	}
 
 }

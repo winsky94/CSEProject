@@ -78,7 +78,7 @@ public class ListPanel extends JPanel {
 		jsp.setOpaque(false);
 		//=====表格美化====
 	
-		tablemodel.Refresh(1);
+		tablemodel.Refresh("汇总");
 		table.revalidate();
 	}
 	
@@ -90,7 +90,11 @@ public class ListPanel extends JPanel {
 	}
 	
 	
-	
+	public void filterRefresh(FilterCondition condition){
+		if(model==1)
+			((PlayerTableModel)tablemodel).Filter(condition);
+		table.revalidate();
+	}
 	
 	
 

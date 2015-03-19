@@ -23,8 +23,11 @@ import presentation.playerui.FilterWindow;
  * 
  * */
 public class ListModelFPanel extends ContentPanel{
-	protected JPanel searchPanel,listPanel;
-	public ListModelFPanel(int model,JPanel list) {
+	protected JPanel searchPanel;
+	private ListPanel listPanel;
+	private JComboBox<String> season;
+	private JComboBox<String> allOrAve;
+	public ListModelFPanel(int model,ListPanel list) {
 		super();
 		addTitleBar();
 		initSearchPanel( model);
@@ -82,9 +85,9 @@ public class ListModelFPanel extends ContentPanel{
 		JLabel filter=new JLabel("按条件筛选");
 		JLabel refresh=new JLabel("刷新");
 		String[] s={"赛季","13-14"};
-		JComboBox<String> season=new JComboBox<String>(s);
+		 season=new JComboBox<String>(s);
 		String[] type={"汇总","场均"};
-		JComboBox<String> allOrAve=new JComboBox<String>(type);
+		allOrAve=new JComboBox<String>(type);
 		JTextField search=new JTextField(20);
 		JButton searchBtn=new JButton("搜索");
 		searchPanel.setLayout(null);
@@ -106,7 +109,7 @@ public class ListModelFPanel extends ContentPanel{
 		allOrAve.setBounds(Scale.TYPE);
 		filter.addMouseListener(new MouseAdapter(){
 			public void mouseClicked(MouseEvent e){
-				FilterWindow f=new FilterWindow();
+				FilterWindow f=new FilterWindow(ListModelFPanel.this);
 				f.setVisible(true);
 				f.setBounds(e.getXOnScreen(), e.getYOnScreen(), 500, 600);
 			}
@@ -118,6 +121,14 @@ public class ListModelFPanel extends ContentPanel{
 
 	public void setListPanel(JPanel listpanel){
 	
+		
+	}
+	
+	public void filterList(String pos,String unio,String sort){
+		String sea=season.getSelectedItem().toString();
+		String allorave=allOrAve.getSelectedItem().toString();
+		FilterCondition c=new FilterCondition(pos,unio,sort,sea,allorave);
+		listPanel.filterRefresh(c);
 		
 	}
 
