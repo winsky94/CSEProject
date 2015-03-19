@@ -31,8 +31,8 @@ public class ListModelFPanel extends ContentPanel{
 		// TODO Auto-generated constructor stub
 		listPanel=list;
 		
-	
-	    ImageIcon	ic=new ImageIcon("img/main/1.jpg");
+		this.setOpaque(false);
+	    ImageIcon ic=new ImageIcon("img/main/1.jpg");
 		JButton backbtn=new JButton(ic);
 		list.add(backbtn);
 		backbtn.setBounds(100, 200, 100,100 );

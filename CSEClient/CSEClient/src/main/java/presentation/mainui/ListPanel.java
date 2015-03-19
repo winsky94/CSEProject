@@ -1,13 +1,18 @@
 package presentation.mainui;
 
+import java.awt.Component;
+import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+import javax.swing.ImageIcon;
+import javax.swing.JComponent;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.AbstractTableModel;
+import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
@@ -34,7 +39,15 @@ public class ListPanel extends JPanel {
 		else
 			tablemodel=new PlayerTableModel();
 		
-		table=new JTable(tablemodel);
+		table=new JTable(tablemodel){
+			public Component prepareRender(TableCellRenderer renderer,int row,int column){
+				Component c=super.prepareRenderer(renderer, row, column);
+				if(c instanceof JComponent)
+					((JComponent)c).setOpaque(false);
+				
+				return c;
+			}
+		};
 		jsp=new JScrollPane(table);
 		table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 		
@@ -61,8 +74,19 @@ public class ListPanel extends JPanel {
 		});
 		TableRowSorter<TableModel> sorter=new TableRowSorter<TableModel>(tablemodel);
 		table.setRowSorter(sorter);
+		table.setOpaque(false);
+		jsp.setOpaque(false);
+		//=====表格美化====
+	
 		tablemodel.Refresh(1);
 		table.revalidate();
+	}
+	
+	public void paintComponent(Graphics g){
+		super.paintComponent(g);
+		ImageIcon icon=new ImageIcon("img/main/tableback.jpg");
+		g.drawImage(icon.getImage(),icon.getIconWidth(),icon.getIconHeight(),
+				icon.getImageObserver());
 	}
 	
 	
