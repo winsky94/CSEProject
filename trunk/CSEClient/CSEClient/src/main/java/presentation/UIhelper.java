@@ -1,6 +1,7 @@
 package presentation;
 
 import java.awt.Dimension;
+import java.awt.Image;
 import java.awt.Toolkit;
 
 public class UIhelper {
@@ -18,5 +19,10 @@ public class UIhelper {
 		Dimension screenSize = kit.getScreenSize();
 		int screenWidth = screenSize.width;
 		return screenWidth;
+	}
+	
+	public static Image getImage(String filename){
+		Image image=kit.getImage(filename);
+		return image;
 	}
 }
