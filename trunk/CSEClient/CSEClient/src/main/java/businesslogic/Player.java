@@ -14,8 +14,8 @@ public class Player implements PlayerBLService {
 
 	public Player() {
 		try {
-			String host = "172.25.176.1:1099";
-			// String host = getServer.getServerHost();
+//			String host = "172.25.176.1:1099";
+			 String host = getServer.getServerHost();
 			String url = "rmi://" + host + "/playerService";
 			service = (PlayerDataService) Naming.lookup(url);
 		} catch (Exception e) {
