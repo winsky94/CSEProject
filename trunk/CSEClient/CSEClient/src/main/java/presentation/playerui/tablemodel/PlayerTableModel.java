@@ -70,6 +70,7 @@ public class PlayerTableModel extends MyTableModel{
 	}
 	
 	public void Refresh(int model){
+		/*
 		Player player=new Player();
 		ArrayList<PlayerVO> result=player.getPlayerSeasonInfo("13-14");
 		if(result!=null&&result.size()!=0){
@@ -114,6 +115,7 @@ public class PlayerTableModel extends MyTableModel{
 			"投篮命中率","三分命中率","罚球命中率","进攻数","防守数","抢断数","盖帽数",
 			"失误数","犯规数","得分","效率","GmSc效率值","真实命中率","投篮效率","篮板率",
 			"进攻篮板率","防守篮板率","助攻率","抢断率","盖帽率","失误率","使用率"}*/	
+		
 		
 	}
 
