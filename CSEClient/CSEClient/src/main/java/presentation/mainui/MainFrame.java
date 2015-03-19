@@ -64,7 +64,7 @@ public class MainFrame extends JFrame {
 	private static MainFrame instance=null;
 	
 	
-	private MainFrame(final ImageIcon ic) {
+	public MainFrame(final ImageIcon ic) {
 		// ------设置窗口大小、位置---------
 		screenWidth = UIhelper.getScreenWidth();
 		screenHeight = UIhelper.getScreenHeight();
