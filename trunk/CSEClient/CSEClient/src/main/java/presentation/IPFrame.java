@@ -43,7 +43,7 @@ public class IPFrame extends JFrame implements ActionListener {
 	ArrayList<String> port, IP;
 
 	public IPFrame() {
-		this.setTitle("进销存系统");
+		this.setTitle("NBA Master");
 		 this.setIconImage(UIhelper.getImage("img/icon.png"));
 		this.setBounds((screenWidth - frameWidth) / 2,
 				(screenHeight - frameHeight) / 2, frameWidth, frameHeight);
@@ -66,7 +66,7 @@ public class IPFrame extends JFrame implements ActionListener {
 		JPanel titlePnl = new JPanel();
 		titlePnl.setOpaque(false);
 		pnl.add(titlePnl);
-		JLabel title = new JLabel("欢迎使用进销存系统");
+		JLabel title = new JLabel("欢迎使用NBA Master");
 		title.setFont(new Font("微软雅黑", Font.PLAIN, 25));
 		title.setForeground(Color.white);
 		titlePnl.add(title);
