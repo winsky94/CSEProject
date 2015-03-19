@@ -6,6 +6,7 @@ import javax.swing.table.AbstractTableModel;
 
 import businesslogic.Player;
 import presentation.mainui.MyTableModel;
+import vo.PlayerVO;
 
 public class PlayerTableModel extends MyTableModel{
 
@@ -68,9 +69,51 @@ public class PlayerTableModel extends MyTableModel{
 		
 	}
 	
-	public void Refresh(){
-	//	Player player=new Player();
-		
+	public void Refresh(int model){
+		Player player=new Player();
+		ArrayList<PlayerVO> result=player.getPlayerSeasonInfo("13-14");
+		if(result!=null&&result.size()!=0){
+			content.clear();
+			for(PlayerVO vo:result){
+				ArrayList<String> line=new ArrayList<String>();
+				line.add(vo.getName());
+				line.add(vo.getTeamName());
+				line.add(vo.getPlayedGames()+"");
+				line.add(vo.getGameStartingNum()+"");
+				line.add(vo.getReboundNum()+"");
+				line.add(vo.getAssistNum()+"");
+			    line.add(vo.getPresentTime());
+			    line.add(vo.getShootHitRate()+"");
+			    line.add(vo.getThreeHitRate()+"");
+			    line.add(vo.getFreeThrowHitRate()+"");
+			    line.add(vo.getOffenNum()+"");
+			    line.add(vo.getDefenNum()+"");
+			    line.add(vo.getStealNum()+"");
+			    line.add(vo.getBlockNum()+"");
+			    line.add(vo.getTurnOverNum()+"");
+			    line.add(vo.getFoulNum()+"");
+			    line.add(vo.getScore()+"");
+			    line.add(vo.getEfficiency()+"");
+			    line.add(vo.getGmScEfficiencyValue()+"");
+			    line.add(vo.getTrueHitRate()+"");
+			    line.add(vo.getShootHitEfficiency()+"");
+			    line.add(vo.getReboundRate()+"");
+			    line.add(vo.getOffenReboundRate()+"");
+			    line.add(vo.getDefenReboundRate()+"");
+			    line.add(vo.getAssistRate()+"");
+			    line.add(vo.getStealRate()+"");
+			    line.add(vo.getBlockRate()+"");
+			    line.add(vo.getTurnOverRate()+"");
+			    line.add(vo.getUsageRate()+"");
+			    content.add(line);
+			    
+			}
+		}
+			
+	/*d={"球员名称","所属球队","参赛场数","先发场数","篮板数","助攻数","在场时间",
+			"投篮命中率","三分命中率","罚球命中率","进攻数","防守数","抢断数","盖帽数",
+			"失误数","犯规数","得分","效率","GmSc效率值","真实命中率","投篮效率","篮板率",
+			"进攻篮板率","防守篮板率","助攻率","抢断率","盖帽率","失误率","使用率"}*/	
 		
 	}
 

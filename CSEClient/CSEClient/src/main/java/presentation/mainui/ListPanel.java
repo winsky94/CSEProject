@@ -61,7 +61,7 @@ public class ListPanel extends JPanel {
 		});
 		TableRowSorter<TableModel> sorter=new TableRowSorter<TableModel>(tablemodel);
 		table.setRowSorter(sorter);
-		//tablemodel.Refresh();
+		tablemodel.Refresh(1);
 		table.revalidate();
 	}
 	
