@@ -1,18 +1,14 @@
 package presentation.mainui;
 
 import java.awt.Cursor;
-import java.awt.FlowLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-
-import presentation.teamui.cardmode.TeamIndex;
 /*
  * author: jin
  * 保存地址栏
