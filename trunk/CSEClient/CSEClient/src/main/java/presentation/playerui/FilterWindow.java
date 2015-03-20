@@ -219,14 +219,11 @@ public class FilterWindow extends JWindow {
 		this.setVisible(true);
 		exitBtn.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
-				FilterWindow.this.setVisible(false);
+				FilterWindow.this.dispose();
 			}
 		});
 	}
 
-	public static void main(String[] args) {
-		new FilterWindow();
-	}
 
 	class MyRenderer extends JLabel implements ListCellRenderer {
 
