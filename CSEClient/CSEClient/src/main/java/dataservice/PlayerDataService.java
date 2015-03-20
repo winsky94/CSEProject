@@ -39,5 +39,7 @@ public interface PlayerDataService extends Remote {
 			String position, String union, String column)
 			throws RemoteException;
 
-	public ImageIcon getPlayerImage(String name) throws RemoteException;
+	public ImageIcon getPlayerActionImage(String name) throws RemoteException;
+	
+	public ImageIcon getPlayerPortraitImage(String name) throws RemoteException;
 }
