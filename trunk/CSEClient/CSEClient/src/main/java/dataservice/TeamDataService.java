@@ -4,6 +4,8 @@ import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
+import javax.swing.ImageIcon;
+
 import po.TeamPO;
 
 public interface TeamDataService extends Remote {
@@ -28,4 +30,6 @@ public interface TeamDataService extends Remote {
 
 	public ArrayList<TeamPO> getOrderedTeamsByAverage(String season,
 			String condition, String order) throws RemoteException;
+	
+	public ImageIcon getTeamImage(String name) throws RemoteException;
 }
