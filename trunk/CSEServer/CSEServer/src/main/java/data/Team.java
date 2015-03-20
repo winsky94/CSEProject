@@ -8,6 +8,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import javax.swing.ImageIcon;
+
 import po.TeamPO;
 import SQLHelper.SqlManager;
 import dataservice.TeamDataService;
@@ -220,7 +222,12 @@ public class Team extends UnicastRemoteObject implements TeamDataService {
 	 * @return
 	 */
 	public String getPhotoPath(String abLocation) {
-		return "src/迭代一数据/teams/" + abLocation + ".svg";
+		return "src/迭代一数据/teamsPng/" + abLocation + ".png";
+	}
+	
+	public ImageIcon getTeamImage(String name) throws RemoteException {
+		ImageIcon imageIcon=new ImageIcon(getPhotoPath(name));
+		return imageIcon;
 	}
 
 	private void closeMySql() {
