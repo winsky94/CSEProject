@@ -36,7 +36,7 @@ public class SvgUtil {
 	*/
 		FileList fList=new FileList("src/迭代一数据/teams");
 		ArrayList<String> paths=fList.getList();
-		paths.remove("E:\\CSEProject\\trunk\\CSEServer\\CSEServer\\src\\迭代一数据\\teams\\teams");
+		paths.remove("src\\迭代一数据\\teams\\teams");
 		for(String path:paths){
 			File f=new File(path);
 			String[] strings=path.split("teams");
