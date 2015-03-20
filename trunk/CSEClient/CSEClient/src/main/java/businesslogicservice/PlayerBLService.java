@@ -3,6 +3,8 @@ package businesslogicservice;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
+import javax.swing.ImageIcon;
+
 import vo.PlayerVO;
 
 public interface PlayerBLService {
@@ -30,4 +32,5 @@ public interface PlayerBLService {
 	public ArrayList<PlayerVO> selectPlayersByAverage(String season,
 			String position, String union, String column);
 
+	public ImageIcon getPlayerImage(String name);
 }
