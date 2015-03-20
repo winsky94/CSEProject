@@ -4,6 +4,8 @@ import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
+import javax.swing.ImageIcon;
+
 import po.PlayerPO;
 
 public interface PlayerDataService extends Remote {
@@ -36,4 +38,6 @@ public interface PlayerDataService extends Remote {
 	public ArrayList<PlayerPO> selectPlayersByAverage(String season,
 			String position, String union, String column)
 			throws RemoteException;
+
+	public ImageIcon getPlayerImage(String name) throws RemoteException;
 }
