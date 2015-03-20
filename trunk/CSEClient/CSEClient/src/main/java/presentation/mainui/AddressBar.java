@@ -1,11 +1,14 @@
 package presentation.mainui;
 
 import java.awt.Cursor;
+import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -30,8 +33,12 @@ public class AddressBar extends JPanel implements MouseListener{
 		showAddress=new ArrayList<JLabel>();
 		address=new ArrayList<JLabel>();
 		voice=new JLabel("音");
-		min=new JLabel("小");
-		close=new JLabel("关");
+		ImageIcon minImg = new ImageIcon("img/main/min.png"); 
+		minImg.setImage(minImg.getImage().getScaledInstance(13,13,Image.SCALE_DEFAULT)); 
+		min=new JLabel(minImg);
+		ImageIcon exitImg = new ImageIcon("img/main/exit.png"); 
+		exitImg.setImage(exitImg.getImage().getScaledInstance(11,11,Image.SCALE_DEFAULT)); 
+		close=new JLabel(exitImg);
 		setLayout(null);
 		add(voice);
 		add(min);
@@ -54,7 +61,12 @@ public class AddressBar extends JPanel implements MouseListener{
 		
 		
 	}
-	
+	protected void paintComponent(Graphics g) {
+		ImageIcon icon = new ImageIcon("img/main/TitleBar.png");
+		Image img = icon.getImage();
+		g.drawImage(img, 0,0, icon.getIconWidth(),
+				icon.getIconHeight(), icon.getImageObserver());
+	}
 	//===bug  bug又有bug了==========
 	public void RefreshAddress(String addex, final JPanel p){
 	final JLabel temp=new JLabel(addex);
