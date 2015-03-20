@@ -717,8 +717,13 @@ public class Player extends UnicastRemoteObject implements PlayerDataService {
 	public String getPortraitPhotoPath(String name) throws RemoteException {
 		return "src/迭代一数据/players/portrait/" + name + ".png";
 	}
+	
+	public ImageIcon getPlayerActionImage(String name) throws RemoteException {
+		ImageIcon imageIcon=new ImageIcon(getActionPhotoPath(name));
+		return imageIcon;
+	}
 
-	public ImageIcon getPlayerImage(String name) throws RemoteException {
+	public ImageIcon getPlayerPortraitImage(String name) throws RemoteException {
 		ImageIcon imageIcon = new ImageIcon(getPortraitPhotoPath(name));
 		return imageIcon;
 	}
