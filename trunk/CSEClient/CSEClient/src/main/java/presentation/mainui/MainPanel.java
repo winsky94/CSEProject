@@ -1,21 +1,13 @@
 package presentation.mainui;
 
 import java.awt.Cursor;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.Image;
-import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import javax.swing.ImageIcon;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-
-
-import presentation.teamui.cardmode.TeamCardIndexPanel;
-import presentation.teamui.cardmode.TeamIndex;
 /*
  * 首页
  * by jin
