@@ -4,6 +4,8 @@ import java.rmi.Naming;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
+import javax.swing.ImageIcon;
+
 import po.PlayerPO;
 import vo.PlayerVO;
 import businesslogicservice.PlayerBLService;
@@ -14,8 +16,8 @@ public class Player implements PlayerBLService {
 
 	public Player() {
 		try {
-//			String host = "172.25.176.1:1099";
-			 String host = getServer.getServerHost();
+			// String host = "localhost";
+			String host = getServer.getServerHost();
 			String url = "rmi://" + host + "/playerService";
 			service = (PlayerDataService) Naming.lookup(url);
 		} catch (Exception e) {
@@ -200,6 +202,17 @@ public class Player implements PlayerBLService {
 			e.printStackTrace();
 		}
 		return result;
+	}
+
+	public ImageIcon getPlayerImage(String name) {
+		ImageIcon icon = null;
+		try {
+			icon = service.getPlayerImage(name);
+		} catch (RemoteException e) {
+			// TODO 自动生成的 catch 块
+			e.printStackTrace();
+		}
+		return icon;
 	}
 
 	public PlayerVO poTovo(PlayerPO po) {
