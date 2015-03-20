@@ -68,8 +68,10 @@ public class MainFrame extends JFrame {
 		// ------设置窗口大小、位置---------
 		screenWidth = UIhelper.getScreenWidth();
 		screenHeight = UIhelper.getScreenHeight();
-		frameWidth = screenWidth * 85 / 100;
-		frameHeight = screenHeight * 90 / 100;
+		//frameWidth = screenWidth * 85 / 100;
+		//frameHeight = screenHeight * 90 / 100;
+		frameWidth=1366;
+		frameHeight=768;
 		
 		this.setBounds((screenWidth - frameWidth) / 2,
 				(screenHeight - frameHeight) / 2, frameWidth, frameHeight);
