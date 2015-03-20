@@ -16,7 +16,7 @@ import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
-import presentation.playerui.PlayerInfoPanel;
+import presentation.playerui.detail.PlayerInfoPanel;
 import presentation.playerui.tablemodel.PlayerTableModel;
 import presentation.teamui.tablemodel.TeamTableModel;
 
@@ -64,7 +64,7 @@ public class ListPanel extends JPanel {
 					if(model==1)//查看球员详细信息
 					{	
 						AddressBar.getInstance().RefreshAddress("球员查询》", (JPanel)ListPanel.this.getParent());
-						MainFrame.getInstance().refresh(new PlayerInfoPanel());
+						MainFrame.getInstance().refresh(new PlayerInfoPanel(null));
 						
 					
 					}
