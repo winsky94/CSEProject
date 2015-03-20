@@ -4,6 +4,8 @@ import java.rmi.Naming;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
+import javax.swing.ImageIcon;
+
 import po.TeamPO;
 import vo.TeamVO;
 import businesslogicservice.TeamBLService;
@@ -184,6 +186,17 @@ public class Team implements TeamBLService {
 			e.printStackTrace();
 		}
 		return result;
+	}
+	
+	public ImageIcon getTeamImage(String name){
+		ImageIcon icon = null;
+		try {
+			icon = service.getTeamImage(name);
+		} catch (RemoteException e) {
+			// TODO 自动生成的 catch 块
+			e.printStackTrace();
+		}
+		return icon;
 	}
 
 	public TeamVO poToVo(TeamPO po) {

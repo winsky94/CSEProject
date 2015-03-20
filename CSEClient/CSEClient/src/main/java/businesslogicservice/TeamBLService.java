@@ -2,6 +2,8 @@ package businesslogicservice;
 
 import java.util.ArrayList;
 
+import javax.swing.ImageIcon;
+
 import vo.TeamVO;
 
 public interface TeamBLService {
@@ -22,4 +24,6 @@ public interface TeamBLService {
 
 	public ArrayList<TeamVO> getOrderedTeamsByAverage(String season,
 			String condition, String order);
+	
+	public ImageIcon getTeamImage(String name);
 }
