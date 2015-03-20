@@ -225,7 +225,7 @@ public class FilterWindow extends JWindow {
 	}
 
 	public static void main(String[] args) {
-		//new FilterWindow();
+		new FilterWindow();
 	}
 
 	class MyRenderer extends JLabel implements ListCellRenderer {
