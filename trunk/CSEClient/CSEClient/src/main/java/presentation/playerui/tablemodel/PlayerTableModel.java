@@ -16,7 +16,7 @@ public class PlayerTableModel extends MyTableModel{
 	 */
 	Player player=new Player();
 	private static final long serialVersionUID = 1L;
-	ArrayList<ArrayList<String>> content=new ArrayList<ArrayList<String>>();
+	ArrayList<ArrayList<Object>> content=new ArrayList<ArrayList<Object>>();
 	static String[] head={"球员名称","所属球队","参赛场数","先发场数","篮板数","助攻数","在场时间",
 			"投篮命中率","三分命中率","罚球命中率","进攻数","防守数","抢断数","盖帽数",
 			"失误数","犯规数","得分","效率","GmSc效率值","真实命中率","投篮效率","篮板率",
@@ -29,13 +29,13 @@ public class PlayerTableModel extends MyTableModel{
 			"10","5","1","3","0","0","100","100%","100%","99%","100%","50%","100%",
 			"100%","100%","100%","100%","0%","100%"};
 	public PlayerTableModel(){
-		ArrayList<String> e=new ArrayList<String>();
-		for(String str:example)
+		ArrayList<Object> e=new ArrayList<Object>();
+		for(Object str:example)
 			e.add(str);
 		content.add(e);
 		
-		ArrayList<String> f=new ArrayList<String>();
-		for(String str:ex)
+		ArrayList<Object> f=new ArrayList<Object>();
+		for(Object str:ex)
 			f.add(str);
 		content.add(f);
 	}
@@ -61,6 +61,7 @@ public class PlayerTableModel extends MyTableModel{
 		return head;
 	}
 	
+	
 	//改变表头顺序  同时列内容也要变动
 	public void setHead(int front){
 		//front为被置前的搜索项  球队名称和所属球队始终置前
@@ -78,7 +79,7 @@ public class PlayerTableModel extends MyTableModel{
 		else
 			result=player.getPlayerAverageInfo("13-14");
 		if(result!=null&&result.size()!=0){
-			Refresh(result);
+			refreshContent(result);
 			    
 			
 		}
@@ -100,43 +101,43 @@ public class PlayerTableModel extends MyTableModel{
 			v=player.selectPlayersByAverage(f.getSeason(), f.getPosition(), f.getUnion(), 
 					f.getSort());
 		if(v!=null&&v.size()!=0)
-			Refresh(v);
+			refreshContent(v);
 		
 	}
 	
-	public void Refresh(ArrayList<PlayerVO> result){
+	public void refreshContent(ArrayList<PlayerVO> result){
 		content.clear();
 		for(PlayerVO vo:result){
-			ArrayList<String> line=new ArrayList<String>();
+			ArrayList<Object> line=new ArrayList<Object>();
 			line.add(vo.getName());
 			line.add(vo.getTeamName());
-			line.add(vo.getPlayedGames()+"");
-			line.add(vo.getGameStartingNum()+"");
-			line.add(vo.getReboundNum()+"");
-			line.add(vo.getAssistNum()+"");
+			line.add(vo.getPlayedGames());
+			line.add(vo.getGameStartingNum());
+			line.add(vo.getReboundNum());
+			line.add(vo.getAssistNum());
 		    line.add(vo.getPresentTime());
-		    line.add(vo.getShootHitRate()+"");
-		    line.add(vo.getThreeHitRate()+"");
-		    line.add(vo.getFreeThrowHitRate()+"");
-		    line.add(vo.getOffenNum()+"");
-		    line.add(vo.getDefenNum()+"");
-		    line.add(vo.getStealNum()+"");
-		    line.add(vo.getBlockNum()+"");
-		    line.add(vo.getTurnOverNum()+"");
-		    line.add(vo.getFoulNum()+"");
-		    line.add(vo.getScore()+"");
-		    line.add(vo.getEfficiency()+"");
-		    line.add(vo.getGmScEfficiencyValue()+"");
-		    line.add(vo.getTrueHitRate()+"");
-		    line.add(vo.getShootHitEfficiency()+"");
-		    line.add(vo.getReboundRate()+"");
-		    line.add(vo.getOffenReboundRate()+"");
-		    line.add(vo.getDefenReboundRate()+"");
-		    line.add(vo.getAssistRate()+"");
-		    line.add(vo.getStealRate()+"");
-		    line.add(vo.getBlockRate()+"");
-		    line.add(vo.getTurnOverRate()+"");
-		    line.add(vo.getUsageRate()+"");
+		    line.add(vo.getShootHitRate());
+		    line.add(vo.getThreeHitRate());
+		    line.add(vo.getFreeThrowHitRate());
+		    line.add(vo.getOffenNum());
+		    line.add(vo.getDefenNum());
+		    line.add(vo.getStealNum());
+		    line.add(vo.getBlockNum());
+		    line.add(vo.getTurnOverNum());
+		    line.add(vo.getFoulNum());
+		    line.add(vo.getScore());
+		    line.add(vo.getEfficiency());
+		    line.add(vo.getGmScEfficiencyValue());
+		    line.add(vo.getTrueHitRate());
+		    line.add(vo.getShootHitEfficiency());
+		    line.add(vo.getReboundRate());
+		    line.add(vo.getOffenReboundRate());
+		    line.add(vo.getDefenReboundRate());
+		    line.add(vo.getAssistRate());
+		    line.add(vo.getStealRate());
+		    line.add(vo.getBlockRate());
+		    line.add(vo.getTurnOverRate());
+		    line.add(vo.getUsageRate());
 		    content.add(line);
 		    
 		}

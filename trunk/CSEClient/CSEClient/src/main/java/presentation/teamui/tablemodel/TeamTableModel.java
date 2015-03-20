@@ -7,8 +7,13 @@ import vo.TeamVO;
 import businesslogic.Team;
 
 public class TeamTableModel extends MyTableModel {
+	/**
+	 * 
+	 */
+	
+	private static final long serialVersionUID = 1L;
 	Team team = new Team();
-	ArrayList<ArrayList<String>> content = new ArrayList<ArrayList<String>>();
+	ArrayList<ArrayList<Object>> content = new ArrayList<ArrayList<Object>>();
 	static String[] head = { "球队名称", "比赛场数", "投篮命中数", "投篮出手次数", "投篮命中率",
 			"三分命中数", "三分出手数", "三分命中率", "罚球命中数", "罚球出手数", "罚球命中率", "进攻篮板数",
 			"防守篮板数", "篮板数", "篮板效率", "进攻回合", "进攻效率", "防守效率", "助攻数", "助攻率",
@@ -19,8 +24,8 @@ public class TeamTableModel extends MyTableModel {
 			"100%", "1", "100%", "1", "0", "0", "100", "100%" };
 
 	public TeamTableModel() {
-		ArrayList<String> e = new ArrayList<String>();
-		for (String str : example)
+		ArrayList<Object> e = new ArrayList<Object>();
+		for (Object str : example)
 			e.add(str);
 		content.add(e);
 	}
@@ -29,6 +34,7 @@ public class TeamTableModel extends MyTableModel {
 		// TODO Auto-generated method stub
 		return content.size();
 	}
+	
 
 	public int getColumnCount() {
 		// TODO Auto-generated method stub
@@ -55,7 +61,7 @@ public class TeamTableModel extends MyTableModel {
 		else
 			teamvo = team.getTeamAverageInfo("13-14");
 		if (teamvo != null && teamvo.size() != 0)
-			Refresh(teamvo);
+			refreshContent(teamvo);
 
 		/*
 		 * {"球队名称","比赛场数","投篮命中数","投篮出手次数","投篮命中率","三分命中数","三分出手数",
@@ -67,38 +73,38 @@ public class TeamTableModel extends MyTableModel {
 
 	}
 
-	public void Refresh(ArrayList<TeamVO> result) {
+	public void refreshContent(ArrayList<TeamVO> result) {
 
 		content.clear();
 		for (TeamVO vo : result) {
-			ArrayList<String> line = new ArrayList<String>();
+			ArrayList<Object> line = new ArrayList<Object>();
 			line.add(vo.getTeamName());
-			line.add(vo.getMatchesNum() + "");
-			line.add(vo.getShootHitNum() + "");
-			line.add(vo.getShootAttemptNum() + "");
-			line.add(vo.getShootHitRate() + "");
-			line.add(vo.getThreeHitNum() + "");
-			line.add(vo.getThreeAttemptNum() + "");
-			line.add(vo.getThreeHitRate() + "");
-			line.add(vo.getFreeThrowHitNum() + "");
-			line.add(vo.getFreeThrowAttemptNum() + "");
-			line.add(vo.getFreeThrowHitRate() + "");
-			line.add(vo.getOffenReboundNum() + "");
-			line.add(vo.getDefenReboundNum() + "");
-			line.add(vo.getReboundNum() + "");
-			line.add(vo.getReboundEfficiency() + "");
-			line.add(vo.getOffenRound() + "");
-			line.add(vo.getOffenEfficiency() + "");
-			line.add(vo.getDefenEfficiency() + "");
-			line.add(vo.getAssistNum() + "");
-			line.add(vo.getAssistEfficiency() + "");
-			line.add(vo.getStealNum() + "");
-			line.add(vo.getStealEfficiency() + "");
-			line.add(vo.getBlockNum() + "");
-			line.add(vo.getTurnOverNum() + "");
-			line.add(vo.getFoulNum() + "");
-			line.add(vo.getScore() + "");
-			line.add(vo.getWinRate() + "");
+			line.add(vo.getMatchesNum());
+			line.add(vo.getShootHitNum() );
+			line.add(vo.getShootAttemptNum());
+			line.add(vo.getShootHitRate());
+			line.add(vo.getThreeHitNum());
+			line.add(vo.getThreeAttemptNum());
+			line.add(vo.getThreeHitRate() );
+			line.add(vo.getFreeThrowHitNum() );
+			line.add(vo.getFreeThrowAttemptNum());
+			line.add(vo.getFreeThrowHitRate());
+			line.add(vo.getOffenReboundNum());
+			line.add(vo.getDefenReboundNum());
+			line.add(vo.getReboundNum());
+			line.add(vo.getReboundEfficiency());
+			line.add(vo.getOffenRound());
+			line.add(vo.getOffenEfficiency());
+			line.add(vo.getDefenEfficiency());
+			line.add(vo.getAssistNum() );
+			line.add(vo.getAssistEfficiency() );
+			line.add(vo.getStealNum());
+			line.add(vo.getStealEfficiency() );
+			line.add(vo.getBlockNum() );
+			line.add(vo.getTurnOverNum());
+			line.add(vo.getFoulNum());
+			line.add(vo.getScore());
+			line.add(vo.getWinRate());
 			content.add(line);
 		}
 	}
