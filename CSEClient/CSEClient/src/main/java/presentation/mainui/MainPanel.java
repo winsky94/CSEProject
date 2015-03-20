@@ -16,7 +16,7 @@ import javax.swing.JPanel;
 public class MainPanel extends ContentPanel{
 	private JLabel player,team;
 	private ImageIcon p,t;
-	private int bw=180,by=90;
+	private int bw=214,by=110;
 	private JPanel pane;
 
 	
@@ -45,8 +45,8 @@ public class MainPanel extends ContentPanel{
 		setLayout(null);
 		team.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		player.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		team.setBounds(672,336, 160, 70);
-		player.setBounds(862,336, 160,70);
+		team.setBounds(800,380, 165, 70);
+		player.setBounds(1020,380, 165,70);
 		
 		initView();
 		

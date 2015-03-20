@@ -3,17 +3,17 @@ package presentation.mainui;
 import java.awt.Rectangle;
 
 public interface Scale {
-	final  Rectangle TITLEBAR=new Rectangle(69,83,1000,35);//地址栏
+	final  Rectangle TITLEBAR=new Rectangle(84,97,1170,35);//地址栏
 	
-	final Rectangle VOICE=new Rectangle(895,0,35,35);//声音开关
-	final Rectangle MIN=new Rectangle(930,0,35,35);//最小化
-	final Rectangle CLOSE=new Rectangle(965,0,35,35);//关闭
+	final Rectangle VOICE=new Rectangle(1065,0,35,35);//声音开关
+	final Rectangle MIN=new Rectangle(1100,0,35,35);//最小化
+	final Rectangle CLOSE=new Rectangle(1135,0,35,35);//关闭
 	
 	final Rectangle FUNCTIONBUTTON=new Rectangle(964,83,105,35);
 	
-	final Rectangle SEARCHPANE=new Rectangle(69,118,1000,45);//地址栏下的主pane 的bounds
-	final Rectangle LISTPANE=new Rectangle(69,163,1000,450);
-	final Rectangle LISTTABLE=new Rectangle(0,0,1000,450);
+	final Rectangle SEARCHPANE=new Rectangle(69,118,1170,45);//地址栏下的主pane 的bounds
+	final Rectangle LISTPANE=new Rectangle(69,163,1170,450);
+	final Rectangle LISTTABLE=new Rectangle(0,0,1170,450);
 	
 	
 	//======搜索栏设置；
@@ -26,6 +26,14 @@ public interface Scale {
     final Rectangle MODEL=new Rectangle(880,0,40,40);//模式切换按钮
     final Rectangle UP=new Rectangle(920,0,40,40);//升序按钮
     final Rectangle DOWN=new Rectangle(960,0,40,40);//降序按钮
+    
+    
+    
+    //=====球队信息详细显示界面====
+    final Rectangle LeftImage=new Rectangle(150,150,300,500);
+    final Rectangle RightInfo=new Rectangle(600,150,600,500);
+    
+    final Rectangle BaseInfo=new Rectangle(20,20,500,200);
     
 	
 	
