@@ -204,10 +204,21 @@ public class Player implements PlayerBLService {
 		return result;
 	}
 
-	public ImageIcon getPlayerImage(String name) {
+	public ImageIcon getPlayerPortraitImage(String name) {
 		ImageIcon icon = null;
 		try {
-			icon = service.getPlayerImage(name);
+			icon = service.getPlayerPortraitImage(name);
+		} catch (RemoteException e) {
+			// TODO 自动生成的 catch 块
+			e.printStackTrace();
+		}
+		return icon;
+	}
+	
+	public ImageIcon getPlayerActionImage(String name){
+		ImageIcon icon = null;
+		try {
+			icon = service.getPlayerActionImage(name);
 		} catch (RemoteException e) {
 			// TODO 自动生成的 catch 块
 			e.printStackTrace();

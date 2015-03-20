@@ -32,5 +32,6 @@ public interface PlayerBLService {
 	public ArrayList<PlayerVO> selectPlayersByAverage(String season,
 			String position, String union, String column);
 
-	public ImageIcon getPlayerImage(String name);
+	public ImageIcon getPlayerPortraitImage(String name);
+	public ImageIcon getPlayerActionImage(String name);
 }
