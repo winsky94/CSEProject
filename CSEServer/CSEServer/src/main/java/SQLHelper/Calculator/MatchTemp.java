@@ -7,6 +7,11 @@ import java.sql.Statement;
 
 import SQLHelper.SqlManager;
 
+/**
+ * 
+ * 统计每场比赛的数据，存于matchTemp表中
+ *
+ */
 public class MatchTemp {
 	Connection con;
 
