@@ -11,8 +11,8 @@ public interface Scale {
 	
 	final Rectangle FUNCTIONBUTTON=new Rectangle(964,83,105,35);
 	
-	final Rectangle SEARCHPANE=new Rectangle(69,118,1170,45);//地址栏下的主pane 的bounds
-	final Rectangle LISTPANE=new Rectangle(69,163,1170,450);
+	final Rectangle SEARCHPANE=new Rectangle(84,118,1170,45);//地址栏下的主pane 的bounds
+	final Rectangle LISTPANE=new Rectangle(84,163,1170,450);
 	final Rectangle LISTTABLE=new Rectangle(0,0,1170,450);
 	
 	

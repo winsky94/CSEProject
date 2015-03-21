@@ -10,34 +10,28 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JSplitPane;
 import javax.swing.JTextField;
 
 import presentation.ModeChangeButton;
 import presentation.OrderChangeButton;
 import presentation.playerui.FilterWindow;
 
-/*
- * author:jin
- * 列表搜索模式球员球队共用框架
- * 
- * */
 public class ListModelFPanel extends ContentPanel{
 	protected JPanel searchPanel;
 	private ListPanel listPanel;
 	private JComboBox<String> season;
 	private JComboBox<String> allOrAve;
-	public ListModelFPanel(int model,ListPanel list) {
+	public ListModelFPanel(int model) {
 		super();
 		addTitleBar();
 		initSearchPanel( model);
 		// TODO Auto-generated constructor stub
-		listPanel=list;
+		listPanel=new ListPanel(model);
 		
 		this.setOpaque(false);
 	    ImageIcon ic=new ImageIcon("img/main/1.jpg");
 		JButton backbtn=new JButton(ic);
-		list.add(backbtn);
+		listPanel.add(backbtn);
 		backbtn.setBounds(100, 200, 100,100 );
 		backbtn.addMouseListener(new MouseListener() {
 			
@@ -68,9 +62,9 @@ public class ListModelFPanel extends ContentPanel{
 			}
 		});
 		add(searchPanel);
-		add(list);
+		add(listPanel);
 		searchPanel.setBounds(Scale.SEARCHPANE);
-		list.setBounds(Scale.LISTPANE);
+		listPanel.setBounds(Scale.LISTPANE);
 		
 		
 	}
@@ -131,5 +125,12 @@ public class ListModelFPanel extends ContentPanel{
 		listPanel.filterRefresh(c);
 		
 	}
+	
+	//===测试==
+	public static void main(String[] args) {
+
+		MainFrame.getInstance().refresh(new ListModelFPanel(1) );
+	}
 
 }
+
