@@ -159,6 +159,7 @@ public class TeamMatchDataCalculator {
 	 */
 	private void getAverageData() {
 		shootHitNumAverage = (double) shootHitNum / matchesNum;// 投篮命中数
+		System.out.println("shootHitNum="+shootHitNum);
 		shootAttemptNumAverage = (double) shootAttemptNum / matchesNum;// 投篮出手次数
 		threeHitNumAverage = (double) threeHitNum / matchesNum;// 三分命中数
 		threeAttemptNumAverage = (double) threeAttemptNum / matchesNum;// 三分出手次数
@@ -410,6 +411,10 @@ public class TeamMatchDataCalculator {
 				winNum++;
 			}
 
+			if(teamName.equals("ATL")){
+				System.out.println(resultSet.getInt(flag + "ShootHitNum"));
+			}
+			
 			shootHitNum += resultSet.getInt(flag + "ShootHitNum");
 			shootAttemptNum += resultSet.getInt(flag + "ShootAttemptNum");
 			threeHitNum += resultSet.getInt(flag + "ThreeHitNum");
