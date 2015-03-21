@@ -66,7 +66,7 @@ public class TeamMatchDataCalculator {
 	double offenReboundEfficiency = 0; // 进攻篮板效率
 	double defenReboundEfficiency = 0; // 防守篮板效率
 	double stealEfficiency = 0; // 抢断效率
-	double assistEfficiency = 0; // 助攻率
+	double assistRate = 0; // 助攻率
 
 	// 赛季
 	// 赛季平均的数字型数值跟场均是一样的，胜率也是一样的
@@ -79,7 +79,7 @@ public class TeamMatchDataCalculator {
 	double offenReboundEfficiencySeason = 0; // 进攻篮板效率
 	double defenReboundEfficiencySeason = 0; // 防守篮板效率
 	double stealEfficiencySeason = 0; // 抢断效率
-	double assistEfficiencySeason = 0; // 助攻率
+	double assistRateSeason = 0; // 助攻率
 	int dsDefenReboundNumSeason = 0;// 对手防守篮板数
 	int dsOffenReboundNumSeason = 0;// 对手进攻篮板数
 	// temp
@@ -104,7 +104,6 @@ public class TeamMatchDataCalculator {
 	}
 
 	public void calculate(String season) {
-
 		createTable();
 		ArrayList<String> names = new ArrayList<String>();
 		names = getTeams();
@@ -127,14 +126,24 @@ public class TeamMatchDataCalculator {
 					String visitingTeam = teams.get("visitingTeam");
 					if (name.equals(homeTeam)) {
 						// 当前球队在该比赛中是主队
+//						if (matchID == 1186) {
+//							System.out.println("a");
+//						}
 						getTeamData(result, "home");
 					} else if (name.equals(visitingTeam)) {
 						// 当前球队在该比赛中是客队
+//						if (matchID == 1186) {
+//							System.out.println("b");
+//						}
 						getTeamData(result, "visiting");
 					} else {
 						// 该球队未参加这场比赛
 						// 跳出当前循环，进行下一次循环
+//						if (matchID == 1186) {
+//							System.out.println("c");
+//						}
 						continue;
+
 					}
 				}
 
@@ -155,11 +164,10 @@ public class TeamMatchDataCalculator {
 	}
 
 	/**
-	 * 计算篮板数、投篮数等的赛季场均数据
+	 * 计算篮板数、投篮数等的赛季总数和场均数据
 	 */
 	private void getAverageData() {
 		shootHitNumAverage = (double) shootHitNum / matchesNum;// 投篮命中数
-		System.out.println("shootHitNum="+shootHitNum);
 		shootAttemptNumAverage = (double) shootAttemptNum / matchesNum;// 投篮出手次数
 		threeHitNumAverage = (double) threeHitNum / matchesNum;// 三分命中数
 		threeAttemptNumAverage = (double) threeAttemptNum / matchesNum;// 三分出手次数
@@ -178,28 +186,31 @@ public class TeamMatchDataCalculator {
 		shootHitRate = (double) shootHitRate / matchesNum;
 		threeHitRate = (double) threeHitRate / matchesNum;
 		freeThrowHitRate = (double) freeThrowHitRate / matchesNum;
-		winRate = (double) winNum / matchesNum;
+		winRate=(double)winNum/matchesNum;
 		offenRound = (double) offenRound / matchesNum;
 		offenEfficiency = (double) offenEfficiency / matchesNum;
 		defenEfficiency = (double) defenEfficiency / matchesNum;
 		offenReboundEfficiency = (double) offenReboundEfficiency / matchesNum;
 		defenReboundEfficiency = (double) defenReboundEfficiency / matchesNum;
 		stealEfficiency = (double) stealEfficiency / matchesNum;
-		assistEfficiency = (double) assistEfficiency / matchesNum;
+		assistRate = (double) assistRate / matchesNum;
 
-		// 计算赛季的总数据平均，对于数量而言，场均和赛季平均一样，胜率也是一样的
+		// 计算赛季的总数据，对于数量而言，场均和赛季平均一样，胜率也是一样的
 		shootHitRateSeason = (double) shootHitNum / shootAttemptNum;
 		threeHitRateSeason = (double) threeHitNum / threeAttemptNum;
 		freeThrowHitRateSeason = (double) freeThrowHitNum / freeThrowAttemptNum;
-		offenRoundSeason = (double) offenRound / matchesNum;
-		offenEfficiencySeason = (double) score / offenRound * 100;
-		defenEfficiencySeason = (double) dsScoreSeason / dsOffenRoundSeason;
+		// offenRoundSeason = (double) offenRound / matchesNum;
+		offenRoundSeason = (double) offenRound * matchesNum;
+		offenEfficiencySeason = (double) score / (offenRound * matchesNum)
+				* 100;
+		defenEfficiencySeason = (double) dsScoreSeason / dsOffenRoundSeason
+				* 100;
 		offenReboundEfficiencySeason = (double) offenReboundNum
 				/ (offenReboundNum + dsDefenReboundNumSeason);
 		defenReboundEfficiencySeason = (double) defenReboundNum
 				/ (defenReboundNum + dsOffenReboundNumSeason);
 		stealEfficiencySeason = (double) stealNum / dsOffenRoundSeason;
-		assistEfficiencySeason = (double) assistNum / offenRound;
+		assistRateSeason = (double) assistNum / (offenRound * matchesNum) * 100;
 	}
 
 	private void createTable() {
@@ -336,9 +347,8 @@ public class TeamMatchDataCalculator {
 		stealEfficiency = Double.parseDouble(dec.format(stealEfficiency));
 		stealEfficiencySeason = Double.parseDouble(dec
 				.format(stealEfficiencySeason));
-		assistEfficiency = Double.parseDouble(dec.format(assistEfficiency));
-		assistEfficiencySeason = Double.parseDouble(dec
-				.format(assistEfficiencySeason));
+		assistRate = Double.parseDouble(dec.format(assistRate));
+		assistRateSeason = Double.parseDouble(dec.format(assistRateSeason));
 	}
 
 	private void exportToSQL() {
@@ -349,22 +359,19 @@ public class TeamMatchDataCalculator {
 
 			sql.execute("insert teamMatchDataSeason values(" + sqlID + ",'"
 					+ teamName + "','" + season + "'," + matchesNum + ","
-					+ winRate + "," + shootHitNumAverage + ","
-					+ shootAttemptNumAverage + "," + threeHitNumAverage + ","
-					+ threeAttemptNumAverage + "," + freeThrowHitNumAverage
-					+ "," + freeThrowAttemptNumAverage + ","
-					+ offenReboundNumAverage + "," + defenReboundNumAverage
-					+ "," + reboundNumAverage + "," + assistNumAverage + ","
-					+ stealNumAverage + "," + blockNumAverage + ","
-					+ turnOverNumAverage + "," + foulNumAverage + ","
-					+ scoreAverage + "," + shootHitRateSeason + ","
+					+ winRate + "," + shootHitNum + "," + shootAttemptNum + ","
+					+ threeHitNum + "," + threeAttemptNum + ","
+					+ freeThrowHitNum + "," + freeThrowAttemptNum + ","
+					+ offenReboundNum + "," + defenReboundNum + ","
+					+ reboundNum + "," + assistNum + "," + stealNum + ","
+					+ blockNum + "," + turnOverNum + "," + foulNum + ","
+					+ score + "," + shootHitRateSeason + ","
 					+ threeHitRateSeason + "," + freeThrowHitRateSeason + ","
 					+ offenRoundSeason + "," + offenEfficiencySeason + ","
 					+ defenEfficiencySeason + ","
 					+ offenReboundEfficiencySeason + ","
 					+ defenReboundEfficiencySeason + ","
-					+ stealEfficiencySeason + "," + assistEfficiencySeason
-					+ ")");
+					+ stealEfficiencySeason + "," + assistRateSeason + ")");
 			sql.close();
 
 			Statement sql2 = con.createStatement();
@@ -382,7 +389,7 @@ public class TeamMatchDataCalculator {
 					+ "," + freeThrowHitRate + "," + offenRound + ","
 					+ offenEfficiency + "," + defenEfficiency + ","
 					+ offenReboundEfficiency + "," + defenReboundEfficiency
-					+ "," + stealEfficiency + "," + assistEfficiency + ")");
+					+ "," + stealEfficiency + "," + assistRate + ")");
 			sql2.close();
 
 			sqlID++;
@@ -411,10 +418,6 @@ public class TeamMatchDataCalculator {
 				winNum++;
 			}
 
-			if(teamName.equals("ATL")){
-				System.out.println(resultSet.getInt(flag + "ShootHitNum"));
-			}
-			
 			shootHitNum += resultSet.getInt(flag + "ShootHitNum");
 			shootAttemptNum += resultSet.getInt(flag + "ShootAttemptNum");
 			threeHitNum += resultSet.getInt(flag + "ThreeHitNum");
@@ -494,7 +497,7 @@ public class TeamMatchDataCalculator {
 
 				stealEfficiency += (double) resultSet.getInt("homeStealNum")
 						/ perVisitingOfenRound * 100;
-				assistEfficiency += (double) resultSet.getInt("homeAssistNum")
+				assistRate += (double) resultSet.getInt("homeAssistNum")
 						/ perHomeOfenRound * 100;
 
 				dsScoreSeason += resultSet.getInt("visitingScore");
@@ -515,10 +518,8 @@ public class TeamMatchDataCalculator {
 
 				stealEfficiency += (double) resultSet
 						.getInt("visitingStealNum") / perHomeOfenRound * 100;
-				assistEfficiency += (double) resultSet
-						.getInt("visitingAssistNum")
-						/ perVisitingOfenRound
-						* 100;
+				assistRate += (double) resultSet.getInt("visitingAssistNum")
+						/ perVisitingOfenRound * 100;
 
 				dsScoreSeason += resultSet.getInt("homeScore");
 				dsOffenRoundSeason += perHomeOfenRound;
@@ -583,7 +584,7 @@ public class TeamMatchDataCalculator {
 		offenReboundEfficiency = 0;
 		defenReboundEfficiency = 0;
 		stealEfficiency = 0; // 抢断效率
-		assistEfficiency = 0; // 助攻率
+		assistRate = 0; // 助攻率
 
 		// 赛季
 		shootHitRateSeason = 0;// 投篮命中率
@@ -595,7 +596,7 @@ public class TeamMatchDataCalculator {
 		offenReboundEfficiencySeason = 0;
 		defenReboundEfficiencySeason = 0;
 		stealEfficiencySeason = 0; // 抢断效率
-		assistEfficiencySeason = 0; // 助攻率
+		assistRateSeason = 0; // 助攻率
 		dsDefenReboundNumSeason = 0;// 对手防守篮板数
 		dsOffenReboundNumSeason = 0;// 对手进攻篮板数
 		dsScoreSeason = 0;// 总赛季对手得分

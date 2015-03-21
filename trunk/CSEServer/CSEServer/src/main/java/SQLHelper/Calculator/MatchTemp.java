@@ -7,14 +7,45 @@ import java.sql.Statement;
 
 import SQLHelper.SqlManager;
 
-/**
- * 
- * 从records表中读取数据，统计每场比赛主客队的相应的技术数据 存储于表：matchtemp
- *
- */
 public class MatchTemp {
 	Connection con;
-	int t=0;
+
+	int matchID = -1;
+	int count = 1;
+	String season = "";
+	String visitingTeam = "";
+	String homeTeam = "";
+
+	int visitingShootHitNum = 0; // 投篮命中数
+	int visitingShootAttemptNum = 0; // 投篮出手次数
+	int visitingThreeHitNum = 0; // 三分命中数
+	int visitingThreeAttemptNum = 0; // 三分出手数
+	int visitingFreeThrowHitNum = 0; // 罚球命中数
+	int visitingFreeThrowAttemptNum = 0; // 罚球出手数
+	int visitingOffenReboundNum = 0; // 进攻篮板数
+	int visitingDefenReboundNum = 0; // 防守篮板数
+	int visitingAssistNum = 0;// 助攻数
+	int visitingStealNum = 0;// 抢断数
+	int visitingBlockNum = 0;// 盖帽数
+	int visitingTurnOverNum = 0;// 失误数
+	int visitingFoulNum = 0;// 犯规数
+	int visitingScore = 0;// 得分
+
+	int homeShootHitNum = 0; // 投篮命中数
+	int homeShootAttemptNum = 0; // 投篮出手次数
+	int homeThreeHitNum = 0; // 三分命中数
+	int homeThreeAttemptNum = 0; // 三分出手数
+	int homeFreeThrowHitNum = 0; // 罚球命中数
+	int homeFreeThrowAttemptNum = 0; // 罚球出手数
+	int homeOffenReboundNum = 0; // 进攻篮板数
+	int homeDefenReboundNum = 0; // 防守篮板数
+	int homeAssistNum = 0;// 助攻数
+	int homeStealNum = 0;// 抢断数
+	int homeBlockNum = 0;// 盖帽数
+	int homeTurnOverNum = 0;// 失误数
+	int homeFoulNum = 0;// 犯规数
+	int homeScore = 0;// 得分
+
 	public MatchTemp() {
 		try {
 			con = SqlManager.getConnection();
@@ -27,230 +58,142 @@ public class MatchTemp {
 		}
 	}
 
-	public void matchTempInit() {
-		int visitingShootHitNum = 0; // 投篮命中数
-		int visitingShootAttemptNum = 0; // 投篮出手次数
-		int visitingThreeHitNum = 0; // 三分命中数
-		int visitingThreeAttemptNum = 0; // 三分出手数
-		int visitingFreeThrowHitNum = 0; // 罚球命中数
-		int visitingFreeThrowAttemptNum = 0; // 罚球出手数
-		int visitingOffenReboundNum = 0; // 进攻篮板数
-		int visitingDefenReboundNum = 0; // 防守篮板数
-		int visitingAssistNum = 0;// 助攻数
-		int visitingStealNum = 0;// 抢断数
-		int visitingBlockNum = 0;// 盖帽数
-		int visitingTurnOverNum = 0;// 失误数
-		int visitingFoulNum = 0;// 犯规数
-		int visitingScore = 0;// 得分
+	public static void main(String[] args) {
+		MatchTemp matchTemp2 = new MatchTemp();
+		matchTemp2.calculate();
+	}
 
-		int homeShootHitNum = 0; // 投篮命中数
-		int homeShootAttemptNum = 0; // 投篮出手次数
-		int homeThreeHitNum = 0; // 三分命中数
-		int homeThreeAttemptNum = 0; // 三分出手数
-		int homeFreeThrowHitNum = 0; // 罚球命中数
-		int homeFreeThrowAttemptNum = 0; // 罚球出手数
-		int homeOffenReboundNum = 0; // 进攻篮板数
-		int homeDefenReboundNum = 0; // 防守篮板数
-		int homeAssistNum = 0;// 助攻数
-		int homeStealNum = 0;// 抢断数
-		int homeBlockNum = 0;// 盖帽数
-		int homeTurnOverNum = 0;// 失误数
-		int homeFoulNum = 0;// 犯规数
-		int homeScore = 0;// 得分
-
+	public void calculate() {
+		createTable();
 		try {
-			Statement sql3 = con.createStatement();
-			createTable();
-			int count = 1;
 			Statement sql = con.createStatement();
-			String query = "select * from records";
+			String query = "select * from matches";
 			ResultSet resultSet = sql.executeQuery(query);
-			int tempID = 0;
-			String visitingTeam = null;
-			String homeTeam = null;
-			String season = null;
-			
+
 			while (resultSet.next()) {
-				int matchID = resultSet.getInt("matchID");
+				matchID = resultSet.getInt("matchID");
 				season = resultSet.getString("season");
-
-				Statement sql2 = con.createStatement();
-				String query2 = "select visitingTeam,homeTeam from matches where matchID="
-						+ matchID;
+				homeTeam = resultSet.getString("homeTeam");
+				homeScore=resultSet.getInt("homeScore");
+				visitingScore=resultSet.getInt("visitingScore");
+				
+						
+				visitingTeam = resultSet.getString("visitingTeam");
+				
+				Statement sql2=con.createStatement();
+				String query2 = "select * from records where matchID=" + matchID;
 				ResultSet rs = sql2.executeQuery(query2);
-				rs.next();
-				visitingTeam = rs.getString("visitingTeam");
-				homeTeam = rs.getString("homeTeam");
-				
-				if (tempID == matchID || tempID == 0) {
-					tempID = matchID;
-					String team = resultSet.getString("team");
-					if (team.equals(visitingTeam)) {
-						if(team.equals("ATL")){
-							t+=resultSet.getInt("shootHitNum");
-						}
-						visitingShootHitNum += resultSet.getInt("shootHitNum"); // 投篮命中数
-						visitingShootAttemptNum += resultSet
-								.getInt("shootAttemptNum"); // 投篮出手次数
-						visitingThreeHitNum += resultSet.getInt("threeHitNum"); // 三分命中数
-						visitingThreeAttemptNum += resultSet
-								.getInt("threeAttemptNum"); // 三分出手数
-						visitingFreeThrowHitNum += resultSet
-								.getInt("freeThrowHitNum"); // 罚球命中数
-						visitingFreeThrowAttemptNum += resultSet
-								.getInt("freeThrowAttemptNum"); // 罚球出手数
-						visitingOffenReboundNum += resultSet
-								.getInt("offenReboundNum"); // 进攻篮板数
-						visitingDefenReboundNum += resultSet
-								.getInt("defenReboundNum"); // 防守篮板数
-						visitingAssistNum += resultSet.getInt("assistNum");// 助攻数
-						visitingStealNum += resultSet.getInt("stealNum");// 抢断数
-						visitingBlockNum += resultSet.getInt("blockNum");// 盖帽数
-						visitingTurnOverNum += resultSet.getInt("turnOverNum");// 失误数
-						visitingFoulNum += resultSet.getInt("foulNum");// 犯规数
-						visitingScore += resultSet.getInt("score");// 得分
-					} else if (team.equals(homeTeam)) {
-						if(team.equals("ATL")){
-							t+=resultSet.getInt("shootHitNum");
-						}
-						homeShootHitNum += resultSet.getInt("shootHitNum"); // 投篮命中数
-						homeShootAttemptNum += resultSet
-								.getInt("shootAttemptNum"); // 投篮出手次数
-						homeThreeHitNum += resultSet.getInt("threeHitNum"); // 三分命中数
-						homeThreeAttemptNum += resultSet
-								.getInt("threeAttemptNum"); // 三分出手数
-						homeFreeThrowHitNum += resultSet
-								.getInt("freeThrowHitNum"); // 罚球命中数
-						homeFreeThrowAttemptNum += resultSet
-								.getInt("freeThrowAttemptNum"); // 罚球出手数
-						homeOffenReboundNum += resultSet
-								.getInt("offenReboundNum"); // 进攻篮板数
-						homeDefenReboundNum += resultSet
-								.getInt("defenReboundNum"); // 防守篮板数
-						homeAssistNum += resultSet.getInt("assistNum");// 助攻数
-						homeStealNum += resultSet.getInt("stealNum");// 抢断数
-						homeBlockNum += resultSet.getInt("blockNum");// 盖帽数
-						homeTurnOverNum += resultSet.getInt("turnOverNum");// 失误数
-						homeFoulNum += resultSet.getInt("foulNum");// 犯规数
-						homeScore += resultSet.getInt("score");// 得分
+				while (rs.next()) {
+					if (rs.getString("team").equals(homeTeam)) {
+						getHomeData(rs);
+					} else if (rs.getString("team").equals(visitingTeam)) {
+						getVisitingData(rs);
 					}
-				} else {
-					sql3.execute("insert MatchTemp values(" + (count++) + ","
-							+ tempID + ",'" + season + "','" + visitingTeam
-							+ "'," + visitingShootHitNum + ","
-							+ visitingShootAttemptNum + ","
-							+ visitingThreeHitNum + ","
-							+ visitingThreeAttemptNum + ","
-							+ visitingFreeThrowHitNum + ","
-							+ visitingFreeThrowAttemptNum + ","
-							+ visitingOffenReboundNum + ","
-							+ visitingDefenReboundNum + "," + visitingAssistNum
-							+ "," + visitingStealNum + "," + visitingBlockNum
-							+ "," + visitingTurnOverNum + "," + visitingFoulNum
-							+ "," + visitingScore + ",'" + homeTeam + "',"
-							+ homeShootHitNum + "," + homeShootAttemptNum + ","
-							+ homeThreeHitNum + "," + homeThreeAttemptNum + ","
-							+ homeFreeThrowHitNum + ","
-							+ homeFreeThrowAttemptNum + ","
-							+ homeOffenReboundNum + "," + homeDefenReboundNum
-							+ "," + homeAssistNum + "," + homeStealNum + ","
-							+ homeBlockNum + "," + homeTurnOverNum + ","
-							+ homeFoulNum + "," + homeScore + ")");
-
-					tempID = 0;
-
-					visitingShootHitNum = 0; // 投篮命中数
-					visitingShootAttemptNum = 0; // 投篮出手次数
-					visitingThreeHitNum = 0; // 三分命中数
-					visitingThreeAttemptNum = 0; // 三分出手数
-					visitingFreeThrowHitNum = 0; // 罚球命中数
-					visitingFreeThrowAttemptNum = 0; // 罚球出手数
-					visitingOffenReboundNum = 0; // 进攻篮板数
-					visitingDefenReboundNum = 0; // 防守篮板数
-					visitingAssistNum = 0;// 助攻数
-					visitingStealNum = 0;// 抢断数
-					visitingBlockNum = 0;// 盖帽数
-					visitingTurnOverNum = 0;// 失误数
-					visitingFoulNum = 0;// 犯规数
-					visitingScore = 0;// 得分
-
-					homeShootHitNum = 0; // 投篮命中数
-					homeShootAttemptNum = 0; // 投篮出手次数
-					homeThreeHitNum = 0; // 三分命中数
-					homeThreeAttemptNum = 0; // 三分出手数
-					homeFreeThrowHitNum = 0; // 罚球命中数
-					homeFreeThrowAttemptNum = 0; // 罚球出手数
-					homeOffenReboundNum = 0; // 进攻篮板数
-					homeDefenReboundNum = 0; // 防守篮板数
-					homeAssistNum = 0;// 助攻数
-					homeStealNum = 0;// 抢断数
-					homeBlockNum = 0;// 盖帽数
-					homeTurnOverNum = 0;// 失误数
-					homeFoulNum = 0;// 犯规数
-					homeScore = 0;// 得分
-
-					tempID = matchID;
-					String team = resultSet.getString("team");
-					if (team.equals(visitingTeam)) {
-						if(team.equals("ATL")){
-							t+=resultSet.getInt("shootHitNum");
-						}
-						visitingShootHitNum += resultSet.getInt("shootHitNum"); // 投篮命中数
-						visitingShootAttemptNum += resultSet
-								.getInt("shootAttemptNum"); // 投篮出手次数
-						visitingThreeHitNum += resultSet.getInt("threeHitNum"); // 三分命中数
-						visitingThreeAttemptNum += resultSet
-								.getInt("threeAttemptNum"); // 三分出手数
-						visitingFreeThrowHitNum += resultSet
-								.getInt("freeThrowHitNum"); // 罚球命中数
-						visitingFreeThrowAttemptNum += resultSet
-								.getInt("freeThrowAttemptNum"); // 罚球出手数
-						visitingOffenReboundNum += resultSet
-								.getInt("offenReboundNum"); // 进攻篮板数
-						visitingDefenReboundNum += resultSet
-								.getInt("defenReboundNum"); // 防守篮板数
-						visitingAssistNum += resultSet.getInt("assistNum");// 助攻数
-						visitingStealNum += resultSet.getInt("stealNum");// 抢断数
-						visitingBlockNum += resultSet.getInt("blockNum");// 盖帽数
-						visitingTurnOverNum += resultSet.getInt("turnOverNum");// 失误数
-						visitingFoulNum += resultSet.getInt("foulNum");// 犯规数
-						visitingScore += resultSet.getInt("score");// 得分
-					} else if (team.equals(homeTeam)) {
-						if(team.equals("ATL")){
-							t+=resultSet.getInt("shootHitNum");
-						}
-						homeShootHitNum += resultSet.getInt("shootHitNum"); // 投篮命中数
-						homeShootAttemptNum += resultSet
-								.getInt("shootAttemptNum"); // 投篮出手次数
-						homeThreeHitNum += resultSet.getInt("threeHitNum"); // 三分命中数
-						homeThreeAttemptNum += resultSet
-								.getInt("threeAttemptNum"); // 三分出手数
-						homeFreeThrowHitNum += resultSet
-								.getInt("freeThrowHitNum"); // 罚球命中数
-						homeFreeThrowAttemptNum += resultSet
-								.getInt("freeThrowAttemptNum"); // 罚球出手数
-						homeOffenReboundNum += resultSet
-								.getInt("offenReboundNum"); // 进攻篮板数
-						homeDefenReboundNum += resultSet
-								.getInt("defenReboundNum"); // 防守篮板数
-						homeAssistNum += resultSet.getInt("assistNum");// 助攻数
-						homeStealNum += resultSet.getInt("stealNum");// 抢断数
-						homeBlockNum += resultSet.getInt("blockNum");// 盖帽数
-						homeTurnOverNum += resultSet.getInt("turnOverNum");// 失误数
-						homeFoulNum += resultSet.getInt("foulNum");// 犯规数
-						homeScore += resultSet.getInt("score");// 得分
+					else {
+						System.out.println("error");
 					}
-					System.out.println(count);
 				}
-
-				
-
 				rs.close();
 				sql2.close();
-
+				
+				exportToSQL();
+				reSet();
+				System.out.println(count);
 			}
 
-			sql3.execute("insert MatchTemp values(" + (count++) + "," + tempID
+			sql.close();
+			resultSet.close();
+			con.close();
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+	}
+
+	private void getVisitingData(ResultSet resultSet) {
+		try {
+			visitingShootHitNum += resultSet.getInt("shootHitNum"); // 投篮命中数
+			visitingShootAttemptNum += resultSet.getInt("shootAttemptNum"); // 投篮出手次数
+			visitingThreeHitNum += resultSet.getInt("threeHitNum"); // 三分命中数
+			visitingThreeAttemptNum += resultSet.getInt("threeAttemptNum"); // 三分出手数
+			visitingFreeThrowHitNum += resultSet.getInt("freeThrowHitNum"); // 罚球命中数
+			visitingFreeThrowAttemptNum += resultSet
+					.getInt("freeThrowAttemptNum"); // 罚球出手数
+			visitingOffenReboundNum += resultSet.getInt("offenReboundNum"); // 进攻篮板数
+			visitingDefenReboundNum += resultSet.getInt("defenReboundNum"); // 防守篮板数
+			visitingAssistNum += resultSet.getInt("assistNum");// 助攻数
+			visitingStealNum += resultSet.getInt("stealNum");// 抢断数
+			visitingBlockNum += resultSet.getInt("blockNum");// 盖帽数
+			visitingTurnOverNum += resultSet.getInt("turnOverNum");// 失误数
+			visitingFoulNum += resultSet.getInt("foulNum");// 犯规数
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+	}
+
+	private void getHomeData(ResultSet resultSet) {
+		try {
+			homeShootHitNum += resultSet.getInt("shootHitNum"); // 投篮命中数
+			homeShootAttemptNum += resultSet.getInt("shootAttemptNum"); // 投篮出手次数
+			homeThreeHitNum += resultSet.getInt("threeHitNum"); // 三分命中数
+			homeThreeAttemptNum += resultSet.getInt("threeAttemptNum"); // 三分出手数
+			homeFreeThrowHitNum += resultSet.getInt("freeThrowHitNum"); // 罚球命中数
+			homeFreeThrowAttemptNum += resultSet.getInt("freeThrowAttemptNum"); // 罚球出手数
+			homeOffenReboundNum += resultSet.getInt("offenReboundNum"); // 进攻篮板数
+			homeDefenReboundNum += resultSet.getInt("defenReboundNum"); // 防守篮板数
+			homeAssistNum += resultSet.getInt("assistNum");// 助攻数
+			homeStealNum += resultSet.getInt("stealNum");// 抢断数
+			homeBlockNum += resultSet.getInt("blockNum");// 盖帽数
+			homeTurnOverNum += resultSet.getInt("turnOverNum");// 失误数
+			homeFoulNum += resultSet.getInt("foulNum");// 犯规数
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+	}
+
+	private void reSet() {
+		matchID = -1;
+		season = "";
+		visitingTeam = "";
+		homeTeam = "";
+
+		visitingShootHitNum = 0; // 投篮命中数
+		visitingShootAttemptNum = 0; // 投篮出手次数
+		visitingThreeHitNum = 0; // 三分命中数
+		visitingThreeAttemptNum = 0; // 三分出手数
+		visitingFreeThrowHitNum = 0; // 罚球命中数
+		visitingFreeThrowAttemptNum = 0; // 罚球出手数
+		visitingOffenReboundNum = 0; // 进攻篮板数
+		visitingDefenReboundNum = 0; // 防守篮板数
+		visitingAssistNum = 0;// 助攻数
+		visitingStealNum = 0;// 抢断数
+		visitingBlockNum = 0;// 盖帽数
+		visitingTurnOverNum = 0;// 失误数
+		visitingFoulNum = 0;// 犯规数
+		visitingScore = 0;// 得分
+
+		homeShootHitNum = 0; // 投篮命中数
+		homeShootAttemptNum = 0; // 投篮出手次数
+		homeThreeHitNum = 0; // 三分命中数
+		homeThreeAttemptNum = 0; // 三分出手数
+		homeFreeThrowHitNum = 0; // 罚球命中数
+		homeFreeThrowAttemptNum = 0; // 罚球出手数
+		homeOffenReboundNum = 0; // 进攻篮板数
+		homeDefenReboundNum = 0; // 防守篮板数
+		homeAssistNum = 0;// 助攻数
+		homeStealNum = 0;// 抢断数
+		homeBlockNum = 0;// 盖帽数
+		homeTurnOverNum = 0;// 失误数
+		homeFoulNum = 0;// 犯规数
+		homeScore = 0;// 得分
+	}
+
+	private void exportToSQL() {
+		try {
+			Statement sql = con.createStatement();
+			sql.execute("insert MatchTemp values(" + (count++) + "," + matchID
 					+ ",'" + season + "','" + visitingTeam + "',"
 					+ visitingShootHitNum + "," + visitingShootAttemptNum + ","
 					+ visitingThreeHitNum + "," + visitingThreeAttemptNum + ","
@@ -267,11 +210,7 @@ public class MatchTemp {
 					+ homeAssistNum + "," + homeStealNum + "," + homeBlockNum
 					+ "," + homeTurnOverNum + "," + homeFoulNum + ","
 					+ homeScore + ")");
-
-			sql3.close();
-			resultSet.close();
 			sql.close();
-			con.close();
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
@@ -314,7 +253,8 @@ public class MatchTemp {
 					+ "homeBlockNum int not null default 0,"
 					+ "homeTurnOverNum int not null default 0,"
 					+ "homeFoulNum int not null default 0,"
-					+ "homeScore int not null default 0," + "primary key(matchTempID));");
+					+ "homeScore int not null default 0,"
+					+ "primary key(matchTempID));");
 			sql.close();
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -322,9 +262,4 @@ public class MatchTemp {
 		}
 	}
 
-	public static void main(String[] args) {
-		MatchTemp matchTemp = new MatchTemp();
-		matchTemp.matchTempInit();
-		System.out.println(matchTemp.t);
-	}
 }
