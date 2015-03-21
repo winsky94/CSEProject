@@ -46,6 +46,7 @@ public class PlayerPO implements Serializable {
 	private double blockRate;// 盖帽率
 	private double turnOverRate;// 失误率
 	private double usageRate;//使用率
+	private double score_rebound_assist;//得分/篮板/助攻
 	private int doubleDoubleNum;//两双
 
 	public PlayerPO(){
@@ -235,6 +236,10 @@ public class PlayerPO implements Serializable {
 		return doubleDoubleNum;
 	}
 	
+	public double getScore_rebound_assist(){
+		return score_rebound_assist;
+	}
+	
 	
 	
 	
@@ -407,6 +412,10 @@ public class PlayerPO implements Serializable {
 	
 	public void setDoubleDouble(int doubleDoubleNum){
 		this.doubleDoubleNum=doubleDoubleNum;
+	}
+	
+	public void setScore_rebound_assist(double score_rebound_assist){
+		this.score_rebound_assist=score_rebound_assist;
 	}
 
 }
