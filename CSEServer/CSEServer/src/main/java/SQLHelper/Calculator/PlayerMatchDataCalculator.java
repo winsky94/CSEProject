@@ -103,6 +103,8 @@ public class PlayerMatchDataCalculator {
 	int teamTurnOverNumSeason = 0;
 	int doubleDoubleNum=0;
 	double dsOffenRoundNumSeason=0;
+	double score_rebound_assistSeason=0;
+	double score_rebound_assist=0;
 
 	public PlayerMatchDataCalculator() {
 		try {
@@ -202,6 +204,8 @@ public class PlayerMatchDataCalculator {
 		teamFreeThrowAttemptNumSeason = 0;
 		teamTurnOverNumSeason = 0;
 		doubleDoubleNum=0;
+		score_rebound_assistSeason=0;
+		score_rebound_assist=0;
 	}
 
 	public void format() {
@@ -267,6 +271,8 @@ public class PlayerMatchDataCalculator {
 		turnOverRateSeason = Double.parseDouble(dec.format(turnOverRateSeason));
 		usageRateSeason = Double.parseDouble(dec.format(usageRateSeason));
 		matchTimeSeason = Double.parseDouble(dec.format(matchTimeSeason));
+		score_rebound_assist=Double.parseDouble(dec.format(score_rebound_assist));
+		score_rebound_assistSeason=Double.parseDouble(dec.format(score_rebound_assistSeason));
 	}
 
 	public void exportToSQL() {
@@ -296,7 +302,7 @@ public class PlayerMatchDataCalculator {
 					+ offenReboundRateSeason + "," + defenReboundRateSeason
 					+ "," + assistRateSeason + "," + stealRateSeason + ","
 					+ blockRateSeason + "," + turnOverRateSeason + ","
-					+ usageRateSeason +","+doubleDoubleNum+")");
+					+ usageRateSeason +","+score_rebound_assistSeason+","+doubleDoubleNum+")");
 			sql.close();
 
 			Statement sql2 = con.createStatement();
@@ -315,7 +321,7 @@ public class PlayerMatchDataCalculator {
 					+ reboundRate + "," + offenReboundRate + ","
 					+ defenReboundRate + "," + assistRate + "," + stealRate
 					+ "," + blockRate + "," + turnOverRate + "," + usageRate
-					+","+doubleDoubleNum+ ")");
+					+","+score_rebound_assist+","+doubleDoubleNum+ ")");
 			sql2.close();
 
 			sqlID++;
@@ -352,8 +358,7 @@ public class PlayerMatchDataCalculator {
 						gameStartingNum++;
 					reboundNumSeason += resultSet.getInt("reboundNum");
 					assistNumSeason += resultSet.getInt("assistNum");
-					presentTimeSeason = addPresentTime(presentTime,
-							resultSet.getString("presentTime"));
+					presentTimeSeason = addPresentTime(presentTimeSeason,resultSet.getString("presentTime"));
 					shootHitNumSeason += resultSet.getInt("shootHitNum");
 					shootAttemptNumSeason += resultSet
 							.getInt("shootAttemptNum");
@@ -570,6 +575,7 @@ public class PlayerMatchDataCalculator {
 					teamShootAttemptNumSeason += teamShootAttemptNum;
 					teamFreeThrowAttemptNumSeason += teamFreeThrowAttemptNum;
 					teamTurnOverNumSeason += teamTurnOverNum;
+					score_rebound_assist+=score+reboundNum+assistNum;
 					
 					int temp=0;
 				    if(resultSet.getInt("score")>=10)
@@ -688,6 +694,8 @@ public class PlayerMatchDataCalculator {
 							/ (teamShootAttemptNumSeason + 0.44
 									* teamFreeThrowAttemptNumSeason + teamTurnOverNumSeason);
 					usageRate = usageRate / playedGames;
+					score_rebound_assistSeason=(double)(scoreSeason+reboundNumSeason+assistNumSeason)/3;
+					score_rebound_assist=(double)score_rebound_assist/playedGames;
 					rs.close();
 					sql0.close();
 
@@ -1136,6 +1144,7 @@ public class PlayerMatchDataCalculator {
 					+ "blockRate double not null default 0,"
 					+ "turnOverRate double not null default 0,"
 					+ "usageRate double not null default 0,"
+					+ "score_rebound_assist double not null default 0,"
 					+ "doubleDoubleNum double not null default 0,"
 					+ "primary key(playerDataID));";
 			sql.execute(query);
@@ -1177,6 +1186,7 @@ public class PlayerMatchDataCalculator {
 					+ "blockRate double not null default 0,"
 					+ "turnOverRate double not null default 0,"
 					+ "usageRate double not null default 0,"
+					+ "score_rebound_assist double not null default 0,"
 					+ "doubleDoubleNum int not null default 0,"
 					+ "primary key(playerDataID));";
 			sql2.execute(query2);
