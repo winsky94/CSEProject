@@ -80,6 +80,7 @@ public class ListPanel extends JPanel {
 		table.setRowSorter(sorter);
 		table.setOpaque(false);
 		jsp.setOpaque(false);
+		this.setOpaque(false);
 		// =====表格美化====
 
 		tablemodel.Refresh("汇总");
