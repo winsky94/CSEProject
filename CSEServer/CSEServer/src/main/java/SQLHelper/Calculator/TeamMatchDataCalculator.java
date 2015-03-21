@@ -663,21 +663,21 @@ public class TeamMatchDataCalculator {
 	 *            表名
 	 * @return 当前表中最后一个id
 	 */
-	private int getLastID(String idNameInTable, String table) {
-		int result = 0;
-		try {
-			Statement sql = con.createStatement();
-			String query = "select " + idNameInTable + " from " + table
-					+ " order by " + idNameInTable + " desc";
-			ResultSet resultSet = sql.executeQuery(query);
-			resultSet.next();
-			result = resultSet.getInt(idNameInTable);
-			resultSet.close();
-			sql.close();
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-		}
-		return result;
-	}
+//	private int getLastID(String idNameInTable, String table) {
+//		int result = 0;
+//		try {
+//			Statement sql = con.createStatement();
+//			String query = "select " + idNameInTable + " from " + table
+//					+ " order by " + idNameInTable + " desc";
+//			ResultSet resultSet = sql.executeQuery(query);
+//			resultSet.next();
+//			result = resultSet.getInt(idNameInTable);
+//			resultSet.close();
+//			sql.close();
+//		} catch (Exception e) {
+//			// TODO: handle exception
+//			e.printStackTrace();
+//		}
+//		return result;
+//	}
 }
