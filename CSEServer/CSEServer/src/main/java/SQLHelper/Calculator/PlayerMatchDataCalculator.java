@@ -347,8 +347,8 @@ public class PlayerMatchDataCalculator {
 						owingTeam = owingTeam + resultSet.getString("team")
 								+ "  ";
 					}
-					playedGames++;
-					if (resultSet.getString("position") != null)
+					playedGames++; 
+					if (!resultSet.getString("position") .equals("") )
 						gameStartingNum++;
 					reboundNumSeason += resultSet.getInt("reboundNum");
 					assistNumSeason += resultSet.getInt("assistNum");
