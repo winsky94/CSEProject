@@ -14,7 +14,7 @@ import SQLHelper.SqlManager;
  */
 public class MatchTemp {
 	Connection con;
-
+	int t=0;
 	public MatchTemp() {
 		try {
 			con = SqlManager.getConnection();
@@ -69,14 +69,26 @@ public class MatchTemp {
 			String visitingTeam = null;
 			String homeTeam = null;
 			String season = null;
+			
 			while (resultSet.next()) {
 				int matchID = resultSet.getInt("matchID");
 				season = resultSet.getString("season");
 
+				Statement sql2 = con.createStatement();
+				String query2 = "select visitingTeam,homeTeam from matches where matchID="
+						+ matchID;
+				ResultSet rs = sql2.executeQuery(query2);
+				rs.next();
+				visitingTeam = rs.getString("visitingTeam");
+				homeTeam = rs.getString("homeTeam");
+				
 				if (tempID == matchID || tempID == 0) {
 					tempID = matchID;
 					String team = resultSet.getString("team");
 					if (team.equals(visitingTeam)) {
+						if(team.equals("ATL")){
+							t+=resultSet.getInt("shootHitNum");
+						}
 						visitingShootHitNum += resultSet.getInt("shootHitNum"); // 投篮命中数
 						visitingShootAttemptNum += resultSet
 								.getInt("shootAttemptNum"); // 投篮出手次数
@@ -98,6 +110,9 @@ public class MatchTemp {
 						visitingFoulNum += resultSet.getInt("foulNum");// 犯规数
 						visitingScore += resultSet.getInt("score");// 得分
 					} else if (team.equals(homeTeam)) {
+						if(team.equals("ATL")){
+							t+=resultSet.getInt("shootHitNum");
+						}
 						homeShootHitNum += resultSet.getInt("shootHitNum"); // 投篮命中数
 						homeShootAttemptNum += resultSet
 								.getInt("shootAttemptNum"); // 投篮出手次数
@@ -177,6 +192,9 @@ public class MatchTemp {
 					tempID = matchID;
 					String team = resultSet.getString("team");
 					if (team.equals(visitingTeam)) {
+						if(team.equals("ATL")){
+							t+=resultSet.getInt("shootHitNum");
+						}
 						visitingShootHitNum += resultSet.getInt("shootHitNum"); // 投篮命中数
 						visitingShootAttemptNum += resultSet
 								.getInt("shootAttemptNum"); // 投篮出手次数
@@ -198,6 +216,9 @@ public class MatchTemp {
 						visitingFoulNum += resultSet.getInt("foulNum");// 犯规数
 						visitingScore += resultSet.getInt("score");// 得分
 					} else if (team.equals(homeTeam)) {
+						if(team.equals("ATL")){
+							t+=resultSet.getInt("shootHitNum");
+						}
 						homeShootHitNum += resultSet.getInt("shootHitNum"); // 投篮命中数
 						homeShootAttemptNum += resultSet
 								.getInt("shootAttemptNum"); // 投篮出手次数
@@ -222,13 +243,7 @@ public class MatchTemp {
 					System.out.println(count);
 				}
 
-				Statement sql2 = con.createStatement();
-				String query2 = "select visitingTeam,homeTeam from matches where matchID="
-						+ matchID;
-				ResultSet rs = sql2.executeQuery(query2);
-				rs.next();
-				visitingTeam = rs.getString("visitingTeam");
-				homeTeam = rs.getString("homeTeam");
+				
 
 				rs.close();
 				sql2.close();
@@ -310,5 +325,6 @@ public class MatchTemp {
 	public static void main(String[] args) {
 		MatchTemp matchTemp = new MatchTemp();
 		matchTemp.matchTempInit();
+		System.out.println(matchTemp.t);
 	}
 }
