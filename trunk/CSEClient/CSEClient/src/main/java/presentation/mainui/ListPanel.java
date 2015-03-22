@@ -1,6 +1,8 @@
 package presentation.mainui;
 
+import java.awt.Color;
 import java.awt.Component;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.event.MouseAdapter;
@@ -12,10 +14,12 @@ import javax.swing.JComponent;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
+import presentation.MyTableCellRenderer;
 import presentation.playerui.detail.PlayerInfoPanel;
 import presentation.playerui.tablemodel.PlayerTableModel;
 import presentation.teamui.tablemodel.TeamTableModel;
@@ -40,16 +44,30 @@ public class ListPanel extends JPanel {
 		else
 			tablemodel = new PlayerTableModel();
 
-		table = new JTable(tablemodel) {
-			public Component prepareRender(TableCellRenderer renderer, int row,
-					int column) {
-				Component c = super.prepareRenderer(renderer, row, column);
-				if (c instanceof JComponent)
-					((JComponent) c).setOpaque(false);
+		// table = new JTable(tablemodel) {
+		// public Component prepareRender(MyTableCellRenderer renderer, int row,
+		// int column) {
+		// Component c = super.prepareRenderer(renderer, row, column);
+		// if (c instanceof JComponent)
+		// ((JComponent) c).setOpaque(false);
+		//
+		// return c;
+		// }
+		// };
+		table = new JTable(tablemodel);
 
-				return c;
-			}
-		};
+		// table 渲染器，设置文字内容居中显示，设置背景色等
+		// table.setBackground(new Color(248,248,255));//设置背景颜色204, 204, 255
+		// table.setForeground(new Color(128, 0, 0));//
+		// 设置字体颜色，但标题不会改变——新设置的字体颜色丑死了，我还是注释掉吧
+		table.setSelectionBackground(new java.awt.Color(218, 112, 214));// 设置选择行的颜色——兰花紫
+		table.setFont(new Font("微软雅黑", 0, 12));
+		table.getTableHeader().setFont(new Font("微软雅黑", 0, 14));
+		table.getTableHeader().setBackground(new Color(211, 211, 211));
+		DefaultTableCellRenderer tcr = new MyTableCellRenderer();
+		for (int i = 0; i < table.getColumnCount(); i++) {
+			table.getColumn(table.getColumnName(i)).setCellRenderer(tcr);
+		}
 		jsp = new JScrollPane(table);
 		table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
