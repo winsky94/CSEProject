@@ -575,7 +575,7 @@ public class PlayerMatchDataCalculator {
 					teamShootAttemptNumSeason += teamShootAttemptNum;
 					teamFreeThrowAttemptNumSeason += teamFreeThrowAttemptNum;
 					teamTurnOverNumSeason += teamTurnOverNum;
-					score_rebound_assist+=score+reboundNum+assistNum;
+					score_rebound_assist+=resultSet.getInt("score")+resultSet.getInt("reboundNum")+resultSet.getInt("assistNum");
 					
 					int temp=0;
 				    if(resultSet.getInt("score")>=10)
