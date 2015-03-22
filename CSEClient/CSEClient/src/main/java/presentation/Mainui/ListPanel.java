@@ -9,6 +9,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.Comparator;
 
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
@@ -103,6 +104,8 @@ public class ListPanel extends JPanel {
 
 		//tablemodel.Refresh("汇总");
 		table.revalidate();
+		jsp.setBorder(BorderFactory.createLineBorder(Color.BLACK,5));
+		
 	}
 
 	public void paintComponent(Graphics g) {
