@@ -537,7 +537,7 @@ public class Player extends UnicastRemoteObject implements PlayerDataService {
 			con = SqlManager.getConnection();
 			Statement sql = con.createStatement();
 			String query;
-			if (position.equals("all")) {
+			if (position.equals("all")&&!union.equals("all")) {
 				query = "select *" + " from " + table + " order by " + table
 						+ "." + column + " desc";
 				ResultSet rs = sql.executeQuery(query);
@@ -590,15 +590,16 @@ public class Player extends UnicastRemoteObject implements PlayerDataService {
 
 				}
 				rs.close();
-			} else if (union.equals("all")) {
+			} else if (union.equals("all")&&!position.equals("all")) {
 				query = "select players.name,players.position," + table + ".*"
 						+ " from players," + table + " where players.name="
-						+ table + ".playerName and players.position like '%"
-						+ position + "%' order by " + table + "." + column
+						+ table + ".playerName and players.position='"
+						+ position + "' order by " + table + "." + column
 						+ " desc";
 				ResultSet rs = sql.executeQuery(query);
 				while (rs.next()) {
 					player = new PlayerPO();
+					player.setPosition(rs.getString("position"));
 					player.setName(rs.getString("playerName"));
 					player.setTeamName(rs.getString("owingTeam"));
 					player.setPlayedGames(rs.getInt("playedGames"));
@@ -639,16 +640,17 @@ public class Player extends UnicastRemoteObject implements PlayerDataService {
 					players.add(player);
 				}
 				rs.close();
-			} else {
+			} else if(!position.equals("all")&&!union.equals("all")){
 				query = "select players.name,players.position," + table + ".*"
 						+ " from players," + table + " where players.name="
-						+ table + ".playerName and players.position like '%"
-						+ position + "%' order by " + table + "." + column
+						+ table + ".playerName and players.position='"
+						+ position + "' order by " + table + "." + column
 						+ " desc";
 				ResultSet rs = sql.executeQuery(query);
 				while (rs.next()) {
 					if (isUnionRight(rs.getString("owingTeam"), union)) {
 						player = new PlayerPO();
+						player.setPosition(rs.getString("position"));
 						player.setName(rs.getString("playerName"));
 						player.setTeamName(rs.getString("owingTeam"));
 						player.setPlayedGames(rs.getInt("playedGames"));
@@ -696,6 +698,55 @@ public class Player extends UnicastRemoteObject implements PlayerDataService {
 				}
 				rs.close();
 			}
+			else{
+				query = "select players.name," + table + ".*"
+						+ " from players," + table + " where players.name="
+						+ table + ".playerName order by " + table + "." + column
+						+ " desc";
+				ResultSet rs = sql.executeQuery(query);
+				while (rs.next()) {
+					player = new PlayerPO();
+					player.setName(rs.getString("playerName"));
+					player.setTeamName(rs.getString("owingTeam"));
+					player.setPlayedGames(rs.getInt("playedGames"));
+					player.setGameStartingNum(rs.getInt("gameStartingNum"));
+					player.setReboundNum(rs.getInt("reboundNum"));
+					player.setAssistNum(rs.getInt("assistNum"));
+					player.setPresentTime(rs.getString("presentTime"));
+					player.setShootHitRate(rs.getDouble("shootHitRate"));
+					player.setThreeHitRate(rs.getDouble("threeHitRate"));
+					player.setFreeThrowHitRate(rs.getDouble("freeThrowHitRate"));
+					player.setOffenNum(rs.getInt("offenNum"));
+					player.setDefenNum(rs.getInt("defenNum"));
+					player.setStealNum(rs.getInt("stealNum"));
+					player.setBlockNum(rs.getInt("blockNum"));
+					player.setFoulNum(rs.getInt("foulNum"));
+					player.setTurnOverNum(rs.getInt("turnOverNum"));
+					player.setScore(rs.getInt("score"));
+					player.setEfficiency(rs.getDouble("efficiency"));
+					player.setRecentFiveMatchesScoreUpRate(rs
+							.getDouble("recentFiveMatchesScoreUpRate"));
+					player.setRecentFiveMatchesReboundUpRate(rs
+							.getDouble("recentFiveMatchesReboundUpRate"));
+					player.setRecentFiveMatchesAssistUpRate(rs
+							.getDouble("recentFiveMatchesAssistUpRate"));
+					player.setGmScEfficiencyValue(rs
+							.getDouble("GmScEfficiencyValue"));
+					player.setTrueHitRate(rs.getDouble("trueHitRate"));
+					player.setShootEfficiency(rs.getDouble("shootEfficiency"));
+					player.setReboundRate(rs.getDouble("reboundRate"));
+					player.setOffenReboundRate(rs.getDouble("offenReboundRate"));
+					player.setDefenReboundRate(rs.getDouble("defenReboundRate"));
+					player.setAssistRate(rs.getDouble("assistRate"));
+					player.setStealRate(rs.getDouble("stealRate"));
+					player.setBlockRate(rs.getDouble("blockRate"));
+					player.setTurnOverRate(rs.getDouble("turnOverRate"));
+					player.setUsageRate(rs.getDouble("usageRate"));
+					player.setDoubleDouble(rs.getInt("doubleDoubleNum"));
+					players.add(player);
+				}
+				rs.close();
+			}
 
 			con.close();
 			sql.close();
@@ -729,25 +780,36 @@ public class Player extends UnicastRemoteObject implements PlayerDataService {
 	}
 
 	public static void main(String[] args) {
-		Connection con;
+//		Connection con;
+//		try {
+//			String table = "playermatchdataaverage";
+//			String position = "G";
+//			String column = "playedGames";
+//			con = SqlManager.getConnection();
+//			Statement sql = con.createStatement();
+//			String query = "select players.name,players.position," + table
+//					+ ".*" + " from players," + table + " where players.name="
+//					+ table + ".playerName and players.position like '%"
+//					+ position + "%' order by " + table + "." + column
+//					+ " desc";
+//			ResultSet rs = sql.executeQuery(query);
+//			rs.next();
+//			System.out.println(rs.getString("reboundNum"));
+//		} catch (ClassNotFoundException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		} catch (SQLException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 		try {
-			String table = "playermatchdataaverage";
-			String position = "G";
-			String column = "playedGames";
-			con = SqlManager.getConnection();
-			Statement sql = con.createStatement();
-			String query = "select players.name,players.position," + table
-					+ ".*" + " from players," + table + " where players.name="
-					+ table + ".playerName and players.position like '%"
-					+ position + "%' order by " + table + "." + column
-					+ " desc";
-			ResultSet rs = sql.executeQuery(query);
-			rs.next();
-			System.out.println(rs.getString("reboundNum"));
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (SQLException e) {
+			Player p=new Player();
+			ArrayList<PlayerPO> pl= p.selectPlayersBySeason("13-14",
+					"G", "E", "playedGames");
+			for(PlayerPO pp:pl){
+				System.out.println(pp.getName()+" "+pp.getPosition());
+			}
+		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -755,16 +817,19 @@ public class Player extends UnicastRemoteObject implements PlayerDataService {
 	}
 
 	private boolean isUnionRight(String owingTeam, String union) {
-		String[] theTeams = owingTeam.split(" ");
+		String[] theTeams = owingTeam.split("  ");
 		for (int i = 0; i < theTeams.length; i++) {
 			String team = theTeams[i];
-
+            if(team.equals(""))
+            	return false;
 			try {
 				con = SqlManager.getConnection();
 				Statement sql = con.createStatement();
 				String query = "select conference,partition from teams where abLocation='"
 						+ team + "'";
 				ResultSet rs = sql.executeQuery(query);
+				if(rs==null)
+					continue;
 				rs.next();
 				if (union.equals(rs.getString("conference"))
 						|| union.equals(rs.getString("partition")))
