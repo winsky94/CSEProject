@@ -28,9 +28,6 @@ import javax.swing.JWindow;
 import javax.swing.ListCellRenderer;
 import javax.swing.border.TitledBorder;
 
-import presentation.mainui.ListModelFPanel;
-import presentation.mainui.ListPanel;
-
 public class FilterWindow extends JWindow {
 
 	/**
@@ -55,6 +52,7 @@ public class FilterWindow extends JWindow {
 			 */
 			private static final long serialVersionUID = 1L;
 
+			@Override
 			protected void paintComponent(Graphics g) {
 				ImageIcon icon = new ImageIcon("img/main/metal.jpg");
 				Image img = icon.getImage();

@@ -5,8 +5,6 @@ import java.util.ArrayList;
 import javax.swing.table.AbstractTableModel;
 
 import businesslogic.Player;
-import presentation.mainui.FilterCondition;
-import presentation.mainui.MyTableModel;
 import vo.PlayerVO;
 
 public class PlayerTableModel extends MyTableModel{

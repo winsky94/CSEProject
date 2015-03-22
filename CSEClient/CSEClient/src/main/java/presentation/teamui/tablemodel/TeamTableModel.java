@@ -2,7 +2,6 @@ package presentation.teamui.tablemodel;
 
 import java.util.ArrayList;
 
-import presentation.mainui.MyTableModel;
 import vo.TeamVO;
 import businesslogic.Team;
 
