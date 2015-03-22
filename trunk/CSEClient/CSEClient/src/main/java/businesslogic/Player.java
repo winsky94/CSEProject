@@ -169,6 +169,9 @@ public class Player implements PlayerBLService {
 		// TODO 自动生成的方法存根
 		ArrayList<PlayerVO> result = new ArrayList<PlayerVO>();
 		try {
+			position = changePositionCHToEN(position);
+			union=changeUnionCHToEN(union);
+			column = changeColumnCHToEN(column);
 			ArrayList<PlayerPO> data = service.selectPlayersBySeason(season,
 					position, union, column);
 
@@ -189,6 +192,9 @@ public class Player implements PlayerBLService {
 		// TODO 自动生成的方法存根
 		ArrayList<PlayerVO> result = new ArrayList<PlayerVO>();
 		try {
+			position = changePositionCHToEN(position);
+			union=changeUnionCHToEN(union);
+			column = changeColumnCHToEN(column);
 			ArrayList<PlayerPO> data = service.selectPlayersByAverage(season,
 					position, union, column);
 
@@ -214,8 +220,8 @@ public class Player implements PlayerBLService {
 		}
 		return icon;
 	}
-	
-	public ImageIcon getPlayerActionImage(String name){
+
+	public ImageIcon getPlayerActionImage(String name) {
 		ImageIcon icon = null;
 		try {
 			icon = service.getPlayerActionImage(name);
@@ -252,5 +258,86 @@ public class Player implements PlayerBLService {
 				po.getTurnOverRate(), po.getUsageRate(),
 				po.getDoubleDoubleNum());
 		return vo;
+	}
+
+	/**
+	 * 将table的列的中文名转换为对应的英文名，便于数据库查找
+	 * 
+	 * @param CH
+	 *            table列的中文名
+	 * @return 对应的英文名
+	 */
+	private String changeColumnCHToEN(String CH) {
+		String EN = null;
+		if (CH.equals("得分")) {
+			EN = "score";
+		} else if (CH.equals("篮板")) {
+			EN = "reboundNum";
+		} else if (CH.equals("助攻")) {
+			EN = "assistNum";
+		} else if (CH.equals("得分/篮板/助攻（加权比为1:1:1）")) {
+			EN = "score_rebound_assist";
+		} else if (CH.equals("盖帽")) {
+			EN = "blockNum";
+		} else if (CH.equals("抢断")) {
+			EN = "stealNum";
+		} else if (CH.equals("犯规")) {
+			EN = "foulNum";
+		} else if (CH.equals("失误")) {
+			EN = "turnOverNum";
+		} else if (CH.equals("分钟")) {
+			EN = "presentTime";
+		} else if (CH.equals("效率")) {
+			EN = "efficiency";
+		} else if (CH.equals("投篮")) {
+			EN = "shootHitRate";
+		} else if (CH.equals("三分")) {
+			EN = "threeHitRate";
+		} else if (CH.equals("罚球")) {
+			EN = "freeThrowHitRate";
+		} else if (CH.equals("两双")) {
+			EN = "doubleDoubleNum";
+		} else {
+			EN = CH;
+		}
+		return EN;
+	}
+
+	/**
+	 * 将球员位置中文转为英文便于数据库查找
+	 * 
+	 * @param CH
+	 *            位置的中文名
+	 * @return 对应的英文
+	 */
+	private String changePositionCHToEN(String CH) {
+		String EN = null;
+		if (CH.equals("全部")) {
+			EN = "all";
+		} else if (CH.equals("前锋")) {
+			EN = "F";
+		} else if (CH.equals("中锋")) {
+			EN = "C";
+		} else if (CH.equals("后卫")) {
+			EN = "G";
+		} else {
+			EN = CH;
+		}
+		return EN;
+	}
+
+	/**
+	 * 将球员联盟中文转为英文便于数据库查找
+	 * @param CH 球员联盟
+	 * @return 对应的英文
+	 */
+	private String changeUnionCHToEN(String CH) {
+		String EN = null;
+		if (CH.equals("全部")) {
+			EN = "all";
+		} else {
+			EN = CH;
+		}
+		return EN;
 	}
 }
