@@ -742,7 +742,7 @@ public class PlayerMatchDataCalculator {
 		try {
 			Statement sql = con.createStatement();
 			String query = "select matchID,score,reboundNum,assistNum from records where playerName='"
-					+ name + "'";
+					+ name + "' order by matchID desc";
 			ResultSet resultSet = sql.executeQuery(query);
 			while (resultSet.next()) {
 				if (count >= 5) {
