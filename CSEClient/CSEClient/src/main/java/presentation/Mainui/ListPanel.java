@@ -101,7 +101,7 @@ public class ListPanel extends JPanel {
 		this.setOpaque(false);
 		// =====表格美化====
 
-		tablemodel.Refresh("汇总");
+		//tablemodel.Refresh("汇总");
 		table.revalidate();
 	}
 
