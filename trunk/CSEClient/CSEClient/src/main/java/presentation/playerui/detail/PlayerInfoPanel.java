@@ -6,15 +6,9 @@ import javax.swing.JPanel;
 
 
 import javax.swing.JTabbedPane;
+import javax.swing.SwingConstants;
 
 import businesslogic.Player;
-/*
- * author:jin
- * 球员具体信息显示
- * */
-import presentation.mainui.ContentPanel;
-import presentation.mainui.MainFrame;
-import presentation.mainui.Scale;
 import vo.PlayerVO;
 /*
  * 大背景 
@@ -36,7 +30,7 @@ public class PlayerInfoPanel extends ContentPanel{
 		base=new JPanel();
 		average=new JPanel();
 		season=new JPanel();
-		rightInfo=new JTabbedPane(JTabbedPane.TOP);
+		rightInfo=new JTabbedPane(SwingConstants.TOP);
 		rightInfo.add("基本信息", base);
 		rightInfo.add("场均数据", average);
 		rightInfo.add("赛季总数据",season);

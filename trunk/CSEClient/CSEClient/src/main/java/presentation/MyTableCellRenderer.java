@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import javax.swing.JLabel;
 import javax.swing.JTable;
+import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 
 public class MyTableCellRenderer extends DefaultTableCellRenderer {
@@ -26,9 +27,10 @@ public class MyTableCellRenderer extends DefaultTableCellRenderer {
 	}
 	
 	
+	@Override
 	public Component getTableCellRendererComponent(JTable table, Object value,
 			boolean isSelected, boolean hasFocus, int row, int column) {
-		setHorizontalAlignment(JLabel.CENTER);
+		setHorizontalAlignment(SwingConstants.CENTER);
 		// 设置列宽自己设置
 //		String columnName1 = table.getColumnName(0);
 //		table.getColumn(columnName1).setPreferredWidth(180);

@@ -50,6 +50,7 @@ public class IPFrame extends JFrame implements ActionListener {
 			private static final long serialVersionUID = 1L;
 
 			// 给panel加上图片
+			@Override
 			protected void paintComponent(Graphics g) {
 				ImageIcon icon = new ImageIcon("img/net.png");
 				Image img = icon.getImage();
@@ -122,6 +123,7 @@ public class IPFrame extends JFrame implements ActionListener {
 		this.setVisible(true);
 		// 处理窗口拖动事件
 		this.addMouseListener(new MouseAdapter() {
+			@Override
 			public void mousePressed(MouseEvent e) {
 				xOld = e.getX();
 				yOld = e.getY();
