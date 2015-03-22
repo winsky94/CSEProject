@@ -243,7 +243,6 @@ public class PlayerPO implements Serializable {
 	
 	
 	
-	
 
 	public void setId(int id) {
 		this.id = id;
@@ -414,9 +413,9 @@ public class PlayerPO implements Serializable {
 	public void setDoubleDouble(int doubleDoubleNum){
 		this.doubleDoubleNum=doubleDoubleNum;
 	}
-
+	
 	public void setScore_rebound_assist(double score_rebound_assist){
 		this.score_rebound_assist=score_rebound_assist;
 	}
-	
+
 }

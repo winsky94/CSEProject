@@ -42,7 +42,7 @@ public class PlayerVO {
 	private double blockRate;// 盖帽率
 	private double turnOverRate;// 失误率
 	private double usageRate;// 使用率
-	private double score_rebound_assist;//得分/篮板/助攻
+	private double score_rebound_assist;// 得分/篮板/助攻
 	private int doubleDoubleNum;// 两双
 
 	public PlayerVO(int id, String name, int number, String position,
@@ -72,7 +72,8 @@ public class PlayerVO {
 			double trueHitRate, double shootHitEfficiency, double reboundRate,
 			double offenReboundRate, double defenReboundRate,
 			double assistRate, double stealRate, double blockRate,
-			double turnOverRate, double usageRate, int doubleDoubleNum) {
+			double turnOverRate, double usageRate, double score_rebound_assist,
+			int doubleDoubleNum) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -114,6 +115,7 @@ public class PlayerVO {
 		this.blockRate = blockRate;
 		this.turnOverRate = turnOverRate;
 		this.usageRate = usageRate;
+		this.score_rebound_assist = score_rebound_assist;
 		this.doubleDoubleNum = doubleDoubleNum;
 	}
 
@@ -228,7 +230,7 @@ public class PlayerVO {
 	public double getRecentFiveMatchesReboundUpRate() {
 		return recentFiveMatchesReboundUpRate;
 	}
-	
+
 	public double getRecentFiveMatchesScoreUpRate() {
 		return recentFiveMatchesScoreUpRate;
 	}
@@ -280,8 +282,8 @@ public class PlayerVO {
 	public int getDoubleDoubleNum() {
 		return doubleDoubleNum;
 	}
-	
-	public double getScore_rebound_assist(){
+
+	public double getScore_rebound_assist() {
 		return score_rebound_assist;
 	}
 }
