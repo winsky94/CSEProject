@@ -1,4 +1,4 @@
-package presentation.mainui;
+package presentation.Mainui;
 
 import javax.swing.table.AbstractTableModel;
 

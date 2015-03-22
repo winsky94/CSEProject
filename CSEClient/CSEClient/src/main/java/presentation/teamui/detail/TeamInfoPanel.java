@@ -7,6 +7,10 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
+import presentation.Mainui.ContentPanel;
+import presentation.Mainui.MainFrame;
+import presentation.Mainui.Scale;
+
 public class TeamInfoPanel extends ContentPanel{
 	private JScrollPane jsp;
 	private JPanel test;

@@ -24,6 +24,9 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import presentation.Mainui.MainFrame;
+import presentation.Mainui.MainPanel;
+
 //输入服务器IP和port
 public class IPFrame extends JFrame implements ActionListener {
 

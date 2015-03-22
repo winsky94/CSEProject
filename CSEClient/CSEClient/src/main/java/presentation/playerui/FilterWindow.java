@@ -28,6 +28,8 @@ import javax.swing.JWindow;
 import javax.swing.ListCellRenderer;
 import javax.swing.border.TitledBorder;
 
+import presentation.Mainui.ListModelFPanel;
+
 public class FilterWindow extends JWindow {
 
 	/**

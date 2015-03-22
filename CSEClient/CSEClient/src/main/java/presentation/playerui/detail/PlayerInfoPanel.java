@@ -8,6 +8,9 @@ import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.SwingConstants;
 
+import presentation.Mainui.ContentPanel;
+import presentation.Mainui.MainFrame;
+import presentation.Mainui.Scale;
 import businesslogic.Player;
 import vo.PlayerVO;
 /*

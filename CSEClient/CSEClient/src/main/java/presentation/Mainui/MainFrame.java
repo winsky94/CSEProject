@@ -1,4 +1,4 @@
-package presentation.mainui;
+package presentation.Mainui;
 
 /*2015.3.9 wangning 创建
  * 2015.3.10 wangning 界面分区
