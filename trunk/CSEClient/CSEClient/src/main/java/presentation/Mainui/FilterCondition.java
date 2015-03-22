@@ -1,4 +1,4 @@
-package presentation.mainui;
+package presentation.Mainui;
 
 public class FilterCondition {
 	private String position;

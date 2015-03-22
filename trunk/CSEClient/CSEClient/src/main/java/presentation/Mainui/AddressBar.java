@@ -1,4 +1,4 @@
-package presentation.mainui;
+package presentation.Mainui;
 
 import java.awt.Cursor;
 import java.awt.Graphics;

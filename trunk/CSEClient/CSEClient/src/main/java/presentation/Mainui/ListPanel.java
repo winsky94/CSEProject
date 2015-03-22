@@ -1,4 +1,4 @@
-package presentation.mainui;
+package presentation.Mainui;
 
 import java.awt.Color;
 import java.awt.Component;

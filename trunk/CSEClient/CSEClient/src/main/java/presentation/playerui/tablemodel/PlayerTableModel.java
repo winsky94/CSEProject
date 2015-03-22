@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 import javax.swing.table.AbstractTableModel;
 
+import presentation.Mainui.FilterCondition;
+import presentation.Mainui.MyTableModel;
 import businesslogic.Player;
 import vo.PlayerVO;
 
