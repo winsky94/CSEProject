@@ -10,8 +10,6 @@ import java.awt.event.MouseEvent;
 import javax.swing.JButton;
 import javax.swing.JWindow;
 
-import presentation.mainui.MainFrame;
-
 public class OrderChangeButton extends JButton{
 
 	/**btnMode_列表现在的状态
