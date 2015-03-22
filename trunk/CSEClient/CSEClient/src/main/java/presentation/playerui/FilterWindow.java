@@ -206,6 +206,7 @@ public class FilterWindow extends JWindow {
 				    }   
 				}
 				list.filterList(pos, union, sort);
+				FilterWindow.this.dispose();
 				
 			}
 			
