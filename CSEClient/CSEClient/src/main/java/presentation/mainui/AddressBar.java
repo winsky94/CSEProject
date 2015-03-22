@@ -32,7 +32,9 @@ public class AddressBar extends JPanel implements MouseListener{
 		frame=MainFrame.getInstance();
 		showAddress=new ArrayList<JLabel>();
 		address=new ArrayList<JLabel>();
-		voice=new JLabel("音");
+		ImageIcon musicImg=new ImageIcon("img/main/music.png");
+		musicImg.setImage(musicImg.getImage().getScaledInstance(12, 12, Image.SCALE_DEFAULT));
+		voice=new JLabel(musicImg);
 		ImageIcon minImg = new ImageIcon("img/main/min.png"); 
 		minImg.setImage(minImg.getImage().getScaledInstance(13,13,Image.SCALE_DEFAULT)); 
 		min=new JLabel(minImg);
