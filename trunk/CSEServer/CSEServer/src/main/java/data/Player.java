@@ -117,6 +117,7 @@ public class Player extends UnicastRemoteObject implements PlayerDataService {
 				player.setBlockRate(rs.getDouble("blockRate"));
 				player.setTurnOverRate(rs.getDouble("turnOverRate"));
 				player.setUsageRate(rs.getDouble("usageRate"));
+				player.setScore_rebound_assist(rs.getDouble("score_rebound_assist"));
 				player.setDoubleDouble(rs.getInt("doubleDoubleNum"));
 				players.add(player);
 			}
@@ -233,6 +234,7 @@ public class Player extends UnicastRemoteObject implements PlayerDataService {
 			player.setBlockRate(rs.getDouble("blockRate"));
 			player.setTurnOverRate(rs.getDouble("turnOverRate"));
 			player.setUsageRate(rs.getDouble("usageRate"));
+			player.setScore_rebound_assist(rs.getDouble("score_rebound_assist"));
 			player.setDoubleDouble(rs.getInt("doubleDoubleNum"));
 			rs.close();
 			con.close();
@@ -300,6 +302,7 @@ public class Player extends UnicastRemoteObject implements PlayerDataService {
 				player.setBlockRate(rs.getDouble("blockRate"));
 				player.setTurnOverRate(rs.getDouble("turnOverRate"));
 				player.setUsageRate(rs.getDouble("usageRate"));
+				player.setScore_rebound_assist(rs.getDouble("score_rebound_assist"));
 				player.setDoubleDouble(rs.getInt("doubleDoubleNum"));
 				players.add(player);
 			}
@@ -372,6 +375,7 @@ public class Player extends UnicastRemoteObject implements PlayerDataService {
 			player.setBlockRate(rs.getDouble("blockRate"));
 			player.setTurnOverRate(rs.getDouble("turnOverRate"));
 			player.setUsageRate(rs.getDouble("usageRate"));
+			player.setScore_rebound_assist(rs.getDouble("score_rebound_assist"));
 			player.setDoubleDouble(rs.getInt("doubleDoubleNum"));
 			rs.close();
 			con.close();
@@ -478,6 +482,7 @@ public class Player extends UnicastRemoteObject implements PlayerDataService {
 				player.setBlockRate(rs.getDouble("blockRate"));
 				player.setTurnOverRate(rs.getDouble("turnOverRate"));
 				player.setUsageRate(rs.getDouble("usageRate"));
+				player.setScore_rebound_assist(rs.getDouble("score_rebound_assist"));
 				player.setDoubleDouble(rs.getInt("doubleDoubleNum"));
 				players.add(player);
 			}
@@ -584,6 +589,7 @@ public class Player extends UnicastRemoteObject implements PlayerDataService {
 						player.setBlockRate(rs.getDouble("blockRate"));
 						player.setTurnOverRate(rs.getDouble("turnOverRate"));
 						player.setUsageRate(rs.getDouble("usageRate"));
+						player.setScore_rebound_assist(rs.getDouble("score_rebound_assist"));
 						player.setDoubleDouble(rs.getInt("doubleDoubleNum"));
 						players.add(player);
 					}
@@ -636,6 +642,7 @@ public class Player extends UnicastRemoteObject implements PlayerDataService {
 					player.setBlockRate(rs.getDouble("blockRate"));
 					player.setTurnOverRate(rs.getDouble("turnOverRate"));
 					player.setUsageRate(rs.getDouble("usageRate"));
+					player.setScore_rebound_assist(rs.getDouble("score_rebound_assist"));
 					player.setDoubleDouble(rs.getInt("doubleDoubleNum"));
 					players.add(player);
 				}
@@ -691,6 +698,7 @@ public class Player extends UnicastRemoteObject implements PlayerDataService {
 						player.setBlockRate(rs.getDouble("blockRate"));
 						player.setTurnOverRate(rs.getDouble("turnOverRate"));
 						player.setUsageRate(rs.getDouble("usageRate"));
+						player.setScore_rebound_assist(rs.getDouble("score_rebound_assist"));
 						player.setDoubleDouble(rs.getInt("doubleDoubleNum"));
 						players.add(player);
 					}
@@ -742,6 +750,7 @@ public class Player extends UnicastRemoteObject implements PlayerDataService {
 					player.setBlockRate(rs.getDouble("blockRate"));
 					player.setTurnOverRate(rs.getDouble("turnOverRate"));
 					player.setUsageRate(rs.getDouble("usageRate"));
+					player.setScore_rebound_assist(rs.getDouble("score_rebound_assist"));
 					player.setDoubleDouble(rs.getInt("doubleDoubleNum"));
 					players.add(player);
 				}

@@ -170,7 +170,7 @@ public class Player implements PlayerBLService {
 		ArrayList<PlayerVO> result = new ArrayList<PlayerVO>();
 		try {
 			position = changePositionCHToEN(position);
-			union=changeUnionCHToEN(union);
+			union = changeUnionCHToEN(union);
 			column = changeColumnCHToEN(column);
 			ArrayList<PlayerPO> data = service.selectPlayersBySeason(season,
 					position, union, column);
@@ -193,7 +193,7 @@ public class Player implements PlayerBLService {
 		ArrayList<PlayerVO> result = new ArrayList<PlayerVO>();
 		try {
 			position = changePositionCHToEN(position);
-			union=changeUnionCHToEN(union);
+			union = changeUnionCHToEN(union);
 			column = changeColumnCHToEN(column);
 			ArrayList<PlayerPO> data = service.selectPlayersByAverage(season,
 					position, union, column);
@@ -256,7 +256,7 @@ public class Player implements PlayerBLService {
 				po.getOffenReboundRate(), po.getDefenReboundRate(),
 				po.getAssistRate(), po.getStealRate(), po.getBlockRate(),
 				po.getTurnOverRate(), po.getUsageRate(),
-				po.getDoubleDoubleNum());
+				po.getScore_rebound_assist(), po.getDoubleDoubleNum());
 		return vo;
 	}
 
@@ -328,7 +328,9 @@ public class Player implements PlayerBLService {
 
 	/**
 	 * 将球员联盟中文转为英文便于数据库查找
-	 * @param CH 球员联盟
+	 * 
+	 * @param CH
+	 *            球员联盟
 	 * @return 对应的英文
 	 */
 	private String changeUnionCHToEN(String CH) {
