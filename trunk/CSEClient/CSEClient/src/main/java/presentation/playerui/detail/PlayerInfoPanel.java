@@ -2,6 +2,7 @@ package presentation.playerui.detail;
 
 import java.awt.Color;
 
+import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
 
@@ -28,6 +29,7 @@ public class PlayerInfoPanel extends ContentPanel{
 	//private Player player=new Player();
 	public PlayerInfoPanel(PlayerVO vo){
 		addTitleBar();
+		back=new ImageIcon("img/player/playerback.png");
 		leftImage=new JPanel();
 		//back=new ImageIcon();//背景
 		base=new JPanel();
