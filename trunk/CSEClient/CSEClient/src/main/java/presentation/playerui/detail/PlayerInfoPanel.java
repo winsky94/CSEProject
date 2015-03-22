@@ -4,16 +4,14 @@ import java.awt.Color;
 
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
-
-
 import javax.swing.JTabbedPane;
 import javax.swing.SwingConstants;
 
 import presentation.Mainui.ContentPanel;
 import presentation.Mainui.MainFrame;
 import presentation.Mainui.Scale;
-import businesslogic.Player;
 import vo.PlayerVO;
+
 /*
  * 大背景 
  * 左侧球员找
