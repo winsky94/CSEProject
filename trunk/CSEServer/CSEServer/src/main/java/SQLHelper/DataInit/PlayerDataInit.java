@@ -76,7 +76,7 @@ public class PlayerDataInit {
 	public ArrayList<PlayerPO> getPlayerListFromFile() {
 		ArrayList<PlayerPO> players = new ArrayList<PlayerPO>();
 		try {
-			FileList fl = new FileList("src/迭代一数据/players/info");
+			FileList fl = new FileList("src/data/players/info");
 			ArrayList<String> names = fl.getList();
 			for (String name : names) {
 				players.add(readFromFile(name));

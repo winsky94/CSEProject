@@ -34,14 +34,14 @@ public class SvgUtil {
 		File destFile = new File("src/sun.png");
 		SvgUtil.convertSvgFileToPng(f, destFile);
 	*/
-		FileList fList=new FileList("src/迭代一数据/teams");
+		FileList fList=new FileList("src/data/teams");
 		ArrayList<String> paths=fList.getList();
-		paths.remove("src\\迭代一数据\\teams\\teams");
+		paths.remove("src\\data\\teams\\teams");
 		for(String path:paths){
 			File f=new File(path);
 			String[] strings=path.split("teams");
 			String ii=strings[1].replace(".svg", ".png");
-			String newPath="src\\迭代一数据\\teamsPng"+ii;
+			String newPath="src\\data\\teamsPng"+ii;
 			File destFile=new File(newPath);
 			SvgUtil.convertSvgFileToPng(f, destFile);
 			System.out.println("成功转成转换"+path);

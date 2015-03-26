@@ -148,7 +148,7 @@ public class MatchDataInit {
 		// TODO 自动生成的方法存根
 		ArrayList<MatchPO> matches = new ArrayList<MatchPO>();
 		try {
-			FileList fl = new FileList("src/迭代一数据/matches");
+			FileList fl = new FileList("src/data/matches");
 			ArrayList<String> names = fl.getList();
 			for (String name : names) {
 				matches.add(readFromMatchFile(name));

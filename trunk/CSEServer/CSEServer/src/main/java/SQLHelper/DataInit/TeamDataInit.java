@@ -69,7 +69,7 @@ public class TeamDataInit {
 
 		ArrayList<TeamPO> teams = new ArrayList<TeamPO>();
 		TeamPO team;
-		ArrayList<String[]> result = readFromFile("src/迭代一数据/teams/teams");
+		ArrayList<String[]> result = readFromFile("src/data/teams/teams");
 		for (String[] content : result) {
 			name = content[0];
 			abLocation = content[1];
