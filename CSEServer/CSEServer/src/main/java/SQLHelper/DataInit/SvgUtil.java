@@ -20,7 +20,7 @@ import org.apache.batik.transcoder.image.PNGTranscoder;
 import SQLHelper.FileList;
 
 /**
- * svg转换工具类(以下方法开发足够用了)
+ * svg转换工具类(以下方法开发足够用了) 只要将常量size设为需要的图片大小就OK了
  * 
  * @param svg
  * @param pdf
@@ -28,6 +28,7 @@ import SQLHelper.FileList;
  * @throws TranscoderException
  */
 public class SvgUtil {
+	final static int size = 35;// 只要将常量size设为需要的图片大小就OK了
 
 	public static void main(String[] args) throws Exception {
 		// 注：使用的是svg字符串转pdf的情况可能会出现编码错误的异常，就把字符串里的UTF-8替换为GBK
@@ -35,20 +36,21 @@ public class SvgUtil {
 		// File destFile = new File("src/sun.png");
 		// SvgUtil.convertSvgFileToPng(f, destFile);
 
-		String fileName="teamsPng35";//输出图片的文件名 ，后面的数字代表图片像素大小，如35表示35*35
-		
-		
 		FileList fList = new FileList("src/data/teams");
 		ArrayList<String> paths = fList.getList();
-		
+		File file = new File("src\\data\\teamsPng" + String.valueOf(size));
+		if (!file.exists() && !file.isDirectory()) {
+			file.mkdir();
+		}
 		for (String path : paths) {
-			if(path.endsWith("teams")){
+			if (path.endsWith("teams")) {
 				continue;
 			}
 			File f = new File(path);
 			String[] strings = path.split("teams");
 			String ii = strings[1].replace(".svg", ".png");
-			String newPath = "src\\data\\"+fileName + ii;
+			String newPath = "src\\data\\teamsPng"
+					+ String.valueOf(size).replace(".0", "") + ii;
 			File destFile = new File(newPath);
 			SvgUtil.convertSvgFileToPng(f, destFile);
 			System.out.println("成功转成转换" + path);
@@ -98,7 +100,7 @@ public class SvgUtil {
 			try {
 				TranscoderOutput output = new TranscoderOutput(out);
 				transcoder.addTranscodingHint(ImageTranscoder.KEY_WIDTH,
-						new Float(35));
+						Float.parseFloat(String.valueOf(size)));// 设置图片大小
 				transcoder.transcode(input, output);
 
 			} finally {
