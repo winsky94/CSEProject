@@ -36,7 +36,9 @@ public class MyTableCellRenderer extends DefaultTableCellRenderer {
 //		table.getColumn(columnName1).setPreferredWidth(180);
 //		String columnName2 = table.getColumnName(1);
 //		table.getColumn(columnName2).setPreferredWidth(130);
-
+		//去除单元格边框线
+//		table.setShowHorizontalLines(false);
+//		table.setShowVerticalLines(false);
 		if (row % 2 == 1)
 			setBackground(Color.white); // 设置奇数行底色
 		else if (row % 2 == 0)
