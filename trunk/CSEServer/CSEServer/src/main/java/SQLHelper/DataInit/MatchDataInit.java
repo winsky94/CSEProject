@@ -10,6 +10,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import java.sql.PreparedStatement;
+
 import SQLHelper.FileList;
 import SQLHelper.SqlManager;
 import po.MatchPO;
@@ -167,6 +169,7 @@ public class MatchDataInit {
 		ArrayList<MatchPO> matches = getMatchesListFromFile();
 		try {
 			Connection con = SqlManager.getConnection();
+			con.setAutoCommit(false);
 			Statement sql = con.createStatement();
 			sql.execute("drop table if exists matches");
 			sql.execute("drop table if exists detailScores");
@@ -218,6 +221,11 @@ public class MatchDataInit {
 			int recordIndex = 1;
 
 			int test = 1;// 用于标示数据录入过程的，无多大实际意义
+	
+			sql.close();
+			PreparedStatement matchesStatement = con.prepareStatement("INSERT INTO matches VALUES(?,?,?,?,?,?,?,?)"); 
+			PreparedStatement detailScoreStatement = con.prepareStatement("INSERT INTO detailScores VALUES(?, ?,?,?)"); 
+			PreparedStatement recordsStatement = con.prepareStatement("INSERT INTO records VALUES(?, ?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)"); 
 			for (MatchPO matchPO : matches) {
 				// 向matches表中插入数据
 				String[] teams = matchPO.getTeams().split("-");
@@ -232,19 +240,35 @@ public class MatchDataInit {
 				} else {
 					time = 48 + (parts - 4) * 5;
 				}
-				sql.execute("insert matches values(" + matchPO.getMatchID()
+				matchesStatement.setInt(1, matchPO.getMatchID());
+				matchesStatement.setString(2, matchPO.getSeason());
+				matchesStatement.setString(3, matchPO.getDate());
+				matchesStatement.setString(4, visitingTeam);
+				matchesStatement.setInt(5, visitingScore);
+				matchesStatement.setString(6, homeTeam);
+				matchesStatement.setInt(7, homeScore);
+				matchesStatement.setInt(8,time);
+				matchesStatement.addBatch();
+		/*		sql.execute("insert matches values(" + matchPO.getMatchID()
 						+ ",'" + matchPO.getSeason() + "','"
 						+ matchPO.getDate() + "','" + visitingTeam + "',"
 						+ visitingScore + ",'" + homeTeam + "'," + homeScore
 						+ "," + time + ")");
+		*/
 
 				// 向detailScores表中插入数据
 				ArrayList<String> detailScore = matchPO.getDetailScores();
 				int partIndex = 1;
 				for (String s : detailScore) {
-					sql.execute("insert detailScores values(" + scoreIndex
+					detailScoreStatement.setInt(1, scoreIndex);
+					detailScoreStatement.setInt(2, matchPO.getMatchID());
+					detailScoreStatement.setInt(3, partIndex);
+					detailScoreStatement.setString(4, s);
+					detailScoreStatement.addBatch();
+				/*	sql.execute("insert detailScores values(" + scoreIndex
 							+ "," + matchPO.getMatchID() + "," + partIndex
 							+ ",'" + s + "')");
+				*/
 					partIndex++;
 					scoreIndex++;
 				}
@@ -252,7 +276,30 @@ public class MatchDataInit {
 				// 向records表中插入数据
 				ArrayList<RecordPO> records = matchPO.getRecords();
 				for (RecordPO recordPO : records) {
-					sql.execute("insert records values(" + recordIndex + ","
+					recordsStatement.setInt(1, recordIndex);
+					recordsStatement.setInt(2, matchPO.getMatchID());
+					recordsStatement.setString(3, recordPO.getTeam());
+					recordsStatement.setString(4, matchPO.getSeason());
+					recordsStatement.setString(5, recordPO.getPlayerName());
+					recordsStatement.setString(6, recordPO.getPresentTime());
+					recordsStatement.setString(7, recordPO.getPosition());
+					recordsStatement.setInt(8, recordPO.getShootHitNum());
+					recordsStatement.setInt(9, recordPO.getShootAttemptNum());
+					recordsStatement.setInt(10, recordPO.getThreeHitNum());
+					recordsStatement.setInt(11, recordPO.getThreeAttemptNum());
+					recordsStatement.setInt(12, recordPO.getFreeThrowHitNum());
+					recordsStatement.setInt(13, recordPO.getFreeThrowAttemptNum());
+					recordsStatement.setInt(14, recordPO.getOffenReboundNum());
+					recordsStatement.setInt(15, recordPO.getDefenReboundNum());
+					recordsStatement.setInt(16, recordPO.getReboundNum());
+					recordsStatement.setInt(17, recordPO.getAssistNum());
+					recordsStatement.setInt(18, recordPO.getStealNum());
+					recordsStatement.setInt(19, recordPO.getBlockNum());
+					recordsStatement.setInt(20, recordPO.getTurnOverNum());
+					recordsStatement.setInt(21, recordPO.getFoulNum());
+					recordsStatement.setInt(22, recordPO.getScore());
+					recordsStatement.addBatch();
+		/*			sql.execute("insert records values(" + recordIndex + ","
 							+ matchPO.getMatchID() + ",'" + recordPO.getTeam()
 							+ "','" + matchPO.getSeason() + "','"
 							+ recordPO.getPlayerName() + "','"
@@ -273,11 +320,18 @@ public class MatchDataInit {
 							+ recordPO.getTurnOverNum() + ","
 							+ recordPO.getFoulNum() + "," + recordPO.getScore()
 							+ ")");
+			*/
 					recordIndex++;
 				}
 				System.out.println(test++);
 			}
-			sql.close();
+			matchesStatement.executeBatch();
+			detailScoreStatement.executeBatch();
+			recordsStatement.executeBatch();
+			con.commit();
+			matchesStatement.close();
+			detailScoreStatement.close();
+			recordsStatement.close();
 			con.close();
 		} catch (java.lang.ClassNotFoundException e) {
 			System.err.println("ClassNotFoundException:" + e.getMessage());
