@@ -33,5 +33,6 @@ public interface PlayerBLService {
 			String position, String union, String column);
 
 	public ImageIcon getPlayerPortraitImage(String name);
+
 	public ImageIcon getPlayerActionImage(String name);
 }
