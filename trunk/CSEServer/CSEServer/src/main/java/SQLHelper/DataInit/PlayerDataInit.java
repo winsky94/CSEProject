@@ -6,6 +6,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -95,6 +96,7 @@ public class PlayerDataInit {
 		ArrayList<PlayerPO> players = getPlayerListFromFile();
 		try {
 			Connection con = SqlManager.getConnection();
+			con.setAutoCommit(false);
 			Statement sql = con.createStatement();
 			sql.execute("drop table if exists players");
 			sql.execute("create table players(playerID int not null auto_increment,name varchar(40) not null default 'null',"
@@ -102,18 +104,34 @@ public class PlayerDataInit {
 					+ "height varchar(20) not null default 'null',weight int not null default 0,"
 					+ "birth varchar(20) not null default 'null',age int not null default 0,exp int not null default 0,"
 					+ "school varchar(40)not null default 'null',primary key(playerID));");
+			sql.close();
+			PreparedStatement statement = con.prepareStatement("INSERT INTO players VALUES(?, ?,?,?,?,?,?,?,?,?)");   
 			int count = 1;
 			for (PlayerPO player : players) {
-				sql.execute("insert players values(" + (count++) + ",'"
+				statement.setInt(1, count++);
+				statement.setString(2, player.getName());
+				statement.setInt(3, player.getNumber());
+				statement.setString(4, player.getPosition());
+				statement.setString(5, player.getHeight());
+				statement.setInt(6, player.getWeight());
+				statement.setString(7, player.getBirth());
+				statement.setInt(8, player.getAge());
+				statement.setInt(9, player.getExp());
+				statement.setString(10, player.getSchool());
+				statement.addBatch();
+			/*	sql.execute("insert players values(" + (count++) + ",'"
 						+ player.getName() + "'," + player.getNumber() + ",'"
 						+ player.getPosition() + "','" + player.getHeight()
 						+ "'," + player.getWeight() + ",'" + player.getBirth()
 						+ "'," + player.getAge() + "," + player.getExp() + ",'"
 						+ player.getSchool() + "')");
+			*/
 				System.out.println(count-1);
 			}
 
-			sql.close();
+			statement.executeBatch();
+			con.commit();
+			statement.close();
 			con.close();
 		} catch (java.lang.ClassNotFoundException e) {
 			System.err.println("ClassNotFoundException:" + e.getMessage());
