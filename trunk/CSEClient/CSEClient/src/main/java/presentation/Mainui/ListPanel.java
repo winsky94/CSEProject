@@ -45,16 +45,6 @@ public class ListPanel extends JPanel {
 		else
 			tablemodel = new PlayerTableModel();
 
-		// table = new JTable(tablemodel) {
-		// public Component prepareRender(MyTableCellRenderer renderer, int row,
-		// int column) {
-		// Component c = super.prepareRenderer(renderer, row, column);
-		// if (c instanceof JComponent)
-		// ((JComponent) c).setOpaque(false);
-		//
-		// return c;
-		// }
-		// };
 		table = new JTable(tablemodel);
 
 		// table 渲染器，设置文字内容居中显示，设置背景色等
@@ -102,7 +92,7 @@ public class ListPanel extends JPanel {
 		this.setOpaque(false);
 		// =====表格美化====
 
-		//tablemodel.Refresh("汇总");
+		tablemodel.Refresh("汇总");
 		table.revalidate();
 		jsp.setBorder(BorderFactory.createLineBorder(Color.BLACK,5));
 		
