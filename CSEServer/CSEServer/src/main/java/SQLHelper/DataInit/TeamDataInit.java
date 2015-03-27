@@ -6,6 +6,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -90,6 +91,7 @@ public class TeamDataInit {
 		ArrayList<TeamPO> teams = getTeamListFromFile();
 		try {
 			Connection con = SqlManager.getConnection();
+			con.setAutoCommit(false);
 			Statement sql = con.createStatement();
 			sql.execute("drop table if exists teams");
 			sql.execute("create table teams(teamID int not null auto_increment,teamName varchar(40) not null default 'null',"
@@ -97,17 +99,31 @@ public class TeamDataInit {
 					+ "conference varchar(20) not null default 'null',partition varchar(20) not null default 'null',"
 					+ "homeCourt varchar(40) not null default 'null',setUpTime int not null default 0,primary key(teamID));");
 			int count = 1;
+			sql.close();
+			PreparedStatement statement = con.prepareStatement("INSERT INTO teams VALUES(?, ?,?,?,?,?,?,?)"); 
 			for (TeamPO team : teams) {
-				sql.execute("insert teams values(" + (count++) + ",'"
+				statement.setInt(1, count++);
+				statement.setString(2, team.getTeamName());
+				statement.setString(3, team.getAbLocation());
+				statement.setString(4, team.getLocation());
+				statement.setString(5, team.getConference());
+				statement.setString(6, team.getPartition());
+				statement.setString(7, team.getHomeCourt());
+				statement.setInt(8, team.getSetUpTime());
+				statement.addBatch();
+			/*	sql.execute("insert teams values(" + (count++) + ",'"
 						+ team.getTeamName() + "','" + team.getAbLocation()
 						+ "','" + team.getLocation() + "','"
 						+ team.getConference() + "','" + team.getPartition()
 						+ "','" + team.getHomeCourt() + "',"
 						+ team.getSetUpTime() + ")");
+			*/
 
 				System.out.println(count);
 			}
-			sql.close();
+			statement.executeBatch();
+			con.commit();
+			statement.close();
 			con.close();
 		} catch (java.lang.ClassNotFoundException e) {
 			System.err.println("ClassNotFoundException:" + e.getMessage());
