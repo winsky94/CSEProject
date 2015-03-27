@@ -67,7 +67,7 @@ public class TitleBar extends JPanel implements MouseListener{
 		JLabel blank=new JLabel("        ");
 		gbc.gridx=4;
 		gbc.gridwidth = 3;
-		gbc.weightx = 3;
+		gbc.weightx = 10;
 		gbl.setConstraints(blank, gbc);
 		add(blank);
 		//-----------------------------

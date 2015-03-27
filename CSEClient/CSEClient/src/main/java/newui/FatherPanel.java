@@ -9,7 +9,7 @@ import javax.swing.JPanel;
 public class FatherPanel extends JPanel{
 
 	/**
-	 * 顶部导航条写在此处
+	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	protected GridBagLayout gbl;
