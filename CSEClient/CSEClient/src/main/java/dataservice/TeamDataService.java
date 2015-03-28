@@ -30,6 +30,6 @@ public interface TeamDataService extends Remote {
 
 	public ArrayList<TeamPO> getOrderedTeamsByAverage(String season,
 			String condition, String order) throws RemoteException;
-	
+
 	public ImageIcon getTeamImage(String name) throws RemoteException;
 }
