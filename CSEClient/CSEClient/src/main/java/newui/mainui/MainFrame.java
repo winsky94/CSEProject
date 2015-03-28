@@ -29,7 +29,7 @@ public class MainFrame extends JFrame{
 		gbc.fill=GridBagConstraints.BOTH;
 		setLayout(gbl);
 		setBounds((screenWidth-width)/2,(screenHeight-height)/2,width,height);
-		setIconImage(UIhelper.getImage("image/kobelogo.png"));
+		setIconImage(UIhelper.getImage("image/appicon.png"));
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		//-------下面是布局----------------

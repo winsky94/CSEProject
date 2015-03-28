@@ -14,6 +14,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import newui.Style;
 import newui.matchui.MatchIndexPanel;
 import newui.playerui.PlayerIndexPanel;
 import newui.teamui.TeamIndexPanel;
@@ -24,14 +25,12 @@ public class IndexTitleBar extends JPanel implements MouseListener{
 	 * 首页的TitleBar，需对文本框和搜索按钮加监听
 	 */
 	private static final long serialVersionUID = 1L;
-	Color color=new Color(6,73,130);//深蓝，未指向时
-	Color focusColor=new Color(53,109,160);//选中或指向时的蓝色
 	Font font = new Font("微软雅黑", Font.PLAIN, 15);
 	MyButton indexBtn,teamBtn,playerBtn,matchBtn;
 	JTextField searchFld;
 	JLabel searchBtn;
 	public IndexTitleBar(){
-		setBackground(color);
+		setBackground(Style.DEEP_BLUE);
 		GridBagLayout gbl = new GridBagLayout();
 		GridBagConstraints gbc = new GridBagConstraints();
 		gbc.fill=GridBagConstraints.BOTH;
@@ -92,7 +91,7 @@ public class IndexTitleBar extends JPanel implements MouseListener{
 			super(text);
 			setFont(font);
 			setForeground(Color.white);
-			setBackground(color);
+			setBackground(Style.DEEP_BLUE);
 			setFocusPainted(false);
 			setBorderPainted(false);
 			addMouseListener(IndexTitleBar.this);
@@ -125,25 +124,25 @@ public class IndexTitleBar extends JPanel implements MouseListener{
 	}
 	public void mouseEntered(MouseEvent e) {
 		if(e.getSource()==indexBtn)
-			indexBtn.setBackground(focusColor);
+			indexBtn.setBackground(Style.FOCUS_BLUE);
 		if(e.getSource()==teamBtn)
-			teamBtn.setBackground(focusColor);
+			teamBtn.setBackground(Style.FOCUS_BLUE);
 		if(e.getSource()==playerBtn)
-			playerBtn.setBackground(focusColor);
+			playerBtn.setBackground(Style.FOCUS_BLUE);
 		if(e.getSource()==matchBtn)
-			matchBtn.setBackground(focusColor);
+			matchBtn.setBackground(Style.FOCUS_BLUE);
 		if(e.getSource()==searchBtn)
 			searchBtn.setIcon(new ImageIcon("image/searchFocus.png"));
 	}
 	public void mouseExited(MouseEvent e) {
 		if(e.getSource()==indexBtn)
-			indexBtn.setBackground(color);
+			indexBtn.setBackground(Style.DEEP_BLUE);
 		if(e.getSource()==teamBtn)
-			teamBtn.setBackground(color);
+			teamBtn.setBackground(Style.DEEP_BLUE);
 		if(e.getSource()==playerBtn)
-			playerBtn.setBackground(color);
+			playerBtn.setBackground(Style.DEEP_BLUE);
 		if(e.getSource()==matchBtn)
-			matchBtn.setBackground(color);
+			matchBtn.setBackground(Style.DEEP_BLUE);
 		if(e.getSource()==searchBtn)
 			searchBtn.setIcon(new ImageIcon("image/search.png"));
 		

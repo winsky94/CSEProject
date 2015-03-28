@@ -16,6 +16,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
 import newui.FatherPanel;
+import newui.Style;
+import newui.mainui.MainFrame;
 import newui.tables.PlayerIndexTableModel;
 
 public class PlayerIndexPanel extends FatherPanel implements MouseListener {
@@ -34,8 +36,6 @@ public class PlayerIndexPanel extends FatherPanel implements MouseListener {
 	JTable table;
 	PlayerIndexTableModel pitm = new PlayerIndexTableModel();
 	// ---------------
-	Color backGrey = new Color(87, 89, 91);
-	Color focusGrey = new Color(69, 69, 69);
 	Font font = new Font("微软雅黑", Font.PLAIN, 15);
 	// ---------------
 	ArrayList<MyCharacter> characterLblList = new ArrayList<MyCharacter>(26);
@@ -45,7 +45,7 @@ public class PlayerIndexPanel extends FatherPanel implements MouseListener {
 		super();
 		// ------funcPnl--------
 		funcPnl = new JPanel();
-		funcPnl.setBackground(backGrey);
+		funcPnl.setBackground(Style.BACK_GREY);
 		gbc.gridy = 1;
 		gbc.gridheight = 1;
 		gbc.weighty = 0.8;
@@ -63,8 +63,8 @@ public class PlayerIndexPanel extends FatherPanel implements MouseListener {
 		// ----按球队查看---------
 		funcPnl.add(new JLabel("       "));
 		teamBox = new JComboBox<String>(teams);
-		teamBox.setBackground(Color.white);
-		teamBox.setForeground(backGrey);
+		teamBox.setBackground(Style.BACK_GREY);
+		teamBox.setForeground(Color.white);
 		teamBox.setFont(new Font("微软雅黑", Font.PLAIN, 12));
 		teamBox.setMaximumRowCount(20);
 		funcPnl.add(teamBox);
@@ -117,7 +117,8 @@ public class PlayerIndexPanel extends FatherPanel implements MouseListener {
 	}
 
 	public void mouseClicked(MouseEvent e) {
-		// TODO Auto-generated method stub
+		if(e.getSource()==modeLbl)
+			MainFrame.getInstance().setContentPanel(new PlayerRankPanel());
 
 	}
 
@@ -135,17 +136,17 @@ public class PlayerIndexPanel extends FatherPanel implements MouseListener {
 		if (e.getSource().getClass() == MyCharacter.class) {
 			MyCharacter lbl = (MyCharacter) e.getSource();
 			lbl.setOpaque(true);
-			lbl.setBackground(focusGrey);
+			lbl.setBackground(Style.FOCUS_GREY);
 			lbl.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		}
 		if (e.getSource() == refreshLbl) {
-			refreshLbl.setOpaque(true);
-			refreshLbl.setBackground(focusGrey);
+			refreshLbl.setForeground(Style.FOCUS_BLUE);
+			refreshLbl.setIcon(new ImageIcon("image/refreshFocus.png"));
 			refreshLbl.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		}
 		if (e.getSource() == modeLbl) {
-			modeLbl.setOpaque(true);
-			modeLbl.setBackground(focusGrey);
+			modeLbl.setForeground(Style.FOCUS_BLUE);
+			modeLbl.setIcon(new ImageIcon("image/player/rankmodeBlue.png"));
 			modeLbl.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		}
 	}
@@ -154,17 +155,17 @@ public class PlayerIndexPanel extends FatherPanel implements MouseListener {
 		if (e.getSource().getClass() == MyCharacter.class) {
 			MyCharacter lbl = (MyCharacter) e.getSource();
 			lbl.setOpaque(false);
-			lbl.setBackground(backGrey);
+			lbl.setBackground(Style.BACK_GREY);
 			lbl.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
 		}
 		if (e.getSource() == refreshLbl) {
-			refreshLbl.setOpaque(false);
-			refreshLbl.setBackground(backGrey);
+			refreshLbl.setForeground(Color.white);
+			refreshLbl.setIcon(new ImageIcon("image/refreshWhite.png"));
 			refreshLbl.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
 		}
 		if (e.getSource() == modeLbl) {
-			modeLbl.setOpaque(false);
-			modeLbl.setBackground(backGrey);
+			modeLbl.setForeground(Color.white);
+			modeLbl.setIcon(new ImageIcon("image/player/rankmode.png"));
 			modeLbl.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
 		}
 	}
