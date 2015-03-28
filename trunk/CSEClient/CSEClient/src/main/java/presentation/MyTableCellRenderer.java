@@ -61,8 +61,8 @@ public class MyTableCellRenderer extends DefaultTableCellRenderer {
 			boolean isSelected, boolean hasFocus, int row, int column) {
 		setHorizontalAlignment(SwingConstants.CENTER);
 		// 设置列宽自己设置
-		// String columnName1 = table.getColumnName(0);
-		// table.getColumn(columnName1).setPreferredWidth(180);
+		 String columnName1 = table.getColumnName(0);
+		 table.getColumn(columnName1).setPreferredWidth(0);
 		// String columnName2 = table.getColumnName(1);
 		// table.getColumn(columnName2).setPreferredWidth(130);
 
