@@ -14,6 +14,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
 import newui.FatherPanel;
+import newui.Style;
 import newui.tables.MyTable;
 import newui.tables.TeamTableModel;
 
@@ -31,13 +32,11 @@ public class TeamIndexPanel extends FatherPanel implements MouseListener{
 	JLabel refreshLbl;
 	JComboBox<String> seasonBox,typeBox;
 	Font font = new Font("微软雅黑", Font.PLAIN, 13);
-	Color color=new Color(6,73,130);//深蓝，未指向时
-	Color focusColor=new Color(53,109,160);//选中或指向时的蓝色
 	public TeamIndexPanel(){
 		super();
 		//------funcPnl--------
 		funcPnl=new JPanel();
-		funcPnl.setBackground(Color.WHITE);
+		funcPnl.setBackground(Style.BACK_GREY);
 		gbc.gridy=1;
 		gbc.gridheight = 1;
 		gbc.weighty = 0.1;
@@ -58,7 +57,7 @@ public class TeamIndexPanel extends FatherPanel implements MouseListener{
 		funcPnl.add(typeBox);
 		funcPnl.add(new JLabel("       "));
 		//-----refreshLbl------
-		refreshLbl=new MyJLabel("刷新",new ImageIcon("image/refresh.png"));
+		refreshLbl=new MyJLabel("刷新",new ImageIcon("image/refreshWhite.png"));
 		refreshLbl.addMouseListener(this);
 		funcPnl.add(refreshLbl);
 		//-----table-----------
@@ -85,7 +84,7 @@ public class TeamIndexPanel extends FatherPanel implements MouseListener{
 	}
 	public void mouseEntered(MouseEvent e) {
 		if(e.getSource()==refreshLbl){
-			refreshLbl.setForeground(focusColor);
+			refreshLbl.setForeground(Style.FOCUS_BLUE);
 			refreshLbl.setIcon(new ImageIcon("image/refreshFocus.png"));
 			refreshLbl.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		}
@@ -93,8 +92,8 @@ public class TeamIndexPanel extends FatherPanel implements MouseListener{
 	}
 	public void mouseExited(MouseEvent e) {
 		if(e.getSource()==refreshLbl){
-			refreshLbl.setForeground(color);
-			refreshLbl.setIcon(new ImageIcon("image/refresh.png"));
+			refreshLbl.setForeground(Color.white);
+			refreshLbl.setIcon(new ImageIcon("image/refreshWhite.png"));
 			refreshLbl.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
 		}
 		
@@ -108,11 +107,12 @@ public class TeamIndexPanel extends FatherPanel implements MouseListener{
 		public MyJLabel(String text){
 			super(text);
 			setFont(font);
+			setForeground(Color.white);
 		}
 		public MyJLabel(String text,ImageIcon img){
 			super(text,img,JLabel.CENTER);
 			setFont(font);
-			setForeground(color);
+			setForeground(Color.white);
 		}
 		
 	}

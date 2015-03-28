@@ -15,6 +15,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JWindow;
 
+import newui.Style;
 import newui.UIhelper;
 import newui.mainui.MainFrame;
 
@@ -30,7 +31,6 @@ public class TeamWindow extends JWindow implements MouseListener {
 	int width = screenWidth * 50 / 100;
 	int height = screenHeight * 40 / 100;
 	JPanel pnl, westPnl, eastPnl;
-	Color focusColor = new Color(53, 109, 160);// 选中或指向时的蓝色
 
 	private TeamWindow(int x, int y) {
 		super(MainFrame.getInstance());
@@ -79,7 +79,7 @@ public class TeamWindow extends JWindow implements MouseListener {
 		if (e.getSource().getClass() == MyButton.class) {
 			setVisible(true);
 			MyButton btn = (MyButton) e.getSource();
-			btn.setForeground(focusColor);
+			btn.setForeground(Style.FOCUS_BLUE);
 			btn.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		}
 	}
