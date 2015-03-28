@@ -2,19 +2,14 @@ package newui.tables;
 
 import java.util.ArrayList;
 
-public class PlayerIndexTableModel extends MyTableModel {
+public class TeamBaseInfoTableModel extends MyTableModel{
 
 	/**
-	 * 并没有写刷新的方法
+	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	static String[] head = { "(头像)", "球员名", "所属球队", "位置", "身高", "体重","生日","年龄" ,"经验" };
+	static String[] head ={"(logo)","球队","缩写","联盟","分区","主场","成立时间"};
 	ArrayList<ArrayList<Object>> content = new ArrayList<ArrayList<Object>>();
-
-	public PlayerIndexTableModel() {
-
-	}
-
 	public int getRowCount() {
 		return content.size();
 	}
