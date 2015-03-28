@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 
+import po.MatchPO;
 import po.TeamPO;
 
 public interface TeamDataService extends Remote {
@@ -16,6 +17,13 @@ public interface TeamDataService extends Remote {
 
 	public ArrayList<TeamPO> getTeamAverageInfo(String season)
 			throws RemoteException;
+	
+	public ArrayList<MatchPO> getMatchesAverageRecent(String teamName)throws RemoteException;
+	public ArrayList<MatchPO> getMatchesSeasonRecent(String teamName)throws RemoteException;
+	public ArrayList<MatchPO> getMatchesAverage(String teamName)throws RemoteException;
+	public ArrayList<MatchPO> getMatchesSeason(String teamName)throws RemoteException;//可以模糊
+	
+	public ArrayList<TeamPO> getSeasonHotTeam(String column)throws RemoteException;
 
 	public TeamPO getTeamBaseInfo(String name) throws RemoteException;
 
