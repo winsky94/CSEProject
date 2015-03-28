@@ -23,10 +23,10 @@ public interface PlayerDataService extends Remote {
 	public PlayerPO getPlayerAverageInfo(String season, String name)
 			throws RemoteException;
 
-	public ArrayList<MatchPO> getMatchesAverageRecent(String playerName)
+	public ArrayList<MatchPO> getRecentMatchesAverage(String playerName)
 			throws RemoteException;
 
-	public ArrayList<MatchPO> getMatchesSeasonRecent(String playerName)
+	public ArrayList<MatchPO> getRecentMatchesSeason(String playerName)
 			throws RemoteException;
 
 	public ArrayList<MatchPO> getMatchesAverage(String playerName)
