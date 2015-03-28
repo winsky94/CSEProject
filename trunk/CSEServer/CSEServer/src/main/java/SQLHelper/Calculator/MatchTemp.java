@@ -19,6 +19,7 @@ public class MatchTemp {
 	int matchID = -1;
 	int count = 1;
 	String season = "";
+	String date = "";
 	String visitingTeam = "";
 	String homeTeam = "";
 
@@ -51,7 +52,7 @@ public class MatchTemp {
 	int homeTurnOverNum = 0;// 失误数
 	int homeFoulNum = 0;// 犯规数
 	int homeScore = 0;// 得分
-	PreparedStatement statement;   
+	PreparedStatement statement;
 
 	public MatchTemp() {
 		try {
@@ -77,34 +78,35 @@ public class MatchTemp {
 			Statement sql = con.createStatement();
 			String query = "select * from matches";
 			ResultSet resultSet = sql.executeQuery(query);
-			statement = con.prepareStatement("INSERT INTO MatchTemp VALUES(?, ?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");   
+			statement = con
+					.prepareStatement("INSERT INTO MatchTemp VALUES(?, ?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
 
 			while (resultSet.next()) {
 				matchID = resultSet.getInt("matchID");
 				season = resultSet.getString("season");
+				date = resultSet.getString("date");
 				homeTeam = resultSet.getString("homeTeam");
-				homeScore=resultSet.getInt("homeScore");
-				visitingScore=resultSet.getInt("visitingScore");
-				
-						
+				homeScore = resultSet.getInt("homeScore");
+				visitingScore = resultSet.getInt("visitingScore");
+
 				visitingTeam = resultSet.getString("visitingTeam");
-				
-				Statement sql2=con.createStatement();
-				String query2 = "select * from records where matchID=" + matchID;
+
+				Statement sql2 = con.createStatement();
+				String query2 = "select * from records where matchID="
+						+ matchID;
 				ResultSet rs = sql2.executeQuery(query2);
 				while (rs.next()) {
 					if (rs.getString("team").equals(homeTeam)) {
 						getHomeData(rs);
 					} else if (rs.getString("team").equals(visitingTeam)) {
 						getVisitingData(rs);
-					}
-					else {
+					} else {
 						System.out.println("error");
 					}
 				}
 				rs.close();
 				sql2.close();
-				
+
 				exportToSQL();
 				reSet();
 				System.out.println(count);
@@ -168,6 +170,7 @@ public class MatchTemp {
 	private void reSet() {
 		matchID = -1;
 		season = "";
+		date = "";
 		visitingTeam = "";
 		homeTeam = "";
 
@@ -207,56 +210,56 @@ public class MatchTemp {
 			statement.setInt(1, (count++));
 			statement.setInt(2, matchID);
 			statement.setString(3, season);
-			statement.setString(4, visitingTeam);
-			statement.setInt(5, visitingShootHitNum);
-			statement.setInt(6, visitingShootAttemptNum);
-			statement.setInt(7, visitingThreeHitNum);
-			statement.setInt(8, visitingThreeAttemptNum);
-			statement.setInt(9, visitingFreeThrowHitNum);
-			statement.setInt(10, visitingFreeThrowAttemptNum);
-			statement.setInt(11, visitingOffenReboundNum);
-			statement.setInt(12, visitingDefenReboundNum);
-			statement.setInt(13, visitingAssistNum);
-			statement.setInt(14, visitingStealNum);
-			statement.setInt(15, visitingBlockNum);
-			statement.setInt(16, visitingTurnOverNum);
-			statement.setInt(17, visitingFoulNum);
-			statement.setInt(18, visitingScore);
-			statement.setString(19, homeTeam);
-			statement.setInt(20, homeShootHitNum);
-			statement.setInt(21, homeShootAttemptNum);
-			statement.setInt(22, homeThreeHitNum);
-			statement.setInt(23, homeThreeAttemptNum);
-			statement.setInt(24, homeFreeThrowHitNum);
-			statement.setInt(25, homeFreeThrowAttemptNum);
-			statement.setInt(26, homeOffenReboundNum);
-			statement.setInt(27, homeDefenReboundNum);
-			statement.setInt(28, homeAssistNum);
-			statement.setInt(29, homeStealNum);
-			statement.setInt(30, homeBlockNum);
-			statement.setInt(31, homeTurnOverNum);
-			statement.setInt(32, homeFoulNum);
-			statement.setInt(33, homeScore);
-		/*	Statement sql = con.createStatement();
-			sql.execute("insert MatchTemp values(" + (count++) + "," + matchID
-					+ ",'" + season + "','" + visitingTeam + "',"
-					+ visitingShootHitNum + "," + visitingShootAttemptNum + ","
-					+ visitingThreeHitNum + "," + visitingThreeAttemptNum + ","
-					+ visitingFreeThrowHitNum + ","
-					+ visitingFreeThrowAttemptNum + ","
-					+ visitingOffenReboundNum + "," + visitingDefenReboundNum
-					+ "," + visitingAssistNum + "," + visitingStealNum + ","
-					+ visitingBlockNum + "," + visitingTurnOverNum + ","
-					+ visitingFoulNum + "," + visitingScore + ",'" + homeTeam
-					+ "'," + homeShootHitNum + "," + homeShootAttemptNum + ","
-					+ homeThreeHitNum + "," + homeThreeAttemptNum + ","
-					+ homeFreeThrowHitNum + "," + homeFreeThrowAttemptNum + ","
-					+ homeOffenReboundNum + "," + homeDefenReboundNum + ","
-					+ homeAssistNum + "," + homeStealNum + "," + homeBlockNum
-					+ "," + homeTurnOverNum + "," + homeFoulNum + ","
-					+ homeScore + ")");
-			sql.close();
-		*/
+			statement.setString(4, date);
+			statement.setString(5, visitingTeam);
+			statement.setInt(6, visitingShootHitNum);
+			statement.setInt(7, visitingShootAttemptNum);
+			statement.setInt(8, visitingThreeHitNum);
+			statement.setInt(9, visitingThreeAttemptNum);
+			statement.setInt(10, visitingFreeThrowHitNum);
+			statement.setInt(11, visitingFreeThrowAttemptNum);
+			statement.setInt(12, visitingOffenReboundNum);
+			statement.setInt(13, visitingDefenReboundNum);
+			statement.setInt(14, visitingAssistNum);
+			statement.setInt(15, visitingStealNum);
+			statement.setInt(16, visitingBlockNum);
+			statement.setInt(17, visitingTurnOverNum);
+			statement.setInt(18, visitingFoulNum);
+			statement.setInt(19, visitingScore);
+			statement.setString(20, homeTeam);
+			statement.setInt(21, homeShootHitNum);
+			statement.setInt(22, homeShootAttemptNum);
+			statement.setInt(23, homeThreeHitNum);
+			statement.setInt(24, homeThreeAttemptNum);
+			statement.setInt(25, homeFreeThrowHitNum);
+			statement.setInt(26, homeFreeThrowAttemptNum);
+			statement.setInt(27, homeOffenReboundNum);
+			statement.setInt(28, homeDefenReboundNum);
+			statement.setInt(29, homeAssistNum);
+			statement.setInt(30, homeStealNum);
+			statement.setInt(31, homeBlockNum);
+			statement.setInt(32, homeTurnOverNum);
+			statement.setInt(33, homeFoulNum);
+			statement.setInt(34, homeScore);
+			/*
+			 * Statement sql = con.createStatement();
+			 * sql.execute("insert MatchTemp values(" + (count++) + "," +
+			 * matchID + ",'" + season + "','" + visitingTeam + "'," +
+			 * visitingShootHitNum + "," + visitingShootAttemptNum + "," +
+			 * visitingThreeHitNum + "," + visitingThreeAttemptNum + "," +
+			 * visitingFreeThrowHitNum + "," + visitingFreeThrowAttemptNum + ","
+			 * + visitingOffenReboundNum + "," + visitingDefenReboundNum + "," +
+			 * visitingAssistNum + "," + visitingStealNum + "," +
+			 * visitingBlockNum + "," + visitingTurnOverNum + "," +
+			 * visitingFoulNum + "," + visitingScore + ",'" + homeTeam + "'," +
+			 * homeShootHitNum + "," + homeShootAttemptNum + "," +
+			 * homeThreeHitNum + "," + homeThreeAttemptNum + "," +
+			 * homeFreeThrowHitNum + "," + homeFreeThrowAttemptNum + "," +
+			 * homeOffenReboundNum + "," + homeDefenReboundNum + "," +
+			 * homeAssistNum + "," + homeStealNum + "," + homeBlockNum + "," +
+			 * homeTurnOverNum + "," + homeFoulNum + "," + homeScore + ")");
+			 * sql.close();
+			 */
 			statement.addBatch();
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -271,6 +274,7 @@ public class MatchTemp {
 			sql.execute("create table MatchTemp(matchTempID int not null auto_increment,"
 					+ "matchID int not null default 0,"
 					+ "season varchar(20) not null default 'null',"
+					+ "date varchar(20) not null default 'null',"
 					+ "visitingTeam varchar(20) not null default 'null',"
 					+ "visitingShootHitNum int not null default 0,"
 					+ "visitingShootAttemptNum int not null default 0,"
