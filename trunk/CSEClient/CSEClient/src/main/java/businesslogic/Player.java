@@ -217,6 +217,9 @@ public class Player implements PlayerBLService {
 			// TODO 自动生成的 catch 块
 			e.printStackTrace();
 		}
+		if(icon.equals(null)){
+			System.out.println("Player.getPlayerPortraitImage()");
+		}
 		return icon;
 	}
 
