@@ -49,7 +49,7 @@ public interface PlayerDataService extends Remote {
 	public ArrayList<PlayerPO> getDayHotPlayer(String column)
 			throws RemoteException;
 
-	public ArrayList<PlayerPO> getSeasonHotPlayer(String column)
+	public ArrayList<PlayerPO> getSeasonHotPlayer(String season,String column)
 			throws RemoteException;
 
 	public ArrayList<PlayerPO> getBestImprovedPlayer(String column)
