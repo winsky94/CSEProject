@@ -16,7 +16,6 @@ public class Player implements PlayerBLService {
 
 	public Player() {
 		try {
-			// String host = "localhost";
 			String host = getServer.getServerHost();
 			String url = "rmi://" + host + "/playerService";
 			service = (PlayerDataService) Naming.lookup(url);
@@ -342,4 +341,23 @@ public class Player implements PlayerBLService {
 		}
 		return EN;
 	}
+
+//	/**
+//	 * 将球员的位置由英文转为中文
+//	 * @param position
+//	 * @return
+//	 */
+//	private String changePositionToCH(String position){
+//		String CH="";
+//		if (position.equals("F")) {
+//			CH = "前锋";
+//		} else if (position.equals("C")) {
+//			CH = "中锋";
+//		} else if (position.equals("G")) {
+//			CH = "后卫";
+//		} else {
+//			CH = "";
+//		}
+//		return CH;
+//	}
 }
