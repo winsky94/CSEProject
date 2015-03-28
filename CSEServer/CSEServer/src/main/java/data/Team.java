@@ -10,6 +10,8 @@ import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 
+import po.MatchPO;
+import po.RecordPO;
 import po.TeamPO;
 import SQLHelper.SqlManager;
 import dataservice.TeamDataService;
@@ -30,14 +32,9 @@ public class Team extends UnicastRemoteObject implements TeamDataService {
 		Team team;
 		try {
 			team = new Team();
-			// TeamPO po = team.getTeamSeasonInfo("13-14", "WAS");
-			// System.out.println(po.getScore());
-
-//			ArrayList<TeamPO> teams = team.getOrderedTeamsBySeason("13-14",
-//					"score", null);
-			ArrayList<TeamPO> teams = team.getTeamBaseInfo();
+			ArrayList<TeamPO> teams = team.getSeasonHotTeam("13-14", "score");
 			for (TeamPO po : teams) {
-				System.out.println(po.getTeamName());
+				System.out.println(po.getAbLocation());
 			}
 		} catch (RemoteException e) {
 			// TODO 自动生成的 catch 块
@@ -224,9 +221,9 @@ public class Team extends UnicastRemoteObject implements TeamDataService {
 	public String getPhotoPath(String abLocation) {
 		return "src/迭代一数据/teamsPng/" + abLocation + ".png";
 	}
-	
+
 	public ImageIcon getTeamImage(String name) throws RemoteException {
-		ImageIcon imageIcon=new ImageIcon(getPhotoPath(name));
+		ImageIcon imageIcon = new ImageIcon(getPhotoPath(name));
 		return imageIcon;
 	}
 
@@ -488,5 +485,191 @@ public class Team extends UnicastRemoteObject implements TeamDataService {
 			closeMySql();
 		}
 		return po;
+	}
+
+	/**
+	 * 根据球队名称模糊查找球队近期比赛
+	 * 
+	 * @param teamName
+	 *            球队名称
+	 * @return 近期五场比赛的列表
+	 */
+	public ArrayList<MatchPO> getRecentMatches(String teamName)
+			throws RemoteException {
+		// TODO 自动生成的方法存根
+		ArrayList<MatchPO> result = new ArrayList<MatchPO>();
+		result = getRencentMatches(teamName, 5);
+		return result;
+	}
+
+	/**
+	 * 根据球队名称模糊查找其过往比赛
+	 * 
+	 * @param teamName
+	 *            球队名称
+	 * @return
+	 */
+	public ArrayList<MatchPO> getMatches(String teamName)
+			throws RemoteException {
+		// TODO 自动生成的方法存根
+		ArrayList<MatchPO> result = new ArrayList<MatchPO>();
+		result = getRencentMatches(teamName, -1);
+		return result;
+	}
+
+	/**
+	 * 根据球队名得到近期比赛的某种数据 模糊查找
+	 * 
+	 * @param teamName
+	 * @param num
+	 *            得到比赛的场数 ，-1则是取出全部数据
+	 * @return
+	 */
+	private ArrayList<MatchPO> getRencentMatches(String teamName, int num) {
+		ArrayList<MatchPO> result = new ArrayList<MatchPO>();
+		try {
+			connection = SqlManager.getConnection();
+			Statement sql = connection.createStatement();
+			// 模糊查找
+			String query = "select * from matches where homeTeam like '%"
+					+ teamName + "%' or visitingTeam like '%" + teamName
+					+ "%' order by date desc";
+			ResultSet resultSet = sql.executeQuery(query);
+			int count = 0;
+			while (resultSet.next()) {
+				count++;
+
+				int matchID = resultSet.getInt("matchID");
+				String season = resultSet.getString("season");
+				String date = resultSet.getString("date");
+				String visingTeam = resultSet.getString("visitingTeam");
+				String homeTeam = resultSet.getString("homeTeam");
+				int visitingScore = resultSet.getInt("visitingScore");
+				int homeScore = resultSet.getInt("homeScore");
+
+				ArrayList<String> detailScores = new ArrayList<String>();
+				Statement statement = connection.createStatement();
+				String query2 = "select score from detailscores where matchID="
+						+ matchID;
+				ResultSet rs = statement.executeQuery(query2);
+				while (rs.next()) {
+					detailScores.add(rs.getString("score"));
+				}
+				statement.close();
+				rs.close();
+
+				ArrayList<RecordPO> records = new ArrayList<RecordPO>();
+				Statement stat = connection.createStatement();
+				String query3 = "select * from records where matchID="
+						+ matchID;
+				ResultSet rSet = stat.executeQuery(query3);
+				while (rSet.next()) {
+					String team = rSet.getString("team");
+					String playerName = rSet.getString("playerName");
+					String position = rSet.getString("position");
+					String presentTime = rSet.getString("presentTime");
+					int shootHitNum = rSet.getInt("shootHitNum");
+					int shootAttemptNum = rSet.getInt("shootAttemptNum");
+					int threeHitNum = rSet.getInt("threeHitNum");
+					int threeAttemptNum = rSet.getInt("threeAttemptNum");
+					int freeThrowHitNum = rSet.getInt("freeThrowHitNum");
+					int freeThrowAttemptNum = rSet
+							.getInt("freeThrowAttemptNum");
+					int offenReboundNum = rSet.getInt("offenReboundNum");
+					int defenReboundNum = rSet.getInt("defenReboundNum");
+					int reboundNum = rSet.getInt("reboundNum");
+					int assistNum = rSet.getInt("assistNum");
+					int stealNum = rSet.getInt("stealNum");
+					int blockNum = rSet.getInt("blockNum");
+					int turnOverNum = rSet.getInt("turnOverNum");
+					int foulNum = rSet.getInt("foulNum");
+					int score = rSet.getInt("score");
+					RecordPO recordPO = new RecordPO(team, playerName,
+							position, presentTime, shootHitNum,
+							shootAttemptNum, threeHitNum, threeAttemptNum,
+							freeThrowHitNum, freeThrowAttemptNum,
+							offenReboundNum, defenReboundNum, reboundNum,
+							assistNum, stealNum, blockNum, turnOverNum,
+							foulNum, score);
+					records.add(recordPO);
+				}
+				rSet.close();
+				stat.close();
+
+				MatchPO matchPO = new MatchPO(matchID, season, date,
+						visingTeam, homeTeam, visitingScore, homeScore,
+						detailScores, records);
+				result.add(matchPO);
+				if (num > 0) {// -1则是取出全部数据
+					if (count >= num) {
+						break;
+					}
+				}
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		} finally {
+			closeMySql();
+		}
+		return result;
+	}
+
+	/**
+	 * @param column
+	 *            筛选条件
+	 * @return 返回到 目前为止所有参加过比赛的球队中筛选出前 5 名球队（按照 降序排列进行筛选）
+	 */
+	public ArrayList<TeamPO> getSeasonHotTeam(String season, String column)
+			throws RemoteException {
+		// TODO 自动生成的方法存根
+		ArrayList<TeamPO> result = new ArrayList<TeamPO>();
+		try {
+			connection = SqlManager.getConnection();
+			Statement sql = connection.createStatement();
+			String query = "";
+			if (column.equals("score") || column.equals("reboundNum")
+					|| column.equals("assistNum") || column.equals("blockNum")
+					|| column.equals("stealNum")) {
+				query = "select * from teamMatchDataAverage where season='"
+						+ season + "' order by " + column + " desc";
+			} else {
+				query = "select * from teamMatchDataSeason where season='"
+						+ season + "' order by " + column + " desc";
+			}
+			ResultSet rs = sql.executeQuery(query);
+			int count = 0;
+			while (rs.next()) {
+				count++;
+				String abLocation = rs.getString("team");
+				Statement stat = connection.createStatement();
+				String query2 = "select * from teams where abLocation ='"
+						+ abLocation+"'";
+				ResultSet resultSet = stat.executeQuery(query2);
+				resultSet.next();
+				// 基础信息
+				int id = resultSet.getInt("teamID");
+				String teamName = resultSet.getString("teamName");
+				String location = resultSet.getString("location");
+				String conference = resultSet.getString("conference");
+				String partition = resultSet.getString("partition");
+				String homeCourt = resultSet.getString("homeCourt");
+				int setUpTime = resultSet.getInt("setUpTime");
+
+				TeamPO teamPO = new TeamPO(id, teamName, abLocation, location,
+						conference, partition, homeCourt, setUpTime);
+				result.add(teamPO);
+				if (count >= 5) {
+					break;
+				}
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		} finally {
+			closeMySql();
+		}
+
+		return result;
 	}
 }
