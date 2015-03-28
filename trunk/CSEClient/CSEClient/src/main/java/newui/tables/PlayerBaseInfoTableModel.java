@@ -14,6 +14,7 @@ public class PlayerBaseInfoTableModel extends MyTableModel {
 	static String[] head = { "(头像)", "球员名", "所属球队", "位置", "身高", "体重","生日","年龄" ,"经验" };
 	ArrayList<ArrayList<Object>> content = new ArrayList<ArrayList<Object>>();
 	private Player player;
+	private ArrayList<ImageIcon> imgList=new ArrayList<ImageIcon>();
 	private ArrayList<PlayerVO> playerlist;
 	public PlayerBaseInfoTableModel() {
 		player=new Player();
@@ -60,6 +61,7 @@ public class PlayerBaseInfoTableModel extends MyTableModel {
 			ArrayList<Object> line=new ArrayList<Object>();
 			String name=vo.getName();
 			ImageIcon tou=player.getPlayerPortraitImage(name);
+			imgList.add(tou);
 			line.add(tou);
 			line.add(name);
 			line.add(vo.getTeamName());
@@ -73,6 +75,10 @@ public class PlayerBaseInfoTableModel extends MyTableModel {
 		}
 		
 		
+	}
+	
+	public ArrayList<ImageIcon> getImgList(){
+		return imgList;
 	}
 	
 }

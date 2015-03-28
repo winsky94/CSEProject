@@ -23,16 +23,16 @@ public class MyTableModel extends AbstractTableModel{
 		// TODO Auto-generated method stub
 		return null;
 	}
-	public Class getColumnClass(int column) {
-		Class returnValue;
-		if ((column >= 0) && (column < getColumnCount())) {
-			returnValue = getValueAt(0, column).getClass();
-		} else {
-			returnValue = Object.class;
-		}
-		//System.out.println(returnValue);
-		return returnValue;
-	}
+//	public Class getColumnClass(int column) {
+//		Class returnValue;
+//		if ((column >= 0) && (column < getColumnCount())) {
+//			returnValue = getValueAt(0, column).getClass();
+//		} else {
+//			returnValue = Object.class;
+//		}
+//		//System.out.println(returnValue);
+//		return returnValue;
+//	}
 	//====更新数据=====0汇总，1场均
 	public void Refresh(String model){
 		
