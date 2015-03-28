@@ -1,6 +1,7 @@
 package SQLHelper.Calculator;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -105,10 +106,13 @@ public class PlayerMatchDataCalculator {
 	double dsOffenRoundNumSeason=0;
 	double score_rebound_assistSeason=0;
 	double score_rebound_assist=0;
+	PreparedStatement averageStatement ;
+	PreparedStatement seasonStatement ;
 
 	public PlayerMatchDataCalculator() {
 		try {
 			con = SqlManager.getConnection();
+			con.setAutoCommit(false);
 		} catch (ClassNotFoundException e) {
 			// TODO 自动生成的 catch 块
 			e.printStackTrace();
@@ -282,9 +286,44 @@ public class PlayerMatchDataCalculator {
 		format();
 
 		try {
-			Statement sql = con.createStatement();
-
-			sql.execute("insert playerMatchDataSeason values(" + sqlID + ",'"
+			seasonStatement.setInt(1, sqlID);
+			seasonStatement.setString(2, playerName);
+			seasonStatement.setString(3, season);
+			seasonStatement.setString(4, owingTeam);
+			seasonStatement.setInt(5, playedGames);
+			seasonStatement.setInt(6, gameStartingNum);
+			seasonStatement.setInt(7, reboundNumSeason);
+			seasonStatement.setInt(8, assistNumSeason);
+			seasonStatement.setString(9, presentTimeSeason);
+			seasonStatement.setDouble(10, shootHitRateSeason);
+			seasonStatement.setDouble(11, threeHitRateSeason);
+			seasonStatement.setDouble(12, freeThrowHitRateSeason);
+			seasonStatement.setInt(13, offenReboundNumSeason);
+			seasonStatement.setInt(14, defenReboundNumSeason);
+			seasonStatement.setInt(15, stealNumSeason);
+			seasonStatement.setInt(16, blockNumSeason);
+			seasonStatement.setInt(17, foulNumSeason);
+			seasonStatement.setInt(18, turnOverNumSeason);
+			seasonStatement.setInt(19, scoreSeason);
+			seasonStatement.setDouble(20, efficiencySeason);
+			seasonStatement.setDouble(21, recentFiveMatchesScoreUpRate);
+			seasonStatement.setDouble(22, recentFiveMatchesReboundUpRate);
+			seasonStatement.setDouble(23, recentFiveMatchesAssistUpRate);
+			seasonStatement.setDouble(24, GmScEfficiencyValueSeason);
+			seasonStatement.setDouble(25, trueHitRateSeason);
+			seasonStatement.setDouble(26, shootEfficiencySeason);
+			seasonStatement.setDouble(27, reboundRateSeason);
+			seasonStatement.setDouble(28, offenReboundRateSeason);
+			seasonStatement.setDouble(29, defenReboundRateSeason);
+			seasonStatement.setDouble(30, assistRateSeason);
+			seasonStatement.setDouble(31, stealRateSeason);
+			seasonStatement.setDouble(32, blockRateSeason);
+			seasonStatement.setDouble(33, turnOverRateSeason);
+			seasonStatement.setDouble(34, usageRateSeason);
+			seasonStatement.setDouble(35, score_rebound_assistSeason);
+			seasonStatement.setDouble(36, doubleDoubleNum);
+			seasonStatement.addBatch();
+			/*sql.execute("insert playerMatchDataSeason values(" + sqlID + ",'"
 					+ playerName + "','" + season + "','" + owingTeam + "',"
 					+ playedGames + "," + gameStartingNum + ","
 					+ reboundNumSeason + "," + assistNumSeason + ",'"
@@ -323,6 +362,44 @@ public class PlayerMatchDataCalculator {
 					+ "," + blockRate + "," + turnOverRate + "," + usageRate
 					+","+score_rebound_assist+","+doubleDoubleNum+ ")");
 			sql2.close();
+		*/
+			averageStatement.setInt(1, sqlID);
+			averageStatement.setString(2, playerName);
+			averageStatement.setString(3, season);
+			averageStatement.setString(4, owingTeam);
+			averageStatement.setInt(5, playedGames);
+			averageStatement.setInt(6, gameStartingNum);
+			averageStatement.setDouble(7, reboundNum);
+			averageStatement.setDouble(8, assistNum);
+			averageStatement.setString(9, presentTime);
+			averageStatement.setDouble(10, shootHitRate);
+			averageStatement.setDouble(11, threeHitRate);
+			averageStatement.setDouble(12, freeThrowHitRate);
+			averageStatement.setDouble(13, offenReboundNum);
+			averageStatement.setDouble(14, defenReboundNum);
+			averageStatement.setDouble(15, stealNum);
+			averageStatement.setDouble(16, blockNum);
+			averageStatement.setDouble(17, foulNum);
+			averageStatement.setDouble(18, turnOverNum);
+			averageStatement.setDouble(19, score);
+			averageStatement.setDouble(20, efficiency);
+			averageStatement.setDouble(21, recentFiveMatchesScoreUpRate);
+			averageStatement.setDouble(22, recentFiveMatchesReboundUpRate);
+			averageStatement.setDouble(23, recentFiveMatchesAssistUpRate);
+			averageStatement.setDouble(24, GmScEfficiencyValue);
+			averageStatement.setDouble(25, trueHitRate);
+			averageStatement.setDouble(26, shootEfficiency);
+			averageStatement.setDouble(27, reboundRate);
+			averageStatement.setDouble(28, offenReboundRate);
+			averageStatement.setDouble(29, defenReboundRate);
+			averageStatement.setDouble(30, assistRate);
+			averageStatement.setDouble(31, stealRate);
+			averageStatement.setDouble(32, blockRate);
+			averageStatement.setDouble(33, turnOverRate);
+			averageStatement.setDouble(34, usageRate);
+			averageStatement.setDouble(35, score_rebound_assist);
+			averageStatement.setDouble(36, doubleDoubleNum);
+			averageStatement.addBatch();
 
 			sqlID++;
 		} catch (Exception e) {
@@ -335,7 +412,10 @@ public class PlayerMatchDataCalculator {
 
 		createTable();
 		ArrayList<String> names = findPlayerNames();
+		
 		try {
+			averageStatement = con.prepareStatement("INSERT INTO playerMatchDataAverage VALUES(?, ?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+			seasonStatement = con.prepareStatement("INSERT INTO playerMatchDataSeason VALUES(?, ?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
 			for (String name : names) {
 				reset();
 				playerName = name;
@@ -705,6 +785,11 @@ public class PlayerMatchDataCalculator {
 				exportToSQL();
 
 			}
+			seasonStatement.executeBatch();
+			averageStatement.executeBatch();
+			con.commit();
+			seasonStatement.close();
+			averageStatement.close();
 			con.close();
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -742,7 +827,7 @@ public class PlayerMatchDataCalculator {
 		try {
 			Statement sql = con.createStatement();
 			String query = "select matchID,score,reboundNum,assistNum from records where playerName='"
-					+ name + "' order by matchID desc";
+					+ name + "' order by matchID desc limit 5";
 			ResultSet resultSet = sql.executeQuery(query);
 			while (resultSet.next()) {
 				if (count >= 5) {
@@ -810,7 +895,7 @@ public class PlayerMatchDataCalculator {
 		try {
 			Statement sql = con.createStatement();
 			String query = "select homeTeam,visitingTeam from matchtemp where matchID="
-					+ matchID;
+					+ matchID+" limit 1";
 			ResultSet resultSet = sql.executeQuery(query);
 			resultSet.next();
 			if (resultSet.getString("homeTeam").equals(team)) {
@@ -843,7 +928,7 @@ public class PlayerMatchDataCalculator {
 			Statement sql = con.createStatement();
 			// 去matchtemp里面找
 			String query = "select homeTeam,visitingTeam,homeOffenReboundNum,visitingOffenReboundNum,homeDefenReboundNum,visitingDefenReboundNum from matchtemp where matchID="
-					+ matchID;
+					+ matchID+" limit 1";
 			ResultSet resultSet = sql.executeQuery(query);
 			resultSet.next();
 			if (resultSet.getString("homeTeam").equals(team)) {
@@ -883,7 +968,7 @@ public class PlayerMatchDataCalculator {
 			Statement sql = con.createStatement();
 			// 去matchtemp里面找
 			String query = "select homeTeam,visitingTeam,homeShootHitNum,visitingShootHitNum from matchtemp where matchID="
-					+ matchID;
+					+ matchID+" limit 1";
 			ResultSet resultSet = sql.executeQuery(query);
 			resultSet.next();
 			if (resultSet.getString("homeTeam").equals(team)) {
@@ -917,7 +1002,7 @@ public class PlayerMatchDataCalculator {
 			Statement sql = con.createStatement();
 			// 去matchtemp里面找
 			String query = "select homeTeam,visitingTeam,homeShootAttemptNum,visitingShootAttemptNum,homeFreeThrowAttemptNum,visitingFreeThrowAttemptNum,homeTurnOverNum,visitingTurnOverNum from matchtemp where matchID="
-					+ matchID;
+					+ matchID+" limit 1";
 			ResultSet resultSet = sql.executeQuery(query);
 			resultSet.next();
 			if (resultSet.getString("homeTeam").equals(team)) {
@@ -958,7 +1043,7 @@ public class PlayerMatchDataCalculator {
 			Statement sql = con.createStatement();
 			// 去matchtemp里面找
 			String query = "select homeTeam,visitingTeam,homeShootAttemptNum,visitingShootAttemptNum,homeThreeAttemptNum,visitingThreeAttemptNum from matchtemp where matchID="
-					+ matchID;
+					+ matchID+" limit 1";
 			ResultSet resultSet = sql.executeQuery(query);
 			resultSet.next();
 			if (resultSet.getString("homeTeam").equals(team)) {
@@ -990,7 +1075,7 @@ public class PlayerMatchDataCalculator {
 		try {
 			Statement sql = con.createStatement();
 			// 去matchtemp里面找
-			String query = "select * from matchtemp where matchID="+ matchID;
+			String query = "select homeTeam,visitingShootAttemptNum,visitingFreeThrowAttemptNum,visitingOffenReboundNum,homeDefenReboundNum,visitingShootHitNum,visitingTurnOverNum,homeShootAttemptNum,homeFreeThrowAttemptNum,homeOffenReboundNum,visitingDefenReboundNum,homeShootHitNum,homeTurnOverNum from matchtemp where matchID="+ matchID+" limit 1";
 			ResultSet resultSet = sql.executeQuery(query);
 			resultSet.next();
 			if (resultSet.getString("homeTeam").equals(team)) {
@@ -1056,7 +1141,7 @@ public class PlayerMatchDataCalculator {
 		int result = 0;
 		try {
 			Statement sql = con.createStatement();
-			String query = "select time from matches where matchID=" + matchID;
+			String query = "select time from matches where matchID=" + matchID+" limit 1";
 			ResultSet resultSet = sql.executeQuery(query);
 			resultSet.next();
 			result = resultSet.getInt("time");

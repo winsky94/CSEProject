@@ -1,6 +1,7 @@
 package SQLHelper.Calculator;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -50,10 +51,12 @@ public class MatchTemp {
 	int homeTurnOverNum = 0;// 失误数
 	int homeFoulNum = 0;// 犯规数
 	int homeScore = 0;// 得分
+	PreparedStatement statement;   
 
 	public MatchTemp() {
 		try {
 			con = SqlManager.getConnection();
+			con.setAutoCommit(false);
 		} catch (ClassNotFoundException e) {
 			// TODO 自动生成的 catch 块
 			e.printStackTrace();
@@ -74,6 +77,7 @@ public class MatchTemp {
 			Statement sql = con.createStatement();
 			String query = "select * from matches";
 			ResultSet resultSet = sql.executeQuery(query);
+			statement = con.prepareStatement("INSERT INTO MatchTemp VALUES(?, ?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");   
 
 			while (resultSet.next()) {
 				matchID = resultSet.getInt("matchID");
@@ -108,6 +112,9 @@ public class MatchTemp {
 
 			sql.close();
 			resultSet.close();
+			statement.executeBatch();
+			con.commit();
+			statement.close();
 			con.close();
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -197,7 +204,40 @@ public class MatchTemp {
 
 	private void exportToSQL() {
 		try {
-			Statement sql = con.createStatement();
+			statement.setInt(1, (count++));
+			statement.setInt(2, matchID);
+			statement.setString(3, season);
+			statement.setString(4, visitingTeam);
+			statement.setInt(5, visitingShootHitNum);
+			statement.setInt(6, visitingShootAttemptNum);
+			statement.setInt(7, visitingThreeHitNum);
+			statement.setInt(8, visitingThreeAttemptNum);
+			statement.setInt(9, visitingFreeThrowHitNum);
+			statement.setInt(10, visitingFreeThrowAttemptNum);
+			statement.setInt(11, visitingOffenReboundNum);
+			statement.setInt(12, visitingDefenReboundNum);
+			statement.setInt(13, visitingAssistNum);
+			statement.setInt(14, visitingStealNum);
+			statement.setInt(15, visitingBlockNum);
+			statement.setInt(16, visitingTurnOverNum);
+			statement.setInt(17, visitingFoulNum);
+			statement.setInt(18, visitingScore);
+			statement.setString(19, homeTeam);
+			statement.setInt(20, homeShootHitNum);
+			statement.setInt(21, homeShootAttemptNum);
+			statement.setInt(22, homeThreeHitNum);
+			statement.setInt(23, homeThreeAttemptNum);
+			statement.setInt(24, homeFreeThrowHitNum);
+			statement.setInt(25, homeFreeThrowAttemptNum);
+			statement.setInt(26, homeOffenReboundNum);
+			statement.setInt(27, homeDefenReboundNum);
+			statement.setInt(28, homeAssistNum);
+			statement.setInt(29, homeStealNum);
+			statement.setInt(30, homeBlockNum);
+			statement.setInt(31, homeTurnOverNum);
+			statement.setInt(32, homeFoulNum);
+			statement.setInt(33, homeScore);
+		/*	Statement sql = con.createStatement();
 			sql.execute("insert MatchTemp values(" + (count++) + "," + matchID
 					+ ",'" + season + "','" + visitingTeam + "',"
 					+ visitingShootHitNum + "," + visitingShootAttemptNum + ","
@@ -216,6 +256,8 @@ public class MatchTemp {
 					+ "," + homeTurnOverNum + "," + homeFoulNum + ","
 					+ homeScore + ")");
 			sql.close();
+		*/
+			statement.addBatch();
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
