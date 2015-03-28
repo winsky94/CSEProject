@@ -23,16 +23,12 @@ public interface PlayerDataService extends Remote {
 	public PlayerPO getPlayerAverageInfo(String season, String name)
 			throws RemoteException;
 
-	public ArrayList<MatchPO> getRecentMatchesAverage(String playerName)
+	public ArrayList<MatchPO> getRecentMatches(String playerName)
 			throws RemoteException;
+	
+	public ArrayList<MatchPO> getTodayMatches(String playerName) throws RemoteException;
 
-	public ArrayList<MatchPO> getRecentMatchesSeason(String playerName)
-			throws RemoteException;
-
-	public ArrayList<MatchPO> getMatchesAverage(String playerName)
-			throws RemoteException;
-
-	public ArrayList<MatchPO> getMatchesSeason(String playerName)
+	public ArrayList<MatchPO> getMatches(String playerName)
 			throws RemoteException;// 可以模糊
 
 	public ArrayList<PlayerPO> getOrderedPlayersBySeason(String season,
@@ -55,7 +51,7 @@ public interface PlayerDataService extends Remote {
 	public ArrayList<PlayerPO> getDayHotPlayer(String column)
 			throws RemoteException;
 
-	public ArrayList<PlayerPO> getSeasonHotPlayer(String column)
+	public ArrayList<PlayerPO> getSeasonHotPlayer(String season,String column)
 			throws RemoteException;
 
 	public ArrayList<PlayerPO> getBestImprovedPlayer(String column)
