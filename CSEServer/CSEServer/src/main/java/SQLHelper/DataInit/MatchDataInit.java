@@ -6,16 +6,15 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import java.sql.PreparedStatement;
-
-import SQLHelper.FileList;
-import SQLHelper.SqlManager;
 import po.MatchPO;
 import po.RecordPO;
+import SQLHelper.FileList;
+import SQLHelper.SqlManager;
 
 /**
  * 
@@ -201,6 +200,7 @@ public class MatchDataInit {
 					+ "matchID int not null default -1,"
 					+ "team varchar(20) not null default 'null',"
 					+ "season varchar(20) not null default 'null',"
+					+ "date varchar(20) not null default 'null',"
 					+ "playerName varchar(40) not null default 'null',"
 					+ "presentTime varchar(20) not null default 'null',"
 					+ "position varchar(20) not null default 'null',"
@@ -233,7 +233,7 @@ public class MatchDataInit {
 			PreparedStatement detailScoreStatement = con
 					.prepareStatement("INSERT INTO detailScores VALUES(?, ?,?,?)");
 			PreparedStatement recordsStatement = con
-					.prepareStatement("INSERT INTO records VALUES(?, ?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+					.prepareStatement("INSERT INTO records VALUES(?, ?, ?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
 			for (MatchPO matchPO : matches) {
 				// 向matches表中插入数据
 				String visitingTeam = matchPO.getVisingTeam();
@@ -288,25 +288,27 @@ public class MatchDataInit {
 					recordsStatement.setInt(2, matchPO.getMatchID());
 					recordsStatement.setString(3, recordPO.getTeam());
 					recordsStatement.setString(4, matchPO.getSeason());
-					recordsStatement.setString(5, recordPO.getPlayerName());
-					recordsStatement.setString(6, recordPO.getPresentTime());
-					recordsStatement.setString(7, recordPO.getPosition());
-					recordsStatement.setInt(8, recordPO.getShootHitNum());
-					recordsStatement.setInt(9, recordPO.getShootAttemptNum());
-					recordsStatement.setInt(10, recordPO.getThreeHitNum());
-					recordsStatement.setInt(11, recordPO.getThreeAttemptNum());
-					recordsStatement.setInt(12, recordPO.getFreeThrowHitNum());
-					recordsStatement.setInt(13,
+					recordsStatement.setString(5, matchPO.getDate());
+
+					recordsStatement.setString(6, recordPO.getPlayerName());
+					recordsStatement.setString(7, recordPO.getPresentTime());
+					recordsStatement.setString(8, recordPO.getPosition());
+					recordsStatement.setInt(9, recordPO.getShootHitNum());
+					recordsStatement.setInt(10, recordPO.getShootAttemptNum());
+					recordsStatement.setInt(11, recordPO.getThreeHitNum());
+					recordsStatement.setInt(12, recordPO.getThreeAttemptNum());
+					recordsStatement.setInt(13, recordPO.getFreeThrowHitNum());
+					recordsStatement.setInt(14,
 							recordPO.getFreeThrowAttemptNum());
-					recordsStatement.setInt(14, recordPO.getOffenReboundNum());
-					recordsStatement.setInt(15, recordPO.getDefenReboundNum());
-					recordsStatement.setInt(16, recordPO.getReboundNum());
-					recordsStatement.setInt(17, recordPO.getAssistNum());
-					recordsStatement.setInt(18, recordPO.getStealNum());
-					recordsStatement.setInt(19, recordPO.getBlockNum());
-					recordsStatement.setInt(20, recordPO.getTurnOverNum());
-					recordsStatement.setInt(21, recordPO.getFoulNum());
-					recordsStatement.setInt(22, recordPO.getScore());
+					recordsStatement.setInt(15, recordPO.getOffenReboundNum());
+					recordsStatement.setInt(16, recordPO.getDefenReboundNum());
+					recordsStatement.setInt(17, recordPO.getReboundNum());
+					recordsStatement.setInt(18, recordPO.getAssistNum());
+					recordsStatement.setInt(19, recordPO.getStealNum());
+					recordsStatement.setInt(20, recordPO.getBlockNum());
+					recordsStatement.setInt(21, recordPO.getTurnOverNum());
+					recordsStatement.setInt(22, recordPO.getFoulNum());
+					recordsStatement.setInt(23, recordPO.getScore());
 					recordsStatement.addBatch();
 					/*
 					 * sql.execute("insert records values(" + recordIndex + ","
