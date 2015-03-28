@@ -1,6 +1,7 @@
 package SQLHelper.Calculator;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -85,10 +86,14 @@ public class TeamMatchDataCalculator {
 	// temp
 	int dsScoreSeason = 0;// 总赛季对手得分
 	int dsOffenRoundSeason = 0;// 总赛季对手进攻回合，即总赛季球队防守回合
+	PreparedStatement seasonStatement;
+	PreparedStatement averageStatement;
+
 
 	public TeamMatchDataCalculator() {
 		try {
 			con = SqlManager.getConnection();
+			con.setAutoCommit(false);
 		} catch (ClassNotFoundException e) {
 			// TODO 自动生成的 catch 块
 			e.printStackTrace();
@@ -108,6 +113,8 @@ public class TeamMatchDataCalculator {
 		ArrayList<String> names = new ArrayList<String>();
 		names = getTeams();
 		try {
+			seasonStatement = con.prepareStatement("INSERT INTO teamMatchDataAverage VALUES(?, ?, ?, ?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");   
+			averageStatement= con.prepareStatement("INSERT INTO teamMatchDataSeason VALUES(?, ?, ?, ?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");  
 			Statement sql = con.createStatement(
 					ResultSet.TYPE_SCROLL_INSENSITIVE,
 					ResultSet.CONCUR_READ_ONLY);
@@ -145,7 +152,13 @@ public class TeamMatchDataCalculator {
 				result.beforeFirst();
 				reset();
 			}
+			sql.close();
 			result.close();
+			seasonStatement.executeBatch();
+			averageStatement.executeBatch();
+			con.commit();
+			seasonStatement.close();
+			averageStatement.close();
 			con.close();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -350,8 +363,38 @@ public class TeamMatchDataCalculator {
 		foramt();
 
 		try {
-			Statement sql = con.createStatement();
-
+			seasonStatement.setInt(1, sqlID);
+			seasonStatement.setString(2, teamName);
+			seasonStatement.setString(3, season);
+			seasonStatement.setInt(4, matchesNum);
+			seasonStatement.setDouble(5, winRate);
+			seasonStatement.setInt(6, shootHitNum);
+			seasonStatement.setInt(7, shootAttemptNum);
+			seasonStatement.setInt(8, threeHitNum);
+			seasonStatement.setInt(9, threeAttemptNum);
+			seasonStatement.setInt(10, freeThrowHitNum);
+			seasonStatement.setInt(11, freeThrowAttemptNum);
+			seasonStatement.setInt(12, offenReboundNum);
+			seasonStatement.setInt(13, defenReboundNum);
+			seasonStatement.setInt(14, reboundNum);
+			seasonStatement.setInt(15, assistNum);
+			seasonStatement.setInt(16, stealNum);
+			seasonStatement.setInt(17, blockNum);
+			seasonStatement.setInt(18, turnOverNum);
+			seasonStatement.setInt(19, foulNum);
+			seasonStatement.setInt(20, score);
+			seasonStatement.setDouble(21, shootHitRateSeason);
+			seasonStatement.setDouble(22, threeHitRateSeason);
+			seasonStatement.setDouble(23, freeThrowHitRateSeason);
+			seasonStatement.setDouble(24, offenRoundSeason);
+			seasonStatement.setDouble(25, offenEfficiencySeason);
+			seasonStatement.setDouble(26, defenEfficiencySeason);
+			seasonStatement.setDouble(27, offenReboundEfficiencySeason);
+			seasonStatement.setDouble(28, defenReboundEfficiencySeason);
+			seasonStatement.setDouble(29, stealEfficiencySeason);
+			seasonStatement.setDouble(30, assistRateSeason);
+			seasonStatement.addBatch();
+/*			Statement sql = con.createStatement();
 			sql.execute("insert teamMatchDataSeason values(" + sqlID + ",'"
 					+ teamName + "','" + season + "'," + matchesNum + ","
 					+ winRate + "," + shootHitNum + "," + shootAttemptNum + ","
@@ -386,7 +429,38 @@ public class TeamMatchDataCalculator {
 					+ offenReboundEfficiency + "," + defenReboundEfficiency
 					+ "," + stealEfficiency + "," + assistRate + ")");
 			sql2.close();
-
+*/
+			averageStatement.setInt(1, sqlID);
+			averageStatement.setString(2, teamName);
+			averageStatement.setString(3, season);
+			averageStatement.setInt(4, matchesNum);
+			averageStatement.setDouble(5, winRate);
+			averageStatement.setDouble(6, shootHitNumAverage);
+			averageStatement.setDouble(7, shootAttemptNumAverage);
+			averageStatement.setDouble(8, threeHitNumAverage);
+			averageStatement.setDouble(9, threeAttemptNumAverage);
+			averageStatement.setDouble(10, freeThrowHitNumAverage);
+			averageStatement.setDouble(11, freeThrowAttemptNumAverage);
+			averageStatement.setDouble(12, offenReboundNumAverage);
+			averageStatement.setDouble(13, defenReboundNumAverage);
+			averageStatement.setDouble(14, reboundNumAverage);
+			averageStatement.setDouble(15, assistNumAverage);
+			averageStatement.setDouble(16, stealNumAverage);
+			averageStatement.setDouble(17, blockNumAverage);
+			averageStatement.setDouble(18, turnOverNumAverage);
+			averageStatement.setDouble(19, foulNumAverage);
+			averageStatement.setDouble(20, scoreAverage);
+			averageStatement.setDouble(21, shootHitRate);
+			averageStatement.setDouble(22, threeHitRate);
+			averageStatement.setDouble(23, freeThrowHitRate);
+			averageStatement.setDouble(24, offenRound);
+			averageStatement.setDouble(25, offenEfficiency);
+			averageStatement.setDouble(26, defenEfficiency);
+			averageStatement.setDouble(27, offenReboundEfficiency);
+			averageStatement.setDouble(28, defenReboundEfficiency);
+			averageStatement.setDouble(29, stealEfficiency);
+			averageStatement.setDouble(30, assistRate);
+			averageStatement.addBatch();
 			sqlID++;
 		} catch (Exception e) {
 			// TODO: handle exception
