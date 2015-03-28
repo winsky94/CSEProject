@@ -18,7 +18,7 @@ import javax.swing.JTable;
 import newui.FatherPanel;
 import newui.Style;
 import newui.mainui.MainFrame;
-import newui.tables.PlayerIndexTableModel;
+import newui.tables.PlayerBaseInfoTableModel;
 
 public class PlayerIndexPanel extends FatherPanel implements MouseListener {
 	/**
@@ -34,7 +34,7 @@ public class PlayerIndexPanel extends FatherPanel implements MouseListener {
 	// --------------
 	JScrollPane jsp;
 	JTable table;
-	PlayerIndexTableModel pitm = new PlayerIndexTableModel();
+	PlayerBaseInfoTableModel pitm = new PlayerBaseInfoTableModel();
 	// ---------------
 	Font font = new Font("微软雅黑", Font.PLAIN, 15);
 	// ---------------

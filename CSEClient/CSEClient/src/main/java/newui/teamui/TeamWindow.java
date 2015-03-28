@@ -120,7 +120,8 @@ public class TeamWindow extends JWindow implements MouseListener {
 			else
 				text = eText;
 			// ----------title----------------
-			JLabel titleLbl = new JLabel(text[0]);
+			JLabel titleLbl = new JLabel(text[0], new ImageIcon("image/"
+					+ text[0] + ".png"), JLabel.CENTER);
 			titleLbl.setFont(new Font("微软雅黑", Font.PLAIN, 16));
 			titleLbl.setForeground(new Color(6, 73, 130));
 			titleLbl.setHorizontalAlignment(JLabel.CENTER);
