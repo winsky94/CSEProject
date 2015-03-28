@@ -126,24 +126,14 @@ public class TeamMatchDataCalculator {
 					String visitingTeam = teams.get("visitingTeam");
 					if (name.equals(homeTeam)) {
 						// 当前球队在该比赛中是主队
-//						if (matchID == 1186) {
-//							System.out.println("a");
-//						}
 						getTeamData(result, "home");
 					} else if (name.equals(visitingTeam)) {
 						// 当前球队在该比赛中是客队
-//						if (matchID == 1186) {
-//							System.out.println("b");
-//						}
 						getTeamData(result, "visiting");
 					} else {
 						// 该球队未参加这场比赛
 						// 跳出当前循环，进行下一次循环
-//						if (matchID == 1186) {
-//							System.out.println("c");
-//						}
 						continue;
-
 					}
 				}
 
@@ -186,7 +176,7 @@ public class TeamMatchDataCalculator {
 		shootHitRate = (double) shootHitRate / matchesNum;
 		threeHitRate = (double) threeHitRate / matchesNum;
 		freeThrowHitRate = (double) freeThrowHitRate / matchesNum;
-		winRate=(double)winNum/matchesNum;
+		winRate = (double) winNum / matchesNum;
 		offenRound = (double) offenRound / matchesNum;
 		offenEfficiency = (double) offenEfficiency / matchesNum;
 		defenEfficiency = (double) defenEfficiency / matchesNum;
@@ -199,10 +189,15 @@ public class TeamMatchDataCalculator {
 		shootHitRateSeason = (double) shootHitNum / shootAttemptNum;
 		threeHitRateSeason = (double) threeHitNum / threeAttemptNum;
 		freeThrowHitRateSeason = (double) freeThrowHitNum / freeThrowAttemptNum;
-		// offenRoundSeason = (double) offenRound / matchesNum;
-		offenRoundSeason = (double) offenRound * matchesNum;
-		offenEfficiencySeason = (double) score / (offenRound * matchesNum)
-				* 100;
+		// offenRoundSeason = (double) offenRound *matchesNum;
+		offenRoundSeason = shootAttemptNum
+				+ 0.4
+				* freeThrowAttemptNum
+				- 1.07
+				* (offenReboundNum
+						/ (double) (offenReboundNum + dsDefenReboundNumSeason) * (shootAttemptNum - shootHitNum))
+				+ 1.07 * turnOverNum;
+		offenEfficiencySeason = score / (double) offenRoundSeason * 100;
 		defenEfficiencySeason = (double) dsScoreSeason / dsOffenRoundSeason
 				* 100;
 		offenReboundEfficiencySeason = (double) offenReboundNum
@@ -210,7 +205,7 @@ public class TeamMatchDataCalculator {
 		defenReboundEfficiencySeason = (double) defenReboundNum
 				/ (defenReboundNum + dsOffenReboundNumSeason);
 		stealEfficiencySeason = (double) stealNum / dsOffenRoundSeason;
-		assistRateSeason = (double) assistNum / (offenRound * matchesNum) * 100;
+		assistRateSeason =  assistNum / (double)offenRoundSeason * 100;
 	}
 
 	private void createTable() {
@@ -663,21 +658,21 @@ public class TeamMatchDataCalculator {
 	 *            表名
 	 * @return 当前表中最后一个id
 	 */
-//	private int getLastID(String idNameInTable, String table) {
-//		int result = 0;
-//		try {
-//			Statement sql = con.createStatement();
-//			String query = "select " + idNameInTable + " from " + table
-//					+ " order by " + idNameInTable + " desc";
-//			ResultSet resultSet = sql.executeQuery(query);
-//			resultSet.next();
-//			result = resultSet.getInt(idNameInTable);
-//			resultSet.close();
-//			sql.close();
-//		} catch (Exception e) {
-//			// TODO: handle exception
-//			e.printStackTrace();
-//		}
-//		return result;
-//	}
+	// private int getLastID(String idNameInTable, String table) {
+	// int result = 0;
+	// try {
+	// Statement sql = con.createStatement();
+	// String query = "select " + idNameInTable + " from " + table
+	// + " order by " + idNameInTable + " desc";
+	// ResultSet resultSet = sql.executeQuery(query);
+	// resultSet.next();
+	// result = resultSet.getInt(idNameInTable);
+	// resultSet.close();
+	// sql.close();
+	// } catch (Exception e) {
+	// // TODO: handle exception
+	// e.printStackTrace();
+	// }
+	// return result;
+	// }
 }

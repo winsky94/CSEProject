@@ -64,8 +64,8 @@ public class MatchTemp {
 	}
 
 	public static void main(String[] args) {
-		MatchTemp matchTemp2 = new MatchTemp();
-		matchTemp2.calculate();
+		MatchTemp matchTemp = new MatchTemp();
+		matchTemp.calculate();
 	}
 
 	public void calculate() {
