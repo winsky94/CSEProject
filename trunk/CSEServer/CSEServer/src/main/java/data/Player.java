@@ -91,8 +91,8 @@ public class Player extends UnicastRemoteObject implements PlayerDataService {
 				player.setShootHitRate(rs.getDouble("shootHitRate"));
 				player.setThreeHitRate(rs.getDouble("threeHitRate"));
 				player.setFreeThrowHitRate(rs.getDouble("freeThrowHitRate"));
-				player.setOffenNum(rs.getInt("offenNum"));
-				player.setDefenNum(rs.getInt("defenNum"));
+				player.setOffenNum(rs.getInt("offenReboundNum"));
+				player.setDefenNum(rs.getInt("defenReboundNum"));
 				player.setStealNum(rs.getInt("stealNum"));
 				player.setBlockNum(rs.getInt("blockNum"));
 				player.setFoulNum(rs.getInt("foulNum"));
@@ -209,8 +209,8 @@ public class Player extends UnicastRemoteObject implements PlayerDataService {
 			player.setShootHitRate(rs.getDouble("shootHitRate"));
 			player.setThreeHitRate(rs.getDouble("threeHitRate"));
 			player.setFreeThrowHitRate(rs.getDouble("freeThrowHitRate"));
-			player.setOffenNum(rs.getInt("offenNum"));
-			player.setDefenNum(rs.getInt("defenNum"));
+			player.setOffenNum(rs.getInt("offenReboundNum"));
+			player.setDefenNum(rs.getInt("defenReboundNum"));
 			player.setStealNum(rs.getInt("stealNum"));
 			player.setBlockNum(rs.getInt("blockNum"));
 			player.setFoulNum(rs.getInt("foulNum"));
@@ -276,8 +276,8 @@ public class Player extends UnicastRemoteObject implements PlayerDataService {
 				player.setShootHitRate(rs.getDouble("shootHitRate"));
 				player.setThreeHitRate(rs.getDouble("threeHitRate"));
 				player.setFreeThrowHitRate(rs.getDouble("freeThrowHitRate"));
-				player.setOffenNum(rs.getInt("offenNum"));
-				player.setDefenNum(rs.getInt("defenNum"));
+				player.setOffenNum(rs.getInt("offenReboundNum"));
+				player.setDefenNum(rs.getInt("defenReboundNum"));
 				player.setStealNum(rs.getInt("stealNum"));
 				player.setBlockNum(rs.getInt("blockNum"));
 				player.setFoulNum(rs.getInt("foulNum"));
@@ -350,8 +350,8 @@ public class Player extends UnicastRemoteObject implements PlayerDataService {
 			player.setShootHitRate(rs.getDouble("shootHitRate"));
 			player.setThreeHitRate(rs.getDouble("threeHitRate"));
 			player.setFreeThrowHitRate(rs.getDouble("freeThrowHitRate"));
-			player.setOffenNum(rs.getInt("offenNum"));
-			player.setDefenNum(rs.getInt("defenNum"));
+			player.setOffenNum(rs.getInt("offenReboundNum"));
+			player.setDefenNum(rs.getInt("defenReboundNum"));
 			player.setStealNum(rs.getInt("stealNum"));
 			player.setBlockNum(rs.getInt("blockNum"));
 			player.setFoulNum(rs.getInt("foulNum"));
@@ -456,8 +456,8 @@ public class Player extends UnicastRemoteObject implements PlayerDataService {
 				player.setShootHitRate(rs.getDouble("shootHitRate"));
 				player.setThreeHitRate(rs.getDouble("threeHitRate"));
 				player.setFreeThrowHitRate(rs.getDouble("freeThrowHitRate"));
-				player.setOffenNum(rs.getInt("offenNum"));
-				player.setDefenNum(rs.getInt("defenNum"));
+				player.setOffenNum(rs.getInt("offenReboundNum"));
+				player.setDefenNum(rs.getInt("defenReboundNum"));
 				player.setStealNum(rs.getInt("stealNum"));
 				player.setBlockNum(rs.getInt("blockNum"));
 				player.setFoulNum(rs.getInt("foulNum"));
@@ -560,8 +560,8 @@ public class Player extends UnicastRemoteObject implements PlayerDataService {
 						player.setThreeHitRate(rs.getDouble("threeHitRate"));
 						player.setFreeThrowHitRate(rs
 								.getDouble("freeThrowHitRate"));
-						player.setOffenNum(rs.getInt("offenNum"));
-						player.setDefenNum(rs.getInt("defenNum"));
+						player.setOffenNum(rs.getInt("offenReboundNum"));
+						player.setDefenNum(rs.getInt("defenReboundNum"));
 						player.setStealNum(rs.getInt("stealNum"));
 						player.setBlockNum(rs.getInt("blockNum"));
 						player.setFoulNum(rs.getInt("foulNum"));
@@ -616,8 +616,8 @@ public class Player extends UnicastRemoteObject implements PlayerDataService {
 					player.setShootHitRate(rs.getDouble("shootHitRate"));
 					player.setThreeHitRate(rs.getDouble("threeHitRate"));
 					player.setFreeThrowHitRate(rs.getDouble("freeThrowHitRate"));
-					player.setOffenNum(rs.getInt("offenNum"));
-					player.setDefenNum(rs.getInt("defenNum"));
+					player.setOffenNum(rs.getInt("offenReboundNum"));
+					player.setDefenNum(rs.getInt("defenReboundNum"));
 					player.setStealNum(rs.getInt("stealNum"));
 					player.setBlockNum(rs.getInt("blockNum"));
 					player.setFoulNum(rs.getInt("foulNum"));
@@ -669,8 +669,8 @@ public class Player extends UnicastRemoteObject implements PlayerDataService {
 						player.setThreeHitRate(rs.getDouble("threeHitRate"));
 						player.setFreeThrowHitRate(rs
 								.getDouble("freeThrowHitRate"));
-						player.setOffenNum(rs.getInt("offenNum"));
-						player.setDefenNum(rs.getInt("defenNum"));
+						player.setOffenNum(rs.getInt("offenReboundNum"));
+						player.setDefenNum(rs.getInt("defenReboundNum"));
 						player.setStealNum(rs.getInt("stealNum"));
 						player.setBlockNum(rs.getInt("blockNum"));
 						player.setFoulNum(rs.getInt("foulNum"));
@@ -724,8 +724,8 @@ public class Player extends UnicastRemoteObject implements PlayerDataService {
 					player.setShootHitRate(rs.getDouble("shootHitRate"));
 					player.setThreeHitRate(rs.getDouble("threeHitRate"));
 					player.setFreeThrowHitRate(rs.getDouble("freeThrowHitRate"));
-					player.setOffenNum(rs.getInt("offenNum"));
-					player.setDefenNum(rs.getInt("defenNum"));
+					player.setOffenNum(rs.getInt("offenReboundNum"));
+					player.setDefenNum(rs.getInt("defenReboundNum"));
 					player.setStealNum(rs.getInt("stealNum"));
 					player.setBlockNum(rs.getInt("blockNum"));
 					player.setFoulNum(rs.getInt("foulNum"));
