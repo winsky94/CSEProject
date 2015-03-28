@@ -25,6 +25,8 @@ public interface PlayerDataService extends Remote {
 
 	public ArrayList<MatchPO> getRecentMatches(String playerName)
 			throws RemoteException;
+	
+	public ArrayList<MatchPO> getTodayMatches(String playerName) throws RemoteException;
 
 	public ArrayList<MatchPO> getMatches(String playerName)
 			throws RemoteException;// 可以模糊
