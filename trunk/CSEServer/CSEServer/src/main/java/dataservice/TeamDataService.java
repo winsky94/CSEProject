@@ -24,7 +24,7 @@ public interface TeamDataService extends Remote {
 	public ArrayList<MatchPO> getMatches(String teamName)
 			throws RemoteException;// 可以模糊
 
-	public ArrayList<TeamPO> getSeasonHotTeam(String column)
+	public ArrayList<TeamPO> getSeasonHotTeam(String season, String column)
 			throws RemoteException;
 
 	public TeamPO getTeamBaseInfo(String name) throws RemoteException;
