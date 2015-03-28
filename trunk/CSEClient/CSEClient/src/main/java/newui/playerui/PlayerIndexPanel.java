@@ -77,6 +77,9 @@ public class PlayerIndexPanel extends FatherPanel implements MouseListener {
 		// ----jsp--------------
 		table = new JTable(pitm);
 		jsp = new JScrollPane(table);
+		//刷新
+		pitm.Refresh();
+		table.revalidate();
 		gbc.gridy = 2;
 		gbc.gridheight = 10;
 		gbc.weighty = 10;
@@ -84,6 +87,8 @@ public class PlayerIndexPanel extends FatherPanel implements MouseListener {
 		add(jsp);
 
 	}
+	
+	
 
 	class MyCharacter extends JLabel {
 

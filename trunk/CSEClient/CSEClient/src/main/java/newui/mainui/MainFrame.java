@@ -3,6 +3,10 @@ package newui.mainui;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.awt.Point;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionAdapter;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -17,6 +21,8 @@ public class MainFrame extends JFrame{
 	 */
 	private static final long serialVersionUID = 1L;
 	private static MainFrame instance=null;
+	private int fx,fy;//实时坐标位置
+	private Point origin;
 	int screenWidth=UIhelper.getScreenWidth();
 	int screenHeight=UIhelper.getScreenHeight();
 	int width=screenWidth*90/100;
@@ -30,6 +36,7 @@ public class MainFrame extends JFrame{
 		setLayout(gbl);
 		setBounds((screenWidth-width)/2,(screenHeight-height)/2,width,height);
 		setIconImage(UIhelper.getImage("image/appicon.png"));
+		this.setUndecorated(true);
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		//-------下面是布局----------------
@@ -50,6 +57,40 @@ public class MainFrame extends JFrame{
 		gbl.setConstraints(contentPnl, gbc);
 		add(contentPnl);
 		setContentPanel(new IndexPanel());
+		this.origin=new Point();
+		
+		 //由于取消了默认的窗体结构，所以我们要手动设置一下移动窗体的方法
+		  this.addMouseListener( 
+		        new MouseAdapter(){
+		          public void mousePressed(MouseEvent e){
+		            origin.x = e.getX();
+		            origin.y = e.getY();
+		          }
+		          //窗体上单击鼠标右键关闭程序
+		          public void mouseClicked(MouseEvent e) {
+		            if(e.getButton()==MouseEvent.BUTTON3)
+		              System.exit(0);
+		          }
+		          public void mouseReleased(MouseEvent e) {
+		            super.mouseReleased(e);
+		          }
+		          @Override
+		          public void mouseEntered(MouseEvent e) {
+		            repaint();              
+		          }            
+		        }
+		    );
+
+		    addMouseMotionListener(
+		        new MouseMotionAdapter(){
+		          public void mouseDragged(MouseEvent e){
+		            Point p = getLocation();
+		            fx=p.x + e.getX() - origin.x;
+		            fy=p.y + e.getY() - origin.y;
+		            setLocation(p.x + e.getX() - origin.x, p.y + e.getY() - origin.y );
+		          }          
+		        }
+		    );  
 	}
 	public void setContentPanel(JPanel pnl){
 		contentPnl.removeAll();

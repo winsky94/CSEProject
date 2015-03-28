@@ -2,17 +2,22 @@ package newui.tables;
 
 import java.util.ArrayList;
 
+import javax.swing.ImageIcon;
+
+import vo.PlayerVO;
+import businesslogic.Player;
+
 public class PlayerBaseInfoTableModel extends MyTableModel {
 
-	/**
-	 * 并没有写刷新的方法
-	 */
+	
 	private static final long serialVersionUID = 1L;
 	static String[] head = { "(头像)", "球员名", "所属球队", "位置", "身高", "体重","生日","年龄" ,"经验" };
 	ArrayList<ArrayList<Object>> content = new ArrayList<ArrayList<Object>>();
-
+	private Player player;
+	private ArrayList<PlayerVO> playerlist;
 	public PlayerBaseInfoTableModel() {
-
+		player=new Player();
+		playerlist=new ArrayList<PlayerVO>();
 	}
 
 	public int getRowCount() {
@@ -34,4 +39,40 @@ public class PlayerBaseInfoTableModel extends MyTableModel {
 	public static String[] getHead() {
 		return head;
 	}
+	
+	
+	public void Refresh(){
+		playerlist=player.getPlayerBaseInfo();
+		if(playerlist==null||playerlist.size()==0){
+			//显示没有符合消息的数据
+			}
+		else
+			RefreshTable(playerlist);
+		
+	}
+	//	static String[] head =
+	//{ "(头像)", "球员名", "所属球队", "位置", "身高", "体重","生日","年龄" ,"经验" };
+	//适应出网络连接方式来的数据
+	public void RefreshTable(ArrayList<PlayerVO>  list){
+		content.clear();
+		
+		for(PlayerVO vo:list){
+			ArrayList<Object> line=new ArrayList<Object>();
+			String name=vo.getName();
+			ImageIcon tou=player.getPlayerPortraitImage(name);
+			line.add(tou);
+			line.add(name);
+			line.add(vo.getTeamName());
+			line.add(vo.getPosition());
+			line.add(vo.getHeight());
+			line.add(vo.getWeight());
+			line.add(vo.getBirth());
+			line.add(vo.getAge());
+			line.add(vo.getExp());
+			content.add(line);
+		}
+		
+		
+	}
+	
 }
