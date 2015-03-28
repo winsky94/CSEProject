@@ -776,14 +776,32 @@ public class Player extends UnicastRemoteObject implements PlayerDataService {
 		return players;
 	}
 
+	/**
+	 * 获得球员的全身照路径
+	 * @param name球员名
+	 * @return
+	 * @throws RemoteException
+	 */
 	public String getActionPhotoPath(String name) throws RemoteException {
 		return "src/data/players/action/" + name + ".png";
 	}
 
+	/**
+	 * 获得球员的大头照路径
+	 * @param name球员名
+	 * @return
+	 * @throws RemoteException
+	 */
 	public String getPortraitPhotoPath(String name) throws RemoteException {
 		return "src/data/players/portrait/" + name + ".png";
 	}
 	
+	/**
+	 * 获得球员的全身照
+	 * @param name球员名
+	 * @return
+	 * @throws RemoteException
+	 */
 	public ImageIcon getPlayerActionImage(String name) throws RemoteException {
 		String address=getActionPhotoPath(name);
 		File file=new File(address);
@@ -794,6 +812,12 @@ public class Player extends UnicastRemoteObject implements PlayerDataService {
 		return imageIcon;
 	}
 
+     /**
+	 * 获得球员的大头照路径
+	 * @param name球员名
+	 * @return
+	 * @throws RemoteException
+	 */
 	public ImageIcon getPlayerPortraitImage(String name) throws RemoteException {
 		String address=getPortraitPhotoPath(name);
 		File file=new File(address);
@@ -870,7 +894,10 @@ public class Player extends UnicastRemoteObject implements PlayerDataService {
 		}
 		return false;
 	}
-
+ 
+	/**
+	 * 获得该球员最近5场比赛的数据
+	 */
 	public ArrayList<MatchPO> getRecentMatches(String playerName)
 			throws RemoteException {
 		playerName = playerName.replace("'", "''");
@@ -930,6 +957,9 @@ public class Player extends UnicastRemoteObject implements PlayerDataService {
 		return matches;
 	}
 
+	/**
+	 * 获得该球员所有比赛的数据
+	 */
 	public ArrayList<MatchPO> getMatches(String playerName)
 			throws RemoteException {
 		playerName = playerName.replace("'", "''");
@@ -989,6 +1019,9 @@ public class Player extends UnicastRemoteObject implements PlayerDataService {
 		return matches;
 	}
 	
+	/**
+	 * 获得该球员今日比赛的数据
+	 */
 	public ArrayList<MatchPO> getTodayMatches(String playerName)
 			throws RemoteException {
 		playerName = playerName.replace("'", "''");
@@ -1049,6 +1082,9 @@ public class Player extends UnicastRemoteObject implements PlayerDataService {
 		return matches;
 	}
 	
+	/**
+	 * 获得该球员某赛季比赛的数据
+	 */
 	public ArrayList<MatchPO> getSeasonMatches(String playerName,String season)
 			throws RemoteException {
 		playerName = playerName.replace("'", "''");
@@ -1107,7 +1143,9 @@ public class Player extends UnicastRemoteObject implements PlayerDataService {
 		return matches;
 	}
 	
-
+    /**
+     * 获得当天热点球员
+     */
 	public ArrayList<PlayerPO> getDayHotPlayer(String column)
 			throws RemoteException {
 
@@ -1138,6 +1176,9 @@ public class Player extends UnicastRemoteObject implements PlayerDataService {
 		return players;
 	}
 
+	/**
+	 * 获得赛季热点球员
+	 */
 	public ArrayList<PlayerPO> getSeasonHotPlayer(String season,String column)
 			throws RemoteException {
 		ArrayList<PlayerPO> players = new ArrayList<PlayerPO>();
@@ -1172,6 +1213,9 @@ public class Player extends UnicastRemoteObject implements PlayerDataService {
 		return players;
 	}
 
+	/**
+	 * 获得进步最快球员
+	 */
 	public ArrayList<PlayerPO> getBestImprovedPlayer(String column)
 			throws RemoteException {
 		ArrayList<PlayerPO> players = new ArrayList<PlayerPO>();
@@ -1207,7 +1251,7 @@ public class Player extends UnicastRemoteObject implements PlayerDataService {
 		return players;
 	}
 
-	public String getTodaySeason(){
+	private String getTodaySeason(){
 		String result;
 		int year;
 		int month;
