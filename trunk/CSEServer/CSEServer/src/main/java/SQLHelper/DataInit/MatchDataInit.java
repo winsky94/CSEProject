@@ -144,8 +144,8 @@ public class MatchDataInit {
 		String homeTeam = temp[1];
 
 		String[] s=score.split("-");
-		String visitingScore=s[0];
-		String homeScore=s[1];
+		int visitingScore=Integer.parseInt(s[0]);
+		int homeScore=Integer.parseInt(s[1]);
 		
 		matchPO = new MatchPO(count, season, date, visitingTeam, homeTeam,
 				visitingScore,homeScore, detailScores, records);
@@ -242,8 +242,8 @@ public class MatchDataInit {
 				// 向matches表中插入数据
 				String visitingTeam = matchPO.getVisingTeam();
 				String homeTeam = matchPO.getHomeTeam();
-				int visitingScore = Integer.parseInt(matchPO.getVisitingScore());
-				int homeScore = Integer.parseInt(matchPO.getHomeScore());
+				int visitingScore = matchPO.getVisitingScore();
+				int homeScore = matchPO.getHomeScore();
 				int parts = matchPO.getDetailScores().size();
 				if (parts <= 4) {
 					time = 48;
