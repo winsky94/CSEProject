@@ -85,10 +85,15 @@ public class TeamMatchDataCalculator {
 	int dsOffenReboundNumSeason = 0;// 对手进攻篮板数
 	// temp
 	int dsScoreSeason = 0;// 总赛季对手得分
-	int dsOffenRoundSeason = 0;// 总赛季对手进攻回合，即总赛季球队防守回合
+	double dsOffenRoundSeason = 0;// 总赛季对手进攻回合，即总赛季球队防守回合
+
+	int dsShootAttempNumSeason = 0;
+	int dsFreeThrowAttemptNumSeason = 0;
+	int dsShootHitNumSeason = 0;
+	int dsTurnOverNumSeason = 0;
+
 	PreparedStatement seasonStatement;
 	PreparedStatement averageStatement;
-
 
 	public TeamMatchDataCalculator() {
 		try {
@@ -113,8 +118,10 @@ public class TeamMatchDataCalculator {
 		ArrayList<String> names = new ArrayList<String>();
 		names = getTeams();
 		try {
-			seasonStatement = con.prepareStatement("INSERT INTO teamMatchDataAverage VALUES(?, ?, ?, ?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");   
-			averageStatement= con.prepareStatement("INSERT INTO teamMatchDataSeason VALUES(?, ?, ?, ?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");  
+			seasonStatement = con
+					.prepareStatement("INSERT INTO teamMatchDataAverage VALUES(?, ?, ?, ?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+			averageStatement = con
+					.prepareStatement("INSERT INTO teamMatchDataSeason VALUES(?, ?, ?, ?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
 			Statement sql = con.createStatement(
 					ResultSet.TYPE_SCROLL_INSENSITIVE,
 					ResultSet.CONCUR_READ_ONLY);
@@ -211,6 +218,13 @@ public class TeamMatchDataCalculator {
 						/ (double) (offenReboundNum + dsDefenReboundNumSeason) * (shootAttemptNum - shootHitNum))
 				+ 1.07 * turnOverNum;
 		offenEfficiencySeason = score / (double) offenRoundSeason * 100;
+		dsOffenRoundSeason = dsShootAttempNumSeason
+				+ 0.4
+				* dsFreeThrowAttemptNumSeason
+				- 1.07
+				* (dsOffenReboundNumSeason
+						/ (double) (dsOffenReboundNumSeason + defenReboundNum) * (dsShootAttempNumSeason - dsShootHitNumSeason))
+				+ 1.07 * dsTurnOverNumSeason;
 		defenEfficiencySeason = (double) dsScoreSeason / dsOffenRoundSeason
 				* 100;
 		offenReboundEfficiencySeason = (double) offenReboundNum
@@ -218,7 +232,7 @@ public class TeamMatchDataCalculator {
 		defenReboundEfficiencySeason = (double) defenReboundNum
 				/ (defenReboundNum + dsOffenReboundNumSeason);
 		stealEfficiencySeason = (double) stealNum / dsOffenRoundSeason;
-		assistRateSeason =  assistNum / (double)offenRoundSeason * 100;
+		assistRateSeason = assistNum / (double) offenRoundSeason * 100;
 	}
 
 	private void createTable() {
@@ -394,42 +408,38 @@ public class TeamMatchDataCalculator {
 			seasonStatement.setDouble(29, stealEfficiencySeason);
 			seasonStatement.setDouble(30, assistRateSeason);
 			seasonStatement.addBatch();
-/*			Statement sql = con.createStatement();
-			sql.execute("insert teamMatchDataSeason values(" + sqlID + ",'"
-					+ teamName + "','" + season + "'," + matchesNum + ","
-					+ winRate + "," + shootHitNum + "," + shootAttemptNum + ","
-					+ threeHitNum + "," + threeAttemptNum + ","
-					+ freeThrowHitNum + "," + freeThrowAttemptNum + ","
-					+ offenReboundNum + "," + defenReboundNum + ","
-					+ reboundNum + "," + assistNum + "," + stealNum + ","
-					+ blockNum + "," + turnOverNum + "," + foulNum + ","
-					+ score + "," + shootHitRateSeason + ","
-					+ threeHitRateSeason + "," + freeThrowHitRateSeason + ","
-					+ offenRoundSeason + "," + offenEfficiencySeason + ","
-					+ defenEfficiencySeason + ","
-					+ offenReboundEfficiencySeason + ","
-					+ defenReboundEfficiencySeason + ","
-					+ stealEfficiencySeason + "," + assistRateSeason + ")");
-			sql.close();
-
-			Statement sql2 = con.createStatement();
-			sql2.execute("insert teamMatchDataAverage values(" + sqlID + ",'"
-					+ teamName + "','" + season + "'," + matchesNum + ","
-					+ winRate + "," + shootHitNumAverage + ","
-					+ shootAttemptNumAverage + "," + threeHitNumAverage + ","
-					+ threeAttemptNumAverage + "," + freeThrowHitNumAverage
-					+ "," + freeThrowAttemptNumAverage + ","
-					+ offenReboundNumAverage + "," + defenReboundNumAverage
-					+ "," + reboundNumAverage + "," + assistNumAverage + ","
-					+ stealNumAverage + "," + blockNumAverage + ","
-					+ turnOverNumAverage + "," + foulNumAverage + ","
-					+ scoreAverage + "," + shootHitRate + "," + threeHitRate
-					+ "," + freeThrowHitRate + "," + offenRound + ","
-					+ offenEfficiency + "," + defenEfficiency + ","
-					+ offenReboundEfficiency + "," + defenReboundEfficiency
-					+ "," + stealEfficiency + "," + assistRate + ")");
-			sql2.close();
-*/
+			/*
+			 * Statement sql = con.createStatement();
+			 * sql.execute("insert teamMatchDataSeason values(" + sqlID + ",'" +
+			 * teamName + "','" + season + "'," + matchesNum + "," + winRate +
+			 * "," + shootHitNum + "," + shootAttemptNum + "," + threeHitNum +
+			 * "," + threeAttemptNum + "," + freeThrowHitNum + "," +
+			 * freeThrowAttemptNum + "," + offenReboundNum + "," +
+			 * defenReboundNum + "," + reboundNum + "," + assistNum + "," +
+			 * stealNum + "," + blockNum + "," + turnOverNum + "," + foulNum +
+			 * "," + score + "," + shootHitRateSeason + "," + threeHitRateSeason
+			 * + "," + freeThrowHitRateSeason + "," + offenRoundSeason + "," +
+			 * offenEfficiencySeason + "," + defenEfficiencySeason + "," +
+			 * offenReboundEfficiencySeason + "," + defenReboundEfficiencySeason
+			 * + "," + stealEfficiencySeason + "," + assistRateSeason + ")");
+			 * sql.close();
+			 * 
+			 * Statement sql2 = con.createStatement();
+			 * sql2.execute("insert teamMatchDataAverage values(" + sqlID + ",'"
+			 * + teamName + "','" + season + "'," + matchesNum + "," + winRate +
+			 * "," + shootHitNumAverage + "," + shootAttemptNumAverage + "," +
+			 * threeHitNumAverage + "," + threeAttemptNumAverage + "," +
+			 * freeThrowHitNumAverage + "," + freeThrowAttemptNumAverage + "," +
+			 * offenReboundNumAverage + "," + defenReboundNumAverage + "," +
+			 * reboundNumAverage + "," + assistNumAverage + "," +
+			 * stealNumAverage + "," + blockNumAverage + "," +
+			 * turnOverNumAverage + "," + foulNumAverage + "," + scoreAverage +
+			 * "," + shootHitRate + "," + threeHitRate + "," + freeThrowHitRate
+			 * + "," + offenRound + "," + offenEfficiency + "," +
+			 * defenEfficiency + "," + offenReboundEfficiency + "," +
+			 * defenReboundEfficiency + "," + stealEfficiency + "," + assistRate
+			 * + ")"); sql2.close();
+			 */
 			averageStatement.setInt(1, sqlID);
 			averageStatement.setString(2, teamName);
 			averageStatement.setString(3, season);
@@ -522,7 +532,7 @@ public class TeamMatchDataCalculator {
 			int perHomeDefenReboundNum = resultSet
 					.getInt("homeDefenReboundNum");
 			int perHomeMissShoot = perHomeShootAttemptNum
-					- resultSet.getInt("homeShootAttemptNum");
+					- resultSet.getInt("homeShootHitNum");
 			int perHomeTurnOverNum = resultSet.getInt("homeTurnOverNum");
 
 			int perVisitingShootAttemptNum = resultSet
@@ -534,7 +544,7 @@ public class TeamMatchDataCalculator {
 			int perVisitingDefenReboundNum = resultSet
 					.getInt("visitingDefenReboundNum");
 			int perVisitingMissShoot = perVisitingShootAttemptNum
-					- resultSet.getInt("visitingShootAttemptNum");
+					- resultSet.getInt("visitingShootHitNum");
 			int perVisitingTurnOverNum = resultSet
 					.getInt("visitingTurnOverNum");
 
@@ -570,7 +580,12 @@ public class TeamMatchDataCalculator {
 						/ perHomeOfenRound * 100;
 
 				dsScoreSeason += resultSet.getInt("visitingScore");
-				dsOffenRoundSeason += perVisitingOfenRound;
+				// dsOffenRoundSeason += perVisitingOfenRound;
+				dsShootAttempNumSeason += perVisitingShootAttemptNum;
+				dsFreeThrowAttemptNumSeason += perVisitingFreeThrowAttemptNum;
+				dsShootHitNumSeason += resultSet.getInt("visitingShootHitNum");
+				dsTurnOverNumSeason += perVisitingTurnOverNum;
+
 				dsOffenReboundNumSeason += perVisitingOffenReboundNum;
 				dsDefenReboundNumSeason += perVisitingDefenReboundNum;
 			} else {
@@ -591,7 +606,13 @@ public class TeamMatchDataCalculator {
 						/ perVisitingOfenRound * 100;
 
 				dsScoreSeason += resultSet.getInt("homeScore");
-				dsOffenRoundSeason += perHomeOfenRound;
+				// dsOffenRoundSeason += perHomeOfenRound;
+
+				dsShootAttempNumSeason += perHomeShootAttemptNum;
+				dsFreeThrowAttemptNumSeason += perHomeFreeThrowAttemptNum;
+				dsShootHitNumSeason += resultSet.getInt("homeShootHitNum");
+				dsTurnOverNumSeason += perHomeTurnOverNum;
+
 				dsOffenReboundNumSeason += perHomeOffenReboundNum;
 				dsDefenReboundNumSeason += perHomeDefenReboundNum;
 			}
@@ -670,6 +691,10 @@ public class TeamMatchDataCalculator {
 		dsOffenReboundNumSeason = 0;// 对手进攻篮板数
 		dsScoreSeason = 0;// 总赛季对手得分
 		dsOffenRoundSeason = 0;// 总赛季对手进攻回合，即总赛季球队防守回合
+		dsShootAttempNumSeason = 0;
+		dsFreeThrowAttemptNumSeason = 0;
+		dsShootHitNumSeason = 0;
+		dsTurnOverNumSeason = 0;
 	}
 
 	/**
