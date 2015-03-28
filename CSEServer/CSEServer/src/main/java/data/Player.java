@@ -160,7 +160,7 @@ public class Player extends UnicastRemoteObject implements PlayerDataService {
 			ResultSet resultSet = sql.executeQuery(query);
 			resultSet.next();
 			player = new PlayerPO();
-			int id = resultSet.getInt("id");
+			int id = resultSet.getInt("playerID");
 			String playerName = resultSet.getString("name");
 			int number = resultSet.getInt("number");
 			String position = resultSet.getString("position");
@@ -858,7 +858,10 @@ public class Player extends UnicastRemoteObject implements PlayerDataService {
 //			for(PlayerPO pp:pl){
 //				System.out.println(pp.getName()+" "+pp.getPosition());
 //			}
-			System.out.println(p.getTodaySeason());
+		//	ArrayList<MatchPO> matches=p.getMatches("Aaron Brooks");
+		//	System.out.println(matches.get(0).getDate());
+			ArrayList<PlayerPO> players=p.getSeasonHotPlayer("13-14", "score");
+			System.out.println(players.get(0).getName());
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -926,6 +929,7 @@ public class Player extends UnicastRemoteObject implements PlayerDataService {
 			   date=rs.getString("date");
 			   Statement sql2 = con.createStatement();
 			   ResultSet rs2 = sql2.executeQuery("select * from matches where matchID="+matchID+" limit 1");
+               rs2.next();
 			   visingTeam=rs2.getString("visitingTeam");
 			   homeTeam=rs2.getString("homeTeam");
 			   visitingScore=rs2.getInt("visitingScore");
@@ -988,6 +992,7 @@ public class Player extends UnicastRemoteObject implements PlayerDataService {
 			   date=rs.getString("date");
 			   Statement sql2 = con.createStatement();
 			   ResultSet rs2 = sql2.executeQuery("select * from matches where matchID="+matchID+" limit 1");
+			   rs2.next();
 			   visingTeam=rs2.getString("visitingTeam");
 			   homeTeam=rs2.getString("homeTeam");
 			   visitingScore=rs2.getInt("visitingScore");
@@ -1051,6 +1056,7 @@ public class Player extends UnicastRemoteObject implements PlayerDataService {
 			   date=rs.getString("date");
 			   Statement sql2 = con.createStatement();
 			   ResultSet rs2 = sql2.executeQuery("select * from matches where matchID="+matchID+" limit 1");
+			   rs2.next();
 			   visingTeam=rs2.getString("visitingTeam");
 			   homeTeam=rs2.getString("homeTeam");
 			   visitingScore=rs2.getInt("visitingScore");
@@ -1112,6 +1118,7 @@ public class Player extends UnicastRemoteObject implements PlayerDataService {
 			   date=rs.getString("date");
 			   Statement sql2 = con.createStatement();
 			   ResultSet rs2 = sql2.executeQuery("select * from matches where matchID="+matchID+" limit 1");
+			   rs2.next();
 			   visingTeam=rs2.getString("visitingTeam");
 			   homeTeam=rs2.getString("homeTeam");
 			   visitingScore=rs2.getInt("visitingScore");
@@ -1156,7 +1163,7 @@ public class Player extends UnicastRemoteObject implements PlayerDataService {
 		try {
 			con = SqlManager.getConnection();
 			Statement sql = con.createStatement();
-        	ResultSet rs = sql.executeQuery("select playName,"+column+" from records where season='"+todaySeason+"' and date='"+todayDate+"' order by "+column+" desc limit 5");      	
+        	ResultSet rs = sql.executeQuery("select playerName,"+column+" from records where season='"+todaySeason+"' and date='"+todayDate+"' order by "+column+" desc limit 5");      	
 			while(rs.next()){
 			  name=rs.getString("playerName");
 			  playerPO=getPlayerBaseInfo(name);
@@ -1198,7 +1205,7 @@ public class Player extends UnicastRemoteObject implements PlayerDataService {
 			}
 			ResultSet rs = sql.executeQuery(query);
 			while (rs.next()) {
-				String playName = rs.getString("playName");
+				String playName = rs.getString("playerName");
 				playerPO=getPlayerBaseInfo(playName);
 				players.add(playerPO);			
 			}
@@ -1236,7 +1243,7 @@ public class Player extends UnicastRemoteObject implements PlayerDataService {
 			
 			ResultSet rs = sql.executeQuery(query);
 			while (rs.next()) {
-				String playName = rs.getString("playName");
+				String playName = rs.getString("playerName");
 				playerPO=getPlayerBaseInfo(playName);
 				players.add(playerPO);			
 			}
