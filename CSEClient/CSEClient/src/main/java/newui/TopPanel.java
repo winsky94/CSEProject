@@ -1,6 +1,7 @@
 package newui;
 
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -8,8 +9,11 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import javax.swing.ImageIcon;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+
+import newui.mainui.MainFrame;
 
 public class TopPanel extends JPanel implements MouseListener{
 
@@ -56,6 +60,7 @@ public class TopPanel extends JPanel implements MouseListener{
 			System.exit(0);
 		if(e.getSource()==miniBtn){
 			//监听
+			MainFrame.getInstance().setExtendedState(JFrame.HIDE_ON_CLOSE);
 		}
 			
 	}
@@ -95,6 +100,7 @@ class MyButton extends JLabel{
 	private static final long serialVersionUID = 1L;
 	public MyButton(ImageIcon img){
 		super(img);
+		this.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 	}
 	
 }

@@ -1,6 +1,7 @@
 package newui.mainui;
 
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -102,6 +103,7 @@ public class IndexTitleBar extends JPanel implements MouseListener {
 			setFocusPainted(false);
 			setBorderPainted(false);
 			addMouseListener(IndexTitleBar.this);
+			this.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		}
 	}
 
