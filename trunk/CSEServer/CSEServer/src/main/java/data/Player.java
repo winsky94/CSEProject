@@ -7,16 +7,21 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import javax.swing.ImageIcon;
 
 import SQLHelper.SqlManager;
+import po.MatchPO;
 import po.PlayerPO;
+import po.RecordPO;
 import dataservice.PlayerDataService;
 
 public class Player extends UnicastRemoteObject implements PlayerDataService {
 	private static final long serialVersionUID = 1L;
 	Connection con;
+	String todaySeason;
+	String todayDate;
 
 	public Player() throws RemoteException {
 		super();
@@ -77,7 +82,7 @@ public class Player extends UnicastRemoteObject implements PlayerDataService {
 		try {
 			con = SqlManager.getConnection();
 			Statement sql = con.createStatement();
-			String query = "select * from playermatchdataseason";
+			String query = "select * from playermatchdataseason where season='"+season+"'";
 			ResultSet rs = sql.executeQuery(query);
 			while (rs.next()) {
 				player = new PlayerPO();
@@ -195,7 +200,7 @@ public class Player extends UnicastRemoteObject implements PlayerDataService {
 			con = SqlManager.getConnection();
 			Statement sql = con.createStatement();
 			String query = "select * from playermatchdataseason where name='"
-					+ playername + "'";
+					+ playername + "' and season='"+season+"'";
 			ResultSet rs = sql.executeQuery(query);
 			rs.next();
 			player = new PlayerPO();
@@ -262,7 +267,7 @@ public class Player extends UnicastRemoteObject implements PlayerDataService {
 		try {
 			con = SqlManager.getConnection();
 			Statement sql = con.createStatement();
-			String query = "select * from playermatchdataaverage";
+			String query = "select * from playermatchdataaverage where season='"+season+"'";
 			ResultSet rs = sql.executeQuery(query);
 			while (rs.next()) {
 				player = new PlayerPO();
@@ -336,7 +341,7 @@ public class Player extends UnicastRemoteObject implements PlayerDataService {
 			con = SqlManager.getConnection();
 			Statement sql = con.createStatement();
 			String query = "select * from playermatchdataaverage where name='"
-					+ playername + "'";
+					+ playername + "' and season='"+season+"'";
 			ResultSet rs = sql.executeQuery(query);
 			rs.next();
 			player = new PlayerPO();
@@ -543,7 +548,7 @@ public class Player extends UnicastRemoteObject implements PlayerDataService {
 			Statement sql = con.createStatement();
 			String query;
 			if (position.equals("all")&&!union.equals("all")) {
-				query = "select *" + " from " + table + " order by " + table
+				query = "select *" + " from " + table + " where season='"+season+"' order by " + table
 						+ "." + column + " desc";
 				ResultSet rs = sql.executeQuery(query);
 				while (rs.next()) {
@@ -600,7 +605,7 @@ public class Player extends UnicastRemoteObject implements PlayerDataService {
 				query = "select players.name,players.position," + table + ".*"
 						+ " from players," + table + " where players.name="
 						+ table + ".playerName and players.position='"
-						+ position + "' order by " + table + "." + column
+						+ position + "' and season='"+season+"' order by " + table + "." + column
 						+ " desc";
 				ResultSet rs = sql.executeQuery(query);
 				while (rs.next()) {
@@ -651,7 +656,7 @@ public class Player extends UnicastRemoteObject implements PlayerDataService {
 				query = "select players.name,players.position," + table + ".*"
 						+ " from players," + table + " where players.name="
 						+ table + ".playerName and players.position='"
-						+ position + "' order by " + table + "." + column
+						+ position + "' and season='"+season+"' order by " + table + "." + column
 						+ " desc";
 				ResultSet rs = sql.executeQuery(query);
 				while (rs.next()) {
@@ -709,7 +714,7 @@ public class Player extends UnicastRemoteObject implements PlayerDataService {
 			else{
 				query = "select players.name," + table + ".*"
 						+ " from players," + table + " where players.name="
-						+ table + ".playerName order by " + table + "." + column
+						+ table + ".playerName and season='"+season+"' order by " + table + "." + column
 						+ " desc";
 				ResultSet rs = sql.executeQuery(query);
 				while (rs.next()) {
@@ -813,11 +818,12 @@ public class Player extends UnicastRemoteObject implements PlayerDataService {
 //		}
 		try {
 			Player p=new Player();
-			ArrayList<PlayerPO> pl= p.selectPlayersBySeason("13-14",
-					"G", "E", "playedGames");
-			for(PlayerPO pp:pl){
-				System.out.println(pp.getName()+" "+pp.getPosition());
-			}
+//			ArrayList<PlayerPO> pl= p.selectPlayersBySeason("13-14",
+//					"G", "E", "playedGames");
+//			for(PlayerPO pp:pl){
+//				System.out.println(pp.getName()+" "+pp.getPosition());
+//			}
+			System.out.println(p.getTodaySeason());
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -853,5 +859,364 @@ public class Player extends UnicastRemoteObject implements PlayerDataService {
 		}
 		return false;
 	}
+
+	public ArrayList<MatchPO> getRecentMatches(String playerName)
+			throws RemoteException {
+		playerName = playerName.replace("'", "''");
+		ArrayList<MatchPO> matches=new ArrayList<MatchPO>();
+		MatchPO matchPO=null;
+		RecordPO recordPO;
+		ArrayList<String> detailScores;
+		ArrayList<RecordPO> records;
+		int matchID=0;
+		String season="";
+		String date="";
+		String visingTeam="";
+		String homeTeam="";
+		int visitingScore=0;
+		int homeScore=0;
+		try {
+			con = SqlManager.getConnection();
+			Statement sql = con.createStatement();
+			ResultSet rs = sql.executeQuery("select * from records where playerName='"+playerName+"' order by season desc,date desc limit 5");
+			while(rs.next()){
+			   recordPO=new RecordPO(rs.getString("team"), rs.getString("playerName"), rs.getString("position"), rs.getString("presentTime"), rs.getInt("shootHitNum"), rs.getInt("shootAttemptNum"), rs.getInt("threeHitNum"), rs.getInt("threeAttemptNum"), rs.getInt("freeThrowHitNum"), rs.getInt("freeThrowAttemptNum"), rs.getInt("offenReboundNum"), rs.getInt("defenReboundNum"), rs.getInt("reboundNum"), rs.getInt("assistNum"), rs.getInt("stealNum"), rs.getInt("blockNum"), rs.getInt("turnOverNum"), rs.getInt("foulNum"), rs.getInt("score"));
+			   records=new ArrayList<RecordPO>();
+			   records.add(recordPO);
+			   matchID=rs.getInt("matchID");
+			   season=rs.getString("season");
+			   date=rs.getString("date");
+			   Statement sql2 = con.createStatement();
+			   ResultSet rs2 = sql2.executeQuery("select * from matches where matchID="+matchID+" limit 1");
+			   visingTeam=rs2.getString("visitingTeam");
+			   homeTeam=rs2.getString("homeTeam");
+			   visitingScore=rs2.getInt("visitingScore");
+			   homeScore=rs2.getInt("homeScore");
+			   rs2.close();
+			   sql2.close();
+			   Statement sql3 = con.createStatement();
+			   ResultSet rs3 = sql3.executeQuery("select * from detailscores where matchID="+matchID);
+			   detailScores=new ArrayList<String>();
+			   while(rs3.next()){
+				   detailScores.add(rs3.getString("score"));
+			   }
+			   rs3.close();
+			   sql3.close();
+			   matchPO=new MatchPO(matchID, season, date, visingTeam, homeTeam, visitingScore, homeScore, detailScores, records);
+			   matches.add(matchPO);
+			}
+			rs.close();
+			sql.close();
+			con.close();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return matches;
+	}
+
+	public ArrayList<MatchPO> getMatches(String playerName)
+			throws RemoteException {
+		playerName = playerName.replace("'", "''");
+		ArrayList<MatchPO> matches=new ArrayList<MatchPO>();
+		MatchPO matchPO=null;
+		RecordPO recordPO;
+		ArrayList<String> detailScores;
+		ArrayList<RecordPO> records;
+		int matchID=0;
+		String season="";
+		String date="";
+		String visingTeam="";
+		String homeTeam="";
+		int visitingScore=0;
+		int homeScore=0;
+		try {
+			con = SqlManager.getConnection();
+			Statement sql = con.createStatement();
+			ResultSet rs = sql.executeQuery("select * from records where playerName='"+playerName+"' order by season desc,date desc");
+			while(rs.next()){
+			   recordPO=new RecordPO(rs.getString("team"), rs.getString("playerName"), rs.getString("position"), rs.getString("presentTime"), rs.getInt("shootHitNum"), rs.getInt("shootAttemptNum"), rs.getInt("threeHitNum"), rs.getInt("threeAttemptNum"), rs.getInt("freeThrowHitNum"), rs.getInt("freeThrowAttemptNum"), rs.getInt("offenReboundNum"), rs.getInt("defenReboundNum"), rs.getInt("reboundNum"), rs.getInt("assistNum"), rs.getInt("stealNum"), rs.getInt("blockNum"), rs.getInt("turnOverNum"), rs.getInt("foulNum"), rs.getInt("score"));
+			   records=new ArrayList<RecordPO>();
+			   records.add(recordPO);
+			   matchID=rs.getInt("matchID");
+			   season=rs.getString("season");
+			   date=rs.getString("date");
+			   Statement sql2 = con.createStatement();
+			   ResultSet rs2 = sql2.executeQuery("select * from matches where matchID="+matchID+" limit 1");
+			   visingTeam=rs2.getString("visitingTeam");
+			   homeTeam=rs2.getString("homeTeam");
+			   visitingScore=rs2.getInt("visitingScore");
+			   homeScore=rs2.getInt("homeScore");
+			   rs2.close();
+			   sql2.close();
+			   Statement sql3 = con.createStatement();
+			   ResultSet rs3 = sql3.executeQuery("select * from detailscores where matchID="+matchID);
+			   detailScores=new ArrayList<String>();
+			   while(rs3.next()){
+				   detailScores.add(rs3.getString("score"));
+			   }
+			   rs3.close();
+			   sql3.close();
+			   matchPO=new MatchPO(matchID, season, date, visingTeam, homeTeam, visitingScore, homeScore, detailScores, records);
+			   matches.add(matchPO);
+			}
+			rs.close();
+			sql.close();
+			con.close();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return matches;
+	}
+	
+	public ArrayList<MatchPO> getTodayMatches(String playerName)
+			throws RemoteException {
+		playerName = playerName.replace("'", "''");
+		ArrayList<MatchPO> matches=new ArrayList<MatchPO>();
+		MatchPO matchPO=null;
+		RecordPO recordPO;
+		ArrayList<String> detailScores;
+		ArrayList<RecordPO> records;
+		int matchID=0;
+		String season="";
+		String date="";
+		String visingTeam="";
+		String homeTeam="";
+		int visitingScore=0;
+		int homeScore=0;
+		getTodaySeason();
+		try {
+			con = SqlManager.getConnection();
+			Statement sql = con.createStatement();
+			ResultSet rs = sql.executeQuery("select * from records where playerName='"+playerName+"' and season='"+todaySeason+"' and date='"+todayDate+"'");
+			while(rs.next()){
+			   recordPO=new RecordPO(rs.getString("team"), rs.getString("playerName"), rs.getString("position"), rs.getString("presentTime"), rs.getInt("shootHitNum"), rs.getInt("shootAttemptNum"), rs.getInt("threeHitNum"), rs.getInt("threeAttemptNum"), rs.getInt("freeThrowHitNum"), rs.getInt("freeThrowAttemptNum"), rs.getInt("offenReboundNum"), rs.getInt("defenReboundNum"), rs.getInt("reboundNum"), rs.getInt("assistNum"), rs.getInt("stealNum"), rs.getInt("blockNum"), rs.getInt("turnOverNum"), rs.getInt("foulNum"), rs.getInt("score"));
+			   records=new ArrayList<RecordPO>();
+			   records.add(recordPO);
+			   matchID=rs.getInt("matchID");
+			   season=rs.getString("season");
+			   date=rs.getString("date");
+			   Statement sql2 = con.createStatement();
+			   ResultSet rs2 = sql2.executeQuery("select * from matches where matchID="+matchID+" limit 1");
+			   visingTeam=rs2.getString("visitingTeam");
+			   homeTeam=rs2.getString("homeTeam");
+			   visitingScore=rs2.getInt("visitingScore");
+			   homeScore=rs2.getInt("homeScore");
+			   rs2.close();
+			   sql2.close();
+			   Statement sql3 = con.createStatement();
+			   ResultSet rs3 = sql3.executeQuery("select * from detailscores where matchID="+matchID);
+			   detailScores=new ArrayList<String>();
+			   while(rs3.next()){
+				   detailScores.add(rs3.getString("score"));
+			   }
+			   rs3.close();
+			   sql3.close();
+			   matchPO=new MatchPO(matchID, season, date, visingTeam, homeTeam, visitingScore, homeScore, detailScores, records);
+               matches.add(matchPO);
+			}
+			rs.close();
+			sql.close();
+			con.close();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return matches;
+	}
+	
+	public ArrayList<MatchPO> getSeasonMatches(String playerName,String season)
+			throws RemoteException {
+		playerName = playerName.replace("'", "''");
+		ArrayList<MatchPO> matches=new ArrayList<MatchPO>();
+		MatchPO matchPO=null;
+		RecordPO recordPO;
+		ArrayList<String> detailScores;
+		ArrayList<RecordPO> records;
+		int matchID=0;
+		String date="";
+		String visingTeam="";
+		String homeTeam="";
+		int visitingScore=0;
+		int homeScore=0;
+		try {
+			con = SqlManager.getConnection();
+			Statement sql = con.createStatement();
+			ResultSet rs = sql.executeQuery("select * from records where playerName='"+playerName+"' and season='"+season+"'");
+			while(rs.next()){
+			   recordPO=new RecordPO(rs.getString("team"), rs.getString("playerName"), rs.getString("position"), rs.getString("presentTime"), rs.getInt("shootHitNum"), rs.getInt("shootAttemptNum"), rs.getInt("threeHitNum"), rs.getInt("threeAttemptNum"), rs.getInt("freeThrowHitNum"), rs.getInt("freeThrowAttemptNum"), rs.getInt("offenReboundNum"), rs.getInt("defenReboundNum"), rs.getInt("reboundNum"), rs.getInt("assistNum"), rs.getInt("stealNum"), rs.getInt("blockNum"), rs.getInt("turnOverNum"), rs.getInt("foulNum"), rs.getInt("score"));
+			   records=new ArrayList<RecordPO>();
+			   records.add(recordPO);
+			   matchID=rs.getInt("matchID");
+			   season=rs.getString("season");
+			   date=rs.getString("date");
+			   Statement sql2 = con.createStatement();
+			   ResultSet rs2 = sql2.executeQuery("select * from matches where matchID="+matchID+" limit 1");
+			   visingTeam=rs2.getString("visitingTeam");
+			   homeTeam=rs2.getString("homeTeam");
+			   visitingScore=rs2.getInt("visitingScore");
+			   homeScore=rs2.getInt("homeScore");
+			   rs2.close();
+			   sql2.close();
+			   Statement sql3 = con.createStatement();
+			   ResultSet rs3 = sql3.executeQuery("select * from detailscores where matchID="+matchID);
+			   detailScores=new ArrayList<String>();
+			   while(rs3.next()){
+				   detailScores.add(rs3.getString("score"));
+			   }
+			   rs3.close();
+			   sql3.close();
+			   matchPO=new MatchPO(matchID, season, date, visingTeam, homeTeam, visitingScore, homeScore, detailScores, records);
+               matches.add(matchPO);
+			}
+			rs.close();
+			sql.close();
+			con.close();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return matches;
+	}
+	
+
+	public ArrayList<PlayerPO> getDayHotPlayer(String column)
+			throws RemoteException {
+
+		ArrayList<PlayerPO> players=new ArrayList<PlayerPO>();
+		getTodaySeason();
+		PlayerPO playerPO;
+		String name;
+		try {
+			con = SqlManager.getConnection();
+			Statement sql = con.createStatement();
+        	ResultSet rs = sql.executeQuery("select playName,"+column+" from records where season='"+todaySeason+"' and date='"+todayDate+"' order by "+column+" desc limit 5");      	
+			while(rs.next()){
+			  name=rs.getString("playerName");
+			  playerPO=getPlayerBaseInfo(name);
+			  players.add(playerPO);
+			}
+			rs.close();
+			sql.close();
+			con.close();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return players;
+	}
+
+	public ArrayList<PlayerPO> getSeasonHotPlayer(String season,String column)
+			throws RemoteException {
+		ArrayList<PlayerPO> players = new ArrayList<PlayerPO>();
+		PlayerPO playerPO;
+		try {
+			con= SqlManager.getConnection();
+			Statement sql = con.createStatement();
+			String query = "";
+			if (column.equals("score") || column.equals("reboundNum")
+					|| column.equals("assistNum") || column.equals("blockNum")
+					|| column.equals("stealNum")) {
+				query = "select * from playerMatchDataAverage where season='"
+						+ season + "' order by " + column + " desc limit 5";
+			} else {
+				query = "select * from playerMatchDataSeason where season='"
+						+ season + "' order by " + column + " desc limit 5";
+			}
+			ResultSet rs = sql.executeQuery(query);
+			while (rs.next()) {
+				String playName = rs.getString("playName");
+				playerPO=getPlayerBaseInfo(playName);
+				players.add(playerPO);			
+			}
+		    rs.close();
+		    sql.close();
+		    con.close();
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		} 
+
+		return players;
+	}
+
+	public ArrayList<PlayerPO> getBestImprovedPlayer(String column)
+			throws RemoteException {
+		ArrayList<PlayerPO> players = new ArrayList<PlayerPO>();
+		PlayerPO playerPO;
+		if(column.equals("score")){
+			column="recentFiveMatchesScoreUpRate";
+		}
+		else if(column.equals("reboundNum")){
+			column="recentFiveMatchesReboundUpRate";
+		}
+		else{
+			column="recentFiveMatchesAssistUpRate";
+		}
+		try {
+			con= SqlManager.getConnection();
+			Statement sql = con.createStatement();
+			String query = "select playerName from playerMatchDataSeason order by " + column + " desc limit 5";
+			
+			ResultSet rs = sql.executeQuery(query);
+			while (rs.next()) {
+				String playName = rs.getString("playName");
+				playerPO=getPlayerBaseInfo(playName);
+				players.add(playerPO);			
+			}
+		    rs.close();
+		    sql.close();
+		    con.close();
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		} 
+
+		return players;
+	}
+
+	public String getTodaySeason(){
+		String result;
+		int year;
+		int month;
+		Calendar cal=Calendar.getInstance();   
+		java.text.SimpleDateFormat f=new java.text.SimpleDateFormat("MM-dd");    
+	    todayDate=f.format(cal.getTime()); 
+		year=cal.get(Calendar.YEAR); 
+		year-=2000;
+		month=cal.get(Calendar.MONTH);       
+		if(month<=6){
+			result=(year-1)+"-"+year;
+		}
+		else {
+			result=year+"-"+(year+1);
+		}
+		todaySeason=result;
+		
+		return result;
+	}
+
+
 
 }
