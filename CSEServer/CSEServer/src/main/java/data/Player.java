@@ -1,5 +1,6 @@
 package data;
 
+import java.io.File;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.sql.Connection;
@@ -776,20 +777,30 @@ public class Player extends UnicastRemoteObject implements PlayerDataService {
 	}
 
 	public String getActionPhotoPath(String name) throws RemoteException {
-		return "src/迭代一数据/players/action/" + name + ".png";
+		return "src/data/players/action/" + name + ".png";
 	}
 
 	public String getPortraitPhotoPath(String name) throws RemoteException {
-		return "src/迭代一数据/players/portrait/" + name + ".png";
+		return "src/data/players/portrait/" + name + ".png";
 	}
 	
 	public ImageIcon getPlayerActionImage(String name) throws RemoteException {
-		ImageIcon imageIcon=new ImageIcon(getActionPhotoPath(name));
+		String address=getActionPhotoPath(name);
+		File file=new File(address);
+		if(!file.exists()){
+			address="src/data/players/lose.jpg";
+		}
+		ImageIcon imageIcon=new ImageIcon(address);
 		return imageIcon;
 	}
 
 	public ImageIcon getPlayerPortraitImage(String name) throws RemoteException {
-		ImageIcon imageIcon = new ImageIcon(getPortraitPhotoPath(name));
+		String address=getPortraitPhotoPath(name);
+		File file=new File(address);
+		if(!file.exists()){
+			address="src/data/players/lose.jpg";
+		}
+		ImageIcon imageIcon = new ImageIcon(address);
 		return imageIcon;
 	}
 
