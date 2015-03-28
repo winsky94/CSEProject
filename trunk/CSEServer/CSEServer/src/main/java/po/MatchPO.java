@@ -10,20 +10,22 @@ public class MatchPO implements Serializable {
 	private String date;// 时间
 	private String visingTeam;// 对阵队伍
 	private String homeTeam;
-	private String score; // 比分
+	private String visitingScore; // 比分
+	private String homeScore;
 	private ArrayList<String> detailScores;// 各节比分
 	private ArrayList<RecordPO> records;// 球员比分数据记录
 
 	public MatchPO(int matchID, String season, String date, String visingTeam,
-			String homeTeam, String score, ArrayList<String> detailScores,
-			ArrayList<RecordPO> records) {
+			String homeTeam, String visitingScore, String homeScore,
+			ArrayList<String> detailScores, ArrayList<RecordPO> records) {
 		super();
 		this.matchID = matchID;
 		this.season = season;
 		this.date = date;
 		this.visingTeam = visingTeam;
 		this.homeTeam = homeTeam;
-		this.score = score;
+		this.visitingScore = visitingScore;
+		this.homeScore = homeScore;
 		this.detailScores = detailScores;
 		this.records = records;
 	}
@@ -48,8 +50,12 @@ public class MatchPO implements Serializable {
 		return homeTeam;
 	}
 
-	public String getScore() {
-		return score;
+	public String getVisitingScore() {
+		return visitingScore;
+	}
+
+	public String getHomeScore() {
+		return homeScore;
 	}
 
 	public ArrayList<String> getDetailScores() {
@@ -80,8 +86,12 @@ public class MatchPO implements Serializable {
 		this.homeTeam = homeTeam;
 	}
 
-	public void setScore(String score) {
-		this.score = score;
+	public void setVisitingScore(String visitingScore) {
+		this.visitingScore = visitingScore;
+	}
+
+	public void setHomeScore(String homeScore) {
+		this.homeScore = homeScore;
 	}
 
 	public void setDetailScores(ArrayList<String> detailScores) {
