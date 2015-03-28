@@ -18,10 +18,10 @@ public interface TeamDataService extends Remote {
 	public ArrayList<TeamPO> getTeamAverageInfo(String season)
 			throws RemoteException;
 
-	public ArrayList<MatchPO> getMatchesAverageRecent(String teamName)
+	public ArrayList<MatchPO> getRecentMatchesAverage(String teamName)
 			throws RemoteException;
 
-	public ArrayList<MatchPO> getMatchesSeasonRecent(String teamName)
+	public ArrayList<MatchPO> getRecentMatchesSeason(String teamName)
 			throws RemoteException;
 
 	public ArrayList<MatchPO> getMatchesAverage(String teamName)
