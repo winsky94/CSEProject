@@ -62,7 +62,9 @@ public class MyTableCellRenderer extends DefaultTableCellRenderer {
 		setHorizontalAlignment(SwingConstants.CENTER);
 		// 设置列宽自己设置
 		 String columnName1 = table.getColumnName(0);
-		 table.getColumn(columnName1).setPreferredWidth(0);
+		 table.getColumn(columnName1).setPreferredWidth(50);
+		 table.getColumn(columnName1).setMinWidth(50);
+		 table.getColumn(columnName1).setMaxWidth(50);
 		// String columnName2 = table.getColumnName(1);
 		// table.getColumn(columnName2).setPreferredWidth(130);
 
@@ -70,7 +72,7 @@ public class MyTableCellRenderer extends DefaultTableCellRenderer {
 		table.setShowHorizontalLines(false);
 		table.setShowVerticalLines(false);
 
-		// 设置行宽
+		// 设置行高
 		table.setRowHeight(row, 40);
 
 		// 设置每行第一列显示图片
