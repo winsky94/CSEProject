@@ -32,7 +32,7 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener {
 	// --------------
 	JScrollPane jsp;
 	JTable table;
-	//PlayerTableModel ptm = new PlayerTableModel();
+	PlayerTableModel ptm = new PlayerTableModel();
 	// ---------------
 	JLabel refreshLbl, filterLbl,modeLbl;
 	JComboBox<String> locationBox, partitionBox, filterRankBox, seasonBox,
@@ -100,7 +100,7 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener {
 		modeLbl.addMouseListener(this);
 		funcPnl.add(modeLbl);
 		// ----jsp--------------
-		table = new JTable();
+		table = new MyTable(ptm);
 		jsp = new JScrollPane(table);
 		gbc.gridy = 2;
 		gbc.gridheight = 10;
