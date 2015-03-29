@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 
+import po.MatchPO;
 import po.PlayerPO;
 import vo.PlayerVO;
 import businesslogicservice.PlayerBLService;
@@ -343,6 +344,81 @@ public class Player implements PlayerBLService {
 			EN = CH;
 		}
 		return EN;
+	}
+
+	
+	public ArrayList<PlayerPO> getDayHotPlayer(String column)
+			throws RemoteException {
+		// TODO 自动生成的方法存根
+		ArrayList<PlayerPO> result=new ArrayList<PlayerPO>();
+		try {
+			result=service.getDayHotPlayer(column);
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		return result;
+	}
+
+	public ArrayList<PlayerPO> getSeasonHotPlayer(String season, String column) {
+		// TODO 自动生成的方法存根
+		ArrayList<PlayerPO> result=new ArrayList<PlayerPO>();
+		try {
+			result=service.getSeasonHotPlayer(season,column);
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		return result;
+	}
+
+	public ArrayList<PlayerPO> getBestImprovedPlayer(String column) {
+		// TODO 自动生成的方法存根
+		ArrayList<PlayerPO> result=new ArrayList<PlayerPO>();
+		try {
+			result=service.getBestImprovedPlayer(column);
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		return result;
+	}
+
+	public ArrayList<MatchPO> getRecentMatches(String playerName)
+			throws RemoteException {
+		// TODO 自动生成的方法存根
+		ArrayList<MatchPO> result=new ArrayList<MatchPO>();
+		try {
+			result=service.getRecentMatches(playerName);
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		return result;
+	}
+
+	public ArrayList<MatchPO> getTodayMatches(String playerName) {
+		// TODO 自动生成的方法存根
+		ArrayList<MatchPO> result=new ArrayList<MatchPO>();
+		try {
+			result=service.getTodayMatches(playerName);
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		return result;
+	}
+
+	public ArrayList<MatchPO> getMatches(String playerName) {
+		// TODO 自动生成的方法存根
+		ArrayList<MatchPO> result=new ArrayList<MatchPO>();
+		try {
+			result=service.getMatches(playerName);
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		return result;
 	}
 
 //	/**
