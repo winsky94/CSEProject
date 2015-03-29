@@ -5,6 +5,8 @@ import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 
+import po.MatchPO;
+import po.PlayerPO;
 import vo.PlayerVO;
 
 public interface PlayerBLService {
@@ -35,4 +37,18 @@ public interface PlayerBLService {
 	public ImageIcon getPlayerPortraitImage(String name);
 
 	public ImageIcon getPlayerActionImage(String name);
+
+	public ArrayList<PlayerPO> getDayHotPlayer(String column)
+			throws RemoteException;
+
+	public ArrayList<PlayerPO> getSeasonHotPlayer(String season, String column);
+
+	public ArrayList<PlayerPO> getBestImprovedPlayer(String column);
+
+	public ArrayList<MatchPO> getRecentMatches(String playerName)
+			throws RemoteException;
+
+	public ArrayList<MatchPO> getTodayMatches(String playerName);
+
+	public ArrayList<MatchPO> getMatches(String playerName);// 可以模糊
 }
