@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 
+import po.MatchPO;
 import po.TeamPO;
 import vo.TeamVO;
 import businesslogicservice.TeamBLService;
@@ -16,8 +17,8 @@ public class Team implements TeamBLService {
 
 	public Team() {
 		try {
-//			String host = "localhost";
-			 String host = getServer.getServerHost();
+			// String host = "localhost";
+			String host = getServer.getServerHost();
 			String url = "rmi://" + host + "/teamService";
 			service = (TeamDataService) Naming.lookup(url);
 		} catch (Exception e) {
@@ -187,8 +188,8 @@ public class Team implements TeamBLService {
 		}
 		return result;
 	}
-	
-	public ImageIcon getTeamImage(String name){
+
+	public ImageIcon getTeamImage(String name) {
 		ImageIcon icon = null;
 		try {
 			icon = service.getTeamImage(name);
@@ -216,6 +217,42 @@ public class Team implements TeamBLService {
 				po.getOffenReboundEfficiency(), po.getDefenReboundEfficiency(),
 				po.getStealEfficiency(), po.getAssistRate());
 		return teamVO;
+	}
+
+	public ArrayList<MatchPO> getRecentMatches(String teamName) {
+		// TODO 自动生成的方法存根
+		ArrayList<MatchPO> result = new ArrayList<MatchPO>();
+		try {
+			result = service.getRecentMatches(teamName);
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		return result;
+	}
+
+	public ArrayList<MatchPO> getMatches(String teamName) {
+		// TODO 自动生成的方法存根
+		ArrayList<MatchPO> result = new ArrayList<MatchPO>();
+		try {
+			result = service.getMatches(teamName);
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		return result;
+	}
+
+	public ArrayList<TeamPO> getSeasonHotTeam(String season, String column) {
+		// TODO 自动生成的方法存根
+		ArrayList<TeamPO> result = new ArrayList<TeamPO>();
+		try {
+			result = service.getSeasonHotTeam(season, column);
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		return result;
 	}
 
 }
