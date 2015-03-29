@@ -28,8 +28,10 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import data.Match;
 import data.Player;
 import data.Team;
+import dataservice.MatchDataService;
 
 public class runServer extends JFrame implements ActionListener {
 	/**
@@ -198,8 +200,10 @@ public class runServer extends JFrame implements ActionListener {
 			LocateRegistry.createRegistry(portNum);
 			Player player = new Player();
 			Team team = new Team();
+			Match match = new Match();
 			Naming.rebind("playerService", player);
 			Naming.rebind("teamService", team);
+			Naming.rebind("matchService", match);
 
 			new ServerMainFrame(hostIP, port);
 		} catch (Exception e) {
