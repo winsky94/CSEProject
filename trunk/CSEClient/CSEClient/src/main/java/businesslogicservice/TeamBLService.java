@@ -4,8 +4,7 @@ import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 
-import po.MatchPO;
-import po.TeamPO;
+import vo.MatchVO;
 import vo.TeamVO;
 
 public interface TeamBLService {
@@ -29,9 +28,9 @@ public interface TeamBLService {
 
 	public ImageIcon getTeamImage(String name);
 
-	public ArrayList<MatchPO> getRecentMatches(String teamName);
+	public ArrayList<MatchVO> getRecentMatches(String teamName);
 
-	public ArrayList<MatchPO> getMatches(String teamName);// 可以模糊
+	public ArrayList<MatchVO> getMatches(String teamName);// 可以模糊
 
-	public ArrayList<TeamPO> getSeasonHotTeam(String season, String column);
+	public ArrayList<TeamVO> getSeasonHotTeam(String season, String column);
 }
