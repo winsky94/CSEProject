@@ -2,9 +2,9 @@ package businesslogicservice;
 
 import java.util.ArrayList;
 
-import po.MatchPO;
+import vo.MatchVO;
 
 public interface MatchBLService {
-	public ArrayList<MatchPO> getMatchData(String season, String date,
+	public ArrayList<MatchVO> getMatchData(String season, String date,
 			String homeTeam, String visitingTeam);
 }
