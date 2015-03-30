@@ -15,7 +15,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import newui.SearchResultPanel;
 import newui.Style;
+import newui.hotui.HotIndexPanel;
 import newui.matchui.MatchIndexPanel;
 import newui.playerui.PlayerIndexPanel;
 import newui.teamui.TeamIndexPanel;
@@ -85,6 +87,7 @@ public class IndexTitleBar extends JPanel implements MouseListener {
 		gbc.weightx = 1;
 		gbl.setConstraints(searchBtn, gbc);
 		searchBtn.addMouseListener(this);
+		searchBtn.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		add(searchBtn);
 
 	}
@@ -103,22 +106,24 @@ public class IndexTitleBar extends JPanel implements MouseListener {
 			setFocusPainted(false);
 			setBorderPainted(false);
 			addMouseListener(IndexTitleBar.this);
-			this.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+			setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		}
 	}
 
 	public void mouseClicked(MouseEvent e) {
-		if (e.getSource() == indexBtn) {
+		if (e.getSource() == indexBtn) 
 			MainFrame.getInstance().setContentPanel(new IndexPanel());
-		}
 		if (e.getSource() == teamBtn)
 			MainFrame.getInstance().setContentPanel(new TeamIndexPanel());
 		if (e.getSource() == playerBtn)
 			MainFrame.getInstance().setContentPanel(new PlayerIndexPanel());
 		if (e.getSource() == matchBtn)
 			MainFrame.getInstance().setContentPanel(new MatchIndexPanel());
+		if (e.getSource() == hotBtn)
+			MainFrame.getInstance().setContentPanel(new HotIndexPanel());
 		if (e.getSource() == searchBtn) {
 			// 监听
+			MainFrame.getInstance().setContentPanel(new SearchResultPanel());
 		}
 	}
 
@@ -133,27 +138,19 @@ public class IndexTitleBar extends JPanel implements MouseListener {
 	}
 
 	public void mouseEntered(MouseEvent e) {
-		if (e.getSource() == indexBtn)
-			indexBtn.setBackground(Style.FOCUS_BLUE);
-		if (e.getSource() == teamBtn)
-			teamBtn.setBackground(Style.FOCUS_BLUE);
-		if (e.getSource() == playerBtn)
-			playerBtn.setBackground(Style.FOCUS_BLUE);
-		if (e.getSource() == matchBtn)
-			matchBtn.setBackground(Style.FOCUS_BLUE);
+		if(e.getSource().getClass()==MyButton.class){
+			MyButton  btn=(MyButton) e.getSource();
+			btn.setBackground(Style.FOCUS_BLUE);
+		}
 		if (e.getSource() == searchBtn)
 			searchBtn.setIcon(new ImageIcon("image/searchFocus.png"));
 	}
 
 	public void mouseExited(MouseEvent e) {
-		if (e.getSource() == indexBtn)
-			indexBtn.setBackground(Style.DEEP_BLUE);
-		if (e.getSource() == teamBtn)
-			teamBtn.setBackground(Style.DEEP_BLUE);
-		if (e.getSource() == playerBtn)
-			playerBtn.setBackground(Style.DEEP_BLUE);
-		if (e.getSource() == matchBtn)
-			matchBtn.setBackground(Style.DEEP_BLUE);
+		if(e.getSource().getClass()==MyButton.class){
+			MyButton  btn=(MyButton) e.getSource();
+			btn.setBackground(Style.DEEP_BLUE);
+		}
 		if (e.getSource() == searchBtn)
 			searchBtn.setIcon(new ImageIcon("image/search.png"));
 
