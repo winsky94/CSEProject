@@ -12,7 +12,7 @@ public class Match implements MatchBLService {
 
 	public Match() {
 		try {
-			String host = getServer.getServerHost();
+			String host = GetServer.getServerHost();
 			String url = "rmi://" + host + "/matchService";
 			service = (MatchDataService) Naming.lookup(url);
 		} catch (Exception e) {

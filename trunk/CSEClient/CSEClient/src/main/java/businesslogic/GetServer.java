@@ -4,7 +4,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
-public class getServer {
+public class GetServer {
 	private static String host=null;
 	
 	public static String getServerHost() throws IOException {

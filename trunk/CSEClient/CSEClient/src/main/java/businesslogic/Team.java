@@ -18,7 +18,7 @@ public class Team implements TeamBLService {
 	public Team() {
 		try {
 			// String host = "localhost";
-			String host = getServer.getServerHost();
+			String host = GetServer.getServerHost();
 			String url = "rmi://" + host + "/teamService";
 			service = (TeamDataService) Naming.lookup(url);
 		} catch (Exception e) {
