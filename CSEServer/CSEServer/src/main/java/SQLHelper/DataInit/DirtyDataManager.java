@@ -18,8 +18,15 @@ public class DirtyDataManager {
 	 *            待检查的字符串
 	 * @return 如果字符串含有单引号，就用两个单引号来代替一个单引号
 	 */
+/*	public static String checkString(String fileName, String string) {
 
+		if (string.indexOf("'") != -1) {// 判断字符串是否含有单引号
+			string = string.replace("'", "''"); // SQL是用两个单引号来代替一个单引号的
+		}
 
+		return string;
+	}
+*/
 	/**
 	 * 判断球龄是否符合要求的方法
 	 * 
