@@ -17,7 +17,7 @@ public class Player implements PlayerBLService {
 
 	public Player() {
 		try {
-			String host = getServer.getServerHost();
+			String host = GetServer.getServerHost();
 			String url = "rmi://" + host + "/playerService";
 			service = (PlayerDataService) Naming.lookup(url);
 		} catch (Exception e) {
