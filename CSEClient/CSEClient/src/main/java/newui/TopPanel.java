@@ -18,7 +18,7 @@ import newui.mainui.MainFrame;
 public class TopPanel extends JPanel implements MouseListener{
 
 	/**
-	 * 标题栏，需增加最小化监听
+	 * 
 	 * 期望实现：页面跳转功能
 	 */
 	private static final long serialVersionUID = 1L;
