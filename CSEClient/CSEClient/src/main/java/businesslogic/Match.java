@@ -4,6 +4,9 @@ import java.rmi.Naming;
 import java.util.ArrayList;
 
 import po.MatchPO;
+import po.RecordPO;
+import vo.MatchVO;
+import vo.RecordVO;
 import businesslogicservice.MatchBLService;
 import dataservice.MatchDataService;
 
@@ -21,12 +24,17 @@ public class Match implements MatchBLService {
 		}
 	}
 
-	public ArrayList<MatchPO> getMatchData(String season, String date,
+	public ArrayList<MatchVO> getMatchData(String season, String date,
 			String homeTeam, String visitingTeam) {
 		// TODO 自动生成的方法存根
-		ArrayList<MatchPO> result = new ArrayList<MatchPO>();
+		ArrayList<MatchVO> result = new ArrayList<MatchVO>();
+		ArrayList<MatchPO> matches = new ArrayList<MatchPO>();
 		try {
-			result = service.getMatchData(season, date, homeTeam, visitingTeam);
+			matches = service.getMatchData(season, date, homeTeam, visitingTeam);
+			for(MatchPO po:matches){
+				MatchVO vo=poToVo(po);
+				result.add(vo);
+			}
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
@@ -34,4 +42,30 @@ public class Match implements MatchBLService {
 		return result;
 	}
 
+	public MatchVO poToVo(MatchPO po) {
+		ArrayList<RecordVO> records = new ArrayList<RecordVO>();
+		for (RecordPO recordPO : po.getRecords()) {
+			RecordVO recordVO = recordPoToVO(recordPO);
+			records.add(recordVO);
+		}
+
+		MatchVO matchVO = new MatchVO(po.getMatchID(), po.getSeason(),
+				po.getDate(), po.getVisingTeam(), po.getHomeTeam(),
+				po.getVisitingScore(), po.getHomeScore(), po.getDetailScores(),
+				records);
+		return matchVO;
+	}
+
+	public RecordVO recordPoToVO(RecordPO po) {
+		RecordVO recordVO = new RecordVO(po.getTeam(), po.getPlayerName(),
+				po.getPosition(), po.getPresentTime(), po.getShootHitNum(),
+				po.getShootAttemptNum(), po.getThreeHitNum(),
+				po.getThreeAttemptNum(), po.getFreeThrowHitNum(),
+				po.getFreeThrowAttemptNum(), po.getOffenReboundNum(),
+				po.getDefenReboundNum(), po.getReboundNum(), po.getAssistNum(),
+				po.getStealNum(), po.getBlockNum(), po.getTurnOverNum(),
+				po.getFoulNum(), po.getScore());
+		return recordVO;
+
+	}
 }
