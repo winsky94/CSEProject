@@ -8,6 +8,7 @@ import javax.swing.ImageIcon;
 
 import po.MatchPO;
 import po.PlayerPO;
+import vo.MatchVO;
 import vo.PlayerVO;
 import businesslogicservice.PlayerBLService;
 import dataservice.PlayerDataService;
@@ -218,7 +219,7 @@ public class Player implements PlayerBLService {
 			// TODO 自动生成的 catch 块
 			e.printStackTrace();
 		}
-		if(icon.equals(null)){
+		if (icon.equals(null)) {
 			System.out.println("Player.getPlayerPortraitImage()");
 		}
 		return icon;
@@ -235,7 +236,7 @@ public class Player implements PlayerBLService {
 		return icon;
 	}
 
-	public PlayerVO poTovo(PlayerPO po) {
+	public static PlayerVO poTovo(PlayerPO po) {
 		int exp = po.getExp();
 		String expString = "";
 		if (exp > 0) {
@@ -346,13 +347,17 @@ public class Player implements PlayerBLService {
 		return EN;
 	}
 
-	
-	public ArrayList<PlayerPO> getDayHotPlayer(String column)
+	public ArrayList<PlayerVO> getDayHotPlayer(String column)
 			throws RemoteException {
 		// TODO 自动生成的方法存根
-		ArrayList<PlayerPO> result=new ArrayList<PlayerPO>();
+		ArrayList<PlayerPO> players = new ArrayList<PlayerPO>();
+		ArrayList<PlayerVO> result = new ArrayList<PlayerVO>();
 		try {
-			result=service.getDayHotPlayer(column);
+			players = service.getDayHotPlayer(column);
+			for (PlayerPO po : players) {
+				PlayerVO vo = poTovo(po);
+				result.add(vo);
+			}
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
@@ -360,11 +365,16 @@ public class Player implements PlayerBLService {
 		return result;
 	}
 
-	public ArrayList<PlayerPO> getSeasonHotPlayer(String season, String column) {
+	public ArrayList<PlayerVO> getSeasonHotPlayer(String season, String column) {
 		// TODO 自动生成的方法存根
-		ArrayList<PlayerPO> result=new ArrayList<PlayerPO>();
+		ArrayList<PlayerPO> players = new ArrayList<PlayerPO>();
+		ArrayList<PlayerVO> result = new ArrayList<PlayerVO>();
 		try {
-			result=service.getSeasonHotPlayer(season,column);
+			players = service.getSeasonHotPlayer(season, column);
+			for (PlayerPO po : players) {
+				PlayerVO vo = poTovo(po);
+				result.add(vo);
+			}
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
@@ -372,11 +382,16 @@ public class Player implements PlayerBLService {
 		return result;
 	}
 
-	public ArrayList<PlayerPO> getBestImprovedPlayer(String column) {
+	public ArrayList<PlayerVO> getBestImprovedPlayer(String column) {
 		// TODO 自动生成的方法存根
-		ArrayList<PlayerPO> result=new ArrayList<PlayerPO>();
+		ArrayList<PlayerPO> players = new ArrayList<PlayerPO>();
+		ArrayList<PlayerVO> result = new ArrayList<PlayerVO>();
 		try {
-			result=service.getBestImprovedPlayer(column);
+			players = service.getBestImprovedPlayer(column);
+			for (PlayerPO po : players) {
+				PlayerVO vo = poTovo(po);
+				result.add(vo);
+			}
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
@@ -384,12 +399,17 @@ public class Player implements PlayerBLService {
 		return result;
 	}
 
-	public ArrayList<MatchPO> getRecentMatches(String playerName)
+	public ArrayList<MatchVO> getRecentMatches(String playerName)
 			throws RemoteException {
 		// TODO 自动生成的方法存根
-		ArrayList<MatchPO> result=new ArrayList<MatchPO>();
+		ArrayList<MatchPO> matches = new ArrayList<MatchPO>();
+		ArrayList<MatchVO> result = new ArrayList<MatchVO>();
 		try {
-			result=service.getRecentMatches(playerName);
+			matches = service.getRecentMatches(playerName);
+			for (MatchPO po : matches) {
+				MatchVO vo = Match.poToVo(po);
+				result.add(vo);
+			}
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
@@ -397,11 +417,16 @@ public class Player implements PlayerBLService {
 		return result;
 	}
 
-	public ArrayList<MatchPO> getTodayMatches(String playerName) {
+	public ArrayList<MatchVO> getTodayMatches(String playerName) {
 		// TODO 自动生成的方法存根
-		ArrayList<MatchPO> result=new ArrayList<MatchPO>();
+		ArrayList<MatchPO> matches = new ArrayList<MatchPO>();
+		ArrayList<MatchVO> result = new ArrayList<MatchVO>();
 		try {
-			result=service.getTodayMatches(playerName);
+			matches = service.getTodayMatches(playerName);
+			for (MatchPO po : matches) {
+				MatchVO vo = Match.poToVo(po);
+				result.add(vo);
+			}
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
@@ -409,11 +434,16 @@ public class Player implements PlayerBLService {
 		return result;
 	}
 
-	public ArrayList<MatchPO> getMatches(String playerName) {
+	public ArrayList<MatchVO> getMatches(String playerName) {
 		// TODO 自动生成的方法存根
-		ArrayList<MatchPO> result=new ArrayList<MatchPO>();
+		ArrayList<MatchPO> matches = new ArrayList<MatchPO>();
+		ArrayList<MatchVO> result = new ArrayList<MatchVO>();
 		try {
-			result=service.getMatches(playerName);
+			matches = service.getMatches(playerName);
+			for (MatchPO po : matches) {
+				MatchVO vo = Match.poToVo(po);
+				result.add(vo);
+			}
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
@@ -421,22 +451,22 @@ public class Player implements PlayerBLService {
 		return result;
 	}
 
-//	/**
-//	 * 将球员的位置由英文转为中文
-//	 * @param position
-//	 * @return
-//	 */
-//	private String changePositionToCH(String position){
-//		String CH="";
-//		if (position.equals("F")) {
-//			CH = "前锋";
-//		} else if (position.equals("C")) {
-//			CH = "中锋";
-//		} else if (position.equals("G")) {
-//			CH = "后卫";
-//		} else {
-//			CH = "";
-//		}
-//		return CH;
-//	}
+	// /**
+	// * 将球员的位置由英文转为中文
+	// * @param position
+	// * @return
+	// */
+	// private String changePositionToCH(String position){
+	// String CH="";
+	// if (position.equals("F")) {
+	// CH = "前锋";
+	// } else if (position.equals("C")) {
+	// CH = "中锋";
+	// } else if (position.equals("G")) {
+	// CH = "后卫";
+	// } else {
+	// CH = "";
+	// }
+	// return CH;
+	// }
 }
