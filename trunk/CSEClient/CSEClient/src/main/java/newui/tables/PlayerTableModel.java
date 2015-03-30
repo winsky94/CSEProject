@@ -71,7 +71,7 @@ public class PlayerTableModel extends MyTableModel{
 	
 	public void Refresh(String model){
 		ArrayList<PlayerVO> result;
-		if(model.equals("汇总"))
+		if(model.equals("赛季"))
 			 result=player.getPlayerSeasonInfo("13-14");
 		else
 			result=player.getPlayerAverageInfo("13-14");

@@ -45,7 +45,8 @@ public class TeamIndexPanel extends FatherPanel implements MouseListener{
 		//-----season----------
 		JLabel seasonBoxLbl=new MyJLabel("赛季：");
 		funcPnl.add(seasonBoxLbl);
-		String[] seasonBoxText={"我需要监听了啦"};
+		//暂时没有bl方法
+		String[] seasonBoxText={"13-14"};
 		seasonBox=new MyComboBox(seasonBoxText);
 		funcPnl.add(seasonBox);
 		funcPnl.add(new JLabel("       "));
@@ -64,11 +65,17 @@ public class TeamIndexPanel extends FatherPanel implements MouseListener{
 		ttm=new TeamTableModel();
 		table=new MySortableTable(ttm);
 		jsp=new JScrollPane(table);
+		
 		gbc.gridy = 2;
 		gbc.gridheight = 10;
 		gbc.weighty = 10;
 		gbl.setConstraints(jsp, gbc);
 		add(jsp);
+		
+		//====初始化数据=====
+		ttm.Refresh(typeBox.getSelectedItem().toString());
+		table.revalidate();
+	
 	}
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub

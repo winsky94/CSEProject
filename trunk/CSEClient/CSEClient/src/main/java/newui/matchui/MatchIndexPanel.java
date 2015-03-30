@@ -20,7 +20,8 @@ public class MatchIndexPanel extends FatherPanel {
 	JScrollPane jsp;
 	JPanel funcPnl;
 	JComboBox<String> seasonBox;
-	String[] seasonText={"请加监听"};
+	//暂无赛季选择的bl层方法
+	String[] seasonText={"13-14"};
 	Font font = new Font("微软雅黑", Font.PLAIN, 13);
 	public MatchIndexPanel() {
 		// ------funcPnl--------

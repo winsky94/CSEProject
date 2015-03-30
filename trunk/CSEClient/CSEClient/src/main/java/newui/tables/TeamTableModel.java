@@ -56,7 +56,7 @@ public class TeamTableModel extends MyTableModel {
 
 	public void Refresh(String model) {
 		ArrayList<TeamVO> teamvo;
-		if (model.equals("汇总"))
+		if (model.equals("赛季"))
 			teamvo = team.getTeamSeasonInfo("13-14");
 		else
 			teamvo = team.getTeamAverageInfo("13-14");

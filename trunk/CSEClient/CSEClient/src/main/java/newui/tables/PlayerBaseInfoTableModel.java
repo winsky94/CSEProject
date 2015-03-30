@@ -48,14 +48,15 @@ public class PlayerBaseInfoTableModel extends MyTableModel {
 			//显示没有符合消息的数据
 			}
 		else
-			RefreshTable(playerlist);
+			Refresh(playerlist);
 		
 	}
 	//	static String[] head =
 	//{ "(头像)", "球员名", "所属球队", "位置", "身高", "体重","生日","年龄" ,"经验" };
 	//适应出网络连接方式来的数据
-	public void RefreshTable(ArrayList<PlayerVO>  list){
+	public void Refresh(ArrayList<PlayerVO>  list){
 		content.clear();
+		imgList.clear();
 		
 		for(PlayerVO vo:list){
 			ArrayList<Object> line=new ArrayList<Object>();
