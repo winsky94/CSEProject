@@ -287,7 +287,7 @@ public class PlayerMatchDataCalculator {
 
 		try {
 			seasonStatement.setInt(1, sqlID);
-			seasonStatement.setString(2, playerName);
+			seasonStatement.setString(2, playerName.replace("''", "'"));
 			seasonStatement.setString(3, season);
 			seasonStatement.setString(4, owingTeam);
 			seasonStatement.setInt(5, playedGames);
@@ -364,7 +364,7 @@ public class PlayerMatchDataCalculator {
 			sql2.close();
 		*/
 			averageStatement.setInt(1, sqlID);
-			averageStatement.setString(2, playerName);
+			averageStatement.setString(2, playerName.replace("''", "'"));
 			averageStatement.setString(3, season);
 			averageStatement.setString(4, owingTeam);
 			averageStatement.setInt(5, playedGames);
