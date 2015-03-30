@@ -17,7 +17,7 @@ import newui.UIhelper;
 
 public class MainFrame extends JFrame{
 	/**
-	 * 需：去掉外框，增加移动位置代码
+	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	private static MainFrame instance=null;
