@@ -77,6 +77,7 @@ public class PlayerBaseInfoTableModel extends MyTableModel {
 			line.add(vo.getAge());
 			line.add(vo.getExp());
 			content.add(line);
+			
 		}
 		
 		
