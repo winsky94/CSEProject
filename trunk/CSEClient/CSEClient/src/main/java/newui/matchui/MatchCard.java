@@ -16,7 +16,7 @@ public class MatchCard extends JPanel{
 	}
 	public JPanel getDetailScoresPanel(){
 		JPanel result=new JPanel();
-		String[] 
+		
 		return result;
 	}
 }
