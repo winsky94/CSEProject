@@ -51,6 +51,10 @@ public class PlayerBaseInfoTableModel extends MyTableModel {
 			Refresh(playerlist);
 		
 	}
+	//图片加载过慢1.每加载一条完整或一定数量行记录 即执行渲染或Revalidate
+	//long a=System.currentTimeMillis();
+	//
+	//System.out.println("\r<br>执行耗时 : "+(System.currentTimeMillis()-a)/1000f+" 秒 ");
 	//	static String[] head =
 	//{ "(头像)", "球员名", "所属球队", "位置", "身高", "体重","生日","年龄" ,"经验" };
 	//适应出网络连接方式来的数据
