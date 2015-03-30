@@ -7,6 +7,7 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
@@ -15,6 +16,8 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
+import vo.PlayerVO;
+import businesslogic.Player;
 import newui.FatherPanel;
 import newui.Style;
 import newui.mainui.MainFrame;
@@ -29,6 +32,7 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener {
 	 */
 	private static final long serialVersionUID = 1L;
 	JPanel funcPnl;
+	private Player player;
 	// --------------
 	JScrollPane jsp;
 	JTable table;
@@ -81,7 +85,8 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener {
 		// -----season----------
 		JLabel seasonBoxLbl = new MyJLabel("赛季：");
 		funcPnl.add(seasonBoxLbl);
-		String[] seasonBoxText = { "我需要监听了啦" };
+		//暂无获取赛季的bl方法
+		String[] seasonBoxText = { "13-14" };
 		seasonBox = new MyComboBox(seasonBoxText);
 		funcPnl.add(seasonBox);
 		// ----DataType---------
@@ -145,6 +150,24 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener {
 	public void mouseClicked(MouseEvent e) {
 		if(e.getSource()==modeLbl)
 			MainFrame.getInstance().setContentPanel(new PlayerIndexPanel());
+		if(e.getSource()==filterLbl){
+			//执行筛选
+			String season=seasonBox.getSelectedItem().toString();
+			String position=locationBox.getSelectedItem().toString();
+			String union=partitionBox.getSelectedItem().toString();
+			String sort=filterRankBox.getSelectedItem().toString();
+			ArrayList<PlayerVO> vlist;
+			String type=typeBox.getSelectedItem().toString();
+			if(type.equals("赛季"))
+				vlist=player.selectPlayersBySeason(season, position, union, sort);
+			else
+				vlist=player.selectPlayersByAverage(season, position, union, sort);
+			//vlist.size()==0显示没有符合条件的球员
+			if(vlist!=null)
+				ptm.refreshContent(vlist);
+			table.revalidate();
+				
+		}
 
 	}
 
