@@ -8,6 +8,7 @@ import javax.swing.ImageIcon;
 
 import po.MatchPO;
 import po.TeamPO;
+import vo.MatchVO;
 import vo.TeamVO;
 import businesslogicservice.TeamBLService;
 import dataservice.TeamDataService;
@@ -219,11 +220,16 @@ public class Team implements TeamBLService {
 		return teamVO;
 	}
 
-	public ArrayList<MatchPO> getRecentMatches(String teamName) {
+	public ArrayList<MatchVO> getRecentMatches(String teamName) {
 		// TODO 自动生成的方法存根
-		ArrayList<MatchPO> result = new ArrayList<MatchPO>();
+		ArrayList<MatchPO> matches = new ArrayList<MatchPO>();
+		ArrayList<MatchVO> result = new ArrayList<MatchVO>();
 		try {
-			result = service.getRecentMatches(teamName);
+			matches = service.getRecentMatches(teamName);
+			for (MatchPO po : matches) {
+				MatchVO vo = Match.poToVo(po);
+				result.add(vo);
+			}
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
@@ -231,11 +237,16 @@ public class Team implements TeamBLService {
 		return result;
 	}
 
-	public ArrayList<MatchPO> getMatches(String teamName) {
+	public ArrayList<MatchVO> getMatches(String teamName) {
 		// TODO 自动生成的方法存根
-		ArrayList<MatchPO> result = new ArrayList<MatchPO>();
+		ArrayList<MatchPO> matches = new ArrayList<MatchPO>();
+		ArrayList<MatchVO> result = new ArrayList<MatchVO>();
 		try {
-			result = service.getMatches(teamName);
+			matches = service.getMatches(teamName);
+			for (MatchPO po : matches) {
+				MatchVO vo = Match.poToVo(po);
+				result.add(vo);
+			}
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
@@ -243,11 +254,16 @@ public class Team implements TeamBLService {
 		return result;
 	}
 
-	public ArrayList<TeamPO> getSeasonHotTeam(String season, String column) {
+	public ArrayList<TeamVO> getSeasonHotTeam(String season, String column) {
 		// TODO 自动生成的方法存根
-		ArrayList<TeamPO> result = new ArrayList<TeamPO>();
+		ArrayList<TeamPO> teams = new ArrayList<TeamPO>();
+		ArrayList<TeamVO> result = new ArrayList<TeamVO>();
 		try {
-			result = service.getSeasonHotTeam(season, column);
+			teams = service.getSeasonHotTeam(season, column);
+			for (TeamPO po : teams) {
+				TeamVO vo = poToVo(po);
+				result.add(vo);
+			}
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
