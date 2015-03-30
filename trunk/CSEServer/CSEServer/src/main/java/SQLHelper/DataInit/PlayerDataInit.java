@@ -60,7 +60,7 @@ public class PlayerDataInit {
 			e.printStackTrace();
 		}
 
-		mname = DirtyDataManager.checkString(fileName, content[0]);
+		mname = content[0];
 		mnumber = DirtyDataManager.checkNum(fileName, content[1]);
 		mposition = content[2];
 		mheight = content[3];
@@ -68,7 +68,7 @@ public class PlayerDataInit {
 		mbirth = content[5];
 		mage = Integer.parseInt(content[6]);
 		mexp = DirtyDataManager.checkExp(fileName, content[7]);
-		mschool = DirtyDataManager.checkString(fileName, content[8]);
+		mschool = content[8];
 		player = new PlayerPO(0, mname, mnumber, mposition, mheight, mweight,
 				mbirth, mage, mexp, mschool);
 		return player;
