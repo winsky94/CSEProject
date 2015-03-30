@@ -23,7 +23,7 @@ public class GetServer {
 				ip=str;
 			}
 			br.close();
-			host="192.168.191.2:1099";
+			host="192.168.191.3:1099";
 			return host;
 		}else{
 			return host;
