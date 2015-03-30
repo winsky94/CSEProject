@@ -149,8 +149,7 @@ public class TitleBar extends JPanel implements MouseListener {
 			indexBtn.setBackground(Style.FOCUS_BLUE);
 		if (e.getSource() == teamBtn) {
 			teamBtn.setBackground(Style.FOCUS_BLUE);
-			TeamWindow.getInstance(e.getXOnScreen(), e.getYOnScreen())
-					.setVisible(true);
+			TeamWindow.getInstance(e.getXOnScreen(), e.getYOnScreen()).setVisible(true);
 
 		}
 		if (e.getSource() == playerBtn)
