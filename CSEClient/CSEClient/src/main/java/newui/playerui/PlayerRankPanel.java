@@ -19,7 +19,7 @@ import newui.FatherPanel;
 import newui.Style;
 import newui.mainui.MainFrame;
 import newui.playerui.PlayerIndexPanel.MyLabel;
-import newui.tables.MyTable;
+import newui.tables.MySortableTable;
 import newui.tables.PlayerTableModel;
 
 public class PlayerRankPanel extends FatherPanel implements MouseListener {
@@ -100,7 +100,7 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener {
 		modeLbl.addMouseListener(this);
 		funcPnl.add(modeLbl);
 		// ----jsp--------------
-		table = new MyTable(ptm);
+		table = new MySortableTable(ptm);
 		jsp = new JScrollPane(table);
 		gbc.gridy = 2;
 		gbc.gridheight = 10;

@@ -15,7 +15,7 @@ import javax.swing.JTable;
 
 import newui.FatherPanel;
 import newui.Style;
-import newui.tables.MyTable;
+import newui.tables.MySortableTable;
 import newui.tables.TeamTableModel;
 
 public class TeamIndexPanel extends FatherPanel implements MouseListener{
@@ -62,7 +62,7 @@ public class TeamIndexPanel extends FatherPanel implements MouseListener{
 		funcPnl.add(refreshLbl);
 		//-----table-----------
 		ttm=new TeamTableModel();
-		table=new MyTable(ttm);
+		table=new MySortableTable(ttm);
 		jsp=new JScrollPane(table);
 		gbc.gridy = 2;
 		gbc.gridheight = 10;

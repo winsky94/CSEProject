@@ -80,7 +80,6 @@ public class TeamWindow extends JWindow implements MouseListener {
 			setVisible(true);
 			MyButton btn = (MyButton) e.getSource();
 			btn.setForeground(Style.FOCUS_BLUE);
-			btn.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		}
 	}
 
@@ -91,7 +90,6 @@ public class TeamWindow extends JWindow implements MouseListener {
 		if (e.getSource().getClass() == MyButton.class) {
 			MyButton btn = (MyButton) e.getSource();
 			btn.setForeground(Color.black);
-			btn.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
 		}
 	}
 
@@ -259,6 +257,7 @@ public class TeamWindow extends JWindow implements MouseListener {
 					+ ".png"), JLabel.LEFT);
 			setFont(font);
 			addMouseListener(TeamWindow.this);
+			setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		}
 
 	}
