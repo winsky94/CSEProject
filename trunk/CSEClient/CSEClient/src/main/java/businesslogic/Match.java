@@ -30,9 +30,10 @@ public class Match implements MatchBLService {
 		ArrayList<MatchVO> result = new ArrayList<MatchVO>();
 		ArrayList<MatchPO> matches = new ArrayList<MatchPO>();
 		try {
-			matches = service.getMatchData(season, date, homeTeam, visitingTeam);
-			for(MatchPO po:matches){
-				MatchVO vo=poToVo(po);
+			matches = service
+					.getMatchData(season, date, homeTeam, visitingTeam);
+			for (MatchPO po : matches) {
+				MatchVO vo = poToVo(po);
 				result.add(vo);
 			}
 		} catch (Exception e) {
@@ -42,7 +43,7 @@ public class Match implements MatchBLService {
 		return result;
 	}
 
-	public MatchVO poToVo(MatchPO po) {
+	public static MatchVO poToVo(MatchPO po) {
 		ArrayList<RecordVO> records = new ArrayList<RecordVO>();
 		for (RecordPO recordPO : po.getRecords()) {
 			RecordVO recordVO = recordPoToVO(recordPO);
@@ -56,7 +57,7 @@ public class Match implements MatchBLService {
 		return matchVO;
 	}
 
-	public RecordVO recordPoToVO(RecordPO po) {
+	public static RecordVO recordPoToVO(RecordPO po) {
 		RecordVO recordVO = new RecordVO(po.getTeam(), po.getPlayerName(),
 				po.getPosition(), po.getPresentTime(), po.getShootHitNum(),
 				po.getShootAttemptNum(), po.getThreeHitNum(),

@@ -200,7 +200,7 @@ public class Team implements TeamBLService {
 		return icon;
 	}
 
-	public TeamVO poToVo(TeamPO po) {
+	public static TeamVO poToVo(TeamPO po) {
 		TeamVO teamVO = new TeamVO(po.getId(), po.getTeamName(),
 				po.getAbLocation(), po.getLocation(), po.getConference(),
 				po.getPartition(), po.getHomeCourt(), po.getSetUpTime(),
