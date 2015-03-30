@@ -89,8 +89,7 @@ public class MatchDataInit {
 					isComplete = false;
 				} else {
 					String[] line = temp.split(";");
-					playerName = DirtyDataManager
-							.checkString(fileName, line[0]);
+					playerName = line[0];
 					position = line[1];
 					presentTime = DirtyDataManager.checkPresentTime(fileName,
 							team, playerName, line[2]);// 在场时间
