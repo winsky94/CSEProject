@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
@@ -101,8 +103,21 @@ public class PlayerIndexPanel extends FatherPanel implements MouseListener {
 		gbc.weighty = 10;
 		gbl.setConstraints(jsp, gbc);
 		add(jsp);
+		//====按球队筛选监听====
+		teamBox.addItemListener(new ItemListener(){
+
+			public void itemStateChanged(ItemEvent e) {
+				// TODO Auto-generated method stub
+				String teamName=teamBox.getSelectedItem().toString();
+				pitm.findByTeam(teamName);
+				table.revalidate();
+				
+			}
+			
+		});
 
 	}
+	
 
 	class MyCharacter extends JLabel {
 
@@ -140,6 +155,11 @@ public class PlayerIndexPanel extends FatherPanel implements MouseListener {
 	public void mouseClicked(MouseEvent e) {
 		if (e.getSource() == modeLbl)
 			MainFrame.getInstance().setContentPanel(new PlayerRankPanel());
+		if(e.getSource() instanceof MyCharacter){
+			String sort=((MyCharacter)e.getSource()).getText();
+			pitm.sortByCharacter(sort);
+			table.revalidate();
+		}
 
 	}
 
