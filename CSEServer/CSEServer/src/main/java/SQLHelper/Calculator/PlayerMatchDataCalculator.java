@@ -33,8 +33,6 @@ public class PlayerMatchDataCalculator {
 	double threeAttemptNum = 0;
 	double threeHitRate = 0;
 	double freeThrowHitRate = 0;
-	double offenNum = 0;
-	double defenNum = 0;
 	double stealNum = 0;
 	double blockNum = 0;
 	double foulNum = 0;
@@ -137,8 +135,6 @@ public class PlayerMatchDataCalculator {
 		threeAttemptNum = 0;
 		threeHitRate = 0;
 		freeThrowHitRate = 0;
-		offenNum = 0;
-		defenNum = 0;
 		stealNum = 0;
 		blockNum = 0;
 		foulNum = 0;
@@ -224,8 +220,9 @@ public class PlayerMatchDataCalculator {
 		threeAttemptNum = Double.parseDouble(dec.format(threeAttemptNum));
 		threeHitRate = Double.parseDouble(dec.format(threeHitRate));
 		freeThrowHitRate = Double.parseDouble(dec.format(freeThrowHitRate));
-		offenNum = Double.parseDouble(dec.format(offenNum));
-		defenNum = Double.parseDouble(dec.format(defenNum));
+		offenReboundNum = Double.parseDouble(dec.format(offenReboundNum));
+		defenReboundNum = Double.parseDouble(dec.format(defenReboundNum));
+		
 		stealNum = Double.parseDouble(dec.format(stealNum));
 		blockNum = Double.parseDouble(dec.format(blockNum));
 		foulNum = Double.parseDouble(dec.format(foulNum));
@@ -692,8 +689,8 @@ public class PlayerMatchDataCalculator {
 								/ freeThrowAttemptNumSeason;
 					}
 					freeThrowHitRate = freeThrowHitRate / playedGames;
-					offenNum = (double)offenReboundNumSeason / playedGames;
-					defenNum = (double)defenReboundNumSeason / playedGames;
+					offenReboundNum = (double)offenReboundNumSeason / playedGames;
+					defenReboundNum = (double)defenReboundNumSeason / playedGames;
 					stealNum = (double)stealNumSeason / playedGames;
 					blockNum = (double)blockNumSeason / playedGames;
 					turnOverNum = (double)turnOverNumSeason / playedGames;
