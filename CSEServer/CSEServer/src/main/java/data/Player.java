@@ -39,7 +39,7 @@ public class Player extends UnicastRemoteObject implements PlayerDataService {
 		try {
 			con = SqlManager.getConnection();
 			Statement sql = con.createStatement();
-			ResultSet resultSet = sql.executeQuery("select * from players");
+			ResultSet resultSet = sql.executeQuery("select players.*,playermatchdataseason.owingTeam from players,playermatchdataseason where players.name=playermatchdataseason.playerName");
 
 			while (resultSet.next()) {
 				int id = resultSet.getInt("playerID");// 编号
@@ -52,9 +52,11 @@ public class Player extends UnicastRemoteObject implements PlayerDataService {
 				int age = resultSet.getInt("age");// 年龄
 				int exp = resultSet.getInt("exp");// 球龄
 				String school = resultSet.getString("school");// 毕业学校
+				String owingTeam=resultSet.getString("owingTeam");//所属球队
 
 				PlayerPO playerPO = new PlayerPO(id, name, number, position,
 						height, weight, birth, age, exp, school);
+				playerPO.setTeamName(owingTeam);
 				players.add(playerPO);
 			}
 			resultSet.close();
@@ -155,8 +157,8 @@ public class Player extends UnicastRemoteObject implements PlayerDataService {
 		try {
 			con = SqlManager.getConnection();
 			Statement sql = con.createStatement();
-			String query = "select * from players where name='" + playername
-					+ "'";
+			String query = "select players.*,playermatchdataseason.owingTeam from players,playermatchdataseason where name='" + playername
+					+ "' and name=playerName";
 			ResultSet resultSet = sql.executeQuery(query);
 			resultSet.next();
 			player = new PlayerPO();
@@ -170,9 +172,10 @@ public class Player extends UnicastRemoteObject implements PlayerDataService {
 			int age = resultSet.getInt("age");
 			int exp = resultSet.getInt("exp");
 			String school = resultSet.getString("school");
+			String owingTeam=resultSet.getString("owingTeam");
 			player = new PlayerPO(id, playerName, number, position, height,
 					weight, birth, age, exp, school);
-
+            player.setTeamName(owingTeam);
 			resultSet.close();
 			con.close();
 			sql.close();
@@ -861,8 +864,10 @@ public class Player extends UnicastRemoteObject implements PlayerDataService {
 		//	ArrayList<MatchPO> matches=p.getMatches("Aaron Brooks");
 		//	System.out.println(matches.get(0).getDate());
 		//	ArrayList<PlayerPO> players=p.getSeasonHotPlayer("13-14", "score");
-			ArrayList<PlayerPO> players=p.getPlayersByInitialName('A');
-			System.out.println(players.get(0).getName());
+//			ArrayList<PlayerPO> players=p.getPlayersByInitialName('A');
+//			System.out.println(players.get(0).getName());
+			ArrayList<PlayerPO> players=p.getPlayerBaseInfo();
+			System.out.println(players.get(0).getTeamName());
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
