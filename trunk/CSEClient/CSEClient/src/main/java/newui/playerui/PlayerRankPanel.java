@@ -49,6 +49,7 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener {
 			"盖帽", "抢断", "罚球", "犯规","失误","分钟","效率","两双" };
 
 	public PlayerRankPanel() {
+		player=new Player();
 		// ------funcPnl--------
 		funcPnl = new JPanel();
 		funcPnl.setBackground(Style.BACK_GREY);
@@ -161,6 +162,10 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener {
 			String sort=filterRankBox.getSelectedItem().toString();
 			ArrayList<PlayerVO> vlist;
 			String type=typeBox.getSelectedItem().toString();
+			System.out.println("PlayerRankPanel.mouseClicked() "+season);
+			System.out.println("PlayerRankPanel.mouseClicked() "+position);
+			System.out.println("PlayerRankPanel.mouseClicked() "+union);
+			System.out.println("PlayerRankPanel.mouseClicked() "+sort);
 			if(type.equals("赛季"))
 				vlist=player.selectPlayersBySeason(season, position, union, sort);
 			else
