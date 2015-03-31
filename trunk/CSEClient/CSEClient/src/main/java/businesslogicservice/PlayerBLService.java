@@ -43,6 +43,8 @@ public interface PlayerBLService {
 	public ArrayList<PlayerVO> getSeasonHotPlayer(String season, String column);
 
 	public ArrayList<PlayerVO> getBestImprovedPlayer(String column);
+	
+	public ArrayList<PlayerVO> getPlayersByInitialName(char character);
 
 	public ArrayList<MatchVO> getRecentMatches(String playerName)
 			throws RemoteException;
