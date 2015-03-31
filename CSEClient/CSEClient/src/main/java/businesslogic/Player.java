@@ -399,6 +399,23 @@ public class Player implements PlayerBLService {
 		return result;
 	}
 
+	
+	public ArrayList<PlayerVO> getPlayersByInitialName(char character) {
+		ArrayList<PlayerPO> players = new ArrayList<PlayerPO>();
+		ArrayList<PlayerVO> result = new ArrayList<PlayerVO>();
+		try {
+			players = service.getPlayersByInitialName(character);
+			for (PlayerPO po : players) {
+				PlayerVO vo = poTovo(po);
+				result.add(vo);
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
 	public ArrayList<MatchVO> getRecentMatches(String playerName)
 			throws RemoteException {
 		// TODO 自动生成的方法存根
@@ -450,6 +467,7 @@ public class Player implements PlayerBLService {
 		}
 		return result;
 	}
+
 
 	// /**
 	// * 将球员的位置由英文转为中文
