@@ -860,7 +860,8 @@ public class Player extends UnicastRemoteObject implements PlayerDataService {
 //			}
 		//	ArrayList<MatchPO> matches=p.getMatches("Aaron Brooks");
 		//	System.out.println(matches.get(0).getDate());
-			ArrayList<PlayerPO> players=p.getSeasonHotPlayer("13-14", "score");
+		//	ArrayList<PlayerPO> players=p.getSeasonHotPlayer("13-14", "score");
+			ArrayList<PlayerPO> players=p.getPlayersByInitialName('A');
 			System.out.println(players.get(0).getName());
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
@@ -1257,6 +1258,48 @@ public class Player extends UnicastRemoteObject implements PlayerDataService {
 
 		return players;
 	}
+	
+/**
+ * 获得以某个首字母开头的球员
+ */
+	public ArrayList<PlayerPO> getPlayersByInitialName(char character)
+			throws RemoteException {
+		ArrayList<PlayerPO> players=new ArrayList<PlayerPO>();
+		PlayerPO playerPO;
+		try {
+			con = SqlManager.getConnection();
+			Statement sql = con.createStatement();
+        	ResultSet resultSet = sql.executeQuery("Select * from players where name like '"+character+"%' ");      	
+			while(resultSet.next()){
+				int id = resultSet.getInt("playerID");// 编号
+				String name = resultSet.getString("name");// 球员名称
+				int number = resultSet.getInt("number");// 球衣号码
+				String position = resultSet.getString("position");// 位置
+				String height = resultSet.getString("height");// 身高（英尺-英存）
+				int weight = resultSet.getInt("weight");// 体重（英镑）
+				String birth = resultSet.getString("birth");// （月 日，年）
+				int age = resultSet.getInt("age");// 年龄
+				int exp = resultSet.getInt("exp");// 球龄
+				String school = resultSet.getString("school");// 毕业学校
+
+				playerPO = new PlayerPO(id, name, number, position,
+						height, weight, birth, age, exp, school);
+				players.add(playerPO);
+			}
+			resultSet.close();
+			sql.close();
+			con.close();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return players;
+	}
+
 
 	private String getTodaySeason(){
 		String result;
@@ -1278,7 +1321,6 @@ public class Player extends UnicastRemoteObject implements PlayerDataService {
 		
 		return result;
 	}
-
 
 
 }
