@@ -1,5 +1,6 @@
 package businesslogic;
 
+import java.io.File;
 import java.rmi.Naming;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
@@ -211,30 +212,77 @@ public class Player implements PlayerBLService {
 		return result;
 	}
 
-	public ImageIcon getPlayerPortraitImage(String name) {
-		ImageIcon icon = null;
-		try {
-			icon = service.getPlayerPortraitImage(name);
-		} catch (RemoteException e) {
-			// TODO 自动生成的 catch 块
-			e.printStackTrace();
-		}
-		if (icon.equals(null)) {
-			System.out.println("Player.getPlayerPortraitImage()");
-		}
-		return icon;
+	 /** 获得球员的全身照路径
+	 * @param name球员名
+	 * @return
+	 * @throws RemoteException
+	 */
+	public String getActionPhotoPath(String name) {
+		return "src/data/players/action/" + name + ".png";
 	}
 
-	public ImageIcon getPlayerActionImage(String name) {
-		ImageIcon icon = null;
-		try {
-			icon = service.getPlayerActionImage(name);
-		} catch (RemoteException e) {
-			// TODO 自动生成的 catch 块
-			e.printStackTrace();
-		}
-		return icon;
+	/**
+	 * 获得球员的大头照路径
+	 * @param name球员名
+	 * @return
+	 * @throws RemoteException
+	 */
+	public String getPortraitPhotoPath(String name){
+		return "src/data/players/portrait/" + name + ".png";
 	}
+	
+	/**
+	 * 获得球员的全身照
+	 * @param name球员名
+	 * @return
+	 */
+	public ImageIcon getPlayerActionImage(String name) {
+		String address=getActionPhotoPath(name);
+		File file=new File(address);
+		if(!file.exists()){
+			address="src/data/players/lose.jpg";
+		}
+		ImageIcon imageIcon=new ImageIcon(address);
+		return imageIcon;
+	}
+
+     /**
+	 * 获得球员的大头照路径
+	 * @param name球员名
+	 * @return
+	 */
+	public ImageIcon getPlayerPortraitImage(String name) {
+		String address=getPortraitPhotoPath(name);
+		File file=new File(address);
+		if(!file.exists()){
+			address="src/data/players/lose.jpg";
+		}
+		ImageIcon imageIcon = new ImageIcon(address);
+		return imageIcon;
+	}
+
+	
+//	public ImageIcon getPlayerPortraitImage(String name) {
+//		ImageIcon icon = null;
+//		try {
+//			icon = service.getPlayerPortraitImage(name);
+//		} catch (RemoteException e) {
+//			// TODO 自动生成的 catch 块
+//			e.printStackTrace();
+//		}
+//		return icon;
+//	}
+//
+//	public ImageIcon getPlayerActionImage(String name) {
+//		ImageIcon icon = null;
+//		try {
+//			icon = service.getPlayerActionImage(name);
+//		} catch (RemoteException e) {
+//			// TODO 自动生成的 catch 块
+//			e.printStackTrace();
+//		}
+//		return icon;
+//	}
 
 	public static PlayerVO poTovo(PlayerPO po) {
 		int exp = po.getExp();
@@ -468,6 +516,7 @@ public class Player implements PlayerBLService {
 		return result;
 	}
 
+	
 
 	// /**
 	// * 将球员的位置由英文转为中文
