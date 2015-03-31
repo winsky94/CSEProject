@@ -162,10 +162,6 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener {
 			String sort=filterRankBox.getSelectedItem().toString();
 			ArrayList<PlayerVO> vlist;
 			String type=typeBox.getSelectedItem().toString();
-			System.out.println("PlayerRankPanel.mouseClicked() "+season);
-			System.out.println("PlayerRankPanel.mouseClicked() "+position);
-			System.out.println("PlayerRankPanel.mouseClicked() "+union);
-			System.out.println("PlayerRankPanel.mouseClicked() "+sort);
 			if(type.equals("赛季"))
 				vlist=player.selectPlayersBySeason(season, position, union, sort);
 			else
