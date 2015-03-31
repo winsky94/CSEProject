@@ -42,6 +42,36 @@ public class PlayerBaseInfoTableModel extends MyTableModel {
 	}
 	
 	
+	public void sortByCharacter(String character){
+		//没有符合条件的数据 暂时都未处理
+		//有bug此时传给界面渲染器的ImageIcon 应该变化 
+		ArrayList<PlayerVO> sortByC=new ArrayList<PlayerVO>();
+		ArrayList<ImageIcon> listimg=new ArrayList<ImageIcon>();
+		for(int i=0;i<playerlist.size();i++){
+			String name=playerlist.get(i).getName();
+			if(name.startsWith(character)){
+				sortByC.add(playerlist.get(i));
+				listimg.add(imgList.get(i));
+			}	
+		}
+		SortRefresh(sortByC, listimg);
+	}
+	
+	
+	
+	public void findByTeam(String tName){
+		// bug同上
+		ArrayList<PlayerVO> sortByC=new ArrayList<PlayerVO>();
+		ArrayList<ImageIcon> listimg=new ArrayList<ImageIcon>();
+		for(int i=0;i<playerlist.size();i++){
+			String name=playerlist.get(i).getTeamName();
+			if(name.equals(tName)){
+				sortByC.add(playerlist.get(i));
+				listimg.add(imgList.get(i));
+			}	
+		}
+		SortRefresh(sortByC, listimg);
+	}
 	public void Refresh(){
 		playerlist=player.getPlayerBaseInfo();
 		if(playerlist==null||playerlist.size()==0){
@@ -79,6 +109,11 @@ public class PlayerBaseInfoTableModel extends MyTableModel {
 			content.add(line);
 			
 		}
+		
+		
+	}
+	
+	public void SortRefresh(ArrayList<PlayerVO> list,ArrayList<ImageIcon> img){
 		
 		
 	}
