@@ -7,4 +7,5 @@ public interface Style {
 	final Color FOCUS_GREY=new Color(69, 69, 69);
 	final Color FOCUS_BLUE=new Color(70,146,216);
 	final Color DEEP_BLUE=new Color(6,73,130);
+	final Color WINNER_RED=new Color(169,11,51);
 }
