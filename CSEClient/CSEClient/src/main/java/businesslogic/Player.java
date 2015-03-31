@@ -349,7 +349,12 @@ public class Player implements PlayerBLService {
 			EN = "freeThrowHitRate";
 		} else if (CH.equals("两双")) {
 			EN = "doubleDoubleNum";
-		} else {
+		} else if (CH.equals("赛季")){
+			EN="season";
+		}else if(CH.equals("场均")){
+			EN="average";
+		}
+		else {
 			EN = CH;
 		}
 		return EN;
