@@ -106,12 +106,15 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener {
 		funcPnl.add(modeLbl);
 		// ----jsp--------------
 		table = new MySortableTable(ptm);
+		
 		jsp = new JScrollPane(table);
 		gbc.gridy = 2;
 		gbc.gridheight = 10;
 		gbc.weighty = 10;
 		gbl.setConstraints(jsp, gbc);
 		add(jsp);
+		
+		ptm.Refresh(typeBox.getSelectedItem().toString());
 	}
 
 	class MyJLabel extends JLabel {
