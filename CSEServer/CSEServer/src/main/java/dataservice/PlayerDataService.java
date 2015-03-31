@@ -58,8 +58,12 @@ public interface PlayerDataService extends Remote {
 
 	public ArrayList<PlayerPO> getBestImprovedPlayer(String column)
 			throws RemoteException;
+	
+	public ArrayList<PlayerPO> getPlayersByInitialName(char character)
+			throws RemoteException;
 
 	public ImageIcon getPlayerActionImage(String name) throws RemoteException;
 
 	public ImageIcon getPlayerPortraitImage(String name) throws RemoteException;
+	
 }
