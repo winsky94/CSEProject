@@ -113,7 +113,7 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener,ItemLi
 		modeLbl.addMouseListener(this);
 		funcPnl.add(modeLbl);
 		// ----jsp--------------
-		table = new MySortableTable(ptm);
+		table = new MySortableTable(ptm,0);
 
 		// table 渲染器，设置文字内容居中显示，设置背景色等
 		table.setSelectionBackground(new java.awt.Color(218, 112, 214));// 设置选择行的颜色——兰花紫
