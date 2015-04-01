@@ -61,29 +61,29 @@ public class MyTableCellRenderer extends DefaultTableCellRenderer {
 			boolean isSelected, boolean hasFocus, int row, int column) {
 		setHorizontalAlignment(SwingConstants.CENTER);
 		if (table.getModel().toString().contains("PlayerBaseInfoTableModel")) {
-			// 设置列宽自己设置
-			String columnName1 = table.getColumnName(0);
-			table.getColumn(columnName1).setPreferredWidth(50);
-			table.getColumn(columnName1).setMinWidth(50);
-			table.getColumn(columnName1).setMaxWidth(50);
-			// String columnName2 = table.getColumnName(1);
-			// table.getColumn(columnName2).setPreferredWidth(130);
-
-			// 设置每行第一列显示图片
-			if (column == 0) {
-				if (imageIcons.size() != 0) {// 防止不传图片直接显示表格的那种
-					ImageIcon icon = imageIcons.get(row);
-					ImageIcon icon2 = new ImageIcon(icon.getImage()
-							.getScaledInstance(
-									table.getColumn(table.getColumnName(0))
-											.getWidth(),
-									table.getRowHeight(row),
-									Image.SCALE_DEFAULT));
-					JLabel label = new JLabel(icon2);
-					label.setOpaque(false);
-					return label;
-				}
-			}
+			 // 设置列宽自己设置
+			 String columnName1 = table.getColumnName(0);
+			 table.getColumn(columnName1).setPreferredWidth(50);
+			 table.getColumn(columnName1).setMinWidth(50);
+			 table.getColumn(columnName1).setMaxWidth(50);
+			 // String columnName2 = table.getColumnName(1);
+			 // table.getColumn(columnName2).setPreferredWidth(130);
+			//
+			// // 设置每行第一列显示图片
+			// if (column == 0) {
+			// if (imageIcons.size() != 0) {// 防止不传图片直接显示表格的那种
+			// ImageIcon icon = imageIcons.get(row);
+			// ImageIcon icon2 = new ImageIcon(icon.getImage()
+			// .getScaledInstance(
+			// table.getColumn(table.getColumnName(0))
+			// .getWidth(),
+			// table.getRowHeight(row),
+			// Image.SCALE_DEFAULT));
+			// JLabel label = new JLabel(icon2);
+			// label.setOpaque(false);
+			// return label;
+			// }
+			// }
 
 		}
 
@@ -104,6 +104,34 @@ public class MyTableCellRenderer extends DefaultTableCellRenderer {
 			}
 		}
 
+		return super.getTableCellRendererComponent(table, value, isSelected,
+				hasFocus, row, column);
+	}
+
+	public Component setPlayerIcon(JTable table, Object value,
+			boolean isSelected, boolean hasFocus, int row, int column) {
+		// 设置列宽自己设置
+		String columnName1 = table.getColumnName(0);
+		table.getColumn(columnName1).setPreferredWidth(50);
+		table.getColumn(columnName1).setMinWidth(50);
+		table.getColumn(columnName1).setMaxWidth(50);
+		// String columnName2 = table.getColumnName(1);
+		// table.getColumn(columnName2).setPreferredWidth(130);
+
+		// 设置每行第一列显示图片
+		if (column == 0) {
+			if (imageIcons.size() != 0) {// 防止不传图片直接显示表格的那种
+				ImageIcon icon = imageIcons.get(row);
+				ImageIcon icon2 = new ImageIcon(icon.getImage()
+						.getScaledInstance(
+								table.getColumn(table.getColumnName(0))
+										.getWidth(), table.getRowHeight(row),
+								Image.SCALE_DEFAULT));
+				JLabel label = new JLabel(icon2);
+				label.setOpaque(false);
+				return label;
+			}
+		}
 		return super.getTableCellRendererComponent(table, value, isSelected,
 				hasFocus, row, column);
 	}
