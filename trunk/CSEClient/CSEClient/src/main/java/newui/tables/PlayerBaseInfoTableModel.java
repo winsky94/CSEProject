@@ -1,8 +1,10 @@
 package newui.tables;
 
 import java.util.ArrayList;
+import java.util.Vector;
 
 import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 
 import vo.PlayerVO;
 import businesslogic.Player;
@@ -36,6 +38,8 @@ public class PlayerBaseInfoTableModel extends MyTableModel {
 	public String getColumnName(int col) {
 		return head[col];
 	}
+	
+	
 
 	public static String[] getHead() {
 		return head;
@@ -97,6 +101,7 @@ public class PlayerBaseInfoTableModel extends MyTableModel {
 			String name=vo.getName();
 			ImageIcon tou=player.getPlayerPortraitImage(name);
 			imgList.add(tou);
+			JLabel touImg=new JLabel(tou);
 			line.add(tou);
 			line.add(name);
 			line.add(vo.getTeamName());
