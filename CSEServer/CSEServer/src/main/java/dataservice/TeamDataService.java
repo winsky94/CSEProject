@@ -42,4 +42,7 @@ public interface TeamDataService extends Remote {
 			String condition, String order) throws RemoteException;
 
 	public ImageIcon getTeamImage(String name) throws RemoteException;
+
+	public ArrayList<String> getPlayersByTeam(String teamAbLocation)
+			throws RemoteException;
 }
