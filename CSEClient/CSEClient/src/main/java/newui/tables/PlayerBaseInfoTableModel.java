@@ -9,6 +9,7 @@ import javax.swing.JTable;
 
 import vo.PlayerVO;
 import businesslogic.Player;
+import businesslogic.Team;
 import businesslogicservice.PlayerBLService;
 
 public class PlayerBaseInfoTableModel extends MyTableModel {
@@ -82,7 +83,8 @@ public class PlayerBaseInfoTableModel extends MyTableModel {
 		ArrayList<ImageIcon> listimg = new ArrayList<ImageIcon>();
 		for (int i = 0; i < playerlist.size(); i++) {
 			String name = playerlist.get(i).getTeamName();
-			if (name.equals(tName)) {
+			
+			if (name.contains(Team.changeTeamNameCHToEN(tName))) {
 				sortByC.add(playerlist.get(i));
 				listimg.add(imgList.get(i));
 			}
