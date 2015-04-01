@@ -1,63 +1,96 @@
 package newui.teamui;
 
-import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.GridLayout;
+import java.util.ArrayList;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 
 import newui.FatherPanel;
-import newui.TabbedPaneUI;
+import newui.teamui.details.TeamDetailHistoryPanel;
+import newui.teamui.details.TeamDetailInfoPanel;
+import newui.teamui.details.TeamDetailRecentPanel;
+import businesslogic.Team;
+import businesslogicservice.TeamBLService;
 
 public class TeamDetailPanel extends FatherPanel{
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	JPanel playerPnl,namePnl,tabPnl;
+	String nameCH,abbrName;
+	ArrayList<String> players;
+	ArrayList<JLabel> playerPortraits;
+	//-----------------------
+	JScrollPane playerJsp;
+	JPanel playerPnl;
 	JPanel infoPnl,recentPnl,historyPnl;
+	JTabbedPane tab;
 	Font font = new Font("微软雅黑", Font.PLAIN, 14);
-	public TeamDetailPanel(String name){
+	JLabel nameLbl;
+	TeamBLService team;
+	public TeamDetailPanel(String teamName){
+		team=new Team();
+		abbrName=Team.changeTeamNameCHToEN(teamName);
+		nameCH=teamName;
 		//----------------------
-		namePnl=new JPanel();
-		namePnl.setBackground(Color.black);
+		nameLbl=new JLabel(new ImageIcon("image/teamIcon/teamsPng150/"+abbrName+".png"));
 		gbc.gridx=0;
 		gbc.gridy=1;
-		gbc.gridwidth=3;
-		gbc.gridheight=3;
-		gbc.weightx=3;
-		gbc.weighty=30;
-		gbl.setConstraints(namePnl, gbc);
-		add(namePnl);
+		gbc.gridwidth=1;
+		gbc.gridheight=1;
+		gbc.weightx=1;
+		gbc.weighty=10;
+		gbl.setConstraints(nameLbl, gbc);
+		add(nameLbl);
 		//-----------------------
+		playerJsp=new JScrollPane();
+		playerJsp.setOpaque(false);
+		playerJsp.getViewport().setOpaque(false);
+		playerJsp.setBorder(null);
+		gbc.gridy=2;
+		gbc.gridheight=9;
+		gbc.weighty=90;
+		gbl.setConstraints(playerJsp, gbc);
+		add(playerJsp);
+		
+		//------显示全部球员大头-----
+		players=new ArrayList<String>(team.getPlayersByTeam(abbrName));
+		playerPortraits=new ArrayList<JLabel>(players.size());
 		playerPnl=new JPanel();
-		playerPnl.setBackground(Color.red);
-		gbc.gridy=4;
-		gbc.gridheight=7;
-		gbc.weighty=70;
-		gbl.setConstraints(playerPnl, gbc);
-		add(playerPnl);
+		playerPnl.setOpaque(false);
+		playerPnl.setLayout(new GridLayout(players.size(),1));
+		for(int i=0;i<players.size();i++){
+			JLabel temp=new JLabel(players.get(i),new ImageIcon("image/player/player46/"+players.get(i)+".png"),JLabel.LEFT);
+			playerPortraits.add(temp);
+			playerPnl.add(playerPortraits.get(i));
+		}
+		int height=46*players.size();
+		playerPnl.setPreferredSize(new Dimension(150,height));
+		playerJsp.getViewport().add(playerPnl);
 		//-----------------------
-		tabPnl=new JPanel();
-		gbc.gridx=3;
+		tab=new JTabbedPane();
+		gbc.gridx=1;
 		gbc.gridy=1;
 		gbc.gridwidth=7;
-		gbc.gridheight=1;
-		gbc.weightx=7;
-		gbc.weighty=10;
-		gbl.setConstraints(tabPnl, gbc);
-		add(tabPnl);
-		//-------------------------
-		infoPnl=new JPanel();
-		gbc.gridx=3;
-		gbc.gridy=1;
-		gbc.gridwidth=7;
-		gbc.gridheight=1;
-		gbc.weightx=7;
-		gbc.weighty=10;
-		gbl.setConstraints(tabPnl, gbc);
-		add(tabPnl);
+		gbc.gridheight=10;
+		gbc.weightx=9;
+		gbc.weighty=100;
+		gbl.setConstraints(tab, gbc);
+		add(tab);
+		//---------------------
+		infoPnl=new TeamDetailInfoPanel();
+		recentPnl=new TeamDetailRecentPanel();
+		historyPnl=new TeamDetailHistoryPanel();
+		tab.addTab("基本信息", infoPnl);
+		tab.addTab("近期动态", recentPnl);
+		tab.addTab("历史数据",historyPnl);
 	}
 	public static void main(String[] args) {
 		JFrame f=new JFrame();
