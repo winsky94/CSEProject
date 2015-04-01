@@ -333,7 +333,7 @@ public class Player implements PlayerBLService {
 			EN = "reboundNum";
 		} else if (CH.equals("助攻")) {
 			EN = "assistNum";
-		} else if (CH.equals("得分/篮板/助攻（加权比为1:1:1）")) {
+		} else if (CH.equals("得分/篮板/助攻(1:1:1)")) {
 			EN = "score_rebound_assist";
 		} else if (CH.equals("盖帽")) {
 			EN = "blockNum";
