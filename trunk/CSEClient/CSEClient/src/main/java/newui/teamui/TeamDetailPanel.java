@@ -1,8 +1,12 @@
 package newui.teamui;
 
+import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
@@ -13,6 +17,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 
 import newui.FatherPanel;
+import newui.Style;
 import newui.teamui.details.TeamDetailHistoryPanel;
 import newui.teamui.details.TeamDetailInfoPanel;
 import newui.teamui.details.TeamDetailRecentPanel;
@@ -67,7 +72,7 @@ public class TeamDetailPanel extends FatherPanel{
 		playerPnl.setOpaque(false);
 		playerPnl.setLayout(new GridLayout(players.size(),1));
 		for(int i=0;i<players.size();i++){
-			JLabel temp=new JLabel(players.get(i),new ImageIcon("image/player/player46/"+players.get(i)+".png"),JLabel.LEFT);
+			JLabel temp=new MyLabel(players.get(i),new ImageIcon("image/player/player46/"+players.get(i)+".png"),JLabel.LEFT);
 			playerPortraits.add(temp);
 			playerPnl.add(playerPortraits.get(i));
 		}
@@ -98,5 +103,45 @@ public class TeamDetailPanel extends FatherPanel{
 		f.setBounds(100,100,1000,600);
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		f.setVisible(true);
+	}
+	class MyLabel extends JLabel{
+
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+		public MyLabel(String t,ImageIcon i,int a){
+			super(t,i,a);
+			setFont(font);
+			setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+			addMouseListener(new MouseListener() {
+				
+				public void mouseReleased(MouseEvent e) {
+					// TODO Auto-generated method stub
+					
+				}
+				
+				public void mousePressed(MouseEvent e) {
+					// TODO Auto-generated method stub
+					
+				}
+				
+				public void mouseExited(MouseEvent e) {
+					setForeground(Color.black);
+					
+				}
+				
+				public void mouseEntered(MouseEvent e) {
+					setForeground(Style.FOCUS_BLUE);
+					
+				}
+				
+				public void mouseClicked(MouseEvent e) {
+					// TODO Auto-generated method stub
+					
+				}
+			});
+		}
+		
 	}
 }
