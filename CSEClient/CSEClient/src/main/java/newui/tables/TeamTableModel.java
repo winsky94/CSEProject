@@ -25,10 +25,10 @@ public class TeamTableModel extends MyTableModel {
 			"100%", "1", "100%", "1", "0", "0", "100", "100%" };
 
 	public TeamTableModel() {
-		ArrayList<Object> e = new ArrayList<Object>();
-		for (Object str : example)
-			e.add(str);
-		content.add(e);
+//		ArrayList<Object> e = new ArrayList<Object>();
+//		for (Object str : example)
+//			e.add(str);
+//		content.add(e);
 	}
 
 	public int getRowCount() {
