@@ -11,6 +11,7 @@ import javax.swing.JTable;
 
 import vo.PlayerVO;
 import businesslogic.Player;
+import businesslogicservice.PlayerBLService;
 
 public class PlayerBaseInfoTableModel extends MyTableModel {
 
@@ -19,7 +20,7 @@ public class PlayerBaseInfoTableModel extends MyTableModel {
 	static String[] head = { "(头像)", "球员名", "所属球队", "位置", "身高", "体重","生日","年龄" ,"经验" };
 	
 	ArrayList<ArrayList<Object>> content = new ArrayList<ArrayList<Object>>();
-	private Player player;
+	private PlayerBLService player;
 	private ArrayList<ImageIcon> imgList=new ArrayList<ImageIcon>();
 	private ArrayList<PlayerVO> playerlist;
 	private JTable currentTable;
@@ -143,7 +144,31 @@ public class PlayerBaseInfoTableModel extends MyTableModel {
 	}
 	
 	public void SortRefresh(ArrayList<PlayerVO> list,ArrayList<ImageIcon> img){
-		
+		content.clear();
+		imgList.clear();
+		for(PlayerVO vo:list){
+			int i=0;
+			ArrayList<Object> line=new ArrayList<Object>();
+			ImageIcon icon2 = new ImageIcon(img.get(i).getImage()
+					.getScaledInstance(
+							currentTable.getColumn(currentTable.getColumnName(0))
+									.getWidth(),40
+									/*currentTable.getRowHeight(i)*/,
+							Image.SCALE_DEFAULT));
+			
+			line.add(icon2);
+			line.add(vo.getName());
+			line.add(vo.getTeamName());
+			line.add(vo.getPosition());
+			line.add(vo.getHeight());
+			line.add(vo.getWeight());
+			line.add(vo.getBirth());
+			line.add(vo.getAge());
+			line.add(vo.getExp());
+			content.add(line);
+			i++;
+			
+		}
 		
 	}
 	
