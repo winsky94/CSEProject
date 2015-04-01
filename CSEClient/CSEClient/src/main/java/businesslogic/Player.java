@@ -300,7 +300,7 @@ public class Player implements PlayerBLService {
 				po.getPosition(), po.getHeight(), po.getWeight(),
 				po.getBirth(), po.getAge(), expString, po.getSchool(),
 				po.getTeamName(), po.getPlayedGames(), po.getGameStartingNum(),
-				po.getReboundNum(), po.getAssistNum(), po.getPresentTime(),
+				po.getReboundNum(), po.getAssistNum(), changeSecondToMinute(po.getPresentTime()),
 				po.getShootHitRate(), po.getThreeHitRate(),
 				po.getFreeThrowHitRate(), po.getOffenNum(), po.getDefenNum(),
 				po.getStealNum(), po.getBlockNum(), po.getTurnOverNum(),
@@ -420,6 +420,21 @@ public class Player implements PlayerBLService {
 			EN = CH;
 		}
 		return EN;
+	}
+	
+	/**
+	 * 将 以秒为单位的在场时间 改为 以分钟为单位的在场时间
+	 * 
+	 * @param second 秒
+	 * @return 对应的分钟
+	 */
+	private static String changeSecondToMinute(double second){
+		int kansecond=(int)second;
+		String result="";
+		int minute=kansecond/60;
+		int thesecond=kansecond%60;
+		result=minute+":"+thesecond;
+		return result;
 	}
 
 	public ArrayList<PlayerVO> getDayHotPlayer(String column)
