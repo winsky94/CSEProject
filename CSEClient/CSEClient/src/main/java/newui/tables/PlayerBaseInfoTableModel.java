@@ -1,10 +1,13 @@
 package newui.tables;
 
+import java.awt.Image;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Vector;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.JTable;
 
 import vo.PlayerVO;
 import businesslogic.Player;
@@ -14,14 +17,27 @@ public class PlayerBaseInfoTableModel extends MyTableModel {
 	
 	private static final long serialVersionUID = 1L;
 	static String[] head = { "(头像)", "球员名", "所属球队", "位置", "身高", "体重","生日","年龄" ,"经验" };
+	
 	ArrayList<ArrayList<Object>> content = new ArrayList<ArrayList<Object>>();
 	private Player player;
 	private ArrayList<ImageIcon> imgList=new ArrayList<ImageIcon>();
 	private ArrayList<PlayerVO> playerlist;
+	private JTable currentTable;
 	public PlayerBaseInfoTableModel() {
+		
 		player=new Player();
 		playerlist=new ArrayList<PlayerVO>();
 	}
+	public void setCurrentTable(JTable t){
+		currentTable=t;
+	}
+	private List<Class> colTypes = new ArrayList<Class>();
+	
+	@Override
+    public Class getColumnClass(int c) {
+        return content.get(0).get(c).getClass();
+    }
+   
 
 	public int getRowCount() {
 		return content.size();
@@ -97,11 +113,21 @@ public class PlayerBaseInfoTableModel extends MyTableModel {
 		imgList.clear();
 		
 		for(PlayerVO vo:list){
+			int i=0;
 			ArrayList<Object> line=new ArrayList<Object>();
 			String name=vo.getName();
 			ImageIcon tou=player.getPlayerPortraitImage(name);
 			imgList.add(tou);
 			JLabel touImg=new JLabel(tou);
+		//	touImg.setSize(50, 50);
+			tou .setImage(tou.getImage()
+					.getScaledInstance(
+							currentTable.getColumn(currentTable.getColumnName(0))
+									.getWidth(),
+									currentTable.getRowHeight(i),
+					Image.SCALE_DEFAULT));
+			
+
 			line.add(tou);
 			line.add(name);
 			line.add(vo.getTeamName());
@@ -112,6 +138,7 @@ public class PlayerBaseInfoTableModel extends MyTableModel {
 			line.add(vo.getAge());
 			line.add(vo.getExp());
 			content.add(line);
+			i++;
 			
 		}
 		

@@ -46,6 +46,7 @@ public class TeamWindow extends JWindow implements MouseListener {
 		pnl.add(eastPnl);
 
 	}
+	
 
 	public static TeamWindow getInstance(int x, int y) {
 		if (instance == null)

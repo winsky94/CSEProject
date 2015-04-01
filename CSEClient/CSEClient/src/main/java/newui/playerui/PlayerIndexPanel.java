@@ -89,11 +89,12 @@ public class PlayerIndexPanel extends FatherPanel implements MouseListener {
 		table.getTableHeader().setFont(new Font("微软雅黑", 0, 14));
 		table.getTableHeader().setBackground(new Color(211, 211, 211));
 		DefaultTableCellRenderer tcr = new MyTableCellRenderer(pitm.getImgList());
-		for (int i = 0; i < table.getColumnCount(); i++) {
+		for (int i = 1; i < table.getColumnCount(); i++) {
 			table.getColumn(table.getColumnName(i)).setCellRenderer(tcr);
 		}
 		jsp = new JScrollPane(table);
 		// 刷新
+		pitm.setCurrentTable(table);
 		pitm.Refresh();
 		table.revalidate();
 		gbc.gridy = 2;

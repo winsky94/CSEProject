@@ -32,6 +32,7 @@ public class TitleBar extends JPanel implements MouseListener {
 	MyButton indexBtn, teamBtn, playerBtn, matchBtn, hotBtn;
 	JTextField searchFld;
 	JLabel searchBtn;
+	int startX,startY;
 
 	public TitleBar() {
 		setBackground(Style.DEEP_BLUE);
@@ -54,6 +55,8 @@ public class TitleBar extends JPanel implements MouseListener {
 		gbc.gridx = 1;
 		gbl.setConstraints(teamBtn, gbc);
 		add(teamBtn);
+		startX=teamBtn.getX()+teamBtn.getWidth()/2;
+		startY=teamBtn.getY()+teamBtn.getHeight();
 		// ----------------------------
 		playerBtn = new MyButton("球员");
 		gbc.gridx = 2;
@@ -165,8 +168,10 @@ public class TitleBar extends JPanel implements MouseListener {
 	public void mouseExited(MouseEvent e) {
 		if (e.getSource() == indexBtn)
 			indexBtn.setBackground(Style.DEEP_BLUE);
-		if (e.getSource() == teamBtn)
+		if (e.getSource() == teamBtn){
 			teamBtn.setBackground(Style.DEEP_BLUE);
+			TeamWindow.getInstance(e.getXOnScreen(), e.getYOnScreen()).setVisible(false);
+		}
 		if (e.getSource() == playerBtn)
 			playerBtn.setBackground(Style.DEEP_BLUE);
 		if (e.getSource() == matchBtn)
