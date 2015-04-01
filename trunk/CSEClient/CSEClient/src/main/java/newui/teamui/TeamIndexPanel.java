@@ -17,17 +17,18 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 
-import businesslogic.Team;
-import businesslogicservice.TeamBLService;
-import vo.TeamVO;
 import newui.FatherPanel;
 import newui.Style;
 import newui.tables.MySortableTable;
 import newui.tables.MyTableCellRenderer;
 import newui.tables.RowHeaderTable;
 import newui.tables.TeamTableModel;
+import vo.TeamVO;
+import businesslogic.Team;
+import businesslogicservice.TeamBLService;
 
-public class TeamIndexPanel extends FatherPanel implements MouseListener,ItemListener {
+public class TeamIndexPanel extends FatherPanel implements MouseListener,
+		ItemListener {
 	/**
 	 * 
 	 */
@@ -41,11 +42,9 @@ public class TeamIndexPanel extends FatherPanel implements MouseListener,ItemLis
 	JLabel refreshLbl;
 	JComboBox<String> seasonBox, typeBox;
 	Font font = new Font("微软雅黑", Font.PLAIN, 13);
-	TeamBLService team;
- 
+
 	public TeamIndexPanel() {
 		super();
-		team=new Team();
 		// ------funcPnl--------
 		funcPnl = new JPanel();
 		funcPnl.setBackground(Style.BACK_GREY);
@@ -60,12 +59,13 @@ public class TeamIndexPanel extends FatherPanel implements MouseListener,ItemLis
 		// 暂时没有bl方法
 		String[] seasonBoxText = { "13-14" };
 		seasonBox = new MyComboBox(seasonBoxText);
+		seasonBox.addItemListener(this);
 		funcPnl.add(seasonBox);
 		funcPnl.add(new JLabel("       "));
 		// ----DataType---------
 		JLabel typeLbl = new MyJLabel("数据类型：");
 		funcPnl.add(typeLbl);
-		String[] typeText = { "赛季", "场均" };
+		String[] typeText = { "场均", "赛季" };
 		typeBox = new MyComboBox(typeText);
 		typeBox.addItemListener(this);
 		funcPnl.add(typeBox);
@@ -76,7 +76,7 @@ public class TeamIndexPanel extends FatherPanel implements MouseListener,ItemLis
 		funcPnl.add(refreshLbl);
 		// -----table-----------
 		ttm = new TeamTableModel();
-		table = new MySortableTable(ttm,1);
+		table = new MySortableTable(ttm);
 		// table 渲染器，设置文字内容居中显示，设置背景色等
 		table.setSelectionBackground(new java.awt.Color(218, 112, 214));// 设置选择行的颜色——兰花紫
 		table.setFont(new Font("微软雅黑", 0, 12));
@@ -174,22 +174,22 @@ public class TeamIndexPanel extends FatherPanel implements MouseListener,ItemLis
 			setFont(font);
 		}
 	}
-	
-	 public void itemStateChanged(ItemEvent e)
-	 {
-	       if(e.getStateChange() == ItemEvent.SELECTED)
-	             {
-	    	         String season = seasonBox.getSelectedItem().toString();
-	    	         ArrayList<TeamVO> vlist;
-	                 String s=(String)typeBox.getSelectedItem();
-	                 if (s.equals("赛季"))
-	     				vlist = team.getTeamSeasonInfo(season);
-	     			else
-	     				vlist = team.getTeamAverageInfo(season);
-	     			// vlist.size()==0显示没有符合条件的球员
-	     			if (vlist != null)
-	     				ttm.refreshContent(vlist);
-	     			table.revalidate();
-	             }
-	}  
+
+	public void itemStateChanged(ItemEvent e) {
+		// TODO 自动生成的方法存根
+		if (e.getStateChange() == ItemEvent.SELECTED) {
+			String season = seasonBox.getSelectedItem().toString();
+			ArrayList<TeamVO> vlist;
+			String s = (String) typeBox.getSelectedItem();
+			TeamBLService team = new Team();
+			if (s.equals("赛季"))
+				vlist = team.getTeamSeasonInfo(season);
+			else
+				vlist = team.getTeamAverageInfo(season);
+			// vlist.size()==0显示没有符合条件的球员
+			if (vlist != null)
+				ttm.refreshContent(vlist);
+			table.revalidate();
+		}
+	}
 }
