@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.FlowLayout;
 import java.awt.Font;
-import java.awt.GridBagConstraints;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
@@ -17,15 +16,15 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 
-import vo.PlayerVO;
-import businesslogic.Player;
 import newui.FatherPanel;
 import newui.Style;
 import newui.mainui.MainFrame;
-import newui.playerui.PlayerIndexPanel.MyLabel;
 import newui.tables.MySortableTable;
 import newui.tables.MyTableCellRenderer;
 import newui.tables.PlayerTableModel;
+import newui.tables.RowHeaderTable;
+import vo.PlayerVO;
+import businesslogic.Player;
 
 public class PlayerRankPanel extends FatherPanel implements MouseListener {
 
@@ -131,6 +130,8 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener {
 		ptm.Refresh(typeBox.getSelectedItem().toString());
 		MyTableCellRenderer.adjustTableColumnWidths(table);
 		table.revalidate();
+		// 设置显示行号
+		jsp.setRowHeaderView(new RowHeaderTable(table, 30));
 	}
 
 	class MyJLabel extends JLabel {
