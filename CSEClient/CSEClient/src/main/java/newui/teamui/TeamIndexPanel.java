@@ -65,7 +65,7 @@ public class TeamIndexPanel extends FatherPanel implements MouseListener,
 		// ----DataType---------
 		JLabel typeLbl = new MyJLabel("数据类型：");
 		funcPnl.add(typeLbl);
-		String[] typeText = { "场均", "赛季" };
+		String[] typeText = { "赛季", "场均" };
 		typeBox = new MyComboBox(typeText);
 		typeBox.addItemListener(this);
 		funcPnl.add(typeBox);
