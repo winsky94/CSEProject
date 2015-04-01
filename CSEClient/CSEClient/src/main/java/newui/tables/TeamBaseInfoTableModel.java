@@ -6,6 +6,7 @@ import javax.swing.ImageIcon;
 
 import vo.TeamVO;
 import businesslogic.Team;
+import businesslogicservice.TeamBLService;
 
 public class TeamBaseInfoTableModel extends MyTableModel{
 
@@ -15,7 +16,7 @@ public class TeamBaseInfoTableModel extends MyTableModel{
 	private static final long serialVersionUID = 1L;
 	static String[] head ={"(logo)","球队","缩写","联盟","分区","主场","成立时间"};
 	ArrayList<ArrayList<Object>> content = new ArrayList<ArrayList<Object>>();
-	private Team team;
+	private TeamBLService team;
 	private ArrayList<ImageIcon> teamIcon;
 	public TeamBaseInfoTableModel(){
 		team=new Team();
