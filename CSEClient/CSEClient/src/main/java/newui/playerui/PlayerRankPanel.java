@@ -1,6 +1,7 @@
 package newui.playerui;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Cursor;
 import java.awt.FlowLayout;
 import java.awt.Font;
@@ -12,9 +13,12 @@ import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.ListCellRenderer;
+import javax.swing.plaf.basic.BasicComboBoxRenderer;
 
 import vo.PlayerVO;
 import businesslogic.Player;
@@ -71,6 +75,7 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener {
 		funcPnl.add(partitionLbl);
 		partitionBox = new MyComboBox(partitionText);
 		partitionBox.setMaximumRowCount(10);
+		partitionBox.setRenderer(new MyRenderer());
 		funcPnl.add(partitionBox);
 		// ----排序条件--------
 		JLabel filterRankLbl = new MyJLabel("排序条件：");
@@ -93,7 +98,7 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener {
 		// ----DataType---------
 		JLabel typeLbl = new MyJLabel("数据类型：");
 		funcPnl.add(typeLbl);
-		String[] typeText = { "场均", "赛季" };
+		String[] typeText = { "赛季", "场均" };
 		typeBox = new MyComboBox(typeText);
 		funcPnl.add(typeBox);
 		funcPnl.add(new JLabel("       "));
@@ -220,4 +225,48 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener {
 			modeLbl.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
 		}
 	}
+	
+	class MyRenderer extends JLabel implements ListCellRenderer {
+
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+
+		public Component getListCellRendererComponent(JList list, Object value,
+				int index, boolean isSelected, boolean cellHasFocus) {
+			if (value != null) {
+				setText(value.toString());
+			}
+			if ((value == "西部球队") || (value == "东部球队")) {
+				this.setFont(new Font("微软雅黑", Font.BOLD, 15));
+			} else
+				this.setFont(font);
+
+			return this;
+		}
+
+	}
+	
+	public class ColorComboBoxRenderer extends BasicComboBoxRenderer {  
+		  
+	    @Override  
+	    public Component getListCellRendererComponent(JList list, Object value,  
+	            int index, boolean isSelected, boolean cellHasFocus) {  
+	        // TODO Auto-generated method stub  
+	  
+	        Component c = super.getListCellRendererComponent(list, value, index,  
+	                isSelected, cellHasFocus);  
+	  
+	        if (value instanceof Integer) {  
+	            int i = ((Integer) value).intValue();  
+	  
+	            if (i ==1 ||i==5) {  
+	                c.setBackground(Color.YELLOW);  
+	                c.setSize(20, 20);
+	            }  
+	        }  
+	        return c;  
+	    }  
+	}  
 }
