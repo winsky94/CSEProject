@@ -14,21 +14,21 @@ public class TeamPO implements Serializable {
 	private int setUpTime; // 建立时间
 
 	private int matchesNum; // 比赛场数
-	private int shootHitNum; // 投篮命中数
-	private int shootAttemptNum; // 投篮出手次数
-	private int threeHitNum; // 三分命中数
-	private int threeAttemptNum; // 三分出手数
-	private int freeThrowHitNum; // 罚球命中数
-	private int freeThrowAttemptNum; // 罚球出手数
-	private int offenReboundNum; // 进攻篮板数
-	private int defenReboundNum; // 防守篮板数
-	private int reboundNum;// 篮板数
-	private int assistNum;// 助攻数
-	private int stealNum;// 抢断数
-	private int blockNum;// 盖帽数
-	private int turnOverNum;// 失误数
-	private int foulNum;// 犯规数
-	private int score;// 比赛得分
+	private double shootHitNum; // 投篮命中数
+	private double shootAttemptNum; // 投篮出手次数
+	private double threeHitNum; // 三分命中数
+	private double threeAttemptNum; // 三分出手数
+	private double freeThrowHitNum; // 罚球命中数
+	private double freeThrowAttemptNum; // 罚球出手数
+	private double offenReboundNum; // 进攻篮板数
+	private double defenReboundNum; // 防守篮板数
+	private double reboundNum;// 篮板数
+	private double assistNum;// 助攻数
+	private double stealNum;// 抢断数
+	private double blockNum;// 盖帽数
+	private double turnOverNum;// 失误数
+	private double foulNum;// 犯规数
+	private double score;// 比赛得分
 	private double shootHitRate;// 投篮命中率
 	private double threeHitRate;// 三分命中率
 	private double freeThrowHitRate;// 罚球命中率
@@ -54,11 +54,12 @@ public class TeamPO implements Serializable {
 		this.setUpTime = setUpTime;
 	}
 
-	public TeamPO(String abLocation, int matchesNum, int shootHitNum,
-			int shootAttemptNum, int threeHitNum, int threeAttemptNum,
-			int freeThrowHitNum, int freeThrowAttemptNum, int offenReboundNum,
-			int defenReboundNum, int reboundNum, int assistNum, int stealNum,
-			int blockNum, int turnOverNum, int foulNum, int score,
+	public TeamPO(String abLocation, int matchesNum, double shootHitNum,
+			double shootAttemptNum, double threeHitNum, double threeAttemptNum,
+			double freeThrowHitNum, double freeThrowAttemptNum,
+			double offenReboundNum, double defenReboundNum, double reboundNum,
+			double assistNum, double stealNum, double blockNum,
+			double turnOverNum, double foulNum, double score,
 			double shootHitRate, double threeHitRate, double freeThrowHitRate,
 			double winRate, double offenRound, double offenEfficiency,
 			double defenEfficiency, double offenReboundEfficiency,
@@ -103,12 +104,12 @@ public class TeamPO implements Serializable {
 		return teamName;
 	}
 
-	public String getLocation() {
-		return location;
-	}
-
 	public String getAbLocation() {
 		return abLocation;
+	}
+
+	public String getLocation() {
+		return location;
 	}
 
 	public String getConference() {
@@ -131,36 +132,76 @@ public class TeamPO implements Serializable {
 		return matchesNum;
 	}
 
-	public int getShootHitNum() {
+	public double getShootHitNum() {
 		return shootHitNum;
 	}
 
-	public int getShootAttemptNum() {
+	public double getShootAttemptNum() {
 		return shootAttemptNum;
 	}
 
-	public int getThreeHitNum() {
+	public double getThreeHitNum() {
 		return threeHitNum;
 	}
 
-	public int getThreeAttemptNum() {
+	public double getThreeAttemptNum() {
 		return threeAttemptNum;
 	}
 
-	public int getFreeThrowHitNum() {
+	public double getFreeThrowHitNum() {
 		return freeThrowHitNum;
 	}
 
-	public int getFreeThrowAttemptNum() {
+	public double getFreeThrowAttemptNum() {
 		return freeThrowAttemptNum;
 	}
 
-	public int getOffenReboundNum() {
+	public double getOffenReboundNum() {
 		return offenReboundNum;
 	}
 
-	public int getDefenReboundNum() {
+	public double getDefenReboundNum() {
 		return defenReboundNum;
+	}
+
+	public double getReboundNum() {
+		return reboundNum;
+	}
+
+	public double getAssistNum() {
+		return assistNum;
+	}
+
+	public double getStealNum() {
+		return stealNum;
+	}
+
+	public double getBlockNum() {
+		return blockNum;
+	}
+
+	public double getTurnOverNum() {
+		return turnOverNum;
+	}
+
+	public double getFoulNum() {
+		return foulNum;
+	}
+
+	public double getScore() {
+		return score;
+	}
+
+	public double getShootHitRate() {
+		return shootHitRate;
+	}
+
+	public double getThreeHitRate() {
+		return threeHitRate;
+	}
+
+	public double getFreeThrowHitRate() {
+		return freeThrowHitRate;
 	}
 
 	public double getWinRate() {
@@ -195,46 +236,6 @@ public class TeamPO implements Serializable {
 		return assistRate;
 	}
 
-	public int getReboundNum() {
-		return reboundNum;
-	}
-
-	public int getAssistNum() {
-		return assistNum;
-	}
-
-	public double getShootHitRate() {
-		return shootHitRate;
-	}
-
-	public double getThreeHitRate() {
-		return threeHitRate;
-	}
-
-	public double getFreeThrowHitRate() {
-		return freeThrowHitRate;
-	}
-
-	public int getStealNum() {
-		return stealNum;
-	}
-
-	public int getBlockNum() {
-		return blockNum;
-	}
-
-	public int getTurnOverNum() {
-		return turnOverNum;
-	}
-
-	public int getFoulNum() {
-		return foulNum;
-	}
-
-	public int getScore() {
-		return score;
-	}
-
 	public void setId(int id) {
 		this.id = id;
 	}
@@ -243,12 +244,12 @@ public class TeamPO implements Serializable {
 		this.teamName = teamName;
 	}
 
-	public void setLocation(String location) {
-		this.location = location;
-	}
-
 	public void setAbLocation(String abLocation) {
 		this.abLocation = abLocation;
+	}
+
+	public void setLocation(String location) {
+		this.location = location;
 	}
 
 	public void setConference(String conference) {
@@ -271,36 +272,76 @@ public class TeamPO implements Serializable {
 		this.matchesNum = matchesNum;
 	}
 
-	public void setShootHitNum(int shootHitNum) {
+	public void setShootHitNum(double shootHitNum) {
 		this.shootHitNum = shootHitNum;
 	}
 
-	public void setShootAttemptNum(int shootAttemptNum) {
+	public void setShootAttemptNum(double shootAttemptNum) {
 		this.shootAttemptNum = shootAttemptNum;
 	}
 
-	public void setThreeHitNum(int threeHitNum) {
+	public void setThreeHitNum(double threeHitNum) {
 		this.threeHitNum = threeHitNum;
 	}
 
-	public void setThreeAttemptNum(int threeAttemptNum) {
+	public void setThreeAttemptNum(double threeAttemptNum) {
 		this.threeAttemptNum = threeAttemptNum;
 	}
 
-	public void setFreeThrowHitNum(int freeThrowHitNum) {
+	public void setFreeThrowHitNum(double freeThrowHitNum) {
 		this.freeThrowHitNum = freeThrowHitNum;
 	}
 
-	public void setFreeThrowAttemptNum(int freeThrowAttemptNum) {
+	public void setFreeThrowAttemptNum(double freeThrowAttemptNum) {
 		this.freeThrowAttemptNum = freeThrowAttemptNum;
 	}
 
-	public void setOffenReboundNum(int offenReboundNum) {
+	public void setOffenReboundNum(double offenReboundNum) {
 		this.offenReboundNum = offenReboundNum;
 	}
 
-	public void setDefenReboundNum(int defenReboundNum) {
+	public void setDefenReboundNum(double defenReboundNum) {
 		this.defenReboundNum = defenReboundNum;
+	}
+
+	public void setReboundNum(double reboundNum) {
+		this.reboundNum = reboundNum;
+	}
+
+	public void setAssistNum(double assistNum) {
+		this.assistNum = assistNum;
+	}
+
+	public void setStealNum(double stealNum) {
+		this.stealNum = stealNum;
+	}
+
+	public void setBlockNum(double blockNum) {
+		this.blockNum = blockNum;
+	}
+
+	public void setTurnOverNum(double turnOverNum) {
+		this.turnOverNum = turnOverNum;
+	}
+
+	public void setFoulNum(double foulNum) {
+		this.foulNum = foulNum;
+	}
+
+	public void setScore(double score) {
+		this.score = score;
+	}
+
+	public void setShootHitRate(double shootHitRate) {
+		this.shootHitRate = shootHitRate;
+	}
+
+	public void setThreeHitRate(double threeHitRate) {
+		this.threeHitRate = threeHitRate;
+	}
+
+	public void setFreeThrowHitRate(double freeThrowHitRate) {
+		this.freeThrowHitRate = freeThrowHitRate;
 	}
 
 	public void setWinRate(double winRate) {
@@ -335,43 +376,4 @@ public class TeamPO implements Serializable {
 		this.assistRate = assistRate;
 	}
 
-	public void setReboundNum(int reboundNum) {
-		this.reboundNum = reboundNum;
-	}
-
-	public void setAssistNum(int assistNum) {
-		this.assistNum = assistNum;
-	}
-
-	public void setShootHitRate(double shootHitRate) {
-		this.shootHitRate = shootHitRate;
-	}
-
-	public void setThreeHitRate(double threeHitRate) {
-		this.threeHitRate = threeHitRate;
-	}
-
-	public void setFreeThrowHitRate(double freeThrowHitRate) {
-		this.freeThrowHitRate = freeThrowHitRate;
-	}
-
-	public void setStealNum(int stealNum) {
-		this.stealNum = stealNum;
-	}
-
-	public void setBlockNum(int blockNum) {
-		this.blockNum = blockNum;
-	}
-
-	public void setTurnOverNum(int turnOverNum) {
-		this.turnOverNum = turnOverNum;
-	}
-
-	public void setFoulNum(int foulNum) {
-		this.foulNum = foulNum;
-	}
-
-	public void setScore(int score) {
-		this.score = score;
-	}
 }
