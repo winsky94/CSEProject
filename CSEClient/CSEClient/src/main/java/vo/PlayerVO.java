@@ -1,33 +1,33 @@
 package vo;
 
 public class PlayerVO {
-	private int id;// 编号
+	private double id;// 编号
 	private String name;// 球员名称
-	private int number;// 球衣号码
+	private double number;// 球衣号码
 	private String position;// 位置
 	private String height;// 身高（英尺-英存）
-	private int weight;// 体重（英镑）
+	private double weight;// 体重（英镑）
 	private String birth;// （月 日，年）
-	private int age;// 年龄
+	private double age;// 年龄
 	private String exp;// 球龄
 	private String school;// 毕业学校
 
 	private String teamName;// 所属球队
-	private int playedGames;// 参赛场数
-	private int gameStartingNum;// 先发场数
-	private int reboundNum;// 篮板数
-	private int assistNum;// 助攻数
+	private double playedGames;// 参赛场数
+	private double gameStartingNum;// 先发场数
+	private double reboundNum;// 篮板数
+	private double assistNum;// 助攻数
 	private String presentTime;// 在场时间
 	private double shootHitRate;// 投篮命中率
 	private double threeHitRate;// 三分命中率
 	private double freeThrowHitRate;// 罚球命中率
-	private int offenNum;// 进攻数
-	private int defenNum;// 防守数
-	private int stealNum;// 抢断数
-	private int blockNum;// 盖帽数
-	private int turnOverNum;// 失误数
-	private int foulNum;// 犯规数
-	private int score;// 得分
+	private double offenNum;// 进攻数
+	private double defenNum;// 防守数
+	private double stealNum;// 抢断数
+	private double blockNum;// 盖帽数
+	private double turnOverNum;// 失误数
+	private double foulNum;// 犯规数
+	private double score;// 得分
 	private double efficiency;// 效率
 	private double recentFiveMatchesScoreUpRate;// 近五场得分提升率
 	private double recentFiveMatchesReboundUpRate;// 近五场篮板提升率
@@ -43,10 +43,10 @@ public class PlayerVO {
 	private double turnOverRate;// 失误率
 	private double usageRate;// 使用率
 	private double score_rebound_assist;// 得分/篮板/助攻
-	private int doubleDoubleNum;// 两双
+	private double doubleDoubleNum;// 两双
 
-	public PlayerVO(int id, String name, int number, String position,
-			String height, int weight, String birth, int age, String exp,
+	public PlayerVO(double id, String name, double number, String position,
+			String height, double weight, String birth, double age, String exp,
 			String school) {
 		this.id = id;
 		this.name = name;
@@ -60,20 +60,21 @@ public class PlayerVO {
 		this.school = school;
 	}
 
-	public PlayerVO(int id, String name, int number, String position,
-			String height, int weight, String birth, int age, String exp,
-			String school, String teamName, int playedGames,
-			int gameStartingNum, int reboundNum, int assistNum,
+	public PlayerVO(double id, String name, double number, String position,
+			String height, double weight, String birth, double age, String exp,
+			String school, String teamName, double playedGames,
+			double gameStartingNum, double reboundNum, double assistNum,
 			String presentTime, double shootHitRate, double threeHitRate,
-			double freeThrowHitRate, int offenNum, int defenNum, int stealNum,
-			int blockNum, int turnOverNum, int foulNum, int score,
-			double efficiency, double recentFiveMatchesScoreUpRate,
+			double freeThrowHitRate, double offenNum, double defenNum,
+			double stealNum, double blockNum, double turnOverNum,
+			double foulNum, double score, double efficiency,
+			double recentFiveMatchesScoreUpRate,
 			double recentFiveMatchesReboundUpRate, double gmScEfficiencyValue,
 			double trueHitRate, double shootHitEfficiency, double reboundRate,
 			double offenReboundRate, double defenReboundRate,
 			double assistRate, double stealRate, double blockRate,
 			double turnOverRate, double usageRate, double score_rebound_assist,
-			int doubleDoubleNum) {
+			double doubleDoubleNum) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -119,7 +120,7 @@ public class PlayerVO {
 		this.doubleDoubleNum = doubleDoubleNum;
 	}
 
-	public int getId() {
+	public double getId() {
 		return id;
 	}
 
@@ -127,7 +128,7 @@ public class PlayerVO {
 		return name;
 	}
 
-	public int getNumber() {
+	public double getNumber() {
 		return number;
 	}
 
@@ -139,7 +140,7 @@ public class PlayerVO {
 		return height;
 	}
 
-	public int getWeight() {
+	public double getWeight() {
 		return weight;
 	}
 
@@ -147,7 +148,7 @@ public class PlayerVO {
 		return birth;
 	}
 
-	public int getAge() {
+	public double getAge() {
 		return age;
 	}
 
@@ -163,19 +164,19 @@ public class PlayerVO {
 		return teamName;
 	}
 
-	public int getPlayedGames() {
+	public double getPlayedGames() {
 		return playedGames;
 	}
 
-	public int getGameStartingNum() {
+	public double getGameStartingNum() {
 		return gameStartingNum;
 	}
 
-	public int getReboundNum() {
+	public double getReboundNum() {
 		return reboundNum;
 	}
 
-	public int getAssistNum() {
+	public double getAssistNum() {
 		return assistNum;
 	}
 
@@ -195,31 +196,31 @@ public class PlayerVO {
 		return freeThrowHitRate;
 	}
 
-	public int getOffenNum() {
+	public double getOffenNum() {
 		return offenNum;
 	}
 
-	public int getDefenNum() {
+	public double getDefenNum() {
 		return defenNum;
 	}
 
-	public int getStealNum() {
+	public double getStealNum() {
 		return stealNum;
 	}
 
-	public int getBlockNum() {
+	public double getBlockNum() {
 		return blockNum;
 	}
 
-	public int getTurnOverNum() {
+	public double getTurnOverNum() {
 		return turnOverNum;
 	}
 
-	public int getFoulNum() {
+	public double getFoulNum() {
 		return foulNum;
 	}
 
-	public int getScore() {
+	public double getScore() {
 		return score;
 	}
 
@@ -279,7 +280,7 @@ public class PlayerVO {
 		return usageRate;
 	}
 
-	public int getDoubleDoubleNum() {
+	public double getDoubleDoubleNum() {
 		return doubleDoubleNum;
 	}
 
