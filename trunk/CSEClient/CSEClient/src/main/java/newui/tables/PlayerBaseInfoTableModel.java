@@ -147,7 +147,7 @@ public class PlayerBaseInfoTableModel extends MyTableModel {
 	
 	public void SortRefresh(ArrayList<PlayerVO> list,ArrayList<ImageIcon> img){
 		content.clear();
-		imgList.clear();
+	//	imgList.clear();
 		for(PlayerVO vo:list){
 			int i=0;
 			ArrayList<Object> line=new ArrayList<Object>();
