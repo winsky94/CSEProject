@@ -235,6 +235,22 @@ public class Player implements PlayerBLService {
 	}
 
 	/**
+	 * 获得球员的大头照路径
+	 * 
+	 * @param name球员名
+	 * @return
+	 */
+	public ImageIcon getPlayerPortraitImage(String name) {
+		String address = getPortraitPhotoPath(name);
+		File file = new File(address);
+		if (!file.exists()) {
+			address = "src/data/players/lose.jpg";
+		}
+		ImageIcon imageIcon = new ImageIcon(address);
+		return imageIcon;
+	}
+
+	/**
 	 * 获得球员的全身照
 	 * 
 	 * @param name球员名
@@ -250,21 +266,7 @@ public class Player implements PlayerBLService {
 		return imageIcon;
 	}
 
-	/**
-	 * 获得球员的大头照路径
-	 * 
-	 * @param name球员名
-	 * @return
-	 */
-	public ImageIcon getPlayerPortraitImage(String name) {
-		String address = getPortraitPhotoPath(name);
-		File file = new File(address);
-		if (!file.exists()) {
-			address = "src/data/players/lose.jpg";
-		}
-		ImageIcon imageIcon = new ImageIcon(address);
-		return imageIcon;
-	}
+	
 
 	// public ImageIcon getPlayerPortraitImage(String name) {
 	// ImageIcon icon = null;
