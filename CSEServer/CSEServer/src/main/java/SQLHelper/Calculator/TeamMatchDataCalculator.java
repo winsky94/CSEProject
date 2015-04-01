@@ -375,7 +375,6 @@ public class TeamMatchDataCalculator {
 
 	private void exportToSQL() {
 		foramt();
-
 		try {
 			seasonStatement.setInt(1, sqlID);
 			seasonStatement.setString(2, teamName);
