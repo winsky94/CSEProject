@@ -22,10 +22,10 @@ public interface PlayerBLService {
 	public PlayerVO getPlayerAverageInfo(String season, String name);
 
 	public ArrayList<PlayerVO> getOrderedPlayersBySeason(String season,
-			String condition, String order) throws RemoteException;
+			String condition, String order,int num) throws RemoteException;
 
 	public ArrayList<PlayerVO> getOrderedPlayersByAverage(String season,
-			String condition, String order);
+			String condition, String order,int num);
 
 	public ArrayList<PlayerVO> selectPlayersBySeason(String season,
 			String position, String union, String column);
