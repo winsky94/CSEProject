@@ -13,7 +13,7 @@ public class PlayerVO {
 	private String school;// 毕业学校
 
 	private String teamName;// 所属球队
-	private double playedGames;// 参赛场数
+	private int playedGames;// 参赛场数
 	private double gameStartingNum;// 先发场数
 	private double reboundNum;// 篮板数
 	private double assistNum;// 助攻数
@@ -62,7 +62,7 @@ public class PlayerVO {
 
 	public PlayerVO(double id, String name, double number, String position,
 			String height, double weight, String birth, double age, String exp,
-			String school, String teamName, double playedGames,
+			String school, String teamName, int playedGames,
 			double gameStartingNum, double reboundNum, double assistNum,
 			String presentTime, double shootHitRate, double threeHitRate,
 			double freeThrowHitRate, double offenNum, double defenNum,
