@@ -18,7 +18,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 
-import businesslogicservice.PlayerBLService;
 import newui.FatherPanel;
 import newui.Style;
 import newui.mainui.MainFrame;
@@ -28,8 +27,10 @@ import newui.tables.PlayerTableModel;
 import newui.tables.RowHeaderTable;
 import vo.PlayerVO;
 import businesslogic.Player;
+import businesslogicservice.PlayerBLService;
 
-public class PlayerRankPanel extends FatherPanel implements MouseListener,ItemListener {
+public class PlayerRankPanel extends FatherPanel implements MouseListener,
+		ItemListener {
 
 	/**
 	 * 
@@ -53,7 +54,7 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener,ItemLi
 			"盖帽", "抢断", "罚球", "犯规", "失误", "分钟", "效率", "两双" };
 
 	public PlayerRankPanel() {
-		player=new Player();
+		player = new Player();
 		// ------funcPnl--------
 		funcPnl = new JPanel();
 		funcPnl.setBackground(Style.BACK_GREY);
@@ -94,6 +95,7 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener,ItemLi
 		// 暂无获取赛季的bl方法
 		String[] seasonBoxText = { "13-14" };
 		seasonBox = new MyComboBox(seasonBoxText);
+		seasonBox.addItemListener(this);
 		funcPnl.add(seasonBox);
 		// ----DataType---------
 		JLabel typeLbl = new MyJLabel("数据类型：");
@@ -113,7 +115,7 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener,ItemLi
 		modeLbl.addMouseListener(this);
 		funcPnl.add(modeLbl);
 		// ----jsp--------------
-		table = new MySortableTable(ptm,0);
+		table = new MySortableTable(ptm);
 
 		// table 渲染器，设置文字内容居中显示，设置背景色等
 		table.setSelectionBackground(new java.awt.Color(218, 112, 214));// 设置选择行的颜色——兰花紫
@@ -247,23 +249,21 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener,ItemLi
 			modeLbl.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
 		}
 	}
-	
-	 public void itemStateChanged(ItemEvent e)
-	 {
-	       if(e.getStateChange() == ItemEvent.SELECTED)
-	             {
-	    	         String season = seasonBox.getSelectedItem().toString();
-	    	         ArrayList<PlayerVO> vlist;
-	                 String s=(String)typeBox.getSelectedItem();
-	                 if (s.equals("赛季"))
-	     				vlist = player.getPlayerSeasonInfo(season);
-	     			else
-	     				vlist = player.getPlayerAverageInfo(season);
-	     			// vlist.size()==0显示没有符合条件的球员
-	     			if (vlist != null)
-	     				ptm.refreshContent(vlist);
-	     			table.revalidate();
-	             }
-	}  
-	
+
+	public void itemStateChanged(ItemEvent e) {
+		if (e.getStateChange() == ItemEvent.SELECTED) {
+			String season = seasonBox.getSelectedItem().toString();
+			ArrayList<PlayerVO> vlist;
+			String s = (String) typeBox.getSelectedItem();
+			if (s.equals("赛季"))
+				vlist = player.getPlayerSeasonInfo(season);
+			else
+				vlist = player.getPlayerAverageInfo(season);
+			// vlist.size()==0显示没有符合条件的球员
+			if (vlist != null)
+				ptm.refreshContent(vlist);
+			table.revalidate();
+		}
+	}
+
 }
