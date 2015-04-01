@@ -253,9 +253,9 @@ public class Team implements TeamBLService {
 				po.getFoulNum(), po.getScore(), po.getShootHitRate(),
 				po.getThreeHitRate(), po.getFreeThrowHitRate(),
 				po.getWinRate(), po.getOffenRound(), po.getOffenEfficiency(),
-				po.getDefenEfficiency(), po.getReboundEfficiency(),
-				po.getOffenReboundEfficiency(), po.getDefenReboundEfficiency(),
-				po.getStealEfficiency(), po.getAssistRate());
+				po.getDefenEfficiency(), po.getOffenReboundEfficiency(),
+				po.getDefenReboundEfficiency(), po.getStealEfficiency(),
+				po.getAssistRate());
 		return teamVO;
 	}
 
