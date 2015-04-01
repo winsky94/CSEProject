@@ -118,17 +118,14 @@ public class PlayerBaseInfoTableModel extends MyTableModel {
 			String name=vo.getName();
 			ImageIcon tou=player.getPlayerPortraitImage(name);
 			imgList.add(tou);
-			JLabel touImg=new JLabel(tou);
-		//	touImg.setSize(50, 50);
-			tou .setImage(tou.getImage()
+			ImageIcon icon2 = new ImageIcon(tou.getImage()
 					.getScaledInstance(
 							currentTable.getColumn(currentTable.getColumnName(0))
-									.getWidth(),
-									currentTable.getRowHeight(i),
-					Image.SCALE_DEFAULT));
+									.getWidth(),40
+									/*currentTable.getRowHeight(i)*/,
+							Image.SCALE_DEFAULT));
 			
-
-			line.add(tou);
+			line.add(icon2);
 			line.add(name);
 			line.add(vo.getTeamName());
 			line.add(vo.getPosition());
