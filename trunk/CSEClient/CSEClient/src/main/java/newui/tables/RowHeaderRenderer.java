@@ -46,7 +46,7 @@ public class RowHeaderRenderer extends JLabel implements TableCellRenderer,
 		if (isSelect(row)) // 当选取单元格时,在row header上设置成选取颜色
 		{
 			setForeground(Color.white);
-			setBackground(Color.red);
+			setBackground(Color.GREEN);
 		} else {
 			setForeground(header.getForeground());
 		}
