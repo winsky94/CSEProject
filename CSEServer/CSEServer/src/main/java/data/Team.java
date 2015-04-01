@@ -673,4 +673,31 @@ public class Team extends UnicastRemoteObject implements TeamDataService {
 
 		return result;
 	}
+
+	/**
+	 * 根据球队缩写获得该球队的队员
+	 * 
+	 * @param teamAbLocation
+	 *            球队缩写
+	 * @return 球员姓名列表
+	 */
+	public ArrayList<String> getPlayersByTeam(String teamAbLocation) {
+		ArrayList<String> result = new ArrayList<String>();
+		try {
+			connection = SqlManager.getConnection();
+			Statement sql = connection.createStatement();
+			String query = "select playerName from playerMatchDataSeason where owingTeam like '%"
+					+ teamAbLocation + "%'";
+			ResultSet rs = sql.executeQuery(query);
+			while (rs.next()) {
+				result.add(rs.getString("playerName"));
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		} finally {
+			closeMySql();
+		}
+		return result;
+	}
 }
