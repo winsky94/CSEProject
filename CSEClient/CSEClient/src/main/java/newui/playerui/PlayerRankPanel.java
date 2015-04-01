@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
@@ -27,7 +29,7 @@ import newui.tables.RowHeaderTable;
 import vo.PlayerVO;
 import businesslogic.Player;
 
-public class PlayerRankPanel extends FatherPanel implements MouseListener {
+public class PlayerRankPanel extends FatherPanel implements MouseListener,ItemListener {
 
 	/**
 	 * 
@@ -98,6 +100,7 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener {
 		funcPnl.add(typeLbl);
 		String[] typeText = { "赛季", "场均" };
 		typeBox = new MyComboBox(typeText);
+		typeBox.addItemListener(this);
 		funcPnl.add(typeBox);
 		funcPnl.add(new JLabel("       "));
 		// -----refreshLbl------
@@ -244,4 +247,23 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener {
 			modeLbl.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
 		}
 	}
+	
+	 public void itemStateChanged(ItemEvent e)
+	 {
+	       if(e.getStateChange() == ItemEvent.SELECTED)
+	             {
+	    	         String season = seasonBox.getSelectedItem().toString();
+	    	         ArrayList<PlayerVO> vlist;
+	                 String s=(String)typeBox.getSelectedItem();
+	                 if (s.equals("赛季"))
+	     				vlist = player.getPlayerSeasonInfo(season);
+	     			else
+	     				vlist = player.getPlayerAverageInfo(season);
+	     			// vlist.size()==0显示没有符合条件的球员
+	     			if (vlist != null)
+	     				ptm.refreshContent(vlist);
+	     			table.revalidate();
+	             }
+	}  
+	
 }
