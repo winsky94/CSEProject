@@ -33,4 +33,6 @@ public interface TeamBLService {
 	public ArrayList<MatchVO> getMatches(String teamName);// 可以模糊
 
 	public ArrayList<TeamVO> getSeasonHotTeam(String season, String column);
+
+	public ArrayList<String> getPlayersByTeam(String teamAbLocation);
 }
