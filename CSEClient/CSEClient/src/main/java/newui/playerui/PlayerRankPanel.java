@@ -10,6 +10,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -115,7 +116,7 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener,
 		modeLbl.addMouseListener(this);
 		funcPnl.add(modeLbl);
 		// ----jsp--------------
-		table = new MySortableTable(ptm,0);
+		table = new MySortableTable(ptm, 0);
 
 		// table 渲染器，设置文字内容居中显示，设置背景色等
 		table.setSelectionBackground(new java.awt.Color(218, 112, 214));// 设置选择行的颜色——兰花紫
@@ -137,6 +138,15 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener,
 		ptm.Refresh(typeBox.getSelectedItem().toString());
 		MyTableCellRenderer.adjustTableColumnWidths(table);
 		table.revalidate();
+		// 设置表头颜色
+		table.getTableHeader().setBackground(new Color(158, 158, 158));
+
+		JLabel jb = new JLabel();
+		jb.setOpaque(true);
+		jb.setBackground(Color.black);
+		jb.setBorder(BorderFactory.createLineBorder(new Color(158, 158, 158),
+				20));
+		jsp.setCorner(JScrollPane.UPPER_RIGHT_CORNER, jb);
 		// 设置显示行号
 		jsp.setRowHeaderView(new RowHeaderTable(table, 30));
 	}
