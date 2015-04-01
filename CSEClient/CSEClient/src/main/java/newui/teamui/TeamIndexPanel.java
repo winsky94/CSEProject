@@ -88,8 +88,7 @@ public class TeamIndexPanel extends FatherPanel implements MouseListener,
 		}
 
 		jsp = new JScrollPane(table);
-		// 设置显示行号
-		jsp.setRowHeaderView(new RowHeaderTable(table, 30));
+		
 
 		gbc.gridy = 2;
 		gbc.gridheight = 10;
@@ -101,6 +100,8 @@ public class TeamIndexPanel extends FatherPanel implements MouseListener,
 		ttm.Refresh(typeBox.getSelectedItem().toString());
 		table.revalidate();
 		MyTableCellRenderer.adjustTableColumnWidths(table);// 自动设置列宽
+		// 设置显示行号
+				jsp.setRowHeaderView(new RowHeaderTable(table, 30));
 
 	}
 
