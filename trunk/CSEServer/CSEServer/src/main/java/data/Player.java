@@ -408,14 +408,16 @@ public class Player extends UnicastRemoteObject implements PlayerDataService {
 	 *            排序条件，即某一项技术分析项，如：篮板率
 	 * @param order
 	 *            升序还是降序 asc 表示升序 , desc表示降序 , 未明确写明排序方式时默认是升序
+	 * @param num
+	 *            筛选出前多少名球员
 	 * 
 	 * @return 按照所给条件排好序的球队列表
 	 */
 	public ArrayList<PlayerPO> getOrderedPlayersBySeason(String season,
-			String condition, String order) throws RemoteException {
+			String condition, String order,int num) throws RemoteException {
 		ArrayList<PlayerPO> result = new ArrayList<PlayerPO>();
 		result = getOrderedPlayers("playermatchdataseason", season, condition,
-				order);
+				order,num);
 		return result;
 	}
 
@@ -432,15 +434,15 @@ public class Player extends UnicastRemoteObject implements PlayerDataService {
 	 * @return 按照所给条件排好序的球员列表
 	 */
 	public ArrayList<PlayerPO> getOrderedPlayersByAverage(String season,
-			String condition, String order) throws RemoteException {
+			String condition, String order,int num) throws RemoteException {
 		ArrayList<PlayerPO> result = new ArrayList<PlayerPO>();
 		result = getOrderedPlayers("playermatchdataaverage", season, condition,
-				order);
+				order,num);
 		return result;
 	}
 
 	private ArrayList<PlayerPO> getOrderedPlayers(String table, String season,
-			String condition, String order) {
+			String condition, String order,int num) {
 		ArrayList<PlayerPO> players = new ArrayList<PlayerPO>();
 		PlayerPO player;
 		// 未明确写明排序方式时默认是升序
@@ -451,7 +453,7 @@ public class Player extends UnicastRemoteObject implements PlayerDataService {
 			con = SqlManager.getConnection();
 			Statement sql = con.createStatement();
 			String query = "select * from " + table + " where season='"
-					+ season + "' order by " + condition + " " + order;
+					+ season + "' order by " + condition + " " + order+" limit "+num;
 			ResultSet rs = sql.executeQuery(query);
 			while (rs.next()) {
 				player = new PlayerPO();
