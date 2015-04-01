@@ -20,7 +20,7 @@ import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
-import presentation.MyTableCellRenderer;
+import newui.tables.MyTableCellRenderer;
 import presentation.playerui.detail.PlayerInfoPanel;
 import presentation.playerui.tablemodel.PlayerTableModel;
 import presentation.teamui.tablemodel.TeamTableModel;

@@ -5,7 +5,6 @@ import java.awt.Component;
 import java.awt.Cursor;
 import java.awt.FlowLayout;
 import java.awt.Font;
-import java.awt.GridBagConstraints;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
@@ -19,15 +18,16 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ListCellRenderer;
 import javax.swing.plaf.basic.BasicComboBoxRenderer;
+import javax.swing.table.DefaultTableCellRenderer;
 
-import vo.PlayerVO;
-import businesslogic.Player;
 import newui.FatherPanel;
 import newui.Style;
 import newui.mainui.MainFrame;
-import newui.playerui.PlayerIndexPanel.MyLabel;
 import newui.tables.MySortableTable;
+import newui.tables.MyTableCellRenderer;
 import newui.tables.PlayerTableModel;
+import vo.PlayerVO;
+import businesslogic.Player;
 
 public class PlayerRankPanel extends FatherPanel implements MouseListener {
 
@@ -42,7 +42,7 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener {
 	JTable table;
 	PlayerTableModel ptm = new PlayerTableModel();
 	// ---------------
-	JLabel refreshLbl, filterLbl,modeLbl;
+	JLabel refreshLbl, filterLbl, modeLbl;
 	JComboBox<String> locationBox, partitionBox, filterRankBox, seasonBox,
 			typeBox;
 	Font font = new Font("微软雅黑", Font.PLAIN, 13);
@@ -50,10 +50,10 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener {
 	String[] partitionText = { "全部", "西部球队", "西北分区", "太平洋分区", "西南分区", "东部球队",
 			"大西洋分区", "中央分区", "东南分区" };
 	String[] filterRankText = { "得分", "篮板", "助攻", "得分/篮板/助攻(1:1:1)", "投篮",
-			"盖帽", "抢断", "罚球", "犯规","失误","分钟","效率","两双" };
+			"盖帽", "抢断", "罚球", "犯规", "失误", "分钟", "效率", "两双" };
 
 	public PlayerRankPanel() {
-		player=new Player();
+		player = new Player();
 		// ------funcPnl--------
 		funcPnl = new JPanel();
 		funcPnl.setBackground(Style.BACK_GREY);
@@ -61,7 +61,7 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener {
 		gbc.gridheight = 1;
 		gbc.weighty = 0.8;
 		gbl.setConstraints(funcPnl, gbc);
-		FlowLayout fl=new FlowLayout(FlowLayout.LEFT);
+		FlowLayout fl = new FlowLayout(FlowLayout.LEFT);
 		funcPnl.setLayout(fl);
 		add(funcPnl);
 		// -------筛选---------------------------------------
@@ -83,15 +83,16 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener {
 		filterRankBox = new MyComboBox(filterRankText);
 		filterRankBox.setMaximumRowCount(13);
 		funcPnl.add(filterRankBox);
-		//-----filterLbl-----
-		filterLbl=new MyJLabel("筛选",new ImageIcon("image/player/filterWhite.png"));
+		// -----filterLbl-----
+		filterLbl = new MyJLabel("筛选", new ImageIcon(
+				"image/player/filterWhite.png"));
 		filterLbl.addMouseListener(this);
 		funcPnl.add(filterLbl);
 		funcPnl.add(new JLabel("       "));
 		// -----season----------
 		JLabel seasonBoxLbl = new MyJLabel("赛季：");
 		funcPnl.add(seasonBoxLbl);
-		//暂无获取赛季的bl方法
+		// 暂无获取赛季的bl方法
 		String[] seasonBoxText = { "13-14" };
 		seasonBox = new MyComboBox(seasonBoxText);
 		funcPnl.add(seasonBox);
@@ -106,21 +107,33 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener {
 		refreshLbl = new MyJLabel("刷新", new ImageIcon("image/refreshWhite.png"));
 		refreshLbl.addMouseListener(this);
 		funcPnl.add(refreshLbl);
-		//-----modeLbl---------
-		modeLbl=new MyJLabel("至快速查询模式",new ImageIcon("image/player/headmode.png"));
+		// -----modeLbl---------
+		modeLbl = new MyJLabel("至快速查询模式", new ImageIcon(
+				"image/player/headmode.png"));
 		modeLbl.addMouseListener(this);
 		funcPnl.add(modeLbl);
 		// ----jsp--------------
 		table = new MySortableTable(ptm);
-		
+
+		// table 渲染器，设置文字内容居中显示，设置背景色等
+		table.setSelectionBackground(new java.awt.Color(218, 112, 214));// 设置选择行的颜色——兰花紫
+		table.setFont(new Font("微软雅黑", 0, 12));
+		table.getTableHeader().setFont(new Font("微软雅黑", 0, 14));
+		table.getTableHeader().setBackground(new Color(211, 211, 211));
+		DefaultTableCellRenderer tcr = new MyTableCellRenderer();
+		for (int i = 0; i < table.getColumnCount(); i++) {
+			table.getColumn(table.getColumnName(i)).setCellRenderer(tcr);
+		}
+
 		jsp = new JScrollPane(table);
 		gbc.gridy = 2;
 		gbc.gridheight = 10;
 		gbc.weighty = 10;
 		gbl.setConstraints(jsp, gbc);
 		add(jsp);
-		
+
 		ptm.Refresh(typeBox.getSelectedItem().toString());
+		MyTableCellRenderer.adjustTableColumnWidths(table);
 	}
 
 	class MyJLabel extends JLabel {
@@ -157,25 +170,27 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener {
 	}
 
 	public void mouseClicked(MouseEvent e) {
-		if(e.getSource()==modeLbl)
+		if (e.getSource() == modeLbl)
 			MainFrame.getInstance().setContentPanel(new PlayerIndexPanel());
-		if(e.getSource()==filterLbl){
-			//执行筛选
-			String season=seasonBox.getSelectedItem().toString();
-			String position=locationBox.getSelectedItem().toString();
-			String union=partitionBox.getSelectedItem().toString();
-			String sort=filterRankBox.getSelectedItem().toString();
+		if (e.getSource() == filterLbl) {
+			// 执行筛选
+			String season = seasonBox.getSelectedItem().toString();
+			String position = locationBox.getSelectedItem().toString();
+			String union = partitionBox.getSelectedItem().toString();
+			String sort = filterRankBox.getSelectedItem().toString();
 			ArrayList<PlayerVO> vlist;
-			String type=typeBox.getSelectedItem().toString();
-			if(type.equals("赛季"))
-				vlist=player.selectPlayersBySeason(season, position, union, sort);
+			String type = typeBox.getSelectedItem().toString();
+			if (type.equals("赛季"))
+				vlist = player.selectPlayersBySeason(season, position, union,
+						sort);
 			else
-				vlist=player.selectPlayersByAverage(season, position, union, sort);
-			//vlist.size()==0显示没有符合条件的球员
-			if(vlist!=null)
+				vlist = player.selectPlayersByAverage(season, position, union,
+						sort);
+			// vlist.size()==0显示没有符合条件的球员
+			if (vlist != null)
 				ptm.refreshContent(vlist);
 			table.revalidate();
-				
+
 		}
 
 	}
@@ -196,7 +211,7 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener {
 			refreshLbl.setIcon(new ImageIcon("image/refreshFocus.png"));
 			refreshLbl.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		}
-		if(e.getSource()==filterLbl){
+		if (e.getSource() == filterLbl) {
 			filterLbl.setForeground(Style.FOCUS_BLUE);
 			filterLbl.setIcon(new ImageIcon("image/player/filterFocus.png"));
 			filterLbl.setCursor(new Cursor(Cursor.HAND_CURSOR));
@@ -214,7 +229,7 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener {
 			refreshLbl.setIcon(new ImageIcon("image/refreshWhite.png"));
 			refreshLbl.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
 		}
-		if(e.getSource()==filterLbl){
+		if (e.getSource() == filterLbl) {
 			filterLbl.setForeground(Color.white);
 			filterLbl.setIcon(new ImageIcon("image/player/filterWhite.png"));
 			filterLbl.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
@@ -225,7 +240,7 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener {
 			modeLbl.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
 		}
 	}
-	
+
 	class MyRenderer extends JLabel implements ListCellRenderer {
 
 		/**
@@ -247,26 +262,26 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener {
 		}
 
 	}
-	
-	public class ColorComboBoxRenderer extends BasicComboBoxRenderer {  
-		  
-	    @Override  
-	    public Component getListCellRendererComponent(JList list, Object value,  
-	            int index, boolean isSelected, boolean cellHasFocus) {  
-	        // TODO Auto-generated method stub  
-	  
-	        Component c = super.getListCellRendererComponent(list, value, index,  
-	                isSelected, cellHasFocus);  
-	  
-	        if (value instanceof Integer) {  
-	            int i = ((Integer) value).intValue();  
-	  
-	            if (i ==1 ||i==5) {  
-	                c.setBackground(Color.YELLOW);  
-	                c.setSize(20, 20);
-	            }  
-	        }  
-	        return c;  
-	    }  
-	}  
+
+	public class ColorComboBoxRenderer extends BasicComboBoxRenderer {
+
+		@Override
+		public Component getListCellRendererComponent(JList list, Object value,
+				int index, boolean isSelected, boolean cellHasFocus) {
+			// TODO Auto-generated method stub
+
+			Component c = super.getListCellRendererComponent(list, value,
+					index, isSelected, cellHasFocus);
+
+			if (value instanceof Integer) {
+				int i = ((Integer) value).intValue();
+
+				if (i == 1 || i == 5) {
+					c.setBackground(Color.YELLOW);
+					c.setSize(20, 20);
+				}
+			}
+			return c;
+		}
+	}
 }
