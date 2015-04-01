@@ -105,7 +105,8 @@ public class PlayerIndexPanel extends FatherPanel implements MouseListener {
 		jsp.setCorner(JScrollPane.UPPER_RIGHT_CORNER, jb);
 		// 刷新
 		pitm.setCurrentTable(table);
-		
+		pitm.Refresh();
+		table.revalidate();
 		// 设置表头颜色
 		table.getTableHeader().setBackground(new Color(158, 158, 158));
 
@@ -130,8 +131,7 @@ public class PlayerIndexPanel extends FatherPanel implements MouseListener {
 
 	}
 	public void Refresh(){
-		pitm.Refresh();
-		table.revalidate();
+		
 	}
 	
 
