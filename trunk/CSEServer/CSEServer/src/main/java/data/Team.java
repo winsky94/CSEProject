@@ -278,22 +278,22 @@ public class Team extends UnicastRemoteObject implements TeamDataService {
 			while (resultSet.next()) {
 				String name = resultSet.getString("team");
 				int matchesNum = resultSet.getInt("matchesNum"); // 比赛场数
-				int shootHitNum = resultSet.getInt("shootHitNum"); // 投篮命中数
-				int shootAttemptNum = resultSet.getInt("shootAttemptNum"); // 投篮出手次数
-				int threeHitNum = resultSet.getInt("threeHitNum"); // 三分命中数
-				int threeAttemptNum = resultSet.getInt("threeAttemptNum"); // 三分出手数
-				int freeThrowHitNum = resultSet.getInt("freeThrowHitNum"); // 罚球命中数
-				int freeThrowAttemptNum = resultSet
+				double shootHitNum = resultSet.getInt("shootHitNum"); // 投篮命中数
+				double shootAttemptNum = resultSet.getInt("shootAttemptNum"); // 投篮出手次数
+				double threeHitNum = resultSet.getInt("threeHitNum"); // 三分命中数
+				double threeAttemptNum = resultSet.getInt("threeAttemptNum"); // 三分出手数
+				double freeThrowHitNum = resultSet.getInt("freeThrowHitNum"); // 罚球命中数
+				double freeThrowAttemptNum = resultSet
 						.getInt("freeThrowAttemptNum"); // 罚球出手数
-				int offenReboundNum = resultSet.getInt("offenReboundNum"); // 进攻篮板数
-				int defenReboundNum = resultSet.getInt("defenReboundNum"); // 防守篮板数
-				int reboundNum = resultSet.getInt("reboundNum");// 篮板数
-				int assistNum = resultSet.getInt("assistNum");// 助攻数
-				int stealNum = resultSet.getInt("stealNum");// 抢断数
-				int blockNum = resultSet.getInt("blockNum");// 盖帽数
-				int turnOverNum = resultSet.getInt("turnOverNum");// 失误数
-				int foulNum = resultSet.getInt("foulNum");// 犯规数
-				int score = resultSet.getInt("score");// 比赛得分
+				double offenReboundNum = resultSet.getInt("offenReboundNum"); // 进攻篮板数
+				double defenReboundNum = resultSet.getInt("defenReboundNum"); // 防守篮板数
+				double reboundNum = resultSet.getInt("reboundNum");// 篮板数
+				double assistNum = resultSet.getInt("assistNum");// 助攻数
+				double stealNum = resultSet.getInt("stealNum");// 抢断数
+				double blockNum = resultSet.getInt("blockNum");// 盖帽数
+				double turnOverNum = resultSet.getInt("turnOverNum");// 失误数
+				double foulNum = resultSet.getInt("foulNum");// 犯规数
+				double score = resultSet.getInt("score");// 比赛得分
 				double shootHitRate = resultSet.getDouble("shootHitRate");// 投篮命中率
 				double threeHitRate = resultSet.getDouble("threeHitRate");// 三分命中率
 				double freeThrowHitRate = resultSet
