@@ -23,6 +23,7 @@ import newui.Style;
 import newui.mainui.MainFrame;
 import newui.tables.MyTableCellRenderer;
 import newui.tables.PlayerBaseInfoTableModel;
+import newui.tables.RowHeaderTable;
 
 public class PlayerIndexPanel extends FatherPanel implements MouseListener {
 	/**
@@ -30,7 +31,7 @@ public class PlayerIndexPanel extends FatherPanel implements MouseListener {
 	 */
 	private static final long serialVersionUID = 1L;
 	JPanel funcPnl;
-	
+
 	MyLabel refreshLbl, modeLbl;
 	String[] teams = { "按球队查找", "掘金", "森林狼", "雷霆", "开拓者", "爵士", "勇士", "快船",
 			"湖人", "太阳", "国王", "小牛", "火箭", "灰熊", "鹈鹕", "马刺", "凯尔特人", "篮网",
@@ -88,35 +89,39 @@ public class PlayerIndexPanel extends FatherPanel implements MouseListener {
 		table.setFont(new Font("微软雅黑", 0, 12));
 		table.getTableHeader().setFont(new Font("微软雅黑", 0, 14));
 		table.getTableHeader().setBackground(new Color(211, 211, 211));
-		DefaultTableCellRenderer tcr = new MyTableCellRenderer(pitm.getImgList());
+		DefaultTableCellRenderer tcr = new MyTableCellRenderer(
+				pitm.getImgList());
 		for (int i = 1; i < table.getColumnCount(); i++) {
 			table.getColumn(table.getColumnName(i)).setCellRenderer(tcr);
 		}
 		jsp = new JScrollPane(table);
+
 		// 刷新
 		pitm.setCurrentTable(table);
 		pitm.Refresh();
 		table.revalidate();
+		// 设置显示行号
+		jsp.setRowHeaderView(new RowHeaderTable(table, 30));
+
 		gbc.gridy = 2;
 		gbc.gridheight = 10;
 		gbc.weighty = 10;
 		gbl.setConstraints(jsp, gbc);
 		add(jsp);
-		//====按球队筛选监听====
-		teamBox.addItemListener(new ItemListener(){
+		// ====按球队筛选监听====
+		teamBox.addItemListener(new ItemListener() {
 
 			public void itemStateChanged(ItemEvent e) {
 				// TODO Auto-generated method stub
-				String teamName=teamBox.getSelectedItem().toString();
+				String teamName = teamBox.getSelectedItem().toString();
 				pitm.findByTeam(teamName);
 				table.revalidate();
-				
+
 			}
-			
+
 		});
 
 	}
-	
 
 	class MyCharacter extends JLabel {
 
@@ -154,12 +159,12 @@ public class PlayerIndexPanel extends FatherPanel implements MouseListener {
 	public void mouseClicked(MouseEvent e) {
 		if (e.getSource() == modeLbl)
 			MainFrame.getInstance().setContentPanel(new PlayerRankPanel());
-		if(e.getSource() instanceof MyCharacter){
-			String sort=((MyCharacter)e.getSource()).getText();
+		if (e.getSource() instanceof MyCharacter) {
+			String sort = ((MyCharacter) e.getSource()).getText();
 			pitm.sortByCharacter(sort);
 			table.revalidate();
 		}
-		if(e.getSource()==refreshLbl){
+		if (e.getSource() == refreshLbl) {
 			pitm.Refresh();
 			table.revalidate();
 		}
