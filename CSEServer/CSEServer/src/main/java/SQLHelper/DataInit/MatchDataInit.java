@@ -249,6 +249,7 @@ public class MatchDataInit {
 				} else {
 					time = 48 + (parts - 4) * 5;
 				}
+				time=time*60;
 				matchesStatement.setInt(1, matchPO.getMatchID());
 				matchesStatement.setString(2, matchPO.getSeason());
 				matchesStatement.setString(3, matchPO.getDate());
