@@ -9,6 +9,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -78,7 +79,9 @@ public class TeamIndexPanel extends FatherPanel implements MouseListener,
 		ttm = new TeamTableModel();
 		table = new MySortableTable(ttm, 1);
 		// table 渲染器，设置文字内容居中显示，设置背景色等
-		table.setSelectionBackground(new java.awt.Color(218, 112, 214));// 设置选择行的颜色——兰花紫
+
+		table.setSelectionBackground(new Color(225, 255, 255));// 设置选择行的颜色——淡蓝色
+
 		table.setFont(new Font("微软雅黑", 0, 12));
 		table.getTableHeader().setFont(new Font("微软雅黑", 0, 14));
 		table.getTableHeader().setBackground(new Color(211, 211, 211));
@@ -99,9 +102,19 @@ public class TeamIndexPanel extends FatherPanel implements MouseListener,
 		ttm.Refresh(typeBox.getSelectedItem().toString());
 		table.revalidate();
 		MyTableCellRenderer.adjustTableColumnWidths(table);// 自动设置列宽
+		// 设置表头颜色
+		table.getTableHeader().setBackground(new Color(158, 158, 158));
+		
 		// 设置显示行号
 		jsp.setRowHeaderView(new RowHeaderTable(table, 20));
-
+		
+		
+		JLabel jb = new JLabel();
+		jb.setOpaque(true);
+		jb.setBackground(Color.black);
+		jb.setBorder(BorderFactory.createLineBorder(new Color(158, 158, 158),
+				20));
+		jsp.setCorner(JScrollPane.UPPER_RIGHT_CORNER, jb);
 	}
 
 	public void mouseClicked(MouseEvent e) {
