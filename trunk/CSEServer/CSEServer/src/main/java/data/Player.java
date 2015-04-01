@@ -868,8 +868,8 @@ public class Player extends UnicastRemoteObject implements PlayerDataService {
 		//	ArrayList<PlayerPO> players=p.getSeasonHotPlayer("13-14", "score");
 //			ArrayList<PlayerPO> players=p.getPlayersByInitialName('A');
 //			System.out.println(players.get(0).getName());
-			ArrayList<PlayerPO> players=p.getPlayerBaseInfo();
-			System.out.println(players.get(0).getTeamName());
+			ArrayList<PlayerPO> players=p.selectPlayersBySeason("13-14", "all", "all", "score_rebound_assist");
+			System.out.println(players.get(0).getScore_rebound_assist());
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
