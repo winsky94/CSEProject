@@ -100,7 +100,7 @@ public class TeamIndexPanel extends FatherPanel implements MouseListener,
 		table.revalidate();
 		MyTableCellRenderer.adjustTableColumnWidths(table);// 自动设置列宽
 		// 设置显示行号
-		jsp.setRowHeaderView(new RowHeaderTable(table, 30));
+		jsp.setRowHeaderView(new RowHeaderTable(table, 20));
 
 	}
 
