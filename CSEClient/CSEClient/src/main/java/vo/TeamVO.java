@@ -33,7 +33,6 @@ public class TeamVO {
 	private double offenRound; // 进攻回合
 	private double offenEfficiency; // 进攻效率
 	private double defenEfficiency; // 防守效率
-	private double reboundEfficiency;// 篮板效率
 	private double offenReboundEfficiency; // 进攻篮板效率
 	private double defenReboundEfficiency; // 防守篮板效率
 	private double stealEfficiency; // 抢断效率
@@ -61,9 +60,9 @@ public class TeamVO {
 			int blockNum, int turnOverNum, int foulNum, int score,
 			double shootHitRate, double threeHitRate, double freeThrowHitRate,
 			double winRate, double offenRound, double offenEfficiency,
-			double defenEfficiency, double reboundEfficiency,
-			double offenReboundEfficiency, double defenReboundEfficiency,
-			double stealEfficiency, double assistEfficiency) {
+			double defenEfficiency, double offenReboundEfficiency,
+			double defenReboundEfficiency, double stealEfficiency,
+			double assistEfficiency) {
 		super();
 		this.id = id;
 		this.teamName = teamName;
@@ -96,7 +95,6 @@ public class TeamVO {
 		this.offenRound = offenRound;
 		this.offenEfficiency = offenEfficiency;
 		this.defenEfficiency = defenEfficiency;
-		this.reboundEfficiency = reboundEfficiency;
 		this.offenReboundEfficiency = offenReboundEfficiency;
 		this.defenReboundEfficiency = defenReboundEfficiency;
 		this.stealEfficiency = stealEfficiency;
@@ -225,10 +223,6 @@ public class TeamVO {
 
 	public double getDefenEfficiency() {
 		return defenEfficiency;
-	}
-
-	public double getReboundEfficiency() {
-		return reboundEfficiency;
 	}
 
 	public double getOffenReboundEfficiency() {
