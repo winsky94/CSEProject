@@ -11,21 +11,21 @@ public class TeamVO {
 	private int setUpTime; // 建立时间
 
 	private int matchesNum; // 比赛场数
-	private int shootHitNum; // 投篮命中数
-	private int shootAttemptNum; // 投篮出手次数
-	private int threeHitNum; // 三分命中数
-	private int threeAttemptNum; // 三分出手数
-	private int freeThrowHitNum; // 罚球命中数
-	private int freeThrowAttemptNum; // 罚球出手数
-	private int offenReboundNum; // 进攻篮板数
-	private int defenReboundNum; // 防守篮板数
-	private int reboundNum;// 篮板数
-	private int assistNum;// 助攻数
-	private int stealNum;// 抢断数
-	private int blockNum;// 盖帽数
-	private int turnOverNum;// 失误数
-	private int foulNum;// 犯规数
-	private int score;// 比赛得分
+	private double shootHitNum; // 投篮命中数
+	private double shootAttemptNum; // 投篮出手次数
+	private double threeHitNum; // 三分命中数
+	private double threeAttemptNum; // 三分出手数
+	private double freeThrowHitNum; // 罚球命中数
+	private double freeThrowAttemptNum; // 罚球出手数
+	private double offenReboundNum; // 进攻篮板数
+	private double defenReboundNum; // 防守篮板数
+	private double reboundNum;// 篮板数
+	private double assistNum;// 助攻数
+	private double stealNum;// 抢断数
+	private double blockNum;// 盖帽数
+	private double turnOverNum;// 失误数
+	private double foulNum;// 犯规数
+	private double score;// 比赛得分
 	private double shootHitRate;// 投篮命中率
 	private double threeHitRate;// 三分命中率
 	private double freeThrowHitRate;// 罚球命中率
@@ -53,11 +53,12 @@ public class TeamVO {
 
 	public TeamVO(int id, String teamName, String abLocation, String location,
 			String conference, String partition, String homeCourt,
-			int setUpTime, int matchesNum, int shootHitNum,
-			int shootAttemptNum, int threeHitNum, int threeAttemptNum,
-			int freeThrowHitNum, int freeThrowAttemptNum, int offenReboundNum,
-			int defenReboundNum, int reboundNum, int assistNum, int stealNum,
-			int blockNum, int turnOverNum, int foulNum, int score,
+			int setUpTime, int matchesNum, double shootHitNum,
+			double shootAttemptNum, double threeHitNum, double threeAttemptNum,
+			double freeThrowHitNum, double freeThrowAttemptNum,
+			double offenReboundNum, double defenReboundNum, double reboundNum,
+			double assistNum, double stealNum, double blockNum,
+			double turnOverNum, double foulNum, double score,
 			double shootHitRate, double threeHitRate, double freeThrowHitRate,
 			double winRate, double offenRound, double offenEfficiency,
 			double defenEfficiency, double offenReboundEfficiency,
@@ -137,63 +138,63 @@ public class TeamVO {
 		return matchesNum;
 	}
 
-	public int getShootHitNum() {
+	public double getShootHitNum() {
 		return shootHitNum;
 	}
 
-	public int getShootAttemptNum() {
+	public double getShootAttemptNum() {
 		return shootAttemptNum;
 	}
 
-	public int getThreeHitNum() {
+	public double getThreeHitNum() {
 		return threeHitNum;
 	}
 
-	public int getThreeAttemptNum() {
+	public double getThreeAttemptNum() {
 		return threeAttemptNum;
 	}
 
-	public int getFreeThrowHitNum() {
+	public double getFreeThrowHitNum() {
 		return freeThrowHitNum;
 	}
 
-	public int getFreeThrowAttemptNum() {
+	public double getFreeThrowAttemptNum() {
 		return freeThrowAttemptNum;
 	}
 
-	public int getOffenReboundNum() {
+	public double getOffenReboundNum() {
 		return offenReboundNum;
 	}
 
-	public int getDefenReboundNum() {
+	public double getDefenReboundNum() {
 		return defenReboundNum;
 	}
 
-	public int getReboundNum() {
+	public double getReboundNum() {
 		return reboundNum;
 	}
 
-	public int getAssistNum() {
+	public double getAssistNum() {
 		return assistNum;
 	}
 
-	public int getStealNum() {
+	public double getStealNum() {
 		return stealNum;
 	}
 
-	public int getBlockNum() {
+	public double getBlockNum() {
 		return blockNum;
 	}
 
-	public int getTurnOverNum() {
+	public double getTurnOverNum() {
 		return turnOverNum;
 	}
 
-	public int getFoulNum() {
+	public double getFoulNum() {
 		return foulNum;
 	}
 
-	public int getScore() {
+	public double getScore() {
 		return score;
 	}
 
@@ -240,4 +241,5 @@ public class TeamVO {
 	public double getAssistEfficiency() {
 		return assistEfficiency;
 	}
+
 }
