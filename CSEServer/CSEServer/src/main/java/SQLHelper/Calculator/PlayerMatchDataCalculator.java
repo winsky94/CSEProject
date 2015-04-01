@@ -222,7 +222,7 @@ public class PlayerMatchDataCalculator {
 		freeThrowHitRate = Double.parseDouble(dec.format(freeThrowHitRate));
 		offenReboundNum = Double.parseDouble(dec.format(offenReboundNum));
 		defenReboundNum = Double.parseDouble(dec.format(defenReboundNum));
-
+		presentTime=Double.parseDouble(dec.format(presentTime));
 		stealNum = Double.parseDouble(dec.format(stealNum));
 		blockNum = Double.parseDouble(dec.format(blockNum));
 		foulNum = Double.parseDouble(dec.format(foulNum));
