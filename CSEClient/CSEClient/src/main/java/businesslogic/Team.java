@@ -161,6 +161,17 @@ public class Team implements TeamBLService {
 		return teamVO;
 	}
 
+	/**
+	 * 根据赛季得到按某项技术属性排序的球队列表
+	 * 
+	 * @param season
+	 *            赛季
+	 * @param condition
+	 *            技术属性
+	 * @param order
+	 *            排序顺序 asc升序 desc降序
+	 * @return 球队列表
+	 */
 	public ArrayList<TeamVO> getOrderedTeamsBySeason(String season,
 			String condition, String order) {
 		// TODO 自动生成的方法存根
@@ -180,6 +191,17 @@ public class Team implements TeamBLService {
 		return result;
 	}
 
+	/**
+	 * 根据赛季得到按某项技术属性场均数据排序的球队列表
+	 * 
+	 * @param season
+	 *            赛季
+	 * @param condition
+	 *            技术属性
+	 * @param order
+	 *            排序顺序 asc升序 desc降序
+	 * @return 球队列表
+	 */
 	public ArrayList<TeamVO> getOrderedTeamsByAverage(String season,
 			String condition, String order) {
 		// TODO 自动生成的方法存根
@@ -199,6 +221,13 @@ public class Team implements TeamBLService {
 		return result;
 	}
 
+	/**
+	 * 得到球队的logo
+	 * 
+	 * @param name
+	 *            球队缩写,允许是中文名
+	 * @return 球队logo
+	 */
 	public ImageIcon getTeamImage(String name) {
 		ImageIcon icon = null;
 		try {
@@ -230,6 +259,13 @@ public class Team implements TeamBLService {
 		return teamVO;
 	}
 
+	/**
+	 * 得到某支球队的最近比赛
+	 * 
+	 * @param teamName
+	 *            球队缩写，允许是中文名
+	 * @return 该球队的最近比赛列表
+	 */
 	public ArrayList<MatchVO> getRecentMatches(String teamName) {
 		// TODO 自动生成的方法存根
 		ArrayList<MatchPO> matches = new ArrayList<MatchPO>();
@@ -362,6 +398,18 @@ public class Team implements TeamBLService {
 		}
 
 		return EN;
+	}
+
+	public ArrayList<String> getPlayersByTeam(String teamAbLocation) {
+		// TODO 自动生成的方法存根
+		ArrayList<String> result = new ArrayList<String>();
+		try {
+			result = service.getPlayersByTeam(teamAbLocation);
+		} catch (RemoteException e) {
+			// TODO 自动生成的 catch 块
+			e.printStackTrace();
+		}
+		return result;
 	}
 
 }
