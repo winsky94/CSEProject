@@ -278,22 +278,22 @@ public class Team extends UnicastRemoteObject implements TeamDataService {
 			while (resultSet.next()) {
 				String name = resultSet.getString("team");
 				int matchesNum = resultSet.getInt("matchesNum"); // 比赛场数
-				double shootHitNum = resultSet.getInt("shootHitNum"); // 投篮命中数
-				double shootAttemptNum = resultSet.getInt("shootAttemptNum"); // 投篮出手次数
-				double threeHitNum = resultSet.getInt("threeHitNum"); // 三分命中数
-				double threeAttemptNum = resultSet.getInt("threeAttemptNum"); // 三分出手数
-				double freeThrowHitNum = resultSet.getInt("freeThrowHitNum"); // 罚球命中数
+				double shootHitNum = resultSet.getDouble("shootHitNum"); // 投篮命中数
+				double shootAttemptNum = resultSet.getDouble("shootAttemptNum"); // 投篮出手次数
+				double threeHitNum = resultSet.getDouble("threeHitNum"); // 三分命中数
+				double threeAttemptNum = resultSet.getDouble("threeAttemptNum"); // 三分出手数
+				double freeThrowHitNum = resultSet.getDouble("freeThrowHitNum"); // 罚球命中数
 				double freeThrowAttemptNum = resultSet
-						.getInt("freeThrowAttemptNum"); // 罚球出手数
-				double offenReboundNum = resultSet.getInt("offenReboundNum"); // 进攻篮板数
-				double defenReboundNum = resultSet.getInt("defenReboundNum"); // 防守篮板数
-				double reboundNum = resultSet.getInt("reboundNum");// 篮板数
-				double assistNum = resultSet.getInt("assistNum");// 助攻数
-				double stealNum = resultSet.getInt("stealNum");// 抢断数
-				double blockNum = resultSet.getInt("blockNum");// 盖帽数
-				double turnOverNum = resultSet.getInt("turnOverNum");// 失误数
-				double foulNum = resultSet.getInt("foulNum");// 犯规数
-				double score = resultSet.getInt("score");// 比赛得分
+						.getDouble("freeThrowAttemptNum"); // 罚球出手数
+				double offenReboundNum = resultSet.getDouble("offenReboundNum"); // 进攻篮板数
+				double defenReboundNum = resultSet.getDouble("defenReboundNum"); // 防守篮板数
+				double reboundNum = resultSet.getDouble("reboundNum");// 篮板数
+				double assistNum = resultSet.getDouble("assistNum");// 助攻数
+				double stealNum = resultSet.getDouble("stealNum");// 抢断数
+				double blockNum = resultSet.getDouble("blockNum");// 盖帽数
+				double turnOverNum = resultSet.getDouble("turnOverNum");// 失误数
+				double foulNum = resultSet.getDouble("foulNum");// 犯规数
+				double score = resultSet.getDouble("score");// 比赛得分
 				double shootHitRate = resultSet.getDouble("shootHitRate");// 投篮命中率
 				double threeHitRate = resultSet.getDouble("threeHitRate");// 三分命中率
 				double freeThrowHitRate = resultSet
@@ -353,22 +353,22 @@ public class Team extends UnicastRemoteObject implements TeamDataService {
 				resultSet = sql.executeQuery(query);
 				resultSet.next();
 				po.setMatchesNum(resultSet.getInt("matchesNum")); // 比赛场数
-				po.setShootHitNum(resultSet.getInt("shootHitNum")); // 投篮命中数
-				po.setShootAttemptNum(resultSet.getInt("shootAttemptNum")); // 投篮出手次数
-				po.setThreeHitNum(resultSet.getInt("threeHitNum")); // 三分命中数
-				po.setThreeAttemptNum(resultSet.getInt("threeAttemptNum")); // 三分出手数
-				po.setFreeThrowHitNum(resultSet.getInt("freeThrowHitNum")); // 罚球命中数
+				po.setShootHitNum(resultSet.getDouble("shootHitNum")); // 投篮命中数
+				po.setShootAttemptNum(resultSet.getDouble("shootAttemptNum")); // 投篮出手次数
+				po.setThreeHitNum(resultSet.getDouble("threeHitNum")); // 三分命中数
+				po.setThreeAttemptNum(resultSet.getDouble("threeAttemptNum")); // 三分出手数
+				po.setFreeThrowHitNum(resultSet.getDouble("freeThrowHitNum")); // 罚球命中数
 				po.setFreeThrowAttemptNum(resultSet
-						.getInt("freeThrowAttemptNum")); // 罚球出手数
-				po.setOffenReboundNum(resultSet.getInt("offenReboundNum")); // 进攻篮板数
-				po.setDefenReboundNum(resultSet.getInt("defenReboundNum")); // 防守篮板数
-				po.setReboundNum(resultSet.getInt("reboundNum"));// 篮板数
-				po.setAssistNum(resultSet.getInt("assistNum"));// 助攻数
-				po.setStealNum(resultSet.getInt("stealNum"));// 抢断数
-				po.setBlockNum(resultSet.getInt("blockNum"));// 盖帽数
-				po.setTurnOverNum(resultSet.getInt("turnOverNum")); // 失误数
-				po.setFoulNum(resultSet.getInt("foulNum"));// 犯规数
-				po.setScore(resultSet.getInt("score"));// 比赛得分
+						.getDouble("freeThrowAttemptNum")); // 罚球出手数
+				po.setOffenReboundNum(resultSet.getDouble("offenReboundNum")); // 进攻篮板数
+				po.setDefenReboundNum(resultSet.getDouble("defenReboundNum")); // 防守篮板数
+				po.setReboundNum(resultSet.getDouble("reboundNum"));// 篮板数
+				po.setAssistNum(resultSet.getDouble("assistNum"));// 助攻数
+				po.setStealNum(resultSet.getDouble("stealNum"));// 抢断数
+				po.setBlockNum(resultSet.getDouble("blockNum"));// 盖帽数
+				po.setTurnOverNum(resultSet.getDouble("turnOverNum")); // 失误数
+				po.setFoulNum(resultSet.getDouble("foulNum"));// 犯规数
+				po.setScore(resultSet.getDouble("score"));// 比赛得分
 				po.setShootHitRate(resultSet.getDouble("shootHitRate"));// 投篮命中率
 				po.setThreeHitRate(resultSet.getDouble("threeHitRate"));// 三分命中率
 				po.setFreeThrowHitRate(resultSet.getDouble("freeThrowHitRate"));// 罚球命中率
@@ -447,21 +447,21 @@ public class Team extends UnicastRemoteObject implements TeamDataService {
 			resultSet.next();
 
 			po.setMatchesNum(resultSet.getInt("matchesNum")); // 比赛场数
-			po.setShootHitNum(resultSet.getInt("shootHitNum")); // 投篮命中数
-			po.setShootAttemptNum(resultSet.getInt("shootAttemptNum")); // 投篮出手次数
-			po.setThreeHitNum(resultSet.getInt("threeHitNum")); // 三分命中数
-			po.setThreeAttemptNum(resultSet.getInt("threeAttemptNum")); // 三分出手数
-			po.setFreeThrowHitNum(resultSet.getInt("freeThrowHitNum")); // 罚球命中数
-			po.setFreeThrowAttemptNum(resultSet.getInt("freeThrowAttemptNum")); // 罚球出手数
-			po.setOffenReboundNum(resultSet.getInt("offenReboundNum")); // 进攻篮板数
-			po.setDefenReboundNum(resultSet.getInt("defenReboundNum")); // 防守篮板数
-			po.setReboundNum(resultSet.getInt("reboundNum"));// 篮板数
-			po.setAssistNum(resultSet.getInt("assistNum"));// 助攻数
-			po.setStealNum(resultSet.getInt("stealNum"));// 抢断数
-			po.setBlockNum(resultSet.getInt("blockNum"));// 盖帽数
-			po.setTurnOverNum(resultSet.getInt("turnOverNum")); // 失误数
-			po.setFoulNum(resultSet.getInt("foulNum"));// 犯规数
-			po.setScore(resultSet.getInt("score"));// 比赛得分
+			po.setShootHitNum(resultSet.getDouble("shootHitNum")); // 投篮命中数
+			po.setShootAttemptNum(resultSet.getDouble("shootAttemptNum")); // 投篮出手次数
+			po.setThreeHitNum(resultSet.getDouble("threeHitNum")); // 三分命中数
+			po.setThreeAttemptNum(resultSet.getDouble("threeAttemptNum")); // 三分出手数
+			po.setFreeThrowHitNum(resultSet.getDouble("freeThrowHitNum")); // 罚球命中数
+			po.setFreeThrowAttemptNum(resultSet.getDouble("freeThrowAttemptNum")); // 罚球出手数
+			po.setOffenReboundNum(resultSet.getDouble("offenReboundNum")); // 进攻篮板数
+			po.setDefenReboundNum(resultSet.getDouble("defenReboundNum")); // 防守篮板数
+			po.setReboundNum(resultSet.getDouble("reboundNum"));// 篮板数
+			po.setAssistNum(resultSet.getDouble("assistNum"));// 助攻数
+			po.setStealNum(resultSet.getDouble("stealNum"));// 抢断数
+			po.setBlockNum(resultSet.getDouble("blockNum"));// 盖帽数
+			po.setTurnOverNum(resultSet.getDouble("turnOverNum")); // 失误数
+			po.setFoulNum(resultSet.getDouble("foulNum"));// 犯规数
+			po.setScore(resultSet.getDouble("score"));// 比赛得分
 			po.setShootHitRate(resultSet.getDouble("shootHitRate"));// 投篮命中率
 			po.setThreeHitRate(resultSet.getDouble("threeHitRate"));// 三分命中率
 			po.setFreeThrowHitRate(resultSet.getDouble("freeThrowHitRate"));// 罚球命中率
