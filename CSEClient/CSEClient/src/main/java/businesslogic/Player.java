@@ -127,12 +127,12 @@ public class Player implements PlayerBLService {
 	}
 
 	public ArrayList<PlayerVO> getOrderedPlayersBySeason(String season,
-			String condition, String order) throws RemoteException {
+			String condition, String order,int num) throws RemoteException {
 		// TODO 自动生成的方法存根
 		ArrayList<PlayerVO> result = new ArrayList<PlayerVO>();
 		try {
 			ArrayList<PlayerPO> data = service.getOrderedPlayersBySeason(
-					season, condition, order);
+					season, condition, order,num);
 
 			for (PlayerPO po : data) {
 				PlayerVO vo = poTovo(po);
@@ -147,12 +147,12 @@ public class Player implements PlayerBLService {
 	}
 
 	public ArrayList<PlayerVO> getOrderedPlayersByAverage(String season,
-			String condition, String order) {
+			String condition, String order,int num) {
 		// TODO 自动生成的方法存根
 		ArrayList<PlayerVO> result = new ArrayList<PlayerVO>();
 		try {
 			ArrayList<PlayerPO> data = service.getOrderedPlayersByAverage(
-					season, condition, order);
+					season, condition, order,num);
 
 			for (PlayerPO po : data) {
 				PlayerVO vo = poTovo(po);
