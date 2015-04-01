@@ -212,7 +212,9 @@ public class Player implements PlayerBLService {
 		return result;
 	}
 
-	 /** 获得球员的全身照路径
+	/**
+	 * 获得球员的全身照路径
+	 * 
 	 * @param name球员名
 	 * @return
 	 * @throws RemoteException
@@ -223,66 +225,68 @@ public class Player implements PlayerBLService {
 
 	/**
 	 * 获得球员的大头照路径
+	 * 
 	 * @param name球员名
 	 * @return
 	 * @throws RemoteException
 	 */
-	public String getPortraitPhotoPath(String name){
+	public String getPortraitPhotoPath(String name) {
 		return "src/data/players/portrait/" + name + ".png";
 	}
-	
+
 	/**
 	 * 获得球员的全身照
+	 * 
 	 * @param name球员名
 	 * @return
 	 */
 	public ImageIcon getPlayerActionImage(String name) {
-		String address=getActionPhotoPath(name);
-		File file=new File(address);
-		if(!file.exists()){
-			address="src/data/players/lose.jpg";
-		}
-		ImageIcon imageIcon=new ImageIcon(address);
-		return imageIcon;
-	}
-
-     /**
-	 * 获得球员的大头照路径
-	 * @param name球员名
-	 * @return
-	 */
-	public ImageIcon getPlayerPortraitImage(String name) {
-		String address=getPortraitPhotoPath(name);
-		File file=new File(address);
-		if(!file.exists()){
-			address="src/data/players/lose.jpg";
+		String address = getActionPhotoPath(name);
+		File file = new File(address);
+		if (!file.exists()) {
+			address = "src/data/players/lose.jpg";
 		}
 		ImageIcon imageIcon = new ImageIcon(address);
 		return imageIcon;
 	}
 
-	
-//	public ImageIcon getPlayerPortraitImage(String name) {
-//		ImageIcon icon = null;
-//		try {
-//			icon = service.getPlayerPortraitImage(name);
-//		} catch (RemoteException e) {
-//			// TODO 自动生成的 catch 块
-//			e.printStackTrace();
-//		}
-//		return icon;
-//	}
-//
-//	public ImageIcon getPlayerActionImage(String name) {
-//		ImageIcon icon = null;
-//		try {
-//			icon = service.getPlayerActionImage(name);
-//		} catch (RemoteException e) {
-//			// TODO 自动生成的 catch 块
-//			e.printStackTrace();
-//		}
-//		return icon;
-//	}
+	/**
+	 * 获得球员的大头照路径
+	 * 
+	 * @param name球员名
+	 * @return
+	 */
+	public ImageIcon getPlayerPortraitImage(String name) {
+		String address = getPortraitPhotoPath(name);
+		File file = new File(address);
+		if (!file.exists()) {
+			address = "src/data/players/lose.jpg";
+		}
+		ImageIcon imageIcon = new ImageIcon(address);
+		return imageIcon;
+	}
+
+	// public ImageIcon getPlayerPortraitImage(String name) {
+	// ImageIcon icon = null;
+	// try {
+	// icon = service.getPlayerPortraitImage(name);
+	// } catch (RemoteException e) {
+	// // TODO 自动生成的 catch 块
+	// e.printStackTrace();
+	// }
+	// return icon;
+	// }
+	//
+	// public ImageIcon getPlayerActionImage(String name) {
+	// ImageIcon icon = null;
+	// try {
+	// icon = service.getPlayerActionImage(name);
+	// } catch (RemoteException e) {
+	// // TODO 自动生成的 catch 块
+	// e.printStackTrace();
+	// }
+	// return icon;
+	// }
 
 	public static PlayerVO poTovo(PlayerPO po) {
 		int exp = po.getExp();
@@ -349,12 +353,11 @@ public class Player implements PlayerBLService {
 			EN = "freeThrowHitRate";
 		} else if (CH.equals("两双")) {
 			EN = "doubleDoubleNum";
-		} else if (CH.equals("赛季")){
-			EN="season";
-		}else if(CH.equals("场均")){
-			EN="average";
-		}
-		else {
+		} else if (CH.equals("赛季")) {
+			EN = "season";
+		} else if (CH.equals("场均")) {
+			EN = "average";
+		} else {
 			EN = CH;
 		}
 		return EN;
@@ -391,10 +394,29 @@ public class Player implements PlayerBLService {
 	 * @return 对应的英文
 	 */
 	private String changeUnionCHToEN(String CH) {
+
+		// "全部", "西部球队", "西北分区", "太平洋分区", "西南分区", "东部球队",
+		// "大西洋分区", "中央分区", "东南分区"
 		String EN = null;
 		if (CH.equals("全部")) {
 			EN = "all";
-		} else {
+		} else if (CH.equals("西部球队")) {
+			EN = "W";
+		} else if (CH.equals("西北分区")) {
+			EN = "Northwest";
+		} else if (CH.equals("太平洋分区")) {
+			EN = "Pacific";
+		} else if (CH.equals("西南分区")) {
+			EN = "Southwest";
+		} else if (CH.equals("东部球队")) {
+			EN = "E";
+		} else if (CH.equals("大西洋分区")) {
+			EN = "Atlantic";
+		} else if (CH.equals("中央分区")) {
+			EN = "Central";
+		} else if (CH.equals("东南分区")) {
+			EN = "Southeast";
+		} else  {
 			EN = CH;
 		}
 		return EN;
@@ -452,7 +474,6 @@ public class Player implements PlayerBLService {
 		return result;
 	}
 
-	
 	public ArrayList<PlayerVO> getPlayersByInitialName(char character) {
 		ArrayList<PlayerPO> players = new ArrayList<PlayerPO>();
 		ArrayList<PlayerVO> result = new ArrayList<PlayerVO>();
@@ -468,7 +489,7 @@ public class Player implements PlayerBLService {
 		}
 		return result;
 	}
-	
+
 	public ArrayList<MatchVO> getRecentMatches(String playerName)
 			throws RemoteException {
 		// TODO 自动生成的方法存根
@@ -520,8 +541,6 @@ public class Player implements PlayerBLService {
 		}
 		return result;
 	}
-
-	
 
 	// /**
 	// * 将球员的位置由英文转为中文
