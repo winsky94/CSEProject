@@ -260,11 +260,11 @@ public class Team implements TeamBLService {
 	}
 
 	/**
-	 * 得到某支球队的最近比赛
+	 * 得到某支球队的最近五场比赛
 	 * 
 	 * @param teamName
 	 *            球队缩写，允许是中文名
-	 * @return 该球队的最近比赛列表
+	 * @return 该球队的最近五场比赛列表
 	 */
 	public ArrayList<MatchVO> getRecentMatches(String teamName) {
 		// TODO 自动生成的方法存根
@@ -284,6 +284,13 @@ public class Team implements TeamBLService {
 		return result;
 	}
 
+	/**
+	 * 得到某支球队的比赛
+	 * 
+	 * @param teamName
+	 *            球队缩写，允许是中文名
+	 * @return 该球队的比赛列表
+	 */
 	public ArrayList<MatchVO> getMatches(String teamName) {
 		// TODO 自动生成的方法存根
 		ArrayList<MatchPO> matches = new ArrayList<MatchPO>();
@@ -302,6 +309,15 @@ public class Team implements TeamBLService {
 		return result;
 	}
 
+	/**
+	 * 根据某一技术属性得到某赛季的热点球队
+	 * 
+	 * @param season
+	 *            赛季
+	 * @param column
+	 *            技术属性，允许是中文
+	 * @return 热点球队的列表
+	 */
 	public ArrayList<TeamVO> getSeasonHotTeam(String season, String column) {
 		// TODO 自动生成的方法存根
 		ArrayList<TeamPO> teams = new ArrayList<TeamPO>();
@@ -331,6 +347,13 @@ public class Team implements TeamBLService {
 		return EN;
 	}
 
+	/**
+	 * 将球队中文名转为相应的英文缩写
+	 * 
+	 * @param CH
+	 *            球队中文名
+	 * @return 英文缩写
+	 */
 	public static String changeTeamNameCHToEN(String CH) {
 		String EN = "";
 		if (CH.equals("太阳")) {
@@ -400,10 +423,18 @@ public class Team implements TeamBLService {
 		return EN;
 	}
 
+	/**
+	 * 根据球队名称得到该球队的球员姓名列表
+	 * 
+	 * @param teamAbLocation
+	 *            球队缩写，允许是中文名称
+	 * @return 球员姓名列表
+	 */
 	public ArrayList<String> getPlayersByTeam(String teamAbLocation) {
 		// TODO 自动生成的方法存根
 		ArrayList<String> result = new ArrayList<String>();
 		try {
+			teamAbLocation = changeTeamNameCHToEN(teamAbLocation);
 			result = service.getPlayersByTeam(teamAbLocation);
 		} catch (RemoteException e) {
 			// TODO 自动生成的 catch 块
