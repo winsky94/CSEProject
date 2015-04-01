@@ -96,7 +96,7 @@ public class MyTableCellRenderer extends DefaultTableCellRenderer {
 		if (row % 2 == 1)
 			setBackground(Color.white); // 设置奇数行底色
 		else if (row % 2 == 0)
-			setBackground(new Color(225, 255, 255)); // 设置偶数行底色
+			setBackground(new Color(246, 246, 246)); // 设置偶数行底色
 
 		for (int i = 0; i < rowList.size(); i++) {
 			if (row == rowList.get(i)) {
