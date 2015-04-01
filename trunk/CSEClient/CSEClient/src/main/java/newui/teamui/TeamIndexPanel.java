@@ -95,6 +95,11 @@ public class TeamIndexPanel extends FatherPanel implements MouseListener {
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
 
+		if(e.getSource()==refreshLbl){
+			ttm.Refresh(typeBox.getSelectedItem().toString());
+			table.revalidate();
+		}
+
 	}
 
 	public void mousePressed(MouseEvent e) {

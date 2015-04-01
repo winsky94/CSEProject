@@ -75,6 +75,7 @@ public class PlayerIndexPanel extends FatherPanel implements MouseListener {
 		funcPnl.add(teamBox);
 		// -----刷新--------------
 		refreshLbl = new MyLabel("刷新", new ImageIcon("image/refreshWhite.png"));
+		refreshLbl.addMouseListener(this);
 		funcPnl.add(refreshLbl);
 		// ------切换至列表排名模式----
 		modeLbl = new MyLabel("至排名模式", new ImageIcon(
@@ -155,6 +156,10 @@ public class PlayerIndexPanel extends FatherPanel implements MouseListener {
 		if(e.getSource() instanceof MyCharacter){
 			String sort=((MyCharacter)e.getSource()).getText();
 			pitm.sortByCharacter(sort);
+			table.revalidate();
+		}
+		if(e.getSource()==refreshLbl){
+			pitm.Refresh();
 			table.revalidate();
 		}
 
