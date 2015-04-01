@@ -58,6 +58,7 @@ public class Team implements TeamBLService {
 	public ArrayList<TeamVO> getTeamSeasonInfo(String season) {
 		// TODO 自动生成的方法存根
 		ArrayList<TeamVO> result = new ArrayList<TeamVO>();
+		season=changeColumnCHToEN(season);
 		try {
 			ArrayList<TeamPO> teams = service.getTeamSeasonInfo(season);
 			for (TeamPO po : teams) {
@@ -80,6 +81,7 @@ public class Team implements TeamBLService {
 	public ArrayList<TeamVO> getTeamAverageInfo(String season) {
 		// TODO 自动生成的方法存根
 		ArrayList<TeamVO> result = new ArrayList<TeamVO>();
+		season=changeColumnCHToEN(season);
 		try {
 			ArrayList<TeamPO> teams = service.getTeamAverageInfo(season);
 			for (TeamPO po : teams) {
@@ -123,6 +125,7 @@ public class Team implements TeamBLService {
 	public TeamVO getTeamSeasonInfo(String season, String name) {
 		// TODO 自动生成的方法存根
 		TeamVO teamVO = null;
+		season=changeColumnCHToEN(season);
 		try {
 			TeamPO po = service.getTeamSeasonInfo(season, name);
 			teamVO = poToVo(po);
@@ -144,6 +147,7 @@ public class Team implements TeamBLService {
 	public TeamVO getTeamAverageInfo(String season, String name) {
 		// TODO 自动生成的方法存根
 		TeamVO teamVO = null;
+		season=changeColumnCHToEN(season);
 		try {
 			TeamPO po = service.getTeamAverageInfo(season, name);
 			teamVO = poToVo(po);
@@ -157,6 +161,7 @@ public class Team implements TeamBLService {
 	public ArrayList<TeamVO> getOrderedTeamsBySeason(String season,
 			String condition, String order) {
 		// TODO 自动生成的方法存根
+		season=changeColumnCHToEN(season);
 		ArrayList<TeamVO> result = new ArrayList<TeamVO>();
 		try {
 			ArrayList<TeamPO> teams = service.getOrderedTeamsBySeason(season,
@@ -175,6 +180,7 @@ public class Team implements TeamBLService {
 	public ArrayList<TeamVO> getOrderedTeamsByAverage(String season,
 			String condition, String order) {
 		// TODO 自动生成的方法存根
+		season=changeColumnCHToEN(season);
 		ArrayList<TeamVO> result = new ArrayList<TeamVO>();
 		try {
 			ArrayList<TeamPO> teams = service.getOrderedTeamsByAverage(season,
@@ -269,6 +275,18 @@ public class Team implements TeamBLService {
 			e.printStackTrace();
 		}
 		return result;
+	}
+	
+	private String changeColumnCHToEN(String CH) {
+		String EN = null;
+		if (CH.equals("赛季")) {
+			EN = "season";
+		} else if (CH.equals("场均")) {
+			EN = "average";
+		} else {
+			EN = CH;
+		}
+		return EN;
 	}
 
 }

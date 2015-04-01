@@ -10,14 +10,26 @@ public class MySortableTable extends JTable {
 	 * 计划让所有需要排序的表格都继承此类
 	 */
 	private static final long serialVersionUID = 1L;
-//	TableRowSorter<TableModel> sorter;
-	TableSorter sorter;
+	TableRowSorter<TableModel> sorterTeam;
+	TableSorter sorterPlayer;
 
-	public MySortableTable(TableModel model) {
+/**
+ * 
+ * @param model
+ * @param mode  mode为0代表球员，mode为1代表球队
+ */
+	public MySortableTable(TableModel model,int mode) {
 		super(model);
 		setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-		sorter = new TableSorter(model);
-		setRowSorter(sorter);
+		if(mode==0){
+		  sorterPlayer = new TableSorter(model);
+		  setRowSorter(sorterPlayer);
+		}
+		else{ 
+		  sorterTeam = new TableRowSorter<TableModel>(model);
+		  setRowSorter(sorterTeam);
+		}
+		
 	}
 
 }
