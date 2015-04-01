@@ -18,6 +18,7 @@ import newui.FatherPanel;
 import newui.Style;
 import newui.tables.MySortableTable;
 import newui.tables.MyTableCellRenderer;
+import newui.tables.RowHeaderTable;
 import newui.tables.TeamTableModel;
 
 public class TeamIndexPanel extends FatherPanel implements MouseListener {
@@ -78,6 +79,8 @@ public class TeamIndexPanel extends FatherPanel implements MouseListener {
 		}
 
 		jsp = new JScrollPane(table);
+		// 设置显示行号
+		jsp.setRowHeaderView(new RowHeaderTable(table, 30));
 
 		gbc.gridy = 2;
 		gbc.gridheight = 10;
@@ -88,14 +91,14 @@ public class TeamIndexPanel extends FatherPanel implements MouseListener {
 		// ====初始化数据=====
 		ttm.Refresh(typeBox.getSelectedItem().toString());
 		table.revalidate();
-		MyTableCellRenderer.adjustTableColumnWidths(table);//自动设置列宽
+		MyTableCellRenderer.adjustTableColumnWidths(table);// 自动设置列宽
 
 	}
 
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
 
-		if(e.getSource()==refreshLbl){
+		if (e.getSource() == refreshLbl) {
 			ttm.Refresh(typeBox.getSelectedItem().toString());
 			table.revalidate();
 		}
