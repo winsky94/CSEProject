@@ -1,20 +1,23 @@
 package newui.teamui;
 
 import java.awt.Color;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
+import java.awt.Font;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JTabbedPane;
 
 import newui.FatherPanel;
+import newui.TabbedPaneUI;
 
 public class TeamDetailPanel extends FatherPanel{
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	JPanel playerPnl,infoPnl,namePnl;
+	JPanel playerPnl,namePnl,tabPnl;
+	JPanel infoPnl,recentPnl,historyPnl;
+	Font font = new Font("微软雅黑", Font.PLAIN, 14);
 	public TeamDetailPanel(String name){
 		//----------------------
 		namePnl=new JPanel();
@@ -36,16 +39,25 @@ public class TeamDetailPanel extends FatherPanel{
 		gbl.setConstraints(playerPnl, gbc);
 		add(playerPnl);
 		//-----------------------
-		infoPnl=new JPanel();
-		infoPnl.setBackground(Color.yellow);
+		tabPnl=new JPanel();
 		gbc.gridx=3;
 		gbc.gridy=1;
 		gbc.gridwidth=7;
-		gbc.gridheight=10;
+		gbc.gridheight=1;
 		gbc.weightx=7;
-		gbc.weighty=100;
-		gbl.setConstraints(infoPnl, gbc);
-		add(infoPnl);
+		gbc.weighty=10;
+		gbl.setConstraints(tabPnl, gbc);
+		add(tabPnl);
+		//-------------------------
+		infoPnl=new JPanel();
+		gbc.gridx=3;
+		gbc.gridy=1;
+		gbc.gridwidth=7;
+		gbc.gridheight=1;
+		gbc.weightx=7;
+		gbc.weighty=10;
+		gbl.setConstraints(tabPnl, gbc);
+		add(tabPnl);
 	}
 	public static void main(String[] args) {
 		JFrame f=new JFrame();
