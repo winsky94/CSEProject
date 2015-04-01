@@ -16,6 +16,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 
+import businesslogicservice.PlayerBLService;
 import newui.FatherPanel;
 import newui.Style;
 import newui.mainui.MainFrame;
@@ -33,7 +34,7 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener {
 	 */
 	private static final long serialVersionUID = 1L;
 	JPanel funcPnl;
-	private Player player;
+	private PlayerBLService player;
 	// --------------
 	JScrollPane jsp;
 	JTable table;
@@ -50,6 +51,7 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener {
 			"盖帽", "抢断", "罚球", "犯规", "失误", "分钟", "效率", "两双" };
 
 	public PlayerRankPanel() {
+		player=new Player();
 		// ------funcPnl--------
 		funcPnl = new JPanel();
 		funcPnl.setBackground(Style.BACK_GREY);
@@ -94,7 +96,7 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener {
 		// ----DataType---------
 		JLabel typeLbl = new MyJLabel("数据类型：");
 		funcPnl.add(typeLbl);
-		String[] typeText = { "场均", "赛季" };
+		String[] typeText = { "赛季", "场均" };
 		typeBox = new MyComboBox(typeText);
 		funcPnl.add(typeBox);
 		funcPnl.add(new JLabel("       "));

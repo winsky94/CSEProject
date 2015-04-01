@@ -11,11 +11,15 @@ public class TableSorter<M extends TableModel> extends   TableRowSorter{
 	private static final Comparator COMPARABLE_COMPARATOR =
             new ComparableComparator();
 	
+	public TableSorter(TableModel model) {
+		super(model);
+	}
+
 	@Override
 
 	  public Comparator<?> getComparator(int column) {
 		if(column==6){
-			
+			return new PlayerTableComparator();
 			
 		}else{
 	        Comparator comparator = super.getComparator(column);
