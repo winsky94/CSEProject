@@ -21,8 +21,8 @@ import javax.swing.table.DefaultTableCellRenderer;
 import newui.FatherPanel;
 import newui.Style;
 import newui.mainui.MainFrame;
+import newui.tables.MyTableCellRenderer;
 import newui.tables.PlayerBaseInfoTableModel;
-import presentation.MyTableCellRenderer;
 
 public class PlayerIndexPanel extends FatherPanel implements MouseListener {
 	/**
@@ -83,9 +83,6 @@ public class PlayerIndexPanel extends FatherPanel implements MouseListener {
 		// ----jsp--------------
 		table = new JTable(pitm);
 		// table 渲染器，设置文字内容居中显示，设置背景色等
-		// table.setBackground(new Color(248,248,255));//设置背景颜色204, 204, 255
-		// table.setForeground(new Color(128, 0, 0));//
-		// 设置字体颜色，但标题不会改变——新设置的字体颜色丑死了，我还是注释掉吧
 		table.setSelectionBackground(new java.awt.Color(218, 112, 214));// 设置选择行的颜色——兰花紫
 		table.setFont(new Font("微软雅黑", 0, 12));
 		table.getTableHeader().setFont(new Font("微软雅黑", 0, 14));
