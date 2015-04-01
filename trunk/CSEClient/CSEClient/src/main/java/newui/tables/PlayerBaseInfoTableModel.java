@@ -83,7 +83,11 @@ public class PlayerBaseInfoTableModel extends MyTableModel {
 		ArrayList<ImageIcon> listimg = new ArrayList<ImageIcon>();
 		for (int i = 0; i < playerlist.size(); i++) {
 			String name = playerlist.get(i).getTeamName();
-			
+			if(tName.equals("按球队查找")){
+				sortByC=playerlist;
+				listimg=imgList;
+				break;
+			}
 			if (name.contains(Team.changeTeamNameCHToEN(tName))) {
 				sortByC.add(playerlist.get(i));
 				listimg.add(imgList.get(i));
