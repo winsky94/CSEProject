@@ -75,6 +75,7 @@ public class PlayerBaseInfoTableModel extends MyTableModel {
 				listimg.add(imgList.get(i));
 			}	
 		}
+		System.out.println(sortByC.size());
 		SortRefresh(sortByC, listimg);
 	}
 	
@@ -136,6 +137,7 @@ public class PlayerBaseInfoTableModel extends MyTableModel {
 			line.add(vo.getAge());
 			line.add(vo.getExp());
 			content.add(line);
+			currentTable.revalidate();
 			i++;
 			
 		}
@@ -166,6 +168,7 @@ public class PlayerBaseInfoTableModel extends MyTableModel {
 			line.add(vo.getAge());
 			line.add(vo.getExp());
 			content.add(line);
+			currentTable.revalidate();
 			i++;
 			
 		}
