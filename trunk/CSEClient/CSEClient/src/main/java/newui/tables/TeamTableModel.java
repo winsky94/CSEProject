@@ -5,14 +5,15 @@ import java.util.ArrayList;
 import presentation.Mainui.MyTableModel;
 import vo.TeamVO;
 import businesslogic.Team;
+import businesslogicservice.TeamBLService;
 
 public class TeamTableModel extends MyTableModel {
 	/**
 	 * 
 	 */
-	
+
 	private static final long serialVersionUID = 1L;
-	Team team = new Team();
+	TeamBLService team = new Team();
 	ArrayList<ArrayList<Object>> content = new ArrayList<ArrayList<Object>>();
 	static String[] head = { "球队名称", "比赛场数", "投篮命中数", "投篮出手次数", "投篮命中率",
 			"三分命中数", "三分出手数", "三分命中率", "罚球命中数", "罚球出手数", "罚球命中率", "进攻篮板数",
@@ -34,7 +35,6 @@ public class TeamTableModel extends MyTableModel {
 		// TODO Auto-generated method stub
 		return content.size();
 	}
-	
 
 	public int getColumnCount() {
 		// TODO Auto-generated method stub
@@ -80,13 +80,13 @@ public class TeamTableModel extends MyTableModel {
 			ArrayList<Object> line = new ArrayList<Object>();
 			line.add(vo.getTeamName());
 			line.add(vo.getMatchesNum());
-			line.add(vo.getShootHitNum() );
+			line.add(vo.getShootHitNum());
 			line.add(vo.getShootAttemptNum());
 			line.add(vo.getShootHitRate());
 			line.add(vo.getThreeHitNum());
 			line.add(vo.getThreeAttemptNum());
-			line.add(vo.getThreeHitRate() );
-			line.add(vo.getFreeThrowHitNum() );
+			line.add(vo.getThreeHitRate());
+			line.add(vo.getFreeThrowHitNum());
 			line.add(vo.getFreeThrowAttemptNum());
 			line.add(vo.getFreeThrowHitRate());
 			line.add(vo.getOffenReboundNum());
@@ -96,11 +96,11 @@ public class TeamTableModel extends MyTableModel {
 			line.add(vo.getOffenRound());
 			line.add(vo.getOffenEfficiency());
 			line.add(vo.getDefenEfficiency());
-			line.add(vo.getAssistNum() );
-			line.add(vo.getAssistEfficiency() );
+			line.add(vo.getAssistNum());
+			line.add(vo.getAssistEfficiency());
 			line.add(vo.getStealNum());
-			line.add(vo.getStealEfficiency() );
-			line.add(vo.getBlockNum() );
+			line.add(vo.getStealEfficiency());
+			line.add(vo.getBlockNum());
 			line.add(vo.getTurnOverNum());
 			line.add(vo.getFoulNum());
 			line.add(vo.getScore());
