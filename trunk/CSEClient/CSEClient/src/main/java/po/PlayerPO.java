@@ -20,7 +20,7 @@ public class PlayerPO implements Serializable {
 	private int gameStartingNum;// 先发场数
 	private int reboundNum;// 篮板数
 	private int assistNum;// 助攻数
-	private String presentTime;// 在场时间
+	private double presentTime;// 在场时间
 	private double shootHitRate;// 投篮命中率
 	private double threeHitRate;// 三分命中率
 	private double freeThrowHitRate;// 罚球命中率
@@ -120,7 +120,7 @@ public class PlayerPO implements Serializable {
 		return gameStartingNum;
 	}
 
-	public String getPresentTime() {
+	public double getPresentTime() {
 		return presentTime;
 	}
 
@@ -297,7 +297,7 @@ public class PlayerPO implements Serializable {
 		this.gameStartingNum = gameStartingNum;
 	}
 
-	public void setPresentTime(String presentTime) {
+	public void setPresentTime(double presentTime) {
 		this.presentTime = presentTime;
 	}
 
