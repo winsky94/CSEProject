@@ -119,7 +119,8 @@ public class Team extends UnicastRemoteObject implements TeamDataService {
 		try {
 			connection = SqlManager.getConnection();
 			sql = connection.createStatement();
-			String query = "select * from teams where abLocation='" + name + "'";
+			String query = "select * from teams where abLocation='" + name
+					+ "'or teamName='" + name + "'";
 			resultSet = sql.executeQuery(query);
 			resultSet.next();
 			int id = resultSet.getInt("id");
@@ -219,7 +220,7 @@ public class Team extends UnicastRemoteObject implements TeamDataService {
 	 * @return
 	 */
 	public String getPhotoPath(String abLocation) {
-		return "src/迭代一数据/teamsPng/" + abLocation + ".png";
+		return "src/data/teamsPng/" + abLocation + ".png";
 	}
 
 	public ImageIcon getTeamImage(String name) throws RemoteException {
@@ -644,7 +645,7 @@ public class Team extends UnicastRemoteObject implements TeamDataService {
 				String abLocation = rs.getString("team");
 				Statement stat = connection.createStatement();
 				String query2 = "select * from teams where abLocation ='"
-						+ abLocation+"'";
+						+ abLocation + "'";
 				ResultSet resultSet = stat.executeQuery(query2);
 				resultSet.next();
 				// 基础信息
