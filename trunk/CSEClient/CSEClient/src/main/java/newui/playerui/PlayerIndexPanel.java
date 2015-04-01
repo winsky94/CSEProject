@@ -32,7 +32,7 @@ public class PlayerIndexPanel extends FatherPanel implements MouseListener {
 	JPanel funcPnl;
 	
 	MyLabel refreshLbl, modeLbl;
-	String[] teams = { "按球队查找", "掘金", "森林狼", "雷霆", "开拓者", "爵士", "勇士", "快船",
+	String[] teams = { "全部", "掘金", "森林狼", "雷霆", "开拓者", "爵士", "勇士", "快船",
 			"湖人", "太阳", "国王", "小牛", "火箭", "灰熊", "鹈鹕", "马刺", "凯尔特人", "篮网",
 			"尼克斯", "76人", "猛龙", "公牛", "骑士", "活塞", "步行者", "雄鹿", "老鹰", "黄蜂",
 			"热火", "魔术", "奇才" };
@@ -158,6 +158,7 @@ public class PlayerIndexPanel extends FatherPanel implements MouseListener {
 		if(e.getSource() instanceof MyCharacter){
 			String sort=((MyCharacter)e.getSource()).getText();
 			sort=sort.trim();
+			teamBox.setSelectedIndex(0);
 			pitm.sortByCharacter(sort);
 			table.revalidate();
 			
