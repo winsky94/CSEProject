@@ -95,7 +95,7 @@ public class Player extends UnicastRemoteObject implements PlayerDataService {
 				player.setGameStartingNum(rs.getInt("gameStartingNum"));
 				player.setReboundNum(rs.getInt("reboundNum"));
 				player.setAssistNum(rs.getInt("assistNum"));
-				player.setPresentTime(rs.getString("presentTime"));
+				player.setPresentTime(rs.getDouble("presentTime"));
 				player.setShootHitRate(rs.getDouble("shootHitRate"));
 				player.setThreeHitRate(rs.getDouble("threeHitRate"));
 				player.setFreeThrowHitRate(rs.getDouble("freeThrowHitRate"));
@@ -214,7 +214,7 @@ public class Player extends UnicastRemoteObject implements PlayerDataService {
 			player.setGameStartingNum(rs.getInt("gameStartingNum"));
 			player.setReboundNum(rs.getInt("reboundNum"));
 			player.setAssistNum(rs.getInt("assistNum"));
-			player.setPresentTime(rs.getString("presentTime"));
+			player.setPresentTime(rs.getDouble("presentTime"));
 			player.setShootHitRate(rs.getDouble("shootHitRate"));
 			player.setThreeHitRate(rs.getDouble("threeHitRate"));
 			player.setFreeThrowHitRate(rs.getDouble("freeThrowHitRate"));
@@ -281,7 +281,7 @@ public class Player extends UnicastRemoteObject implements PlayerDataService {
 				player.setGameStartingNum(rs.getInt("gameStartingNum"));
 				player.setReboundNum(rs.getInt("reboundNum"));
 				player.setAssistNum(rs.getInt("assistNum"));
-				player.setPresentTime(rs.getString("presentTime"));
+				player.setPresentTime(rs.getDouble("presentTime"));
 				player.setShootHitRate(rs.getDouble("shootHitRate"));
 				player.setThreeHitRate(rs.getDouble("threeHitRate"));
 				player.setFreeThrowHitRate(rs.getDouble("freeThrowHitRate"));
@@ -355,7 +355,7 @@ public class Player extends UnicastRemoteObject implements PlayerDataService {
 			player.setGameStartingNum(rs.getInt("gameStartingNum"));
 			player.setReboundNum(rs.getInt("reboundNum"));
 			player.setAssistNum(rs.getInt("assistNum"));
-			player.setPresentTime(rs.getString("presentTime"));
+			player.setPresentTime(rs.getDouble("presentTime"));
 			player.setShootHitRate(rs.getDouble("shootHitRate"));
 			player.setThreeHitRate(rs.getDouble("threeHitRate"));
 			player.setFreeThrowHitRate(rs.getDouble("freeThrowHitRate"));
@@ -461,7 +461,7 @@ public class Player extends UnicastRemoteObject implements PlayerDataService {
 				player.setGameStartingNum(rs.getInt("gameStartingNum"));
 				player.setReboundNum(rs.getInt("reboundNum"));
 				player.setAssistNum(rs.getInt("assistNum"));
-				player.setPresentTime(rs.getString("presentTime"));
+				player.setPresentTime(rs.getDouble("presentTime"));
 				player.setShootHitRate(rs.getDouble("shootHitRate"));
 				player.setThreeHitRate(rs.getDouble("threeHitRate"));
 				player.setFreeThrowHitRate(rs.getDouble("freeThrowHitRate"));
@@ -564,7 +564,7 @@ public class Player extends UnicastRemoteObject implements PlayerDataService {
 						player.setGameStartingNum(rs.getInt("gameStartingNum"));
 						player.setReboundNum(rs.getInt("reboundNum"));
 						player.setAssistNum(rs.getInt("assistNum"));
-						player.setPresentTime(rs.getString("presentTime"));
+						player.setPresentTime(rs.getDouble("presentTime"));
 						player.setShootHitRate(rs.getDouble("shootHitRate"));
 						player.setThreeHitRate(rs.getDouble("threeHitRate"));
 						player.setFreeThrowHitRate(rs
@@ -621,7 +621,7 @@ public class Player extends UnicastRemoteObject implements PlayerDataService {
 					player.setGameStartingNum(rs.getInt("gameStartingNum"));
 					player.setReboundNum(rs.getInt("reboundNum"));
 					player.setAssistNum(rs.getInt("assistNum"));
-					player.setPresentTime(rs.getString("presentTime"));
+					player.setPresentTime(rs.getDouble("presentTime"));
 					player.setShootHitRate(rs.getDouble("shootHitRate"));
 					player.setThreeHitRate(rs.getDouble("threeHitRate"));
 					player.setFreeThrowHitRate(rs.getDouble("freeThrowHitRate"));
@@ -673,7 +673,7 @@ public class Player extends UnicastRemoteObject implements PlayerDataService {
 						player.setGameStartingNum(rs.getInt("gameStartingNum"));
 						player.setReboundNum(rs.getInt("reboundNum"));
 						player.setAssistNum(rs.getInt("assistNum"));
-						player.setPresentTime(rs.getString("presentTime"));
+						player.setPresentTime(rs.getDouble("presentTime"));
 						player.setShootHitRate(rs.getDouble("shootHitRate"));
 						player.setThreeHitRate(rs.getDouble("threeHitRate"));
 						player.setFreeThrowHitRate(rs
@@ -729,7 +729,7 @@ public class Player extends UnicastRemoteObject implements PlayerDataService {
 					player.setGameStartingNum(rs.getInt("gameStartingNum"));
 					player.setReboundNum(rs.getInt("reboundNum"));
 					player.setAssistNum(rs.getInt("assistNum"));
-					player.setPresentTime(rs.getString("presentTime"));
+					player.setPresentTime(rs.getDouble("presentTime"));
 					player.setShootHitRate(rs.getDouble("shootHitRate"));
 					player.setThreeHitRate(rs.getDouble("threeHitRate"));
 					player.setFreeThrowHitRate(rs.getDouble("freeThrowHitRate"));
