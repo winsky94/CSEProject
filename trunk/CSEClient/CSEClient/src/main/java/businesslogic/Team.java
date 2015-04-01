@@ -295,7 +295,7 @@ public class Team implements TeamBLService {
 		return EN;
 	}
 
-	private String changeTeamNameCHToEN(String CH) {
+	public static String changeTeamNameCHToEN(String CH) {
 		String EN = "";
 		if (CH.equals("太阳")) {
 			EN = "PHX";
