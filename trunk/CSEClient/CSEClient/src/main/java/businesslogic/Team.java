@@ -58,7 +58,7 @@ public class Team implements TeamBLService {
 	public ArrayList<TeamVO> getTeamSeasonInfo(String season) {
 		// TODO 自动生成的方法存根
 		ArrayList<TeamVO> result = new ArrayList<TeamVO>();
-		season=changeColumnCHToEN(season);
+		season = changeColumnCHToEN(season);
 		try {
 			ArrayList<TeamPO> teams = service.getTeamSeasonInfo(season);
 			for (TeamPO po : teams) {
@@ -81,7 +81,7 @@ public class Team implements TeamBLService {
 	public ArrayList<TeamVO> getTeamAverageInfo(String season) {
 		// TODO 自动生成的方法存根
 		ArrayList<TeamVO> result = new ArrayList<TeamVO>();
-		season=changeColumnCHToEN(season);
+		season = changeColumnCHToEN(season);
 		try {
 			ArrayList<TeamPO> teams = service.getTeamAverageInfo(season);
 			for (TeamPO po : teams) {
@@ -96,15 +96,16 @@ public class Team implements TeamBLService {
 	}
 
 	/**
-	 * 查找某个球员的基本信息
+	 * 查找某个球队的基本信息
 	 * 
 	 * @param name
-	 *            姓名
+	 *            队名
 	 */
 	public TeamVO getTeamBaseInfo(String name) {
 		// TODO 自动生成的方法存根
 		TeamVO teamVO = null;
 		try {
+			name = changeTeamNameCHToEN(name);
 			TeamPO po = service.getTeamBaseInfo(name);
 			teamVO = poToVo(po);
 		} catch (RemoteException e) {
@@ -125,8 +126,9 @@ public class Team implements TeamBLService {
 	public TeamVO getTeamSeasonInfo(String season, String name) {
 		// TODO 自动生成的方法存根
 		TeamVO teamVO = null;
-		season=changeColumnCHToEN(season);
+		season = changeColumnCHToEN(season);
 		try {
+			name = changeTeamNameCHToEN(name);
 			TeamPO po = service.getTeamSeasonInfo(season, name);
 			teamVO = poToVo(po);
 		} catch (RemoteException e) {
@@ -147,8 +149,9 @@ public class Team implements TeamBLService {
 	public TeamVO getTeamAverageInfo(String season, String name) {
 		// TODO 自动生成的方法存根
 		TeamVO teamVO = null;
-		season=changeColumnCHToEN(season);
+		season = changeColumnCHToEN(season);
 		try {
+			name = changeTeamNameCHToEN(name);
 			TeamPO po = service.getTeamAverageInfo(season, name);
 			teamVO = poToVo(po);
 		} catch (RemoteException e) {
@@ -161,7 +164,7 @@ public class Team implements TeamBLService {
 	public ArrayList<TeamVO> getOrderedTeamsBySeason(String season,
 			String condition, String order) {
 		// TODO 自动生成的方法存根
-		season=changeColumnCHToEN(season);
+		season = changeColumnCHToEN(season);
 		ArrayList<TeamVO> result = new ArrayList<TeamVO>();
 		try {
 			ArrayList<TeamPO> teams = service.getOrderedTeamsBySeason(season,
@@ -180,7 +183,7 @@ public class Team implements TeamBLService {
 	public ArrayList<TeamVO> getOrderedTeamsByAverage(String season,
 			String condition, String order) {
 		// TODO 自动生成的方法存根
-		season=changeColumnCHToEN(season);
+		season = changeColumnCHToEN(season);
 		ArrayList<TeamVO> result = new ArrayList<TeamVO>();
 		try {
 			ArrayList<TeamPO> teams = service.getOrderedTeamsByAverage(season,
@@ -199,6 +202,7 @@ public class Team implements TeamBLService {
 	public ImageIcon getTeamImage(String name) {
 		ImageIcon icon = null;
 		try {
+			name = changeTeamNameCHToEN(name);
 			icon = service.getTeamImage(name);
 		} catch (RemoteException e) {
 			// TODO 自动生成的 catch 块
@@ -231,6 +235,7 @@ public class Team implements TeamBLService {
 		ArrayList<MatchPO> matches = new ArrayList<MatchPO>();
 		ArrayList<MatchVO> result = new ArrayList<MatchVO>();
 		try {
+			teamName = changeTeamNameCHToEN(teamName);
 			matches = service.getRecentMatches(teamName);
 			for (MatchPO po : matches) {
 				MatchVO vo = Match.poToVo(po);
@@ -248,6 +253,7 @@ public class Team implements TeamBLService {
 		ArrayList<MatchPO> matches = new ArrayList<MatchPO>();
 		ArrayList<MatchVO> result = new ArrayList<MatchVO>();
 		try {
+			teamName = changeTeamNameCHToEN(teamName);
 			matches = service.getMatches(teamName);
 			for (MatchPO po : matches) {
 				MatchVO vo = Match.poToVo(po);
@@ -276,7 +282,7 @@ public class Team implements TeamBLService {
 		}
 		return result;
 	}
-	
+
 	private String changeColumnCHToEN(String CH) {
 		String EN = null;
 		if (CH.equals("赛季")) {
@@ -289,4 +295,72 @@ public class Team implements TeamBLService {
 		return EN;
 	}
 
+	private String changeTeamNameCHToEN(String CH) {
+		String EN = "";
+		if (CH.equals("太阳")) {
+			EN = "PHX";
+		} else if (CH.equals("马刺")) {
+			EN = "SAS";
+		} else if (CH.equals("国王")) {
+			EN = "SAC";
+		} else if (CH.equals("火箭")) {
+			EN = "HOU";
+		} else if (CH.equals("湖人")) {
+			EN = "LAL";
+		} else if (CH.equals("掘金")) {
+			EN = "DEN";
+		} else if (CH.equals("森林狼")) {
+			EN = "MIN";
+		} else if (CH.equals("小牛")) {
+			EN = "DAL";
+		} else if (CH.equals("快船")) {
+			EN = "LAC";
+		} else if (CH.equals("爵士")) {
+			EN = "UTA";
+		} else if (CH.equals("勇士")) {
+			EN = "GSW";
+		} else if (CH.equals("灰熊")) {
+			EN = "MEM";
+		} else if (CH.equals("雷霆")) {
+			EN = "OKC";
+		} else if (CH.equals("鹈鹕")) {
+			EN = "NOP";
+		} else if (CH.equals("开拓者")) {
+			EN = "POR";
+		} else if (CH.equals("凯尔特人")) {
+			EN = "BOS";
+		} else if (CH.equals("篮网")) {
+			EN = "BKN";
+		} else if (CH.equals("尼克斯")) {
+			EN = "NYK";
+		} else if (CH.equals("76人")) {
+			EN = "PHI";
+		} else if (CH.equals("猛龙")) {
+			EN = "TOR";
+		} else if (CH.equals("公牛")) {
+			EN = "CHI";
+		} else if (CH.equals("骑士")) {
+			EN = "CLE";
+		} else if (CH.equals("活塞")) {
+			EN = "DET";
+		} else if (CH.equals("步行者")) {
+			EN = "IND";
+		} else if (CH.equals("雄鹿")) {
+			EN = "MIL";
+		} else if (CH.equals("老鹰")) {
+			EN = "ATL";
+		} else if (CH.equals("黄蜂")) {
+			EN = "CHA";
+		} else if (CH.equals("热火")) {
+			EN = "MIA";
+		} else if (CH.equals("魔术")) {
+			EN = "ORL";
+		} else if (CH.equals("奇才")) {
+			EN = "WAS";
+		} else {
+			EN = CH;
+		}
+
+		return EN;
+	}
 }
