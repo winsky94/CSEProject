@@ -76,7 +76,7 @@ public class TeamIndexPanel extends FatherPanel implements MouseListener,
 		funcPnl.add(refreshLbl);
 		// -----table-----------
 		ttm = new TeamTableModel();
-		table = new MySortableTable(ttm);
+		table = new MySortableTable(ttm,1);
 		// table 渲染器，设置文字内容居中显示，设置背景色等
 		table.setSelectionBackground(new java.awt.Color(218, 112, 214));// 设置选择行的颜色——兰花紫
 		table.setFont(new Font("微软雅黑", 0, 12));
