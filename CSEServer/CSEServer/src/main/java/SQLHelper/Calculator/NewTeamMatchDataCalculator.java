@@ -481,7 +481,7 @@ public class NewTeamMatchDataCalculator {
 		turnOverNum = getSum(season, teamName, "TurnOverNum");
 		foulNum = getSum(season, teamName, "FoulNum");
 		score = getSum(season, teamName, "Score");
-
+		
 		shootHitRateSeason = (double) shootHitNum / shootAttemptNum;
 		threeHitRateSeason = (double) threeHitNum / threeAttemptNum;
 		freeThrowHitRateSeason = (double) freeThrowHitNum / freeThrowAttemptNum;
@@ -491,10 +491,11 @@ public class NewTeamMatchDataCalculator {
 				* freeThrowAttemptNum
 				- 1.07
 				* (offenReboundNum
-						/ (double) (offenReboundNum + dsDefenReboundNumSeason) * (shootAttemptNum - shootHitNum))
+						/ (double) (offenReboundNum + getDSSum(season,
+								teamName, "DefenReboundNum")) * (shootAttemptNum - shootHitNum))
 				+ 1.07 * turnOverNum;
 
-		offenEfficiency = (double) score / offenRoundSeason * 100;
+		offenEfficiencySeason = (double) score / offenRoundSeason * 100;
 
 		dsOffenRoundSeason = getDSSum(season, teamName, "ShootAttemptNum")
 				+ 0.4
@@ -508,7 +509,7 @@ public class NewTeamMatchDataCalculator {
 						teamName, "ShootHitNum"))) + 1.07
 				* getDSSum(season, teamName, "TurnOverNum");
 
-		defenEfficiency = (double) getDSSum(season, teamName, "Score")
+		defenEfficiencySeason = (double) getDSSum(season, teamName, "Score")
 				/ dsOffenRoundSeason * 100;
 		offenReboundEfficiencySeason = (double) getSum(season, teamName,
 				"OffenReboundNum")
@@ -521,7 +522,6 @@ public class NewTeamMatchDataCalculator {
 
 		stealEfficiencySeason = (double) stealNum / dsOffenRoundSeason * 100;
 		assistRateSeason = (double) assistNum / offenRoundSeason * 100;
-		// winRate=(double)winNum/matchesNum;
 	}
 
 	/**
