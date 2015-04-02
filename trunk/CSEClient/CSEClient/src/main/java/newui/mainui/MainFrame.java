@@ -39,7 +39,8 @@ public class MainFrame extends JFrame{
 		this.setUndecorated(true);
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		//-------下面是布局----------------
+		//-------下面是布局---------------
+		
 		//-------topPnl关闭按钮与最小化-----
 		topPnl=new TopPanel();
 		gbc.gridx = 0;
