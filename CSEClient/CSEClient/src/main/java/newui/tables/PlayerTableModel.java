@@ -2,7 +2,6 @@ package newui.tables;
 
 import java.util.ArrayList;
 
-import presentation.Mainui.FilterCondition;
 import vo.PlayerVO;
 import businesslogic.Player;
 
