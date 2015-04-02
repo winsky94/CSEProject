@@ -99,6 +99,8 @@ public class PlayerTableModel extends MyTableModel{
 					f.getSort(),50);
 		if(v!=null&&v.size()!=0)
 			refreshContent(v);
+		else
+			System.out.println("没有符合本次筛选的球员！");
 		
 	}
 	
