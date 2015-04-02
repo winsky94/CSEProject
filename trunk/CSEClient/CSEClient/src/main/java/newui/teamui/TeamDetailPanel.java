@@ -91,7 +91,7 @@ public class TeamDetailPanel extends FatherPanel{
 		gbl.setConstraints(tab, gbc);
 		add(tab);
 		//---------------------
-		infoPnl=new TeamDetailInfoPanel();
+		infoPnl=new TeamDetailInfoPanel(nameCH,abbrName);
 		historyPnl=new TeamDetailHistoryPanel();
 		tab.addTab("基本信息", infoPnl);
 		tab.addTab("过往数据",historyPnl);
