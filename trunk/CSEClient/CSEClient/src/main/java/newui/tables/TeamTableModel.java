@@ -30,6 +30,10 @@ public class TeamTableModel extends MyTableModel {
 //			e.add(str);
 //		content.add(e);
 	}
+	@Override
+	public Class getColumnClass(int c) {
+		return content.get(0).get(c).getClass();
+	}
 
 	public int getRowCount() {
 		// TODO Auto-generated method stub

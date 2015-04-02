@@ -25,6 +25,10 @@ public class TeamBaseInfoTableModel extends MyTableModel{
 	public int getRowCount() {
 		return content.size();
 	}
+	@Override
+	public Class getColumnClass(int c) {
+		return content.get(0).get(c).getClass();
+	}
 
 	public int getColumnCount() {
 		return head.length;
