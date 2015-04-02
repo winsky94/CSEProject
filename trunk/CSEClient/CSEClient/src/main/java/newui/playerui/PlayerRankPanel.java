@@ -197,10 +197,10 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener,
 			String type = typeBox.getSelectedItem().toString();
 			if (type.equals("赛季"))
 				vlist = player.selectPlayersBySeason(season, position, union,
-						sort);
+						sort,50);
 			else
 				vlist = player.selectPlayersByAverage(season, position, union,
-						sort);
+						sort,50);
 			// vlist.size()==0显示没有符合条件的球员
 			if (vlist != null){
 				ptm.refreshContent(vlist);

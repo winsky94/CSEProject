@@ -93,10 +93,10 @@ public class PlayerTableModel extends MyTableModel{
 		ArrayList<PlayerVO> v;
 		if(f.getAllOrAve().equals("汇总"))
 			v=player.selectPlayersBySeason(f.getSeason(), f.getPosition(), f.getUnion(), 
-					f.getSort());
+					f.getSort(),50);
 		else
 			v=player.selectPlayersByAverage(f.getSeason(), f.getPosition(), f.getUnion(), 
-					f.getSort());
+					f.getSort(),50);
 		if(v!=null&&v.size()!=0)
 			refreshContent(v);
 		
