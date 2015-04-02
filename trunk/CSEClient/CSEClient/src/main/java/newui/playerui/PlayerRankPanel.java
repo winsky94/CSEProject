@@ -119,7 +119,7 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener,
 		table = new MySortableTable(ptm, 0);
 
 		// table 渲染器，设置文字内容居中显示，设置背景色等
-		table.setSelectionBackground(new java.awt.Color(218, 112, 214));// 设置选择行的颜色——兰花紫
+		table.setSelectionBackground(new Color(225, 255, 255));// 设置选择行的颜色——淡蓝色
 		table.setFont(new Font("微软雅黑", 0, 12));
 		table.getTableHeader().setFont(new Font("微软雅黑", 0, 14));
 		table.getTableHeader().setBackground(new Color(211, 211, 211));
@@ -202,8 +202,9 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener,
 				vlist = player.selectPlayersByAverage(season, position, union,
 						sort);
 			// vlist.size()==0显示没有符合条件的球员
-			if (vlist != null)
+			if (vlist != null){
 				ptm.refreshContent(vlist);
+			}
 			table.revalidate();
 
 		}
