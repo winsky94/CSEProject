@@ -16,7 +16,7 @@ public class PlayerBaseInfoTableModel extends MyTableModel {
 
 	private static final long serialVersionUID = 1L;
 	static String[] head = { "(头像)", "球员名", "所属球队", "位置", "身高", "体重", "生日",
-			"年龄", "经验" };
+			"年龄", "球龄" };
 
 	ArrayList<ArrayList<Object>> content = new ArrayList<ArrayList<Object>>();
 	private PlayerBLService player;
@@ -81,9 +81,9 @@ public class PlayerBaseInfoTableModel extends MyTableModel {
 		ArrayList<ImageIcon> listimg = new ArrayList<ImageIcon>();
 		for (int i = 0; i < playerlist.size(); i++) {
 			String name = playerlist.get(i).getTeamName();
-			if(tName.equals("全部")){
-				sortByC=playerlist;
-				listimg=imgList;
+			if (tName.equals("全部")) {
+				sortByC = playerlist;
+				listimg = imgList;
 				break;
 			}
 			if (name.contains(Team.changeTeamNameCHToEN(tName))) {
@@ -113,9 +113,8 @@ public class PlayerBaseInfoTableModel extends MyTableModel {
 	public void Refresh(ArrayList<PlayerVO> list) {
 		content.clear();
 		imgList.clear();
-
+		int i = 0;
 		for (PlayerVO vo : list) {
-			int i = 0;
 			ArrayList<Object> line = new ArrayList<Object>();
 			String name = vo.getName();
 			ImageIcon tou = player.getPlayerPortraitImage(name);
@@ -135,7 +134,7 @@ public class PlayerBaseInfoTableModel extends MyTableModel {
 			line.add(vo.getAge());
 			line.add(vo.getExp());
 			content.add(line);
-	
+
 			i++;
 
 		}
