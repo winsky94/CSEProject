@@ -18,9 +18,10 @@ import javax.swing.JTabbedPane;
 
 import newui.FatherPanel;
 import newui.Style;
+import newui.mainui.MainFrame;
+import newui.playerui.PlayerDetailPanel;
 import newui.teamui.details.TeamDetailHistoryPanel;
 import newui.teamui.details.TeamDetailInfoPanel;
-import newui.teamui.details.TeamDetailRecentPanel;
 import businesslogic.Team;
 import businesslogicservice.TeamBLService;
 
@@ -35,7 +36,7 @@ public class TeamDetailPanel extends FatherPanel{
 	//-----------------------
 	JScrollPane playerJsp;
 	JPanel playerPnl;
-	JPanel infoPnl,recentPnl,historyPnl;
+	JPanel infoPnl,historyPnl;
 	JTabbedPane tab;
 	Font font = new Font("微软雅黑", Font.PLAIN, 14);
 	JLabel nameLbl;
@@ -91,11 +92,9 @@ public class TeamDetailPanel extends FatherPanel{
 		add(tab);
 		//---------------------
 		infoPnl=new TeamDetailInfoPanel();
-		recentPnl=new TeamDetailRecentPanel();
 		historyPnl=new TeamDetailHistoryPanel();
 		tab.addTab("基本信息", infoPnl);
-		tab.addTab("近期动态", recentPnl);
-		tab.addTab("历史数据",historyPnl);
+		tab.addTab("过往数据",historyPnl);
 	}
 	public static void main(String[] args) {
 		JFrame f=new JFrame();
@@ -137,8 +136,7 @@ public class TeamDetailPanel extends FatherPanel{
 				}
 				
 				public void mouseClicked(MouseEvent e) {
-					// TODO Auto-generated method stub
-					
+					MainFrame.getInstance().setContentPanel(new PlayerDetailPanel(getText()));
 				}
 			});
 		}
