@@ -139,7 +139,6 @@ public class NewMatchTemp {
 
 					System.out.println(count);
 					exportToSQL();
-
 					reSet();
 				}
 				flag++;
