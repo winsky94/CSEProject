@@ -28,10 +28,10 @@ public interface PlayerBLService {
 			String condition, String order,int num);
 
 	public ArrayList<PlayerVO> selectPlayersBySeason(String season,
-			String position, String union, String column);
+			String position, String union, String column,int num);
 
 	public ArrayList<PlayerVO> selectPlayersByAverage(String season,
-			String position, String union, String column);
+			String position, String union, String column,int num);
 
 	public ImageIcon getPlayerPortraitImage(String name);
 

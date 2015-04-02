@@ -167,7 +167,7 @@ public class Player implements PlayerBLService {
 	}
 
 	public ArrayList<PlayerVO> selectPlayersBySeason(String season,
-			String position, String union, String column) {
+			String position, String union, String column,int num) {
 		// TODO 自动生成的方法存根
 		ArrayList<PlayerVO> result = new ArrayList<PlayerVO>();
 		try {
@@ -175,7 +175,7 @@ public class Player implements PlayerBLService {
 			union = changeUnionCHToEN(union);
 			column = changeColumnCHToEN(column);
 			ArrayList<PlayerPO> data = service.selectPlayersBySeason(season,
-					position, union, column);
+					position, union, column,num);
 
 			for (PlayerPO po : data) {
 				PlayerVO vo = poTovo(po);
@@ -190,7 +190,7 @@ public class Player implements PlayerBLService {
 	}
 
 	public ArrayList<PlayerVO> selectPlayersByAverage(String season,
-			String position, String union, String column) {
+			String position, String union, String column,int num) {
 		// TODO 自动生成的方法存根
 		ArrayList<PlayerVO> result = new ArrayList<PlayerVO>();
 		try {
@@ -198,7 +198,7 @@ public class Player implements PlayerBLService {
 			union = changeUnionCHToEN(union);
 			column = changeColumnCHToEN(column);
 			ArrayList<PlayerPO> data = service.selectPlayersByAverage(season,
-					position, union, column);
+					position, union, column,num);
 
 			for (PlayerPO po : data) {
 				PlayerVO vo = poTovo(po);
