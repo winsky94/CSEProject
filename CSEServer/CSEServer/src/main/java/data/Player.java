@@ -527,10 +527,10 @@ public class Player extends UnicastRemoteObject implements PlayerDataService {
 	 * @return 符合条件的球员列表
 	 */
 	public ArrayList<PlayerPO> selectPlayersBySeason(String season,
-			String position, String union, String column)
+			String position, String union, String column,int num)
 			throws RemoteException {
 		ArrayList<PlayerPO> players = selectPlayers("playermatchdataseason",
-				season, position, union, column);
+				season, position, union, column,num);
 		return players;
 	}
 
@@ -544,16 +544,16 @@ public class Player extends UnicastRemoteObject implements PlayerDataService {
 	 * @return 符合条件的球员列表
 	 */
 	public ArrayList<PlayerPO> selectPlayersByAverage(String season,
-			String position, String union, String column)
+			String position, String union, String column,int num)
 			throws RemoteException {
 		ArrayList<PlayerPO> players = selectPlayers("playermatchdataaverage",
-				season, position, union, column);
+				season, position, union, column,num);
 		return players;
 	}
 
 	// F是前锋 C是中锋 G是后卫
 	private ArrayList<PlayerPO> selectPlayers(String table, String season,
-			String position, String union, String column) {
+			String position, String union, String column,int num) {
 		ArrayList<PlayerPO> players = new ArrayList<PlayerPO>();
 		PlayerPO player;
 		try {
@@ -563,7 +563,7 @@ public class Player extends UnicastRemoteObject implements PlayerDataService {
 			if (position.equals("all") && !union.equals("all")) {
 				query = "select *" + " from " + table + " where season='"
 						+ season + "' order by " + table + "." + column
-						+ " desc";
+						+ " desc limit"+num;
 				ResultSet rs = sql.executeQuery(query);
 				while (rs.next()) {
 					if (isUnionRight(rs.getString("owingTeam"), union)) {
@@ -623,7 +623,7 @@ public class Player extends UnicastRemoteObject implements PlayerDataService {
 						+ " from players," + table + " where players.name="
 						+ table + ".playerName and players.position='"
 						+ position + "' and season='" + season + "' order by "
-						+ table + "." + column + " desc";
+						+ table + "." + column + " desc limit"+num;
 				ResultSet rs = sql.executeQuery(query);
 				while (rs.next()) {
 					player = new PlayerPO();
@@ -675,7 +675,7 @@ public class Player extends UnicastRemoteObject implements PlayerDataService {
 						+ " from players," + table + " where players.name="
 						+ table + ".playerName and players.position='"
 						+ position + "' and season='" + season + "' order by "
-						+ table + "." + column + " desc";
+						+ table + "." + column + " desc limit"+num;
 				ResultSet rs = sql.executeQuery(query);
 				while (rs.next()) {
 					if (isUnionRight(rs.getString("owingTeam"), union)) {
@@ -735,7 +735,7 @@ public class Player extends UnicastRemoteObject implements PlayerDataService {
 				query = "select players.name," + table + ".*"
 						+ " from players," + table + " where players.name="
 						+ table + ".playerName and season='" + season
-						+ "' order by " + table + "." + column + " desc";
+						+ "' order by " + table + "." + column + " desc limit"+num;
 				ResultSet rs = sql.executeQuery(query);
 				while (rs.next()) {
 					player = new PlayerPO();
@@ -889,7 +889,7 @@ public class Player extends UnicastRemoteObject implements PlayerDataService {
 			// ArrayList<PlayerPO> players=p.getPlayersByInitialName('A');
 			// System.out.println(players.get(0).getName());
 			ArrayList<PlayerPO> players = p.selectPlayersBySeason("13-14",
-					"all", "all", "score_rebound_assist");
+					"all", "all", "score_rebound_assist",50);
 			System.out.println(players.get(0).getScore_rebound_assist());
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block

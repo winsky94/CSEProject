@@ -43,11 +43,11 @@ public interface PlayerDataService extends Remote {
 			String condition, String order,int num) throws RemoteException;
 
 	public ArrayList<PlayerPO> selectPlayersBySeason(String season,
-			String position, String union, String column)
+			String position, String union, String column,int num)
 			throws RemoteException;
 
 	public ArrayList<PlayerPO> selectPlayersByAverage(String season,
-			String position, String union, String column)
+			String position, String union, String column,int num)
 			throws RemoteException;
 
 	public ArrayList<PlayerPO> getDayHotPlayer(String column)
