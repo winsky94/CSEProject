@@ -231,7 +231,7 @@ public class TeamMatchDataCalculator {
 				/ (offenReboundNum + dsDefenReboundNumSeason);
 		defenReboundEfficiencySeason = (double) defenReboundNum
 				/ (defenReboundNum + dsOffenReboundNumSeason);
-		stealEfficiencySeason = (double) stealNum / dsOffenRoundSeason;
+		stealEfficiencySeason = (double) stealNum / dsOffenRoundSeason*100;
 		assistRateSeason = assistNum / (double) offenRoundSeason * 100;
 	}
 
