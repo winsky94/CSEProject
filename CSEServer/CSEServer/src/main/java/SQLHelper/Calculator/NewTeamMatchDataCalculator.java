@@ -521,7 +521,7 @@ public class NewTeamMatchDataCalculator {
 
 		stealEfficiencySeason = (double) stealNum / dsOffenRoundSeason * 100;
 		assistRateSeason = (double) assistNum / offenRoundSeason * 100;
-//		winRate=(double)winNum/matchesNum;
+		// winRate=(double)winNum/matchesNum;
 	}
 
 	/**
@@ -529,6 +529,8 @@ public class NewTeamMatchDataCalculator {
 	 * 
 	 * @param season
 	 *            赛季
+	 * @param name
+	 *            球队名
 	 * @param type
 	 *            技术属性
 	 * @return 该赛季对手该属性的和
@@ -565,7 +567,7 @@ public class NewTeamMatchDataCalculator {
 
 		// just for test
 		if (result == 0) {
-			System.out.println("对手数据为0");
+			System.out.println("对手" + type + "数据为0");
 		}
 		return result;
 	}
@@ -575,6 +577,8 @@ public class NewTeamMatchDataCalculator {
 	 * 
 	 * @param season
 	 *            赛季
+	 * @param name
+	 *            球队名
 	 * @param type
 	 *            技术属性
 	 * @return 该赛季该属性的和
@@ -610,7 +614,7 @@ public class NewTeamMatchDataCalculator {
 		}
 		// just for test
 		if (result == 0) {
-			System.out.println("求和计算结果为0");
+			System.out.println(type + "求和计算结果为0");
 		}
 		return result;
 	}
@@ -623,7 +627,9 @@ public class NewTeamMatchDataCalculator {
 			Statement statement = con.createStatement();
 			String query = "select count(matchTempID) from matchTemp where season='"
 					+ season
-					+ "' and visitingTeam='"+teamName+"' or homeTeam='"+teamName+"'";
+					+ "' and visitingTeam='"
+					+ teamName
+					+ "' or homeTeam='" + teamName + "'";
 			ResultSet resultSet = statement.executeQuery(query);
 			resultSet.next();
 			matchesNum = resultSet.getInt("count(matchTempID)");
@@ -645,14 +651,18 @@ public class NewTeamMatchDataCalculator {
 			Statement statement = con.createStatement();
 			String sql = "select count(matchTempID) from matchTemp where season='"
 					+ season
-					+ "' and visitingTeam='"+teamName+"' and visitingScore>homeScore";
+					+ "' and visitingTeam='"
+					+ teamName
+					+ "' and visitingScore>homeScore";
 			ResultSet resultSet = statement.executeQuery(sql);
 			resultSet.next();
 
 			Statement statement2 = con.createStatement();
 			String sql2 = "select count(matchTempID) from matchTemp where season='"
 					+ season
-					+ "' and homeTeam='"+teamName+"' and visitingScore<homeScore";
+					+ "' and homeTeam='"
+					+ teamName
+					+ "' and visitingScore<homeScore";
 			ResultSet resultSet2 = statement2.executeQuery(sql2);
 			resultSet2.next();
 
