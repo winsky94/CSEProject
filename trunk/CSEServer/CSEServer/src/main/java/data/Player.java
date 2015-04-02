@@ -563,7 +563,7 @@ public class Player extends UnicastRemoteObject implements PlayerDataService {
 			if (position.equals("all") && !union.equals("all")) {
 				query = "select *" + " from " + table + " where season='"
 						+ season + "' order by " + table + "." + column
-						+ " desc limit"+num;
+						+ " desc limit "+num;
 				ResultSet rs = sql.executeQuery(query);
 				while (rs.next()) {
 					if (isUnionRight(rs.getString("owingTeam"), union)) {
@@ -623,7 +623,7 @@ public class Player extends UnicastRemoteObject implements PlayerDataService {
 						+ " from players," + table + " where players.name="
 						+ table + ".playerName and players.position='"
 						+ position + "' and season='" + season + "' order by "
-						+ table + "." + column + " desc limit"+num;
+						+ table + "." + column + " desc limit "+num;
 				ResultSet rs = sql.executeQuery(query);
 				while (rs.next()) {
 					player = new PlayerPO();
@@ -675,7 +675,7 @@ public class Player extends UnicastRemoteObject implements PlayerDataService {
 						+ " from players," + table + " where players.name="
 						+ table + ".playerName and players.position='"
 						+ position + "' and season='" + season + "' order by "
-						+ table + "." + column + " desc limit"+num;
+						+ table + "." + column + " desc limit "+num;
 				ResultSet rs = sql.executeQuery(query);
 				while (rs.next()) {
 					if (isUnionRight(rs.getString("owingTeam"), union)) {
@@ -735,7 +735,7 @@ public class Player extends UnicastRemoteObject implements PlayerDataService {
 				query = "select players.name," + table + ".*"
 						+ " from players," + table + " where players.name="
 						+ table + ".playerName and season='" + season
-						+ "' order by " + table + "." + column + " desc limit"+num;
+						+ "' order by " + table + "." + column + " desc limit "+num;
 				ResultSet rs = sql.executeQuery(query);
 				while (rs.next()) {
 					player = new PlayerPO();
@@ -889,7 +889,7 @@ public class Player extends UnicastRemoteObject implements PlayerDataService {
 			// ArrayList<PlayerPO> players=p.getPlayersByInitialName('A');
 			// System.out.println(players.get(0).getName());
 			ArrayList<PlayerPO> players = p.selectPlayersBySeason("13-14",
-					"all", "all", "score_rebound_assist",50);
+					"all", "all", "score",50);
 			System.out.println(players.get(0).getScore_rebound_assist());
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
