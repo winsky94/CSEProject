@@ -40,7 +40,10 @@ public class PlayerTableModel extends MyTableModel{
 		// TODO Auto-generated method stub
 		return content.size();
 	}
-
+	@Override
+	public Class getColumnClass(int c) {
+		return content.get(0).get(c).getClass();
+	}
 	public int getColumnCount() {
 		// TODO Auto-generated method stub
 		return head.length;
