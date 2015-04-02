@@ -28,7 +28,7 @@ import SQLHelper.FileList;
  * @throws TranscoderException
  */
 public class SvgUtil {
-	final static int size = 35;// 只要将常量size设为需要的图片大小就OK了
+	final static int size = 150;// 只要将常量size设为需要的图片大小就OK了
 
 	public static void main(String[] args) throws Exception {
 		// 注：使用的是svg字符串转pdf的情况可能会出现编码错误的异常，就把字符串里的UTF-8替换为GBK
