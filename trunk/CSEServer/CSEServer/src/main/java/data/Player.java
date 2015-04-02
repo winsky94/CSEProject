@@ -888,9 +888,9 @@ public class Player extends UnicastRemoteObject implements PlayerDataService {
 			// "score");
 			// ArrayList<PlayerPO> players=p.getPlayersByInitialName('A');
 			// System.out.println(players.get(0).getName());
-			ArrayList<PlayerPO> players = p.selectPlayersBySeason("13-14",
-					"all", "all", "score",50);
-			System.out.println(players.get(0).getScore_rebound_assist());
+			ArrayList<PlayerPO> players = p.selectPlayersByAverage("13-14",
+					"all", "all", "assistNum",50);
+			System.out.println(players.get(0).getAssistNum());
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
