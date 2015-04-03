@@ -1,4 +1,4 @@
-package BLService;
+package blservice;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;
