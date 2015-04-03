@@ -6,7 +6,7 @@ import java.sql.SQLException;
 
 public class SqlManager {
 	public static Connection getConnection() throws SQLException,java.lang.ClassNotFoundException{
-        String url = "jdbc:mysql://localhost:3306/nba";
+        String url = "jdbc:mysql://localhost:3306/test";
         try {
         	Class.forName("com.mysql.jdbc.Driver");
 		} catch (Exception e) {
