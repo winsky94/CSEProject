@@ -3,7 +3,6 @@ package vo;
 import java.util.ArrayList;
 
 public class MatchVO {
-	private int matchID;// 编号
 	private String season;// 赛季
 	private String date;// 时间
 	private String visingTeam;// 对阵队伍
@@ -13,11 +12,10 @@ public class MatchVO {
 	private ArrayList<String> detailScores;// 各节比分
 	private ArrayList<RecordVO> records;// 球员比分数据记录
 
-	public MatchVO(int matchID, String season, String date, String visingTeam,
+	public MatchVO(String season, String date, String visingTeam,
 			String homeTeam, String visitingScore, String homeScore,
 			ArrayList<String> detailScores, ArrayList<RecordVO> records) {
 		super();
-		this.matchID = matchID;
 		this.season = season;
 		this.date = date;
 		this.visingTeam = visingTeam;
@@ -26,10 +24,6 @@ public class MatchVO {
 		this.homeScore = homeScore;
 		this.detailScores = detailScores;
 		this.records = records;
-	}
-
-	public int getMatchID() {
-		return matchID;
 	}
 
 	public String getSeason() {
