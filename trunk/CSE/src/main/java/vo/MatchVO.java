@@ -7,13 +7,13 @@ public class MatchVO {
 	private String date;// 时间
 	private String visingTeam;// 对阵队伍
 	private String homeTeam;
-	private String visitingScore; // 比分
-	private String homeScore;
+	private int visitingScore; // 比分
+	private int homeScore;
 	private ArrayList<String> detailScores;// 各节比分
 	private ArrayList<RecordVO> records;// 球员比分数据记录
 
 	public MatchVO(String season, String date, String visingTeam,
-			String homeTeam, String visitingScore, String homeScore,
+			String homeTeam, int visitingScore, int homeScore,
 			ArrayList<String> detailScores, ArrayList<RecordVO> records) {
 		super();
 		this.season = season;
@@ -42,11 +42,11 @@ public class MatchVO {
 		return homeTeam;
 	}
 
-	public String getVisitingScore() {
+	public int getVisitingScore() {
 		return visitingScore;
 	}
 
-	public String getHomeScore() {
+	public int getHomeScore() {
 		return homeScore;
 	}
 
