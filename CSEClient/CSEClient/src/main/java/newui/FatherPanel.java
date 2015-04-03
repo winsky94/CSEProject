@@ -3,6 +3,7 @@ package newui;
 import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.util.ArrayList;
 
 import javax.swing.JPanel;
 
@@ -31,5 +32,8 @@ public class FatherPanel extends JPanel{
 		gbl.setConstraints(titleBar, gbc);
 		add(titleBar);
 		setBackground(Color.white);
+	}
+	public void SearchRefresh(ArrayList<Object> os){
+		
 	}
 }

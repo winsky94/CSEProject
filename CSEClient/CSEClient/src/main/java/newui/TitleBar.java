@@ -33,7 +33,7 @@ public class TitleBar extends JPanel implements MouseListener {
 	JTextField searchFld;
 	JLabel searchBtn;
 	int startX,startY;
-
+	
 	public TitleBar() {
 		setBackground(Style.DEEP_BLUE);
 		GridBagLayout gbl = new GridBagLayout();
@@ -136,7 +136,9 @@ public class TitleBar extends JPanel implements MouseListener {
 			MainFrame.getInstance().setContentPanel(new HotIndexPanel());
 		if (e.getSource() == searchBtn) {
 			// 监听
-			MainFrame.getInstance().setContentPanel(new SearchResultPanel());
+			String scontent=searchFld.getText();
+			
+			MainFrame.getInstance().setContentPanel(new SearchResultPanel(scontent));
 		}
 	}
 

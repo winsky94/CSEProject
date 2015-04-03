@@ -5,12 +5,18 @@ import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
+import vo.TeamVO;
+import businesslogic.Player;
+import businesslogic.Team;
+import businesslogicservice.PlayerBLService;
+import businesslogicservice.TeamBLService;
 import newui.tables.MyBaseTable;
 import newui.tables.PlayerBaseInfoTableModel;
 import newui.tables.TeamBaseInfoTableModel;
@@ -29,8 +35,10 @@ public class SearchResultPanel extends FatherPanel implements MouseListener{
 	JScrollPane jsp;
 	JLabel resultLbl,changeLbl;
 	JPanel funcPnl;
+	private PlayerBLService pservice;
+	private TeamBLService tservice;
 	Font font = new Font("微软雅黑", Font.PLAIN, 15);
-	public SearchResultPanel() {
+	public SearchResultPanel(String scontent) {
 		// ------funcPnl--------
 		funcPnl = new JPanel();
 		funcPnl.setBackground(Style.BACK_GREY);
@@ -40,7 +48,7 @@ public class SearchResultPanel extends FatherPanel implements MouseListener{
 		gbl.setConstraints(funcPnl, gbc);
 		add(funcPnl);
 		//----resultLbl---------
-		resultLbl=new MyLabel("在球队中检索到88条符合关键字“I need listener”的结果。");
+		resultLbl=new MyLabel("在球队中检索到88条符合关键字"+scontent+"的结果。");
 		funcPnl.add(resultLbl);
 		funcPnl.add(new JLabel("                             "));
 		//----changeLbl---------
@@ -58,6 +66,10 @@ public class SearchResultPanel extends FatherPanel implements MouseListener{
 		gbc.weighty = 10;
 		gbl.setConstraints(jsp, gbc);
 		add(jsp);
+		pservice=new Player();
+		tservice=new Team();
+		//ArrayList<TeamVO> v=tservice.getTeamBaseInfo(scontent);
+		table.revalidate();
 	}
 	class MyLabel extends JLabel{
 
