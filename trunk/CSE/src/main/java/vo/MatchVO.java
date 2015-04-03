@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class MatchVO {
 	private String season;// 赛季
 	private String date;// 时间
-	private String visingTeam;// 对阵队伍
+	private String visitingTeam;// 对阵队伍
 	private String homeTeam;
 	private int visitingScore; // 比分
 	private int homeScore;
@@ -18,7 +18,7 @@ public class MatchVO {
 		super();
 		this.season = season;
 		this.date = date;
-		this.visingTeam = visingTeam;
+		this.visitingTeam = visingTeam;
 		this.homeTeam = homeTeam;
 		this.visitingScore = visitingScore;
 		this.homeScore = homeScore;
@@ -34,8 +34,8 @@ public class MatchVO {
 		return date;
 	}
 
-	public String getVisingTeam() {
-		return visingTeam;
+	public String getVisitingTeam() {
+		return visitingTeam;
 	}
 
 	public String getHomeTeam() {
