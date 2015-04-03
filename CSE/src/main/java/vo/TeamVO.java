@@ -1,7 +1,6 @@
 package vo;
 
 public class TeamVO {
-	private int id; // 编号
 	private String teamName; // 球队全名
 	private String abLocation; // 所在地(缩写)
 	private String location; // 所在地
@@ -38,10 +37,9 @@ public class TeamVO {
 	private double stealEfficiency; // 抢断效率
 	private double assistEfficiency; // 助攻率
 
-	public TeamVO(int id, String teamName, String abLocation, String location,
+	public TeamVO( String teamName, String abLocation, String location,
 			String conference, String partition, String homeCourt, int setUpTime) {
 		super();
-		this.id = id;
 		this.teamName = teamName;
 		this.location = location;
 		this.abLocation = abLocation;
@@ -51,7 +49,7 @@ public class TeamVO {
 		this.setUpTime = setUpTime;
 	}
 
-	public TeamVO(int id, String teamName, String abLocation, String location,
+	public TeamVO( String teamName, String abLocation, String location,
 			String conference, String partition, String homeCourt,
 			int setUpTime, int matchesNum, double shootHitNum,
 			double shootAttemptNum, double threeHitNum, double threeAttemptNum,
@@ -65,7 +63,6 @@ public class TeamVO {
 			double defenReboundEfficiency, double stealEfficiency,
 			double assistEfficiency) {
 		super();
-		this.id = id;
 		this.teamName = teamName;
 		this.abLocation = abLocation;
 		this.location = location;
@@ -100,10 +97,6 @@ public class TeamVO {
 		this.defenReboundEfficiency = defenReboundEfficiency;
 		this.stealEfficiency = stealEfficiency;
 		this.assistEfficiency = assistEfficiency;
-	}
-
-	public int getId() {
-		return id;
 	}
 
 	public String getTeamName() {
@@ -240,6 +233,142 @@ public class TeamVO {
 
 	public double getAssistEfficiency() {
 		return assistEfficiency;
+	}
+
+	public void setTeamName(String teamName) {
+		this.teamName = teamName;
+	}
+
+	public void setAbLocation(String abLocation) {
+		this.abLocation = abLocation;
+	}
+
+	public void setLocation(String location) {
+		this.location = location;
+	}
+
+	public void setConference(String conference) {
+		this.conference = conference;
+	}
+
+	public void setPartition(String partition) {
+		this.partition = partition;
+	}
+
+	public void setHomeCourt(String homeCourt) {
+		this.homeCourt = homeCourt;
+	}
+
+	public void setSetUpTime(int setUpTime) {
+		this.setUpTime = setUpTime;
+	}
+
+	public void setMatchesNum(int matchesNum) {
+		this.matchesNum = matchesNum;
+	}
+
+	public void setShootHitNum(double shootHitNum) {
+		this.shootHitNum = shootHitNum;
+	}
+
+	public void setShootAttemptNum(double shootAttemptNum) {
+		this.shootAttemptNum = shootAttemptNum;
+	}
+
+	public void setThreeHitNum(double threeHitNum) {
+		this.threeHitNum = threeHitNum;
+	}
+
+	public void setThreeAttemptNum(double threeAttemptNum) {
+		this.threeAttemptNum = threeAttemptNum;
+	}
+
+	public void setFreeThrowHitNum(double freeThrowHitNum) {
+		this.freeThrowHitNum = freeThrowHitNum;
+	}
+
+	public void setFreeThrowAttemptNum(double freeThrowAttemptNum) {
+		this.freeThrowAttemptNum = freeThrowAttemptNum;
+	}
+
+	public void setOffenReboundNum(double offenReboundNum) {
+		this.offenReboundNum = offenReboundNum;
+	}
+
+	public void setDefenReboundNum(double defenReboundNum) {
+		this.defenReboundNum = defenReboundNum;
+	}
+
+	public void setReboundNum(double reboundNum) {
+		this.reboundNum = reboundNum;
+	}
+
+	public void setAssistNum(double assistNum) {
+		this.assistNum = assistNum;
+	}
+
+	public void setStealNum(double stealNum) {
+		this.stealNum = stealNum;
+	}
+
+	public void setBlockNum(double blockNum) {
+		this.blockNum = blockNum;
+	}
+
+	public void setTurnOverNum(double turnOverNum) {
+		this.turnOverNum = turnOverNum;
+	}
+
+	public void setFoulNum(double foulNum) {
+		this.foulNum = foulNum;
+	}
+
+	public void setScore(double score) {
+		this.score = score;
+	}
+
+	public void setShootHitRate(double shootHitRate) {
+		this.shootHitRate = shootHitRate;
+	}
+
+	public void setThreeHitRate(double threeHitRate) {
+		this.threeHitRate = threeHitRate;
+	}
+
+	public void setFreeThrowHitRate(double freeThrowHitRate) {
+		this.freeThrowHitRate = freeThrowHitRate;
+	}
+
+	public void setWinRate(double winRate) {
+		this.winRate = winRate;
+	}
+
+	public void setOffenRound(double offenRound) {
+		this.offenRound = offenRound;
+	}
+
+	public void setOffenEfficiency(double offenEfficiency) {
+		this.offenEfficiency = offenEfficiency;
+	}
+
+	public void setDefenEfficiency(double defenEfficiency) {
+		this.defenEfficiency = defenEfficiency;
+	}
+
+	public void setOffenReboundEfficiency(double offenReboundEfficiency) {
+		this.offenReboundEfficiency = offenReboundEfficiency;
+	}
+
+	public void setDefenReboundEfficiency(double defenReboundEfficiency) {
+		this.defenReboundEfficiency = defenReboundEfficiency;
+	}
+
+	public void setStealEfficiency(double stealEfficiency) {
+		this.stealEfficiency = stealEfficiency;
+	}
+
+	public void setAssistEfficiency(double assistEfficiency) {
+		this.assistEfficiency = assistEfficiency;
 	}
 
 }
