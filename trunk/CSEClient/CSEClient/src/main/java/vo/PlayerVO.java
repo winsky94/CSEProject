@@ -31,9 +31,10 @@ public class PlayerVO {
 	private double efficiency;// 效率
 	private double recentFiveMatchesScoreUpRate;// 近五场得分提升率
 	private double recentFiveMatchesReboundUpRate;// 近五场篮板提升率
+	private double recentFiveMatchesAssistUpRate;//近五场助攻提升率
 	private double GmScEfficiencyValue;// GmSc效率值
 	private double trueHitRate;// 真实命中率
-	private double shootHitEfficiency;// 投篮效率
+	private double shootEfficiency;// 投篮效率
 	private double reboundRate;// 篮板率
 	private double offenReboundRate;// 进攻篮板率
 	private double defenReboundRate;// 防守篮板率
@@ -107,7 +108,7 @@ public class PlayerVO {
 		this.recentFiveMatchesScoreUpRate = recentFiveMatchesScoreUpRate;
 		GmScEfficiencyValue = gmScEfficiencyValue;
 		this.trueHitRate = trueHitRate;
-		this.shootHitEfficiency = shootHitEfficiency;
+		this.shootEfficiency = shootHitEfficiency;
 		this.reboundRate = reboundRate;
 		this.offenReboundRate = offenReboundRate;
 		this.defenReboundRate = defenReboundRate;
@@ -244,8 +245,8 @@ public class PlayerVO {
 		return trueHitRate;
 	}
 
-	public double getShootHitEfficiency() {
-		return shootHitEfficiency;
+	public double getShootEfficiency() {
+		return shootEfficiency;
 	}
 
 	public double getReboundRate() {
