@@ -69,8 +69,8 @@ public class SequenceOfTeam implements Comparator<TeamVO> {
 		} else if (column.equals("助攻数")) {
 			result = compareDouble(t1.getAssistNum(), t2.getAssistNum());
 		} else if (column.equals("助攻率")) {
-			result = compareDouble(t1.getAssistEfficiency(),
-					t2.getAssistEfficiency());
+			result = compareDouble(t1.getAssistRate(),
+					t2.getAssistRate());
 		} else if (column.equals("抢断数")) {
 			result = compareDouble(t1.getStealNum(), t2.getStealNum());
 		} else if (column.equals("抢断效率")) {
