@@ -123,7 +123,8 @@ public class IndexTitleBar extends JPanel implements MouseListener {
 			MainFrame.getInstance().setContentPanel(new HotIndexPanel());
 		if (e.getSource() == searchBtn) {
 			// 监听
-			MainFrame.getInstance().setContentPanel(new SearchResultPanel());
+			String scontent=searchFld.getText();
+			MainFrame.getInstance().setContentPanel(new SearchResultPanel(scontent));
 		}
 	}
 
