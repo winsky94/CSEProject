@@ -35,9 +35,9 @@ public class TeamVO {
 	private double offenReboundEfficiency; // 进攻篮板效率
 	private double defenReboundEfficiency; // 防守篮板效率
 	private double stealEfficiency; // 抢断效率
-	private double assistEfficiency; // 助攻率
+	private double assistRate; // 助攻率
 
-	public TeamVO( String teamName, String abLocation, String location,
+	public TeamVO(String teamName, String abLocation, String location,
 			String conference, String partition, String homeCourt, int setUpTime) {
 		super();
 		this.teamName = teamName;
@@ -49,7 +49,7 @@ public class TeamVO {
 		this.setUpTime = setUpTime;
 	}
 
-	public TeamVO( String teamName, String abLocation, String location,
+	public TeamVO(String teamName, String abLocation, String location,
 			String conference, String partition, String homeCourt,
 			int setUpTime, int matchesNum, double shootHitNum,
 			double shootAttemptNum, double threeHitNum, double threeAttemptNum,
@@ -61,7 +61,7 @@ public class TeamVO {
 			double winRate, double offenRound, double offenEfficiency,
 			double defenEfficiency, double offenReboundEfficiency,
 			double defenReboundEfficiency, double stealEfficiency,
-			double assistEfficiency) {
+			double assistRate) {
 		super();
 		this.teamName = teamName;
 		this.abLocation = abLocation;
@@ -96,7 +96,7 @@ public class TeamVO {
 		this.offenReboundEfficiency = offenReboundEfficiency;
 		this.defenReboundEfficiency = defenReboundEfficiency;
 		this.stealEfficiency = stealEfficiency;
-		this.assistEfficiency = assistEfficiency;
+		this.assistRate = assistRate;
 	}
 
 	public String getTeamName() {
@@ -231,8 +231,8 @@ public class TeamVO {
 		return stealEfficiency;
 	}
 
-	public double getAssistEfficiency() {
-		return assistEfficiency;
+	public double getAssistRate() {
+		return assistRate;
 	}
 
 	public void setTeamName(String teamName) {
@@ -367,8 +367,8 @@ public class TeamVO {
 		this.stealEfficiency = stealEfficiency;
 	}
 
-	public void setAssistEfficiency(double assistEfficiency) {
-		this.assistEfficiency = assistEfficiency;
+	public void setAssistRate(double assistRate) {
+		this.assistRate = assistRate;
 	}
 
 }
