@@ -32,7 +32,8 @@ public class Team implements TeamBLService {
 		String season = "13-14";
 		ArrayList<TeamVO> result = new ArrayList<TeamVO>();
 		// ArrayList<MatchVO> result = new ArrayList<MatchVO>();
-		result = team.getTeamSeasonInfo(season);
+		// result = team.getTeamSeasonInfo(season);
+		result = team.getTeamAverageInfo();
 		// result = team.getSeasonHotTeam(season, "比赛得分");
 		// result=team.getTeamSeasonInfo(season);
 		// result = team.getRecentMatches("ATL");
@@ -41,23 +42,23 @@ public class Team implements TeamBLService {
 
 		for (TeamVO vo : result) {
 			System.out.println(vo.getAbLocation());
-			// System.out.println("winRate：" + vo.getWinRate());
-			// System.out.println("shootHitNum：" + vo.getShootHitNum());
-			// System.out.println("shootAttemptNum：" + vo.getShootAttemptNum());
-			// System.out.println("threeHitNum：" + vo.getThreeHitNum());
-			// System.out.println("threeAttemptNum：" + vo.getThreeAttemptNum());
-			// System.out.println("freeThrowHitNum：" + vo.getFreeThrowHitNum());
-			// System.out.println("freeThrowAttemptNum："
-			// + vo.getFreeThrowAttemptNum());
-			// System.out.println("offenReboundNum：" + vo.getOffenReboundNum());
-			// System.out.println("defenReboundNum：" + vo.getDefenReboundNum());
-			// System.out.println("reboundNum：" + vo.getReboundNum());
-			// System.out.println("assistNum：" + vo.getAssistNum());
-			// System.out.println("stealNum：" + vo.getStealNum());
-			// System.out.println("blockNum：" + vo.getBlockNum());
-			// System.out.println("turnOverNum：" + vo.getTurnOverNum());
-			// System.out.println("foulNum：" + vo.getFoulNum());
-			// System.out.println("score：" + vo.getScore());
+			System.out.println("winRate：" + vo.getWinRate());
+			System.out.println("shootHitNum：" + vo.getShootHitNum());
+			System.out.println("shootAttemptNum：" + vo.getShootAttemptNum());
+			System.out.println("threeHitNum：" + vo.getThreeHitNum());
+			System.out.println("threeAttemptNum：" + vo.getThreeAttemptNum());
+			System.out.println("freeThrowHitNum：" + vo.getFreeThrowHitNum());
+			System.out.println("freeThrowAttemptNum："
+					+ vo.getFreeThrowAttemptNum());
+			System.out.println("offenReboundNum：" + vo.getOffenReboundNum());
+			System.out.println("defenReboundNum：" + vo.getDefenReboundNum());
+			System.out.println("reboundNum：" + vo.getReboundNum());
+			System.out.println("assistNum：" + vo.getAssistNum());
+			System.out.println("stealNum：" + vo.getStealNum());
+			System.out.println("blockNum：" + vo.getBlockNum());
+			System.out.println("turnOverNum：" + vo.getTurnOverNum());
+			System.out.println("foulNum：" + vo.getFoulNum());
+			System.out.println("score：" + vo.getScore());
 			System.out.println("shootHitRate:" + vo.getShootHitRate());
 			System.out.println("threeHitRate:" + vo.getThreeHitRate());
 			System.out.println("freeThrowHitRate:" + vo.getFreeThrowHitRate());
@@ -292,7 +293,7 @@ public class Team implements TeamBLService {
 		// TODO 自动生成的方法存根
 		ArrayList<TeamVO> result = new ArrayList<TeamVO>();
 		ArrayList<TeamVO> teams = new ArrayList<TeamVO>();
-		teams = teamsBaseInfo;
+		teams = getTeamBaseInfo();
 		for (TeamVO vo : teams) {
 			String teamName = vo.getTeamName();
 			String team = vo.getAbLocation();
@@ -340,84 +341,91 @@ public class Team implements TeamBLService {
 			int dsOffenReboundNum = 0;
 			int dsDefenReboundNum = 0;
 			double dsOffenRound = 0;
-
 			for (MatchVO matchVO : matches) {
 				int homeScore = matchVO.getHomeScore();
 				int visitingScore = matchVO.getVisitingScore();
 				String homeTeam = matchVO.getHomeTeam();
 				String visitingTeam = matchVO.getVisitingTeam();
 
-				if (homeTeam.equals(team) && homeScore > visitingScore) {
-					winNum++;
-				} else if (visitingTeam.equals(team)
-						&& visitingScore > homeScore) {
-					winNum++;
-				}
-
-				ArrayList<RecordVO> records = matchVO.getRecords();
-				for (RecordVO recordVO : records) {
-					if (recordVO.getTeam().equals(team)) {
-						matchesNum++;
-						shootHitNum += recordVO.getShootHitNum(); // 投篮命中数
-						shootAttemptNum += recordVO.getShootAttemptNum(); // 投篮出手次数
-						threeHitNum += recordVO.getThreeHitNum(); // 三分命中数
-						threeAttemptNum += recordVO.getThreeAttemptNum(); // 三分出手数
-						freeThrowHitNum += recordVO.getFreeThrowHitNum(); // 罚球命中数
-						freeThrowAttemptNum += recordVO
-								.getFreeThrowAttemptNum(); // 罚球出手数
-						offenReboundNum += recordVO.getOffenReboundNum(); // 进攻篮板数
-						defenReboundNum += recordVO.getDefenReboundNum(); // 防守篮板数
-						reboundNum += recordVO.getReboundNum();// 篮板数
-						assistNum += recordVO.getAssistNum();// 助攻数
-						stealNum += recordVO.getStealNum();// 抢断数
-						blockNum += recordVO.getBlockNum();// 盖帽数
-						turnOverNum += recordVO.getTurnOverNum();// 失误数
-						foulNum += recordVO.getFoulNum();// 犯规数
-						score += recordVO.getScore();// 比赛得分
-					} else {
-						// 计算对手的
-						dsShootHitNum += recordVO.getShootHitNum();
-						dsShootAttempNum += recordVO.getShootAttemptNum();
-						dsFreeThrowAttemptNum += recordVO
-								.getFreeThrowAttemptNum();
-						dsTurnOverNum += recordVO.getTurnOverNum();
-						dsScore += recordVO.getScore();
-						dsOffenReboundNum += recordVO.getOffenReboundNum();
-						dsDefenReboundNum += recordVO.getDefenReboundNum();
+				boolean isHomeTeam = homeTeam.equals(team);
+				boolean isVisitingTeam = visitingTeam.equals(team);
+				if (isHomeTeam) {
+					matchesNum++;
+					score += homeScore;
+					dsScore += visitingScore;
+					if (homeScore > visitingScore) {
+						winNum++;
+					}
+				} else if (isVisitingTeam) {
+					matchesNum++;
+					score += visitingScore;
+					dsScore += homeScore;
+					if (visitingScore > homeScore) {
+						winNum++;
 					}
 				}
+				if (isHomeTeam || isVisitingTeam) {
+					ArrayList<RecordVO> records = matchVO.getRecords();
+					for (RecordVO recordVO : records) {
+						if (recordVO.getTeam().equals(team)) {
+							shootHitNum += recordVO.getShootHitNum(); // 投篮命中数
+							shootAttemptNum += recordVO.getShootAttemptNum(); // 投篮出手次数
+							threeHitNum += recordVO.getThreeHitNum(); // 三分命中数
+							threeAttemptNum += recordVO.getThreeAttemptNum(); // 三分出手数
+							freeThrowHitNum += recordVO.getFreeThrowHitNum(); // 罚球命中数
+							freeThrowAttemptNum += recordVO
+									.getFreeThrowAttemptNum(); // 罚球出手数
+							offenReboundNum += recordVO.getOffenReboundNum(); // 进攻篮板数
+							defenReboundNum += recordVO.getDefenReboundNum(); // 防守篮板数
+							reboundNum += recordVO.getReboundNum();// 篮板数
+							assistNum += recordVO.getAssistNum();// 助攻数
+							stealNum += recordVO.getStealNum();// 抢断数
+							blockNum += recordVO.getBlockNum();// 盖帽数
+							turnOverNum += recordVO.getTurnOverNum();// 失误数
+							foulNum += recordVO.getFoulNum();// 犯规数
+						} else {
+							// 计算对手的
+							dsShootHitNum += recordVO.getShootHitNum();
+							dsShootAttempNum += recordVO.getShootAttemptNum();
+							dsFreeThrowAttemptNum += recordVO
+									.getFreeThrowAttemptNum();
+							dsTurnOverNum += recordVO.getTurnOverNum();
+							dsOffenReboundNum += recordVO.getOffenReboundNum();
+							dsDefenReboundNum += recordVO.getDefenReboundNum();
+						}
+					}
 
-				shootHitRate = (double) shootHitNum / shootAttemptNum;// 投篮命中率
-				threeHitRate = (double) threeHitNum / threeAttemptNum;// 三分命中率
-				freeThrowHitRate = (double) freeThrowHitNum
-						/ freeThrowAttemptNum;// 罚球命中率
-				winRate = (double) winNum / matchesNum; // 胜率
-				// 进攻回合
-				offenRound = shootAttemptNum
-						+ 0.4
-						* freeThrowAttemptNum
-						- 1.07
-						* (offenReboundNum
-								/ (double) (offenReboundNum + dsDefenReboundNum) * (shootAttemptNum - shootHitNum))
-						+ 1.07 * turnOverNum;
-				dsOffenRound = dsShootAttempNum
-						+ 0.4
-						* dsFreeThrowAttemptNum
-						- 1.07
-						* (dsOffenReboundNum
-								/ (double) (dsOffenReboundNum + defenReboundNum) * (dsShootAttempNum - dsShootHitNum))
-						+ 1.07 * dsTurnOverNum;
+					shootHitRate = (double) shootHitNum / shootAttemptNum;// 投篮命中率
+					threeHitRate = (double) threeHitNum / threeAttemptNum;// 三分命中率
+					freeThrowHitRate = (double) freeThrowHitNum
+							/ freeThrowAttemptNum;// 罚球命中率
+					winRate = (double) winNum / matchesNum; // 胜率
+					// 进攻回合
+					offenRound = shootAttemptNum
+							+ 0.4
+							* freeThrowAttemptNum
+							- 1.07
+							* (offenReboundNum
+									/ (double) (offenReboundNum + dsDefenReboundNum) * (shootAttemptNum - shootHitNum))
+							+ 1.07 * turnOverNum;
+					dsOffenRound = dsShootAttempNum
+							+ 0.4
+							* dsFreeThrowAttemptNum
+							- 1.07
+							* (dsOffenReboundNum
+									/ (double) (dsOffenReboundNum + defenReboundNum) * (dsShootAttempNum - dsShootHitNum))
+							+ 1.07 * dsTurnOverNum;
 
-				offenEfficiency = (double) score / offenRound * 100; // 进攻效率
-				defenEfficiency = (double) dsScore / dsOffenRound; // 防守效率
-				offenReboundEfficiency = (double) offenReboundNum
-						/ (offenReboundNum + dsDefenReboundNum); // 进攻篮板效率
-				defenReboundEfficiency = (double) defenReboundEfficiency
-						/ (defenReboundNum + dsOffenReboundNum); // 防守篮板效率
-				stealEfficiency = (double) stealNum / dsOffenRound * 100; // 抢断效率
-				assistEfficiency = (double) assistNum / offenRound; // 助攻率
+					offenEfficiency = (double) score / offenRound * 100; // 进攻效率
+					defenEfficiency = (double) dsScore / dsOffenRound * 100; // 防守效率
+					offenReboundEfficiency = (double) offenReboundNum
+							/ (offenReboundNum + dsDefenReboundNum); // 进攻篮板效率
+					defenReboundEfficiency = (double) defenReboundNum
+							/ (defenReboundNum + dsOffenReboundNum); // 防守篮板效率
+					stealEfficiency = (double) stealNum / dsOffenRound * 100; // 抢断效率
+					assistEfficiency = (double) assistNum / offenRound * 100; // 助攻率
+				}
 			}
-
 			TeamVO teamVO = new TeamVO(teamName, abLocation, location,
 					conference, partition, homeCourt, setUpTime, matchesNum,
 					shootHitNum, shootAttemptNum, threeHitNum, threeAttemptNum,
@@ -429,6 +437,7 @@ public class Team implements TeamBLService {
 					defenReboundEfficiency, stealEfficiency, assistEfficiency);
 			result.add(teamVO);
 		}
+
 		return result;
 	}
 
@@ -495,14 +504,16 @@ public class Team implements TeamBLService {
 					String homeTeam = matchVO.getHomeTeam();
 					String visitingTeam = matchVO.getVisitingTeam();
 
-					if (homeTeam.equals(team)) {
+					boolean isHomeTeam = homeTeam.equals(team);
+					boolean isVisitingTeam = visitingTeam.equals(team);
+					if (isHomeTeam) {
 						matchesNum++;
 						score += homeScore;
 						dsScore += visitingScore;
 						if (homeScore > visitingScore) {
 							winNum++;
 						}
-					} else if (visitingTeam.equals(team)) {
+					} else if (isVisitingTeam) {
 						matchesNum++;
 						score += visitingScore;
 						dsScore += homeScore;
@@ -510,68 +521,77 @@ public class Team implements TeamBLService {
 							winNum++;
 						}
 					}
-
-					ArrayList<RecordVO> records = matchVO.getRecords();
-					for (RecordVO recordVO : records) {
-						if (recordVO.getTeam().equals(team)) {
-							shootHitNum += recordVO.getShootHitNum(); // 投篮命中数
-							shootAttemptNum += recordVO.getShootAttemptNum(); // 投篮出手次数
-							threeHitNum += recordVO.getThreeHitNum(); // 三分命中数
-							threeAttemptNum += recordVO.getThreeAttemptNum(); // 三分出手数
-							freeThrowHitNum += recordVO.getFreeThrowHitNum(); // 罚球命中数
-							freeThrowAttemptNum += recordVO
-									.getFreeThrowAttemptNum(); // 罚球出手数
-							offenReboundNum += recordVO.getOffenReboundNum(); // 进攻篮板数
-							defenReboundNum += recordVO.getDefenReboundNum(); // 防守篮板数
-							reboundNum += recordVO.getReboundNum();// 篮板数
-							assistNum += recordVO.getAssistNum();// 助攻数
-							stealNum += recordVO.getStealNum();// 抢断数
-							blockNum += recordVO.getBlockNum();// 盖帽数
-							turnOverNum += recordVO.getTurnOverNum();// 失误数
-							foulNum += recordVO.getFoulNum();// 犯规数
-							// score += recordVO.getScore();// 比赛得分
-						} else {
-							// 计算对手的
-							dsShootHitNum += recordVO.getShootHitNum();
-							dsShootAttempNum += recordVO.getShootAttemptNum();
-							dsFreeThrowAttemptNum += recordVO
-									.getFreeThrowAttemptNum();
-							dsTurnOverNum += recordVO.getTurnOverNum();
-							// dsScore += recordVO.getScore();
-							dsOffenReboundNum += recordVO.getOffenReboundNum();
-							dsDefenReboundNum += recordVO.getDefenReboundNum();
+					if (isHomeTeam || isVisitingTeam) {
+						ArrayList<RecordVO> records = matchVO.getRecords();
+						for (RecordVO recordVO : records) {
+							if (recordVO.getTeam().equals(team)) {
+								shootHitNum += recordVO.getShootHitNum(); // 投篮命中数
+								shootAttemptNum += recordVO
+										.getShootAttemptNum(); // 投篮出手次数
+								threeHitNum += recordVO.getThreeHitNum(); // 三分命中数
+								threeAttemptNum += recordVO
+										.getThreeAttemptNum(); // 三分出手数
+								freeThrowHitNum += recordVO
+										.getFreeThrowHitNum(); // 罚球命中数
+								freeThrowAttemptNum += recordVO
+										.getFreeThrowAttemptNum(); // 罚球出手数
+								offenReboundNum += recordVO
+										.getOffenReboundNum(); // 进攻篮板数
+								defenReboundNum += recordVO
+										.getDefenReboundNum(); // 防守篮板数
+								reboundNum += recordVO.getReboundNum();// 篮板数
+								assistNum += recordVO.getAssistNum();// 助攻数
+								stealNum += recordVO.getStealNum();// 抢断数
+								blockNum += recordVO.getBlockNum();// 盖帽数
+								turnOverNum += recordVO.getTurnOverNum();// 失误数
+								foulNum += recordVO.getFoulNum();// 犯规数
+							} else {
+								// 计算对手的
+								dsShootHitNum += recordVO.getShootHitNum();
+								dsShootAttempNum += recordVO
+										.getShootAttemptNum();
+								dsFreeThrowAttemptNum += recordVO
+										.getFreeThrowAttemptNum();
+								dsTurnOverNum += recordVO.getTurnOverNum();
+								dsOffenReboundNum += recordVO
+										.getOffenReboundNum();
+								dsDefenReboundNum += recordVO
+										.getDefenReboundNum();
+							}
 						}
+
+						shootHitRate = (double) shootHitNum / shootAttemptNum;// 投篮命中率
+						threeHitRate = (double) threeHitNum / threeAttemptNum;// 三分命中率
+						freeThrowHitRate = (double) freeThrowHitNum
+								/ freeThrowAttemptNum;// 罚球命中率
+						winRate = (double) winNum / matchesNum; // 胜率
+						// 进攻回合
+						offenRound = shootAttemptNum
+								+ 0.4
+								* freeThrowAttemptNum
+								- 1.07
+								* (offenReboundNum
+										/ (double) (offenReboundNum + dsDefenReboundNum) * (shootAttemptNum - shootHitNum))
+								+ 1.07 * turnOverNum;
+						dsOffenRound = dsShootAttempNum
+								+ 0.4
+								* dsFreeThrowAttemptNum
+								- 1.07
+								* (dsOffenReboundNum
+										/ (double) (dsOffenReboundNum + defenReboundNum) * (dsShootAttempNum - dsShootHitNum))
+								+ 1.07 * dsTurnOverNum;
+
+						offenEfficiency = (double) score / offenRound * 100; // 进攻效率
+						defenEfficiency = (double) dsScore / dsOffenRound * 100; // 防守效率
+						offenReboundEfficiency = (double) offenReboundNum
+								/ (offenReboundNum + dsDefenReboundNum); // 进攻篮板效率
+						defenReboundEfficiency = (double) defenReboundNum
+								/ (defenReboundNum + dsOffenReboundNum); // 防守篮板效率
+						stealEfficiency = (double) stealNum / dsOffenRound
+								* 100; // 抢断效率
+						assistEfficiency = (double) assistNum / offenRound
+								* 100; // 助攻率
 					}
-
-					shootHitRate = (double) shootHitNum / shootAttemptNum;// 投篮命中率
-					threeHitRate = (double) threeHitNum / threeAttemptNum;// 三分命中率
-					freeThrowHitRate = (double) freeThrowHitNum
-							/ freeThrowAttemptNum;// 罚球命中率
-					winRate = (double) winNum / matchesNum; // 胜率
-					// 进攻回合
-					offenRound = shootAttemptNum
-							+ 0.4
-							* freeThrowAttemptNum
-							- 1.07
-							* (offenReboundNum
-									/ (double) (offenReboundNum + dsDefenReboundNum) * (shootAttemptNum - shootHitNum))
-							+ 1.07 * turnOverNum;
-					dsOffenRound = dsShootAttempNum
-							+ 0.4
-							* dsFreeThrowAttemptNum
-							- 1.07
-							* (dsOffenReboundNum
-									/ (double) (dsOffenReboundNum + defenReboundNum) * (dsShootAttempNum - dsShootHitNum))
-							+ 1.07 * dsTurnOverNum;
-
-					offenEfficiency = (double) score / offenRound * 100; // 进攻效率
-					defenEfficiency = (double) dsScore / dsOffenRound; // 防守效率
-					offenReboundEfficiency = (double) offenReboundNum
-							/ (offenReboundNum + dsDefenReboundNum); // 进攻篮板效率
-					defenReboundEfficiency = (double) defenReboundEfficiency
-							/ (defenReboundNum + dsOffenReboundNum); // 防守篮板效率
-					stealEfficiency = (double) stealNum / dsOffenRound * 100; // 抢断效率
-					assistEfficiency = (double) assistNum / offenRound * 100; // 助攻率
 				}
 			}
 			TeamVO teamVO = new TeamVO(teamName, abLocation, location,
