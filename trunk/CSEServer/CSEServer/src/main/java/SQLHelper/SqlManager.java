@@ -15,9 +15,9 @@ public class SqlManager {
 		}
         
         String userName = "root";
-        String password = "12345678";
+        String password = "12345a";
         
-        Connection c = DriverManager.getConnection(url,"root",password);
+        Connection c = DriverManager.getConnection(url,userName,password);
         return c;
   }
 	 

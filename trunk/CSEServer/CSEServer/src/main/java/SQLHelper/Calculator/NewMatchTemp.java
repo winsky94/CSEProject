@@ -83,7 +83,7 @@ public class NewMatchTemp {
 			Statement statement2 = con.createStatement();
 			String query = "select matchID,team,season,date,sum(shootHitNum),sum(shootAttemptNum),sum(threeHitNum),sum(threeAttemptNum),sum(freeThrowHitNum),sum(freeThrowAttemptNum),"
 					+ "sum(offenReboundNum),sum(defenReboundNum),sum(reboundNum),sum(assistNum),sum(stealNum),sum(blockNum),sum(turnOverNum),sum(foulNum),sum(score)"
-					+ " from records group by matchID,team";
+					+ " from records group by matchID,team order by matchID asc";
 			ResultSet resultSet = statement2.executeQuery(query);
 
 			int flag = 0;
