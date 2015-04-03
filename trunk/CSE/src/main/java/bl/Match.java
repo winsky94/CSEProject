@@ -18,6 +18,11 @@ public class Match implements MatchBLService {
 		matches = getMatches();
 	}
 
+	/**
+	 * 从文件中读取每场比赛信息
+	 * @param fileName 记录比赛信息的文件名
+	 * @return 一个matchVO对象
+	 */
 	private MatchVO readFromMatchFile(String fileName) {
 		MatchVO matchVO;
 		String season;// 赛季
@@ -141,6 +146,10 @@ public class Match implements MatchBLService {
 		return matchVO;
 	}
 
+	/**
+	 * 得到全部的比赛信息
+	 * @return 比赛列表
+	 */
 	private ArrayList<MatchVO> getMatches() {
 		// TODO 自动生成的方法存根
 		ArrayList<MatchVO> matches = new ArrayList<MatchVO>();
@@ -160,6 +169,14 @@ public class Match implements MatchBLService {
 		return matches;
 	}
 
+	/**
+	 * 获得某场比赛的信息，暂不支持模糊查找，需要与界面进行讨论研究
+	 * @param season 赛季
+	 * @param date 日期
+	 * @param homeTeam 主队
+	 * @param visitingTeam 客队
+	 * @return 比赛的列表
+	 */
 	public ArrayList<MatchVO> getMatchData(String season, String date,
 			String homeTeam, String visitingTeam) {
 		// TODO 自动生成的方法存根
