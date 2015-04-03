@@ -45,6 +45,7 @@ public class TeamDetailPanel extends FatherPanel{
 		team=new Team();
 		abbrName=Team.changeTeamNameCHToEN(teamName);
 		nameCH=teamName;
+		setBackground(Style.BACK_YELLOW);
 		//----------------------
 		nameLbl=new JLabel(new ImageIcon("image/teamIcon/teamsPng150/"+abbrName+".png"));
 		gbc.gridx=0;
@@ -95,6 +96,7 @@ public class TeamDetailPanel extends FatherPanel{
 		historyPnl=new TeamDetailHistoryPanel();
 		tab.addTab("基本信息", infoPnl);
 		tab.addTab("过往数据",historyPnl);
+		tab.setBorder(null);
 	}
 	public static void main(String[] args) {
 		JFrame f=new JFrame();
