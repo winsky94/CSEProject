@@ -519,7 +519,7 @@ public class Team extends UnicastRemoteObject implements TeamDataService {
 	}
 
 	/**
-	 * 根据球队名得到近期比赛的某种数据 模糊查找
+	 * 根据球队名得到近期比赛的某种数据 模糊查找（觉得好像意义不大）
 	 * 
 	 * @param teamName
 	 * @param num
@@ -617,6 +617,7 @@ public class Team extends UnicastRemoteObject implements TeamDataService {
 	}
 
 	/**
+	 * 筛选出赛季的热点球队——所谓热点球队，就是按照筛选条件排前五的球队
 	 * @param column
 	 *            筛选条件
 	 * @return 返回到 目前为止所有参加过比赛的球队中筛选出前 5 名球队（按照 降序排列进行筛选）
