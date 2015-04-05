@@ -85,6 +85,13 @@ public class Team implements TeamBLService {
 
 	}
 
+	/**
+	 * 从文件中读取球队信息
+	 * 
+	 * @param fileName
+	 *            存储球队信息的文件名
+	 * @return
+	 */
 	private ArrayList<String[]> readFromFile(String fileName) {
 		ArrayList<String[]> result = new ArrayList<String[]>();
 		String[] content;
@@ -122,6 +129,11 @@ public class Team implements TeamBLService {
 		return result;
 	}
 
+	/**
+	 * 解析球队信息，转换成teamvo列表，初始化全局变量teamsBaseInfo
+	 * 
+	 * @return
+	 */
 	private ArrayList<TeamVO> getTeams() {
 		// TODO 自动生成的方法存根
 		String name;
@@ -151,6 +163,11 @@ public class Team implements TeamBLService {
 		return teams;
 	}
 
+	/**
+	 * 计算球队所有比赛的平均数据，初始化全局变量teamAverageInfo
+	 * 
+	 * @return
+	 */
 	private ArrayList<TeamVO> calculateTeamAverageInfo() {
 		// TODO 自动生成的方法存根
 		ArrayList<TeamVO> result = new ArrayList<TeamVO>();
@@ -303,10 +320,23 @@ public class Team implements TeamBLService {
 		return result;
 	}
 
+	/**
+	 * 从数据库中获得球队列表teams
+	 * 
+	 * @return 球队最基本信息的列表，其他属性值为空，未进行初始化
+	 */
 	public ArrayList<TeamVO> getTeamBaseInfo() {
 		return teamsBaseInfo;
 	}
 
+	/**
+	 * 得到球队的该赛季的技术统计数据
+	 * 
+	 * @param season
+	 *            赛季
+	 * @return 球队赛季统计数据，vo的所有初始值均进行了初始化
+	 * 
+	 */
 	public ArrayList<TeamVO> getTeamSeasonInfo(String season) {
 		// TODO 自动生成的方法存根
 		ArrayList<TeamVO> result = new ArrayList<TeamVO>();
@@ -471,11 +501,24 @@ public class Team implements TeamBLService {
 		return result;
 	}
 
+	/**
+	 * 得到球队的该场均的技术统计数据
+	 * 
+	 * @return 球队场均统计数据，VO的所有初始值均进行了初始化
+	 * 
+	 */
 	public ArrayList<TeamVO> getTeamAverageInfo() {
 		// TODO 自动生成的方法存根
 		return teamAverageInfo;
 	}
 
+	/**
+	 * 模糊查询球队的基础信息，球队名可以是名称，也可以是缩写，大小写均可
+	 * 
+	 * @param name
+	 *            球队名称
+	 * @return 符合模糊查询条件的球队对象的列表，球队对象只进行了基础信息的初始化与赋值
+	 */
 	public ArrayList<TeamVO> getTeamBaseInfo(String name) {
 		// TODO 自动生成的方法存根
 		ArrayList<TeamVO> result = new ArrayList<TeamVO>();
@@ -490,6 +533,15 @@ public class Team implements TeamBLService {
 		return result;
 	}
 
+	/**
+	 * 模糊查询球队的某个赛季的信息，球队名可以是名称，也可以是缩写，大小写均可
+	 * 
+	 * @param season
+	 *            赛季
+	 * @param name
+	 *            球队名称
+	 * @return 符合模糊查询条件的球队对象的列表
+	 */
 	public ArrayList<TeamVO> getTeamSeasonInfo(String season, String name) {
 		// TODO 自动生成的方法存根
 		ArrayList<TeamVO> result = new ArrayList<TeamVO>();
@@ -506,6 +558,13 @@ public class Team implements TeamBLService {
 		return result;
 	}
 
+	/**
+	 * 模糊查询球队的场均技术信息，球队名可以是名称，也可以是缩写，大小写均可
+	 * 
+	 * @param name
+	 *            球队名称
+	 * @return 符合模糊查询条件的球队对象的列表
+	 */
 	public ArrayList<TeamVO> getTeamAverageInfo(String name) {
 		// TODO 自动生成的方法存根
 		ArrayList<TeamVO> result = new ArrayList<TeamVO>();
@@ -522,27 +581,62 @@ public class Team implements TeamBLService {
 		return result;
 	}
 
+	/**
+	 * 根据某一项技术分析项，将球队按某个赛季的该项数据进行升降序排序
+	 * 
+	 * @param season
+	 *            赛季
+	 * @param condition
+	 *            排序条件，即某一项技术分析项，如：篮板率
+	 * @param order
+	 *            升序还是降序 asc 表示升序 , desc表示降序 , 未明确写明排序方式时默认是升序
+	 * 
+	 * @return 按照所给条件排好序的球队列表
+	 */
 	public ArrayList<TeamVO> getOrderedTeamsBySeason(String season,
 			String condition, String order) {
 		// TODO 自动生成的方法存根
 		ArrayList<TeamVO> teams = new ArrayList<TeamVO>();
 		teams = getTeamSeasonInfo(season);
-		Collections.sort(teams, new SequenceOfTeam(condition, order));
-		return teams;
-	}
-
-	public ArrayList<TeamVO> getOrderedTeamsByAverage(String condition,
-			String order) {
-		// TODO 自动生成的方法存根
-		ArrayList<TeamVO> teams = new ArrayList<TeamVO>();
-		teams = teamAverageInfo;
+		// 未明确写明排序方式时默认是升序
+		if (order == null || order.equals("null")) {
+			order = "asc";
+		}
 		Collections.sort(teams, new SequenceOfTeam(condition, order));
 		return teams;
 	}
 
 	/**
+	 * 根据某一项技术分析项，将球队按场均该项数据进行升降序排序
+	 * 
+	 * @param season
+	 *            赛季
+	 * @param condition
+	 *            排序条件，即某一项技术分析项，如：篮板率
+	 * @param order
+	 *            升序还是降序 asc 表示升序 , desc表示降序 , 未明确写明排序方式时默认是升序
+	 * 
+	 * @return 按照所给条件排好序的球队列表
+	 */
+	public ArrayList<TeamVO> getOrderedTeamsByAverage(String condition,
+			String order) {
+		// TODO 自动生成的方法存根
+		ArrayList<TeamVO> teams = new ArrayList<TeamVO>();
+		teams = teamAverageInfo;
+		// 未明确写明排序方式时默认是升序
+		if (order == null || order.equals("null")) {
+			order = "asc";
+		}
+		Collections.sort(teams, new SequenceOfTeam(condition, order));
+		return teams;
+	}
+
+	/**
+	 * 根据球队缩写得到球队队徽
+	 * 
 	 * @param name
 	 *            球队缩写
+	 * @return 该球队队徽
 	 */
 	public ImageIcon getTeamImage(String name) {
 		// TODO 自动生成的方法存根
@@ -551,6 +645,13 @@ public class Team implements TeamBLService {
 		return imageIcon;
 	}
 
+	/**
+	 * 根据球队名称查找该球队近期比赛
+	 * 
+	 * @param teamName
+	 *            球队缩写 完全匹配
+	 * @return 近期五场比赛的列表
+	 */
 	public ArrayList<MatchVO> getRecentMatches(String teamName) {
 		// TODO 自动生成的方法存根
 		ArrayList<MatchVO> result = new ArrayList<MatchVO>();
@@ -558,6 +659,13 @@ public class Team implements TeamBLService {
 		return result;
 	}
 
+	/**
+	 * 根据球队名称查找其过往比赛
+	 * 
+	 * @param teamName
+	 *            球队缩写 完全匹配
+	 * @return 过往比赛列表
+	 */
 	public ArrayList<MatchVO> getMatches(String teamName) {
 		// TODO 自动生成的方法存根
 		ArrayList<MatchVO> result = new ArrayList<MatchVO>();
@@ -572,7 +680,7 @@ public class Team implements TeamBLService {
 	 *            球队名缩写，完全匹配
 	 * @param num
 	 *            得到比赛的场数 ，-1则是取出全部数据
-	 * @return
+	 * @return 过往比赛的列表
 	 */
 	private ArrayList<MatchVO> getRecentMatches(String teamName, int num) {
 		ArrayList<MatchVO> result = new ArrayList<MatchVO>();
@@ -594,6 +702,13 @@ public class Team implements TeamBLService {
 		return result;
 	}
 
+	/**
+	 * 筛选出赛季的热点球队——所谓热点球队，就是按照筛选条件排前五的球队
+	 * 
+	 * @param column
+	 *            筛选条件
+	 * @return 返回到 目前为止所有参加过比赛的球队中筛选出前 5 名球队（按照 降序排列进行筛选）
+	 */
 	public ArrayList<TeamVO> getSeasonHotTeam(String season, String column) {
 		// TODO 自动生成的方法存根
 		ArrayList<TeamVO> result = new ArrayList<TeamVO>();
