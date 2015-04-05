@@ -95,7 +95,7 @@ public class Team extends UnicastRemoteObject implements TeamDataService {
 	}
 
 	/**
-	 * 得到球队的该赛季的技术统计数据
+	 * 得到球队的场均的技术统计数据
 	 * 
 	 * @param season
 	 * @return
