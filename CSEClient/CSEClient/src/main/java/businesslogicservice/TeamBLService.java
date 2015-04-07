@@ -14,11 +14,11 @@ public interface TeamBLService {
 
 	public ArrayList<TeamVO> getTeamAverageInfo(String season);
 
-	public TeamVO getTeamBaseInfo(String name);
+	public ArrayList<TeamVO> getTeamBaseInfo(String name);
 
-	public TeamVO getTeamSeasonInfo(String season, String name);
+	public ArrayList<TeamVO> getTeamSeasonInfo(String season, String name);
 
-	public TeamVO getTeamAverageInfo(String season, String name);
+	public ArrayList<TeamVO> getTeamAverageInfo(String name);
 
 	public ArrayList<TeamVO> getOrderedTeamsBySeason(String season,
 			String condition, String order);
