@@ -15,11 +15,11 @@ public interface PlayerBLService {
 
 	public ArrayList<PlayerVO> getPlayerAverageInfo(String season);
 
-	public PlayerVO getPlayerBaseInfo(String name);
+	public ArrayList<PlayerVO> getPlayerBaseInfo(String name);
 
-	public PlayerVO getPlayerSeasonInfo(String season, String name);
+	public ArrayList<PlayerVO> getPlayerSeasonInfo(String season, String name);
 
-	public PlayerVO getPlayerAverageInfo(String season, String name);
+	public ArrayList<PlayerVO> getPlayerAverageInfo(String name);
 
 	public ArrayList<PlayerVO> getOrderedPlayersBySeason(String season,
 			String condition, String order,int num) throws RemoteException;
