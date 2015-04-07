@@ -12,4 +12,5 @@ public class MyBaseTable extends JTable{
 	public MyBaseTable(TableModel model) {
 		super(model);
 	}
+	
 }

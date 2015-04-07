@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 
+import vo.PlayerVO;
 import vo.TeamVO;
 import businesslogic.Team;
 import businesslogicservice.TeamBLService;
@@ -76,5 +77,12 @@ public class TeamBaseInfoTableModel extends MyTableModel{
 		return this.teamIcon;
 	}
 	
-	
+	public void SearchRefresh(Object vv){
+		ArrayList<TeamVO> v=(ArrayList<TeamVO>)vv;
+		if(v!=null&&v.size()!=0){
+			
+			Refresh(v);
+		}
+		
+	}
 }

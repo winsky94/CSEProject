@@ -15,7 +15,7 @@ public class FatherPanel extends JPanel{
 	private static final long serialVersionUID = 1L;
 	protected GridBagLayout gbl;
 	protected GridBagConstraints gbc;
-	JPanel titleBar;
+	protected TitleBar titleBar;
 	public FatherPanel(){
 		gbl=new GridBagLayout();
 		gbc=new GridBagConstraints();
@@ -36,4 +36,6 @@ public class FatherPanel extends JPanel{
 	public void SearchRefresh(ArrayList<Object> os){
 		
 	}
+	
+	
 }

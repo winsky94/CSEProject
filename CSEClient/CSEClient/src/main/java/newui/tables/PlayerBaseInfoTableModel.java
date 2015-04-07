@@ -175,5 +175,14 @@ public class PlayerBaseInfoTableModel extends MyTableModel {
 	public ArrayList<ImageIcon> getImgList() {
 		return imgList;
 	}
+	
+	public void SearchRefresh(Object vv){
+		ArrayList<PlayerVO> v=(ArrayList<PlayerVO>)vv;
+		if(v!=null&&v.size()!=0){
+			
+			Refresh(v);
+		}
+		
+	}
 
 }

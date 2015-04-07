@@ -112,5 +112,12 @@ public class TeamTableModel extends MyTableModel {
 			content.add(line);
 		}
 	}
-
+	public void SearchRefresh(Object vv){
+		ArrayList<TeamVO> v=(ArrayList<TeamVO>)vv;
+		if(v!=null&&v.size()!=0){
+			
+			refreshContent(v);
+		}
+		
+	}
 }

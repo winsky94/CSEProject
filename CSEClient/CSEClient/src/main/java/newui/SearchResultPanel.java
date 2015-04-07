@@ -3,6 +3,7 @@ package newui;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Font;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
@@ -12,6 +13,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
+import vo.PlayerVO;
 import vo.TeamVO;
 import businesslogic.Player;
 import businesslogic.Team;
@@ -37,10 +39,12 @@ public class SearchResultPanel extends FatherPanel implements MouseListener{
 	JPanel funcPnl;
 	private PlayerBLService pservice;
 	private TeamBLService tservice;
+	public String content;
 	Font font = new Font("微软雅黑", Font.PLAIN, 15);
 	public SearchResultPanel(String scontent) {
 		// ------funcPnl--------
 		funcPnl = new JPanel();
+		content=scontent;
 		funcPnl.setBackground(Style.BACK_GREY);
 		gbc.gridy = 1;
 		gbc.gridheight = 1;
@@ -58,7 +62,19 @@ public class SearchResultPanel extends FatherPanel implements MouseListener{
 		funcPnl.add(changeLbl);
 		//------jsp--------------------
 		ttm=new TeamBaseInfoTableModel();
+		ptm=new PlayerBaseInfoTableModel();
 		table=new MyBaseTable(ttm);
+		
+		titleBar.searchBtn.addMouseListener(new MouseAdapter(){
+			public void mouseClicked(MouseEvent e){
+				table=new MyBaseTable(ttm);
+				titleBar.setCurrentTableModel(ttm);
+				titleBar.setModelEnum(TableModel.TEAMBASEINFO);
+				titleBar.setTable(table);
+				content=titleBar.searchFld.getText();
+			}
+			
+		});
 		jsp=new JScrollPane(table);
 		isTeamTable=true;
 		gbc.gridy =2;
@@ -68,7 +84,8 @@ public class SearchResultPanel extends FatherPanel implements MouseListener{
 		add(jsp);
 		pservice=new Player();
 		tservice=new Team();
-		//ArrayList<TeamVO> v=tservice.getTeamBaseInfo(scontent);
+		ArrayList<TeamVO> v=tservice.getTeamBaseInfo(scontent);
+		ttm.SearchRefresh(v);
 		table.revalidate();
 	}
 	class MyLabel extends JLabel{
@@ -91,10 +108,18 @@ public class SearchResultPanel extends FatherPanel implements MouseListener{
 				//换为ptm
 				isTeamTable=false;
 				resultLbl.setText("在球员中检索到……");
+				ArrayList<PlayerVO> re=pservice.getPlayerBaseInfo(content);
+				table=new JTable(ptm);
+				ptm.SearchRefresh(re);
+				table.revalidate();
 			}else{
 				//换为ttm
 				isTeamTable=true;
 				resultLbl.setText("在球队中检索到……");
+				ArrayList<TeamVO> re=tservice.getTeamBaseInfo(content);
+				table=new JTable(ttm);
+				ttm.SearchRefresh(re);
+				table.revalidate();
 			}
 		}
 		

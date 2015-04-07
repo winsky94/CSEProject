@@ -20,6 +20,7 @@ import javax.swing.table.DefaultTableCellRenderer;
 
 import newui.FatherPanel;
 import newui.Style;
+import newui.TableModel;
 import newui.tables.MySortableTable;
 import newui.tables.MyTableCellRenderer;
 import newui.tables.RowHeaderTable;
@@ -89,7 +90,9 @@ public class TeamIndexPanel extends FatherPanel implements MouseListener,
 		for (int i = 0; i < table.getColumnCount(); i++) {
 			table.getColumn(table.getColumnName(i)).setCellRenderer(tcr);
 		}
-
+		titleBar.setCurrentTableModel(ttm);
+		titleBar.setModelEnum(TableModel.TEAMRANK);
+		titleBar.setTable(table);
 		jsp = new JScrollPane(table);
 
 		gbc.gridy = 2;
@@ -203,6 +206,8 @@ public class TeamIndexPanel extends FatherPanel implements MouseListener,
 			if (vlist != null)
 				ttm.refreshContent(vlist);
 			table.revalidate();
+			titleBar.setSeason(season);
+			titleBar.setAveOrAll(s);
 		}
 	}
 }
