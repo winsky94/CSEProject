@@ -1,5 +1,7 @@
 package newui.tables;
 
+import java.util.ArrayList;
+
 import javax.swing.table.AbstractTableModel;
 
 public class MyTableModel extends AbstractTableModel{
@@ -33,8 +35,8 @@ public class MyTableModel extends AbstractTableModel{
 		//System.out.println(returnValue);
 		return returnValue;
 	}
-	//====更新数据=====0汇总，1场均
-	public void Refresh(String model){
+
+	public void SearchRefresh(Object v){
 		
 	}
 	

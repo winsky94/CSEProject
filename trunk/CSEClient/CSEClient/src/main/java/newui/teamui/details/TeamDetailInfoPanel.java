@@ -26,7 +26,7 @@ public class TeamDetailInfoPanel extends JPanel{
 		team=new Team();
 		chName=ch;
 		abbrName=abbr;
-		basevo=team.getTeamBaseInfo(abbr);
+		basevo=team.getTeamBaseInfo(abbr).get(0);
 		enName=basevo.getTeamName();
 		//----------------------------
 		GridBagLayout gbl=new GridBagLayout();

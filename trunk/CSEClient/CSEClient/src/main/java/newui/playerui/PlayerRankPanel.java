@@ -21,6 +21,7 @@ import javax.swing.table.DefaultTableCellRenderer;
 
 import newui.FatherPanel;
 import newui.Style;
+import newui.TableModel;
 import newui.mainui.MainFrame;
 import newui.tables.MySortableTable;
 import newui.tables.MyTableCellRenderer;
@@ -127,7 +128,9 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener,
 		for (int i = 0; i < table.getColumnCount(); i++) {
 			table.getColumn(table.getColumnName(i)).setCellRenderer(tcr);
 		}
-
+		titleBar.setCurrentTableModel(ptm);
+		titleBar.setModelEnum(TableModel.PLAYERRANK);
+		titleBar.setTable(table);
 		jsp = new JScrollPane(table);
 		gbc.gridy = 2;
 		gbc.gridheight = 10;
@@ -274,6 +277,8 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener,
 			if (vlist != null)
 				ptm.refreshContent(vlist);
 			table.revalidate();
+			titleBar.setSeason(season);
+			titleBar.setAveOrAll(s);
 		}
 	}
 

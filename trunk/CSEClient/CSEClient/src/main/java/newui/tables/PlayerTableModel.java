@@ -130,7 +130,8 @@ public class PlayerTableModel extends MyTableModel{
 		    line.add(vo.getEfficiency());
 		    line.add(vo.getGmScEfficiencyValue());
 		    line.add(vo.getTrueHitRate());
-		    line.add(vo.getShootHitEfficiency());
+		    //这个对吗？有没有用错get方法了
+		    line.add(vo.getShootEfficiency());
 		    line.add(vo.getReboundRate());
 		    line.add(vo.getOffenReboundRate());
 		    line.add(vo.getDefenReboundRate());
@@ -144,6 +145,14 @@ public class PlayerTableModel extends MyTableModel{
 		    content.add(line);
 		    
 		}
+	}
+	
+	public void SearchRefresh(Object vv){
+		ArrayList<PlayerVO> v=(ArrayList<PlayerVO>)vv;
+		if(v!=null&&v.size()!=0){
+			refreshContent(v);
+		}
+		
 	}
 
 }

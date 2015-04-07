@@ -21,6 +21,7 @@ import javax.swing.table.DefaultTableCellRenderer;
 
 import newui.FatherPanel;
 import newui.Style;
+import newui.TableModel;
 import newui.mainui.MainFrame;
 import newui.tables.MyTableCellRenderer;
 import newui.tables.PlayerBaseInfoTableModel;
@@ -94,7 +95,9 @@ public class PlayerIndexPanel extends FatherPanel implements MouseListener {
 		for (int i = 1; i < table.getColumnCount(); i++) {
 			table.getColumn(table.getColumnName(i)).setCellRenderer(tcr);
 		}
-
+		titleBar.setCurrentTableModel(pitm);
+		titleBar.setModelEnum(TableModel.PLAYERBASEINFO);
+		titleBar.setTable(table);
 		jsp = new JScrollPane(table);
 
 		JLabel jb = new JLabel();
