@@ -16,7 +16,7 @@ public class PlayerVO {
 	private double gameStartingNum;// 先发场数
 	private double reboundNum;// 篮板数
 	private double assistNum;// 助攻数
-	private String presentTime;// 在场时间
+	private double presentTime;// 在场时间
 	private double shootHitNum;//投篮命中数
 	private double shootAttemptNum;//投篮出手数
 	private double shootHitRate;// 投篮命中率
@@ -26,8 +26,8 @@ public class PlayerVO {
 	private double freeThrowHitNum;//罚球命中数
 	private double freeThrowAttemptNum;//罚球出手数
 	private double freeThrowHitRate;// 罚球命中率
-	private double offenNum;// 进攻数
-	private double defenNum;// 防守数
+	private double offenReboundNum;// 进攻数
+	private double defenReboundNum;// 防守数
 	private double stealNum;// 抢断数
 	private double blockNum;// 盖帽数
 	private double turnOverNum;// 失误数
@@ -69,13 +69,72 @@ public class PlayerVO {
 		this.exp = exp;
 		this.school = school;
 	}
+	
+	public PlayerVO(String name, String owingTeam, int playedGames,
+			double gameStartingNum, double reboundNum, double assistNum,
+			double presentTime, int shootHitNum,int shootAttemptNum,double shootHitRate,
+			int threeHitNum,int threeAttemptNum,double threeHitRate,
+			int freeThrowHitNum,int freeThrowAttemptNum,
+			double freeThrowHitRate, double offenReboundNum, double defenReboundNum,
+			double stealNum, double blockNum, double turnOverNum,
+			double foulNum, double score, double efficiency,
+			double recentFiveMatchesScoreUpRate,
+			double recentFiveMatchesReboundUpRate,double recentFiveMatchesAssistUpRate, double gmScEfficiencyValue,
+			double trueHitRate, double shootEfficiency, double reboundRate,
+			double offenReboundRate, double defenReboundRate,
+			double assistRate, double stealRate, double blockRate,
+			double turnOverRate, double usageRate, double score_rebound_assist,
+			double doubleDoubleNum) {
+		
+		this.owingTeam = owingTeam;
+		this.playedGames = playedGames;
+		this.gameStartingNum = gameStartingNum;
+		this.reboundNum = reboundNum;
+		this.assistNum = assistNum;
+		this.presentTime = presentTime;
+		this.shootHitNum=shootHitNum;
+		this.shootAttemptNum=shootAttemptNum;
+		this.shootHitRate = shootHitRate;
+		this.threeHitNum=threeHitNum;
+		this.threeAttemptNum=threeAttemptNum;
+		this.threeHitRate = threeHitRate;
+		this.freeThrowHitNum=freeThrowHitNum;
+		this.freeThrowAttemptNum=freeThrowAttemptNum;
+		this.freeThrowHitRate = freeThrowHitRate;
+		this.offenReboundNum = offenReboundNum;
+		this.defenReboundNum = defenReboundNum;
+		this.stealNum = stealNum;
+		this.blockNum = blockNum;
+		this.turnOverNum = turnOverNum;
+		this.foulNum = foulNum;
+		this.score = score;
+		this.efficiency = efficiency;
+		this.recentFiveMatchesReboundUpRate = recentFiveMatchesReboundUpRate;
+		this.recentFiveMatchesScoreUpRate = recentFiveMatchesScoreUpRate;
+		this.recentFiveMatchesAssistUpRate=recentFiveMatchesAssistUpRate;
+		GmScEfficiencyValue = gmScEfficiencyValue;
+		this.trueHitRate = trueHitRate;
+		this.shootEfficiency = shootEfficiency;
+		this.reboundRate = reboundRate;
+		this.offenReboundRate = offenReboundRate;
+		this.defenReboundRate = defenReboundRate;
+		this.assistRate = assistRate;
+		this.stealRate = stealRate;
+		this.blockRate = blockRate;
+		this.turnOverRate = turnOverRate;
+		this.usageRate = usageRate;
+		this.score_rebound_assist = score_rebound_assist;
+		this.doubleDoubleNum = doubleDoubleNum;
+	}
 
 	public PlayerVO(String name, String number, String position,
 			String height, int weight, String birth, int age, int exp,
 			String school, String owingTeam, int playedGames,
 			double gameStartingNum, double reboundNum, double assistNum,
-			String presentTime, double shootHitRate, double threeHitRate,
-			double freeThrowHitRate, double offenNum, double defenNum,
+			double presentTime, int shootHitNum,int shootAttemptNum,double shootHitRate,
+			int threeHitNum,int threeAttemptNum,double threeHitRate,
+			int freeThrowHitNum,int freeThrowAttemptNum,
+			double freeThrowHitRate, double offenReboundNum, double defenReboundNum,
 			double stealNum, double blockNum, double turnOverNum,
 			double foulNum, double score, double efficiency,
 			double recentFiveMatchesScoreUpRate,
@@ -101,11 +160,17 @@ public class PlayerVO {
 		this.reboundNum = reboundNum;
 		this.assistNum = assistNum;
 		this.presentTime = presentTime;
+		this.shootHitNum=shootHitNum;
+		this.shootAttemptNum=shootAttemptNum;
 		this.shootHitRate = shootHitRate;
+		this.threeHitNum=threeHitNum;
+		this.threeAttemptNum=threeAttemptNum;
 		this.threeHitRate = threeHitRate;
+		this.freeThrowHitNum=freeThrowHitNum;
+		this.freeThrowAttemptNum=freeThrowAttemptNum;
 		this.freeThrowHitRate = freeThrowHitRate;
-		this.offenNum = offenNum;
-		this.defenNum = defenNum;
+		this.offenReboundNum = offenReboundNum;
+		this.defenReboundNum = defenReboundNum;
 		this.stealNum = stealNum;
 		this.blockNum = blockNum;
 		this.turnOverNum = turnOverNum;
@@ -187,7 +252,7 @@ public class PlayerVO {
 		return assistNum;
 	}
 
-	public String getPresentTime() {
+	public double getPresentTime() {
 		return presentTime;
 	}
 
@@ -227,12 +292,12 @@ public class PlayerVO {
 		return freeThrowHitRate;
 	}
 
-	public double getOffenNum() {
-		return offenNum;
+	public double getOffenReboundNum() {
+		return offenReboundNum;
 	}
 
-	public double getDefenNum() {
-		return defenNum;
+	public double getDefenReboundNum() {
+		return defenReboundNum;
 	}
 
 	public double getStealNum() {
@@ -379,7 +444,7 @@ public class PlayerVO {
 		this.assistNum = assistNum;
 	}
 
-	public void setPresentTime(String presentTime) {
+	public void setPresentTime(double presentTime) {
 		this.presentTime = presentTime;
 	}
 
@@ -419,12 +484,12 @@ public class PlayerVO {
 		this.freeThrowHitRate = freeThrowHitRate;
 	}
 
-	public void setOffenNum(double offenNum) {
-		this.offenNum = offenNum;
+	public void setOffenReboundNum(double offenReboundNum) {
+		this.offenReboundNum = offenReboundNum;
 	}
 
-	public void setDefenNum(double defenNum) {
-		this.defenNum = defenNum;
+	public void setDefenReboundNum(double defenReboundNum) {
+		this.defenReboundNum = defenReboundNum;
 	}
 
 	public void setStealNum(double stealNum) {

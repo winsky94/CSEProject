@@ -20,6 +20,8 @@ public class RecordVO {
 	private int turnOverNum;// 失误数
 	private int foulNum;// 犯规数
 	private int score;// 个人得分
+	private String season;//赛季
+	private String date;//日期
 
 	public RecordVO(String team, String playerName, String position,
 			String presentTime, int shootHitNum, int shootAttemptNum,
@@ -123,5 +125,20 @@ public class RecordVO {
 
 	public int getScore() {
 		return score;
+	}
+	public String getSeason(){
+		return season;
+	}
+	
+	public String getDate(){
+		return date;
+	}
+	
+	public void setSeason(String season){
+		this.season=season;
+	}
+	
+	public void setDate(String date){
+		this.date=date;
 	}
 }
