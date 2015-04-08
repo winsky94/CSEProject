@@ -106,10 +106,10 @@ public class SequenceOfTeamMap implements Comparator<Map.Entry<String, TeamVO>> 
 		}
 		if (order.equals("desc")) {
 			// 降序
-			return (result);
+			return (-result);
 		} else {
 			// 升序(默认)
-			return -result;
+			return result;
 		}
 	}
 

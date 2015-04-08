@@ -5,6 +5,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.sql.Date;
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -33,10 +35,10 @@ public class Team implements TeamBLService {
 		Team team = new Team();
 		String season = "13-14";
 		ArrayList<TeamVO> result = new ArrayList<TeamVO>();
-		// ArrayList<MatchVO> result = new ArrayList<MatchVO>();
-		// result = team.getTeamSeasonInfo(season);
-		result = team.getTeamAverageInfo();
-		result = team.getSeasonHotTeam(season, "比赛得分");
+//		 ArrayList<MatchVO> result = new ArrayList<MatchVO>();
+		 result = team.getTeamSeasonInfo(season);
+//		result = team.getTeamAverageInfo();
+//		result = team.getSeasonHotTeam(season, "比赛得分");
 		// result=team.getTeamSeasonInfo(season);
 		// result = team.getRecentMatches("ATL");
 		// result=team.getMatches();
@@ -343,6 +345,7 @@ public class Team implements TeamBLService {
 		ArrayList<TeamVO> teams = new ArrayList<TeamVO>();
 		teams = getTeamBaseInfo();
 		for (TeamVO vo : teams) {
+			long t1=System.currentTimeMillis();
 			String teamName = vo.getTeamName();
 			String team = vo.getAbLocation();
 			String location = vo.getLocation();
@@ -496,6 +499,8 @@ public class Team implements TeamBLService {
 					defenEfficiency, offenReboundEfficiency,
 					defenReboundEfficiency, stealEfficiency, assistEfficiency);
 			result.add(teamVO);
+			long t2=System.currentTimeMillis();
+			System.out.println(t2-t1);
 		}
 
 		return result;

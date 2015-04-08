@@ -7,8 +7,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -20,9 +20,9 @@ import vo.RecordVO;
 import vo.TeamVO;
 
 public class NewTeam {
-	private Map<String, TeamVO> teamsBaseInfo = new HashMap<String, TeamVO>();
-	private Map<String, MatchVO> matches = new HashMap<String, MatchVO>();
-	private Map<String, TeamVO> teamAverageInfo = new HashMap<String, TeamVO>();
+	private Map<String, TeamVO> teamsBaseInfo = new LinkedHashMap<String, TeamVO>();
+	private Map<String, MatchVO> matches = new LinkedHashMap<String, MatchVO>();
+	private Map<String, TeamVO> teamAverageInfo = new LinkedHashMap<String, TeamVO>();
 
 	// 删去了readFromMatchFile和getMatches两个私有方法，改为创建一个match类，从中得到比赛信息
 	public NewTeam() {
@@ -36,11 +36,11 @@ public class NewTeam {
 	public static void main(String[] args) {
 		NewTeam newTeam = new NewTeam();
 		String season = "13-14";
-		Map<String, TeamVO> result = new HashMap<String, TeamVO>();
+		Map<String, TeamVO> result = new LinkedHashMap<String, TeamVO>();
 		result = newTeam.getSeasonHotTeam(season, "比赛得分");
-		
+
 		System.out.println(result.size());
-		
+
 		Iterator<Entry<String, TeamVO>> iter = result.entrySet().iterator();
 		while (iter.hasNext()) {
 			Map.Entry<String, TeamVO> entry = (Map.Entry<String, TeamVO>) iter
@@ -111,7 +111,7 @@ public class NewTeam {
 		String homeCourt;
 		int setUpTime;
 
-		Map<String, TeamVO> teams = new HashMap<String, TeamVO>();
+		Map<String, TeamVO> teams = new LinkedHashMap<String, TeamVO>();
 		TeamVO team;
 		ArrayList<String[]> result = readFromFile("src/data/teams/teams");
 		for (String[] content : result) {
@@ -137,8 +137,8 @@ public class NewTeam {
 	 */
 	private Map<String, TeamVO> calculateTeamAverageInfo() {
 		// TODO 自动生成的方法存根
-		Map<String, TeamVO> result = new HashMap<String, TeamVO>();
-		Map<String, TeamVO> teams = new HashMap<String, TeamVO>();
+		Map<String, TeamVO> result = new LinkedHashMap<String, TeamVO>();
+		Map<String, TeamVO> teams = new LinkedHashMap<String, TeamVO>();
 		teams = getTeamBaseInfo();
 		Iterator<Entry<String, TeamVO>> iter = teams.entrySet().iterator();
 		while (iter.hasNext()) {
@@ -316,8 +316,8 @@ public class NewTeam {
 	 */
 	public Map<String, TeamVO> getTeamSeasonInfo(String season) {
 		// TODO 自动生成的方法存根
-		Map<String, TeamVO> result = new HashMap<String, TeamVO>();
-		Map<String, TeamVO> teams = new HashMap<String, TeamVO>();
+		Map<String, TeamVO> result = new LinkedHashMap<String, TeamVO>();
+		Map<String, TeamVO> teams = new LinkedHashMap<String, TeamVO>();
 		teams = getTeamBaseInfo();
 		Iterator<Entry<String, TeamVO>> iter = teams.entrySet().iterator();
 		while (iter.hasNext()) {
@@ -509,7 +509,7 @@ public class NewTeam {
 	 */
 	public Map<String, TeamVO> getTeamBaseInfo(String name) {
 		// TODO 自动生成的方法存根
-		Map<String, TeamVO> result = new HashMap<String, TeamVO>();
+		Map<String, TeamVO> result = new LinkedHashMap<String, TeamVO>();
 		Iterator<Entry<String, TeamVO>> iter = teamsBaseInfo.entrySet()
 				.iterator();
 		while (iter.hasNext()) {
@@ -538,8 +538,8 @@ public class NewTeam {
 	 */
 	public Map<String, TeamVO> getTeamSeasonInfo(String season, String name) {
 		// TODO 自动生成的方法存根
-		Map<String, TeamVO> result = new HashMap<String, TeamVO>();
-		Map<String, TeamVO> teams = new HashMap<String, TeamVO>();
+		Map<String, TeamVO> result = new LinkedHashMap<String, TeamVO>();
+		Map<String, TeamVO> teams = new LinkedHashMap<String, TeamVO>();
 		teams = getTeamSeasonInfo(season);
 		Iterator<Entry<String, TeamVO>> iter = teams.entrySet().iterator();
 		while (iter.hasNext()) {
@@ -565,8 +565,8 @@ public class NewTeam {
 	 */
 	public Map<String, TeamVO> getTeamAverageInfo(String name) {
 		// TODO 自动生成的方法存根
-		Map<String, TeamVO> result = new HashMap<String, TeamVO>();
-		Map<String, TeamVO> teams = new HashMap<String, TeamVO>();
+		Map<String, TeamVO> result = new LinkedHashMap<String, TeamVO>();
+		Map<String, TeamVO> teams = new LinkedHashMap<String, TeamVO>();
 		teams = getTeamAverageInfo();
 		Iterator<Entry<String, TeamVO>> iter = teams.entrySet().iterator();
 		while (iter.hasNext()) {
@@ -598,7 +598,7 @@ public class NewTeam {
 	public Map<String, TeamVO> getOrderedTeamsBySeason(String season,
 			String condition, String order) {
 		// TODO 自动生成的方法存根
-		Map<String, TeamVO> teams = new HashMap<String, TeamVO>();
+		Map<String, TeamVO> teams = new LinkedHashMap<String, TeamVO>();
 		teams = getTeamSeasonInfo(season);
 
 		// 未明确写明排序方式时默认是升序
@@ -608,7 +608,7 @@ public class NewTeam {
 		List<Map.Entry<String, TeamVO>> infoIds = new ArrayList<Map.Entry<String, TeamVO>>(
 				teams.entrySet());
 		Collections.sort(infoIds, new SequenceOfTeamMap(condition, order));
-		Map<String, TeamVO> result = new HashMap<String, TeamVO>();
+		Map<String, TeamVO> result = new LinkedHashMap<String, TeamVO>();
 		for (Map.Entry<String, TeamVO> map : infoIds) {
 			String key = map.getKey();
 			TeamVO vo = map.getValue();
@@ -632,7 +632,7 @@ public class NewTeam {
 	public Map<String, TeamVO> getOrderedTeamsByAverage(String condition,
 			String order) {
 		// TODO 自动生成的方法存根
-		Map<String, TeamVO> teams = new HashMap<String, TeamVO>();
+		Map<String, TeamVO> teams = new LinkedHashMap<String, TeamVO>();
 		teams = teamAverageInfo;
 		// 未明确写明排序方式时默认是升序
 		if (order == null || order.equals("null")) {
@@ -641,7 +641,7 @@ public class NewTeam {
 		List<Map.Entry<String, TeamVO>> infoIds = new ArrayList<Map.Entry<String, TeamVO>>(
 				teams.entrySet());
 		Collections.sort(infoIds, new SequenceOfTeamMap(condition, order));
-		Map<String, TeamVO> result = new HashMap<String, TeamVO>();
+		Map<String, TeamVO> result = new LinkedHashMap<String, TeamVO>();
 		for (Map.Entry<String, TeamVO> map : infoIds) {
 			String key = map.getKey();
 			TeamVO vo = map.getValue();
@@ -673,7 +673,7 @@ public class NewTeam {
 	 */
 	public Map<String, MatchVO> getRecentMatches(String teamName) {
 		// TODO 自动生成的方法存根
-		Map<String, MatchVO> result = new HashMap<String, MatchVO>();
+		Map<String, MatchVO> result = new LinkedHashMap<String, MatchVO>();
 		result = getRecentMatches(teamName, 5);
 		return result;
 	}
@@ -687,7 +687,7 @@ public class NewTeam {
 	 */
 	public Map<String, MatchVO> getMatches(String teamName) {
 		// TODO 自动生成的方法存根
-		Map<String, MatchVO> result = new HashMap<String, MatchVO>();
+		Map<String, MatchVO> result = new LinkedHashMap<String, MatchVO>();
 		result = getRecentMatches(teamName, -1);
 		return result;
 	}
@@ -702,7 +702,7 @@ public class NewTeam {
 	 * @return 过往比赛的列表
 	 */
 	private Map<String, MatchVO> getRecentMatches(String teamName, int num) {
-		Map<String, MatchVO> result = new HashMap<String, MatchVO>();
+		Map<String, MatchVO> result = new LinkedHashMap<String, MatchVO>();
 		int count = 0;
 		Iterator<Entry<String, MatchVO>> iter = matches.entrySet().iterator();
 		while (iter.hasNext()) {
@@ -735,8 +735,8 @@ public class NewTeam {
 	 */
 	public Map<String, TeamVO> getSeasonHotTeam(String season, String column) {
 		// TODO 自动生成的方法存根
-		Map<String, TeamVO> result = new HashMap<String, TeamVO>();
-		Map<String, TeamVO> teamSeasonInfo = new HashMap<String, TeamVO>();
+		Map<String, TeamVO> result = new LinkedHashMap<String, TeamVO>();
+		Map<String, TeamVO> teamSeasonInfo = new LinkedHashMap<String, TeamVO>();
 		teamSeasonInfo = getTeamSeasonInfo(season);
 
 		List<Map.Entry<String, TeamVO>> infoIds = new ArrayList<Map.Entry<String, TeamVO>>(
@@ -747,6 +747,7 @@ public class NewTeam {
 		for (Map.Entry<String, TeamVO> map : infoIds) {
 			String key = map.getKey();
 			TeamVO vo = map.getValue();
+			System.out.println(vo.getScore());
 			result.put(key, vo);
 			count++;
 			if (count >= 5) {
@@ -757,7 +758,7 @@ public class NewTeam {
 	}
 
 	/**
-	 * 将比赛的hashmap转为Arraylist便于排序
+	 * 将比赛的LinkedHashMap转为Arraylist便于排序
 	 * 
 	 * @param map
 	 *            球队
@@ -776,7 +777,7 @@ public class NewTeam {
 	}
 
 	/**
-	 * 将球队的hashmap转为Arraylist便于排序
+	 * 将球队的LinkedHashMap转为Arraylist便于排序
 	 * 
 	 * @param teams
 	 *            球队
@@ -795,7 +796,7 @@ public class NewTeam {
 	}
 
 	private Map<String, TeamVO> changeTeamListToMap(ArrayList<TeamVO> list) {
-		Map<String, TeamVO> result = new HashMap<String, TeamVO>();
+		Map<String, TeamVO> result = new LinkedHashMap<String, TeamVO>();
 		for (TeamVO vo : list) {
 			String key = vo.getAbLocation();
 			result.put(key, vo);
