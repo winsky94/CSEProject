@@ -152,6 +152,8 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener,
 		jsp.setCorner(JScrollPane.UPPER_RIGHT_CORNER, jb);
 		// 设置显示行号
 		jsp.setRowHeaderView(new RowHeaderTable(table, 30));
+		titleBar.setSeason(seasonBox.getSelectedItem().toString());
+		titleBar.setAveOrAll(typeBox.getSelectedItem().toString());
 	}
 
 	class MyJLabel extends JLabel {
