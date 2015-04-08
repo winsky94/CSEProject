@@ -118,6 +118,8 @@ public class TeamIndexPanel extends FatherPanel implements MouseListener,
 		jb.setBorder(BorderFactory.createLineBorder(new Color(158, 158, 158),
 				20));
 		jsp.setCorner(JScrollPane.UPPER_RIGHT_CORNER, jb);
+		titleBar.setSeason(seasonBox.getSelectedItem().toString());
+		titleBar.setAveOrAll(typeBox.getSelectedItem().toString());
 	}
 
 	public void mouseClicked(MouseEvent e) {
