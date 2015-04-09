@@ -127,8 +127,10 @@ public class NewPlayer {
 		try{					
 			FileList fl = new FileList("src/data/matches");
 			ArrayList<String> names = fl.getList();
+			int matchCount=0;
 	      for(String name:names){
-	    	  readMatchInfoFromFile(name);
+	    	  readMatchInfoFromFile(name,matchCount);
+	    	  matchCount++;
 	      }
 		}
 		catch (IOException e){
@@ -139,14 +141,13 @@ public class NewPlayer {
 		}
 	}
 	
-	private void readMatchInfoFromFile(String fileName){
+	private void readMatchInfoFromFile(String fileName,int matchCount){
 		String season;// 赛季
 		String date = null;// 比赛日期
 		String teams = null;// 对阵队伍
 
 		String tp[] = fileName.split("matches");
 		season = tp[1].substring(1, 6);
-		int matchCount=0;
 
 		try {
 			File file = new File(fileName);
@@ -292,7 +293,7 @@ public class NewPlayer {
 					thisMatch.addHomeAssistNum(assistNum);
 					thisMatch.addHomeStealNum(stealNum);
 					thisMatch.addHomeBlockNum(blockNum);
-					thisMatch.addVisitingTurnOverNum(turnOverNum);
+					thisMatch.addHomeTurnOverNum(turnOverNum);
 					thisMatch.addHomeFoulNum(foulNum);
 				}
 				else{
@@ -318,7 +319,6 @@ public class NewPlayer {
 			}
 			
 			matches.put(matchCount, thisMatch);	
-			matchCount++;
 
 			br.close();
 		} catch (IOException e) {
@@ -463,7 +463,7 @@ public class NewPlayer {
 					- allturnOverNum;
 			
 			ArrayList<Integer> matchIDs=playerSeason.getMatchesID();
-			ArrayList<Boolean> isVisitingTeam=playerSeason.getIsVisitingTeam();
+			Map<Integer,Boolean> isVisitingTeam=playerSeason.getIsVisitingTeam();
 			if(matchIDs.size()<5){
 				recentFiveMatchesScoreUpRate=0;
 			    recentFiveMatchesReboundUpRate=0;

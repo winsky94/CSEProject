@@ -1,6 +1,8 @@
 package vo;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class PlayerVO {
 	private String name;// 球员名称
@@ -53,7 +55,7 @@ public class PlayerVO {
 	private double score_rebound_assist;// 得分/篮板/助攻
 	private double doubleDoubleNum;// 两双
 	private ArrayList<Integer> matchesID=new ArrayList<Integer>();//所参加的比赛ID
-	private ArrayList<Boolean> isVisitingTeam=new ArrayList<Boolean>();//记录球员在上面的比赛ID中所属队伍是否是客队。如果是，是true;不是，是false;
+	private Map<Integer,Boolean> isVisitingTeam=new HashMap<Integer,Boolean>(64);//记录球员在上面的比赛ID中所属队伍是否是客队。如果是，是true;不是，是false;
     private LittleRecordVO[] fiveRecentRecords=new LittleRecordVO[5];//最近五场比赛记录
 	
 
@@ -398,7 +400,7 @@ public class PlayerVO {
 		return matchesID;
 	}
 	
-	public ArrayList<Boolean> getIsVisitingTeam(){
+	public Map<Integer,Boolean> getIsVisitingTeam(){
 		return isVisitingTeam;
 	}
 	
@@ -685,7 +687,7 @@ public class PlayerVO {
 
 	public void addMatchesID(int i,boolean isVisitingTeam){
 		this.matchesID.add(i);
-		this.isVisitingTeam.add(isVisitingTeam);
+		this.isVisitingTeam.put(i,isVisitingTeam);
 	}
 	
 	public int fiveRecentRecordsSort(){
