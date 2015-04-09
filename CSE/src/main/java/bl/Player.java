@@ -40,10 +40,13 @@ public class Player implements PlayerBLService{
 		}
 		
 		else{
+			long start = System.currentTimeMillis();
 			Match match=new Match();
 		//	matches=new ArrayList<MatchVO>();
 		//	matchInfoInit();
 			matches=match.getMatchData("全部", "全部", "全部", "全部");
+		    long end = System.currentTimeMillis();
+		    System.out.println("运行时间：" + (end - start) + "毫秒");//应该是end - start
 		}
 	}
 	
@@ -282,7 +285,23 @@ public class Player implements PlayerBLService{
 	}
 
 	public ArrayList<PlayerVO> getPlayerAverageInfo() {
-		// TODO Auto-generated method stub
+		FileList fl;
+		ArrayList<String> names=null;
+		try {
+			fl = new FileList("src/data/players/info");
+			names = fl.getList();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		for(String name:names){
+			getPlayerAverageInfo(name);
+		}
+		
 		return null;
 	}
 
@@ -1002,14 +1021,45 @@ public class Player implements PlayerBLService{
 	   long start = System.currentTimeMillis();
 	   Player player=new Player(3);
 	   PlayerVO vo=player.getPlayerAverageInfo("Al Horford");
+	   System.out.println(vo.getOwingTeam());
+	   System.out.println(vo.getPlayedGames());
+	   System.out.println(vo.getGameStartingNum());
+	   System.out.println(vo.getReboundNum()*vo.getPlayedGames());
+	   System.out.println(vo.getAssistNum()*vo.getPlayedGames());
+	   System.out.println(vo.getPresentTime()*vo.getPlayedGames());
+	   System.out.println(vo.getShootHitRate());
+	   System.out.println(vo.getThreeHitRate());
+	   System.out.println(vo.getFreeThrowHitRate());
+	   System.out.println(vo.getOffenReboundNum()*vo.getPlayedGames());
+	   System.out.println(vo.getDefenReboundNum()*vo.getPlayedGames());
+	   System.out.println(vo.getStealNum()*vo.getPlayedGames());
+	   System.out.println(vo.getBlockNum()*vo.getPlayedGames());
+	   System.out.println(vo.getFoulNum()*vo.getPlayedGames());
+	   System.out.println(vo.getTurnOverNum()*vo.getPlayedGames());
+	   System.out.println(vo.getScore()*vo.getPlayedGames());
+	   System.out.println(vo.getEfficiency());
+	   System.out.println(vo.getRecentFiveMatchesScoreUpRate());
+	   System.out.println(vo.getRecentFiveMatchesReboundUpRate());
+	   System.out.println(vo.getRecentFiveMatchesAssistUpRate());
+	   System.out.println(vo.getGmScEfficiencyValue());
+	   System.out.println(vo.getTrueHitRate());
+	   System.out.println(vo.getShootHitEfficiency());
+	   System.out.println(vo.getReboundRate());
+	   System.out.println(vo.getOffenReboundRate());
+	   System.out.println(vo.getDefenReboundRate());
+	   System.out.println(vo.getAssistRate());
 	   System.out.println(vo.getStealRate());
-	   PlayerVO vo1=player.getPlayerAverageInfo("Aaron Brooks");
-	   System.out.println(vo1.getPlayedGames());
+	   System.out.println(vo.getBlockRate());
+	   System.out.println(vo.getTurnOverRate());
+	   System.out.println(vo.getUsageRate());
+	   System.out.println(vo.getScore_rebound_assist()*vo.getPlayedGames());
+	   System.out.println(vo.getDoubleDoubleNum()*vo.getPlayedGames());
 	   PlayerVO vo2=player.getPlayerAverageInfo("Aaron Brooks");
 	   PlayerVO vo3=player.getPlayerAverageInfo("Adonis Thomas");
 	   PlayerVO vo4=player.getPlayerAverageInfo("Aaron Gray");
 	   PlayerVO vo5=player.getPlayerAverageInfo("Al Harrington");
 	   PlayerVO vo6=player.getPlayerAverageInfo("Al Jefferson");
+	   player.getPlayerAverageInfo();
 	   long end = System.currentTimeMillis();
        System.out.println("运行时间：" + (end - start) + "毫秒");//应该是end - start
    }

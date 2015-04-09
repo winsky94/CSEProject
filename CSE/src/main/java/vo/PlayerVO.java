@@ -91,7 +91,7 @@ public class PlayerVO {
 			double assistRate, double stealRate, double blockRate,
 			double turnOverRate, double usageRate, double score_rebound_assist,
 			double doubleDoubleNum) {
-		
+		this.name=name;
 		this.owingTeam = owingTeam;
 		this.playedGames = playedGames;
 		this.gameStartingNum = gameStartingNum;
