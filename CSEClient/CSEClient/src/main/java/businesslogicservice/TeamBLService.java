@@ -12,7 +12,7 @@ public interface TeamBLService {
 
 	public ArrayList<TeamVO> getTeamSeasonInfo(String season);
 
-	public ArrayList<TeamVO> getTeamAverageInfo(String season);
+	public ArrayList<TeamVO> getTeamAverageInfo();
 
 	public ArrayList<TeamVO> getTeamBaseInfo(String name);
 

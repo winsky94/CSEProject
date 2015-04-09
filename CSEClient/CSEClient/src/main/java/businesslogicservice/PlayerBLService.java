@@ -13,7 +13,7 @@ public interface PlayerBLService {
 
 	public ArrayList<PlayerVO> getPlayerSeasonInfo(String season);
 
-	public ArrayList<PlayerVO> getPlayerAverageInfo(String season);
+	public ArrayList<PlayerVO> getPlayerAverageInfo();
 
 	public ArrayList<PlayerVO> getPlayerBaseInfo(String name);
 
