@@ -8,6 +8,8 @@ import java.io.InputStreamReader;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.swing.ImageIcon;
 
@@ -17,11 +19,11 @@ import vo.RecordVO;
 import vo.TeamVO;
 import blservice.PlayerBLService;
 
-public class Player implements PlayerBLService{
-
-	ArrayList<PlayerVO> players;
+public class NewPlayer {
+	
+	Map<String,PlayerVO> players = new HashMap<String,PlayerVO>(512);
 	ArrayList<TeamVO> teams;
-	ArrayList<MatchVO> matches;
+	Map<Integer,MatchVO> matches=new HashMap<Integer,MatchVO>(2048);
 	
 	/**
 	 * 
@@ -30,20 +32,20 @@ public class Player implements PlayerBLService{
 	 * flag=1   看球员的赛季信息
 	 * flag=2  看球员的场均信息
 	 */
-	public Player(int flag){
-		players=new ArrayList<PlayerVO>();
+	public NewPlayer(int flag){
+
 		if(flag==0){
 			baseInfoInit();
 		}
 		else if(flag==2){
-			matches=new ArrayList<MatchVO>();
+			
 		}
 		
 		else{
 			Match match=new Match();
 		//	matches=new ArrayList<MatchVO>();
 		//	matchInfoInit();
-			matches=match.getMatchData("全部", "全部", "全部", "全部");
+			
 		}
 	}
 	
@@ -53,7 +55,7 @@ public class Player implements PlayerBLService{
 			FileList fl = new FileList("src/data/players/info");
 			ArrayList<String> names = fl.getList();
 	      for(String name:names){
-	    	  players.add(readBaseInfoFromFile(name));
+	    	  players.put(name,readBaseInfoFromFile(name));
 	      }
 		}
 		catch (IOException e){
@@ -141,9 +143,7 @@ public class Player implements PlayerBLService{
 
 		String tp[] = fileName.split("matches");
 		season = tp[1].substring(1, 6);
-		ArrayList<RecordVO> records=new ArrayList<RecordVO>();
-		ArrayList<String> details=new ArrayList<String>();
-		MatchVO match;
+		int matchCount=0;
 
 		try {
 			File file = new File(fileName);
@@ -159,17 +159,19 @@ public class Player implements PlayerBLService{
 			date = fisrtContent[0];
 			teams = fisrtContent[1];
 			score = fisrtContent[2];
+			
+			String[] teamstemp = teams.split("-");
+			String visitingTeam = teamstemp[0];
+			String homeTeam = teamstemp[1];
+
+			MatchVO thisMatch=new MatchVO(season, date, visitingTeam, homeTeam);		
 
 			temp = br.readLine();
-			String[] nextContent = temp.split(";");
-			for(int i=0;i<nextContent.length;i++){
-				details.add(nextContent[i]);
-			}
 
 			String team = null;// 球队
 			String playerName = null;// 球员名
 			String position = null;// 位置
-			String presentTime = null;// 在场时间
+			int presentTime = 0;// 在场时间
 			int shootHitNum = 0;// 投篮命中数
 			int shootAttemptNum = 0;// 投篮出手数
 			int threeHitNum = 0;// 三分命中数
@@ -194,8 +196,8 @@ public class Player implements PlayerBLService{
 					String[] line = temp.split(";");
 					playerName = line[0];
 					position = line[1];
-					presentTime = DirtyDataManager.checkPresentTime(fileName,
-							team, playerName, line[2]);// 在场时间
+					presentTime = convertMinuteToSecond(DirtyDataManager.checkPresentTime(fileName,
+							team, playerName, line[2]));// 在场时间
 					shootHitNum = Integer.parseInt(line[3]);// 投篮命中数
 					shootAttemptNum = DirtyDataManager.checkShootAndHitNum(
 							fileName, Integer.parseInt(line[4]), shootHitNum);// 投篮出手数
@@ -218,37 +220,86 @@ public class Player implements PlayerBLService{
 					foulNum = Integer.parseInt(line[16]);// 犯规数
 					personScore = DirtyDataManager.checkPersonScore(fileName,
 							line[17], temp);// 个人得分
+				    PlayerVO thisPlayer=players.get(playerName);
+				    if(thisPlayer==null){
+				    	if(!position.equals(""))
+				    	   thisPlayer=new PlayerVO(playerName, team, 1, 1, reboundNum, assistNum, presentTime, shootHitNum, shootAttemptNum, 0, threeHitNum, threeAttemptNum, 0, freeThrowHitNum, freeThrowAttemptNum, 0, offenReboundNum, defenReboundNum, stealNum, blockNum, turnOverNum, foulNum, personScore, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+				    	else {
+				    	   thisPlayer=new PlayerVO(playerName, team, 1, 0, reboundNum, assistNum, presentTime, shootHitNum, shootAttemptNum, 0, threeHitNum, threeAttemptNum, 0, freeThrowHitNum, freeThrowAttemptNum, 0, offenReboundNum, defenReboundNum, stealNum, blockNum, turnOverNum, foulNum, personScore, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+						}
+				    }
+				    else{
+				    	thisPlayer.addPlayedGames();
+				    	if(!position.equals(""))
+				    		thisPlayer.addGameStartingNum();
+				    	if(!thisPlayer.getOwingTeam().contains(team))
+				    	    thisPlayer.setOwingTeam(thisPlayer.getOwingTeam()+" "+team);
+	                    thisPlayer.addPresentTime(presentTime);
+	                    thisPlayer.addShootHitNum(shootHitNum);
+						thisPlayer.addShootAttemptNum(shootAttemptNum);
+						thisPlayer.addThreeHitNum(threeHitNum);
+						thisPlayer.addThreeAttemptNum(threeAttemptNum);
+						thisPlayer.addFreeThrowHitNum(freeThrowHitNum);
+						thisPlayer.addFreeThrowAttemptNum(freeThrowAttemptNum);
+						thisPlayer.addOffenReboundNum(offenReboundNum);
+						thisPlayer.addDefenReboundNum(defenReboundNum);
+						thisPlayer.addReboundNum(reboundNum);
+						thisPlayer.addAssistNum(assistNum);
+						thisPlayer.addStealNum(stealNum);
+						thisPlayer.addBlockNum(blockNum);
+						thisPlayer.addTurnOverNum(turnOverNum);
+						thisPlayer.addFoulNum(foulNum);
+						thisPlayer.addScore(personScore);
+						
+				    }
+				thisPlayer.addMatchesID(matchCount);
 				
-					RecordVO recordVO = new RecordVO(team, playerName,
-							position, presentTime, shootHitNum,
-							shootAttemptNum, threeHitNum, threeAttemptNum,
-							freeThrowHitNum, freeThrowAttemptNum,
-							offenReboundNum, defenReboundNum, reboundNum,
-							assistNum, stealNum, blockNum, turnOverNum,
-							foulNum, personScore);
-					
-					records.add(recordVO);
+				if(team.equals(homeTeam)){
+					thisMatch.addHomeShootHitNum(shootHitNum);
+					thisMatch.addHomeShootAttemptNum(shootAttemptNum);
+					thisMatch.addHomeThreeHitNum(threeHitNum);
+					thisMatch.addHomeThreeAttemptNum(threeAttemptNum);
+					thisMatch.addHomeFreeThrowHitNum(freeThrowHitNum);
+					thisMatch.addHomeFreeThrowAttemptNum(freeThrowAttemptNum);
+					thisMatch.addHomeOffenReboundNum(offenReboundNum);
+					thisMatch.addHomeDefenReboundNum(defenReboundNum); 
+					thisMatch.addHomeAssistNum(assistNum);
+					thisMatch.addHomeStealNum(stealNum);
+					thisMatch.addHomeBlockNum(blockNum);
+					thisMatch.addVisitingTurnOverNum(turnOverNum);
+					thisMatch.addHomeFoulNum(foulNum);
 				}
+				else{
+					thisMatch.addVisitingShootHitNum(shootHitNum);
+					thisMatch.addVisitingShootAttemptNum(shootAttemptNum);
+					thisMatch.addVisitingThreeHitNum(threeHitNum);
+					thisMatch.addVisitingThreeAttemptNum(threeAttemptNum);
+					thisMatch.addVisitingFreeThrowHitNum(freeThrowHitNum);
+					thisMatch.addVisitingFreeThrowAttemptNum(freeThrowAttemptNum);
+					thisMatch.addVisitingOffenReboundNum(offenReboundNum);
+					thisMatch.addVisitingDefenReboundNum(defenReboundNum); 
+					thisMatch.addVisitingAssistNum(assistNum);
+					thisMatch.addVisitingStealNum(stealNum);
+					thisMatch.addVisitingBlockNum(blockNum);
+					thisMatch.addVisitingTurnOverNum(turnOverNum);
+					thisMatch.addVisitingFoulNum(foulNum);
+				}
+					
+			  }
+			
 
 				temp = br.readLine();
 			}
+			
+			matches.put(matchCount, thisMatch);	
+			matchCount++;
 
 			br.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 
-		String[] temp = teams.split("-");
-		String visitingTeam = temp[0];
-		String homeTeam = temp[1];
-
-		String[] s=score.split("-");
-		int visitingScore=Integer.parseInt(s[0]);
-		int homeScore=Integer.parseInt(s[1]);
 		
-		match = new MatchVO(season, date, visitingTeam, homeTeam,
-				visitingScore,homeScore, details, records);
-		matches.add(match);
 	}
 	
 /*	private boolean isMoreRecent(String season1,String date1,String season2,String date2){
