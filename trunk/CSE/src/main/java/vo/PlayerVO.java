@@ -1,5 +1,7 @@
 package vo;
 
+import java.util.ArrayList;
+
 public class PlayerVO {
 	private String name;// 球员名称
 	private String number;// 球衣号码
@@ -50,6 +52,9 @@ public class PlayerVO {
 	private double usageRate;// 使用率
 	private double score_rebound_assist;// 得分/篮板/助攻
 	private double doubleDoubleNum;// 两双
+	private ArrayList<Integer> matchesID;//所参加的比赛ID
+    private RecordVO[] fiveRecentRecords=new RecordVO[5];//最近五场比赛记录
+	
 
 	
 	public PlayerVO(){
@@ -388,6 +393,11 @@ public class PlayerVO {
 		return score_rebound_assist;
 	}
 	
+	public ArrayList<Integer> getMatchesID(){
+		return matchesID;
+	}
+	
+	
 	public void setName(String name) {
 		this.name = name;
 	}
@@ -431,41 +441,82 @@ public class PlayerVO {
 	public void setPlayedGames(int playedGames) {
 		this.playedGames = playedGames;
 	}
+	
+	public void addPlayedGames() {
+		this.playedGames++;
+	}
+	
 
 	public void setGameStartingNum(double gameStartingNum) {
 		this.gameStartingNum = gameStartingNum;
+	}
+	
+	public void addGameStartingNum() {
+		this.gameStartingNum++;
 	}
 
 	public void setReboundNum(double reboundNum) {
 		this.reboundNum = reboundNum;
 	}
+	
+	public void addReboundNum(int reboundNum) {
+		this.reboundNum += reboundNum;
+	}
 
 	public void setAssistNum(double assistNum) {
 		this.assistNum = assistNum;
 	}
+	
+	public void addAssistNum(int assistNum) {
+		this.assistNum += assistNum;
+	}
 
 	public void setPresentTime(double presentTime) {
 		this.presentTime = presentTime;
+	}
+	
+	public void addPresentTime(int presentTime) {
+		this.presentTime += presentTime;
 	}
 
 	public void setShootHitNum(double shootHitNum){
 		this.shootHitNum=shootHitNum;
 	}
 	
+	public void addShootHitNum(int shootHitNum){
+		this.shootHitNum+=shootHitNum;
+	}
+	
 	public void setShootAttemptNum(double shootAttemptNum){
 		this.shootAttemptNum=shootAttemptNum;
+	}
+	
+	public void addShootAttemptNum(int shootAttemptNum){
+		this.shootAttemptNum+=shootAttemptNum;
 	}
 	
 	public void setShootHitRate(double shootHitRate) {
 		this.shootHitRate = shootHitRate;
 	}
 	
+	public void addShootHitRate(int shootHitRate) {
+		this.shootHitRate += shootHitRate;
+	}
+	
 	public void setThreeHitNum(double threeHitNum){
 		this.threeHitNum=threeHitNum;
 	}
 	
+	public void addThreeHitNum(int threeHitNum){
+		this.threeHitNum+=threeHitNum;
+	}
+	
 	public void setThreeAttemptNum(double threeAttemptNum){
 		this.threeAttemptNum=threeAttemptNum;
+	}
+	
+	public void addThreeAttemptNum(int threeAttemptNum){
+		this.threeAttemptNum+=threeAttemptNum;
 	}
 
 	public void setThreeHitRate(double threeHitRate) {
@@ -476,8 +527,16 @@ public class PlayerVO {
 		this.freeThrowHitNum=freeThrowHitNum;
 	}
 	
+	public void addFreeThrowHitNum(int freeThrowHitNum){
+		this.freeThrowHitNum+=freeThrowHitNum;
+	}
+	
 	public void setFreeThrowAttemptNum(double freeThrowAttemptNum){
 		this.freeThrowAttemptNum=freeThrowAttemptNum;
+	}
+	
+	public void addFreeThrowAttemptNum(int freeThrowAttemptNum){
+		this.freeThrowAttemptNum+=freeThrowAttemptNum;
 	}
 	
 	public void setFreeThrowHitRate(double freeThrowHitRate) {
@@ -487,29 +546,57 @@ public class PlayerVO {
 	public void setOffenReboundNum(double offenReboundNum) {
 		this.offenReboundNum = offenReboundNum;
 	}
+	
+	public void addOffenReboundNum(int offenReboundNum) {
+		this.offenReboundNum += offenReboundNum;
+	}
 
 	public void setDefenReboundNum(double defenReboundNum) {
 		this.defenReboundNum = defenReboundNum;
+	}
+	
+	public void addDefenReboundNum(int defenReboundNum) {
+		this.defenReboundNum += defenReboundNum;
 	}
 
 	public void setStealNum(double stealNum) {
 		this.stealNum = stealNum;
 	}
+	
+	public void addStealNum(int stealNum) {
+		this.stealNum += stealNum;
+	}
 
 	public void setBlockNum(double blockNum) {
 		this.blockNum = blockNum;
+	}
+	
+	public void addBlockNum(int blockNum) {
+		this.blockNum += blockNum;
 	}
 
 	public void setTurnOverNum(double turnOverNum) {
 		this.turnOverNum = turnOverNum;
 	}
+	
+	public void addTurnOverNum(int turnOverNum) {
+		this.turnOverNum += turnOverNum;
+	}
 
 	public void setFoulNum(double foulNum) {
 		this.foulNum = foulNum;
 	}
+	
+	public void addFoulNum(int foulNum) {
+		this.foulNum += foulNum;
+	}
 
 	public void setScore(double score) {
 		this.score = score;
+	}
+	
+	public void addScore(int score) {
+		this.score += score;
 	}
 
 	public void setEfficiency(double efficiency) {
@@ -583,4 +670,19 @@ public class PlayerVO {
 		this.doubleDoubleNum = doubleDoubleNum;
 	}
 
+	public void addMatchesID(int i){
+		this.matchesID.add(i);
+	}
+	
+	public void fiveRecentRecordsSort(){
+		//冒泡排序
+	}
+	
+	public boolean isMoreRecent(String season,String date){
+		
+	}
+	
+	public void addFiveRecentRecords(LittleRecordVO vo){
+		
+	}
 }
