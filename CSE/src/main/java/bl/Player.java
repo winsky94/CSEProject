@@ -549,9 +549,9 @@ public class Player implements PlayerBLService{
 			int beforeRecentFiveScore=score-recentFiveScore;
 			int beforeRecentReboundNum=reboundNum-recentReboundNum;
 			int beforeRecentAssistNum=assistNum-recentAssistNum;
-			recentFiveMatchesScoreUpRate=(((double)recentFiveScore/5)-(double)beforeRecentFiveScore/(playedGames-5))/(double)beforeRecentFiveScore/(playedGames-5);
-			recentFiveMatchesReboundUpRate=(((double)recentReboundNum/5)-(double)beforeRecentReboundNum/(playedGames-5))/(double)beforeRecentReboundNum/(playedGames-5);
-			recentFiveMatchesAssistUpRate=(((double)recentAssistNum/5)-(double)beforeRecentAssistNum/(playedGames-5))/(double)beforeRecentAssistNum/(playedGames-5);
+			recentFiveMatchesScoreUpRate=(((double)recentFiveScore/5)-(double)beforeRecentFiveScore/(playedGames-5))/((double)beforeRecentFiveScore/(playedGames-5));
+			recentFiveMatchesReboundUpRate=(((double)recentReboundNum/5)-(double)beforeRecentReboundNum/(playedGames-5))/((double)beforeRecentReboundNum/(playedGames-5));
+			recentFiveMatchesAssistUpRate=(((double)recentAssistNum/5)-(double)beforeRecentAssistNum/(playedGames-5))/((double)beforeRecentAssistNum/(playedGames-5));
 			GmScEfficiencyValue = score
 					+ 0.4
 					* shootHitNum
@@ -1003,6 +1003,13 @@ public class Player implements PlayerBLService{
 	   Player player=new Player(3);
 	   PlayerVO vo=player.getPlayerAverageInfo("Al Horford");
 	   System.out.println(vo.getStealRate());
+	   PlayerVO vo1=player.getPlayerAverageInfo("Aaron Brooks");
+	   System.out.println(vo1.getPlayedGames());
+	   PlayerVO vo2=player.getPlayerAverageInfo("Aaron Brooks");
+	   PlayerVO vo3=player.getPlayerAverageInfo("Adonis Thomas");
+	   PlayerVO vo4=player.getPlayerAverageInfo("Aaron Gray");
+	   PlayerVO vo5=player.getPlayerAverageInfo("Al Harrington");
+	   PlayerVO vo6=player.getPlayerAverageInfo("Al Jefferson");
 	   long end = System.currentTimeMillis();
        System.out.println("运行时间：" + (end - start) + "毫秒");//应该是end - start
    }

@@ -9,43 +9,52 @@ public class MatchVO {
 	private String homeTeam;
 	private ArrayList<String> detailScores;// 各节比分
 	private ArrayList<RecordVO> records;// 球员比分数据记录
-	int visitingShootHitNum = 0; // 投篮命中数
-	int visitingShootAttemptNum = 0; // 投篮出手次数
-	int visitingThreeHitNum = 0; // 三分命中数
-	int visitingThreeAttemptNum = 0; // 三分出手数
-	int visitingFreeThrowHitNum = 0; // 罚球命中数
-	int visitingFreeThrowAttemptNum = 0; // 罚球出手数
-	int visitingOffenReboundNum = 0; // 进攻篮板数
-	int visitingDefenReboundNum = 0; // 防守篮板数
-	int visitingAssistNum = 0;// 助攻数
-	int visitingStealNum = 0;// 抢断数
-	int visitingBlockNum = 0;// 盖帽数
-	int visitingTurnOverNum = 0;// 失误数
-	int visitingFoulNum = 0;// 犯规数
-	int visitingScore = 0;// 得分
+	private int matchTime;//比赛总时间,以秒为单位
+	
+	private int visitingShootHitNum = 0; // 投篮命中数
+	private int visitingShootAttemptNum = 0; // 投篮出手次数
+	private int visitingThreeHitNum = 0; // 三分命中数
+	private int visitingThreeAttemptNum = 0; // 三分出手数
+	private int visitingFreeThrowHitNum = 0; // 罚球命中数
+	private int visitingFreeThrowAttemptNum = 0; // 罚球出手数
+	private int visitingOffenReboundNum = 0; // 进攻篮板数
+	private int visitingDefenReboundNum = 0; // 防守篮板数
+	private int visitingAssistNum = 0;// 助攻数
+	private int visitingStealNum = 0;// 抢断数
+	private int visitingBlockNum = 0;// 盖帽数
+	private int visitingTurnOverNum = 0;// 失误数
+	private int visitingFoulNum = 0;// 犯规数
+	private int visitingScore = 0;// 得分
 
-	int homeShootHitNum = 0; // 投篮命中数
-	int homeShootAttemptNum = 0; // 投篮出手次数
-	int homeThreeHitNum = 0; // 三分命中数
-	int homeThreeAttemptNum = 0; // 三分出手数
-	int homeFreeThrowHitNum = 0; // 罚球命中数
-	int homeFreeThrowAttemptNum = 0; // 罚球出手数
-	int homeOffenReboundNum = 0; // 进攻篮板数
-	int homeDefenReboundNum = 0; // 防守篮板数
-	int homeAssistNum = 0;// 助攻数
-	int homeStealNum = 0;// 抢断数
-	int homeBlockNum = 0;// 盖帽数
-	int homeTurnOverNum = 0;// 失误数
-	int homeFoulNum = 0;// 犯规数
-	int homeScore = 0;// 得分
+	private int homeShootHitNum = 0; // 投篮命中数
+	private int homeShootAttemptNum = 0; // 投篮出手次数
+	private int homeThreeHitNum = 0; // 三分命中数
+	private int homeThreeAttemptNum = 0; // 三分出手数
+	private int homeFreeThrowHitNum = 0; // 罚球命中数
+	private int homeFreeThrowAttemptNum = 0; // 罚球出手数
+	private int homeOffenReboundNum = 0; // 进攻篮板数
+	private int homeDefenReboundNum = 0; // 防守篮板数
+	private int homeAssistNum = 0;// 助攻数
+	private int homeStealNum = 0;// 抢断数
+	private int homeBlockNum = 0;// 盖帽数
+	private int homeTurnOverNum = 0;// 失误数
+	private int homeFoulNum = 0;// 犯规数
+	private int homeScore = 0;// 得分
 
 	public MatchVO(String season, String date, String visingTeam,
-			String homeTeam){
+			String homeTeam,int partNum){
 		this.season = season;
 		this.date = date;
 		this.visitingTeam = visingTeam;
 		this.homeTeam = homeTeam;
+		if(partNum==4){
+			matchTime= 48*60;
+		}
+		else{
+			matchTime= (48+(partNum-4)*5)*60;
+		}
 	}
+	
 	public MatchVO(String season, String date, String visitingTeam,
 			String homeTeam, int visitingScore, int homeScore,
 			ArrayList<String> detailScores, ArrayList<RecordVO> records) {
@@ -76,6 +85,10 @@ public class MatchVO {
 		return homeTeam;
 	}
 
+	public int getMatchTime(){
+		return matchTime;
+	}
+	
 	public int getVisitingScore() {
 		return visitingScore;
 	}
@@ -265,56 +278,56 @@ public class MatchVO {
 	}
 	
 	
-	public void addHomeShootHitNum(int visitingShootHitNum){
-		this.visitingShootHitNum+=visitingShootHitNum;
+	public void addHomeShootHitNum(int homeShootHitNum){
+		this.homeShootHitNum+=homeShootHitNum;
 	}
 	
-	public void addHomeShootAttemptNum(int visitingShootAttemptNum){
-		this.visitingShootAttemptNum+=visitingShootAttemptNum;
+	public void addHomeShootAttemptNum(int homeShootAttemptNum){
+		this.homeShootAttemptNum+=homeShootAttemptNum;
 	}
 	
-	public void addHomeThreeHitNum(int visitingThreeHitNum){
-		this.visitingThreeHitNum+=visitingThreeHitNum;
+	public void addHomeThreeHitNum(int homeThreeHitNum){
+		this.homeThreeHitNum+=homeThreeHitNum;
 	}
 	
-	public void addHomeThreeAttemptNum(int visitingThreeAttemptNum){
-		this.visitingThreeAttemptNum+=visitingThreeAttemptNum;
+	public void addHomeThreeAttemptNum(int homeThreeAttemptNum){
+		this.homeThreeAttemptNum+=homeThreeAttemptNum;
 	}
 	
-	public void addHomeFreeThrowHitNum(int visitingFreeThrowHitNum){
-		this.visitingFreeThrowHitNum+=visitingFreeThrowHitNum;
+	public void addHomeFreeThrowHitNum(int homeFreeThrowHitNum){
+		this.homeFreeThrowHitNum+=homeFreeThrowHitNum;
 	}
 	
-	public void addHomeFreeThrowAttemptNum(int visitingFreeThrowAttemptNum){
-		this.visitingFreeThrowAttemptNum+=visitingFreeThrowAttemptNum;
+	public void addHomeFreeThrowAttemptNum(int homeFreeThrowAttemptNum){
+		this.homeFreeThrowAttemptNum+=homeFreeThrowAttemptNum;
 	}
 	
-	public void addHomeOffenReboundNum(int visitingOffenReboundNum){
-		this.visitingOffenReboundNum+=visitingOffenReboundNum;
+	public void addHomeOffenReboundNum(int homeOffenReboundNum){
+		this.homeOffenReboundNum+=homeOffenReboundNum;
 	}
 	
-	public void addHomeDefenReboundNum(int visitingDefenReboundNum){
-		this.visitingDefenReboundNum+=visitingDefenReboundNum;
+	public void addHomeDefenReboundNum(int homeDefenReboundNum){
+		this.homeDefenReboundNum+=homeDefenReboundNum;
 	}
 	
-	public void addHomeAssistNum(int visitingAssistNum){
-		this.visitingAssistNum+=visitingAssistNum;
+	public void addHomeAssistNum(int homeAssistNum){
+		this.homeAssistNum+=homeAssistNum;
 	}
 	
-	public void addHomeStealNum(int visitingStealNum){
-		this.visitingStealNum+=visitingStealNum;
+	public void addHomeStealNum(int homeStealNum){
+		this.homeStealNum+=homeStealNum;
 	}
 	
-	public void addHomeBlockNum(int visitingBlockNum){
-		this.visitingBlockNum+=visitingBlockNum;
+	public void addHomeBlockNum(int homeBlockNum){
+		this.homeBlockNum+=homeBlockNum;
 	}
 	
-	public void addHomeTurnOverNum(int visitingTurnOverNum){
-		this.visitingTurnOverNum+=visitingTurnOverNum;
+	public void addHomeTurnOverNum(int homeTurnOverNum){
+		this.homeTurnOverNum+=homeTurnOverNum;
 	}
 	
-	public void addHomeFoulNum(int visitingFoulNum){
-		this.visitingFoulNum+=visitingFoulNum;
+	public void addHomeFoulNum(int homeFoulNum){
+		this.homeFoulNum+=homeFoulNum;
 	}
 	
 	
