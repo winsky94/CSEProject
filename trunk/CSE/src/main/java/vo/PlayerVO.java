@@ -15,7 +15,7 @@ public class PlayerVO {
 
 	private String owingTeam;// 所属球队
 	private int playedGames;// 参赛场数
-	private double gameStartingNum;// 先发场数
+	private int gameStartingNum;// 先发场数
 	private double reboundNum;// 篮板数
 	private double assistNum;// 助攻数
 	private double presentTime;// 在场时间
@@ -52,8 +52,9 @@ public class PlayerVO {
 	private double usageRate;// 使用率
 	private double score_rebound_assist;// 得分/篮板/助攻
 	private double doubleDoubleNum;// 两双
-	private ArrayList<Integer> matchesID;//所参加的比赛ID
-    private RecordVO[] fiveRecentRecords=new RecordVO[5];//最近五场比赛记录
+	private ArrayList<Integer> matchesID=new ArrayList<Integer>();//所参加的比赛ID
+	private ArrayList<Boolean> isVisitingTeam=new ArrayList<Boolean>();//记录球员在上面的比赛ID中所属队伍是否是客队。如果是，是true;不是，是false;
+    private LittleRecordVO[] fiveRecentRecords=new LittleRecordVO[5];//最近五场比赛记录
 	
 
 	
@@ -76,10 +77,10 @@ public class PlayerVO {
 	}
 	
 	public PlayerVO(String name, String owingTeam, int playedGames,
-			double gameStartingNum, double reboundNum, double assistNum,
-			double presentTime, int shootHitNum,int shootAttemptNum,double shootHitRate,
-			int threeHitNum,int threeAttemptNum,double threeHitRate,
-			int freeThrowHitNum,int freeThrowAttemptNum,
+			int gameStartingNum, double reboundNum, double assistNum,
+			double presentTime, double shootHitNum,double shootAttemptNum,double shootHitRate,
+			double threeHitNum,double threeAttemptNum,double threeHitRate,
+			double freeThrowHitNum,double freeThrowAttemptNum,
 			double freeThrowHitRate, double offenReboundNum, double defenReboundNum,
 			double stealNum, double blockNum, double turnOverNum,
 			double foulNum, double score, double efficiency,
@@ -135,7 +136,7 @@ public class PlayerVO {
 	public PlayerVO(String name, String number, String position,
 			String height, int weight, String birth, int age, int exp,
 			String school, String owingTeam, int playedGames,
-			double gameStartingNum, double reboundNum, double assistNum,
+			int gameStartingNum, double reboundNum, double assistNum,
 			double presentTime, int shootHitNum,int shootAttemptNum,double shootHitRate,
 			int threeHitNum,int threeAttemptNum,double threeHitRate,
 			int freeThrowHitNum,int freeThrowAttemptNum,
@@ -241,11 +242,11 @@ public class PlayerVO {
 		return owingTeam;
 	}
 
-	public double getPlayedGames() {
+	public int getPlayedGames() {
 		return playedGames;
 	}
 
-	public double getGameStartingNum() {
+	public int getGameStartingNum() {
 		return gameStartingNum;
 	}
 
@@ -397,6 +398,14 @@ public class PlayerVO {
 		return matchesID;
 	}
 	
+	public ArrayList<Boolean> getIsVisitingTeam(){
+		return isVisitingTeam;
+	}
+	
+	public LittleRecordVO[] getFiveRecentRecords(){
+		return fiveRecentRecords;
+	}
+	
 	
 	public void setName(String name) {
 		this.name = name;
@@ -447,7 +456,7 @@ public class PlayerVO {
 	}
 	
 
-	public void setGameStartingNum(double gameStartingNum) {
+	public void setGameStartingNum(int gameStartingNum) {
 		this.gameStartingNum = gameStartingNum;
 	}
 	
@@ -669,20 +678,96 @@ public class PlayerVO {
 	public void setDoubleDoubleNum(double doubleDoubleNum) {
 		this.doubleDoubleNum = doubleDoubleNum;
 	}
+	
+	public void addDoubleDoubleNum(){
+		this.doubleDoubleNum++;
+	}
 
-	public void addMatchesID(int i){
+	public void addMatchesID(int i,boolean isVisitingTeam){
 		this.matchesID.add(i);
+		this.isVisitingTeam.add(isVisitingTeam);
 	}
 	
-	public void fiveRecentRecordsSort(){
-		//冒泡排序
+	public int fiveRecentRecordsSort(){
+		boolean change = true;
+		int length=0;
+		for(int i=0;i<5;i++){
+			if(fiveRecentRecords[i]!=null)
+				length++;
+		}
+		
+		for (int i=length-1; i>0 && change == true; i--)
+		{
+			change = false;
+			for (int j=0; j<i; j++)
+				if (compare(fiveRecentRecords[j], fiveRecentRecords[j+1])>0 )
+				{
+					LittleRecordVO temp = fiveRecentRecords[j];
+					fiveRecentRecords[j] = fiveRecentRecords[j+1];
+					fiveRecentRecords[j+1] = temp;
+					change = true;
+				}
+		}
+		
+		return length;
 	}
+	
+	public int compare(LittleRecordVO v1,LittleRecordVO v2){
+		if(v1.getSeason().compareTo(v2.getSeason())<0)
+			return -1;
+		else if(v1.getSeason().compareTo(v2.getSeason())>0)
+			return 1;
+		else{
+			if(v1.getDate().compareTo(v2.getDate())<0)
+				return -1;
+			else if(v1.getDate().compareTo(v2.getDate())>0)
+				return 1;
+			else 
+				return 0;
+		}
+	}
+	
 	
 	public boolean isMoreRecent(String season,String date){
-		
+		int length=fiveRecentRecordsSort();
+		if(length<5)
+			return true;
+		else{
+			LittleRecordVO vo=fiveRecentRecords[0];
+			if(season.compareTo(vo.getSeason())>0)
+				return true;
+			else if(season.compareTo(vo.getSeason())<0)
+				return false;
+			else{
+				if(date.compareTo(vo.getDate())>0)
+					return true;
+				else 
+					return false;
+			}
+		}
 	}
 	
 	public void addFiveRecentRecords(LittleRecordVO vo){
-		
+		int length=fiveRecentRecordsSort();
+		if(length<5){
+			fiveRecentRecords[length]=vo;
+		}
+		else{
+			LittleRecordVO v1=fiveRecentRecords[0];
+			if(vo.getSeason().compareTo(v1.getSeason())>0){
+				fiveRecentRecords[0]=vo;
+				return;
+			}
+			else if(vo.getSeason().compareTo(v1.getSeason())<0)
+				return;
+			else{
+				if(vo.getDate().compareTo(v1.getDate())>0){
+					fiveRecentRecords[0]=vo;
+					return;
+				}
+				else 
+					return ;
+			}
+		}
 	}
 }
