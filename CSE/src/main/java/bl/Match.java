@@ -15,12 +15,18 @@ public class Match implements MatchBLService {
 	private ArrayList<MatchVO> matches = new ArrayList<MatchVO>();
 
 	public Match() {
-		matches = getMatches();
+		getMatches();
+	}
+
+	public static void main(String[] args) {
+		new Match();
 	}
 
 	/**
 	 * 从文件中读取每场比赛信息
-	 * @param fileName 记录比赛信息的文件名
+	 * 
+	 * @param fileName
+	 *            记录比赛信息的文件名
 	 * @return 一个matchVO对象
 	 */
 	private MatchVO readFromMatchFile(String fileName) {
@@ -148,14 +154,15 @@ public class Match implements MatchBLService {
 
 	/**
 	 * 得到全部的比赛信息
+	 * 
 	 * @return 比赛列表
 	 */
-	private ArrayList<MatchVO> getMatches() {
+	private void getMatches() {
 		// TODO 自动生成的方法存根
-		ArrayList<MatchVO> matches = new ArrayList<MatchVO>();
 		try {
 			FileList fl = new FileList("src/data/matches");
-			ArrayList<String> names = fl.getList();
+			ArrayList<String> names = new ArrayList<String>();
+			names = fl.getList();
 			for (String name : names) {
 				matches.add(readFromMatchFile(name));
 			}
@@ -166,15 +173,19 @@ public class Match implements MatchBLService {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return matches;
 	}
 
 	/**
 	 * 获得某场比赛的信息，暂不支持模糊查找，需要与界面进行讨论研究
-	 * @param season 赛季
-	 * @param date 日期
-	 * @param homeTeam 主队
-	 * @param visitingTeam 客队
+	 * 
+	 * @param season
+	 *            赛季
+	 * @param date
+	 *            日期
+	 * @param homeTeam
+	 *            主队
+	 * @param visitingTeam
+	 *            客队
 	 * @return 比赛的列表
 	 */
 	public ArrayList<MatchVO> getMatchData(String season, String date,
@@ -219,5 +230,17 @@ public class Match implements MatchBLService {
 			}
 		}
 		return result;
+	}
+
+	/**
+	 * 向match中增加比赛信息
+	 * 
+	 * @param newName
+	 *            动态增加的比赛的文件名
+	 */
+	public void add(ArrayList<String> newName) {
+		for (String str : newName) {
+			matches.add(readFromMatchFile(str));
+		}
 	}
 }
