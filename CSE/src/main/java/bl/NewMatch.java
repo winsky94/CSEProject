@@ -21,11 +21,6 @@ public class NewMatch {
 		matches = getMatches();
 	}
 
-	public static void main(String[] args) {
-		NewMatch newMatch = new NewMatch();
-		
-	}
-
 	/**
 	 * 从文件中读取每场比赛信息
 	 * 
@@ -243,6 +238,18 @@ public class NewMatch {
 			}
 		}
 		return result;
+	}
+
+	/**
+	 * 向match中增加比赛信息
+	 * 
+	 * @param newName
+	 *            动态增加的比赛的文件名
+	 */
+	public void add(ArrayList<String> newName) {
+		for (String str : newName) {
+			matches.put(getKeyName(str), readFromMatchFile(str));
+		}
 	}
 
 	private String getKeyName(String fileName) {
