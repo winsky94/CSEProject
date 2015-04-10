@@ -376,7 +376,7 @@ public class Player implements PlayerBLService{
 		int teamShootAttemptNum=0;
 		int teamFreeThrowAttemptNum=0;
 		int teamTurnOverNum=0;
-		int dsOffenRoundNum=0;
+		double dsOffenRoundNum=0;
 		int dsShootAttemptNum=0;
 		int dsFreeThrowAttemptNum=0;
 		int dsShootMissNum=0;
@@ -521,7 +521,7 @@ public class Player implements PlayerBLService{
 						+ 0.4
 						* thisDSFreeThrowAttemptNum
 						- 1.07
-						* (thisDSAllOffenReboundNum
+						* ((double)thisDSAllOffenReboundNum
 								/ (thisDSAllOffenReboundNum + thisteamAllDefenReboundNum) * thisDSShootMissNum) + 1.07
 						* thisDSTurnOverNum;
 			}

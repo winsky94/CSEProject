@@ -44,7 +44,6 @@ public class NewPlayer {
 		}
 		
 		else{
-		 // baseInfoInit();
 			long start = System.currentTimeMillis();
 		    matchInfoInit();
 		    long end = System.currentTimeMillis();
@@ -407,7 +406,7 @@ public class NewPlayer {
 		int teamShootAttemptNum=0;
 		int teamFreeThrowAttemptNum=0;
 		int teamTurnOverNum=0;
-		int dsOffenRoundNum=0;
+		double dsOffenRoundNum=0;
 				
 		PlayerVO playerSeason=players.get(name);
 		
@@ -504,7 +503,6 @@ public class NewPlayer {
 					/ (2 * (allshootAttemptNum + 0.44 * allfreeThrowAttemptNum));
 			shootEfficiency = (double) (allshootHitNum + 0.5 * allthreeHitNum)
 					/ allshootAttemptNum;
-			
 			for(Integer id:matchIDs){
 				MatchVO match=matches.get(id);
 				allMatchTime+=match.getMatchTime();
@@ -520,8 +518,17 @@ public class NewPlayer {
 				    teamTurnOverNum+=match.getVisitingTurnOverNum();
 				    dsOffenRoundNum+=match.getHomeShootAttemptNum()+0.4*match.getHomeFreeThrowAttemptNum()
 				    		-1.07
-				    		*(match.getHomeOffenReboundNum()/(match.getHomeOffenReboundNum()+match.getVisitingDefenReboundNum())*(match.getHomeShootAttemptNum()-match.getHomeShootHitNum()))+1.07*match.getHomeTurnOverNum();
-		
+				    		*((double)match.getHomeOffenReboundNum()/(match.getHomeOffenReboundNum()+match.getVisitingDefenReboundNum())*(match.getHomeShootAttemptNum()-match.getHomeShootHitNum()))+1.07*match.getHomeTurnOverNum();
+				    int v89=match.getHomeShootAttemptNum();
+					int v24=match.getHomeFreeThrowAttemptNum();
+					 int v17=match.getHomeOffenReboundNum();
+					 int v34=match.getVisitingDefenReboundNum();
+					 int v37=match.getHomeShootHitNum();
+					 int v8=match.getHomeTurnOverNum();
+					 double v88_6133=v89+0.4*v24
+						    	-1.07
+						    	*((double)v17/(v17+v34)*(v89-v37))+1.07*v8;
+					 System.out.println("-"+v88_6133);
 				}
 				else{
 					 teamOffenReboundNum+=match.getHomeOffenReboundNum();
@@ -533,10 +540,19 @@ public class NewPlayer {
 					 teamShootAttemptNum+=match.getHomeShootAttemptNum();
 					 teamFreeThrowAttemptNum+=match.getHomeFreeThrowAttemptNum();
 					 teamTurnOverNum+=match.getHomeTurnOverNum();
+					 int v89=match.getVisitingShootAttemptNum();
+					 int v24=match.getVisitingFreeThrowAttemptNum();
+					 int v17=match.getVisitingOffenReboundNum();
+					 int v34=match.getHomeDefenReboundNum();
+					 int v37=match.getVisitingShootHitNum();
+					 int v8=match.getVisitingTurnOverNum();
+					 double v88_6133=v89+0.4*v24
+						    	-1.07
+						    	*((double)v17/(v17+v34)*(v89-v37))+1.07*v8;
 					 dsOffenRoundNum+=match.getVisitingShootAttemptNum()+0.4*match.getVisitingFreeThrowAttemptNum()
 					    	-1.07
-					    	*(match.getVisitingOffenReboundNum()/(match.getVisitingOffenReboundNum()+match.getHomeDefenReboundNum())*(match.getVisitingShootAttemptNum()-match.getVisitingShootHitNum()))+1.07*match.getVisitingTurnOverNum();
-			
+					    	*((double)match.getVisitingOffenReboundNum()/(match.getVisitingOffenReboundNum()+match.getHomeDefenReboundNum())*(match.getVisitingShootAttemptNum()-match.getVisitingShootHitNum()))+1.07*match.getVisitingTurnOverNum();
+					 System.out.println("-"+v88_6133);
 				}
 			}
 			 teamReboundNum=teamOffenReboundNum+teamDefenReboundNum;
@@ -554,7 +570,7 @@ public class NewPlayer {
 			assistRate = allassistNum
 					/( allpresentTime / allMatchTime
 							* teamShootHitNum - allshootHitNum);
-			stealRate = allassistNum* allMatchTime
+			stealRate = (double)allassistNum* allMatchTime
 					/ allpresentTime
 					/ dsOffenRoundNum;
 			blockRate = allblockNum * allMatchTime
