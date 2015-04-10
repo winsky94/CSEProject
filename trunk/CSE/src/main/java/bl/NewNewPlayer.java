@@ -19,43 +19,20 @@ import vo.MatchVO;
 import vo.PlayerVO;
 import vo.RecordVO;
 import vo.TeamVO;
-import blservice.PlayerBLService;
 
-public class NewPlayer {
+public class NewNewPlayer {
 	
 	Map<String,PlayerVO> players = new HashMap<String,PlayerVO>(32);
-	ArrayList<TeamVO> teams;
+	Map<String, TeamVO> teams;
 	Map<Integer,MatchVO> matches=new HashMap<Integer,MatchVO>(1024);
 	Map<String, ArrayList<MatchVO>> allSeasonMatches=new HashMap<String, ArrayList<MatchVO>>();
 	
-	/**
-	 * 
-	 * @param flag    
-	 * flag=1   看球员的基本信息
-	 * flag=2   看球员的赛季信息
-	 * flag=3   看球员的场均信息
-	 */
-	public NewPlayer(int flag){
-
-		if(flag==0){
-			baseInfoInit();
-		}
-		else if(flag==2){
-			
-		}
-		
-		else{
-			long start = System.currentTimeMillis();
-		    allMatchInfoInit();
-		    long end = System.currentTimeMillis();
-		    System.out.println("运行时间：" + (end - start) + "毫秒");//应该是end - start
-			
-		}
+	public NewNewPlayer(){
+           baseInfoInit();
+		   teams=NewTeam.getTeamsPartition();
+		   allMatchInfoInit();
 	}
 	
-	public NewPlayer(String season){
-		seasonMatchInfoInit(season);
-	}
 	
 	private void baseInfoInit(){
 	
@@ -126,37 +103,15 @@ public class NewPlayer {
 		return player;
 	}
 	
-	private void seasonMatchInfoInit(String season){
-
-		try{					
-			FileList fl = new FileList("src/data/matches");
-			ArrayList<String> names = fl.getList();
-			int matchCount=0;
-	      for(String name:names){
-	    	  String[] buffer=name.split("_");
-	    	  if(buffer[0].equals(season)){
-	    	     readMatchInfoFromFile(name,matchCount);
-	    	     matchCount++;
-	    	  }
-	      }
-		}
-		catch (IOException e){
-			e.printStackTrace();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
+	
 	
 	private void allMatchInfoInit(){
 
 		try{					
 			FileList fl = new FileList("src/data/matches");
 			ArrayList<String> names = fl.getList();
-			int matchCount=0;
 	      for(String name:names){
-	    	  readMatchInfoFromFile(name,matchCount);
-	    	  matchCount++;
+	    	  readMatchInfoFromFile(name);
 	      }
 		}
 		catch (IOException e){
@@ -167,7 +122,7 @@ public class NewPlayer {
 		}
 	}
 	
-	private void readMatchInfoFromFile(String fileName,int matchCount){
+	private void readMatchInfoFromFile(String fileName){
 		String season;// 赛季
 		String date = null;// 比赛日期
 		String teams = null;// 对阵队伍
@@ -198,13 +153,11 @@ public class NewPlayer {
 			temp = br.readLine();
 			String[] scoresData = temp.split(";");
 			int partNum=scoresData.length;
-			MatchVO thisMatch=new MatchVO(season, date, visitingTeam, homeTeam,partNum);	
 			
-
+			
 			String team = null;// 球队
 			String playerName = null;// 球员名
 			String position = null;// 位置
-			int presentTime = 0;// 在场时间
 			String presentTimeString=null;
 			int shootHitNum = 0;// 投篮命中数
 			int shootAttemptNum = 0;// 投篮出手数
@@ -232,7 +185,6 @@ public class NewPlayer {
 					position = line[1];
 					presentTimeString = DirtyDataManager.checkPresentTime(fileName,
 							team, playerName, line[2]);// 在场时间
-					presentTime=convertMinuteToSecond(presentTimeString);
 					shootHitNum = Integer.parseInt(line[3]);// 投篮命中数
 					shootAttemptNum = DirtyDataManager.checkShootAndHitNum(
 							fileName, Integer.parseInt(line[4]), shootHitNum);// 投篮出手数
@@ -255,99 +207,7 @@ public class NewPlayer {
 					foulNum = Integer.parseInt(line[16]);// 犯规数
 					personScore = DirtyDataManager.checkPersonScore(fileName,
 							line[17], temp);// 个人得分
-				    PlayerVO thisPlayer=players.get(playerName);
-				    LittleRecordVO littleRecordVO=new LittleRecordVO(season, date, personScore, reboundNum, assistNum);
-				    if(thisPlayer==null){
-				    	if(!position.equals("")){
-				    	   thisPlayer=new PlayerVO(playerName, team, 1, 1, reboundNum, assistNum, presentTime, shootHitNum, shootAttemptNum, 0, threeHitNum, threeAttemptNum, 0, freeThrowHitNum, freeThrowAttemptNum, 0, offenReboundNum, defenReboundNum, stealNum, blockNum, turnOverNum, foulNum, personScore, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-				    	   thisPlayer.setMostRecentMatch(season+"_"+date);
-				    	}
-				    	else {
-				    	   thisPlayer=new PlayerVO(playerName, team, 1, 0, reboundNum, assistNum, presentTime, shootHitNum, shootAttemptNum, 0, threeHitNum, threeAttemptNum, 0, freeThrowHitNum, freeThrowAttemptNum, 0, offenReboundNum, defenReboundNum, stealNum, blockNum, turnOverNum, foulNum, personScore, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-				    	   thisPlayer.setMostRecentMatch(season+"_"+date);
-				    	}
-				    	players.put(playerName, thisPlayer);
-				    }
-				    else{
-				    	thisPlayer.addPlayedGames();
-				    	if(!position.equals(""))
-				    		thisPlayer.addGameStartingNum();
-				    	if(thisPlayer.getMostRecentMatch().compareTo(season+"_"+date)<0){
-				    	    thisPlayer.setOwingTeam(team);
-				    	    thisPlayer.setMostRecentMatch(season+"_"+date);
-				    	}
-	                    thisPlayer.addPresentTime(presentTime);
-	                    thisPlayer.addShootHitNum(shootHitNum);
-						thisPlayer.addShootAttemptNum(shootAttemptNum);
-						thisPlayer.addThreeHitNum(threeHitNum);
-						thisPlayer.addThreeAttemptNum(threeAttemptNum);
-						thisPlayer.addFreeThrowHitNum(freeThrowHitNum);
-						thisPlayer.addFreeThrowAttemptNum(freeThrowAttemptNum);
-						thisPlayer.addOffenReboundNum(offenReboundNum);
-						thisPlayer.addDefenReboundNum(defenReboundNum);
-						thisPlayer.addReboundNum(reboundNum);
-						thisPlayer.addAssistNum(assistNum);
-						thisPlayer.addStealNum(stealNum);
-						thisPlayer.addBlockNum(blockNum);
-						thisPlayer.addTurnOverNum(turnOverNum);
-						thisPlayer.addFoulNum(foulNum);
-						thisPlayer.addScore(personScore);
-						
-				    }
-				if(team.equals(visitingTeam))
-				    thisPlayer.addMatchesID(matchCount,true);
-				else
-					thisPlayer.addMatchesID(matchCount,false);
-				
-				thisPlayer.addFiveRecentRecords(littleRecordVO);
-				
-				//计算两双
-				int tempDouble=0;
-				if (personScore >= 10)
-					tempDouble++;
-				if (reboundNum >= 10)
-					tempDouble++;
-				if (assistNum >= 10)
-					tempDouble++;
-				if (stealNum >= 10)
-					tempDouble++;
-				if (blockNum >= 10)
-					tempDouble++;
-				if (tempDouble >= 2)
-					thisPlayer.addDoubleDoubleNum();
-				
-				if(team.equals(homeTeam)){
-					thisMatch.addHomeShootHitNum(shootHitNum);
-					thisMatch.addHomeShootAttemptNum(shootAttemptNum);
-					thisMatch.addHomeThreeHitNum(threeHitNum);
-					thisMatch.addHomeThreeAttemptNum(threeAttemptNum);
-					thisMatch.addHomeFreeThrowHitNum(freeThrowHitNum);
-					thisMatch.addHomeFreeThrowAttemptNum(freeThrowAttemptNum);
-					thisMatch.addHomeOffenReboundNum(offenReboundNum);
-					thisMatch.addHomeDefenReboundNum(defenReboundNum); 
-					thisMatch.addHomeAssistNum(assistNum);
-					thisMatch.addHomeStealNum(stealNum);
-					thisMatch.addHomeBlockNum(blockNum);
-					thisMatch.addHomeTurnOverNum(turnOverNum);
-					thisMatch.addHomeFoulNum(foulNum);
-				}
-				else{
-					thisMatch.addVisitingShootHitNum(shootHitNum);
-					thisMatch.addVisitingShootAttemptNum(shootAttemptNum);
-					thisMatch.addVisitingThreeHitNum(threeHitNum);
-					thisMatch.addVisitingThreeAttemptNum(threeAttemptNum);
-					thisMatch.addVisitingFreeThrowHitNum(freeThrowHitNum);
-					thisMatch.addVisitingFreeThrowAttemptNum(freeThrowAttemptNum);
-					thisMatch.addVisitingOffenReboundNum(offenReboundNum);
-					thisMatch.addVisitingDefenReboundNum(defenReboundNum); 
-					thisMatch.addVisitingAssistNum(assistNum);
-					thisMatch.addVisitingStealNum(stealNum);
-					thisMatch.addVisitingBlockNum(blockNum);
-					thisMatch.addVisitingTurnOverNum(turnOverNum);
-					thisMatch.addVisitingFoulNum(foulNum);
-				}
-					
-			  }
+				  
 			
 				RecordVO recordVO = new RecordVO(team, playerName,
 						position, presentTimeString, shootHitNum,
@@ -357,17 +217,16 @@ public class NewPlayer {
 						assistNum, stealNum, blockNum, turnOverNum,
 						foulNum, personScore);
 				records.add(recordVO);
-
+              }
 				temp = br.readLine();
+			 			
 			}
-			
-			matches.put(matchCount, thisMatch);	
-			
 			MatchVO theMatch=new MatchVO(season, date, visitingTeam, homeTeam, partNum, records);
             ArrayList<MatchVO> theSeasonMatches=allSeasonMatches.get(season);
             if(theSeasonMatches==null){
             	theSeasonMatches=new ArrayList<MatchVO>();
             	theSeasonMatches.add(theMatch);
+            	allSeasonMatches.put(season, theSeasonMatches);
             }
             else{
             	theSeasonMatches.add(theMatch);
@@ -390,8 +249,8 @@ public class NewPlayer {
 
 	public ArrayList<PlayerVO> getPlayerAverageInfo() {
 		ArrayList<PlayerVO> result=new ArrayList<PlayerVO>();
-		Iterator iter = players.entrySet().iterator();
-		while (iter.hasNext()) {
+		Iterator iter = matches.entrySet().iterator();
+		while (iter.hasNext()) {    aaaaa我写到这里
 		   Map.Entry entry = (Map.Entry) iter.next();
 	       PlayerVO val = (PlayerVO)entry.getValue();
 		   result.add(val);
@@ -988,47 +847,7 @@ public class NewPlayer {
   
 	public static void main(String[] args){
 	   long start = System.currentTimeMillis();
-	   NewPlayer player=new NewPlayer(3);
-	   PlayerVO vo=player.getPlayerAverageInfo("Al Horford");
-	   System.out.println(vo.getOwingTeam());
-	   System.out.println(vo.getPlayedGames());
-	   System.out.println(vo.getGameStartingNum());
-	   System.out.println(vo.getReboundNum()*vo.getPlayedGames());
-	   System.out.println(vo.getAssistNum()*vo.getPlayedGames());
-	   System.out.println(vo.getPresentTime()*vo.getPlayedGames());
-	   System.out.println(vo.getShootHitRate());
-	   System.out.println(vo.getThreeHitRate());
-	   System.out.println(vo.getFreeThrowHitRate());
-	   System.out.println(vo.getOffenReboundNum()*vo.getPlayedGames());
-	   System.out.println(vo.getDefenReboundNum()*vo.getPlayedGames());
-	   System.out.println(vo.getStealNum()*vo.getPlayedGames());
-	   System.out.println(vo.getBlockNum()*vo.getPlayedGames());
-	   System.out.println(vo.getFoulNum()*vo.getPlayedGames());
-	   System.out.println(vo.getTurnOverNum()*vo.getPlayedGames());
-	   System.out.println(vo.getScore()*vo.getPlayedGames());
-	   System.out.println(vo.getEfficiency());
-	   System.out.println(vo.getRecentFiveMatchesScoreUpRate());
-	   System.out.println(vo.getRecentFiveMatchesReboundUpRate());
-	   System.out.println(vo.getRecentFiveMatchesAssistUpRate());
-	   System.out.println(vo.getGmScEfficiencyValue());
-	   System.out.println(vo.getTrueHitRate());
-	   System.out.println(vo.getShootHitEfficiency());
-	   System.out.println(vo.getReboundRate());
-	   System.out.println(vo.getOffenReboundRate());
-	   System.out.println(vo.getDefenReboundRate());
-	   System.out.println(vo.getAssistRate());
-	   System.out.println(vo.getStealRate());
-	   System.out.println(vo.getBlockRate());
-	   System.out.println(vo.getTurnOverRate());
-	   System.out.println(vo.getUsageRate());
-	   System.out.println(vo.getScore_rebound_assist()*vo.getPlayedGames());
-	   System.out.println(vo.getDoubleDoubleNum()*vo.getPlayedGames());
-	   PlayerVO vo2=player.getPlayerAverageInfo("Aaron Brooks");
-	   PlayerVO vo3=player.getPlayerAverageInfo("Adonis Thomas");
-	   PlayerVO vo4=player.getPlayerAverageInfo("Aaron Gray");
-	   PlayerVO vo5=player.getPlayerAverageInfo("Al Harrington");
-	   PlayerVO vo6=player.getPlayerAverageInfo("Al Jefferson");
-	   player.getPlayerAverageInfo();
+	   NewNewPlayer player=new NewNewPlayer();
 	   long end = System.currentTimeMillis();
        System.out.println("运行时间：" + (end - start) + "毫秒");//应该是end - start
    }

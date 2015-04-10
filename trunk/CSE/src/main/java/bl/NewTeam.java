@@ -59,7 +59,7 @@ public class NewTeam {
 	 *            存储球队信息的文件名
 	 * @return
 	 */
-	private ArrayList<String[]> readFromFile(String fileName) {
+	private static ArrayList<String[]> readFromFile(String fileName) {
 		ArrayList<String[]> result = new ArrayList<String[]>();
 		String[] content;
 		try {
@@ -130,6 +130,29 @@ public class NewTeam {
 		return teams;
 	}
 
+/**为球员服务的map
+ * 
+ */
+	public static Map<String, TeamVO> getTeamsPartition() {
+		// TODO 自动生成的方法存根
+		String abLocation;
+		String conference;
+		String partition;
+
+		Map<String, TeamVO> teams = new LinkedHashMap<String, TeamVO>();
+		TeamVO team;
+		ArrayList<String[]> result = readFromFile("src/data/teams/teams");
+		for (String[] content : result) {
+			abLocation = content[1];
+			conference = content[3];//东西部
+			partition = content[4];
+			
+			team = new TeamVO(abLocation, conference,partition);
+			teams.put(abLocation, team);
+		}
+		return teams;
+	}
+	
 	/**
 	 * 计算球队所有比赛的平均数据，初始化全局变量teamAverageInfo
 	 * 
