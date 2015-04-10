@@ -1,14 +1,11 @@
 package newui.teamui.details;
 
 import java.awt.Font;
-import java.awt.Graphics;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
-import java.awt.Image;
 import java.awt.Insets;
 
-import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -31,7 +28,7 @@ public class TeamDetailInfoPanel extends JPanel{
 		team=new Team();
 		chName=ch;
 		abbrName=abbr;
-		basevo=team.getTeamBaseInfo(abbr).get(0);
+		basevo=team.getTeamBaseInfo(abbr);
 		enName=basevo.getTeamName();
 		//----------------------------
 		GridBagLayout gbl=new GridBagLayout();
