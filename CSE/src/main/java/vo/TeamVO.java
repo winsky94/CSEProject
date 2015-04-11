@@ -99,6 +99,12 @@ public class TeamVO {
 		this.assistRate = assistRate;
 	}
 
+	public TeamVO(String abLocation, String conference, String partition) {
+		this.abLocation = abLocation;
+		this.conference = conference;
+		this.partition = partition;
+	}
+
 	public String getTeamName() {
 		return teamName;
 	}
