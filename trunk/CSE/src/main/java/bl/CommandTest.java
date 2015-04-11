@@ -31,7 +31,7 @@ public class CommandTest {
 	private String pAge="All";
 	private String pUnion="All";
 	private String pPosition="All";
-	private ArrayList<String> playerSort=new ArrayList<String>();//aas.dsec ddd.asc 邮件及
+	private ArrayList<String> playerSort=new ArrayList<String>();//
 	private ArrayList<String> sortP=new ArrayList<String>();
 	private ArrayList<String> playerFilter=new ArrayList<String>();//优先级 field.value
 	private ArrayList<String> teamSort=new ArrayList<String>();//aas.dsec ddd.asc 邮件及
