@@ -47,7 +47,7 @@ public class CommandTest {
 		ArrayList<String> command=new ArrayList<String>();
 		for(int i=1;i<args.length;i++)
 			command.add(args[i]);
-		if(args[0].equals("-palyer")){
+		if(args[0].equals("-player")){
 			//球队命令解析
 			if(command.size()==0)
 				return;//返回得分前50的球员的场均比赛数据 调用
