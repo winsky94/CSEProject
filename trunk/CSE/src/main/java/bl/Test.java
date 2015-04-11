@@ -57,12 +57,11 @@ public class Test {
 			if ((t3 - t2) == (t2 - t1)) {
 				equal++;
 			}
-		}
+			System.out.println("------------------------------");
+			System.out.println("newNewPlayer比newPlayer快"+count+"次");
+			System.out.println(equal+"次二者相等");		
 		
-		System.out.println("------------------------------");
-		System.out.println("newNewPlayer比newPlayer快"+count+"次");
-		System.out.println(equal+"次二者相等");
-
+		}
 	}
 
 }
