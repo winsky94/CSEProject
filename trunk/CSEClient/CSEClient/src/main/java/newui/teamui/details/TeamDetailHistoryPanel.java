@@ -8,8 +8,7 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-
-import newui.tables.MySortableTable;
+import javax.swing.JTable;
 
 public class TeamDetailHistoryPanel extends JPanel{
 
@@ -17,7 +16,7 @@ public class TeamDetailHistoryPanel extends JPanel{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	MySortableTable table;
+	JTable table;
 	JScrollPane jsp;
 	JPanel funcPnl;
 	MyBox seasonBox;
@@ -65,9 +64,6 @@ public class TeamDetailHistoryPanel extends JPanel{
 	}
 	class MyBox extends JComboBox<String>{
 
-		/**
-		 * 
-		 */
 		private static final long serialVersionUID = 1L;
 		public MyBox(String[] arr){
 			super(arr);
@@ -76,9 +72,6 @@ public class TeamDetailHistoryPanel extends JPanel{
 	}
 	class MyLabel extends JLabel{
 
-		/**
-		 * 
-		 */
 		private static final long serialVersionUID = 1L;
 		public MyLabel(String text){
 			super(text);
