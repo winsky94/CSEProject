@@ -130,9 +130,10 @@ public class NewTeam {
 		return teams;
 	}
 
-/**为球员服务的map
- * 
- */
+	/**
+	 * 为球员服务的map
+	 * 
+	 */
 	public static Map<String, TeamVO> getTeamsPartition() {
 		// TODO 自动生成的方法存根
 		String abLocation;
@@ -144,15 +145,15 @@ public class NewTeam {
 		ArrayList<String[]> result = readFromFile("src/data/teams/teams");
 		for (String[] content : result) {
 			abLocation = content[1];
-			conference = content[3];//东西部
+			conference = content[3];// 东西部
 			partition = content[4];
-			
-			team = new TeamVO(abLocation, conference,partition);
+
+			team = new TeamVO(abLocation, conference, partition);
 			teams.put(abLocation, team);
 		}
 		return teams;
 	}
-	
+
 	/**
 	 * 计算球队所有比赛的平均数据，初始化全局变量teamAverageInfo
 	 * 
@@ -533,20 +534,21 @@ public class NewTeam {
 	public Map<String, TeamVO> getTeamBaseInfo(String name) {
 		// TODO 自动生成的方法存根
 		Map<String, TeamVO> result = new LinkedHashMap<String, TeamVO>();
-		Iterator<Entry<String, TeamVO>> iter = teamsBaseInfo.entrySet()
-				.iterator();
-		while (iter.hasNext()) {
-			Map.Entry<String, TeamVO> entry = (Map.Entry<String, TeamVO>) iter
-					.next();
-			TeamVO teamVO = (TeamVO) entry.getValue();
-
-			String teamName = teamVO.getTeamName().toLowerCase();
-			String abLocation = teamVO.getAbLocation().toLowerCase();
-			name = name.toLowerCase();
-			if (teamName.contains(name) || abLocation.contains(name)) {
-				result.put(abLocation, teamVO);
-			}
-		}
+		// Iterator<Entry<String, TeamVO>> iter = teamsBaseInfo.entrySet()
+		// .iterator();
+		// while (iter.hasNext()) {
+		// Map.Entry<String, TeamVO> entry = (Map.Entry<String, TeamVO>) iter
+		// .next();
+		// TeamVO teamVO = (TeamVO) entry.getValue();
+		//
+		// String teamName = teamVO.getTeamName().toLowerCase();
+		// String abLocation = teamVO.getAbLocation().toLowerCase();
+		// name = name.toLowerCase();
+		// if (teamName.contains(name) || abLocation.contains(name)) {
+		// result.put(abLocation, teamVO);
+		// }
+		// }
+		result.put(name, teamsBaseInfo.get(name));
 		return result;
 	}
 
