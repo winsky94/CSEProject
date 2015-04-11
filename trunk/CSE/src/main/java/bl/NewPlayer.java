@@ -394,6 +394,7 @@ public class NewPlayer {
 		while (iter.hasNext()) {
 		   Map.Entry entry = (Map.Entry) iter.next();
 	       PlayerVO val = (PlayerVO)entry.getValue();
+	       val=getPlayerAverageInfo(val.getName());
 		   result.add(val);
 		}
 		Collections.sort(result, new SequenceOfPlayer());
