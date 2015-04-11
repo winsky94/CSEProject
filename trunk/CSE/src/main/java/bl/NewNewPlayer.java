@@ -689,13 +689,22 @@ public class NewNewPlayer {
 
 	public ArrayList<PlayerVO> getOrderedPlayersByAverage(
 			String condition, String order, int num) {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<PlayerVO> result=new ArrayList<PlayerVO>();
+		ArrayList<PlayerVO> allPlayers=getPlayerAverageInfo();
+		Collections.sort(allPlayers, new SequenceOfPlayer(condition, order));
+		int count=0;
+		for(PlayerVO vo:allPlayers){
+			result.add(vo);
+			count++;
+			if(count>=num)
+				break;
+		}
+		return result;
 	}
 
 	public ArrayList<PlayerVO> selectPlayersBySeason(String season,
 			String position, String union, String column, int num) {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 
