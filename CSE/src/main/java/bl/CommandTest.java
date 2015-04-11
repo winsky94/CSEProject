@@ -106,7 +106,7 @@ public class CommandTest {
 					String[] t=command.get(i+1).split(",");
 					for(String s:t)
 						playerFilter.add(s);
-					PalyerFilterChange();
+					PlayerFilterChange();
 					//调用sort+filter方法
 					
 					clearFilter();
@@ -213,7 +213,7 @@ public class CommandTest {
 		}
 	}
 	
-	public void PalyerFilterChange(){
+	public void PlayerFilterChange(){
 		for(String s:playerFilter){
 			if(s.contains("position"))
 				pPosition=s.split(".")[1];
