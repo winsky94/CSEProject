@@ -75,7 +75,7 @@ public interface TeamBLService {
 	 * @return 按照所给条件排好序的球队列表
 	 */
 	public ArrayList<TeamVO> getOrderedTeamsBySeason(String season,
-			String condition, String order);
+			String condition, String order,int num);
 
 	/**
 	 * 根据某一项技术分析项，将球队按场均该项数据进行升降序排序
@@ -90,7 +90,7 @@ public interface TeamBLService {
 	 * @return 按照所给条件排好序的球队列表
 	 */
 	public ArrayList<TeamVO> getOrderedTeamsByAverage(String condition,
-			String order);
+			String order,int num);
 
 	/**
 	 * 根据球队缩写得到球队队徽
@@ -126,5 +126,5 @@ public interface TeamBLService {
 	 *            筛选条件
 	 * @return 返回到 目前为止所有参加过比赛的球队中筛选出前 5 名球队（按照 降序排列进行筛选）
 	 */
-	public ArrayList<TeamVO> getSeasonHotTeam(String season, String column);
+	public ArrayList<TeamVO> getSeasonHotTeam(String season, String column,int num);
 }
