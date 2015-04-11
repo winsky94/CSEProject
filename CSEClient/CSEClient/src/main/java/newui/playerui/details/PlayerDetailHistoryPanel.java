@@ -10,6 +10,8 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
+import newui.tables.PlayerHistoryTableModel;
+
 public class PlayerDetailHistoryPanel extends JPanel {
 
 	/**
@@ -19,6 +21,7 @@ public class PlayerDetailHistoryPanel extends JPanel {
 	String name;
 	JScrollPane jsp;
 	JTable table;
+	PlayerHistoryTableModel phtm;
 	// --------------
 	Font font = new Font("微软雅黑", Font.PLAIN, 15);
 	JPanel funcPnl;
@@ -49,12 +52,16 @@ public class PlayerDetailHistoryPanel extends JPanel {
 		seasonBox = new MyBox(seasonText);
 		funcPnl.add(seasonBox);
 		// ----------------------
-		jsp = new JScrollPane();
+		phtm=new PlayerHistoryTableModel();
+		table=new JTable(phtm);
+		jsp = new JScrollPane(table);
 		gbc.gridy = 1;
 		gbc.gridheight = 10;
 		gbc.weighty = 10;
 		gbl.setConstraints(jsp, gbc);
 		add(jsp);
+		phtm.Refresh(pname);
+		table.revalidate();
 
 	}
 
