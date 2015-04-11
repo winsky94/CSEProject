@@ -58,6 +58,7 @@ public class PlayerVO {
 	private ArrayList<Integer> matchesID=new ArrayList<Integer>();//所参加的比赛ID
 	private Map<Integer,Boolean> isVisitingTeam=new HashMap<Integer,Boolean>(64);//记录球员在上面的比赛ID中所属队伍是否是客队。如果是，是true;不是，是false;
     private LittleRecordVO[] fiveRecentRecords=new LittleRecordVO[5];//最近五场比赛记录
+//    private boolean isCalculate;
 	
 
 	
@@ -413,6 +414,12 @@ public class PlayerVO {
 		return fiveRecentRecords;
 	}
 	
+//	public boolean getIsCalculate(){
+//		return isCalculate;
+//	}
+	
+	
+	
 	
 	public void setName(String name) {
 		this.name = name;
@@ -689,6 +696,10 @@ public class PlayerVO {
 	public void setDoubleDoubleNum(double doubleDoubleNum) {
 		this.doubleDoubleNum = doubleDoubleNum;
 	}
+	
+//	public void setIsCalculate(boolean isCalculate){
+//		this.isCalculate=isCalculate;
+//	}
 	
 	public void addDoubleDoubleNum(){
 		this.doubleDoubleNum++;
