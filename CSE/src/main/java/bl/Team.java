@@ -146,7 +146,8 @@ public class Team implements TeamBLService {
 
 		ArrayList<TeamVO> teams = new ArrayList<TeamVO>();
 		TeamVO team;
-		ArrayList<String[]> result = readFromFile(DataSourse.dataSourse+"/teams/teams");
+		ArrayList<String[]> result = readFromFile(DataSourse.dataSourse
+				+ "/teams/teams");
 		for (String[] content : result) {
 			name = content[0];
 			abLocation = content[1];
@@ -594,8 +595,11 @@ public class Team implements TeamBLService {
 	 * @return 按照所给条件排好序的球队列表
 	 */
 	public ArrayList<TeamVO> getOrderedTeamsBySeason(String season,
-			String condition, String order) {
+			String condition, String order, int num) {
 		// TODO 自动生成的方法存根
+		if (num < 0) {
+			num = 30;
+		}
 		ArrayList<TeamVO> teams = new ArrayList<TeamVO>();
 		teams = getTeamSeasonInfo(season);
 		// 未明确写明排序方式时默认是升序
@@ -603,7 +607,16 @@ public class Team implements TeamBLService {
 			order = "asc";
 		}
 		Collections.sort(teams, new SequenceOfTeam(condition, order));
-		return teams;
+		if (num == 30) {
+			return teams;
+		} else {
+			ArrayList<TeamVO> result = new ArrayList<TeamVO>();
+			for (int i = 0; i < num; i++) {
+				result.add(teams.get(i));
+			}
+			return result;
+		}
+
 	}
 
 	/**
@@ -619,8 +632,11 @@ public class Team implements TeamBLService {
 	 * @return 按照所给条件排好序的球队列表
 	 */
 	public ArrayList<TeamVO> getOrderedTeamsByAverage(String condition,
-			String order) {
+			String order, int num) {
 		// TODO 自动生成的方法存根
+		if (num < 0) {
+			num = 30;
+		}
 		ArrayList<TeamVO> teams = new ArrayList<TeamVO>();
 		teams = teamAverageInfo;
 		// 未明确写明排序方式时默认是升序
@@ -628,7 +644,15 @@ public class Team implements TeamBLService {
 			order = "asc";
 		}
 		Collections.sort(teams, new SequenceOfTeam(condition, order));
-		return teams;
+		if (num == 30) {
+			return teams;
+		} else {
+			ArrayList<TeamVO> result = new ArrayList<TeamVO>();
+			for (int i = 0; i < num; i++) {
+				result.add(teams.get(i));
+			}
+			return result;
+		}
 	}
 
 	/**
@@ -655,7 +679,7 @@ public class Team implements TeamBLService {
 	public ArrayList<MatchVO> getRecentMatches(String teamName) {
 		// TODO 自动生成的方法存根
 		ArrayList<MatchVO> result = new ArrayList<MatchVO>();
-		result = getRecentMatches(teamName, 5);
+		result = getRecentMatchesAll(teamName, 5);
 		return result;
 	}
 
@@ -669,7 +693,7 @@ public class Team implements TeamBLService {
 	public ArrayList<MatchVO> getMatches(String teamName) {
 		// TODO 自动生成的方法存根
 		ArrayList<MatchVO> result = new ArrayList<MatchVO>();
-		result = getRecentMatches(teamName, -1);
+		result = getRecentMatchesAll(teamName, -1);
 		return result;
 	}
 
@@ -682,7 +706,7 @@ public class Team implements TeamBLService {
 	 *            得到比赛的场数 ，-1则是取出全部数据
 	 * @return 过往比赛的列表
 	 */
-	private ArrayList<MatchVO> getRecentMatches(String teamName, int num) {
+	private ArrayList<MatchVO> getRecentMatchesAll(String teamName, int num) {
 		ArrayList<MatchVO> result = new ArrayList<MatchVO>();
 		int count = 0;
 		for (MatchVO matchVO : matches) {
@@ -709,13 +733,17 @@ public class Team implements TeamBLService {
 	 *            筛选条件
 	 * @return 返回到 目前为止所有参加过比赛的球队中筛选出前 5 名球队（按照 降序排列进行筛选）
 	 */
-	public ArrayList<TeamVO> getSeasonHotTeam(String season, String column) {
+	public ArrayList<TeamVO> getSeasonHotTeam(String season, String column,
+			int num) {
 		// TODO 自动生成的方法存根
+		if (num < 0) {
+			num = 5;
+		}
 		ArrayList<TeamVO> result = new ArrayList<TeamVO>();
 		ArrayList<TeamVO> teamSeasonInfo = new ArrayList<TeamVO>();
 		teamSeasonInfo = getTeamSeasonInfo(season);
 		Collections.sort(teamSeasonInfo, new SequenceOfTeam(column, "desc"));
-		for (int i = 0; i < 5; i++) {
+		for (int i = 0; i < num; i++) {
 			TeamVO vo = teamSeasonInfo.get(i);
 			result.add(vo);
 		}
