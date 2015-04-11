@@ -37,7 +37,7 @@ public class NewTeam {
 		NewTeam newTeam = new NewTeam();
 		String season = "13-14";
 		Map<String, TeamVO> result = new LinkedHashMap<String, TeamVO>();
-		result = newTeam.getSeasonHotTeam(season, "比赛得分");
+		result = newTeam.getSeasonHotTeam(season, "比赛得分",5);
 
 		System.out.println(result.size());
 
@@ -113,7 +113,8 @@ public class NewTeam {
 
 		Map<String, TeamVO> teams = new LinkedHashMap<String, TeamVO>();
 		TeamVO team;
-		ArrayList<String[]> result = readFromFile(DataSourse.dataSourse+"/teams/teams");
+		ArrayList<String[]> result = readFromFile(DataSourse.dataSourse
+				+ "/teams/teams");
 		for (String[] content : result) {
 			name = content[0];
 			abLocation = content[1];
@@ -142,7 +143,8 @@ public class NewTeam {
 
 		Map<String, TeamVO> teams = new LinkedHashMap<String, TeamVO>();
 		TeamVO team;
-		ArrayList<String[]> result = readFromFile(DataSourse.dataSourse+"/teams/teams");
+		ArrayList<String[]> result = readFromFile(DataSourse.dataSourse
+				+ "/teams/teams");
 		for (String[] content : result) {
 			abLocation = content[1];
 			conference = content[3];// 东西部
@@ -621,8 +623,11 @@ public class NewTeam {
 	 * @return 按照所给条件排好序的球队列表
 	 */
 	public Map<String, TeamVO> getOrderedTeamsBySeason(String season,
-			String condition, String order) {
+			String condition, String order, int num) {
 		// TODO 自动生成的方法存根
+		if(num<0){
+			num=30;
+		}
 		Map<String, TeamVO> teams = new LinkedHashMap<String, TeamVO>();
 		teams = getTeamSeasonInfo(season);
 
@@ -634,10 +639,17 @@ public class NewTeam {
 				teams.entrySet());
 		Collections.sort(infoIds, new SequenceOfTeamMap(condition, order));
 		Map<String, TeamVO> result = new LinkedHashMap<String, TeamVO>();
+		int count = 0;
 		for (Map.Entry<String, TeamVO> map : infoIds) {
 			String key = map.getKey();
 			TeamVO vo = map.getValue();
 			result.put(key, vo);
+			count++;
+			if (num >= infoIds.size()) {
+				if (count >= num) {
+					break;
+				}
+			}
 		}
 		return result;
 	}
@@ -655,8 +667,11 @@ public class NewTeam {
 	 * @return 按照所给条件排好序的球队列表
 	 */
 	public Map<String, TeamVO> getOrderedTeamsByAverage(String condition,
-			String order) {
+			String order, int num) {
 		// TODO 自动生成的方法存根
+		if(num<0){
+			num=30;
+		}
 		Map<String, TeamVO> teams = new LinkedHashMap<String, TeamVO>();
 		teams = teamAverageInfo;
 		// 未明确写明排序方式时默认是升序
@@ -667,11 +682,19 @@ public class NewTeam {
 				teams.entrySet());
 		Collections.sort(infoIds, new SequenceOfTeamMap(condition, order));
 		Map<String, TeamVO> result = new LinkedHashMap<String, TeamVO>();
+		int count = 0;
 		for (Map.Entry<String, TeamVO> map : infoIds) {
 			String key = map.getKey();
 			TeamVO vo = map.getValue();
 			result.put(key, vo);
+			count++;
+			if (num >= infoIds.size()) {
+				if (count >= num) {
+					break;
+				}
+			}
 		}
+
 		return result;
 	}
 
@@ -758,8 +781,11 @@ public class NewTeam {
 	 *            筛选条件
 	 * @return 返回到 目前为止所有参加过比赛的球队中筛选出前 5 名球队（按照 降序排列进行筛选）
 	 */
-	public Map<String, TeamVO> getSeasonHotTeam(String season, String column) {
+	public Map<String, TeamVO> getSeasonHotTeam(String season, String column,int num) {
 		// TODO 自动生成的方法存根
+		if(num<0){
+			num=30;
+		}
 		Map<String, TeamVO> result = new LinkedHashMap<String, TeamVO>();
 		Map<String, TeamVO> teamSeasonInfo = new LinkedHashMap<String, TeamVO>();
 		teamSeasonInfo = getTeamSeasonInfo(season);
@@ -772,10 +798,9 @@ public class NewTeam {
 		for (Map.Entry<String, TeamVO> map : infoIds) {
 			String key = map.getKey();
 			TeamVO vo = map.getValue();
-			System.out.println(vo.getScore());
 			result.put(key, vo);
 			count++;
-			if (count >= 5) {
+			if (count >= num) {
 				break;
 			}
 		}
