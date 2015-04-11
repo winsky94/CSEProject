@@ -12,8 +12,13 @@ import vo.RecordVO;
 import blservice.MatchBLService;
 
 public class Match implements MatchBLService {
-	private static ArrayList<MatchVO> matches = new ArrayList<MatchVO>();
+	private ArrayList<MatchVO> matches = new ArrayList<MatchVO>();
 	private FileList fl;
+
+	public Match(boolean f) {
+
+	}
+
 	public Match() {
 		getMatches();
 	}
@@ -160,7 +165,7 @@ public class Match implements MatchBLService {
 	private void getMatches() {
 		// TODO 自动生成的方法存根
 		try {
-			 fl = new FileList("src/data/matches");
+			fl = new FileList(DataSourse.dataSourse + "/matches", this);
 			ArrayList<String> names = new ArrayList<String>();
 			names = fl.getList();
 			for (String name : names) {
@@ -173,6 +178,10 @@ public class Match implements MatchBLService {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+
+		// 初始化后 开启线程：
+		updateMatch um = new updateMatch();
+		um.startThread();
 	}
 
 	/**
@@ -229,15 +238,10 @@ public class Match implements MatchBLService {
 
 			}
 		}
-		//初始化后 开启线程：
-		updateMatch um=new updateMatch();
-		um.startThread();
-		
-		
-		return result;
-		
-	}
 
+		return result;
+
+	}
 
 	/**
 	 * 向match中增加比赛信息
@@ -245,39 +249,40 @@ public class Match implements MatchBLService {
 	 * @param newName
 	 *            动态增加的比赛的文件名
 	 */
-	public static void  add(ArrayList<String> newName) {
+	public void add(ArrayList<String> newName) {
 		for (String str : newName) {
 			matches.add(readFromMatchFile(str));
 		}
 	}
-	 //放在Filelist或Match里均可
-    class updateMatch extends Thread{
-    	
-    	boolean stop;
-    	public updateMatch(){
-    		stop=false;
-    	}
-    	
-    	public void run(){
-    		while(!stop){
-    			fl.checkChange();
-    			System.out.println("我在很认真的检查呀，港荣蒸蛋糕真的好吃，字打错了灭");
-    			try {
-    				this.sleep(2000);//话说 能不能不睡
-    		 	} catch (InterruptedException e) {
-    			// TODO Auto-generated catch block
-    			e.printStackTrace();
-    		 	}
-    		
-    		}
-    	}
-    	
-    	public void startThread(){
-    		this.start();		
-    	}
-    	public void stopThead(){
-    		this.stop=true;
-    	}
-    }
-    
+
+	// 放在Filelist或Match里均可
+	class updateMatch extends Thread {
+		boolean stop;
+
+		public updateMatch() {
+			stop = false;
+		}
+
+		public void run() {
+			while (!stop) {
+				fl.checkChange();
+				System.out.println("我在很认真的检查呀，港荣蒸蛋糕真的好吃，字打错了灭");
+				try {
+					this.sleep(5000);// 话说 能不能不睡
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+
+		public void startThread() {
+			this.start();
+		}
+
+		public void stopThead() {
+			this.stop = true;
+		}
+	}
+
 }

@@ -113,7 +113,7 @@ public class NewTeam {
 
 		Map<String, TeamVO> teams = new LinkedHashMap<String, TeamVO>();
 		TeamVO team;
-		ArrayList<String[]> result = readFromFile("src/data/teams/teams");
+		ArrayList<String[]> result = readFromFile(DataSourse.dataSourse+"/teams/teams");
 		for (String[] content : result) {
 			name = content[0];
 			abLocation = content[1];
@@ -142,7 +142,7 @@ public class NewTeam {
 
 		Map<String, TeamVO> teams = new LinkedHashMap<String, TeamVO>();
 		TeamVO team;
-		ArrayList<String[]> result = readFromFile("src/data/teams/teams");
+		ArrayList<String[]> result = readFromFile(DataSourse.dataSourse+"/teams/teams");
 		for (String[] content : result) {
 			abLocation = content[1];
 			conference = content[3];// 东西部

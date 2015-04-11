@@ -14,6 +14,7 @@ public class FileList {
 	Vector<String> ver = null;
 	ArrayList<String> names = null;
 	private String path;
+	private Match match;
 
 	// 传一个参数方法；
 
@@ -22,6 +23,12 @@ public class FileList {
 		names = new ArrayList<String>(); // 保存文件列表的文件地址
 		ver = new Vector<String>(); // 用做堆栈
 		path = new File(dir_name).getPath() + "\\";
+	}
+	
+	public FileList (String dir_name ,Match match) throws IOException {
+		this(dir_name);
+		this.match=match;
+		
 	}
 
 	public ArrayList<String> getList() throws Exception {
@@ -60,9 +67,10 @@ public class FileList {
 						break;// 因为随机插入 有益于 时间
 				}
 			}
-
+			//更新names;
+			names.addAll(pathaddress);
 			// 调用Matches里的方法 return pathaddress
-			Match.add(pathaddress);
+			match.add(pathaddress);
 
 		}
 

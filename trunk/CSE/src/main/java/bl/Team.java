@@ -146,7 +146,7 @@ public class Team implements TeamBLService {
 
 		ArrayList<TeamVO> teams = new ArrayList<TeamVO>();
 		TeamVO team;
-		ArrayList<String[]> result = readFromFile("src/data/teams/teams");
+		ArrayList<String[]> result = readFromFile(DataSourse.dataSourse+"/teams/teams");
 		for (String[] content : result) {
 			name = content[0];
 			abLocation = content[1];

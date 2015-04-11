@@ -16,6 +16,7 @@ import vo.RecordVO;
 
 public class NewMatch {
 	private Map<String, MatchVO> matches = new HashMap<String, MatchVO>();
+	private FileList fl;
 
 	public NewMatch() {
 		matches = getMatches();
@@ -160,7 +161,7 @@ public class NewMatch {
 		// TODO 自动生成的方法存根
 		Map<String, MatchVO> matches = new HashMap<String, MatchVO>();
 		try {
-			FileList fl = new FileList("src/data/matches");
+			fl = new FileList(DataSourse.dataSourse + "/matches", this);
 			ArrayList<String> names = fl.getList();
 			for (String name : names) {
 				String key = getKeyName(name);
@@ -173,6 +174,11 @@ public class NewMatch {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+
+		// 初始化后 开启线程：
+		updateMatch um = new updateMatch();
+		um.startThread();
+
 		return matches;
 	}
 
@@ -257,5 +263,35 @@ public class NewMatch {
 		String[] tp = fileName.split("matches");
 		result = tp[1].substring(1);
 		return result;
+	}
+
+	// 放在Filelist或Match里均可
+	class updateMatch extends Thread {
+		boolean stop;
+
+		public updateMatch() {
+			stop = false;
+		}
+
+		public void run() {
+			while (!stop) {
+				fl.checkChange();
+				System.out.println("我在很认真的检查呀，港荣蒸蛋糕真的好吃，字打错了灭");
+//				try {
+//					this.sleep(2000);// 话说 能不能不睡
+//				} catch (InterruptedException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				}
+			}
+		}
+
+		public void startThread() {
+			this.start();
+		}
+
+		public void stopThead() {
+			this.stop = true;
+		}
 	}
 }
