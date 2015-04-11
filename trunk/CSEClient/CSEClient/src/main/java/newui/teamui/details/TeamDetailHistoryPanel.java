@@ -10,6 +10,8 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
+import newui.tables.TeamHistoryTableModel;
+
 public class TeamDetailHistoryPanel extends JPanel{
 
 	/**
@@ -17,6 +19,7 @@ public class TeamDetailHistoryPanel extends JPanel{
 	 */
 	private static final long serialVersionUID = 1L;
 	JTable table;
+	TeamHistoryTableModel thtm;
 	JScrollPane jsp;
 	JPanel funcPnl;
 	MyBox seasonBox;
@@ -55,12 +58,16 @@ public class TeamDetailHistoryPanel extends JPanel{
 		typeBox=new MyBox(typeText);
 		funcPnl.add(typeBox);
 		//----------------------
-		jsp=new JScrollPane();
+		thtm=new TeamHistoryTableModel();
+		table=new JTable(thtm);
+		jsp=new JScrollPane(table);
 		gbc.gridy=1;
 		gbc.gridheight=10;
 		gbc.weighty=10;
 		gbl.setConstraints(jsp, gbc);
 		add(jsp);
+		thtm.Refresh(abbrName);
+		table.revalidate();
 	}
 	class MyBox extends JComboBox<String>{
 
