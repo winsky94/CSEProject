@@ -4,26 +4,19 @@ import java.io.PrintStream;
 import java.util.ArrayList;
 
 public class CommandTest {
-	private String[] option_datatype={"-avg","-total"};//0位为默认
-	private String[] player_hot_field={"score","rebound","assist"};
-	private String[] team_hot_field={"score","rebound","assist","blockShot","steal","foul","fault","shot","three","penalty",
-			"defendRebound","offendRebound"};
-	private String[] option_mtype={"-all","-hot field","-king field -season"
-			,"-king field -daily"};//需分开
-	private String[] other_option={"-n","-high"};
-	private int[] n_default={50,30};
-	private String[] player_action={"filter","sort"};
-	private String[] player_position={"All","F","G","C"};//position.All
-	private String[] player_league={"All","West","East"};// league.West
-	private String[] player_age={"All","<=22","22<X<=25","25<X<=30",">30"};//age.xx
-	private String[] sortType={"desc","asc"};
-	private String[] player_sort_base={"score","point","rebound","assist","blockShot","steal","foul","fault","minute","efficient","shot",
-			"three","penalty","doubleTwo"};
-	private String[] player_sort_high={"realShot","GmSc","shotEfficient","reboundEfficient","offendReboundEfficient","defendReboundEfficient"
+	
+	private String[] player_sort={"point","rebound","assist","blockShot","steal","foul","fault","minute","efficient","shot",
+			"three","penalty","doubleTwo","realShot","GmSc","shotEfficient","reboundEfficient","offendReboundEfficient","defendReboundEfficient"
 			,"assistEfficent","stealEfficient","blockShotEfficient","faultEfficient","frequency"};
-	private String[] team_sort_base={"score","point","rebound","assist","blockShot","steal","foul","fault","shot",
-			"three","penalty","defendRebound","offendRebound"};
-	private String[] team_sort_high={"winRate","offendRound","offendEfficient","defendEfficient","offendReboundEfficient","stealEfficeint","assistEfficient"};
+	private String[] player_real_sort={"score","reboundNum","assistNum","blockNum","stealNum","foulNum","turnOverNum","presentTime","efficiency",
+			"shootHitRate","threeHitRate","freeThrowHitRate","doubleDoubleNum","trueHitRate","GmScEfficiencyValue","shootEfficiency","reboundRate",
+			"offenReboundRate","defenReboundRate","assistRate","stealRate","blockRate","turnOverRate","usageRate"};
+
+	private String[] team_sort={"point","rebound","assist","blockShot","steal","foul","fault","shot",
+			"three","penalty","defendRebound","offendRebound","offendRound","offendEfficient","defendEfficient","offendReboundEfficient","defendReboundEfficient","stealEfficeint","assistEfficient"};
+	private String[] team_sort_real={"score","reboundNum","assistNum","blockNum","stealNum","foulNum","turnOverNum","shootHitRate","threeHitRate","freeThrowHitRate",
+			"defenReboundNum","offenReboundNum","offenRound","offenEfficiency","defenEfficiency","offenReboundEfficiency","defenReboundEfficiency",
+			"stealEfficiency","assistRate"};
 	
 	private boolean isPTotal=false;
 	private boolean isTTotal=false;
@@ -35,10 +28,14 @@ public class CommandTest {
 	private int playerNum=50;
 	private boolean isPHigh=false;//是否返回高阶数据
 	private boolean isTHigh=false;
+	private String pAge="All";
+	private String pUnion="All";
+	private String pPosition="All";
 	private ArrayList<String> playerSort=new ArrayList<String>();//aas.dsec ddd.asc 邮件及
-	private ArrayList<String> sort=new ArrayList<String>();
+	private ArrayList<String> sortP=new ArrayList<String>();
 	private ArrayList<String> playerFilter=new ArrayList<String>();//优先级 field.value
 	private ArrayList<String> teamSort=new ArrayList<String>();//aas.dsec ddd.asc 邮件及
+	private ArrayList<String> sortT=new ArrayList<String>();//可以不声明
 	
 	//调用更新
 	
@@ -62,7 +59,7 @@ public class CommandTest {
 				
 			if((i=command.indexOf("-hot"))>=0){
 				playerhotField=command.get(i+1);
-				
+				PlayerHotFieldChange();
 						//调用 player hot 方法
 			}
 			else if((i=command.indexOf("-king"))>=0){
@@ -71,17 +68,23 @@ public class CommandTest {
 					isSeason=true;	
 				else
 					isSeason=false;
-				
+				PlayerKingFieldChange();
 				//调用返回数据王信息
 			}else{
 				//contain all
+				playerSort.clear();
+				sortP.clear();
 				if((i=command.indexOf("-sort"))>=0){
-					playerSort.clear();
-					i++;
-					while(i<command.size()&&!(command.get(i).contains("-"))){
-						playerSort.add(command.get(i));
-						i++;
+					
+					String[] t=command.get(i+1).split(",");
+					for(String s:t){
+						String[] p=s.split(".");
+					playerSort.add(p[0]);
+					sortP.add(p[1]);
 					}
+				}else{
+					playerSort.add("score");playerSort.add("trueHitRate");
+					sortP.add("desc");sortP.add("desc");
 				}
 				if(command.indexOf("-high")>=0){
 					isPHigh=true;
@@ -96,16 +99,17 @@ public class CommandTest {
 					isPTotal=true;
 				else
 					isPTotal=false;
-				
+				PlayerSortFieldChange();
 				if((i=command.indexOf("-filter"))>0){
 					
 					playerFilter.clear();
-					i++;
-					while(i<command.size()&&!(command.get(i).contains("-"))){
-						playerFilter.add(command.get(i));
-						i++;
-					}
+					String[] t=command.get(i+1).split(",");
+					for(String s:t)
+						playerFilter.add(s);
+					PalyerFilterChange();
 					//调用sort+filter方法
+					
+					clearFilter();
 				}else{
 					//调用sort方法
 				}
@@ -125,17 +129,24 @@ public class CommandTest {
 				
 			if((i=command.indexOf("-hot"))>=0){
 				teamhotField=command.get(i+1);
-				
+				TeamHotFieldChange();
 						//调用 team hot 方法
 			}else{
 				//contain all
+				teamSort.clear();
+				sortT.clear();
 				if((i=command.indexOf("-sort"))>=0){
-					teamSort.clear();
-					i++;
-					while(i<command.size()&&!(command.get(i).contains("-"))){
-						teamSort.add(command.get(i));
-						i++;
+
+					String[] t=command.get(i+1).split(",");
+					for(String s:t){
+						String[] p=s.split(".");
+						teamSort.add(p[0]);
+						sortT.add(p[1]);
 					}
+						
+				}else{
+					teamSort.add("score");teamSort.add("winRate");
+					sortT.add("desc");sortT.add("desc");
 				}
 				if(command.indexOf("-high")>=0){
 					isTHigh=true;
@@ -150,7 +161,7 @@ public class CommandTest {
 					isTTotal=true;
 				else
 					isTTotal=false;
-				
+				TeamSortFieldChange();
 					//调用  sort方法
 			
 		
@@ -162,7 +173,61 @@ public class CommandTest {
 		
 	}
 	
+	public void PlayerHotFieldChange(){
+		if(!playerhotField.equals("score"))
+			playerhotField+="Num";	
+	}
 	
+	public void TeamHotFieldChange(){
+		for(int i=1;i<12;i++)
+			if(teamhotField.equals(team_sort[i])){
+				teamhotField=team_sort_real[i];
+				break;
+			}
+	}
+	public void PlayerKingFieldChange(){
+		if(!playerkingField.equals("score"))
+			playerkingField+="Num";	
+	}
+	
+	public void PlayerSortFieldChange(){
+		for(int i=0;i<playerSort.size();i++){
+			String s=playerSort.get(i);
+			for(int j=0;j<player_sort.length;j++)
+				if(s.equals(player_sort[j])){
+					playerSort.set(i,player_real_sort[j]);
+					break;
+				}
+		}
+	}
+	
+	
+	public void TeamSortFieldChange(){
+		for(int i=0;i<teamSort.size();i++){
+			String s=teamSort.get(i);
+			for(int j=0;j<team_sort.length;j++)
+				if(s.equals(team_sort[j])){
+					teamSort.set(i,team_sort_real[j]);
+					break;
+				}
+		}
+	}
+	
+	public void PalyerFilterChange(){
+		for(String s:playerFilter){
+			if(s.contains("position"))
+				pPosition=s.split(".")[1];
+			else if(s.contains("league"))
+				pUnion=s.split(".")[1];
+			else 
+				pAge=s.split(".")[1];
+		}
+		
+	}
+	
+	public void clearFilter(){
+		pAge=pPosition=pUnion="All";
+	}
 
 
 }
