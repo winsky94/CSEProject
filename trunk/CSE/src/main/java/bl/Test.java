@@ -51,7 +51,7 @@ public class Test {
 			NewPlayer newPlayer = new NewPlayer(3);
 			newPlayer.getPlayerAverageInfo();
 			long t3 = System.currentTimeMillis();
-			if ((t3 - t2) > (t2 - t1)) {
+			if ((t3 - t2) < (t2 - t1)) {
 				count++;
 			}
 			if ((t3 - t2) == (t2 - t1)) {
