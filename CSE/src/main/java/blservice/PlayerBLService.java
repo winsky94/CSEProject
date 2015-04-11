@@ -207,11 +207,11 @@ public interface PlayerBLService {
 	public ArrayList<MatchVO> getMatches(String playerName);// 可以模糊
 
 	/**
-	 * 根据球队缩写，找到该球队中的全部球员名
+	 * 根据球队缩写，找到该球队中的全部球员
 	 * 
 	 * @param teamAbLocation
 	 *            球队缩写
 	 * @return 球员名字列表
 	 */
-	public ArrayList<String> getPlayersByTeam(String teamAbLocation);
+	public ArrayList<PlayerVO> getPlayersByTeam(String teamAbLocation);
 }
