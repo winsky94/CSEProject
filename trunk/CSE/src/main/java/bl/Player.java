@@ -982,7 +982,7 @@ public class Player implements PlayerBLService{
 		return null;
 	}
 		
-	public ArrayList<String> getPlayersByTeam(String teamAbLocation) {
+	public ArrayList<PlayerVO> getPlayersByTeam(String teamAbLocation) {
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -675,8 +675,16 @@ public class NewNewPlayer {
 	public ArrayList<PlayerVO> getOrderedPlayersBySeason(String season,
 			String condition, String order, int num) throws RemoteException {
 		ArrayList<PlayerVO> result=new ArrayList<PlayerVO>();
-		aaa
-		return null;
+		ArrayList<PlayerVO> allPlayers=getPlayerSeasonInfo(season);
+		Collections.sort(allPlayers, new SequenceOfPlayer(condition, order));
+		int count=0;
+		for(PlayerVO vo:allPlayers){
+			result.add(vo);
+			count++;
+			if(count>=num)
+				break;
+		}
+		return result;
 	}
 
 	public ArrayList<PlayerVO> getOrderedPlayersByAverage(
