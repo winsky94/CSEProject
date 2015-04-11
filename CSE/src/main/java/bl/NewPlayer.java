@@ -26,7 +26,7 @@ public class NewPlayer {
 	Map<String,PlayerVO> players = new HashMap<String,PlayerVO>(32);
 	ArrayList<TeamVO> teams;
 	Map<Integer,MatchVO> matches=new HashMap<Integer,MatchVO>(1024);
-	Map<String, ArrayList<MatchVO>> allSeasonMatches=new HashMap<String, ArrayList<MatchVO>>();
+//	Map<String, ArrayList<MatchVO>> allSeasonMatches=new HashMap<String, ArrayList<MatchVO>>();
 	
 	/**
 	 * 
@@ -46,6 +46,7 @@ public class NewPlayer {
 		
 		else{
 			long start = System.currentTimeMillis();
+			baseInfoInit();
 		    allMatchInfoInit();
 		    long end = System.currentTimeMillis();
 		    System.out.println("运行时间：" + (end - start) + "毫秒");//应该是end - start
@@ -63,7 +64,7 @@ public class NewPlayer {
 			FileList fl = new FileList("src/data/players/info");
 			ArrayList<String> names = fl.getList();
 	      for(String name:names){
-	    	  players.put(name,readBaseInfoFromFile(name));
+	    	  readBaseInfoFromFile(name);
 	      }
 		}
 		catch (IOException e){
@@ -123,6 +124,7 @@ public class NewPlayer {
 		exp = DirtyDataManager.checkExp(content[7]);
 		school = content[8];
 		player = new PlayerVO(name, number, position, height, weight,birth, age, exp, school);
+		players.put(name,player);
 		return player;
 	}
 	
@@ -171,7 +173,7 @@ public class NewPlayer {
 		String season;// 赛季
 		String date = null;// 比赛日期
 		String teams = null;// 对阵队伍
-		ArrayList<RecordVO> records = new ArrayList<RecordVO>();// 球员比分数据记录
+//		ArrayList<RecordVO> records = new ArrayList<RecordVO>();// 球员比分数据记录
 
 		String tp[] = fileName.split("matches");
 		season = tp[1].substring(1, 6);
@@ -258,23 +260,22 @@ public class NewPlayer {
 				    PlayerVO thisPlayer=players.get(playerName);
 				    LittleRecordVO littleRecordVO=new LittleRecordVO(season, date, personScore, reboundNum, assistNum);
 				    if(thisPlayer==null){
-				    	if(!position.equals("")){
-				    	   thisPlayer=new PlayerVO(playerName, team, 1, 1, reboundNum, assistNum, presentTime, shootHitNum, shootAttemptNum, 0, threeHitNum, threeAttemptNum, 0, freeThrowHitNum, freeThrowAttemptNum, 0, offenReboundNum, defenReboundNum, stealNum, blockNum, turnOverNum, foulNum, personScore, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-				    	   thisPlayer.setMostRecentMatch(season+"_"+date);
-				    	}
-				    	else {
-				    	   thisPlayer=new PlayerVO(playerName, team, 1, 0, reboundNum, assistNum, presentTime, shootHitNum, shootAttemptNum, 0, threeHitNum, threeAttemptNum, 0, freeThrowHitNum, freeThrowAttemptNum, 0, offenReboundNum, defenReboundNum, stealNum, blockNum, turnOverNum, foulNum, personScore, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-				    	   thisPlayer.setMostRecentMatch(season+"_"+date);
-				    	}
-				    	players.put(playerName, thisPlayer);
+				    	temp = br.readLine();
+				    	continue;
 				    }
 				    else{
 				    	thisPlayer.addPlayedGames();
 				    	if(!position.equals(""))
 				    		thisPlayer.addGameStartingNum();
-				    	if(thisPlayer.getMostRecentMatch().compareTo(season+"_"+date)<0){
-				    	    thisPlayer.setOwingTeam(team);
+				    	if(thisPlayer.getMostRecentMatch()==null){
+				    		thisPlayer.setOwingTeam(team);
 				    	    thisPlayer.setMostRecentMatch(season+"_"+date);
+				    	}
+				    	else{
+				    		if(thisPlayer.getMostRecentMatch().compareTo(season+"_"+date)<0){
+				    	       thisPlayer.setOwingTeam(team);
+				    	       thisPlayer.setMostRecentMatch(season+"_"+date);
+				    	    }
 				    	}
 	                    thisPlayer.addPresentTime(presentTime);
 	                    thisPlayer.addShootHitNum(shootHitNum);
@@ -349,29 +350,29 @@ public class NewPlayer {
 					
 			  }
 			
-				RecordVO recordVO = new RecordVO(team, playerName,
-						position, presentTimeString, shootHitNum,
-						shootAttemptNum, threeHitNum, threeAttemptNum,
-						freeThrowHitNum, freeThrowAttemptNum,
-						offenReboundNum, defenReboundNum, reboundNum,
-						assistNum, stealNum, blockNum, turnOverNum,
-						foulNum, personScore);
-				records.add(recordVO);
+//				RecordVO recordVO = new RecordVO(team, playerName,
+//						position, presentTimeString, shootHitNum,
+//						shootAttemptNum, threeHitNum, threeAttemptNum,
+//						freeThrowHitNum, freeThrowAttemptNum,
+//						offenReboundNum, defenReboundNum, reboundNum,
+//						assistNum, stealNum, blockNum, turnOverNum,
+//						foulNum, personScore);
+//				records.add(recordVO);
 
 				temp = br.readLine();
 			}
 			
 			matches.put(matchCount, thisMatch);	
 			
-			MatchVO theMatch=new MatchVO(season, date, visitingTeam, homeTeam, partNum, records);
-            ArrayList<MatchVO> theSeasonMatches=allSeasonMatches.get(season);
-            if(theSeasonMatches==null){
-            	theSeasonMatches=new ArrayList<MatchVO>();
-            	theSeasonMatches.add(theMatch);
-            }
-            else{
-            	theSeasonMatches.add(theMatch);
-            }
+//			MatchVO theMatch=new MatchVO(season, date, visitingTeam, homeTeam, partNum, records);
+//            ArrayList<MatchVO> theSeasonMatches=allSeasonMatches.get(season);
+//            if(theSeasonMatches==null){
+//            	theSeasonMatches=new ArrayList<MatchVO>();
+//            	theSeasonMatches.add(theMatch);
+//            }
+//            else{
+//            	theSeasonMatches.add(theMatch);
+//            }
 			
 			br.close();
 		} catch (IOException e) {
@@ -688,6 +689,7 @@ public class NewPlayer {
 		double dsOffenRoundNum=0;
 				
 		PlayerVO playerSeason=players.get(name);
+		
 		
 		gameStartingNum=playerSeason.getGameStartingNum();
 		owingTeam=playerSeason.getOwingTeam();
