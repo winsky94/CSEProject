@@ -66,6 +66,7 @@ public class TeamDetailHistoryPanel extends JPanel{
 		gbc.weighty=10;
 		gbl.setConstraints(jsp, gbc);
 		add(jsp);
+		//注意  bl层方法的参数是球队缩写 这个是咩
 		thtm.Refresh(abbrName);
 		table.revalidate();
 	}
