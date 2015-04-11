@@ -16,6 +16,7 @@ public class PlayerVO {
 	private String school;// 毕业学校
 
 	private String owingTeam;// 所属球队
+	private String mostRecentMatch;//最近一场比赛的赛季_日期
 	private int playedGames;// 参赛场数
 	private int gameStartingNum;// 先发场数
 	private double reboundNum;// 篮板数
@@ -243,6 +244,10 @@ public class PlayerVO {
 	public String getOwingTeam() {
 		return owingTeam;
 	}
+	
+	public String getMostRecentMatch(){
+		return mostRecentMatch;
+	}
 
 	public int getPlayedGames() {
 		return playedGames;
@@ -447,6 +452,10 @@ public class PlayerVO {
 
 	public void setOwingTeam(String owingTeam) {
 		this.owingTeam = owingTeam;
+	}
+	
+	public void setMostRecentMatch(String mostRecentMatch){
+		this.mostRecentMatch=mostRecentMatch;
 	}
 
 	public void setPlayedGames(int playedGames) {
