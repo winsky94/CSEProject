@@ -220,7 +220,7 @@ public class NewNewMatch {
 				Map.Entry<String, Map<String, MatchVO>> entry = (Map.Entry<String, Map<String, MatchVO>>) iter
 						.next();
 				String seasonKey=(String)entry.getKey();
-				Map<String, MatchVO> temp=new HashMap<String, MatchVO>(1024);
+				Map<String, MatchVO> temp=new HashMap<String, MatchVO>();
 				
 				Map<String, MatchVO> map = (Map<String, MatchVO>) entry
 						.getValue();
