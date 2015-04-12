@@ -509,7 +509,7 @@ public class NewFinalTeam implements TeamBLService {
 		int dsDefenReboundNum = 0;
 		double dsOffenRound = 0;
 
-		Map<String, MatchVO> allMatches = new HashMap<String, MatchVO>(1024);
+		Map<String, MatchVO> allMatches = new HashMap<String, MatchVO>();
 
 		if (season.equals("all")) {
 			// 得到全部比赛数据的，还是觉得有点傻逼
