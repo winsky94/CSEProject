@@ -14,7 +14,7 @@ public class FileList {
 	Vector<String> ver = null;
 	ArrayList<String> names = null;
 	private String path;
-	private Match match;
+	private NewNewMatch match;
 
 	// 传一个参数方法；
 
@@ -25,7 +25,7 @@ public class FileList {
 		path = new File(dir_name).getPath() + "\\";
 	}
 	
-	public FileList (String dir_name ,Match match) throws IOException {
+	public FileList (String dir_name ,NewNewMatch match) throws IOException {
 		this(dir_name);
 		this.match=match;
 		
@@ -55,6 +55,7 @@ public class FileList {
 		int cha = newnum - names.size();
 		ArrayList<String> pathaddress;
 		if (cha > 0) {// 说明有新文件
+			System.out.println("FileList.checkChange() 发现新文件啦！！");
 			// cha 表明新增文件个数 新增文件填入序列不一定
 			pathaddress = new ArrayList<String>();
 			for (int i = 0; i < newnum; i++) {
