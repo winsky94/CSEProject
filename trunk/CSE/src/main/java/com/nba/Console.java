@@ -101,7 +101,7 @@ public class Console {
 						"all", "all", 5,playerhotField,"desc", playerNum);
 				for (PlayerVO vo : result) {
 					// =====================================================
-					PlayerHotInfo playerHotInfo = setplHotInfo(vo,
+					PlayerHotInfo playerHotInfo = setplayerHotInfo(vo,
 							playerhotField);
 					out.append(playerHotInfo.toString());
 				}
@@ -429,7 +429,7 @@ public class Console {
 		return playerHighInfo;
 	}
 
-	private PlayerHotInfo setplHotInfo(PlayerVO vo, String field) {
+	private PlayerHotInfo setplayerHotInfo(PlayerVO vo, String field) {
 		PlayerHotInfo playerHotInfo = new PlayerHotInfo();
 		playerHotInfo.setField(field);
 		playerHotInfo.setName(vo.getName());
