@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Vector;
 
+import bl.match.NewNewMatch;
+
 /*设计思路：
  * 第一次调用了getList方法后 开启checkChange的线程
  * 

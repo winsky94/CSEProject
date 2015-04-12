@@ -1,4 +1,4 @@
-package bl;
+package bl.team;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -13,6 +13,8 @@ import javax.swing.ImageIcon;
 import vo.MatchVO;
 import vo.RecordVO;
 import vo.TeamVO;
+import bl.DataSourse;
+import bl.match.Match;
 import blservice.TeamBLService;
 
 public class Team implements TeamBLService {

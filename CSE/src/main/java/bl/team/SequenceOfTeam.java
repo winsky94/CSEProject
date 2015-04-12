@@ -1,4 +1,4 @@
-package bl;
+package bl.team;
 
 import java.util.Comparator;
 

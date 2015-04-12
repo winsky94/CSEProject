@@ -1,4 +1,4 @@
-package bl;
+package bl.player;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -19,6 +19,8 @@ import vo.MatchVO;
 import vo.PlayerVO;
 import vo.RecordVO;
 import vo.TeamVO;
+import bl.DirtyDataManager;
+import bl.FileList;
 import blservice.PlayerBLService;
 
 public class NewPlayer {

@@ -1,16 +1,16 @@
-package bl;
+package bl.match;
 
 import java.util.Comparator;
 
-import vo.MatchVO;
+import vo.RecordVO;
 
 /**
  * 时间越近的排在前面
  * @author dell
  *
  */
-public	class SequenceOfMatch implements Comparator<MatchVO> {
-      public int compare(MatchVO a1, MatchVO a2) { 
+public	class SequenceOfRecord implements Comparator<RecordVO> {
+      public int compare(RecordVO a1, RecordVO a2) { 
       
            if(a1.getSeason().equals(a2.getSeason())){
     	      return a2.getDate().compareTo(a1.getDate());
