@@ -16,6 +16,7 @@ public class PlayerVO {
 	private String school;// 毕业学校
 
 	private String owingTeam;// 所属球队
+	private String league;//所属联盟
 	private String mostRecentMatch;//最近一场比赛的赛季_日期
 	private int playedGames;// 参赛场数
 	private int gameStartingNum;// 先发场数
@@ -80,7 +81,7 @@ public class PlayerVO {
 		this.school = school;
 	}
 	
-	public PlayerVO(String name, String owingTeam, int playedGames,
+	public PlayerVO(String name, String owingTeam,String league, int playedGames,
 			int gameStartingNum, double reboundNum, double assistNum,
 			double presentTime, double shootHitNum,double shootAttemptNum,double shootHitRate,
 			double threeHitNum,double threeAttemptNum,double threeHitRate,
@@ -97,6 +98,7 @@ public class PlayerVO {
 			double doubleDoubleNum) {
 		this.name=name;
 		this.owingTeam = owingTeam;
+		this.league=league;
 		this.playedGames = playedGames;
 		this.gameStartingNum = gameStartingNum;
 		this.reboundNum = reboundNum;
@@ -139,7 +141,7 @@ public class PlayerVO {
 
 	public PlayerVO(String name, String number, String position,
 			String height, int weight, String birth, int age, int exp,
-			String school, String owingTeam, int playedGames,
+			String school, String owingTeam, String league,int playedGames,
 			int gameStartingNum, double reboundNum, double assistNum,
 			double presentTime, int shootHitNum,int shootAttemptNum,double shootHitRate,
 			int threeHitNum,int threeAttemptNum,double threeHitRate,
@@ -165,6 +167,7 @@ public class PlayerVO {
 		this.exp = exp;
 		this.school = school;
 		this.owingTeam = owingTeam;
+		this.league=league;
 		this.playedGames = playedGames;
 		this.gameStartingNum = gameStartingNum;
 		this.reboundNum = reboundNum;
@@ -244,6 +247,10 @@ public class PlayerVO {
 
 	public String getOwingTeam() {
 		return owingTeam;
+	}
+	
+	public String getLeague(){
+		return league;
 	}
 	
 	public String getMostRecentMatch(){
@@ -459,6 +466,10 @@ public class PlayerVO {
 
 	public void setOwingTeam(String owingTeam) {
 		this.owingTeam = owingTeam;
+	}
+	
+	public void setLeague(String league){
+		this.league=league;
 	}
 	
 	public void setMostRecentMatch(String mostRecentMatch){

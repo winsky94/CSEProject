@@ -30,9 +30,11 @@ public class NewNewPlayer {
 	ArrayList<MatchVO> allSeasonMatches=new ArrayList<MatchVO>();
 	ArrayList<PlayerVO> playersSeason=new ArrayList<PlayerVO>();
 	ArrayList<PlayerVO> playersAverage=new ArrayList<PlayerVO>();
+	ArrayList<PlayerVO> playersToday=new ArrayList<PlayerVO>();
 	boolean isCalculate=false;
 	boolean isCalculatePlayersSeason=false;
 	boolean isCalculatePlayersAverage=false;
+	boolean isCalculatePlayersToday=false;
 	
 	public NewNewPlayer(){
            baseInfoInit();
@@ -44,7 +46,7 @@ public class NewNewPlayer {
 	private void baseInfoInit(){
 	
 		try{					
-			FileList fl = new FileList("src/data/players/info");
+			FileList fl = new FileList(DataSourse.dataSourse+"/players/info");
 			ArrayList<String> names = fl.getList();
 	      for(String name:names){
 	    	  readBaseInfoFromFile(name);
@@ -115,7 +117,7 @@ public class NewNewPlayer {
 	private void allMatchInfoInit(){
 
 		try{					
-			FileList fl = new FileList("src/data/matches");
+			FileList fl = new FileList(DataSourse.dataSourse+"/matches");
 			ArrayList<String> names = fl.getList();
 			int matchCount=0;
 	      for(String name:names){
@@ -245,8 +247,10 @@ public class NewNewPlayer {
 
 	public ArrayList<PlayerVO> getPlayerSeasonInfo(String season) {
 
-		if(isCalculatePlayersSeason==true)
+		if(isCalculatePlayersSeason==true){
+			     Collections.sort(playersSeason,new SequenceOfPlayer());
 		         return playersSeason;
+		}
 		
 		if(isCalculate==false){
 		   getPlayerMatchInfo();
@@ -329,11 +333,13 @@ public class NewNewPlayer {
 				    	
 				    	if(thisPlayer.getMostRecentMatch()==null){
 				    		thisPlayer.setOwingTeam(team);
+				    		thisPlayer.setLeague(teams.get(team).getConference());
 				    		thisPlayer.setMostRecentMatch(season+"_"+date);
 				    	}
 				    	else{
 				    		if(thisPlayer.getMostRecentMatch().compareTo(season+"_"+date)<0){
 				    		   thisPlayer.setOwingTeam(team);
+				    		   thisPlayer.setLeague(teams.get(team).getConference());
 				    	       thisPlayer.setMostRecentMatch(season+"_"+date);
 				    		}
 				    	}
@@ -625,8 +631,10 @@ public class NewNewPlayer {
 
     public ArrayList<PlayerVO> getPlayerAverageInfo() {
     	
-    	if(isCalculatePlayersAverage==true)
+    	if(isCalculatePlayersAverage==true){
+    		Collections.sort(playersAverage,new SequenceOfPlayer());
     		return playersAverage;
+    	}
     	
 		if(isCalculate==false){
 		   getPlayerMatchInfo();
@@ -725,8 +733,7 @@ public class NewNewPlayer {
 	     }
 	     if(!union.equals("all")){
 	    	 for(int i=0;i<thePlayers.size();i++){
-	    		 String team=thePlayers.get(i).getOwingTeam();
-	    		 if(!teams.get(team).getConference().equals(union))
+	    		 if(!thePlayers.get(i).getLeague().equals(union))
 		    	     thePlayers.remove(i);
 		     }
 	     }
@@ -777,12 +784,12 @@ public class NewNewPlayer {
 	}
 
 	public ImageIcon getPlayerPortraitImage(String name) {
-		ImageIcon imageIcon = new ImageIcon("src/data/players/portrait/" + name + ".png");
+		ImageIcon imageIcon = new ImageIcon(DataSourse.dataSourse+"/players/portrait/" + name + ".png");
 		return imageIcon;
 	}
 
 	public ImageIcon getPlayerActionImage(String name) {
-		ImageIcon imageIcon = new ImageIcon("src/data/players/action/" + name + ".png");
+		ImageIcon imageIcon = new ImageIcon(DataSourse.dataSourse+"/players/action/" + name + ".png");
 		return imageIcon;
 	}
 
@@ -806,43 +813,192 @@ public class NewNewPlayer {
 		return result;
 	}
 	
-	public ArrayList<PlayerVO> getDayHotPlayer(String column,int num) {
+	private ArrayList<MatchVO> getTodayMatch(){
+		ArrayList<MatchVO> result=new ArrayList<MatchVO>();
+		String[] buffer=getToday().split("_");
+		String season=buffer[0];
+		String date=buffer[1];
+		for(MatchVO match:allSeasonMatches){
+			if(match.getSeason().equals(season)&&match.getDate().equals(date))
+				result.add(match);
+		}
+		return result;
+	}
+	
+	private void calCulateDayData(){
 		
+	
+	 ArrayList<MatchVO> theMatches=getTodayMatch();
+	 for(MatchVO match:theMatches){
+		 
+	        String team=null;//球队名
+			String playerName = null;// 球员名
+			int presentTime = 0;// 在场时间
+			int shootHitNum = 0;// 投篮命中数
+			int shootAttemptNum = 0;// 投篮出手数
+			int threeHitNum = 0;// 三分命中数
+			int threeAttemptNum = 0;// 三分出手数
+			int freeThrowHitNum = 0;// 罚球命中数
+			int freeThrowAttemptNum = 0;// 罚球出手数
+			int offenReboundNum = 0;// 进攻（前场）篮板数
+			int defenReboundNum = 0;// 防守（后场）篮板数
+			int reboundNum = 0;// 总篮板数
+			int assistNum = 0;// 助攻数
+			int stealNum = 0;// 抢断数
+			int blockNum = 0;// 盖帽数
+			int turnOverNum = 0;// 失误数
+			int foulNum = 0;// 犯规数
+			int personScore = 0;// 个人得分
+
+			for(RecordVO record:match.getRecords()){
+				    team=record.getTeam();
+					playerName = record.getPlayerName();
+					presentTime=convertMinuteToSecond(record.getPresentTime());
+					shootHitNum = record.getShootHitNum();// 投篮命中数
+					shootAttemptNum = record.getShootAttemptNum();// 投篮出手数
+					threeHitNum = record.getThreeHitNum();// 三分命中数
+					threeAttemptNum = record.getThreeAttemptNum();// 三分出手数
+					freeThrowHitNum = record.getFreeThrowHitNum();// 罚球命中数
+					freeThrowAttemptNum = record.getFreeThrowAttemptNum();// 罚球出手数
+					offenReboundNum = record.getOffenReboundNum();// 进攻（前场）篮板数
+					defenReboundNum = record.getDefenReboundNum();// 防守（后场）篮板数
+					reboundNum = record.getReboundNum();// 总篮板数
+					assistNum = record.getAssistNum();// 助攻数
+					stealNum = record.getStealNum();// 抢断数
+					blockNum = record.getBlockNum();// 盖帽数
+					turnOverNum = record.getTurnOverNum();// 失误数
+					foulNum = record.getFoulNum();// 犯规数
+					personScore = record.getScore();// 个人得分
+				    PlayerVO thisPlayer=players.get(playerName);
+				    PlayerVO player=new PlayerVO(thisPlayer.getName(), thisPlayer.getNumber(), thisPlayer.getPosition(),thisPlayer.getHeight(), thisPlayer.getWeight(), thisPlayer.getBirth(), thisPlayer.getAge(), thisPlayer.getExp(), thisPlayer.getSchool());
+                    player.setOwingTeam(team);			    	
+	                player.setPresentTime(presentTime);
+	                player.setShootHitNum(shootHitNum);
+					player.setShootAttemptNum(shootAttemptNum);
+					player.setThreeHitNum(threeHitNum);
+					player.setThreeAttemptNum(threeAttemptNum);
+					player.setFreeThrowHitNum(freeThrowHitNum);
+					player.setFreeThrowAttemptNum(freeThrowAttemptNum);
+					player.setOffenReboundNum(offenReboundNum);
+					player.setDefenReboundNum(defenReboundNum);
+					player.setReboundNum(reboundNum);
+					player.setAssistNum(assistNum);
+					player.setStealNum(stealNum);
+					player.setBlockNum(blockNum);
+					player.setTurnOverNum(turnOverNum);
+					player.setFoulNum(foulNum);
+					player.setScore(personScore);
+									
+				//计算两双
+				int tempDouble=0;
+				if (personScore >= 10)
+					tempDouble++;
+				if (reboundNum >= 10)
+					tempDouble++;
+				if (assistNum >= 10)
+					tempDouble++;
+				if (stealNum >= 10)
+					tempDouble++;
+				if (blockNum >= 10)
+					tempDouble++;
+				if (tempDouble >= 2)
+					player.addDoubleDoubleNum();
+				
+				playersToday.add(player);
+			}
+	 }
+	 
+	}
+	
+	public ArrayList<PlayerVO> getDayHotPlayer(String column,int num) {
+		ArrayList<PlayerVO> result=new ArrayList<PlayerVO>();
+		
+	   if(isCalculatePlayersToday==false){
+	      calCulateDayData();
+	      isCalculatePlayersToday=true;
+	   }
+	   
+	   Collections.sort(playersToday,new SequenceOfPlayer(column, "desc"));
+	   
+	   int count=0;
+	   for(PlayerVO vo:playersToday){
+				result.add(vo);
+				count++;
+				if(count>=num)
+					break;
+		}
+	   
+	   return result;	    
 	}
 
-	public ArrayList<PlayerVO> getSeasonHotPlayer(String season, String column) {
-		// TODO Auto-generated method stub
-		return null;
+	public ArrayList<PlayerVO> getSeasonHotPlayer(String season, String column,int num) {
+		
+		ArrayList<PlayerVO> result=new ArrayList<PlayerVO>();
+		ArrayList<PlayerVO> thePlayers=getPlayerAverageInfo();
+		
+		  Collections.sort(thePlayers,new SequenceOfPlayer(column, "desc"));
+		   int count=0;
+		   for(PlayerVO vo:thePlayers){
+					result.add(vo);
+					count++;
+					if(count>=num)
+						break;
+			}
+		   
+		   return result;	  
 	}
 
-	public ArrayList<PlayerVO> getBestImprovedPlayer(String column) {
-		// TODO Auto-generated method stub
-		return null;
+	public ArrayList<PlayerVO> getBestImprovedPlayer(String column,int num) {
+		ArrayList<PlayerVO> result=new ArrayList<PlayerVO>();
+		ArrayList<PlayerVO> thePlayers=getPlayerAverageInfo();
+		
+		  Collections.sort(thePlayers,new SequenceOfPlayer(column, "desc"));
+		   int count=0;
+		   for(PlayerVO vo:thePlayers){
+					result.add(vo);
+					count++;
+					if(count>=num)
+						break;
+			}
+		   
+		   return result;	 
 	}
 
 	public ArrayList<PlayerVO> getPlayersByInitialName(char character) {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<PlayerVO> result=new ArrayList<PlayerVO>();
+		ArrayList<PlayerVO> thePlayers=getPlayerAverageInfo();
+		for(PlayerVO vo:thePlayers){
+			if(vo.getName().startsWith(character+""))
+				result.add(vo);
+		}
+		return result;
 	}
-
-	public ArrayList<MatchVO> getRecentMatches(String playerName){
-		// TODO Auto-generated method stub
-		return null;
+	
+	public ArrayList<MatchVO> getRecentMatches(String playerName,int num){
+		ArrayList<MatchVO> result=new ArrayList<MatchVO>();
+		int count=0;
+		Collections.sort(allSeasonMatches, new SequenceOfMatch());
+		for(MatchVO vo:allSeasonMatches){
+			for(RecordVO vv:vo.getRecords()){
+				if(vv.getPlayerName().equals(playerName)){
+					result.add(vo);
+					count++;
+					if(count>=num)
+						return result;
+				}
+			}
+		}
+		return result;
 	}
-
-	public ArrayList<MatchVO> getTodayMatches(String playerName) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public ArrayList<MatchVO> getMatches(String playerName) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-		
-	public ArrayList<String> getPlayersByTeam(String teamAbLocation) {
-		// TODO Auto-generated method stub
-		return null;
+	
+	public ArrayList<PlayerVO> getPlayersByTeam(String teamAbLocation) {
+		ArrayList<PlayerVO> result=new ArrayList<PlayerVO>();
+		ArrayList<PlayerVO> thePlayers=getPlayerAverageInfo();
+		for(PlayerVO vo:thePlayers){
+			if(vo.getOwingTeam().equals(teamAbLocation))
+				result.add(vo);
+		}
+		return result;
 	}
 	
 	private int convertMinuteToSecond(String s){
@@ -860,6 +1016,7 @@ public class NewNewPlayer {
 //	   PlayerVO vo=players.get(0);
 //	   System.out.println(vo.getName());
 //	   System.out.println(vo.getOwingTeam());
+//	   System.out.println(vo.getLeague());
 //	   System.out.println(vo.getPlayedGames());
 //	   System.out.println(vo.getGameStartingNum());
 //	   System.out.println(vo.getReboundNum());

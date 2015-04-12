@@ -468,7 +468,7 @@ public class NewPlayer {
 	    playedGames=playerSeason.getPlayedGames();
 	    
 		if(playedGames==0)
-			return new PlayerVO(name, owingTeam, playedGames, gameStartingNum, 0, 0, 0, 0, 0, shootHitRate, 0, 0, threeHitRate, 0, 0, freeThrowHitRate, 0, 0, 0, 0, 0, 0, 0, efficiency, recentFiveMatchesScoreUpRate, recentFiveMatchesReboundUpRate, recentFiveMatchesAssistUpRate, GmScEfficiencyValue, trueHitRate, shootEfficiency, reboundRate, offenReboundRate, defenReboundRate, assistRate, stealRate, blockRate, turnOverRate, usageRate, score_rebound_assist, 0);
+			return new PlayerVO(name, owingTeam, "",playedGames, gameStartingNum, 0, 0, 0, 0, 0, shootHitRate, 0, 0, threeHitRate, 0, 0, freeThrowHitRate, 0, 0, 0, 0, 0, 0, 0, efficiency, recentFiveMatchesScoreUpRate, recentFiveMatchesReboundUpRate, recentFiveMatchesAssistUpRate, GmScEfficiencyValue, trueHitRate, shootEfficiency, reboundRate, offenReboundRate, defenReboundRate, assistRate, stealRate, blockRate, turnOverRate, usageRate, score_rebound_assist, 0);
 		else{			
 			efficiency = (allscore + allreboundNum
 					+ allassistNum + allstealNum + allblockNum)
@@ -715,7 +715,7 @@ public class NewPlayer {
 	    playedGames=playerSeason.getPlayedGames();
 	    
 		if(playedGames==0)
-			return new PlayerVO(name, owingTeam, playedGames, gameStartingNum, reboundNum, assistNum, 0, shootHitNum, shootAttemptNum, shootHitRate, threeHitNum, threeAttemptNum, threeHitRate, freeThrowHitNum, freeThrowAttemptNum, freeThrowHitRate, offenReboundNum, defenReboundNum, stealNum, blockNum, turnOverNum, foulNum, score, efficiency, recentFiveMatchesScoreUpRate, recentFiveMatchesReboundUpRate, recentFiveMatchesAssistUpRate, GmScEfficiencyValue, trueHitRate, shootEfficiency, reboundRate, offenReboundRate, defenReboundRate, assistRate, stealRate, blockRate, turnOverRate, usageRate, score_rebound_assist, doubleDoubleNum);
+			return new PlayerVO(name, owingTeam, "",playedGames, gameStartingNum, reboundNum, assistNum, 0, shootHitNum, shootAttemptNum, shootHitRate, threeHitNum, threeAttemptNum, threeHitRate, freeThrowHitNum, freeThrowAttemptNum, freeThrowHitRate, offenReboundNum, defenReboundNum, stealNum, blockNum, turnOverNum, foulNum, score, efficiency, recentFiveMatchesScoreUpRate, recentFiveMatchesReboundUpRate, recentFiveMatchesAssistUpRate, GmScEfficiencyValue, trueHitRate, shootEfficiency, reboundRate, offenReboundRate, defenReboundRate, assistRate, stealRate, blockRate, turnOverRate, usageRate, score_rebound_assist, doubleDoubleNum);
 		else{			
 			reboundNum=allreboundNum/playedGames;
 			assistNum=allassistNum/playedGames;
