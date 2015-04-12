@@ -1,33 +1,34 @@
 package bl;
 
+import bl.team.FinalTeam;
 import bl.team.NewFinalTeam;
 
-class a extends Thread {
-	
-	NewFinalTeam team = new NewFinalTeam();
-	public void run() {
-		while (true) {
-			System.out.println(team.getTeamAverageInfo().get(3).getAbLocation()
-					+ " " + team.getTeamAverageInfo().get(3).getScore());
-			try {
-				this.sleep(2000);
-			} catch (Exception e) {
-				// TODO: handle exception
-				e.printStackTrace();
-			}
-		}
-	}
-
-	public void startThread() {
-		this.start();
-	}
-}
+//class a extends Thread {
+//	
+//	NewFinalTeam team = new NewFinalTeam();
+//	public void run() {
+//		while (true) {
+//			System.out.println(team.getTeamAverageInfo().get(3).getAbLocation()
+//					+ " " + team.getTeamAverageInfo().get(3).getScore());
+//			try {
+//				this.sleep(2000);
+//			} catch (Exception e) {
+//				// TODO: handle exception
+//				e.printStackTrace();
+//			}
+//		}
+//	}
+//
+//	public void startThread() {
+//		this.start();
+//	}
+//}
 
 public class Test {
 
 	public static void main(String[] args) {
-		a a = new a();
-		a.startThread();
+		// a a = new a();
+		// a.startThread();
 
 		// Map<String, Map<String, Integer>> map = new HashMap<String,
 		// Map<String, Integer>>();
@@ -44,22 +45,23 @@ public class Test {
 		// map3.put("c", map2.get("c"));
 		// System.out.println(map3.size());
 		//
-		// int count = 0;
-		// for (int i = 0; i < 100; i++) {
-		// long t1 = System.currentTimeMillis();
-		// NewFinalTeam team = new NewFinalTeam();
-		// team.getTeamSeasonInfo("13-14");
-		// long t2 = System.currentTimeMillis();
-		// FinalTeam newTeam = new FinalTeam();
-		// newTeam.getTeamSeasonInfo("13-14");
-		// long t3 = System.currentTimeMillis();
-		// System.out.println(t2 - t1);
-		// System.out.println(t3 - t2);
-		// if ((t2 - t1) <= (t3 - t2)) {
-		// count++;
-		// }
-		// }
-		// System.out.println("运行100次，有" + count + "次NewFinalTeam快");
+		int count = 0;
+		for (int i = 0; i < 100; i++) {
+			long t1 = System.currentTimeMillis();
+			FinalTeam newTeam = new FinalTeam();
+			newTeam.getTeamSeasonInfo("13-14");
+			long t2 = System.currentTimeMillis();
+			
+			NewFinalTeam team = new NewFinalTeam();
+			team.getTeamSeasonInfo("13-14");
+			long t3 = System.currentTimeMillis();
+			System.out.println(t2 - t1);
+			System.out.println(t3 - t2);
+			if ((t2 - t1) >= (t3 - t2)) {
+				count++;
+			}
+		}
+		System.out.println("运行100次，有" + count + "次NewFinalTeam快");
 
 		// new Thread() {
 		// int count = 0;
