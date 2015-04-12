@@ -161,7 +161,8 @@ public class NewMatch {
 		// TODO 自动生成的方法存根
 		Map<String, MatchVO> matches = new HashMap<String, MatchVO>();
 		try {
-			fl = new FileList(DataSourse.dataSourse + "/matches", this);
+//			fl = new FileList(DataSourse.dataSourse + "/matches", this);
+			fl = new FileList(DataSourse.dataSourse + "/matches");
 			ArrayList<String> names = fl.getList();
 			for (String name : names) {
 				String key = getKeyName(name);
@@ -175,9 +176,9 @@ public class NewMatch {
 			e.printStackTrace();
 		}
 
-		// 初始化后 开启线程：
-		updateMatch um = new updateMatch();
-		um.startThread();
+//		// 初始化后 开启线程：
+//		updateMatch um = new updateMatch();
+//		um.startThread();
 
 		return matches;
 	}
@@ -276,13 +277,13 @@ public class NewMatch {
 		public void run() {
 			while (!stop) {
 				fl.checkChange();
-				System.out.println("我在很认真的检查呀，港荣蒸蛋糕真的好吃，字打错了灭");
-//				try {
-//					this.sleep(2000);// 话说 能不能不睡
-//				} catch (InterruptedException e) {
-//					// TODO Auto-generated catch block
-//					e.printStackTrace();
-//				}
+//				System.out.println("我在很认真的检查呀，港荣蒸蛋糕真的好吃，字打错了灭");
+				try {
+					this.sleep(2000);// 话说 能不能不睡
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		}
 
