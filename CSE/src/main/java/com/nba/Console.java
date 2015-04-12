@@ -13,8 +13,8 @@ import test.data.TeamNormalInfo;
 import vo.PlayerVO;
 import vo.TeamVO;
 import bl.DataSourse;
-import bl.Player;
-import bl.Team;
+import bl.player.Player;
+import bl.team.Team;
 import blservice.PlayerBLService;
 import blservice.TeamBLService;
 
