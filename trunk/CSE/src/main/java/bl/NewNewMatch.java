@@ -162,7 +162,7 @@ public class NewNewMatch {
 		Map<String, Map<String, MatchVO>> matches = new HashMap<String, Map<String, MatchVO>>();
 		try {
 			// fl = new FileList(DataSourse.dataSourse + "/matches", this);
-			fl = new FileList(DataSourse.dataSourse + "/matches");
+			fl = new FileList(DataSourse.dataSourse + "/matches",this);
 			ArrayList<String> names = fl.getList();
 			for (String name : names) {
 				String key = getKeyName(name);
@@ -184,9 +184,9 @@ public class NewNewMatch {
 			e.printStackTrace();
 		}
 
-		// // 初始化后 开启线程：
-		// updateMatch um = new updateMatch();
-		// um.startThread();
+		 // 初始化后 开启线程：
+		 updateMatch um = new updateMatch();
+		 um.startThread();
 
 		return matches;
 	}
