@@ -391,7 +391,7 @@ public class Console {
 		playerNormalInfo.setEfficiency(vo.getEfficiency());
 		playerNormalInfo.setFault(vo.getTurnOverNum());
 		playerNormalInfo.setFoul(vo.getFoulNum());
-		playerNormalInfo.setMinute(vo.getPresentTime());
+		playerNormalInfo.setMinute(vo.getPresentTime()/(double)60);
 		playerNormalInfo.setName(vo.getName());
 		playerNormalInfo.setNumOfGame(vo.getPlayedGames());
 		playerNormalInfo.setOffend(vo.getOffenReboundNum());
