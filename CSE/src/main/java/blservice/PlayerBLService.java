@@ -98,6 +98,8 @@ public interface PlayerBLService {
 	 *            球员位置
 	 * @param union
 	 *            联盟
+	 * @param ageClass
+	 *            哪个年龄时间段范围          
 	 * @param column
 	 *            哪一项属性 ，如"name"
 	 * @param num
@@ -105,7 +107,7 @@ public interface PlayerBLService {
 	 * @return 符合条件的球员列表
 	 */
 	public ArrayList<PlayerVO> selectPlayersBySeason(String season,
-			String position, String union, String column, int num);
+			String position, String union,int ageClass, String column,String order, int num);
 
 	/**
 	 * 对球员场均信息，根据某一项属性里的值进行筛选
@@ -122,8 +124,7 @@ public interface PlayerBLService {
 	 *            需要的数据条数
 	 * @return 符合条件的球员列表
 	 */
-	public ArrayList<PlayerVO> selectPlayersByAverage(String position,
-			String union, String column, int num);
+	public ArrayList<PlayerVO> selectPlayersByAverage(String position, String union,int ageClass, String column,String order, int num);
 
 	/**
 	 * 获得球员的大头照
@@ -148,7 +149,7 @@ public interface PlayerBLService {
 	 *            进行球员排序的时候的球员属性值
 	 * @return 符合条件的球员列表
 	 */
-	public ArrayList<PlayerVO> getDayHotPlayer(String column);
+	public ArrayList<PlayerVO> getDayHotPlayer(String column,int num);
 
 	/**
 	 * 获得某一赛季的热点球员
@@ -159,7 +160,7 @@ public interface PlayerBLService {
 	 *            进行球员排序的时候的球员属性值
 	 * @return 符合条件的球员列表
 	 */
-	public ArrayList<PlayerVO> getSeasonHotPlayer(String season, String column);
+	public ArrayList<PlayerVO> getSeasonHotPlayer(String season, String column,int num);
 
 	/**
 	 * 获得进步最大的球员
@@ -168,7 +169,7 @@ public interface PlayerBLService {
 	 *            进行球员排序的时候的球员属性值
 	 * @return 符合条件的球员列表
 	 */
-	public ArrayList<PlayerVO> getBestImprovedPlayer(String column);
+	public ArrayList<PlayerVO> getBestImprovedPlayer(String column,int num);
 
 	/**
 	 * 根据首字母得到球员
@@ -186,16 +187,8 @@ public interface PlayerBLService {
 	 *            球员姓名
 	 * @return 比赛列表
 	 */
-	public ArrayList<MatchVO> getRecentMatches(String playerName);
+	public ArrayList<MatchVO> getRecentMatches(String playerName,int num);
 
-	/**
-	 * 获得该球员今日比赛的数据
-	 * 
-	 * @param playerName
-	 *            球员姓名
-	 * @return 比赛列表
-	 */
-	public ArrayList<MatchVO> getTodayMatches(String playerName);
 
 	/**
 	 * 获得该球员全部比赛的数据

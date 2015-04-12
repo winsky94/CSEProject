@@ -16,13 +16,14 @@ import java.util.Map.Entry;
 
 import javax.swing.ImageIcon;
 
+import blservice.PlayerBLService;
 import vo.LittleRecordVO;
 import vo.MatchVO;
 import vo.PlayerVO;
 import vo.RecordVO;
 import vo.TeamVO;
 
-public class NewNewPlayer {
+public class NewNewPlayer implements PlayerBLService{
 	
 	Map<String,PlayerVO> players = new HashMap<String,PlayerVO>(32);
 	Map<String, TeamVO> teams;
@@ -990,6 +991,18 @@ public class NewNewPlayer {
 		}
 		return result;
 	}
+
+	public ArrayList<MatchVO> getMatches(String playerName) {
+		ArrayList<MatchVO> result=new ArrayList<MatchVO>();
+		Collections.sort(allSeasonMatches, new SequenceOfMatch());
+		for(MatchVO vo:allSeasonMatches){
+			for(RecordVO vv:vo.getRecords()){
+				if(vv.getPlayerName().equals(playerName))
+					result.add(vo);			
+			}
+		}
+		return result;
+	}	
 	
 	public ArrayList<PlayerVO> getPlayersByTeam(String teamAbLocation) {
 		ArrayList<PlayerVO> result=new ArrayList<PlayerVO>();
@@ -1000,6 +1013,22 @@ public class NewNewPlayer {
 		}
 		return result;
 	}
+	
+	public ArrayList<PlayerVO> getPlayerBaseInfo() {
+		return getPlayerAverageInfo();
+	}
+
+
+	public ArrayList<PlayerVO> getPlayerBaseInfo(String name) {
+		ArrayList<PlayerVO> result=new ArrayList<PlayerVO>();
+		ArrayList<PlayerVO> thePlayers=getPlayerAverageInfo();
+		for(PlayerVO vo:thePlayers){
+			if(vo.getName().contains(name))
+				result.add(vo);
+		}
+		return result;
+	}
+
 	
 	private int convertMinuteToSecond(String s){
 		String[] temp = s.split(":");
@@ -1052,6 +1081,9 @@ public class NewNewPlayer {
 	   long end = System.currentTimeMillis();
        System.out.println("运行时间：" + (end - start) + "毫秒");//应该是end - start
    }
+
+
+
 
 	
 	

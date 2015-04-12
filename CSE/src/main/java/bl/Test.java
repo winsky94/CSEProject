@@ -2,7 +2,7 @@ package bl;
 
 public class Test {
 	public static void main(String[] args) {
-		int count = 0;
+	/*	int count = 0;
 		for (int i = 0; i < 100; i++) {
 			long t1 = System.currentTimeMillis();
 			Team team = new Team();
@@ -18,7 +18,7 @@ public class Test {
 			}
 		}
 		System.out.println("调用getTeamAverageInfo，运行100次，有" + count
-				+ "次用map的方法快");
+				+ "次用map的方法快");*/
 
 		// new Thread() {
 		// int count = 0;
@@ -41,27 +41,48 @@ public class Test {
 		// }
 		// }.start();
 
-		// int equal = 0;
-		// int count = 0;
-		//
-		// for (int i = 0; i < 100; i++) {
-		// long t1 = System.currentTimeMillis();
-		// NewNewPlayer newNewPlayer = new NewNewPlayer();
-		// newNewPlayer.getPlayerAverageInfo();
-		// long t2 = System.currentTimeMillis();
-		// NewPlayer newPlayer = new NewPlayer(3);
-		// newPlayer.getPlayerAverageInfo();
-		// long t3 = System.currentTimeMillis();
-		// if ((t3 - t2) > (t2 - t1)) {
-		// count++;
-		// }
-		// if ((t3 - t2) == (t2 - t1)) {
-		// equal++;
-		// }
-		// }
-		//
-		// System.out.println("------------------------------");
-		// System.out.println("newNewPlayer比newPlayer快"+count+"次");
-		// System.out.println(equal+"次二者相等");
+		int equal = 0;
+		int count = 0;
+
+		for (int i = 0; i < 100; i++) {
+//			long t1 = System.currentTimeMillis();
+//			NewNewPlayer newNewPlayer = new NewNewPlayer();
+//			newNewPlayer.getPlayerAverageInfo();
+//			long t2 = System.currentTimeMillis();
+//			NewPlayer newPlayer = new NewPlayer(3);
+//			newPlayer.getPlayerAverageInfo();
+//			long t3 = System.currentTimeMillis();
+//			if ((t3 - t2) > (t2 - t1)) {
+//				count++;
+//			}
+//			if ((t3 - t2) == (t2 - t1)) {
+//				equal++;
+//			}
+//			System.out.println("------------------------------");
+//			System.out.println("newNewPlayer比newPlayer快"+count+"次");
+//			System.out.println(equal+"次二者相等");		
+			NewNewPlayer newNewPlayer = new NewNewPlayer();
+			newNewPlayer.getPlayerSeasonInfo("13-14","Andre Drummond");
+			newNewPlayer.getPlayerSeasonInfo("13-14", "Andre Drummond");
+			long t1 = System.currentTimeMillis();
+			newNewPlayer.getPlayerSeasonInfo("13-14", "Andre Drummond");
+			long t2 = System.currentTimeMillis();
+			newNewPlayer.getPlayerSeasonInfo("13-14","Andre Drummond");
+			
+			long t3 = System.currentTimeMillis();
+			if ((t3 - t2) < (t2 - t1)) {
+				count++;
+			}
+			if ((t3 - t2) == (t2 - t1)) {
+				equal++;
+			}
+			System.out.println(t2-t1+"ms");
+			System.out.println(t3-t2+"ms");
+				
+		}
+
+		System.out.println("------------------------------");
+		System.out.println("1比2快"+count+"次");
+		System.out.println(equal+"次二者相等");		
 	}
 }

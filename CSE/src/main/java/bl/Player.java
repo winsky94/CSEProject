@@ -1064,5 +1064,39 @@ public class Player implements PlayerBLService{
        System.out.println("运行时间：" + (end - start) + "毫秒");//应该是end - start
    }
 
+	public ArrayList<PlayerVO> selectPlayersBySeason(String season,
+			String position, String union, int ageClass, String column,
+			String order, int num) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public ArrayList<PlayerVO> selectPlayersByAverage(String position,
+			String union, int ageClass, String column, String order, int num) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public ArrayList<PlayerVO> getDayHotPlayer(String column, int num) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public ArrayList<PlayerVO> getSeasonHotPlayer(String season, String column,
+			int num) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public ArrayList<PlayerVO> getBestImprovedPlayer(String column, int num) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public ArrayList<MatchVO> getRecentMatches(String playerName, int num) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
 

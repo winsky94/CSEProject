@@ -98,7 +98,7 @@ public class Console {
 				PlayerHotFieldChange();
 				// 调用 player hot 方法
 				ArrayList<PlayerVO> result = player.selectPlayersByAverage(
-						"all", "all", playerhotField, playerNum);
+						"all", "all", 5,playerhotField,"desc", playerNum);
 				for (PlayerVO vo : result) {
 					// =====================================================
 					PlayerHotInfo playerHotInfo = setplHotInfo(vo,
@@ -417,7 +417,7 @@ public class Console {
 		playerHighInfo.setFrequency(vo.getUsageRate());
 		playerHighInfo.setGmSc(vo.getGmScEfficiencyValue());
 		// ===============球员联盟是个什么鬼@倩倩
-		playerHighInfo.setLeague(vo.getOwingTeam());
+		playerHighInfo.setLeague(vo.getLeague());
 		playerHighInfo.setName(vo.getName());
 		playerHighInfo.setOffendReboundEfficient(vo.getOffenReboundRate());
 		playerHighInfo.setPosition(vo.getPosition());
