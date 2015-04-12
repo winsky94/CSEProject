@@ -1,36 +1,38 @@
 package bl;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
-
 public class Test {
 	public static void main(String[] args) {
-		Map<String, Map<String, Integer>> map = new HashMap<String, Map<String, Integer>>();
-		Map<String, Integer> map1 = new HashMap<String, Integer>();
-		map1.put("a", 1);
-		Map<String, Integer> map2 = new HashMap<String, Integer>();
-		map2.put("c", 1);
-		map.put("aa", map1);
-		map.put("bb", map2);
-		map2.put("b", 2);
-		
-		Map<String, Integer> map3 = new HashMap<String, Integer>();
-		map3=map.get("aa");
-		map3.put("c", map2.get("c"));
-		System.out.println(map3.size());
+		// Map<String, Map<String, Integer>> map = new HashMap<String,
+		// Map<String, Integer>>();
+		// Map<String, Integer> map1 = new HashMap<String, Integer>();
+		// map1.put("a", 1);
+		// Map<String, Integer> map2 = new HashMap<String, Integer>();
+		// map2.put("c", 1);
+		// map.put("aa", map1);
+		// map.put("bb", map2);
+		// map2.put("b", 2);
+		//
+		// Map<String, Integer> map3 = new HashMap<String, Integer>();
+		// map3=map.get("aa");
+		// map3.put("c", map2.get("c"));
+		// System.out.println(map3.size());
 
-		/*
-		 * int count = 0; for (int i = 0; i < 100; i++) { long t1 =
-		 * System.currentTimeMillis(); Team team = new Team();
-		 * team.getTeamAverageInfo(); long t2 = System.currentTimeMillis();
-		 * NewTeam newTeam = new NewTeam(); newTeam.getTeamAverageInfo(); long
-		 * t3 = System.currentTimeMillis(); System.out.println(t2 - t1);
-		 * System.out.println(t3 - t2); if ((t2 - t1) >= (t3 - t2)) { count++; }
-		 * } System.out.println("调用getTeamAverageInfo，运行100次，有" + count +
-		 * "次用map的方法快");
-		 */
+		int count = 0;
+		for (int i = 0; i < 100; i++) {
+			long t1 = System.currentTimeMillis();
+			NewFinalTeam team = new NewFinalTeam();
+			team.getTeamSeasonInfo("13-14");
+			long t2 = System.currentTimeMillis();
+			FinalTeam newTeam = new FinalTeam();
+			newTeam.getTeamSeasonInfo("13-14");
+			long t3 = System.currentTimeMillis();
+			System.out.println(t2 - t1);
+			System.out.println(t3 - t2);
+			if ((t2 - t1) <= (t3 - t2)) {
+				count++;
+			}
+		}
+		System.out.println("运行100次，有" + count + "次NewFinalTeam快");
 
 		// new Thread() {
 		// int count = 0;
