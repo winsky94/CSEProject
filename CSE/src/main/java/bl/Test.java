@@ -1,5 +1,7 @@
 package bl;
 
+import bl.team.NewFinalTeam;
+
 class a extends Thread {
 	
 	NewFinalTeam team = new NewFinalTeam();
