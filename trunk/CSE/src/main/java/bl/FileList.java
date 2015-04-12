@@ -75,5 +75,34 @@ public class FileList {
 		}
 
 	}
+	
+	public ArrayList<String> checkMatchesChange() {
+		String[] newpath = new File(dir_name).list();
+		int newnum = newpath.length;
+		int cha = newnum - names.size();
+		ArrayList<String> pathaddress=null;
+		if (cha > 0) {// 说明有新文件
+			// cha 表明新增文件个数 新增文件填入序列不一定
+			pathaddress = new ArrayList<String>();
+			for (int i = 0; i < newnum; i++) {
+				String np = path + newpath[i];
+				if (names.indexOf(np) < 0) {
+					// 说明该文件为新文件 np为新地址
+					pathaddress.add(np);
+					cha--;
+					if (cha == 0)
+						break;// 因为随机插入 有益于 时间
+				}
+			}
+			//更新names;
+			names.addAll(pathaddress);
+		}
+		
+		if(pathaddress==null)
+			return null;
+		else 			
+		  return pathaddress;
+
+	}
 
 }
