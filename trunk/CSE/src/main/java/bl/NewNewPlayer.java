@@ -1114,8 +1114,8 @@ public class NewNewPlayer implements PlayerBLService {
 					add(addPaths);
 				// System.out.println("我在很认真的检查呀，港荣蒸蛋糕真的好吃，字打错了灭");
 					System.out.println("有新文件啦！！");
-//					ArrayList<PlayerVO> oo=getPlayerAverageInfo();
-//					System.out.println(oo.get(405).getName()+" "+oo.get(405).getPlayedGames()+" "+oo.get(405).getEfficiency());
+					ArrayList<PlayerVO> oo=getPlayerAverageInfo();
+					System.out.println(oo.get(405).getName()+" "+oo.get(405).getPlayedGames()+" "+oo.get(405).getEfficiency());
 				}
 				try {
 					this.sleep(2000);// 话说 能不能不睡
