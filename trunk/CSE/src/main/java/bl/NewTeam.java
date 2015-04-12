@@ -30,14 +30,14 @@ public class NewTeam {
 		teamsBaseInfo = getTeams();
 		NewMatch match = new NewMatch();
 		matches = match.getMatchData("全部", "全部", "全部", "全部");
-		teamAverageInfo = calculateTeamAverageInfo();
+		// teamAverageInfo = calculateTeamAverageInfo();
 	}
 
 	public static void main(String[] args) {
 		NewTeam newTeam = new NewTeam();
 		String season = "13-14";
 		Map<String, TeamVO> result = new LinkedHashMap<String, TeamVO>();
-		result = newTeam.getSeasonHotTeam(season, "比赛得分",5);
+		result = newTeam.getSeasonHotTeam(season, "比赛得分", 5);
 
 		System.out.println(result.size());
 
@@ -404,7 +404,7 @@ public class NewTeam {
 						.next();
 				MatchVO matchVO = (MatchVO) matchEntry.getValue();
 
-				if (matchVO.getSeason().equals(season)) {
+//				if (matchVO.getSeason().equals(season)) {
 					int homeScore = matchVO.getHomeScore();
 					int visitingScore = matchVO.getVisitingScore();
 					String homeTeam = matchVO.getHomeTeam();
@@ -498,7 +498,7 @@ public class NewTeam {
 						assistEfficiency = (double) assistNum / offenRound
 								* 100; // 助攻率
 					}
-				}
+//				}
 			}
 			TeamVO teamVO = new TeamVO(teamName, abLocation, location,
 					conference, partition, homeCourt, setUpTime, matchesNum,
@@ -523,6 +523,7 @@ public class NewTeam {
 	 */
 	public Map<String, TeamVO> getTeamAverageInfo() {
 		// TODO 自动生成的方法存根
+		teamAverageInfo = calculateTeamAverageInfo();
 		return teamAverageInfo;
 	}
 
@@ -625,8 +626,8 @@ public class NewTeam {
 	public Map<String, TeamVO> getOrderedTeamsBySeason(String season,
 			String condition, String order, int num) {
 		// TODO 自动生成的方法存根
-		if(num<0){
-			num=30;
+		if (num < 0) {
+			num = 30;
 		}
 		Map<String, TeamVO> teams = new LinkedHashMap<String, TeamVO>();
 		teams = getTeamSeasonInfo(season);
@@ -669,8 +670,8 @@ public class NewTeam {
 	public Map<String, TeamVO> getOrderedTeamsByAverage(String condition,
 			String order, int num) {
 		// TODO 自动生成的方法存根
-		if(num<0){
-			num=30;
+		if (num < 0) {
+			num = 30;
 		}
 		Map<String, TeamVO> teams = new LinkedHashMap<String, TeamVO>();
 		teams = teamAverageInfo;
@@ -781,10 +782,11 @@ public class NewTeam {
 	 *            筛选条件
 	 * @return 返回到 目前为止所有参加过比赛的球队中筛选出前 5 名球队（按照 降序排列进行筛选）
 	 */
-	public Map<String, TeamVO> getSeasonHotTeam(String season, String column,int num) {
+	public Map<String, TeamVO> getSeasonHotTeam(String season, String column,
+			int num) {
 		// TODO 自动生成的方法存根
-		if(num<0){
-			num=30;
+		if (num < 0) {
+			num = 30;
 		}
 		Map<String, TeamVO> result = new LinkedHashMap<String, TeamVO>();
 		Map<String, TeamVO> teamSeasonInfo = new LinkedHashMap<String, TeamVO>();
