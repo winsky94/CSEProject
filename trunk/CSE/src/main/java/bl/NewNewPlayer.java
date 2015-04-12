@@ -1089,9 +1089,12 @@ public class NewNewPlayer implements PlayerBLService {
 			getPlayerMatchInfo(vo);
 			ArrayList<RecordVO> records=vo.getRecords();
 			for(RecordVO recordVO:records){
-				calculatePlayerSeason(players.get(recordVO.getPlayerName()));
-				needUpdatePlayerSeason=true;
-				needUpdatePlayerAverage=true;
+				PlayerVO thisPlayer=players.get(recordVO.getPlayerName());
+				if(thisPlayer!=null){
+				  calculatePlayerSeason(thisPlayer);
+				  needUpdatePlayerSeason=true;
+				  needUpdatePlayerAverage=true;
+				}
 			}
 		}
 	}
