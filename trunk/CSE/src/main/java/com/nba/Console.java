@@ -115,7 +115,7 @@ public class Console {
 				// 调用返回数据王信息
 				ArrayList<PlayerVO> result = new ArrayList<PlayerVO>();
 				if (isSeason) {
-					result = player.getSeasonHotPlayer("all", playerkingField);
+					result = player.getSeasonHotPlayer("all", playerkingField,playerNum);
 					for (PlayerVO vo : result) {
 						// =====================================================
 						PlayerKingInfo playerKingInfo = setPlayerKingInfo(vo,
@@ -123,7 +123,7 @@ public class Console {
 						out.append(playerKingInfo.toString());
 					}
 				} else {
-					result = player.getDayHotPlayer(playerkingField);
+					result = player.getDayHotPlayer(playerkingField,playerNum);
 					for (PlayerVO vo : result) {
 						// =====================================================
 						PlayerKingInfo playerKingInfo = setPlayerKingInfo(vo,
