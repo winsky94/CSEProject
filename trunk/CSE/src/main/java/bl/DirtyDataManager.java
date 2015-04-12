@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -84,6 +85,22 @@ public class DirtyDataManager {
 
 		}
 		return result;
+	}
+	
+	
+	/**
+	 * 判断联盟是否符合要求的方法
+	 * 
+	 * @param fileName
+	 *            数据文件名
+	 * @param data
+	 *            文件记录中的String类型的数据
+	 * @return 
+	 */
+	public static String checkConference(String abTeam,String data) {
+		if(abTeam.equals("BOS")&&data.equals("W"))
+			return "E";
+		return data;
 	}
 	
 	/**

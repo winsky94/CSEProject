@@ -49,7 +49,7 @@ public class FinalTeam implements TeamBLService {
 				+ "/teams/teams");
 		for (String[] content : result) {
 			abLocation = content[1];
-			conference = content[3];// 东西部
+			conference = DirtyDataManager.checkConference(abLocation, content[3]);// 东西部
 			partition = content[4];
 
 			team = new TeamVO(abLocation, conference, partition);
@@ -787,7 +787,7 @@ public class FinalTeam implements TeamBLService {
 			name = content[0];
 			abLocation = content[1];
 			location = content[2];
-			conference = content[3];
+			conference = DirtyDataManager.checkConference(abLocation, content[3]);
 			partition = content[4];
 			homeCourt = content[5];
 			setUpTime = Integer.parseInt(content[6]);
