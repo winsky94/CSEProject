@@ -182,9 +182,9 @@ public class Match implements MatchBLService {
 			e.printStackTrace();
 		}
 
-//		// 初始化后 开启线程：
-//		updateMatch um = new updateMatch();
-//		um.startThread();
+		// // 初始化后 开启线程：
+		// updateMatch um = new updateMatch();
+		// um.startThread();
 	}
 
 	/**
@@ -269,7 +269,7 @@ public class Match implements MatchBLService {
 		public void run() {
 			while (!stop) {
 				fl.checkChange();
-//				System.out.println("我在很认真的检查呀，港荣蒸蛋糕真的好吃，字打错了灭");
+				// System.out.println("我在很认真的检查呀，港荣蒸蛋糕真的好吃，字打错了灭");
 				try {
 					this.sleep(5000);// 话说 能不能不睡
 				} catch (InterruptedException e) {
