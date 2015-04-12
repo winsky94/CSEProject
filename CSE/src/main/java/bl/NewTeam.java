@@ -404,101 +404,91 @@ public class NewTeam {
 						.next();
 				MatchVO matchVO = (MatchVO) matchEntry.getValue();
 
-//				if (matchVO.getSeason().equals(season)) {
-					int homeScore = matchVO.getHomeScore();
-					int visitingScore = matchVO.getVisitingScore();
-					String homeTeam = matchVO.getHomeTeam();
-					String visitingTeam = matchVO.getVisitingTeam();
+				// if (matchVO.getSeason().equals(season)) {
+				int homeScore = matchVO.getHomeScore();
+				int visitingScore = matchVO.getVisitingScore();
+				String homeTeam = matchVO.getHomeTeam();
+				String visitingTeam = matchVO.getVisitingTeam();
 
-					boolean isHomeTeam = homeTeam.equals(team);
-					boolean isVisitingTeam = visitingTeam.equals(team);
-					if (isHomeTeam) {
-						matchesNum++;
-						score += homeScore;
-						dsScore += visitingScore;
-						if (homeScore > visitingScore) {
-							winNum++;
-						}
-					} else if (isVisitingTeam) {
-						matchesNum++;
-						score += visitingScore;
-						dsScore += homeScore;
-						if (visitingScore > homeScore) {
-							winNum++;
+				boolean isHomeTeam = homeTeam.equals(team);
+				boolean isVisitingTeam = visitingTeam.equals(team);
+				if (isHomeTeam) {
+					matchesNum++;
+					score += homeScore;
+					dsScore += visitingScore;
+					if (homeScore > visitingScore) {
+						winNum++;
+					}
+				} else if (isVisitingTeam) {
+					matchesNum++;
+					score += visitingScore;
+					dsScore += homeScore;
+					if (visitingScore > homeScore) {
+						winNum++;
+					}
+				}
+				if (isHomeTeam || isVisitingTeam) {
+					ArrayList<RecordVO> records = matchVO.getRecords();
+					for (RecordVO recordVO : records) {
+						if (recordVO.getTeam().equals(team)) {
+							shootHitNum += recordVO.getShootHitNum(); // 投篮命中数
+							shootAttemptNum += recordVO.getShootAttemptNum(); // 投篮出手次数
+							threeHitNum += recordVO.getThreeHitNum(); // 三分命中数
+							threeAttemptNum += recordVO.getThreeAttemptNum(); // 三分出手数
+							freeThrowHitNum += recordVO.getFreeThrowHitNum(); // 罚球命中数
+							freeThrowAttemptNum += recordVO
+									.getFreeThrowAttemptNum(); // 罚球出手数
+							offenReboundNum += recordVO.getOffenReboundNum(); // 进攻篮板数
+							defenReboundNum += recordVO.getDefenReboundNum(); // 防守篮板数
+							reboundNum += recordVO.getReboundNum();// 篮板数
+							assistNum += recordVO.getAssistNum();// 助攻数
+							stealNum += recordVO.getStealNum();// 抢断数
+							blockNum += recordVO.getBlockNum();// 盖帽数
+							turnOverNum += recordVO.getTurnOverNum();// 失误数
+							foulNum += recordVO.getFoulNum();// 犯规数
+						} else {
+							// 计算对手的
+							dsShootHitNum += recordVO.getShootHitNum();
+							dsShootAttempNum += recordVO.getShootAttemptNum();
+							dsFreeThrowAttemptNum += recordVO
+									.getFreeThrowAttemptNum();
+							dsTurnOverNum += recordVO.getTurnOverNum();
+							dsOffenReboundNum += recordVO.getOffenReboundNum();
+							dsDefenReboundNum += recordVO.getDefenReboundNum();
 						}
 					}
-					if (isHomeTeam || isVisitingTeam) {
-						ArrayList<RecordVO> records = matchVO.getRecords();
-						for (RecordVO recordVO : records) {
-							if (recordVO.getTeam().equals(team)) {
-								shootHitNum += recordVO.getShootHitNum(); // 投篮命中数
-								shootAttemptNum += recordVO
-										.getShootAttemptNum(); // 投篮出手次数
-								threeHitNum += recordVO.getThreeHitNum(); // 三分命中数
-								threeAttemptNum += recordVO
-										.getThreeAttemptNum(); // 三分出手数
-								freeThrowHitNum += recordVO
-										.getFreeThrowHitNum(); // 罚球命中数
-								freeThrowAttemptNum += recordVO
-										.getFreeThrowAttemptNum(); // 罚球出手数
-								offenReboundNum += recordVO
-										.getOffenReboundNum(); // 进攻篮板数
-								defenReboundNum += recordVO
-										.getDefenReboundNum(); // 防守篮板数
-								reboundNum += recordVO.getReboundNum();// 篮板数
-								assistNum += recordVO.getAssistNum();// 助攻数
-								stealNum += recordVO.getStealNum();// 抢断数
-								blockNum += recordVO.getBlockNum();// 盖帽数
-								turnOverNum += recordVO.getTurnOverNum();// 失误数
-								foulNum += recordVO.getFoulNum();// 犯规数
-							} else {
-								// 计算对手的
-								dsShootHitNum += recordVO.getShootHitNum();
-								dsShootAttempNum += recordVO
-										.getShootAttemptNum();
-								dsFreeThrowAttemptNum += recordVO
-										.getFreeThrowAttemptNum();
-								dsTurnOverNum += recordVO.getTurnOverNum();
-								dsOffenReboundNum += recordVO
-										.getOffenReboundNum();
-								dsDefenReboundNum += recordVO
-										.getDefenReboundNum();
-							}
-						}
 
-						shootHitRate = (double) shootHitNum / shootAttemptNum;// 投篮命中率
-						threeHitRate = (double) threeHitNum / threeAttemptNum;// 三分命中率
-						freeThrowHitRate = (double) freeThrowHitNum
-								/ freeThrowAttemptNum;// 罚球命中率
-						winRate = (double) winNum / matchesNum; // 胜率
-						// 进攻回合
-						offenRound = shootAttemptNum
-								+ 0.4
-								* freeThrowAttemptNum
-								- 1.07
-								* (offenReboundNum
-										/ (double) (offenReboundNum + dsDefenReboundNum) * (shootAttemptNum - shootHitNum))
-								+ 1.07 * turnOverNum;
-						dsOffenRound = dsShootAttempNum
-								+ 0.4
-								* dsFreeThrowAttemptNum
-								- 1.07
-								* (dsOffenReboundNum
-										/ (double) (dsOffenReboundNum + defenReboundNum) * (dsShootAttempNum - dsShootHitNum))
-								+ 1.07 * dsTurnOverNum;
+					shootHitRate = (double) shootHitNum / shootAttemptNum;// 投篮命中率
+					threeHitRate = (double) threeHitNum / threeAttemptNum;// 三分命中率
+					freeThrowHitRate = (double) freeThrowHitNum
+							/ freeThrowAttemptNum;// 罚球命中率
+					winRate = (double) winNum / matchesNum; // 胜率
+					// 进攻回合
+					offenRound = shootAttemptNum
+							+ 0.4
+							* freeThrowAttemptNum
+							- 1.07
+							* (offenReboundNum
+									/ (double) (offenReboundNum + dsDefenReboundNum) * (shootAttemptNum - shootHitNum))
+							+ 1.07 * turnOverNum;
+					dsOffenRound = dsShootAttempNum
+							+ 0.4
+							* dsFreeThrowAttemptNum
+							- 1.07
+							* (dsOffenReboundNum
+									/ (double) (dsOffenReboundNum + defenReboundNum) * (dsShootAttempNum - dsShootHitNum))
+							+ 1.07 * dsTurnOverNum;
 
-						offenEfficiency = (double) score / offenRound * 100; // 进攻效率
-						defenEfficiency = (double) dsScore / dsOffenRound * 100; // 防守效率
-						offenReboundEfficiency = (double) offenReboundNum
-								/ (offenReboundNum + dsDefenReboundNum); // 进攻篮板效率
-						defenReboundEfficiency = (double) defenReboundNum
-								/ (defenReboundNum + dsOffenReboundNum); // 防守篮板效率
-						stealEfficiency = (double) stealNum / dsOffenRound
-								* 100; // 抢断效率
-						assistEfficiency = (double) assistNum / offenRound
-								* 100; // 助攻率
-					}
-//				}
+					offenEfficiency = (double) score / offenRound * 100; // 进攻效率
+					defenEfficiency = (double) dsScore / dsOffenRound * 100; // 防守效率
+					offenReboundEfficiency = (double) offenReboundNum
+							/ (offenReboundNum + dsDefenReboundNum); // 进攻篮板效率
+					defenReboundEfficiency = (double) defenReboundNum
+							/ (defenReboundNum + dsOffenReboundNum); // 防守篮板效率
+					stealEfficiency = (double) stealNum / dsOffenRound * 100; // 抢断效率
+					assistEfficiency = (double) assistNum / offenRound * 100; // 助攻率
+				}
+				// }
 			}
 			TeamVO teamVO = new TeamVO(teamName, abLocation, location,
 					conference, partition, homeCourt, setUpTime, matchesNum,
@@ -537,21 +527,20 @@ public class NewTeam {
 	public Map<String, TeamVO> getTeamBaseInfo(String name) {
 		// TODO 自动生成的方法存根
 		Map<String, TeamVO> result = new LinkedHashMap<String, TeamVO>();
-		// Iterator<Entry<String, TeamVO>> iter = teamsBaseInfo.entrySet()
-		// .iterator();
-		// while (iter.hasNext()) {
-		// Map.Entry<String, TeamVO> entry = (Map.Entry<String, TeamVO>) iter
-		// .next();
-		// TeamVO teamVO = (TeamVO) entry.getValue();
-		//
-		// String teamName = teamVO.getTeamName().toLowerCase();
-		// String abLocation = teamVO.getAbLocation().toLowerCase();
-		// name = name.toLowerCase();
-		// if (teamName.contains(name) || abLocation.contains(name)) {
-		// result.put(abLocation, teamVO);
-		// }
-		// }
-		result.put(name, teamsBaseInfo.get(name));
+		Iterator<Entry<String, TeamVO>> iter = teamsBaseInfo.entrySet()
+				.iterator();
+		while (iter.hasNext()) {
+			Map.Entry<String, TeamVO> entry = (Map.Entry<String, TeamVO>) iter
+					.next();
+			TeamVO teamVO = (TeamVO) entry.getValue();
+
+			String teamName = teamVO.getTeamName().toLowerCase();
+			String abLocation = teamVO.getAbLocation().toLowerCase();
+			name = name.toLowerCase();
+			if (teamName.contains(name) || abLocation.contains(name)) {
+				result.put(abLocation, teamVO);
+			}
+		}
 		return result;
 	}
 
@@ -708,7 +697,7 @@ public class NewTeam {
 	 */
 	public ImageIcon getTeamImage(String name) {
 		// TODO 自动生成的方法存根
-		ImageIcon imageIcon = new ImageIcon("src/data/teamsPng/" + name
+		ImageIcon imageIcon = new ImageIcon(DataSourse.dataSourse+"/teamsPng/" + name
 				+ ".png");
 		return imageIcon;
 	}
