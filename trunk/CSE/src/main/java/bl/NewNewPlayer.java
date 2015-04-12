@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -27,7 +28,11 @@ public class NewNewPlayer {
 	Map<String, TeamVO> teams;
 	Map<Integer,MatchVO> matches=new HashMap<Integer,MatchVO>(1024);
 	ArrayList<MatchVO> allSeasonMatches=new ArrayList<MatchVO>();
+	ArrayList<PlayerVO> playersSeason=new ArrayList<PlayerVO>();
+	ArrayList<PlayerVO> playersAverage=new ArrayList<PlayerVO>();
 	boolean isCalculate=false;
+	boolean isCalculatePlayersSeason=false;
+	boolean isCalculatePlayersAverage=false;
 	
 	public NewNewPlayer(){
            baseInfoInit();
@@ -239,7 +244,10 @@ public class NewNewPlayer {
 	
 
 	public ArrayList<PlayerVO> getPlayerSeasonInfo(String season) {
-		ArrayList<PlayerVO> result=new ArrayList<PlayerVO>();
+
+		if(isCalculatePlayersSeason==true)
+		         return playersSeason;
+		
 		if(isCalculate==false){
 		   getPlayerMatchInfo();
 		   isCalculate=true;
@@ -248,11 +256,12 @@ public class NewNewPlayer {
 		while(iter.hasNext()){
 	      Map.Entry entry = (Map.Entry) iter.next();
 		  PlayerVO playerSeason = (PlayerVO)entry.getValue();
-		  result.add(playerSeason);
+		  playersSeason.add(playerSeason);
 		}
 		
-		Collections.sort(result,new SequenceOfPlayer());
-		return result;      		
+		Collections.sort(playersSeason,new SequenceOfPlayer());
+		isCalculatePlayersSeason=true;
+		return playersSeason;      		
 	}
 	
 	private void getPlayerMatchInfo(){
@@ -615,7 +624,10 @@ public class NewNewPlayer {
 	}
 
     public ArrayList<PlayerVO> getPlayerAverageInfo() {
-    	ArrayList<PlayerVO> result=new ArrayList<PlayerVO>();
+    	
+    	if(isCalculatePlayersAverage==true)
+    		return playersAverage;
+    	
 		if(isCalculate==false){
 		   getPlayerMatchInfo();
 		   isCalculate=true;
@@ -643,11 +655,12 @@ public class NewNewPlayer {
           playerSeason.setScore(playerSeason.getScore()/playedGames);
           playerSeason.setScore_rebound_assist(playerSeason.getScore_rebound_assist()/playedGames);
           playerSeason.setDoubleDoubleNum(playerSeason.getDoubleDoubleNum()/playedGames);
-		  result.add(playerSeason);
+		  playersAverage.add(playerSeason);
 		}
 		
-		Collections.sort(result,new SequenceOfPlayer());
-		return result;      
+		Collections.sort(playersAverage,new SequenceOfPlayer());
+		isCalculatePlayersAverage=true;
+		return playersAverage;      
     }
 
 
@@ -659,7 +672,7 @@ public class NewNewPlayer {
 		}
 		return players.get(name);
 	}
-
+	
 	
 	public PlayerVO getPlayerAverageInfo(String name) {
 		ArrayList<PlayerVO> result=getPlayerAverageInfo();
@@ -702,31 +715,99 @@ public class NewNewPlayer {
 		return result;
 	}
 
+	private ArrayList<PlayerVO> selectPlayers(ArrayList<PlayerVO> thePlayers,String position, String union,int ageClass, String column,String order, int num){
+		ArrayList<PlayerVO> result=new ArrayList<PlayerVO>();
+	     if(!position.equals("all")){
+	    	 for(int i=0;i<thePlayers.size();i++){
+		    	 if(!thePlayers.get(i).getPosition().contains(position))
+		    		 thePlayers.remove(i);
+		     }
+	     }
+	     if(!union.equals("all")){
+	    	 for(int i=0;i<thePlayers.size();i++){
+	    		 String team=thePlayers.get(i).getOwingTeam();
+	    		 if(!teams.get(team).getConference().equals(union))
+		    	     thePlayers.remove(i);
+		     }
+	     }
+	     if(ageClass!=5){
+	    	 for(int i=0;i<thePlayers.size();i++){
+	    		 int age=thePlayers.get(i).getAge();
+	    		 if(ageClass==1){
+	    			 if(age>22)
+	    				 thePlayers.remove(i);
+	    		 }
+	    		 else if(ageClass==2){
+	    			 if(age<=22||age>25)
+	    				 thePlayers.remove(i);
+	    		 }
+	    		 else if(ageClass==3){
+	    			 if(age<=25||age>30)
+	    				 thePlayers.remove(i);
+	    		 }
+	    		 else{
+	    			 if(age<=30)
+	    				 thePlayers.remove(i);
+	    		 }
+		     }
+	     }
+	     
+	     Collections.sort(thePlayers, new SequenceOfPlayer(column, order));
+	     
+	    int count=0;
+		for(PlayerVO vo:thePlayers){
+				result.add(vo);
+				count++;
+				if(count>=num)
+					break;
+		}
+		return result;
+	}
+	
 	public ArrayList<PlayerVO> selectPlayersBySeason(String season,
-			String position, String union, String column, int num) {
-		
-		return null;
+			String position, String union,int ageClass, String column,String order, int num) {
+	    ArrayList<PlayerVO> thePlayers=getPlayerSeasonInfo(season);
+	    return selectPlayers(thePlayers, position, union, ageClass, column, order, num);
 	}
 
 	public ArrayList<PlayerVO> selectPlayersByAverage(
-			String position, String union, String column, int num) {
-		// TODO Auto-generated method stub
-		return null;
+			String position, String union,int ageClass, String column,String order, int num) {
+		ArrayList<PlayerVO> thePlayers=getPlayerAverageInfo();
+	    return selectPlayers(thePlayers, position, union, ageClass, column, order, num);
 	}
 
 	public ImageIcon getPlayerPortraitImage(String name) {
-		// TODO Auto-generated method stub
-		return null;
+		ImageIcon imageIcon = new ImageIcon("src/data/players/portrait/" + name + ".png");
+		return imageIcon;
 	}
 
 	public ImageIcon getPlayerActionImage(String name) {
-		// TODO Auto-generated method stub
-		return null;
+		ImageIcon imageIcon = new ImageIcon("src/data/players/action/" + name + ".png");
+		return imageIcon;
 	}
 
-	public ArrayList<PlayerVO> getDayHotPlayer(String column) {
-		// TODO Auto-generated method stub
-		return null;
+	private String getToday(){
+		String result;
+		int year;
+		int month;
+		Calendar cal = Calendar.getInstance();
+		java.text.SimpleDateFormat f = new java.text.SimpleDateFormat("MM-dd");
+		String todayDate = f.format(cal.getTime());
+		year = cal.get(Calendar.YEAR);
+		year -= 2000;
+		month = cal.get(Calendar.MONTH);
+		if (month <= 6) {
+			result = (year - 1) + "-" + year;
+		} else {
+			result = year + "-" + (year + 1);
+		}
+		String todaySeason = result;
+        result=todaySeason+"_"+todayDate;
+		return result;
+	}
+	
+	public ArrayList<PlayerVO> getDayHotPlayer(String column,int num) {
+		
 	}
 
 	public ArrayList<PlayerVO> getSeasonHotPlayer(String season, String column) {
