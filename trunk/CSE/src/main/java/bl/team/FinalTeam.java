@@ -1,4 +1,4 @@
-package bl;
+package bl.team;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -18,74 +18,22 @@ import javax.swing.ImageIcon;
 import vo.MatchVO;
 import vo.RecordVO;
 import vo.TeamVO;
+import bl.DataSourse;
+import bl.DirtyDataManager;
+import bl.match.NewMatch;
 import blservice.TeamBLService;
 
-public class NewFinalTeam implements TeamBLService {
+public class FinalTeam implements TeamBLService {
 	private Map<String, TeamVO> teamsBaseInfo = new LinkedHashMap<String, TeamVO>();
-	private Map<String, Map<String, MatchVO>> matches = new LinkedHashMap<String, Map<String, MatchVO>>();
+	private Map<String, MatchVO> matches = new LinkedHashMap<String, MatchVO>();
 	private Map<String, TeamVO> teamAverageInfo = new LinkedHashMap<String, TeamVO>();
-	NewNewMatch match;
 
 	// 删去了readFromMatchFile和getMatches两个私有方法，改为创建一个match类，从中得到比赛信息
-	public NewFinalTeam() {
+	public FinalTeam() {
 		// TODO 自动生成的构造函数存根
 		getTeams();
-		match = new NewNewMatch();
+		NewMatch match = new NewMatch();
 		matches = match.getMatchData("全部", "全部", "全部", "全部");
-	}
-
-	public static void main(String[] args) {
-		NewFinalTeam team = new NewFinalTeam();
-		String season = "13-14";
-		ArrayList<TeamVO> result = new ArrayList<TeamVO>();
-		// ArrayList<MatchVO> result = new ArrayList<MatchVO>();
-		// result = team.getTeamSeasonInfo(season);
-		// result = team.getTeamAverageInfo();
-		// result = team.getSeasonHotTeam(season, "score", 4);
-		result = team.getTeamSeasonInfo(season);
-		// result = team.getRecentMatches("ATL");
-		// result=team.getMatches("ATL");
-		System.out.println(result.size());
-
-		for (TeamVO vo : result) {
-			// System.out.println(vo.getAbLocation() + " " + vo.getScore());
-			System.out.println(vo.getAbLocation());
-			System.out.println("winRate：" + vo.getWinRate());
-			System.out.println("shootHitNum：" + vo.getShootHitNum());
-			System.out.println("shootAttemptNum：" + vo.getShootAttemptNum());
-			System.out.println("threeHitNum：" + vo.getThreeHitNum());
-			System.out.println("threeAttemptNum：" + vo.getThreeAttemptNum());
-			System.out.println("freeThrowHitNum：" + vo.getFreeThrowHitNum());
-			System.out.println("freeThrowAttemptNum："
-					+ vo.getFreeThrowAttemptNum());
-			System.out.println("offenReboundNum：" + vo.getOffenReboundNum());
-			System.out.println("defenReboundNum：" + vo.getDefenReboundNum());
-			System.out.println("reboundNum：" + vo.getReboundNum());
-			System.out.println("assistNum：" + vo.getAssistNum());
-			System.out.println("stealNum：" + vo.getStealNum());
-			System.out.println("blockNum：" + vo.getBlockNum());
-			System.out.println("turnOverNum：" + vo.getTurnOverNum());
-			System.out.println("foulNum：" + vo.getFoulNum());
-			System.out.println("score：" + vo.getScore());
-			System.out.println("shootHitRate:" + vo.getShootHitRate());
-			System.out.println("threeHitRate:" + vo.getThreeHitRate());
-			System.out.println("freeThrowHitRate:" + vo.getFreeThrowHitRate());
-			System.out.println("offenRound:" + vo.getOffenRound());
-			System.out.println("offenEfficiency:" + vo.getOffenEfficiency());
-			System.out.println("defenEfficiency:" + vo.getDefenEfficiency());
-			System.out.println("offenReboundEfficiency:"
-					+ vo.getOffenReboundEfficiency());
-			System.out.println("defenReboundEfficiency:"
-					+ vo.getDefenReboundEfficiency());
-			System.out.println("stealEfficiency:" + vo.getStealEfficiency());
-			System.out.println("assistRate:" + vo.getAssistRate());
-			System.out.println("----------------------------------");
-
-		}
-
-		// for (MatchVO vo : result) {
-		// System.out.println(vo.getVisitingScore() + ":" + vo.getHomeScore());
-		// }
 	}
 
 	/**
@@ -130,9 +78,10 @@ public class NewFinalTeam implements TeamBLService {
 					.next();
 			TeamVO vo = (TeamVO) entry.getValue();
 
-			TeamVO teamVO = calculateTeamInfo(vo, season);
+			TeamVO teamVO = calculateTeamAverageInfo(vo, season);
 			result.add(teamVO);
 		}
+		Collections.sort(result, new SequenceOfTeam("teamName", "asc"));
 		return result;
 	}
 
@@ -191,7 +140,7 @@ public class NewFinalTeam implements TeamBLService {
 				continue;
 			}
 
-			TeamVO teamVO = calculateTeamInfo(vo, season);
+			TeamVO teamVO = calculateTeamAverageInfo(vo, season);
 			result.add(teamVO);
 		}
 		return result;
@@ -215,7 +164,7 @@ public class NewFinalTeam implements TeamBLService {
 				// 当前球队不是我要的球队，就跳过他不进行计算
 				continue;
 			}
-			TeamVO teamVO = calculateTeamInfo(vo, "all");
+			TeamVO teamVO = calculateTeamAverageInfo(vo, "all");
 			result.add(teamVO);
 		}
 		return result;
@@ -318,49 +267,23 @@ public class NewFinalTeam implements TeamBLService {
 	 */
 	private ArrayList<MatchVO> getRecentMatches(String teamName, int num) {
 		ArrayList<MatchVO> result = new ArrayList<MatchVO>();
-
-		// ====================================
-		matches = match.getMatchData("全部", "全部", "全部", "全部");
-		Iterator<Entry<String, Map<String, MatchVO>>> iter = matches.entrySet()
-				.iterator();
-		ArrayList<String> seasons = new ArrayList<String>();
+		int count = 0;
+		Iterator<Entry<String, MatchVO>> iter = matches.entrySet().iterator();
 		while (iter.hasNext()) {
-			Map.Entry<String, Map<String, MatchVO>> entry = (Map.Entry<String, Map<String, MatchVO>>) iter
+			Map.Entry<String, MatchVO> entry = (Map.Entry<String, MatchVO>) iter
 					.next();
-			String seasonKey = (String) entry.getKey();
-			seasons.add(seasonKey);
-		}
-		Collections.sort(seasons);
-
-		int matchCount = 0;
-		int seasonCount = 0;
-		while (seasonCount < matches.size()) {
-			Map<String, MatchVO> map = matches.get(seasons.get(seasonCount));
+			MatchVO matchVO = (MatchVO) entry.getValue();
 			if (num > 0) {// -1则是取出全部数据
-				if (matchCount >= num) {
+				if (count >= num) {
 					break;
 				}
 			}
-
-			Iterator<Entry<String, MatchVO>> iter2 = map.entrySet().iterator();
-			while (iter2.hasNext()) {
-				if (num > 0) {// -1则是取出全部数据
-					if (matchCount >= num) {
-						break;
-					}
-				}
-				Map.Entry<String, MatchVO> entry = (Map.Entry<String, MatchVO>) iter2
-						.next();
-				MatchVO matchVO = (MatchVO) entry.getValue();
-
-				String visitingTeam = matchVO.getVisitingTeam();
-				String homeTeam = matchVO.getHomeTeam();
-				if (homeTeam.equals(teamName) || visitingTeam.equals(teamName)) {
-					result.add(matchVO);
-					matchCount++;
-				}
+			String visitingTeam = matchVO.getVisitingTeam();
+			String homeTeam = matchVO.getHomeTeam();
+			if (homeTeam.equals(teamName) || visitingTeam.equals(teamName)) {
+				result.add(matchVO);
+				count++;
 			}
-			seasonCount++;
 		}
 		return result;
 	}
@@ -457,13 +380,13 @@ public class NewFinalTeam implements TeamBLService {
 					.next();
 			TeamVO vo = (TeamVO) entry.getValue();
 			String abLocation = vo.getAbLocation();
-			TeamVO teamVO = calculateTeamInfo(vo, "all");
+			TeamVO teamVO = calculateTeamAverageInfo(vo, "all");
 			teamAverageInfo.put(abLocation, teamVO);
 		}
 
 	}
 
-	private TeamVO calculateTeamInfo(TeamVO vo, String season) {
+	private TeamVO calculateTeamAverageInfo(TeamVO vo, String season) {
 		String teamName = vo.getTeamName();
 		String team = vo.getAbLocation();
 		String location = vo.getLocation();
@@ -511,50 +434,19 @@ public class NewFinalTeam implements TeamBLService {
 		int dsDefenReboundNum = 0;
 		double dsOffenRound = 0;
 
-		Map<String, MatchVO> allMatches = new HashMap<String, MatchVO>();
-
-		if (season.equals("all")) {
-			// 得到全部比赛数据的，还是觉得有点傻逼
-			// 思路是将按赛季分的二维map读出来加到一个新的不按赛季分的map中
-			int flag = 0;
-
-			// ====================================
-			matches = match.getMatchData("全部", "全部", "全部", "全部");
-
-			Iterator<Entry<String, Map<String, MatchVO>>> iter = matches
-					.entrySet().iterator();
-			while (iter.hasNext()) {
-				Map.Entry<String, Map<String, MatchVO>> entry = (Map.Entry<String, Map<String, MatchVO>>) iter
-						.next();
-				if (flag == 0) {
-					allMatches = entry.getValue();
-				} else {
-					Map<String, MatchVO> map = new HashMap<String, MatchVO>();
-					map = entry.getValue();
-					Iterator<Entry<String, MatchVO>> matchIterator = map
-							.entrySet().iterator();
-					while (matchIterator.hasNext()) {
-						Map.Entry<String, MatchVO> matchEntry = (Map.Entry<String, MatchVO>) matchIterator
-								.next();
-						String key = matchEntry.getKey();
-						MatchVO matchVO = matchEntry.getValue();
-						allMatches.put(key, matchVO);
-					}
-				}
-				flag++;
-			}
-		} else {
-			// ====================================
-			matches = match.getMatchData("全部", "全部", "全部", "全部");
-
-			allMatches = matches.get(season);
-		}
-		Iterator<Entry<String, MatchVO>> allMatchIter = allMatches.entrySet()
+		Iterator<Entry<String, MatchVO>> matchIter = matches.entrySet()
 				.iterator();
-		while (allMatchIter.hasNext()) {
-			Map.Entry<String, MatchVO> matchEntry = (Map.Entry<String, MatchVO>) allMatchIter
+		while (matchIter.hasNext()) {
+			Map.Entry<String, MatchVO> matchEntry = (Map.Entry<String, MatchVO>) matchIter
 					.next();
 			MatchVO matchVO = (MatchVO) matchEntry.getValue();
+
+			if (!season.equals("all")) {
+				if (!matchVO.getSeason().equals(season)) {
+					continue;
+				}
+			}
+
 			int homeScore = matchVO.getHomeScore();
 			int visitingScore = matchVO.getVisitingScore();
 			String homeTeam = matchVO.getHomeTeam();
@@ -638,25 +530,6 @@ public class NewFinalTeam implements TeamBLService {
 				stealEfficiency = (double) stealNum / dsOffenRound * 100; // 抢断效率
 				assistEfficiency = (double) assistNum / offenRound * 100; // 助攻率
 			}
-		}
-
-		if (season.equals("all")) {
-			// 需要的是场均数据，要除以比赛场数
-			shootHitNum = shootHitNum / (double) matchesNum;
-			shootAttemptNum = shootAttemptNum / (double) matchesNum;
-			threeHitNum = threeHitNum / (double) matchesNum;
-			threeAttemptNum = threeAttemptNum / (double) matchesNum;
-			freeThrowHitNum = freeThrowHitNum / (double) matchesNum;
-			freeThrowAttemptNum = freeThrowAttemptNum / (double) matchesNum;
-			offenReboundNum = offenReboundNum / (double) matchesNum;
-			defenReboundNum = defenReboundNum / (double) matchesNum;
-			reboundNum = reboundNum / (double) matchesNum;
-			assistNum = assistNum / (double) matchesNum;
-			stealNum = stealNum / (double) matchesNum;
-			blockNum = blockNum / (double) matchesNum;
-			turnOverNum = turnOverNum / (double) matchesNum;
-			foulNum = foulNum / (double) matchesNum;
-			score = score / (double) matchesNum;
 		}
 		TeamVO teamVO = new TeamVO(teamName, abLocation, location, conference,
 				partition, homeCourt, setUpTime, matchesNum, shootHitNum,

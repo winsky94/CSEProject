@@ -1,4 +1,4 @@
-package bl;
+package bl.match;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -6,25 +6,23 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Map.Entry;
 
+import bl.DataSourse;
+import bl.DirtyDataManager;
+import bl.FileList;
 import vo.MatchVO;
 import vo.RecordVO;
-import blservice.MatchBLService;
 
-public class Match implements MatchBLService {
-	private ArrayList<MatchVO> matches = new ArrayList<MatchVO>();
+public class NewNewMatch {
+	private Map<String, Map<String, MatchVO>> matches = new HashMap<String, Map<String, MatchVO>>();
 	private FileList fl;
 
-	public Match(boolean f) {
-
-	}
-
-	public Match() {
-		getMatches();
-	}
-
-	public static void main(String[] args) {
-		new Match();
+	public NewNewMatch() {
+		matches = getMatches();
 	}
 
 	/**
@@ -34,7 +32,7 @@ public class Match implements MatchBLService {
 	 *            记录比赛信息的文件名
 	 * @return 一个matchVO对象
 	 */
-	private static MatchVO readFromMatchFile(String fileName) {
+	private MatchVO readFromMatchFile(String fileName) {
 		MatchVO matchVO;
 		String season;// 赛季
 		String date = null;// 比赛日期
@@ -162,14 +160,24 @@ public class Match implements MatchBLService {
 	 * 
 	 * @return 比赛列表
 	 */
-	private void getMatches() {
+	private Map<String, Map<String, MatchVO>> getMatches() {
 		// TODO 自动生成的方法存根
+		Map<String, Map<String, MatchVO>> matches = new HashMap<String, Map<String, MatchVO>>();
 		try {
-			fl = new FileList(DataSourse.dataSourse + "/matches", this);
-			ArrayList<String> names = new ArrayList<String>();
-			names = fl.getList();
+			// fl = new FileList(DataSourse.dataSourse + "/matches", this);
+			fl = new FileList(DataSourse.dataSourse + "/matches",this);
+			ArrayList<String> names = fl.getList();
 			for (String name : names) {
-				matches.add(readFromMatchFile(name));
+				String key = getKeyName(name);
+				String season = getSeason(name);
+				Map<String, MatchVO> test = matches.get(season);
+				if (test == null) {
+					Map<String, MatchVO> map = new HashMap<String, MatchVO>();
+					map.put(key, readFromMatchFile(name));
+					matches.put(season, map);
+				} else {
+					test.put(key, readFromMatchFile(name));
+				}
 			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -179,9 +187,11 @@ public class Match implements MatchBLService {
 			e.printStackTrace();
 		}
 
-//		// 初始化后 开启线程：
-//		updateMatch um = new updateMatch();
-//		um.startThread();
+		 // 初始化后 开启线程：
+		 updateMatch um = new updateMatch();
+		 um.startThread();
+
+		return matches;
 	}
 
 	/**
@@ -197,50 +207,67 @@ public class Match implements MatchBLService {
 	 *            客队
 	 * @return 比赛的列表
 	 */
-	public ArrayList<MatchVO> getMatchData(String season, String date,
-			String homeTeam, String visitingTeam) {
+	public Map<String, Map<String, MatchVO>> getMatchData(String season,
+			String date, String homeTeam, String visitingTeam) {
 		// TODO 自动生成的方法存根
-		ArrayList<MatchVO> result = new ArrayList<MatchVO>();
+		Map<String, Map<String, MatchVO>> result = new HashMap<String, Map<String, MatchVO>>();
 
 		if (season.equals("全部") && date.equals("全部") && homeTeam.equals("全部")
 				&& visitingTeam.equals("全部")) {
 			result = matches;
 			return result;
 		} else {
-			for (MatchVO vo : matches) {
-				String currentSeason = vo.getSeason();
-				String currentDate = vo.getDate();
-				String currentHomeTeam = vo.getHomeTeam();
-				String currentVisitingTeam = vo.getVisitingTeam();
+			Iterator<Entry<String, Map<String, MatchVO>>> iter = matches
+					.entrySet().iterator();
+			while (iter.hasNext()) {
+				Map.Entry<String, Map<String, MatchVO>> entry = (Map.Entry<String, Map<String, MatchVO>>) iter
+						.next();
+				String seasonKey=(String)entry.getKey();
+				Map<String, MatchVO> temp=new HashMap<String, MatchVO>();
+				
+				Map<String, MatchVO> map = (Map<String, MatchVO>) entry
+						.getValue();
 
-				boolean checkSeason = true;
-				boolean checkDate = true;
-				boolean checkHomeTeam = true;
-				boolean checkVisitingTeam = true;
-				if (!season.equals("全部")) {
-					checkSeason = currentSeason.equals(season);
-				}
-				if (!date.equals("全部")) {
-					checkDate = currentDate.equals(date);
-				}
-				if (!homeTeam.equals("全部")) {
-					checkHomeTeam = currentHomeTeam.equals(homeTeam);
-				}
-				if (!visitingTeam.equals("全部")) {
-					checkVisitingTeam = currentVisitingTeam
-							.equals(visitingTeam);
-				}
+				Iterator<Entry<String, MatchVO>> matchIterator = map.entrySet()
+						.iterator();
+				while (matchIterator.hasNext()) {
+					Map.Entry<String, MatchVO> matchEntry = (Map.Entry<String, MatchVO>) matchIterator
+							.next();
+					
+					MatchVO vo = (MatchVO) matchEntry.getValue();
+					String currentSeason = vo.getSeason();
+					String currentDate = vo.getDate();
+					String currentHomeTeam = vo.getHomeTeam();
+					String currentVisitingTeam = vo.getVisitingTeam();
 
-				if (checkSeason && checkDate && checkHomeTeam
-						&& checkVisitingTeam) {
-					result.add(vo);
-				}
+					boolean checkSeason = true;
+					boolean checkDate = true;
+					boolean checkHomeTeam = true;
+					boolean checkVisitingTeam = true;
+					if (!season.equals("全部")) {
+						checkSeason = currentSeason.equals(season);
+					}
+					if (!date.equals("全部")) {
+						checkDate = currentDate.equals(date);
+					}
+					if (!homeTeam.equals("全部")) {
+						checkHomeTeam = currentHomeTeam.equals(homeTeam);
+					}
+					if (!visitingTeam.equals("全部")) {
+						checkVisitingTeam = currentVisitingTeam
+								.equals(visitingTeam);
+					}
 
+					if (checkSeason && checkDate && checkHomeTeam
+							&& checkVisitingTeam) {
+						String key = (String) entry.getKey();
+						temp.put(key, vo);
+					}
+				}
+				result.put(seasonKey, temp);
 			}
 		}
-
 		return result;
-
 	}
 
 	/**
@@ -251,8 +278,31 @@ public class Match implements MatchBLService {
 	 */
 	public void add(ArrayList<String> newName) {
 		for (String str : newName) {
-			matches.add(readFromMatchFile(str));
+			String key = getKeyName(str);
+			String season = getSeason(str);
+			Map<String, MatchVO> test = matches.get(season);
+			if (test == null) {
+				Map<String, MatchVO> map = new HashMap<String, MatchVO>();
+				map.put(key, readFromMatchFile(str));
+				matches.put(season, map);
+			} else {
+				test.put(key, readFromMatchFile(str));
+			}
 		}
+	}
+
+	private String getKeyName(String fileName) {
+		String result = null;
+		String[] tp = fileName.split("matches");
+		result = tp[1].substring(1);
+		return result;
+	}
+
+	private String getSeason(String fileName) {
+		String result = null;
+		String[] tp = fileName.split("_");
+		result = tp[0].split("matches")[1].substring(1);
+		return result;
 	}
 
 	// 放在Filelist或Match里均可
@@ -266,9 +316,9 @@ public class Match implements MatchBLService {
 		public void run() {
 			while (!stop) {
 				fl.checkChange();
-//				System.out.println("我在很认真的检查呀，港荣蒸蛋糕真的好吃，字打错了灭");
+				// System.out.println("我在很认真的检查呀，港荣蒸蛋糕真的好吃，字打错了灭");
 				try {
-					this.sleep(5000);// 话说 能不能不睡
+					this.sleep(2000);// 话说 能不能不睡
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

@@ -1,4 +1,4 @@
-package bl;
+package bl.player;
 
 import java.util.Comparator;
 
