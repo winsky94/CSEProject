@@ -61,7 +61,6 @@ public class FinalTeam implements TeamBLService {
 	public ArrayList<TeamVO> getTeamBaseInfo() {
 		// TODO 自动生成的方法存根
 		ArrayList<TeamVO> result = changeMapToList(teamsBaseInfo);
-		Collections.sort(result, new SequenceOfTeam("teamName", "asc"));
 		return result;
 	}
 
