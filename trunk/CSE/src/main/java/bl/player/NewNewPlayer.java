@@ -575,13 +575,21 @@ public class NewNewPlayer implements PlayerBLService {
 
 				if (thisPlayer.getMostRecentMatch() == null) {
 					thisPlayer.setOwingTeam(team);
-					thisPlayer.setLeague(teams.get(team).getConference());
+					TeamVO teamVO=teams.get(team);
+					if(teamVO==null){
+						teamVO=teams.get("NOP");
+					}
+					thisPlayer.setLeague(teamVO.getConference());
 					thisPlayer.setMostRecentMatch(season + "_" + date);
 				} else {
 					if (thisPlayer.getMostRecentMatch().compareTo(
 							season + "_" + date) < 0) {
 						thisPlayer.setOwingTeam(team);
-						thisPlayer.setLeague(teams.get(team).getConference());
+						TeamVO teamVO=teams.get(team);
+						if(teamVO==null){
+							teamVO=teams.get("NOP");
+						}
+						thisPlayer.setLeague(teamVO.getConference());
 						thisPlayer.setMostRecentMatch(season + "_" + date);
 					}
 				}
