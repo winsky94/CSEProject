@@ -19,6 +19,7 @@ public class TinyCard extends JPanel{
 	private static final long serialVersionUID = 1L;
 	boolean isHomeBigger = false;
 	public TinyCard(MatchVO vo) {
+		setOpaque(false);
 		GridBagLayout gbl = new GridBagLayout();
 		GridBagConstraints gbc = new GridBagConstraints();
 		gbc.fill = GridBagConstraints.BOTH;
