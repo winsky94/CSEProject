@@ -168,7 +168,7 @@ public class Match implements MatchBLService {
 	private void getMatches() {
 		// TODO 自动生成的方法存根
 		try {
-			fl = new FileList(DataSourse.dataSourse + "/matches", this);
+			fl = new FileList(DataSourse.dataSourse + "/matches");
 			ArrayList<String> names = new ArrayList<String>();
 			names = fl.getList();
 			for (String name : names) {
