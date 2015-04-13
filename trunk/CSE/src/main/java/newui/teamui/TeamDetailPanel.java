@@ -92,7 +92,7 @@ public class TeamDetailPanel extends FatherPanel{
 		add(tab);
 		//---------------------
 		infoPnl=new TeamDetailInfoPanel(nameCH,abbrName);
-		historyPnl=new TeamDetailHistoryPanel();
+		historyPnl=new TeamDetailHistoryPanel(abbrName);
 		tab.addTab("基本信息", infoPnl);
 		tab.addTab("过往数据",historyPnl);
 		tab.setBorder(null);
