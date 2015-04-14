@@ -7,10 +7,10 @@ import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JTable;
 
+import bl.player.Player;
+import blservice.PlayerBLService;
 import vo.PlayerVO;
-import businesslogic.Player;
-import businesslogic.Team;
-import businesslogicservice.PlayerBLService;
+
 
 public class PlayerBaseInfoTableModel extends MyTableModel {
 
