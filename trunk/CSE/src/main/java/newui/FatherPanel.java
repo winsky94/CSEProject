@@ -25,9 +25,9 @@ public class FatherPanel extends JPanel{
 		titleBar=new TitleBar();
 		gbc.gridx = 0;
 		gbc.gridy = 0;
-		gbc.gridwidth = 10;
+		gbc.gridwidth = 12;
 		gbc.gridheight = 1;
-		gbc.weightx = 10;
+		gbc.weightx = 12;
 		gbc.weighty = 1;
 		gbl.setConstraints(titleBar, gbc);
 		add(titleBar);
