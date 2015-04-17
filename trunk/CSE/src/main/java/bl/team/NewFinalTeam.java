@@ -754,6 +754,82 @@ public class NewFinalTeam implements TeamBLService {
 				stealEfficiency, assistEfficiency);
 		return teamVO;
 	}
+
+	/**
+	 * 将球队中文名转为相应的英文缩写
+	 * 
+	 * @param CH
+	 *            球队中文名
+	 * @return 英文缩写
+	 */
+	public static String changeTeamNameCHToEN(String CH) {
+		String EN = "";
+		if (CH.equals("太阳")) {
+			EN = "PHX";
+		} else if (CH.equals("马刺")) {
+			EN = "SAS";
+		} else if (CH.equals("国王")) {
+			EN = "SAC";
+		} else if (CH.equals("火箭")) {
+			EN = "HOU";
+		} else if (CH.equals("湖人")) {
+			EN = "LAL";
+		} else if (CH.equals("掘金")) {
+			EN = "DEN";
+		} else if (CH.equals("森林狼")) {
+			EN = "MIN";
+		} else if (CH.equals("小牛")) {
+			EN = "DAL";
+		} else if (CH.equals("快船")) {
+			EN = "LAC";
+		} else if (CH.equals("爵士")) {
+			EN = "UTA";
+		} else if (CH.equals("勇士")) {
+			EN = "GSW";
+		} else if (CH.equals("灰熊")) {
+			EN = "MEM";
+		} else if (CH.equals("雷霆")) {
+			EN = "OKC";
+		} else if (CH.equals("鹈鹕")) {
+			EN = "NOP";
+		} else if (CH.equals("开拓者")) {
+			EN = "POR";
+		} else if (CH.equals("凯尔特人")) {
+			EN = "BOS";
+		} else if (CH.equals("篮网")) {
+			EN = "BKN";
+		} else if (CH.equals("尼克斯")) {
+			EN = "NYK";
+		} else if (CH.equals("76人")) {
+			EN = "PHI";
+		} else if (CH.equals("猛龙")) {
+			EN = "TOR";
+		} else if (CH.equals("公牛")) {
+			EN = "CHI";
+		} else if (CH.equals("骑士")) {
+			EN = "CLE";
+		} else if (CH.equals("活塞")) {
+			EN = "DET";
+		} else if (CH.equals("步行者")) {
+			EN = "IND";
+		} else if (CH.equals("雄鹿")) {
+			EN = "MIL";
+		} else if (CH.equals("老鹰")) {
+			EN = "ATL";
+		} else if (CH.equals("黄蜂")) {
+			EN = "CHA";
+		} else if (CH.equals("热火")) {
+			EN = "MIA";
+		} else if (CH.equals("魔术")) {
+			EN = "ORL";
+		} else if (CH.equals("奇才")) {
+			EN = "WAS";
+		} else {
+			EN = CH;
+		}
+
+		return EN;
+	}
 }
 
 // package bl.team;
