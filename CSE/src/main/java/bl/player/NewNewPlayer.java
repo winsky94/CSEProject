@@ -51,8 +51,8 @@ public class NewNewPlayer implements PlayerBLService {
 		baseInfoInit();
 		teams = FinalTeam.getTeamsPartition();
 		allMatchInfoInit();
-		updateMatch um = new updateMatch();
-		um.startThread();
+//		updateMatch um = new updateMatch();    //!!!!注意，这个是检查性能时交代码时才交！！
+//		um.startThread();
 	}
 
 	private void baseInfoInit() {
