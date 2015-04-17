@@ -19,6 +19,9 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 
+import bl.player.NewNewPlayer;
+import blservice.AgeEnum;
+import blservice.PlayerBLService;
 import newui.FatherPanel;
 import newui.Style;
 import newui.TableModel;
@@ -28,8 +31,7 @@ import newui.tables.MyTableCellRenderer;
 import newui.tables.PlayerTableModel;
 import newui.tables.RowHeaderTable;
 import vo.PlayerVO;
-import businesslogic.Player;
-import businesslogicservice.PlayerBLService;
+
 
 public class PlayerRankPanel extends FatherPanel implements MouseListener,
 		ItemListener {
@@ -56,7 +58,7 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener,
 			"盖帽", "抢断", "罚球", "犯规", "失误", "分钟", "效率", "两双" };
 
 	public PlayerRankPanel() {
-		player = new Player();
+		player = new NewNewPlayer();
 		// ------funcPnl--------
 		funcPnl = new JPanel();
 		funcPnl.setBackground(Style.BACK_GREY);
@@ -202,10 +204,10 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener,
 			String type = typeBox.getSelectedItem().toString();
 			if (type.equals("赛季"))
 				vlist = player.selectPlayersBySeason(season, position, union,
-						sort,50);
+						AgeEnum.ALL,sort,"desc",50);
 			else
-				vlist = player.selectPlayersByAverage(season, position, union,
-						sort,50);
+				vlist = player.selectPlayersByAverage(position, union,
+						AgeEnum.ALL,sort,"desc",50);
 			// vlist.size()==0显示没有符合条件的球员
 			if (vlist != null){
 				ptm.refreshContent(vlist);
@@ -274,7 +276,7 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener,
 			if (s.equals("赛季"))
 				vlist = player.getPlayerSeasonInfo(season);
 			else
-				vlist = player.getPlayerAverageInfo(season);
+				vlist = player.getPlayerAverageInfo();
 			// vlist.size()==0显示没有符合条件的球员
 			if (vlist != null)
 				ptm.refreshContent(vlist);

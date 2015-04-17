@@ -7,10 +7,11 @@ import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import bl.team.Team;
+import blservice.TeamBLService;
 import newui.matchui.TinyCard;
 import vo.MatchVO;
-import businesslogic.Team;
-import businesslogicservice.TeamBLService;
+
 
 public class TeamDetailRecentPanel extends JPanel{
 

@@ -12,6 +12,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
+import com.toedter.calendar.JDateChooser;
+
 import newui.FatherPanel;
 import newui.Style;
 

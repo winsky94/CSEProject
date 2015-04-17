@@ -2,15 +2,17 @@ package newui.tables;
 
 import java.util.ArrayList;
 
+import bl.player.NewNewPlayer;
+import blservice.PlayerBLService;
 import vo.PlayerVO;
-import businesslogic.Player;
+
 
 public class PlayerTableModel extends MyTableModel{
 
 	/**
 	 * 表格球员信息列表模式model
 	 */
-	Player player=new Player();
+	PlayerBLService player=new NewNewPlayer();
 	private static final long serialVersionUID = 1L;
 	ArrayList<ArrayList<Object>> content=new ArrayList<ArrayList<Object>>();
 	static String[] head={"球员名称","所属球队","参赛场数","先发场数","篮板数","助攻数","在场时间",

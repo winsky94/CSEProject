@@ -16,14 +16,18 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 
+import bl.player.NewNewPlayer;
+import bl.player.Player;
+import bl.team.Team;
+import blservice.PlayerBLService;
+import blservice.TeamBLService;
 import newui.FatherPanel;
 import newui.Style;
 import newui.mainui.MainFrame;
 import newui.playerui.PlayerDetailPanel;
 import newui.teamui.details.TeamDetailHistoryPanel;
 import newui.teamui.details.TeamDetailInfoPanel;
-import businesslogic.Team;
-import businesslogicservice.TeamBLService;
+
 
 public class TeamDetailPanel extends FatherPanel{
 	/**
@@ -67,7 +71,10 @@ public class TeamDetailPanel extends FatherPanel{
 		add(playerJsp);
 		
 		//------显示全部球员大头-----
-		players=new ArrayList<String>(team.getPlayersByTeam(abbrName));
+		PlayerBLService play=new NewNewPlayer();
+		//这是那个方法？？？
+		players=new ArrayList<String>(play.getPlayersByTeam(abbrName).size());
+		
 		playerPortraits=new ArrayList<JLabel>(players.size());
 		playerPnl=new JPanel();
 		playerPnl.setOpaque(false);

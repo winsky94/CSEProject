@@ -9,9 +9,10 @@ import java.awt.Insets;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import bl.team.Team;
+import blservice.TeamBLService;
 import vo.TeamVO;
-import businesslogic.Team;
-import businesslogicservice.TeamBLService;
+
 
 public class TeamDetailInfoPanel extends JPanel{
 
@@ -28,7 +29,7 @@ public class TeamDetailInfoPanel extends JPanel{
 		team=new Team();
 		chName=ch;
 		abbrName=abbr;
-		basevo=team.getTeamBaseInfo(abbr);
+		basevo=team.getTeamBaseInfo(abbr).get(0);
 		enName=basevo.getTeamName();
 		//----------------------------
 		GridBagLayout gbl=new GridBagLayout();

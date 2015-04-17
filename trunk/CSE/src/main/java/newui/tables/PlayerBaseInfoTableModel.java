@@ -7,7 +7,9 @@ import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JTable;
 
+import bl.player.NewNewPlayer;
 import bl.player.Player;
+import bl.team.Team;
 import blservice.PlayerBLService;
 import vo.PlayerVO;
 
@@ -26,7 +28,7 @@ public class PlayerBaseInfoTableModel extends MyTableModel {
 
 	public PlayerBaseInfoTableModel() {
 
-		player = new Player();
+		player = new NewNewPlayer();
 		playerlist = new ArrayList<PlayerVO>();
 	}
 
@@ -80,7 +82,7 @@ public class PlayerBaseInfoTableModel extends MyTableModel {
 		ArrayList<PlayerVO> sortByC = new ArrayList<PlayerVO>();
 		ArrayList<ImageIcon> listimg = new ArrayList<ImageIcon>();
 		for (int i = 0; i < playerlist.size(); i++) {
-			String name = playerlist.get(i).getTeamName();
+			String name = playerlist.get(i).getOwingTeam();
 			if (tName.equals("全部")) {
 				sortByC = playerlist;
 				listimg = imgList;
@@ -126,7 +128,7 @@ public class PlayerBaseInfoTableModel extends MyTableModel {
 
 			line.add(icon);
 			line.add(name);
-			line.add(vo.getTeamName());
+			line.add(vo.getOwingTeam());
 			line.add(vo.getPosition());
 			line.add(vo.getHeight());
 			line.add(vo.getWeight());
@@ -157,7 +159,7 @@ public class PlayerBaseInfoTableModel extends MyTableModel {
 							Image.SCALE_DEFAULT));
 			line.add(icon);
 			line.add(vo.getName());
-			line.add(vo.getTeamName());
+			line.add(vo.getOwingTeam());
 			line.add(vo.getPosition());
 			line.add(vo.getHeight());
 			line.add(vo.getWeight());
