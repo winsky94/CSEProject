@@ -19,7 +19,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 
-import bl.player.NewNewPlayer;
+import bl.player.Player;
 import blservice.AgeEnum;
 import blservice.PlayerBLService;
 import newui.FatherPanel;
@@ -58,7 +58,7 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener,
 			"盖帽", "抢断", "罚球", "犯规", "失误", "分钟", "效率", "两双" };
 
 	public PlayerRankPanel() {
-		player = new NewNewPlayer();
+		player = new Player();
 		// ------funcPnl--------
 		funcPnl = new JPanel();
 		funcPnl.setBackground(Style.BACK_GREY);

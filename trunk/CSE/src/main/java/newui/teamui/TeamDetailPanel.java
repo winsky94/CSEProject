@@ -16,7 +16,6 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 
-import bl.player.NewNewPlayer;
 import bl.player.Player;
 import bl.team.Team;
 import blservice.PlayerBLService;
@@ -71,7 +70,7 @@ public class TeamDetailPanel extends FatherPanel{
 		add(playerJsp);
 		
 		//------显示全部球员大头-----
-		PlayerBLService play=new NewNewPlayer();
+		PlayerBLService play=new Player();
 		//这是那个方法？？？
 		players=new ArrayList<String>(play.getPlayersByTeam(abbrName).size());
 		

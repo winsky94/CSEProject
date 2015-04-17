@@ -2,7 +2,7 @@ package newui.tables;
 
 import java.util.ArrayList;
 
-import bl.player.NewNewPlayer;
+import bl.player.Player;
 import blservice.PlayerBLService;
 import vo.PlayerVO;
 
@@ -12,7 +12,7 @@ public class PlayerTableModel extends MyTableModel{
 	/**
 	 * 表格球员信息列表模式model
 	 */
-	PlayerBLService player=new NewNewPlayer();
+	PlayerBLService player=new Player();
 	private static final long serialVersionUID = 1L;
 	ArrayList<ArrayList<Object>> content=new ArrayList<ArrayList<Object>>();
 	static String[] head={"球员名称","所属球队","参赛场数","先发场数","篮板数","助攻数","在场时间",
@@ -78,7 +78,7 @@ public class PlayerTableModel extends MyTableModel{
 		if(model.equals("赛季"))
 			 result=player.getPlayerSeasonInfo("13-14");
 		else
-			result=player.getPlayerAverageInfo("13-14");
+			result=player.getPlayerAverageInfo();
 		if(result!=null&&result.size()!=0){
 			refreshContent(result);
 			    
@@ -113,7 +113,7 @@ public class PlayerTableModel extends MyTableModel{
 		for(PlayerVO vo:result){
 			ArrayList<Object> line=new ArrayList<Object>();
 			line.add(vo.getName());
-			line.add(vo.getTeamName());
+			line.add(vo.getOwingTeam());
 			line.add(vo.getPlayedGames());
 			line.add(vo.getGameStartingNum());
 			line.add(vo.getReboundNum());
@@ -122,8 +122,8 @@ public class PlayerTableModel extends MyTableModel{
 		    line.add(vo.getShootHitRate());
 		    line.add(vo.getThreeHitRate());
 		    line.add(vo.getFreeThrowHitRate());
-		    line.add(vo.getOffenNum());
-		    line.add(vo.getDefenNum());
+		    line.add(vo.getOffenReboundNum());
+		    line.add(vo.getDefenReboundNum());
 		    line.add(vo.getStealNum());
 		    line.add(vo.getBlockNum());
 		    line.add(vo.getTurnOverNum());
@@ -133,7 +133,7 @@ public class PlayerTableModel extends MyTableModel{
 		    line.add(vo.getGmScEfficiencyValue());
 		    line.add(vo.getTrueHitRate());
 		    //这个对吗？有没有用错get方法了
-		    line.add(vo.getShootEfficiency());
+		    line.add(vo.getShootHitEfficiency());
 		    line.add(vo.getReboundRate());
 		    line.add(vo.getOffenReboundRate());
 		    line.add(vo.getDefenReboundRate());

@@ -4,10 +4,10 @@ import java.util.ArrayList;
 
 import javax.swing.table.AbstractTableModel;
 
+import bl.player.Player;
+import blservice.PlayerBLService;
 import vo.MatchVO;
 import vo.RecordVO;
-import businesslogic.Player;
-import businesslogicservice.PlayerBLService;
 
 public class PlayerHistoryTableModel extends AbstractTableModel{
 	
