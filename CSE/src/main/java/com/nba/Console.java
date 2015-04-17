@@ -15,6 +15,7 @@ import vo.TeamVO;
 import bl.DataSourse;
 import bl.player.Player;
 import bl.team.Team;
+import blservice.AgeEnum;
 import blservice.PlayerBLService;
 import blservice.TeamBLService;
 
@@ -56,7 +57,7 @@ public class Console {
 	private int playerNum = 50;
 	private boolean isPHigh = false;// 是否返回高阶数据
 	private boolean isTHigh = false;
-	private String pAge = "All";
+	private AgeEnum pAge = AgeEnum.ALL;
 	private String pUnion = "All";
 	private String pPosition = "All";
 	private ArrayList<String> playerSort = new ArrayList<String>();//
@@ -358,19 +359,33 @@ public class Console {
 	}
 
 	public void PalyerFilterChange() {
+		String age;
 		for (String s : playerFilter) {
 			if (s.contains("position"))
 				pPosition = s.split(".")[1];
 			else if (s.contains("league"))
 				pUnion = s.split(".")[1];
-			else
-				pAge = s.split(".")[1];
+			else{
+				 age = s.split(".")[1];
+				 if(age.contains("<=22"))
+					 pAge=AgeEnum.LE22;
+				 else if(age.contains("<=25"))
+					 pAge=AgeEnum.M22_LE25;
+				 else if(age.contains("<=30"))
+					 pAge=AgeEnum.M25_LE30;
+				 else if(age.contains(">30"))
+					 pAge=AgeEnum.M30;
+				 else
+					 pAge=AgeEnum.ALL;
+				 
+			}
 		}
 
 	}
 
 	public void clearFilter() {
-		pAge = pPosition = pUnion = "All";
+		pPosition = pUnion = "All";
+		pAge=AgeEnum.ALL;
 	}
 
 	/**
