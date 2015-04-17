@@ -107,7 +107,7 @@ public interface PlayerBLService {
 	 * @return 符合条件的球员列表
 	 */
 	public ArrayList<PlayerVO> selectPlayersBySeason(String season,
-			String position, String union,int ageClass, String column,String order, int num);
+			String position, String union,AgeEnum ageClass, String column,String order, int num);
 
 	/**
 	 * 对球员场均信息，根据某一项属性里的值进行筛选
@@ -124,7 +124,7 @@ public interface PlayerBLService {
 	 *            需要的数据条数
 	 * @return 符合条件的球员列表
 	 */
-	public ArrayList<PlayerVO> selectPlayersByAverage(String position, String union,int ageClass, String column,String order, int num);
+	public ArrayList<PlayerVO> selectPlayersByAverage(String position, String union,AgeEnum ageClass, String column,String order, int num);
 
 	/**
 	 * 获得球员的大头照
