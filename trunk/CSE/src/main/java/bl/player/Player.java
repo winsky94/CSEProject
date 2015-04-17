@@ -19,6 +19,7 @@ import bl.DirtyDataManager;
 import bl.FileList;
 import bl.match.Match;
 import bl.match.SequenceOfRecord;
+import blservice.AgeEnum;
 import blservice.PlayerBLService;
 
 public class Player implements PlayerBLService{
@@ -1098,6 +1099,19 @@ public class Player implements PlayerBLService{
 	}
 
 	public ArrayList<MatchVO> getRecentMatches(String playerName, int num) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public ArrayList<PlayerVO> selectPlayersBySeason(String season,
+			String position, String union, AgeEnum ageClass, String column,
+			String order, int num) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public ArrayList<PlayerVO> selectPlayersByAverage(String position,
+			String union, AgeEnum ageClass, String column, String order, int num) {
 		// TODO Auto-generated method stub
 		return null;
 	}
