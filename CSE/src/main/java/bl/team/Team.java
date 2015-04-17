@@ -23,7 +23,7 @@ import bl.DirtyDataManager;
 import bl.match.NewNewMatch;
 import blservice.TeamBLService;
 
-public class NewFinalTeam implements TeamBLService {
+public class Team implements TeamBLService {
 	private Map<String, TeamVO> teamsBaseInfo = new LinkedHashMap<String, TeamVO>();
 	private Map<String, Map<String, MatchVO>> matches = new LinkedHashMap<String, Map<String, MatchVO>>();
 	private Map<String, TeamVO> teamAverageInfo = new LinkedHashMap<String, TeamVO>();
@@ -31,7 +31,7 @@ public class NewFinalTeam implements TeamBLService {
 	private Boolean isSeason = false;
 
 	// 删去了readFromMatchFile和getMatches两个私有方法，改为创建一个match类，从中得到比赛信息
-	public NewFinalTeam() {
+	public Team() {
 		// TODO 自动生成的构造函数存根
 		getTeams();
 		match = new NewNewMatch();
@@ -39,7 +39,7 @@ public class NewFinalTeam implements TeamBLService {
 	}
 
 	public static void main(String[] args) {
-		NewFinalTeam team = new NewFinalTeam();
+		Team team = new Team();
 		String season = "12-13";
 		ArrayList<TeamVO> result = new ArrayList<TeamVO>();
 		// ArrayList<MatchVO> result = new ArrayList<MatchVO>();
