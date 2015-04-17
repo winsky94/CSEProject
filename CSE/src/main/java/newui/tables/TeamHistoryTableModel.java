@@ -2,9 +2,9 @@ package newui.tables;
 
 import java.util.ArrayList;
 
+import bl.player.Player;
+import blservice.PlayerBLService;
 import vo.PlayerVO;
-import businesslogic.Player;
-import businesslogicservice.PlayerBLService;
 
 public class TeamHistoryTableModel extends MyTableModel{
 	static String[] head = { "球员","出场", "首发", "时间", "投篮", "三分", "罚球","前篮板",
@@ -70,10 +70,10 @@ public class TeamHistoryTableModel extends MyTableModel{
 			threeHitRate+=p.getThreeHitRate();
 			line.add(p.getFreeThrowHitRate());
 			freeHitRate+=p.getFreeThrowHitRate();
-			line.add(p.getOffenNum());
-			offendNum+=p.getOffenNum();
-			line.add(p.getDefenNum());
-			defendNum+=p.getDefenNum();
+			line.add(p.getOffenReboundNum());
+			offendNum+=p.getOffenReboundNum();
+			line.add(p.getDefenReboundNum());
+			defendNum+=p.getDefenReboundNum();
 			line.add(p.getReboundNum());
 			reboundNum+=p.getReboundNum();
 			line.add(p.getAssistNum());

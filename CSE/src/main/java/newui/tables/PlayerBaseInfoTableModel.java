@@ -7,7 +7,6 @@ import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JTable;
 
-import bl.player.NewNewPlayer;
 import bl.player.Player;
 import bl.team.Team;
 import blservice.PlayerBLService;
@@ -28,7 +27,7 @@ public class PlayerBaseInfoTableModel extends MyTableModel {
 
 	public PlayerBaseInfoTableModel() {
 
-		player = new NewNewPlayer();
+		player = new Player();
 		playerlist = new ArrayList<PlayerVO>();
 	}
 

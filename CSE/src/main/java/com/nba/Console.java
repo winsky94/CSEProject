@@ -69,10 +69,14 @@ public class Console {
 																	// 邮件及
 	private ArrayList<String> sortT = new ArrayList<String>();// 可以不声明
 
-	PlayerBLService player = new Player(3);
+	PlayerBLService player = new Player();
 	TeamBLService team = new Team();
 
 	public void execute(PrintStream out, String[] args) {
+		playerSort.add("score");
+		playerSort.add("trueHitRate");
+		sortP.add("desc");
+		sortP.add("desc");
 		ArrayList<String> command = new ArrayList<String>();
 		for (int i = 1; i < args.length; i++)
 			command.add(args[i]);
@@ -99,7 +103,7 @@ public class Console {
 				PlayerHotFieldChange();
 				// 调用 player hot 方法
 				ArrayList<PlayerVO> result = player.selectPlayersByAverage(
-						"all", "all", 5,playerhotField,"desc", playerNum);
+						"all", "all", pAge,playerhotField,"desc", playerNum);
 				for (PlayerVO vo : result) {
 					// =====================================================
 					PlayerHotInfo playerHotInfo = setplayerHotInfo(vo,
@@ -170,16 +174,28 @@ public class Console {
 					// 调用sort+filter方法
 					ArrayList<PlayerVO> result = new ArrayList<PlayerVO>();
 					if (isPTotal) {
-						result = player.selectPlayersBySeason("all", pPosition,
-								pUnion, pAge, playerNum);
+						if(isPHigh==true){
+							result = player.selectPlayersBySeason("all", pPosition,
+									pUnion, pAge, playerSort.get(1),sortP.get(1),playerNum);
+						}
+						else{
+						    result = player.selectPlayersBySeason("all", pPosition,
+								pUnion, pAge, playerSort.get(0),sortP.get(0),playerNum);
+						}
 						for (PlayerVO vo : result) {
 							// =====================================================
 							PlayerNormalInfo playerNormalInfo = setPlayerNormalInfo(vo);
 							out.append(playerNormalInfo.toString());
 						}
 					} else {
-						result = player.selectPlayersByAverage(pPosition,
-								pUnion, pAge, playerNum);
+						if(isPHigh==true){
+							result = player.selectPlayersByAverage(pPosition,
+									pUnion, pAge, playerSort.get(1),sortP.get(1),playerNum);
+						}
+						else{
+						    result = player.selectPlayersByAverage(pPosition,
+								pUnion, pAge, playerSort.get(0),sortP.get(0),playerNum);
+						}
 						for (PlayerVO vo : result) {
 							// =====================================================
 							PlayerNormalInfo playerNormalInfo = setPlayerNormalInfo(vo);
@@ -190,10 +206,16 @@ public class Console {
 				} else {
 					// 调用sort方法
 					if (isPTotal) {
-						ArrayList<PlayerVO> result = player
-								.selectPlayersBySeason("all",
-										playerSort.get(0), sortP.get(0), "all",
-										playerNum);
+						ArrayList<PlayerVO> result;
+						if(isPHigh==true){
+							result = player.selectPlayersBySeason("all", pPosition,
+									pUnion, pAge, playerSort.get(1),sortP.get(1),playerNum);
+						}
+						else{
+						    result = player.selectPlayersBySeason("all", pPosition,
+								pUnion, pAge, playerSort.get(0),sortP.get(0),playerNum);
+						}
+						
 						for (PlayerVO vo : result) {
 							// =====================================================
 							if (isPHigh) {
@@ -205,9 +227,16 @@ public class Console {
 							}
 						}
 					} else {
-						ArrayList<PlayerVO> result = player
-								.selectPlayersByAverage("all", "all", "all",
-										playerNum);
+						ArrayList<PlayerVO> result;
+						if(isPHigh==true){
+							result = player.selectPlayersByAverage(pPosition,
+									pUnion, pAge, playerSort.get(1),sortP.get(1),playerNum);
+						}
+						else{
+						    result = player.selectPlayersByAverage(pPosition,
+								pUnion, pAge, playerSort.get(0),sortP.get(0),playerNum);
+						}
+
 						for (PlayerVO vo : result) {
 							// =====================================================
 							if (isPHigh) {
