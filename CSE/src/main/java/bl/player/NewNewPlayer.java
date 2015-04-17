@@ -26,6 +26,7 @@ import bl.DirtyDataManager;
 import bl.FileList;
 import bl.match.SequenceOfMatch;
 import bl.team.FinalTeam;
+import blservice.AgeEnum;
 import blservice.PlayerBLService;
 
 public class NewNewPlayer implements PlayerBLService {
@@ -771,7 +772,7 @@ public class NewNewPlayer implements PlayerBLService {
 	}
 
 	private ArrayList<PlayerVO> selectPlayers(ArrayList<PlayerVO> thePlayers,
-			String position, String union, int ageClass, String column,
+			String position, String union, AgeEnum ageClass, String column,
 			String order, int num) {
 		ArrayList<PlayerVO> result = new ArrayList<PlayerVO>();
 		if (!position.equals("all")) {
@@ -786,16 +787,16 @@ public class NewNewPlayer implements PlayerBLService {
 					thePlayers.remove(i);
 			}
 		}
-		if (ageClass != 5) {
+		if (ageClass != AgeEnum.ALL) {
 			for (int i = 0; i < thePlayers.size(); i++) {
 				int age = thePlayers.get(i).getAge();
-				if (ageClass == 1) {
+				if (ageClass == AgeEnum.LE22) {
 					if (age > 22)
 						thePlayers.remove(i);
-				} else if (ageClass == 2) {
+				} else if (ageClass == AgeEnum.M22_LE25) {
 					if (age <= 22 || age > 25)
 						thePlayers.remove(i);
-				} else if (ageClass == 3) {
+				} else if (ageClass == AgeEnum.M25_LE30) {
 					if (age <= 25 || age > 30)
 						thePlayers.remove(i);
 				} else {
@@ -818,7 +819,7 @@ public class NewNewPlayer implements PlayerBLService {
 	}
 
 	public ArrayList<PlayerVO> selectPlayersBySeason(String season,
-			String position, String union, int ageClass, String column,
+			String position, String union, AgeEnum ageClass, String column,
 			String order, int num) {
 		ArrayList<PlayerVO> thePlayers = getPlayerSeasonInfo(season);
 		return selectPlayers(thePlayers, position, union, ageClass, column,
@@ -826,7 +827,7 @@ public class NewNewPlayer implements PlayerBLService {
 	}
 
 	public ArrayList<PlayerVO> selectPlayersByAverage(String position,
-			String union, int ageClass, String column, String order, int num) {
+			String union, AgeEnum ageClass, String column, String order, int num) {
 		ArrayList<PlayerVO> thePlayers = getPlayerAverageInfo();
 		return selectPlayers(thePlayers, position, union, ageClass, column,
 				order, num);
