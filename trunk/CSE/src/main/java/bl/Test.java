@@ -1,7 +1,7 @@
 package bl;
 
 import bl.team.FinalTeam;
-import bl.team.NewFinalTeam;
+import bl.team.Team;
 
 //class a extends Thread {
 //	
@@ -52,7 +52,7 @@ public class Test {
 			newTeam.getTeamSeasonInfo("13-14");
 			long t2 = System.currentTimeMillis();
 			
-			NewFinalTeam team = new NewFinalTeam();
+			Team team = new Team();
 			team.getTeamSeasonInfo("13-14");
 			long t3 = System.currentTimeMillis();
 			System.out.println(t2 - t1);
