@@ -17,13 +17,13 @@ import bl.DataSourse;
 import bl.match.Match;
 import blservice.TeamBLService;
 
-public class Team implements TeamBLService {
+public class OldTeam implements TeamBLService {
 	private ArrayList<TeamVO> teamsBaseInfo = new ArrayList<TeamVO>();
 	private ArrayList<MatchVO> matches = new ArrayList<MatchVO>();
 	private ArrayList<TeamVO> teamAverageInfo = new ArrayList<TeamVO>();
 
 	// 删去了readFromMatchFile和getMatches两个私有方法，改为创建一个match类，从中得到比赛信息
-	public Team() {
+	public OldTeam() {
 		// TODO 自动生成的构造函数存根
 		teamsBaseInfo = getTeams();
 		Match match = new Match();
@@ -32,7 +32,7 @@ public class Team implements TeamBLService {
 	}
 
 	public static void main(String[] args) {
-		Team team = new Team();
+		OldTeam team = new OldTeam();
 		String season = "13-14";
 		ArrayList<TeamVO> result = new ArrayList<TeamVO>();
 		// ArrayList<MatchVO> result = new ArrayList<MatchVO>();
