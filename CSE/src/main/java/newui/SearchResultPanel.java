@@ -13,6 +13,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
+import bl.player.NewNewPlayer;
 import bl.player.Player;
 import bl.team.Team;
 import blservice.PlayerBLService;
@@ -82,7 +83,7 @@ public class SearchResultPanel extends FatherPanel implements MouseListener{
 		gbc.weighty = 10;
 		gbl.setConstraints(jsp, gbc);
 		add(jsp);
-		pservice=new Player(1);//这里有问题
+		pservice=new NewNewPlayer();//这里有问题
 		tservice=new Team();
 		ArrayList<TeamVO> v=tservice.getTeamBaseInfo(scontent);
 		ttm.SearchRefresh(v);

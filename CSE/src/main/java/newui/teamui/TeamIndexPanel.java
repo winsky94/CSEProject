@@ -18,6 +18,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 
+import bl.team.Team;
+import blservice.TeamBLService;
 import newui.FatherPanel;
 import newui.Style;
 import newui.TableModel;
@@ -26,8 +28,7 @@ import newui.tables.MyTableCellRenderer;
 import newui.tables.RowHeaderTable;
 import newui.tables.TeamTableModel;
 import vo.TeamVO;
-import businesslogic.Team;
-import businesslogicservice.TeamBLService;
+
 
 public class TeamIndexPanel extends FatherPanel implements MouseListener,
 		ItemListener {

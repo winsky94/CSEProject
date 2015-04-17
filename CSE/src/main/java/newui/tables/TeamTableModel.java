@@ -2,9 +2,10 @@ package newui.tables;
 
 import java.util.ArrayList;
 
+import bl.team.Team;
+import blservice.TeamBLService;
 import vo.TeamVO;
-import businesslogic.Team;
-import businesslogicservice.TeamBLService;
+
 
 public class TeamTableModel extends MyTableModel {
 	/**
@@ -101,7 +102,7 @@ public class TeamTableModel extends MyTableModel {
 			line.add(vo.getOffenEfficiency());
 			line.add(vo.getDefenEfficiency());
 			line.add(vo.getAssistNum());
-			line.add(vo.getAssistEfficiency());
+			line.add(vo.getAssistRate());
 			line.add(vo.getStealNum());
 			line.add(vo.getStealEfficiency());
 			line.add(vo.getBlockNum());

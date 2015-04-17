@@ -4,10 +4,11 @@ import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 
+import bl.team.Team;
+import blservice.TeamBLService;
 import vo.PlayerVO;
 import vo.TeamVO;
-import businesslogic.Team;
-import businesslogicservice.TeamBLService;
+
 
 public class TeamBaseInfoTableModel extends MyTableModel{
 
