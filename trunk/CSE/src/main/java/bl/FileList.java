@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Vector;
 
-import bl.match.NewNewMatch;
+import bl.match.Match;
 
 /*设计思路：
  * 第一次调用了getList方法后 开启checkChange的线程
@@ -16,7 +16,7 @@ public class FileList {
 	Vector<String> ver = null;
 	ArrayList<String> names = null;
 	private String path;
-	private NewNewMatch match;
+	private Match match;
 
 	// 传一个参数方法；
 
@@ -27,7 +27,7 @@ public class FileList {
 		path = new File(dir_name).getPath() + "\\";
 	}
 	
-	public FileList (String dir_name ,NewNewMatch match) throws IOException {
+	public FileList (String dir_name ,Match match) throws IOException {
 		this(dir_name);
 		this.match=match;
 		
