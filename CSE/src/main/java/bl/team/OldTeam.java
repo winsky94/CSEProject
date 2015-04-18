@@ -14,7 +14,7 @@ import vo.MatchVO;
 import vo.RecordVO;
 import vo.TeamVO;
 import bl.DataSourse;
-import bl.match.Match;
+import bl.match.OldMatch;
 import blservice.TeamBLService;
 
 public class OldTeam implements TeamBLService {
@@ -26,7 +26,7 @@ public class OldTeam implements TeamBLService {
 	public OldTeam() {
 		// TODO 自动生成的构造函数存根
 		teamsBaseInfo = getTeams();
-		Match match = new Match();
+		OldMatch match = new OldMatch();
 		matches = match.getMatchData("全部", "全部", "全部", "全部");
 		teamAverageInfo = calculateTeamAverageInfo();
 	}

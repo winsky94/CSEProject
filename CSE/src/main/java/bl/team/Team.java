@@ -20,21 +20,21 @@ import vo.RecordVO;
 import vo.TeamVO;
 import bl.DataSourse;
 import bl.DirtyDataManager;
-import bl.match.NewNewMatch;
+import bl.match.Match;
 import blservice.TeamBLService;
 
 public class Team implements TeamBLService {
 	private Map<String, TeamVO> teamsBaseInfo = new LinkedHashMap<String, TeamVO>();
 	private Map<String, Map<String, MatchVO>> matches = new LinkedHashMap<String, Map<String, MatchVO>>();
 	private Map<String, TeamVO> teamAverageInfo = new LinkedHashMap<String, TeamVO>();
-	private NewNewMatch match;
+	private Match match;
 	private Boolean isSeason = false;
 
 	// 删去了readFromMatchFile和getMatches两个私有方法，改为创建一个match类，从中得到比赛信息
 	public Team() {
 		// TODO 自动生成的构造函数存根
 		getTeams();
-		match = new NewNewMatch();
+		match = new Match();
 		matches = match.getMatchData("全部", "全部", "全部", "全部");
 	}
 
