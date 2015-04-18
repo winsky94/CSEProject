@@ -3,6 +3,7 @@ package newui.tables;
 import java.util.ArrayList;
 
 import bl.player.Player;
+import blservice.AgeEnum;
 import blservice.PlayerBLService;
 import vo.PlayerVO;
 
@@ -95,11 +96,13 @@ public class PlayerTableModel extends MyTableModel{
 	
 	public void Filter(FilterCondition f){
 		ArrayList<PlayerVO> v;
+		//填赛季还是汇总？？？
 		if(f.getAllOrAve().equals("汇总"))
-			v=player.selectPlayersBySeason(f.getSeason(), f.getPosition(), f.getUnion(), 
+			v=player.selectPlayersBySeason(f.getSeason(), f.getPosition(), f.getUnion(), AgeEnum.ALL,
+					f.getUnion(),
 					f.getSort(),50);
 		else
-			v=player.selectPlayersByAverage(f.getSeason(), f.getPosition(), f.getUnion(), 
+			v=player.selectPlayersByAverage(f.getSeason(), f.getPosition(),AgeEnum.ALL, f.getUnion(), 
 					f.getSort(),50);
 		if(v!=null&&v.size()!=0)
 			refreshContent(v);
