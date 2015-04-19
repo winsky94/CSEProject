@@ -124,6 +124,8 @@ public class MatchIndexPanel extends FatherPanel {
 				// 符合搜索条件的MatchVo
 				ArrayList<MatchVO> mlist = mservice.getMatchData(season, date,
 						hometeam, visitingteam);
+				System.out
+						.println("MatchIndexPanel.MatchIndexPanel().新建 MouseListener() {...}.mouseClicked()"+mlist.size());
 				ArrayList<MatchCard> matchCardList = new ArrayList<MatchCard>();
 				for (MatchVO m : mlist) {
 					MatchCard card = new MatchCard(m);
