@@ -11,13 +11,14 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import vo.MatchVO;
+import vo.RecordVO;
 import bl.DataSourse;
 import bl.DirtyDataManager;
 import bl.FileList;
-import vo.MatchVO;
-import vo.RecordVO;
+import blservice.MatchBLService;
 
-public class Match {
+public class Match implements MatchBLService {
 	private Map<String, Map<String, MatchVO>> matches = new HashMap<String, Map<String, MatchVO>>();
 	private FileList fl;
 
@@ -165,7 +166,7 @@ public class Match {
 		Map<String, Map<String, MatchVO>> matches = new HashMap<String, Map<String, MatchVO>>();
 		try {
 			// fl = new FileList(DataSourse.dataSourse + "/matches", this);
-			fl = new FileList(DataSourse.dataSourse + "/matches",this);
+			fl = new FileList(DataSourse.dataSourse + "/matches", this);
 			ArrayList<String> names = fl.getList();
 			for (String name : names) {
 				String key = getKeyName(name);
@@ -187,9 +188,9 @@ public class Match {
 			e.printStackTrace();
 		}
 
-		 // 初始化后 开启线程：
-		 updateMatch um = new updateMatch();
-		 um.startThread();
+		// 初始化后 开启线程：
+		updateMatch um = new updateMatch();
+		um.startThread();
 
 		return matches;
 	}
@@ -207,24 +208,29 @@ public class Match {
 	 *            客队
 	 * @return 比赛的列表
 	 */
-	public Map<String, Map<String, MatchVO>> getMatchData(String season,
-			String date, String homeTeam, String visitingTeam) {
+	public Map<String, Map<String, MatchVO>> getAllMatches() {
 		// TODO 自动生成的方法存根
-		Map<String, Map<String, MatchVO>> result = new HashMap<String, Map<String, MatchVO>>();
+		return matches;
+
+	}
+
+	public ArrayList<MatchVO> getMatchData(String season, String date,
+			String homeTeam, String visitingTeam) {
+		Map<String, Map<String, MatchVO>> MapResult = new HashMap<String, Map<String, MatchVO>>();
+		ArrayList<MatchVO> result = new ArrayList<MatchVO>();
 
 		if (season.equals("全部") && date.equals("全部") && homeTeam.equals("全部")
 				&& visitingTeam.equals("全部")) {
-			result = matches;
-			return result;
+			MapResult = matches;
 		} else {
 			Iterator<Entry<String, Map<String, MatchVO>>> iter = matches
 					.entrySet().iterator();
 			while (iter.hasNext()) {
 				Map.Entry<String, Map<String, MatchVO>> entry = (Map.Entry<String, Map<String, MatchVO>>) iter
 						.next();
-				String seasonKey=(String)entry.getKey();
-				Map<String, MatchVO> temp=new HashMap<String, MatchVO>();
-				
+				String seasonKey = (String) entry.getKey();
+				Map<String, MatchVO> temp = new HashMap<String, MatchVO>();
+
 				Map<String, MatchVO> map = (Map<String, MatchVO>) entry
 						.getValue();
 
@@ -233,7 +239,7 @@ public class Match {
 				while (matchIterator.hasNext()) {
 					Map.Entry<String, MatchVO> matchEntry = (Map.Entry<String, MatchVO>) matchIterator
 							.next();
-					
+
 					MatchVO vo = (MatchVO) matchEntry.getValue();
 					String currentSeason = vo.getSeason();
 					String currentDate = vo.getDate();
@@ -264,9 +270,28 @@ public class Match {
 						temp.put(key, vo);
 					}
 				}
-				result.put(seasonKey, temp);
+				MapResult.put(seasonKey, temp);
 			}
 		}
+
+		// change to ArrayList
+		Iterator<Entry<String, Map<String, MatchVO>>> iter = MapResult
+				.entrySet().iterator();
+		while (iter.hasNext()) {
+			Map.Entry<String, Map<String, MatchVO>> entry = (Map.Entry<String, Map<String, MatchVO>>) iter
+					.next();
+			Map<String, MatchVO> map = (Map<String, MatchVO>) entry.getValue();
+
+			Iterator<Entry<String, MatchVO>> matchIterator = map.entrySet()
+					.iterator();
+			while (matchIterator.hasNext()) {
+				Map.Entry<String, MatchVO> matchEntry = (Map.Entry<String, MatchVO>) matchIterator
+						.next();
+				MatchVO vo = (MatchVO) matchEntry.getValue();
+				result.add(vo);
+			}
+		}
+
 		return result;
 	}
 

@@ -27,7 +27,13 @@ public class OldMatch implements MatchBLService {
 	}
 
 	public static void main(String[] args) {
-		new OldMatch();
+		OldMatch match = new OldMatch();
+		ArrayList<MatchVO> matches = match.getMatchData("13-14", "01-01", "全部",
+				"全部");
+		for (MatchVO vo : matches) {
+			System.out.println(vo.getHomeTeam() + " " + vo.getVisitingTeam()
+					+ " " + vo.getSeason() + " " + vo.getDate() +" "+vo.getMatchTime());
+		}
 	}
 
 	/**
