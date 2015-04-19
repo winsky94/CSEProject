@@ -108,7 +108,7 @@ public class ProgressPanel extends HotFatherPanel implements MouseListener{
 	public void mouseEntered(MouseEvent e) {
 		if (e.getSource().getClass() == BottomButton.class) {
 			BottomButton btn = (BottomButton) e.getSource();
-			btn.setBackground(Style.HOT_PURPLE);
+			btn.setBackground(Style.HOT_PURPLEFOCUS);
 		}
 
 	}
