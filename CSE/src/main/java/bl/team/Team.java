@@ -35,7 +35,7 @@ public class Team implements TeamBLService {
 		// TODO 自动生成的构造函数存根
 		getTeams();
 		match = new Match();
-		matches = match.getMatchData("全部", "全部", "全部", "全部");
+		matches = match.getAllMatches();
 	}
 
 	public static void main(String[] args) {
@@ -361,7 +361,7 @@ public class Team implements TeamBLService {
 		ArrayList<MatchVO> result = new ArrayList<MatchVO>();
 
 		// ====================================
-		matches = match.getMatchData("全部", "全部", "全部", "全部");
+		matches = match.getAllMatches();
 		Iterator<Entry<String, Map<String, MatchVO>>> iter = matches.entrySet()
 				.iterator();
 		ArrayList<String> seasons = new ArrayList<String>();
@@ -586,7 +586,7 @@ public class Team implements TeamBLService {
 			int flag = 0;
 
 			// ====================================
-			matches = match.getMatchData("全部", "全部", "全部", "全部");
+			matches = match.getAllMatches();
 
 			Iterator<Entry<String, Map<String, MatchVO>>> iter = matches
 					.entrySet().iterator();
@@ -612,7 +612,7 @@ public class Team implements TeamBLService {
 			}
 		} else {
 			// ====================================
-			matches = match.getMatchData("全部", "全部", "全部", "全部");
+			matches = match.getAllMatches();
 
 			allMatches = matches.get(season);
 		}
