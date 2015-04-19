@@ -3,6 +3,8 @@ package newui.teamui.details;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -45,7 +47,7 @@ public class TeamDetailHistoryPanel extends JPanel{
 		MyLabel seasonLbl=new MyLabel("赛季：");
 		funcPnl.add(seasonLbl);
 		//
-		String[] seasonText={"我要监听"};
+		String[] seasonText={"13-14"};
 		seasonBox=new MyBox(seasonText);
 		funcPnl.add(seasonBox);
 		//
@@ -69,6 +71,19 @@ public class TeamDetailHistoryPanel extends JPanel{
 		//注意  bl层方法的参数是球队缩写 这个是咩
 		thtm.Refresh(abbrName);
 		table.revalidate();
+		typeBox.addItemListener(new ItemListener(){
+
+			public void itemStateChanged(ItemEvent e) {
+				// TODO Auto-generated method stub
+				if(typeBox.getSelectedItem().toString().equals("场均")){
+					thtm.RefreshAverage();
+				}else{
+					thtm.RefreshSeason(seasonBox.getSelectedItem().toString());
+				}
+				table.revalidate();
+			}
+			
+		});
 	}
 	class MyBox extends JComboBox<String>{
 

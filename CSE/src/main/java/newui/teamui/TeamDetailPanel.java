@@ -16,6 +16,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 
+import vo.PlayerVO;
 import bl.player.Player;
 import bl.team.Team;
 import blservice.PlayerBLService;
@@ -34,7 +35,7 @@ public class TeamDetailPanel extends FatherPanel{
 	 */
 	private static final long serialVersionUID = 1L;
 	String nameCH,abbrName;
-	ArrayList<String> players;
+	ArrayList<PlayerVO> players;
 	ArrayList<JLabel> playerPortraits;
 	//-----------------------
 	JScrollPane playerJsp;
@@ -54,9 +55,9 @@ public class TeamDetailPanel extends FatherPanel{
 		nameLbl=new JLabel(new ImageIcon("image/teamIcon/teamsPng150/"+abbrName+".png"));
 		gbc.gridx=0;
 		gbc.gridy=1;
-		gbc.gridwidth=1;
+		gbc.gridwidth=2;
 		gbc.gridheight=1;
-		gbc.weightx=1;
+		gbc.weightx=4.5;
 		gbc.weighty=10;
 		gbl.setConstraints(nameLbl, gbc);
 		add(nameLbl);
@@ -74,14 +75,14 @@ public class TeamDetailPanel extends FatherPanel{
 		//------显示全部球员大头-----
 		PlayerBLService play=new Player();
 		//这是那个方法？？？
-		players=new ArrayList<String>(play.getPlayersByTeam(abbrName).size());
+		players=play.getPlayersByTeam(abbrName);
 		
 		playerPortraits=new ArrayList<JLabel>(players.size());
 		playerPnl=new JPanel();
 		playerPnl.setOpaque(false);
 		playerPnl.setLayout(new GridLayout(players.size(),1));
 		for(int i=0;i<players.size();i++){
-			JLabel temp=new MyLabel(players.get(i),new ImageIcon("image/player/player46/"+players.get(i)+".png"),JLabel.LEFT);
+			JLabel temp=new MyLabel(players.get(i).getName(),new ImageIcon("image/player/player46/"+players.get(i).getName()+".png"),JLabel.LEFT);
 			playerPortraits.add(temp);
 			playerPnl.add(playerPortraits.get(i));
 		}
@@ -90,11 +91,11 @@ public class TeamDetailPanel extends FatherPanel{
 		playerJsp.getViewport().add(playerPnl);
 		//-----------------------
 		tab=new JTabbedPane();
-		gbc.gridx=1;
+		gbc.gridx=2;
 		gbc.gridy=1;
 		gbc.gridwidth=7;
 		gbc.gridheight=10;
-		gbc.weightx=9;
+		gbc.weightx=7;
 		gbc.weighty=100;
 		gbl.setConstraints(tab, gbc);
 		add(tab);
