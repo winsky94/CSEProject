@@ -930,6 +930,9 @@ public class Player implements PlayerBLService {
 			for (RecordVO record : match.getRecords()) {
 				team = record.getTeam();
 				playerName = record.getPlayerName();
+				PlayerVO thisPlayer = players.get(playerName);
+				if(thisPlayer==null)
+					continue;
 				presentTime = convertMinuteToSecond(record.getPresentTime());
 				shootHitNum = record.getShootHitNum();// 投篮命中数
 				shootAttemptNum = record.getShootAttemptNum();// 投篮出手数
@@ -946,7 +949,7 @@ public class Player implements PlayerBLService {
 				turnOverNum = record.getTurnOverNum();// 失误数
 				foulNum = record.getFoulNum();// 犯规数
 				personScore = record.getScore();// 个人得分
-				PlayerVO thisPlayer = players.get(playerName);
+				
 				PlayerVO player = new PlayerVO(thisPlayer.getName(),
 						thisPlayer.getNumber(), thisPlayer.getPosition(),
 						thisPlayer.getHeight(), thisPlayer.getWeight(),
