@@ -145,7 +145,7 @@ public class MatchIndexPanel extends FatherPanel {
 					
 					
 				}
-				int heightOfBIGPNL = 100 * row;// 这里一定要设置为180-200之间的值，代表每个卡片的高度，乘以卡片数量之后是整个BIGPNL的高度
+				int heightOfBIGPNL = 170 * row;// 这里一定要设置为180-200之间的值，代表每个卡片的高度，乘以卡片数量之后是整个BIGPNL的高度
 				int screenWidth = UIhelper.getScreenWidth();
 
 				int width = screenWidth * 90 / 100;
