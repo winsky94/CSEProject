@@ -36,6 +36,7 @@ public class HotSeasonPanel extends HotFatherPanel implements MouseListener {
 	PlayerBLService player;
 	BottomButton currentBtn;
 	JTable table;
+	HotSeasonModel model;
 	
 	public HotSeasonPanel() {
 		player=new Player();
@@ -44,8 +45,7 @@ public class HotSeasonPanel extends HotFatherPanel implements MouseListener {
 		bc.fill = GridBagConstraints.BOTH;
 		bestPnl.setLayout(bl);
 		// -------bestPnl--------------
-		bestHead = new JLabel(new ImageIcon(
-				"image/player/portrait/Kobe Bryant.png"));
+		bestHead = new JLabel();
 		// 有需要就加上bestHead.setPreferredSize(new Dimension(width, height));
 		bc.gridx = 0;
 		bc.gridy = 0;
@@ -64,16 +64,16 @@ public class HotSeasonPanel extends HotFatherPanel implements MouseListener {
 		bl.setConstraints(midPnl, bc);
 		bestPnl.add(midPnl);
 		midPnl.setLayout(new GridLayout(2, 1));
-		bestName = new JLabel("Kobe 监听");
+		bestName = new JLabel();
 		bestName.setHorizontalAlignment(JLabel.CENTER);
 		bestName.setFont(new Font("微软雅黑", Font.PLAIN, 28));
 		midPnl.add(bestName);
-		positionAndTeamName = new JLabel("C / 监听队");
+		positionAndTeamName = new JLabel();
 		positionAndTeamName.setHorizontalAlignment(JLabel.CENTER);
 		positionAndTeamName.setFont(new Font("微软雅黑", Font.PLAIN, 20));
 		midPnl.add(positionAndTeamName);
 		// -------------
-		data = new JLabel("40");
+		data = new JLabel();
 		data.setFont(new Font("微软雅黑", Font.PLAIN, 30));
 		data.setForeground(Style.BACK_GREY);
 		bc.gridx = 7;
@@ -82,8 +82,7 @@ public class HotSeasonPanel extends HotFatherPanel implements MouseListener {
 		bl.setConstraints(data, bc);
 		bestPnl.add(data);
 		// ------------
-		bestTeamIcon = new JLabel(new ImageIcon(
-				"image/teamIcon/teamsPng150/LAL.png"));
+		bestTeamIcon = new JLabel();
 		bc.gridx = 8;
 		bc.gridwidth = 2;
 		bc.weightx = 2;
@@ -93,7 +92,7 @@ public class HotSeasonPanel extends HotFatherPanel implements MouseListener {
 		bottomBar.setLayout(new GridLayout(1, 8));
 		//------------
 		scoreBtn = new BottomButton("场均得分");
-		scoreBtn.setBackground(Style.HOT_RED);
+		scoreBtn.setBackground(Style.HOT_REDFOCUS);
 		scoreBtn.addMouseListener(this);
 		bottomBar.add(scoreBtn);
 		currentBtn=scoreBtn;
@@ -132,28 +131,80 @@ public class HotSeasonPanel extends HotFatherPanel implements MouseListener {
 		freeRateBtn.setBackground(Style.HOT_RED);
 		freeRateBtn.addMouseListener(this);
 		bottomBar.add(freeRateBtn);
+		//====
+		model=new HotSeasonModel(head);
+		table=new JTable(model);
+		jsp.getViewport().add(table);
 	}
+	
+	public void Refresh(String sort){
+		//默认筛选  按得分
+		//目前只有一个赛季
+		vlist=player.getSeasonHotPlayer("13-14",sort, 5);
+		if(vlist!=null&&vlist.size()!=0){
+			model.setHead(head);
+		PlayerVO topOne=vlist.get(0);
+		bestHead.setIcon(new ImageIcon("image/player/portrait/"+topOne.getName()+".png"));
+		bestName.setText(topOne.getName());
+		positionAndTeamName.setText(topOne.getPosition()+"/" +topOne.getOwingTeam());
+		//data.setText(topOne.getScore()+"");
+		bestTeamIcon.setIcon(new ImageIcon("image/teamIcon/teamsPng150/"+topOne.getOwingTeam()+".png"));
+		data.setText(topOne.getScore()+"");
+		model.Refresh(vlist);	
+		table.revalidate();
+		jsp.getViewport().remove(table);
+		table=new JTable(model);
+		jsp.getViewport().add(table);
+		jsp.repaint();
+		}
+		
+	}
+	//返回的是场均数据吗
 
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
 		currentBtn.setBackground(Style.HOT_RED);
 		BottomButton m=(BottomButton)e.getSource();
 		if(m==scoreBtn){
-			
-		}else if(m==scoreBtn){
-			
-		}else if(m==scoreBtn){
-			
-		}else if(m==scoreBtn){
-			
-		}else if(m==scoreBtn){
-			
-		}else if(m==scoreBtn){
-			
-		}else if(m==scoreBtn){
-			
+			head[5]="场均得分";
+			currentBtn=scoreBtn;
+			Refresh("score");
+			data.setText(vlist.get(0).getScore()+"");
+		}else if(m==reboundBtn){
+			head[5]="场均篮板";
+			currentBtn=reboundBtn;
+			Refresh("reboundNum");
+			data.setText(vlist.get(0).getReboundNum()+"");
+		}else if(m==assistBtn){
+			head[5]="场均助攻";
+			currentBtn=assistBtn;
+			Refresh("assistNum");
+			data.setText(vlist.get(0).getAssistNum()+"");
+		}else if(m==blockBtn){
+			head[5]="场均盖帽";
+			currentBtn=blockBtn;
+			Refresh("blockNum");
+			data.setText(vlist.get(0).getBlockNum()+"");
+		}else if(m==stealBtn){
+			head[5]="场均抢断";
+			currentBtn=stealBtn;
+			Refresh("stealNum");
+			data.setText(vlist.get(0).getStealNum()+"");
+		}else if(m==threeRateBtn){
+			head[5]="三分命中率";
+			currentBtn=threeRateBtn;
+			Refresh("threeHitRate");
+			data.setText(vlist.get(0).getThreeHitRate()+"");
+		}else if(m==shootRateBtn){
+			head[5]="投篮命中率";
+			currentBtn=shootRateBtn;
+			Refresh("shootHitRate");
+			data.setText(vlist.get(0).getShootHitRate()+"");
 		}else{
-			
+			head[5]="罚球命中率";
+			currentBtn=freeRateBtn;
+			Refresh("freeThrowHitRate");
+			data.setText(vlist.get(0).getFreeThrowHitRate()+"");
 		}
 		currentBtn.setBackground(Style.HOT_REDFOCUS);
 	}
@@ -191,9 +242,36 @@ public class HotSeasonPanel extends HotFatherPanel implements MouseListener {
 		}
 		public void Refresh(ArrayList<PlayerVO> vlist){
 			content.clear();
+			num=2;
 			for(int i=1;i<vlist.size();i++){
 				PlayerVO v=vlist.get(i);
+				ArrayList<Object> line=new ArrayList<Object>();
+				line.add(num);
+				num++;
+				ImageIcon icon=new ImageIcon("image/player/portrait/"+v.getName()+".png");
+				//设置宽高
 				
+				line.add(icon);
+				line.add(v.getName());
+				line.add(v.getOwingTeam());
+				line.add(v.getPosition());
+				if(currentBtn==scoreBtn){
+					line.add(v.getScore());
+				}else if(currentBtn==reboundBtn)
+					line.add(v.getReboundNum());
+				else if(currentBtn==assistBtn)
+					line.add(v.getAssistNum());
+				else if(currentBtn==blockBtn)
+					line.add(v.getBlockNum());
+				else if(currentBtn==stealBtn)
+					line.add(v.getStealNum());
+				else if(currentBtn==threeRateBtn)
+					line.add(v.getThreeHitRate());
+				else if(currentBtn==shootRateBtn)
+					line.add(v.getShootHitRate());
+				else
+					line.add(v.getFreeThrowHitRate());
+				content.add(line);
 			}
 			
 		}

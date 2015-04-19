@@ -6,12 +6,19 @@ import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTable;
 
+import vo.PlayerVO;
+import bl.player.Player;
+import blservice.PlayerBLService;
 import newui.Style;
+import newui.hotui.HotFatherPanel.BottomButton;
+import newui.tables.HotTableModel;
 
 public class ProgressPanel extends HotFatherPanel implements MouseListener{
 	private static final long serialVersionUID = 1L;
@@ -23,15 +30,20 @@ public class ProgressPanel extends HotFatherPanel implements MouseListener{
 	 * 表头：排名（2，3，4，5），头像，球员名，所属球队，位置，最近五场数据，提升率
 	 */
 	// ------bottomBar-----
-	BottomButton scoreBtn, reboundBtn, assistBtn;
+	BottomButton scoreBtn, reboundBtn, assistBtn,currentBtn;
+	PlayerBLService player;
+	ProgressModel model;
+	JTable table;
+	ArrayList<PlayerVO> vlist;
+	String[] head={"排名","(头像)","球员名称","所属球队","位置","场均得分","提升率"};
 	public ProgressPanel(){
+		player=new Player();
 		GridBagLayout bl = new GridBagLayout();
 		GridBagConstraints bc = new GridBagConstraints();
 		bc.fill = GridBagConstraints.BOTH;
 		bestPnl.setLayout(bl);
 		// -------bestPnl--------------
-		bestHead = new JLabel(new ImageIcon(
-				"image/player/portrait/Kobe Bryant.png"));
+		bestHead = new JLabel();
 		// 有需要就加上bestHead.setPreferredSize(new Dimension(width, height));
 		bc.gridx = 0;
 		bc.gridy = 0;
@@ -50,11 +62,11 @@ public class ProgressPanel extends HotFatherPanel implements MouseListener{
 		bl.setConstraints(midPnl, bc);
 		bestPnl.add(midPnl);
 		midPnl.setLayout(new GridLayout(2, 1));
-		bestName = new JLabel("Kobe Bryant");
+		bestName = new JLabel();
 		bestName.setHorizontalAlignment(JLabel.CENTER);
 		bestName.setFont(new Font("微软雅黑", Font.PLAIN, 28));
 		midPnl.add(bestName);
-		positionAndTeamName = new JLabel("C / 监听队");
+		positionAndTeamName = new JLabel();
 		positionAndTeamName.setHorizontalAlignment(JLabel.CENTER);
 		positionAndTeamName.setFont(new Font("微软雅黑", Font.PLAIN, 20));
 		midPnl.add(positionAndTeamName);
@@ -68,8 +80,7 @@ public class ProgressPanel extends HotFatherPanel implements MouseListener{
 		bl.setConstraints(data, bc);
 		bestPnl.add(data);
 		// ------------
-		bestTeamIcon = new JLabel(new ImageIcon(
-				"image/teamIcon/teamsPng150/LAL.png"));
+		bestTeamIcon = new JLabel();
 		bc.gridx = 8;
 		bc.gridwidth = 2;
 		bc.weightx = 2;
@@ -79,9 +90,10 @@ public class ProgressPanel extends HotFatherPanel implements MouseListener{
 		bottomBar.setLayout(new GridLayout(1, 8));
 		//------------
 		scoreBtn = new BottomButton("场均得分");
-		scoreBtn.setBackground(Style.HOT_PURPLE);
+		scoreBtn.setBackground(Style.HOT_PURPLEFOCUS);
 		scoreBtn.addMouseListener(this);
 		bottomBar.add(scoreBtn);
+		currentBtn=scoreBtn;
 		//-----------
 		reboundBtn = new BottomButton("场均篮板");
 		reboundBtn.setBackground(Style.HOT_PURPLE);
@@ -92,10 +104,53 @@ public class ProgressPanel extends HotFatherPanel implements MouseListener{
 		assistBtn.setBackground(Style.HOT_PURPLE);
 		assistBtn.addMouseListener(this);
 		bottomBar.add(assistBtn);
+		model=new ProgressModel(head);
+		table=new JTable(model);
+		jsp.getViewport().add(table);
+	}
+	
+	public void Refresh(String sort){
+		vlist=player.getBestImprovedPlayer(sort, 5);
+		if(vlist!=null&&vlist.size()!=0){
+			model.setHead(head);
+		PlayerVO topOne=vlist.get(0);
+		bestHead.setIcon(new ImageIcon("image/player/portrait/"+topOne.getName()+".png"));
+		bestName.setText(topOne.getName());
+		positionAndTeamName.setText(topOne.getPosition()+"/" +topOne.getOwingTeam());
+		//data.setText(topOne.getScore()+"");
+		bestTeamIcon.setIcon(new ImageIcon("image/teamIcon/teamsPng150/"+topOne.getOwingTeam()+".png"));
+		data.setText(topOne.getScore()+"/"+topOne.getRecentFiveMatchesScoreUpRate()*100+"%");
+		model.Refresh(vlist);	
+		table.revalidate();
+		jsp.getViewport().remove(table);
+		table=new JTable(model);
+		jsp.getViewport().add(table);
+		jsp.repaint();
+		}
 	}
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
+		currentBtn.setBackground(Style.HOT_PURPLE);
+		BottomButton m=(BottomButton)e.getSource();
+		PlayerVO v=vlist.get(0);
+		if(m==scoreBtn){
+			head[5]="场均得分";
+			currentBtn=scoreBtn;
+			Refresh("score");
+			data.setText(v.getScore()+"/"+v.getRecentFiveMatchesScoreUpRate()*100+"%");
+		}else if(m==reboundBtn){
+			head[5]="场均篮板";
+			currentBtn=reboundBtn;
+			Refresh("reboundNum");
+			data.setText(v.getReboundNum()+"/"+v.getRecentFiveMatchesReboundUpRate()*100+"%");
+		}else{
+			head[5]="场均助攻";
+			currentBtn=assistBtn;
+			Refresh("assistNum");
+			data.setText(v.getAssistNum()+"/"+v.getRecentFiveMatchesAssistUpRate()*100+"%");
+		}
 		
+		currentBtn.setBackground(Style.HOT_PURPLEFOCUS);
 	}
 	public void mousePressed(MouseEvent e) {
 		// TODO Auto-generated method stub
@@ -116,8 +171,42 @@ public class ProgressPanel extends HotFatherPanel implements MouseListener{
 	public void mouseExited(MouseEvent e) {
 		if (e.getSource().getClass() == BottomButton.class) {
 			BottomButton btn = (BottomButton) e.getSource();
-			btn.setBackground(Style.HOT_PURPLE);
+			if(currentBtn!=btn)
+				btn.setBackground(Style.HOT_PURPLE);
 		}
 
+	}
+	class ProgressModel extends HotTableModel{
+		public ProgressModel(String[] head){
+			super(head);
+		}
+		public void Refresh(ArrayList<PlayerVO> vlist){
+			content.clear();
+			num=2;
+			for(int i=1;i<vlist.size();i++){
+				PlayerVO v=vlist.get(i);
+				ArrayList<Object> line=new ArrayList<Object>();
+				line.add(num);
+				num++;
+				ImageIcon icon=new ImageIcon("image/player/portrait/"+v.getName()+".png");
+				//设置宽高
+				
+				line.add(icon);
+				line.add(v.getName());
+				line.add(v.getOwingTeam());
+				line.add(v.getPosition());
+				if(currentBtn==scoreBtn){
+					line.add(v.getScore());
+					line.add(v.getRecentFiveMatchesScoreUpRate()*100+"%");
+				}else if(currentBtn==reboundBtn){
+					line.add(v.getReboundNum());
+					line.add(v.getRecentFiveMatchesReboundUpRate()*100+"%");
+				}else{
+					line.add(v.getAssistNum());
+					line.add(v.getRecentFiveMatchesAssistUpRate()*100+"%");
+				}
+				content.add(line);
+			}
+		}
 	}
 }
