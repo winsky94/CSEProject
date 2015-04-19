@@ -8,12 +8,16 @@ import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 
+
+
+import bl.team.Team;
 import vo.MatchVO;
 
 
@@ -27,6 +31,7 @@ public class DetailCard extends JPanel implements MouseListener {
 	JLabel hchNameLbl, habbrNameLbl, homeScore, homeIcon, visitingIcon,
 			vchNameLbl, vabbrNameLbl, visitingScore;
 	JPanel detailPnl;
+	boolean isHomeHigh=true;
 	public DetailCard(MatchVO v){
 		GridBagLayout gbl=new GridBagLayout();
 		GridBagConstraints gbc=new GridBagConstraints();
@@ -36,6 +41,8 @@ public class DetailCard extends JPanel implements MouseListener {
 
 		setLayout(gbl);
 		// ----homeNamePnl--------
+		if(v.getHomeScore()<v.getVisitingScore())
+			isHomeHigh=false;
 		homeNamePnl = new JPanel();
 		homeNamePnl.setLayout(new GridLayout(2, 1));
 		homeNamePnl.setOpaque(false);
@@ -48,13 +55,13 @@ public class DetailCard extends JPanel implements MouseListener {
 		gbl.setConstraints(homeNamePnl, gbc);
 		add(homeNamePnl);
 		// -----hchNameLbl------
-		hchNameLbl = new CHNameLabel("主队的中文名");
+		hchNameLbl = new CHNameLabel(Team.changeTeamNameENToCH(v.getHomeTeam()));
 		homeNamePnl.add(hchNameLbl);
 		// ----habbrNameLbl-----
-		habbrNameLbl = new AbbrNameLabel("Abbr");
+		habbrNameLbl = new AbbrNameLabel(v.getHomeTeam());
 		homeNamePnl.add(habbrNameLbl);
 		// ------homeScore-------
-		homeScore = new ScoreLabel("108");
+		homeScore = new ScoreLabel(v.getHomeScore()+"");
 		gbc.gridx = 2;
 		gbc.gridwidth = 1;
 		gbc.weightx = 1;
@@ -62,7 +69,7 @@ public class DetailCard extends JPanel implements MouseListener {
 		add(homeScore);
 		// -----homeIcon---------
 		homeIcon = new JLabel(
-				new ImageIcon("image/teamIcon/teamsPng90/LAL.png"));
+				new ImageIcon("image/teamIcon/teamsPng90/"+v.getHomeTeam()+".png"));
 		gbc.gridx = 3;
 		gbc.gridwidth = 2;
 		gbc.weightx = 2;
@@ -79,19 +86,23 @@ public class DetailCard extends JPanel implements MouseListener {
 		add(vs);
 		// -----visitingIcon---------
 		visitingIcon = new JLabel(new ImageIcon(
-				"image/teamIcon/teamsPng90/NOP.png"));
+				"image/teamIcon/teamsPng90/"+v.getVisitingTeam()+".png"));
 		gbc.gridx = 6;
 		gbc.gridwidth = 2;
 		gbc.weightx = 2;
 		gbl.setConstraints(visitingIcon, gbc);
 		add(visitingIcon);
 		// ------visitingScore-------
-		visitingScore = new ScoreLabel("101");
+		visitingScore = new ScoreLabel(v.getVisitingScore()+"");
 		gbc.gridx = 8;
 		gbc.gridwidth = 1;
 		gbc.weightx = 1;
 		gbl.setConstraints(visitingScore, gbc);
 		add(visitingScore);
+		if(isHomeHigh)
+			homeScore.setBackground(Style.WINNER_RED);
+		else
+			visitingIcon.setBackground(Style.WINNER_RED);
 		// ----visitingNamePnl--------
 		visitingNamePnl = new JPanel();
 		visitingNamePnl.setLayout(new GridLayout(2, 1));
@@ -102,10 +113,10 @@ public class DetailCard extends JPanel implements MouseListener {
 		gbl.setConstraints(visitingNamePnl, gbc);
 		add(visitingNamePnl);
 		// -----vchNameLbl------
-		vchNameLbl = new CHNameLabel("客队的中文名");
+		vchNameLbl = new CHNameLabel(Team.changeTeamNameENToCH(v.getVisitingTeam()));
 		visitingNamePnl.add(vchNameLbl);
 		// ----habbrNameLbl-----
-		vabbrNameLbl = new AbbrNameLabel("abbr");
+		vabbrNameLbl = new AbbrNameLabel(v.getVisitingTeam());
 		visitingNamePnl.add(vabbrNameLbl);
 		//----------detailPanel-------
 		detailPnl=new JPanel();
@@ -128,16 +139,21 @@ public class DetailCard extends JPanel implements MouseListener {
 			temp.setForeground(Style.FOCUS_GREY);
 			detailPnl.add(temp);
 		}
-		detailPnl.add(new DetailLabel("LAL"));
-		detailPnl.add(new DetailLabel("30"));
-		detailPnl.add(new DetailLabel("30"));
-		detailPnl.add(new DetailLabel("30"));
-		detailPnl.add(new DetailLabel("30"));
-		detailPnl.add(new DetailLabel("ABC"));
-		detailPnl.add(new DetailLabel("40"));
-		detailPnl.add(new DetailLabel("40"));
-		detailPnl.add(new DetailLabel("40"));
-		detailPnl.add(new DetailLabel("40"));
+		ArrayList<String> detail=v.getDetailScores();
+		ArrayList<String> vdet=new ArrayList<String>();
+		ArrayList<String> hdet=new ArrayList<String>();
+		for(int i=0;i<detail.size();i++){
+			String[] s=detail.get(i).split("-");
+			vdet.add(s[0]);
+			hdet.add(s[1]);
+		}
+		detailPnl.add(new DetailLabel(v.getVisitingTeam()));
+		for(String s:vdet)
+			detailPnl.add(new DetailLabel(s));
+		detailPnl.add(new DetailLabel(v.getHomeTeam()));
+		for(String s:hdet)
+			detailPnl.add(new DetailLabel(s));
+		
 		
 	}
 	class DetailLabel extends JLabel{
