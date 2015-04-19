@@ -40,13 +40,13 @@ public class Team implements TeamBLService {
 
 	public static void main(String[] args) {
 		Team team = new Team();
-		String season = "12-13";
+		String season = "13-14";
 		ArrayList<TeamVO> result = new ArrayList<TeamVO>();
 		// ArrayList<MatchVO> result = new ArrayList<MatchVO>();
-		result = team.getTeamSeasonInfo(season);
+//		result = team.getTeamSeasonInfo(season);
 		// result = team.getTeamAverageInfo();
 		// result = team.getSeasonHotTeam(season, "score", 4);
-		// result = team.getTeamSeasonInfo(season, "NOH");
+		 result = team.getTeamSeasonInfo(season, "NOP");
 		// result = team.getTeamAverageInfo("NOH");
 		// result = team.getRecentMatches("ATL");
 		// result=team.getMatches("ATL");
