@@ -9,9 +9,8 @@ public class MatchVO {
 	private String homeTeam;
 	private ArrayList<String> detailScores;// 各节比分
 	private ArrayList<RecordVO> records;// 球员比分数据记录
-	private int matchTime;//比赛总时间,以秒为单位
-
 	
+	private int matchTime;//比赛总时间,以秒为单位
 	private int visitingShootHitNum = 0; // 投篮命中数
 	private int visitingShootAttemptNum = 0; // 投篮出手次数
 	private int visitingThreeHitNum = 0; // 三分命中数
@@ -190,9 +189,6 @@ public class MatchVO {
 	public int getVisitingFoulNum(){
 		return visitingFoulNum;
 	}
-	
-
-
 	
 	public void addVisitingShootHitNum(int visitingShootHitNum){
 		this.visitingShootHitNum+=visitingShootHitNum;
