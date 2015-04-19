@@ -195,6 +195,12 @@ public class Match implements MatchBLService {
 		return matches;
 	}
 
+	public Map<String, Map<String, MatchVO>> getAllMatches() {
+		// TODO 自动生成的方法存根
+		return matches;
+
+	}
+
 	/**
 	 * 获得某场比赛的信息，暂不支持模糊查找，需要与界面进行讨论研究
 	 * 
@@ -208,20 +214,19 @@ public class Match implements MatchBLService {
 	 *            客队
 	 * @return 比赛的列表
 	 */
-	public Map<String, Map<String, MatchVO>> getAllMatches() {
-		// TODO 自动生成的方法存根
-		return matches;
-
-	}
-
 	public ArrayList<MatchVO> getMatchData(String season, String date,
 			String homeTeam, String visitingTeam) {
-		Map<String, Map<String, MatchVO>> MapResult = new HashMap<String, Map<String, MatchVO>>();
+		Map<String, Map<String, MatchVO>> mapResult = new HashMap<String, Map<String, MatchVO>>();
 		ArrayList<MatchVO> result = new ArrayList<MatchVO>();
 
+		System.out.println(season);
+		System.out.println(date);
+		System.out.println(homeTeam);
+		System.out.println(visitingTeam);
+		
 		if (season.equals("全部") && date.equals("全部") && homeTeam.equals("全部")
 				&& visitingTeam.equals("全部")) {
-			MapResult = matches;
+			mapResult = matches;
 		} else {
 			Iterator<Entry<String, Map<String, MatchVO>>> iter = matches
 					.entrySet().iterator();
@@ -266,16 +271,15 @@ public class Match implements MatchBLService {
 
 					if (checkSeason && checkDate && checkHomeTeam
 							&& checkVisitingTeam) {
-						String key = (String) entry.getKey();
+						String key = (String) matchEntry.getKey();
 						temp.put(key, vo);
 					}
 				}
-				MapResult.put(seasonKey, temp);
+				mapResult.put(seasonKey, temp);
 			}
 		}
-
 		// change to ArrayList
-		Iterator<Entry<String, Map<String, MatchVO>>> iter = MapResult
+		Iterator<Entry<String, Map<String, MatchVO>>> iter = mapResult
 				.entrySet().iterator();
 		while (iter.hasNext()) {
 			Map.Entry<String, Map<String, MatchVO>> entry = (Map.Entry<String, Map<String, MatchVO>>) iter
