@@ -24,6 +24,7 @@ import bl.DirtyDataManager;
 import bl.match.Match;
 import blservice.TeamBLService;
 
+//得到赛季热点球队时，根据场均数据，但是只是因为我们只有一个赛季的数据，就直接搞总的场均的吧====蛋蛋疼
 public class Team implements TeamBLService {
 	private Map<String, TeamVO> teamsBaseInfo = new LinkedHashMap<String, TeamVO>();
 	private Map<String, Map<String, MatchVO>> matches = new LinkedHashMap<String, Map<String, MatchVO>>();
@@ -341,8 +342,8 @@ public class Team implements TeamBLService {
 			num = 30;
 		}
 		ArrayList<TeamVO> result = new ArrayList<TeamVO>();
-		ArrayList<TeamVO> teamSeasonInfo = getTeamSeasonInfo(season);
-
+		// ArrayList<TeamVO> teamSeasonInfo = getTeamSeasonInfo(season);
+		ArrayList<TeamVO> teamSeasonInfo = getTeamAverageInfo();
 		Collections.sort(teamSeasonInfo, new SequenceOfTeam(column, "desc"));
 
 		for (int i = 0; i < num; i++) {
