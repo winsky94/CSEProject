@@ -112,7 +112,7 @@ public class HotIndexPanel extends FatherPanel implements MouseListener{
 			downPnl.setLayout(new GridLayout(1,1));
 			ProgressPanel p=new ProgressPanel();
 			downPnl.add(p);
-			p.Refresh("score");
+			p.Refresh("recentFiveMatchesScoreUpRate");
 			downPnl.repaint();
 			downPnl.revalidate();
 		}

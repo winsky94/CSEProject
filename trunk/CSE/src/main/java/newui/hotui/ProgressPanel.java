@@ -119,7 +119,12 @@ public class ProgressPanel extends HotFatherPanel implements MouseListener{
 		positionAndTeamName.setText(topOne.getPosition()+"/" +topOne.getOwingTeam());
 		//data.setText(topOne.getScore()+"");
 		bestTeamIcon.setIcon(new ImageIcon("image/teamIcon/teamsPng150/"+topOne.getOwingTeam()+".png"));
-		data.setText(topOne.getScore()+"/"+topOne.getRecentFiveMatchesScoreUpRate()*100+"%");
+		if(currentBtn==scoreBtn)
+		    data.setText(topOne.getScore()+"/"+topOne.getRecentFiveMatchesScoreUpRate()*100+"%");
+		else if(currentBtn==reboundBtn)
+			data.setText(topOne.getReboundNum()+"/"+topOne.getRecentFiveMatchesReboundUpRate()*100+"%");
+		else 
+			data.setText(topOne.getAssistNum()+"/"+topOne.getRecentFiveMatchesAssistUpRate()*100+"%");
 		model.Refresh(vlist);	
 		table.revalidate();
 		jsp.getViewport().remove(table);
@@ -136,18 +141,18 @@ public class ProgressPanel extends HotFatherPanel implements MouseListener{
 		if(m==scoreBtn){
 			head[5]="场均得分";
 			currentBtn=scoreBtn;
-			Refresh("score");
-			data.setText(v.getScore()+"/"+v.getRecentFiveMatchesScoreUpRate()*100+"%");
+			Refresh("recentFiveMatchesScoreUpRate");
+		//	data.setText(v.getScore()+"/"+v.getRecentFiveMatchesScoreUpRate()*100+"%");
 		}else if(m==reboundBtn){
 			head[5]="场均篮板";
 			currentBtn=reboundBtn;
-			Refresh("reboundNum");
-			data.setText(v.getReboundNum()+"/"+v.getRecentFiveMatchesReboundUpRate()*100+"%");
+			Refresh("recentFiveMatchesReboundUpRate");
+		//	data.setText(v.getReboundNum()+"/"+v.getRecentFiveMatchesReboundUpRate()*100+"%");
 		}else{
 			head[5]="场均助攻";
 			currentBtn=assistBtn;
-			Refresh("assistNum");
-			data.setText(v.getAssistNum()+"/"+v.getRecentFiveMatchesAssistUpRate()*100+"%");
+			Refresh("recentFiveMatchesAssistUpRate");
+		//	data.setText(v.getAssistNum()+"/"+v.getRecentFiveMatchesAssistUpRate()*100+"%");
 		}
 		
 		currentBtn.setBackground(Style.HOT_PURPLEFOCUS);
