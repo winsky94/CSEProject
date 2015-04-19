@@ -137,14 +137,25 @@ public class MatchIndexPanel extends FatherPanel {
 				int row = matchCardList.size() / 2;
 				if (matchCardList.size() % 2 != 0)
 					row += 1;
+			//	if(row==1)
+				//	row+=1;
 				BIGPNL.setLayout(new GridLayout(row, 2));
 				for (int i = 0; i < matchCardList.size(); i++) {
 					BIGPNL.add(matchCardList.get(i));
+					
+					
 				}
-				int heightOfBIGPNL = 100 * matchCardList.size();// 这里一定要设置为180-200之间的值，代表每个卡片的高度，乘以卡片数量之后是整个BIGPNL的高度
+				int heightOfBIGPNL = 100 * row;// 这里一定要设置为180-200之间的值，代表每个卡片的高度，乘以卡片数量之后是整个BIGPNL的高度
 				int screenWidth = UIhelper.getScreenWidth();
 
 				int width = screenWidth * 90 / 100;
+				//if(row==1){
+				//	showPanel=new JPanel();
+					//BIGPNL.add(showPanel);
+					//JPanel p=new JPanel();
+					//BIGPNL.add(p);
+				//}
+			
 				BIGPNL.setPreferredSize(new Dimension(width, heightOfBIGPNL));
 				jsp.getViewport().add(BIGPNL);
 			}
