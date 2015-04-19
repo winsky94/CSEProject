@@ -89,6 +89,7 @@ public class PlayerBaseInfoTableModel extends MyTableModel {
 			}
 			if (name.contains(Team.changeTeamNameCHToEN(tName))) {
 				sortByC.add(playerlist.get(i));
+				//这个有问题
 				listimg.add(imgList.get(i));
 			}
 		}
@@ -118,7 +119,8 @@ public class PlayerBaseInfoTableModel extends MyTableModel {
 		for (PlayerVO vo : list) {
 			ArrayList<Object> line = new ArrayList<Object>();
 			String name = vo.getName();
-			ImageIcon tou = player.getPlayerPortraitImage(name);
+			//ImageIcon tou = player.getPlayerPortraitImage(name);
+			ImageIcon tou=new ImageIcon("image/player/portrait/"+name+".png");
 			imgList.add(tou);
 			ImageIcon icon = new ImageIcon(tou.getImage().getScaledInstance(
 					currentTable.getColumn(currentTable.getColumnName(0))

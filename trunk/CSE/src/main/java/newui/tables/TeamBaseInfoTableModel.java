@@ -63,7 +63,8 @@ public class TeamBaseInfoTableModel extends MyTableModel{
 		for(TeamVO vo:v){
 			ArrayList<Object> line=new ArrayList<Object>();
 			String name=vo.getAbLocation();
-			ImageIcon img=team.getTeamImage(name);
+			//ImageIcon img=team.getTeamImage(name);
+			ImageIcon img=new ImageIcon("image/player/portrait/"+name+".png");
 			img.setImage(img.getImage().getScaledInstance(
 					currentTable.getColumn(currentTable.getColumnName(0))
 							.getWidth(), 40

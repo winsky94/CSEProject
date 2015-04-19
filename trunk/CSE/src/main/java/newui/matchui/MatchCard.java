@@ -66,8 +66,9 @@ public class MatchCard extends JPanel implements MouseListener {
 		detailLbl.addMouseListener(this);
 		topPnl.add(detailLbl);
 		// --homeicon---------------
-		ImageIcon t=team.getTeamImage(vo.getHomeTeam());
-		t.setImage(t.getImage().getScaledInstance(150, 150,0));
+		//ImageIcon t=team.getTeamImage(vo.getHomeTeam());
+		ImageIcon t=new ImageIcon("image/teamIcon/teamsPng150/"+vo.getHomeTeam()+".png");
+		//t.setImage(t.getImage().getScaledInstance(150, 150,0));
 		homeIcon = new JLabel(
 				t);
 		gbc.gridx = 0;
@@ -108,8 +109,9 @@ public class MatchCard extends JPanel implements MouseListener {
 		gbl.setConstraints(detailScoresPnl, gbc);
 		add(detailScoresPnl);
 		// --visitingIcon---------------
-		ImageIcon v=team.getTeamImage(vo.getVisitingTeam());
-		v.setImage(v.getImage().getScaledInstance(150, 150,0));
+		//ImageIcon v=team.getTeamImage(vo.getVisitingTeam());
+		ImageIcon v=new ImageIcon("image/teamIcon/teamsPng150/"+vo.getVisitingTeam()+".png");
+		//v.setImage(v.getImage().getScaledInstance(150, 150,0));
 		visitingIcon = new JLabel(v);
 		gbc.gridx = 4;
 		gbc.weightx = 20;
