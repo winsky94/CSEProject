@@ -1,6 +1,5 @@
 package bl;
 
-import bl.team.FinalTeam;
 import bl.team.Team;
 
 //class a extends Thread {
@@ -46,22 +45,22 @@ public class Test {
 		// System.out.println(map3.size());
 		//
 		int count = 0;
-//		for (int i = 0; i < 100; i++) {
-//			long t1 = System.currentTimeMillis();
-//			FinalTeam newTeam = new FinalTeam();
-//			newTeam.getTeamSeasonInfo("13-14");
-			long t2 = System.currentTimeMillis();
-			
-			Team team = new Team();
-			team.getOrderedTeamsBySeason("13-14", "score", "desc", -1);
-			long t3 = System.currentTimeMillis();
-//			System.out.println(t2 - t1);
-			System.out.println(t3 - t2);
-//			if ((t2 - t1) >= (t3 - t2)) {
-//				count++;
-//			}
-//		}
-//		System.out.println("运行100次，有" + count + "次NewFinalTeam快");
+		// for (int i = 0; i < 100; i++) {
+		// long t1 = System.currentTimeMillis();
+		// FinalTeam newTeam = new FinalTeam();
+		// newTeam.getTeamSeasonInfo("13-14");
+		long t2 = System.currentTimeMillis();
+
+		Team team = new Team();
+		team.getOrderedTeamsBySeason("13-14", "score", "desc", -1);
+		long t3 = System.currentTimeMillis();
+		// System.out.println(t2 - t1);
+		System.out.println(t3 - t2);
+		// if ((t2 - t1) >= (t3 - t2)) {
+		// count++;
+		// }
+		// }
+		// System.out.println("运行100次，有" + count + "次NewFinalTeam快");
 
 		// new Thread() {
 		// int count = 0;
