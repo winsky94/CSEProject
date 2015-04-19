@@ -1,5 +1,6 @@
 package newui.hotui;
 
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -12,15 +13,14 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTable;
+import javax.swing.table.DefaultTableCellRenderer;
 
+import newui.Style;
+import newui.tables.HotTableModel;
+import newui.tables.MyTableCellRenderer;
+import vo.TeamVO;
 import bl.team.Team;
 import blservice.TeamBLService;
-import vo.PlayerVO;
-import vo.TeamVO;
-import newui.Style;
-import newui.hotui.HotFatherPanel.BottomButton;
-import newui.hotui.HotSeasonPanel.HotSeasonModel;
-import newui.tables.HotTableModel;
 
 public class HotTeamPanel extends HotFatherPanel implements MouseListener {
 	private static final long serialVersionUID = 1L;
@@ -32,15 +32,16 @@ public class HotTeamPanel extends HotFatherPanel implements MouseListener {
 	 */
 	// ------bottomBar-----
 	BottomButton scoreBtn, reboundBtn, assistBtn, blockBtn, stealBtn,
-			threeRateBtn, shootRateBtn, freeRateBtn,currentBtn;
-	
-	String[] head={"排名","(logo)","球队名称","球队缩写","所属联盟","场均得分"};
+			threeRateBtn, shootRateBtn, freeRateBtn, currentBtn;
+
+	String[] head = { "排名", "(logo)", "球队名称", "球队缩写", "所属联盟", "场均得分" };
 	JTable table;
 	HotTeamModel model;
 	TeamBLService team;
 	ArrayList<TeamVO> vlist;
+
 	public HotTeamPanel() {
-		team=new Team();
+		team = new Team();
 		GridBagLayout bl = new GridBagLayout();
 		GridBagConstraints bc = new GridBagConstraints();
 		bc.fill = GridBagConstraints.BOTH;
@@ -91,7 +92,7 @@ public class HotTeamPanel extends HotFatherPanel implements MouseListener {
 		scoreBtn.setBackground(Style.HOT_BLUEFOCUS);
 		scoreBtn.addMouseListener(this);
 		bottomBar.add(scoreBtn);
-		currentBtn=scoreBtn;
+		currentBtn = scoreBtn;
 		// -----------
 		reboundBtn = new BottomButton("场均篮板");
 		reboundBtn.setBackground(Style.HOT_BLUE);
@@ -127,79 +128,101 @@ public class HotTeamPanel extends HotFatherPanel implements MouseListener {
 		freeRateBtn.setBackground(Style.HOT_BLUE);
 		freeRateBtn.addMouseListener(this);
 		bottomBar.add(freeRateBtn);
-		model=new HotTeamModel(head);
-		table=new JTable(model);
+		model = new HotTeamModel(head);
+		table = new JTable(model);
+		// table 渲染器，设置文字内容居中显示，设置背景色等
+		table.setSelectionBackground(new Color(225, 255, 255));// 设置选择行的颜色——淡蓝色
+		table.setFont(new Font("微软雅黑", 0, 12));
+		table.getTableHeader().setFont(new Font("微软雅黑", 0, 14));
+		table.getTableHeader().setBackground(new Color(211, 211, 211));
+		DefaultTableCellRenderer tcr = new MyTableCellRenderer();
+		table.getColumn(table.getColumnName(0)).setCellRenderer(tcr);
+		for (int i = 2; i < table.getColumnCount(); i++) {
+			table.getColumn(table.getColumnName(i)).setCellRenderer(tcr);
+		}
 		jsp.getViewport().add(table);
 	}
-	
-	public void Refresh(String sort){
-		//目前只有一个赛季
-		vlist=team.getSeasonHotTeam("13-14", sort, 5);
-		if(vlist!=null&&vlist.size()!=0){
+
+	public void Refresh(String sort) {
+		// 目前只有一个赛季
+		vlist = team.getSeasonHotTeam("13-14", sort, 5);
+		if (vlist != null && vlist.size() != 0) {
 			model.setHead(head);
-		TeamVO topOne=vlist.get(0);
-		teamIcon.setIcon(new ImageIcon("image/teamIcon/teamsPng150/"+topOne.getAbLocation()+".png"));
-		teamNameLbl.setText(Team.changeTeamNameENToCH(topOne.getAbLocation()));
-		data.setText(topOne.getScore()+"");
-	//通过Team调用
-		if(topOne.getConference().equals("E"))
-			unionLbl.setText("东部联盟");
-		else
-			unionLbl.setText("西部联盟");
-		
-		model.Refresh(vlist);	
-		table.revalidate();
-		jsp.getViewport().remove(table);
-		table=new JTable(model);
-		jsp.getViewport().add(table);
-		jsp.repaint();
+			TeamVO topOne = vlist.get(0);
+			teamIcon.setIcon(new ImageIcon("image/teamIcon/teamsPng150/"
+					+ topOne.getAbLocation() + ".png"));
+			teamNameLbl.setText(Team.changeTeamNameENToCH(topOne
+					.getAbLocation()));
+			data.setText(topOne.getScore() + "");
+			// 通过Team调用
+			if (topOne.getConference().equals("E"))
+				unionLbl.setText("东部联盟");
+			else
+				unionLbl.setText("西部联盟");
+
+			model.Refresh(vlist);
+			table.revalidate();
+			jsp.getViewport().remove(table);
+			table = new JTable(model);
+			// table 渲染器，设置文字内容居中显示，设置背景色等
+			table.setSelectionBackground(new Color(225, 255, 255));// 设置选择行的颜色——淡蓝色
+			table.setFont(new Font("微软雅黑", 0, 12));
+			table.getTableHeader().setFont(new Font("微软雅黑", 0, 14));
+			table.getTableHeader().setBackground(new Color(211, 211, 211));
+			DefaultTableCellRenderer tcr = new MyTableCellRenderer();
+			table.getColumn(table.getColumnName(0)).setCellRenderer(tcr);
+			for (int i = 2; i < table.getColumnCount(); i++) {
+				table.getColumn(table.getColumnName(i)).setCellRenderer(tcr);
+			}
+			jsp.getViewport().add(table);
+			jsp.repaint();
 		}
 	}
 
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
 		currentBtn.setBackground(Style.HOT_BLUE);
-		BottomButton m=(BottomButton)e.getSource();
-		if(m==scoreBtn){
-			head[5]="场均得分";
-			currentBtn=scoreBtn;
+		BottomButton m = (BottomButton) e.getSource();
+		if (m == scoreBtn) {
+			head[5] = "场均得分";
+			currentBtn = scoreBtn;
 			Refresh("score");
-			data.setText(vlist.get(0).getScore()+"");
-		}else if(m==reboundBtn){
-			head[5]="场均篮板";
-			currentBtn=reboundBtn;
+			data.setText(vlist.get(0).getScore() + "");
+		} else if (m == reboundBtn) {
+			head[5] = "场均篮板";
+			currentBtn = reboundBtn;
 			Refresh("reboundNum");
-			data.setText(vlist.get(0).getReboundNum()+"");
-		}else if(m==assistBtn){
-			head[5]="场均助攻";
-			currentBtn=assistBtn;
+			data.setText(vlist.get(0).getReboundNum() + "");
+		} else if (m == assistBtn) {
+			head[5] = "场均助攻";
+			currentBtn = assistBtn;
 			Refresh("assistNum");
-			data.setText(vlist.get(0).getAssistNum()+"");
-		}else if(m==blockBtn){
-			head[5]="场均盖帽";
-			currentBtn=blockBtn;
+			data.setText(vlist.get(0).getAssistNum() + "");
+		} else if (m == blockBtn) {
+			head[5] = "场均盖帽";
+			currentBtn = blockBtn;
 			Refresh("blockNum");
-			data.setText(vlist.get(0).getBlockNum()+"");
-		}else if(m==stealBtn){
-			head[5]="场均抢断";
-			currentBtn=stealBtn;
+			data.setText(vlist.get(0).getBlockNum() + "");
+		} else if (m == stealBtn) {
+			head[5] = "场均抢断";
+			currentBtn = stealBtn;
 			Refresh("stealNum");
-			data.setText(vlist.get(0).getStealNum()+"");
-		}else if(m==threeRateBtn){
-			head[5]="三分命中率";
-			currentBtn=threeRateBtn;
+			data.setText(vlist.get(0).getStealNum() + "");
+		} else if (m == threeRateBtn) {
+			head[5] = "三分命中率";
+			currentBtn = threeRateBtn;
 			Refresh("threeHitRate");
-			data.setText(vlist.get(0).getThreeHitRate()+"");
-		}else if(m==shootRateBtn){
-			head[5]="投篮命中率";
-			currentBtn=shootRateBtn;
+			data.setText(vlist.get(0).getThreeHitRate() + "");
+		} else if (m == shootRateBtn) {
+			head[5] = "投篮命中率";
+			currentBtn = shootRateBtn;
 			Refresh("shootHitRate");
-			data.setText(vlist.get(0).getShootHitRate()+"");
-		}else{
-			head[5]="罚球命中率";
-			currentBtn=freeRateBtn;
+			data.setText(vlist.get(0).getShootHitRate() + "");
+		} else {
+			head[5] = "罚球命中率";
+			currentBtn = freeRateBtn;
 			Refresh("freeThrowHitRate");
-			data.setText(vlist.get(0).getFreeThrowHitRate()+"");
+			data.setText(vlist.get(0).getFreeThrowHitRate() + "");
 		}
 		currentBtn.setBackground(Style.HOT_BLUEFOCUS);
 	}
@@ -225,53 +248,55 @@ public class HotTeamPanel extends HotFatherPanel implements MouseListener {
 	public void mouseExited(MouseEvent e) {
 		if (e.getSource().getClass() == BottomButton.class) {
 			BottomButton btn = (BottomButton) e.getSource();
-			if(currentBtn!=btn)
+			if (currentBtn != btn)
 				btn.setBackground(Style.HOT_BLUE);
 		}
 
 	}
-	
-	class HotTeamModel extends HotTableModel{
-		public HotTeamModel(String[] head){
+
+	class HotTeamModel extends HotTableModel {
+		public HotTeamModel(String[] head) {
 			super(head);
 		}
-		public void Refresh(ArrayList<TeamVO> vlist){
+
+		public void Refresh(ArrayList<TeamVO> vlist) {
 			content.clear();
-			num=2;
-			for(int i=1;i<vlist.size();i++){
-				TeamVO v=vlist.get(i);
-				ArrayList<Object> line=new ArrayList<Object>();
+			num = 2;
+			for (int i = 1; i < vlist.size(); i++) {
+				TeamVO v = vlist.get(i);
+				ArrayList<Object> line = new ArrayList<Object>();
 				line.add(num);
 				num++;
-				ImageIcon icon=new ImageIcon("image/teamIcon/teamsPng35/"+v.getAbLocation()+".png");
-				//设置宽高
-				
+				ImageIcon icon = new ImageIcon("image/teamIcon/teamsPng90/"
+						+ v.getAbLocation() + ".png");
+				// 设置宽高
+
 				line.add(icon);
 				line.add(v.getTeamName());
 				line.add(v.getAbLocation());
-				if(v.getConference().equals("E"))
+				if (v.getConference().equals("E"))
 					line.add("东部联盟");
 				else
 					line.add("西部联盟");
-				if(currentBtn==scoreBtn){
+				if (currentBtn == scoreBtn) {
 					line.add(v.getScore());
-				}else if(currentBtn==reboundBtn)
+				} else if (currentBtn == reboundBtn)
 					line.add(v.getReboundNum());
-				else if(currentBtn==assistBtn)
+				else if (currentBtn == assistBtn)
 					line.add(v.getAssistNum());
-				else if(currentBtn==blockBtn)
+				else if (currentBtn == blockBtn)
 					line.add(v.getBlockNum());
-				else if(currentBtn==stealBtn)
+				else if (currentBtn == stealBtn)
 					line.add(v.getStealNum());
-				else if(currentBtn==threeRateBtn)
+				else if (currentBtn == threeRateBtn)
 					line.add(v.getThreeHitRate());
-				else if(currentBtn==shootRateBtn)
+				else if (currentBtn == shootRateBtn)
 					line.add(v.getShootHitRate());
 				else
 					line.add(v.getFreeThrowHitRate());
 				content.add(line);
 			}
-			
+
 		}
 	}
 
