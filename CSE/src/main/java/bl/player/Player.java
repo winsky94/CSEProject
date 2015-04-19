@@ -886,7 +886,8 @@ public class Player implements PlayerBLService {
 		}
 		String todaySeason = result;
 		result = todaySeason + "_" + todayDate;
-		return result;
+		//return result;
+		return "13-14_01-01";
 	}
 
 	private ArrayList<MatchVO> getTodayMatch() {
