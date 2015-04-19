@@ -1,8 +1,10 @@
 package newui.tables;
 
+import java.awt.Image;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
+import javax.swing.JTable;
 
 import bl.team.Team;
 import blservice.TeamBLService;
@@ -19,6 +21,7 @@ public class TeamBaseInfoTableModel extends MyTableModel{
 	static String[] head ={"(logo)","球队","缩写","联盟","分区","主场","成立时间"};
 	ArrayList<ArrayList<Object>> content = new ArrayList<ArrayList<Object>>();
 	private TeamBLService team;
+	private JTable currentTable;
 	private ArrayList<ImageIcon> teamIcon;
 	public TeamBaseInfoTableModel(){
 		team=new Team();
@@ -59,8 +62,12 @@ public class TeamBaseInfoTableModel extends MyTableModel{
 		teamIcon.clear();
 		for(TeamVO vo:v){
 			ArrayList<Object> line=new ArrayList<Object>();
-			String name=vo.getTeamName();
+			String name=vo.getAbLocation();
 			ImageIcon img=team.getTeamImage(name);
+			img.setImage(img.getImage().getScaledInstance(
+					currentTable.getColumn(currentTable.getColumnName(0))
+							.getWidth(), 40
+					/* currentTable.getRowHeight(i) */, Image.SCALE_DEFAULT));
 			teamIcon.add(img);
 			line.add(img);
 			line.add(name);
@@ -84,6 +91,11 @@ public class TeamBaseInfoTableModel extends MyTableModel{
 			
 			Refresh(v);
 		}
+		
+	}
+	
+	public void setCurrentTable(JTable table){
+		this.currentTable=table;
 		
 	}
 }

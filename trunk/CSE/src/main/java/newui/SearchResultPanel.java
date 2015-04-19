@@ -52,7 +52,7 @@ public class SearchResultPanel extends FatherPanel implements MouseListener{
 		gbl.setConstraints(funcPnl, gbc);
 		add(funcPnl);
 		//----resultLbl---------
-		resultLbl=new MyLabel("在球队中检索到88条符合关键字"+scontent+"的结果。");
+		resultLbl=new MyLabel("在球队中检索到88条符合关键字"+scontent+"的结果...");
 		funcPnl.add(resultLbl);
 		funcPnl.add(new JLabel("                             "));
 		//----changeLbl---------
@@ -64,6 +64,8 @@ public class SearchResultPanel extends FatherPanel implements MouseListener{
 		ttm=new TeamBaseInfoTableModel();
 		ptm=new PlayerBaseInfoTableModel();
 		table=new MyBaseTable(ttm);
+		ptm.setCurrentTable(table);
+		ttm.setCurrentTable(table);
 		
 		titleBar.searchBtn.addMouseListener(new MouseAdapter(){
 			public void mouseClicked(MouseEvent e){
@@ -85,6 +87,7 @@ public class SearchResultPanel extends FatherPanel implements MouseListener{
 		pservice=new Player();//这里有问题
 		tservice=new Team();
 		ArrayList<TeamVO> v=tservice.getTeamBaseInfo(scontent);
+		resultLbl.setText("在球队中检索到"+v.size()+"条符合关键字"+scontent+"的结果...");
 		ttm.SearchRefresh(v);
 		table.revalidate();
 	}
@@ -107,20 +110,26 @@ public class SearchResultPanel extends FatherPanel implements MouseListener{
 			if(isTeamTable){
 				//换为ptm
 				isTeamTable=false;
-				resultLbl.setText("在球员中检索到……");
+				
 				ArrayList<PlayerVO> re=pservice.getPlayerBaseInfo(content);
-				table=new JTable(ptm);
+				table.setModel(ptm);
+				
+				resultLbl.setText("在球员中检索到"+re.size()+"条符合关键字"+content+"的结果...");
 				ptm.SearchRefresh(re);
-				table.revalidate();
+			
 			}else{
 				//换为ttm
 				isTeamTable=true;
-				resultLbl.setText("在球队中检索到……");
+				
 				ArrayList<TeamVO> re=tservice.getTeamBaseInfo(content);
-				table=new JTable(ttm);
+				resultLbl.setText("在球员中检索到"+re.size()+"条符合关键字"+content+"的结果...");
+				table.setModel(ttm);;
 				ttm.SearchRefresh(re);
-				table.revalidate();
+				
+				
 			}
+			table.revalidate();
+			jsp.revalidate();
 		}
 		
 	}
