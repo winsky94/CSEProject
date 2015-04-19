@@ -32,9 +32,10 @@ public class MatchCard extends JPanel implements MouseListener {
 	JPanel topPnl, detailScoresPnl;
 	private TeamBLService team;
 	private boolean isHomeHigh=true;
-
+	private MatchVO vo;
 //显示单场比赛信息
 	public MatchCard(MatchVO vo) {
+		this.vo=vo;
 		team=new Team();
 		GridBagLayout gbl = new GridBagLayout();
 		GridBagConstraints gbc = new GridBagConstraints();
@@ -165,7 +166,7 @@ public class MatchCard extends JPanel implements MouseListener {
 
 	public void mouseClicked(MouseEvent e) {
 		if (e.getSource() == detailLbl)// 注意，这里应当传一个比赛的特征值过去
-			MainFrame.getInstance().setContentPanel(new MatchDetailPanel());
+			MainFrame.getInstance().setContentPanel(new MatchDetailPanel(vo));
 	}
 
 	public void mousePressed(MouseEvent e) {

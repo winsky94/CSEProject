@@ -11,6 +11,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
+import vo.MatchVO;
 import newui.FatherPanel;
 import newui.Style;
 
@@ -24,9 +25,9 @@ public class MatchDetailPanel extends FatherPanel {
 	//------------------
 	JScrollPane jsp;
 
-	public MatchDetailPanel() {
+	public MatchDetailPanel(MatchVO v) {
 		// ----card------------
-		card = new DetailCard();
+		card = new DetailCard(v);
 		gbc.gridy = 1;
 		gbc.gridheight = 4;
 		gbc.weighty =4;
