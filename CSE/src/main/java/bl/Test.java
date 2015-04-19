@@ -52,7 +52,7 @@ public class Test {
 		long t2 = System.currentTimeMillis();
 
 		Team team = new Team();
-		team.getOrderedTeamsBySeason("13-14", "score", "desc", -1);
+		team.getOrderedTeamsBySeason("13-14", "score", "null", 5);
 		long t3 = System.currentTimeMillis();
 		// System.out.println(t2 - t1);
 		System.out.println(t3 - t2);
