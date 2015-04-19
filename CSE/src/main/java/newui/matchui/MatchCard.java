@@ -69,8 +69,10 @@ public class MatchCard extends JPanel implements MouseListener {
 		//ImageIcon t=team.getTeamImage(vo.getHomeTeam());
 		ImageIcon t=new ImageIcon("image/teamIcon/teamsPng150/"+vo.getHomeTeam()+".png");
 		//t.setImage(t.getImage().getScaledInstance(150, 150,0));
+		
 		homeIcon = new JLabel(
 				t);
+		homeIcon.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		gbc.gridx = 0;
 		gbc.gridy = 1;
 		gbc.gridwidth = 1;
@@ -113,6 +115,7 @@ public class MatchCard extends JPanel implements MouseListener {
 		ImageIcon v=new ImageIcon("image/teamIcon/teamsPng150/"+vo.getVisitingTeam()+".png");
 		//v.setImage(v.getImage().getScaledInstance(150, 150,0));
 		visitingIcon = new JLabel(v);
+		visitingIcon.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		gbc.gridx = 4;
 		gbc.weightx = 20;
 		gbc.weighty = 50;
@@ -150,11 +153,11 @@ public class MatchCard extends JPanel implements MouseListener {
 		ArrayList<String> detail=vo.getDetailScores();
 		int rowNum=detail.size();
 		result.setLayout(new GridLayout(rowNum,1));
-		JLabel pointLbl=new JLabel(detail.get(0));
-		pointLbl.setFont(new Font("微软雅黑",Font.PLAIN,14));
-		pointLbl.setForeground(Style.BACK_GREY);
-		result.add(pointLbl);
-		for(int i=1;i<rowNum;i++)
+		//JLabel pointLbl=new JLabel(detail.get(0));
+	//	pointLbl.setFont(new Font("微软雅黑",Font.PLAIN,14));
+		//pointLbl.setForeground(Style.BACK_GREY);
+		//result.add(pointLbl);
+		for(int i=0;i<rowNum;i++)
 			result.add(new JLabel(detail.get(i)));
 	
 		return result;
