@@ -1,6 +1,5 @@
 package blservice;
 
-import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
@@ -72,7 +71,7 @@ public interface PlayerBLService {
 	 * @return 按照所给条件排好序的球队列表
 	 */
 	public ArrayList<PlayerVO> getOrderedPlayersBySeason(String season,
-			String condition, String order, int num) throws RemoteException;
+			String condition, String order, int num) ;
 
 	/**
 	 * 根据某一项技术分析项，将球员按场均该项数据进行升降序排序
