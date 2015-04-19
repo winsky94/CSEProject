@@ -785,13 +785,13 @@ public class Team implements TeamBLService {
 	 * @return 英文缩写
 	 */
 	public static String changeTeamNameCHToEN(String CH) {
-		int index = 0;
+		int index = -1;
 		for (int i = 0; i < teamsName_CH.length; i++) {
 			if (teamsName_CH[i].equals(CH)) {
 				index = i;
 			}
 		}
-		if (index != 0) {
+		if (index != -1) {
 			return teamsName_EN[index];
 		} else {
 			return CH;
@@ -806,13 +806,13 @@ public class Team implements TeamBLService {
 	 * @return 中文名
 	 */
 	public static String changeTeamNameENToCH(String EN) {
-		int index = 0;
+		int index = -1;
 		for (int i = 0; i < teamsName_CH.length; i++) {
 			if (teamsName_EN[i].equals(EN)) {
 				index = i;
 			}
 		}
-		if (index != 0) {
+		if (index != -1) {
 			return teamsName_CH[index];
 		} else {
 			return EN;
