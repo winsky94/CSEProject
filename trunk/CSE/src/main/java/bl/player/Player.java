@@ -1182,8 +1182,10 @@ public class Player implements PlayerBLService {
 	public static void main(String[] args) {
 		long start = System.currentTimeMillis();
 		Player player = new Player();
-		ArrayList<PlayerVO> players = player.getOrderedPlayersByAverage("score", "desc", 5);
-		System.out.println(players.get(0).getName()+" "+players.get(0).getScore());
+		ArrayList<PlayerVO> players = player.selectPlayersByAverage("C", "E", AgeEnum.M22_LE25, "reboundNum", "desc", 5);
+		players = player.selectPlayersByAverage("C", "E", AgeEnum.M22_LE25, "reboundNum", "desc", 5);
+//		ArrayList<PlayerVO> players = player.getOrderedPlayersByAverage("score", "desc", 5);
+//		System.out.println(players.get(0).getName()+" "+players.get(0).getScore());
 //		ArrayList<PlayerVO> players=player.getPlayersByTeam("ATL");
 //		 System.out.println(players.get(0).getName());
 //		PlayerVO vo = player.getPlayerAverageInfo("Al Horford");
