@@ -55,9 +55,14 @@ public class HotIndexPanel extends FatherPanel implements MouseListener{
 		downPnl=new JPanel();
 		gbc.gridy = 2;
 		gbc.gridheight = 10;
-		gbc.weighty = 10;
+		gbc.weighty = 15;
 		gbl.setConstraints(downPnl, gbc);
 		add(downPnl);
+		downPnl.removeAll();
+		downPnl.setLayout(new GridLayout(1,1));
+		downPnl.add(new HotTodayPanel());
+		downPnl.repaint();
+		downPnl.revalidate();
 	}
 	class TopButton extends JButton{
 
