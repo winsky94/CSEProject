@@ -17,7 +17,10 @@ public class HotFatherPanel extends JPanel{
 	JPanel bottomBar;
 	JPanel bestPnl;
 	JScrollPane jsp;
+	
+	
 	public HotFatherPanel(){
+		
 		gbl=new GridBagLayout();
 		gbc=new GridBagConstraints();
 		gbc.fill=GridBagConstraints.BOTH;

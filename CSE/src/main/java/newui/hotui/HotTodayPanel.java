@@ -123,7 +123,7 @@ public class HotTodayPanel extends HotFatherPanel implements MouseListener{
 		//-----------表格===
 		model=new HotTodayModel(head);
 		table=new JTable(model);
-		jsp.add(table);
+		jsp.getViewport().add(table);
 		
 		
 	}
@@ -132,15 +132,22 @@ public class HotTodayPanel extends HotFatherPanel implements MouseListener{
 		//默认筛选  按得分
 		vlist=player.getDayHotPlayer(sort, 5);
 		if(vlist!=null&&vlist.size()!=0){
+		model.setHead(head);
 		PlayerVO topOne=vlist.get(0);
 		bestHead.setIcon(new ImageIcon("image/player/portrait/"+topOne.getName()+".png"));
 		bestName.setText(topOne.getName());
 		positionAndTeamName.setText(topOne.getPosition()+"/" +topOne.getOwingTeam());
-		//data.setText(topOne.getScore()+"");
+		data.setText(topOne.getScore()+"");
 		bestTeamIcon.setIcon(new ImageIcon("image/teamIcon/teamsPng150/"+topOne.getOwingTeam()+".png"));
-		model.setHead(head);
+		
 		model.Refresh(vlist);	
 		table.revalidate();
+		jsp.getViewport().remove(table);
+		table=new JTable(model);
+		jsp.getViewport().add(table);
+		jsp.repaint();
+		
+	
 		}
 			
 	}
@@ -244,6 +251,7 @@ public class HotTodayPanel extends HotFatherPanel implements MouseListener{
 				content.add(line);
 				
 			}
+		
 			
 		}
 	}

@@ -83,28 +83,36 @@ public class HotIndexPanel extends FatherPanel implements MouseListener{
 		if(e.getSource()==todayBtn){
 			downPnl.removeAll();
 			downPnl.setLayout(new GridLayout(1,1));
-			downPnl.add(new HotTodayPanel());
+			HotTodayPanel p=new HotTodayPanel();
+			downPnl.add(p);
+			p.Refresh("score");
 			downPnl.repaint();
 			downPnl.revalidate();
 		}
 		if(e.getSource()==seasonBtn){
 			downPnl.removeAll();
 			downPnl.setLayout(new GridLayout(1,1));
-			downPnl.add(new HotSeasonPanel());
+			HotSeasonPanel p=new HotSeasonPanel();
+			downPnl.add(p);
+			p.Refresh("score");
 			downPnl.repaint();
 			downPnl.revalidate();
 		}
 		if(e.getSource()==teamBtn){
 			downPnl.removeAll();
 			downPnl.setLayout(new GridLayout(1,1));
-			downPnl.add(new HotTeamPanel());
+			HotTeamPanel p=new HotTeamPanel();
+			downPnl.add(p);
+			p.Refresh("score");
 			downPnl.repaint();
 			downPnl.revalidate();
 		}
 		if(e.getSource()==progressBtn){
 			downPnl.removeAll();
 			downPnl.setLayout(new GridLayout(1,1));
-			downPnl.add(new ProgressPanel());
+			ProgressPanel p=new ProgressPanel();
+			downPnl.add(p);
+			p.Refresh("score");
 			downPnl.repaint();
 			downPnl.revalidate();
 		}
