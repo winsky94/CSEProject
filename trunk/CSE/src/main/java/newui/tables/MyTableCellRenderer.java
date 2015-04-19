@@ -92,6 +92,11 @@ public class MyTableCellRenderer extends DefaultTableCellRenderer {
 			table.getColumn(columnName1).setPreferredWidth(200);
 		}
 		
+		if (table.getModel().toString().contains("TeamHistoryTableModel")) {
+			String columnName1 = table.getColumnName(0);
+			table.getColumn(columnName1).setPreferredWidth(200);
+		}
+		
 		// 设置行高
 		table.setRowHeight(row, 40);
 		// 去除单元格边框线
