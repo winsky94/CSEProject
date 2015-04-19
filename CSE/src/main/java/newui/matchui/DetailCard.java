@@ -13,21 +13,27 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+
+import vo.MatchVO;
+
+
 import newui.Style;
 
 public class DetailCard extends JPanel implements MouseListener {
+
 	private static final long serialVersionUID = 1L;
+
 	JPanel homeNamePnl, visitingNamePnl;
 	JLabel hchNameLbl, habbrNameLbl, homeScore, homeIcon, visitingIcon,
 			vchNameLbl, vabbrNameLbl, visitingScore;
 	JPanel detailPnl;
-
-	public DetailCard() {
-		GridBagLayout gbl = new GridBagLayout();
-		GridBagConstraints gbc = new GridBagConstraints();
-		gbc.fill = GridBagConstraints.BOTH;
+	public DetailCard(MatchVO v){
+		GridBagLayout gbl=new GridBagLayout();
+		GridBagConstraints gbc=new GridBagConstraints();
+		gbc.fill=GridBagConstraints.BOTH;
 		gbc.insets = new Insets(0, 40, 0, 40);
 		setOpaque(false);
+
 		setLayout(gbl);
 		// ----homeNamePnl--------
 		homeNamePnl = new JPanel();
