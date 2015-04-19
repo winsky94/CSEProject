@@ -834,14 +834,12 @@ public class Player implements PlayerBLService {
 	}
 
 	public ImageIcon getPlayerPortraitImage(String name) {
-		ImageIcon imageIcon = new ImageIcon(DataSourse.dataSourse
-				+ "/players/portrait/" + name + ".png");
+		ImageIcon imageIcon = new ImageIcon("image/player/portrait/" + name + ".png");
 		return imageIcon;
 	}
 
 	public ImageIcon getPlayerActionImage(String name) {
-		ImageIcon imageIcon = new ImageIcon(DataSourse.dataSourse
-				+ "/players/action/" + name + ".png");
+		ImageIcon imageIcon = new ImageIcon("image/player/action/" + name + ".png");
 		return imageIcon;
 	}
 
