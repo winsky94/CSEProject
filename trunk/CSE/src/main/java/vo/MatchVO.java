@@ -9,8 +9,8 @@ public class MatchVO {
 	private String homeTeam;
 	private ArrayList<String> detailScores;// 各节比分
 	private ArrayList<RecordVO> records;// 球员比分数据记录
-	
-	private int matchTime;//比赛总时间,以秒为单位
+
+	private int matchTime;// 比赛总时间,以秒为单位
 	private int visitingShootHitNum = 0; // 投篮命中数
 	private int visitingShootAttemptNum = 0; // 投篮出手次数
 	private int visitingThreeHitNum = 0; // 三分命中数
@@ -42,27 +42,26 @@ public class MatchVO {
 	private int homeScore = 0;// 得分
 
 	public MatchVO(String season, String date, String visitingTeam,
-			String homeTeam,int partNum){
+			String homeTeam, int partNum) {
 		this.season = season;
 		this.date = date;
 		this.visitingTeam = visitingTeam;
 		this.homeTeam = homeTeam;
-		if(partNum==4){
-			matchTime= 48*60;
-		}
-		else{
-			matchTime= (48+(partNum-4)*5)*60;
+		if (partNum == 4) {
+			matchTime = 48 * 60;
+		} else {
+			matchTime = (48 + (partNum - 4) * 5) * 60;
 		}
 	}
-	
+
 	public MatchVO(String season, String date, String visitingTeam,
-			String homeTeam){
+			String homeTeam) {
 		this.season = season;
 		this.date = date;
 		this.visitingTeam = visitingTeam;
 		this.homeTeam = homeTeam;
 	}
-	
+
 	public MatchVO(String season, String date, String visitingTeam,
 			String homeTeam, int visitingScore, int homeScore,
 			ArrayList<String> detailScores, ArrayList<RecordVO> records) {
@@ -76,20 +75,21 @@ public class MatchVO {
 		this.detailScores = detailScores;
 		this.records = records;
 	}
-	
+
 	public MatchVO(String season, String date, String visitingTeam,
-			String homeTeam, int partNum,
-			 ArrayList<RecordVO> records) {
+			String homeTeam, int visitingScore, int homeScore, int partNum,
+			ArrayList<RecordVO> records) {
 		super();
 		this.season = season;
 		this.date = date;
 		this.visitingTeam = visitingTeam;
 		this.homeTeam = homeTeam;
-		if(partNum==4){
-			matchTime= 48*60;
-		}
-		else{
-			matchTime= (48+(partNum-4)*5)*60;
+		this.visitingScore = visitingScore;
+		this.homeScore = homeScore;
+		if (partNum == 4) {
+			matchTime = 48 * 60;
+		} else {
+			matchTime = (48 + (partNum - 4) * 5) * 60;
 		}
 		this.records = records;
 	}
@@ -110,24 +110,24 @@ public class MatchVO {
 		return homeTeam;
 	}
 
-	public int getMatchTime(){
+	public int getMatchTime() {
 		return matchTime;
 	}
-	
+
 	public int getVisitingScore() {
 		return visitingScore;
 	}
-	
-	public void addVisitingScore(int visitingScore){
-		this.visitingScore+=visitingScore;
+
+	public void addVisitingScore(int visitingScore) {
+		this.visitingScore += visitingScore;
 	}
 
 	public int getHomeScore() {
 		return homeScore;
 	}
-	
-	public void addHomeScore(int homeScore){
-		this.homeScore+=homeScore;
+
+	public void addHomeScore(int homeScore) {
+		this.homeScore += homeScore;
 	}
 
 	public ArrayList<String> getDetailScores() {
@@ -137,224 +137,217 @@ public class MatchVO {
 	public ArrayList<RecordVO> getRecords() {
 		return records;
 	}
-	
-	public int getVisitingShootHitNum(){
+
+	public int getVisitingShootHitNum() {
 		return visitingShootHitNum;
 	}
-	
-	public int getVisitingShootAttemptNum(){
+
+	public int getVisitingShootAttemptNum() {
 		return visitingShootAttemptNum;
 	}
-	
-	public int getVisitingThreeHitNum(){
+
+	public int getVisitingThreeHitNum() {
 		return visitingThreeHitNum;
 	}
-	
-	public int getVisitingThreeAttemptNum(){
+
+	public int getVisitingThreeAttemptNum() {
 		return visitingThreeAttemptNum;
 	}
-	
-	public int getVisitingFreeThrowHitNum(){
+
+	public int getVisitingFreeThrowHitNum() {
 		return visitingFreeThrowHitNum;
 	}
-	
-	public int getVisitingFreeThrowAttemptNum(){
+
+	public int getVisitingFreeThrowAttemptNum() {
 		return visitingFreeThrowAttemptNum;
 	}
-	
-	public int getVisitingOffenReboundNum(){
+
+	public int getVisitingOffenReboundNum() {
 		return visitingOffenReboundNum;
 	}
-	
-	public int getVisitingDefenReboundNum(){
+
+	public int getVisitingDefenReboundNum() {
 		return visitingDefenReboundNum;
 	}
-	
-	public int getVisitingAssistNum(){
+
+	public int getVisitingAssistNum() {
 		return visitingAssistNum;
 	}
-	
-	public int getVisitingStealNum(){
+
+	public int getVisitingStealNum() {
 		return visitingStealNum;
 	}
-	
-	public int getVisitingBlockNum(){
+
+	public int getVisitingBlockNum() {
 		return visitingBlockNum;
 	}
-	
-	public int getVisitingTurnOverNum(){
+
+	public int getVisitingTurnOverNum() {
 		return visitingTurnOverNum;
 	}
-	
-	public int getVisitingFoulNum(){
+
+	public int getVisitingFoulNum() {
 		return visitingFoulNum;
 	}
-	
-	public void addVisitingShootHitNum(int visitingShootHitNum){
-		this.visitingShootHitNum+=visitingShootHitNum;
+
+	public void addVisitingShootHitNum(int visitingShootHitNum) {
+		this.visitingShootHitNum += visitingShootHitNum;
 	}
-	
-	public void addVisitingShootAttemptNum(int visitingShootAttemptNum){
-		this.visitingShootAttemptNum+=visitingShootAttemptNum;
+
+	public void addVisitingShootAttemptNum(int visitingShootAttemptNum) {
+		this.visitingShootAttemptNum += visitingShootAttemptNum;
 	}
-	
-	public void addVisitingThreeHitNum(int visitingThreeHitNum){
-		this.visitingThreeHitNum+=visitingThreeHitNum;
+
+	public void addVisitingThreeHitNum(int visitingThreeHitNum) {
+		this.visitingThreeHitNum += visitingThreeHitNum;
 	}
-	
-	public void addVisitingThreeAttemptNum(int visitingThreeAttemptNum){
-		this.visitingThreeAttemptNum+=visitingThreeAttemptNum;
+
+	public void addVisitingThreeAttemptNum(int visitingThreeAttemptNum) {
+		this.visitingThreeAttemptNum += visitingThreeAttemptNum;
 	}
-	
-	public void addVisitingFreeThrowHitNum(int visitingFreeThrowHitNum){
-		this.visitingFreeThrowHitNum+=visitingFreeThrowHitNum;
+
+	public void addVisitingFreeThrowHitNum(int visitingFreeThrowHitNum) {
+		this.visitingFreeThrowHitNum += visitingFreeThrowHitNum;
 	}
-	
-	public void addVisitingFreeThrowAttemptNum(int visitingFreeThrowAttemptNum){
-		this.visitingFreeThrowAttemptNum+=visitingFreeThrowAttemptNum;
+
+	public void addVisitingFreeThrowAttemptNum(int visitingFreeThrowAttemptNum) {
+		this.visitingFreeThrowAttemptNum += visitingFreeThrowAttemptNum;
 	}
-	
-	public void addVisitingOffenReboundNum(int visitingOffenReboundNum){
-		this.visitingOffenReboundNum+=visitingOffenReboundNum;
+
+	public void addVisitingOffenReboundNum(int visitingOffenReboundNum) {
+		this.visitingOffenReboundNum += visitingOffenReboundNum;
 	}
-	
-	public void addVisitingDefenReboundNum(int visitingDefenReboundNum){
-		this.visitingDefenReboundNum+=visitingDefenReboundNum;
+
+	public void addVisitingDefenReboundNum(int visitingDefenReboundNum) {
+		this.visitingDefenReboundNum += visitingDefenReboundNum;
 	}
-	
-	public void addVisitingAssistNum(int visitingAssistNum){
-		this.visitingAssistNum+=visitingAssistNum;
+
+	public void addVisitingAssistNum(int visitingAssistNum) {
+		this.visitingAssistNum += visitingAssistNum;
 	}
-	
-	public void addVisitingStealNum(int visitingStealNum){
-		this.visitingStealNum+=visitingStealNum;
+
+	public void addVisitingStealNum(int visitingStealNum) {
+		this.visitingStealNum += visitingStealNum;
 	}
-	
-	public void addVisitingBlockNum(int visitingBlockNum){
-		this.visitingBlockNum+=visitingBlockNum;
+
+	public void addVisitingBlockNum(int visitingBlockNum) {
+		this.visitingBlockNum += visitingBlockNum;
 	}
-	
-	public void addVisitingTurnOverNum(int visitingTurnOverNum){
-		this.visitingTurnOverNum+=visitingTurnOverNum;
+
+	public void addVisitingTurnOverNum(int visitingTurnOverNum) {
+		this.visitingTurnOverNum += visitingTurnOverNum;
 	}
-	
-	public void addVisitingFoulNum(int visitingFoulNum){
-		this.visitingFoulNum+=visitingFoulNum;
+
+	public void addVisitingFoulNum(int visitingFoulNum) {
+		this.visitingFoulNum += visitingFoulNum;
 	}
-	
-	
-	
-	
-	
-	
-	public int getHomeShootHitNum(){
+
+	public int getHomeShootHitNum() {
 		return homeShootHitNum;
 	}
-	
-	public int getHomeShootAttemptNum(){
+
+	public int getHomeShootAttemptNum() {
 		return homeShootAttemptNum;
 	}
-	
-	public int getHomeThreeHitNum(){
+
+	public int getHomeThreeHitNum() {
 		return homeThreeHitNum;
 	}
-	
-	public int getHomeThreeAttemptNum(){
+
+	public int getHomeThreeAttemptNum() {
 		return homeThreeAttemptNum;
 	}
-	
-	public int getHomeFreeThrowHitNum(){
+
+	public int getHomeFreeThrowHitNum() {
 		return homeFreeThrowHitNum;
 	}
-	
-	public int getHomeFreeThrowAttemptNum(){
+
+	public int getHomeFreeThrowAttemptNum() {
 		return homeFreeThrowAttemptNum;
 	}
-	
-	public int getHomeOffenReboundNum(){
+
+	public int getHomeOffenReboundNum() {
 		return homeOffenReboundNum;
 	}
-	
-	public int getHomeDefenReboundNum(){
+
+	public int getHomeDefenReboundNum() {
 		return homeDefenReboundNum;
 	}
-	
-	public int getHomeAssistNum(){
+
+	public int getHomeAssistNum() {
 		return homeAssistNum;
 	}
-	
-	public int getHomeStealNum(){
+
+	public int getHomeStealNum() {
 		return homeStealNum;
 	}
-	
-	public int getHomeBlockNum(){
+
+	public int getHomeBlockNum() {
 		return homeBlockNum;
 	}
-	
-	public int getHomeTurnOverNum(){
+
+	public int getHomeTurnOverNum() {
 		return homeTurnOverNum;
 	}
-	
-	public int getHomeFoulNum(){
+
+	public int getHomeFoulNum() {
 		return homeFoulNum;
 	}
-	
-	
-	public void addHomeShootHitNum(int homeShootHitNum){
-		this.homeShootHitNum+=homeShootHitNum;
+
+	public void addHomeShootHitNum(int homeShootHitNum) {
+		this.homeShootHitNum += homeShootHitNum;
 	}
-	
-	public void addHomeShootAttemptNum(int homeShootAttemptNum){
-		this.homeShootAttemptNum+=homeShootAttemptNum;
+
+	public void addHomeShootAttemptNum(int homeShootAttemptNum) {
+		this.homeShootAttemptNum += homeShootAttemptNum;
 	}
-	
-	public void addHomeThreeHitNum(int homeThreeHitNum){
-		this.homeThreeHitNum+=homeThreeHitNum;
+
+	public void addHomeThreeHitNum(int homeThreeHitNum) {
+		this.homeThreeHitNum += homeThreeHitNum;
 	}
-	
-	public void addHomeThreeAttemptNum(int homeThreeAttemptNum){
-		this.homeThreeAttemptNum+=homeThreeAttemptNum;
+
+	public void addHomeThreeAttemptNum(int homeThreeAttemptNum) {
+		this.homeThreeAttemptNum += homeThreeAttemptNum;
 	}
-	
-	public void addHomeFreeThrowHitNum(int homeFreeThrowHitNum){
-		this.homeFreeThrowHitNum+=homeFreeThrowHitNum;
+
+	public void addHomeFreeThrowHitNum(int homeFreeThrowHitNum) {
+		this.homeFreeThrowHitNum += homeFreeThrowHitNum;
 	}
-	
-	public void addHomeFreeThrowAttemptNum(int homeFreeThrowAttemptNum){
-		this.homeFreeThrowAttemptNum+=homeFreeThrowAttemptNum;
+
+	public void addHomeFreeThrowAttemptNum(int homeFreeThrowAttemptNum) {
+		this.homeFreeThrowAttemptNum += homeFreeThrowAttemptNum;
 	}
-	
-	public void addHomeOffenReboundNum(int homeOffenReboundNum){
-		this.homeOffenReboundNum+=homeOffenReboundNum;
+
+	public void addHomeOffenReboundNum(int homeOffenReboundNum) {
+		this.homeOffenReboundNum += homeOffenReboundNum;
 	}
-	
-	public void addHomeDefenReboundNum(int homeDefenReboundNum){
-		this.homeDefenReboundNum+=homeDefenReboundNum;
+
+	public void addHomeDefenReboundNum(int homeDefenReboundNum) {
+		this.homeDefenReboundNum += homeDefenReboundNum;
 	}
-	
-	public void addHomeAssistNum(int homeAssistNum){
-		this.homeAssistNum+=homeAssistNum;
+
+	public void addHomeAssistNum(int homeAssistNum) {
+		this.homeAssistNum += homeAssistNum;
 	}
-	
-	public void addHomeStealNum(int homeStealNum){
-		this.homeStealNum+=homeStealNum;
+
+	public void addHomeStealNum(int homeStealNum) {
+		this.homeStealNum += homeStealNum;
 	}
-	
-	public void addHomeBlockNum(int homeBlockNum){
-		this.homeBlockNum+=homeBlockNum;
+
+	public void addHomeBlockNum(int homeBlockNum) {
+		this.homeBlockNum += homeBlockNum;
 	}
-	
-	public void addHomeTurnOverNum(int homeTurnOverNum){
-		this.homeTurnOverNum+=homeTurnOverNum;
+
+	public void addHomeTurnOverNum(int homeTurnOverNum) {
+		this.homeTurnOverNum += homeTurnOverNum;
 	}
-	
-	public void addHomeFoulNum(int homeFoulNum){
-		this.homeFoulNum+=homeFoulNum;
+
+	public void addHomeFoulNum(int homeFoulNum) {
+		this.homeFoulNum += homeFoulNum;
 	}
-	
-	public void setMatchTime(int matchTime){
-		this.matchTime=matchTime;
+
+	public void setMatchTime(int matchTime) {
+		this.matchTime = matchTime;
 	}
-	
-	
+
 }
