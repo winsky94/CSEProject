@@ -69,21 +69,21 @@ public class MyTableCellRenderer extends DefaultTableCellRenderer {
 			String columnName2 = table.getColumnName(1);
 			table.getColumn(columnName2).setPreferredWidth(130);
 
-//			// 设置每行第一列显示图片
-//			if (column == 0) {
-//				if (imageIcons.size() != 0) {// 防止不传图片直接显示表格的那种
-//					ImageIcon icon = imageIcons.get(row);
-//					ImageIcon icon2 = new ImageIcon(icon.getImage()
-//							.getScaledInstance(
-//									table.getColumn(table.getColumnName(0))
-//											.getWidth(),
-//									table.getRowHeight(row),
-//									Image.SCALE_DEFAULT));
-//					JLabel label = new JLabel(icon2);
-//					label.setOpaque(false);
-//					return label;
-//				}
-//			}
+			// // 设置每行第一列显示图片
+			// if (column == 0) {
+			// if (imageIcons.size() != 0) {// 防止不传图片直接显示表格的那种
+			// ImageIcon icon = imageIcons.get(row);
+			// ImageIcon icon2 = new ImageIcon(icon.getImage()
+			// .getScaledInstance(
+			// table.getColumn(table.getColumnName(0))
+			// .getWidth(),
+			// table.getRowHeight(row),
+			// Image.SCALE_DEFAULT));
+			// JLabel label = new JLabel(icon2);
+			// label.setOpaque(false);
+			// return label;
+			// }
+			// }
 
 		}
 
@@ -91,12 +91,12 @@ public class MyTableCellRenderer extends DefaultTableCellRenderer {
 			String columnName1 = table.getColumnName(0);
 			table.getColumn(columnName1).setPreferredWidth(200);
 		}
-		
-		if (table.getModel().toString().contains("TeamHistoryTableModel")) {
+
+		if (table.getModel().toString().contains("TeamHistoryTableModel")||table.getModel().toString().contains("MatchDetailModel")) {
 			String columnName1 = table.getColumnName(0);
 			table.getColumn(columnName1).setPreferredWidth(200);
 		}
-		
+
 		// 设置行高
 		table.setRowHeight(row, 40);
 		// 去除单元格边框线
@@ -112,6 +112,23 @@ public class MyTableCellRenderer extends DefaultTableCellRenderer {
 			if (row == rowList.get(i)) {
 				setBackground(new Color(255, 255, 0));// 设置某些特定的行的底色
 			}
+		}
+
+		if (table.getModel().toString().contains("HotTodayModel")
+				|| table.getModel().toString().contains("HotSeasonModel")
+				|| table.getModel().toString().contains("HotTeamModel")
+				|| table.getModel().toString().contains("ProgressModel")) {
+			// 设置列宽自己设置
+			String columnName1 = table.getColumnName(0);
+			table.getColumn(columnName1).setPreferredWidth(50);
+			table.getColumn(columnName1).setMinWidth(50);
+			table.getColumn(columnName1).setMaxWidth(50);
+			String columnName2 = table.getColumnName(1);
+			table.getColumn(columnName2).setPreferredWidth(100);
+			table.getColumn(columnName2).setMinWidth(100);
+			table.getColumn(columnName2).setMaxWidth(100);
+
+			table.setRowHeight(row, 80);
 		}
 
 		return super.getTableCellRendererComponent(table, value, isSelected,
