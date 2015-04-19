@@ -81,6 +81,7 @@ public class TeamDetailHistoryPanel extends JPanel{
 					thtm.RefreshSeason(seasonBox.getSelectedItem().toString());
 				}
 				table.revalidate();
+				jsp.repaint();
 			}
 			
 		});
