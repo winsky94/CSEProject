@@ -300,7 +300,7 @@ public class Player implements PlayerBLService {
 
 	}
 
-	private void calculatePlayerSeason(PlayerVO playerSeason) {
+	private void calculatePlayerSeason(PlayerVO playerSeason) throws NumberFormatException{
 		int playedGames;
 
 		playedGames = playerSeason.getPlayedGames();
@@ -362,10 +362,20 @@ public class Player implements PlayerBLService {
 			
 			shootHitRate = allshootHitNum / allshootAttemptNum;
 			shootHitRate=Double.parseDouble(dec.format(shootHitRate));
-			threeHitRate = allthreeHitNum / allthreeAttemptNum;
-			threeHitRate=Double.parseDouble(dec.format(threeHitRate));
-			freeThrowHitRate = allfreeThrowHitNum / allfreeThrowAttemptNum;
-			freeThrowHitRate=Double.parseDouble(dec.format(freeThrowHitRate));
+			if(allthreeAttemptNum!=0){
+			  threeHitRate = allthreeHitNum / allthreeAttemptNum;
+			  threeHitRate=Double.parseDouble(dec.format(threeHitRate));
+			}
+			else{
+				threeHitRate=0;
+			}
+			if(allfreeThrowAttemptNum!=0){
+			  freeThrowHitRate = allfreeThrowHitNum / allfreeThrowAttemptNum;
+			  freeThrowHitRate=Double.parseDouble(dec.format(freeThrowHitRate));
+			}
+			else{
+			  freeThrowHitRate=0;
+			}
 			efficiency = (allscore + allreboundNum + allassistNum + allstealNum + allblockNum)
 					- (allshootAttemptNum - allshootHitNum)
 					- (allfreeThrowAttemptNum - allfreeThrowHitNum)
@@ -374,7 +384,7 @@ public class Player implements PlayerBLService {
 			ArrayList<Integer> matchIDs = playerSeason.getMatchesID();
 			Map<Integer, Boolean> isVisitingTeam = playerSeason
 					.getIsVisitingTeam();
-			if (matchIDs.size() < 5) {
+			if (matchIDs.size() <= 5) {
 				recentFiveMatchesScoreUpRate = 0;
 				recentFiveMatchesReboundUpRate = 0;
 				recentFiveMatchesAssistUpRate = 0;
@@ -395,19 +405,34 @@ public class Player implements PlayerBLService {
 				double beforeRecentReboundNum = allreboundNum
 						- recentReboundNum;
 				double beforeRecentAssistNum = allassistNum - recentAssistNum;
+			if(beforeRecentFiveScore!=0){
 				recentFiveMatchesScoreUpRate = ((recentFiveScore / 5) - beforeRecentFiveScore
 						/ (playedGames - 5))
 						/ (beforeRecentFiveScore / (playedGames - 5));
 				recentFiveMatchesScoreUpRate=Double.parseDouble(dec.format(recentFiveMatchesScoreUpRate));
+			}
+			else{
+				recentFiveMatchesScoreUpRate=0;
+			}
+			if(beforeRecentReboundNum!=0){
 				recentFiveMatchesReboundUpRate = ((recentReboundNum / 5) - beforeRecentReboundNum
 						/ (playedGames - 5))
 						/ (beforeRecentReboundNum / (playedGames - 5));
 				recentFiveMatchesReboundUpRate=Double.parseDouble(dec.format(recentFiveMatchesReboundUpRate));
+	         }
+	         else{
+	        	 recentFiveMatchesReboundUpRate=0;
+	         }
+	         if(beforeRecentAssistNum!=0){
 				recentFiveMatchesAssistUpRate = ((recentAssistNum / 5) - beforeRecentAssistNum
 						/ (playedGames - 5))
 						/ (beforeRecentAssistNum / (playedGames - 5));
 				recentFiveMatchesAssistUpRate=Double.parseDouble(dec.format(recentFiveMatchesAssistUpRate));
-			}
+	         }
+	         else{
+	        	 recentFiveMatchesAssistUpRate=0;
+	         }
+	         }
 
 			GmScEfficiencyValue = allscore + 0.4 * allshootHitNum - 0.7
 					* allshootAttemptNum - 0.4
@@ -419,9 +444,14 @@ public class Player implements PlayerBLService {
 			trueHitRate = (double) allscore
 					/ (2 * (allshootAttemptNum + 0.44 * allfreeThrowAttemptNum));
 			trueHitRate=Double.parseDouble(dec.format(trueHitRate));
+		if(allshootAttemptNum!=0){
 			shootEfficiency = (double) (allshootHitNum + 0.5 * allthreeHitNum)
 					/ allshootAttemptNum;
 			shootEfficiency=Double.parseDouble(dec.format(shootEfficiency));
+		}
+		else{
+			shootEfficiency=0;
+		}
 			for (Integer id : matchIDs) {
 				MatchVO match = matches.get(id);
 				allMatchTime += match.getMatchTime();
@@ -1213,8 +1243,8 @@ public class Player implements PlayerBLService {
 	public static void main(String[] args) {
 		long start = System.currentTimeMillis();
 		Player player = new Player();
-		ArrayList<PlayerVO> players=player.getPlayersByTeam("ATL");
-		System.out.println(players.get(0).getName());
+//		ArrayList<PlayerVO> players=player.getPlayersByTeam("ATL");
+//		System.out.println(players.get(0).getName());
 //		ArrayList<PlayerVO> players = player.selectPlayersByAverage("C", "E", AgeEnum.M22_LE25, "reboundNum", "desc", 5);
 //		players = player.selectPlayersByAverage("C", "E", AgeEnum.M22_LE25, "reboundNum", "desc", 5);
 //		ArrayList<PlayerVO> players = player.getOrderedPlayersByAverage("score", "desc", 5);
@@ -1222,7 +1252,7 @@ public class Player implements PlayerBLService {
 //		ArrayList<PlayerVO> players=player.getPlayersByTeam("ATL");
 //		 System.out.println(players.get(0).getName());
 //		PlayerVO vo = player.getPlayerAverageInfo("Al Horford");
-//		 ArrayList<PlayerVO> players=player.getPlayerAverageInfo();
+		 ArrayList<PlayerVO> players=player.getPlayerAverageInfo();
 //		 System.out.println(players.get(405).getName()+" "+players.get(405).getPlayedGames()+" "+players.get(405).getEfficiency());
 //		 PlayerVO vo=players.get(0);
 //		 System.out.println(vo.getName());
