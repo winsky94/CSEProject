@@ -138,8 +138,11 @@ public class TitleBar extends JPanel implements MouseListener {
 		}
 		if (e.getSource() == matchBtn)
 			MainFrame.getInstance().setContentPanel(new MatchIndexPanel());
-		if (e.getSource() == hotBtn)
+		if (e.getSource() == hotBtn){
+			
 			MainFrame.getInstance().setContentPanel(new HotIndexPanel());
+			
+		}
 		if (e.getSource() == searchBtn) {
 //			PlayerBLService p;TeamBLService t;
 //			// 监听

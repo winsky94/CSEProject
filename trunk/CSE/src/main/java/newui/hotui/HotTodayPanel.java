@@ -6,12 +6,19 @@ import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
+import bl.player.Player;
+import blservice.PlayerBLService;
+import vo.PlayerVO;
 import newui.Style;
+import newui.tables.HotTableModel;
 
 public class HotTodayPanel extends HotFatherPanel implements MouseListener{
 	private static final long serialVersionUID = 1L;
@@ -23,16 +30,26 @@ public class HotTodayPanel extends HotFatherPanel implements MouseListener{
 	 * jsp已经在HotFatherPanel里建好了，这里只要table和tableModel
 	 * 表头：排名（2，3，4，5），头像，球员名，所属球队，位置，比赛数据
 	 */
+	String[] head={"排名","(头像)","球员名称","所属球队","位置","得分"};
+	JTable table;
+	PlayerBLService player;	
 	//------bottomBar-----
-	BottomButton scoreBtn,reboundBtn,assistBtn,blockBtn,stealBtn;
+	BottomButton scoreBtn,reboundBtn,assistBtn,blockBtn,stealBtn,currentBtn;
+	HotTodayModel model;
+	ArrayList<PlayerVO> vlist;
 	//----------------------------
 	public HotTodayPanel(){
 		GridBagLayout bl=new GridBagLayout();
 		GridBagConstraints bc=new GridBagConstraints();
 		bc.fill=GridBagConstraints.BOTH;
 		bestPnl.setLayout(bl);
+		player=new Player();
+		//========initial======
+	
+		
+		
 		//-------bestPnl--------------
-		bestHead=new JLabel(new ImageIcon("image/player/portrait/Kobe Bryant.png"));
+		bestHead=new JLabel();
 		//有需要就加上bestHead.setPreferredSize(new Dimension(width, height));
 		bc.gridx=0;
 		bc.gridy=0;
@@ -51,16 +68,16 @@ public class HotTodayPanel extends HotFatherPanel implements MouseListener{
 		bl.setConstraints(midPnl, bc);
 		bestPnl.add(midPnl);
 		midPnl.setLayout(new GridLayout(2,1));
-		bestName=new JLabel("Kobe 监听");
+		bestName=new JLabel();
 		bestName.setHorizontalAlignment(JLabel.CENTER);
 		bestName.setFont(new Font("微软雅黑",Font.PLAIN,28));
 		midPnl.add(bestName);
-		positionAndTeamName=new JLabel("C / 监听队");
+		positionAndTeamName=new JLabel();
 		positionAndTeamName.setHorizontalAlignment(JLabel.CENTER);
 		positionAndTeamName.setFont(new Font("微软雅黑",Font.PLAIN,20));
 		midPnl.add(positionAndTeamName);
 		//-------------
-		data=new JLabel("40");
+		data=new JLabel();
 		data.setFont(new Font("微软雅黑",Font.PLAIN,30));
 		data.setForeground(Style.BACK_GREY);
 		bc.gridx=7;
@@ -69,7 +86,7 @@ public class HotTodayPanel extends HotFatherPanel implements MouseListener{
 		bl.setConstraints(data, bc);
 		bestPnl.add(data);
 		//------------
-		bestTeamIcon=new JLabel(new ImageIcon("image/teamIcon/teamsPng150/LAL.png"));
+		bestTeamIcon=new JLabel();
 		bc.gridx=8;
 		bc.gridwidth=2;
 		bc.weightx=2;
@@ -79,9 +96,10 @@ public class HotTodayPanel extends HotFatherPanel implements MouseListener{
 		bottomBar.setLayout(new GridLayout(1,5));
 		//------------
 		scoreBtn=new BottomButton("得分");
-		scoreBtn.setBackground(Style.HOT_YELLOW);
+		scoreBtn.setBackground(Style.HOT_YELLOWFOCUS);
 		scoreBtn.addMouseListener(this);
 		bottomBar.add(scoreBtn);
+		currentBtn=scoreBtn;
 		//-----------
 		reboundBtn=new BottomButton("篮板");
 		reboundBtn.setBackground(Style.HOT_YELLOW);
@@ -102,11 +120,63 @@ public class HotTodayPanel extends HotFatherPanel implements MouseListener{
 		stealBtn.setBackground(Style.HOT_YELLOW);
 		stealBtn.addMouseListener(this);
 		bottomBar.add(stealBtn);
-		//-----------
+		//-----------表格===
+		model=new HotTodayModel(head);
+		table=new JTable(model);
+		jsp.add(table);
 		
+		
+	}
+	
+	public void Refresh(String sort){
+		//默认筛选  按得分
+		vlist=player.getDayHotPlayer(sort, 5);
+		if(vlist!=null&&vlist.size()!=0){
+		PlayerVO topOne=vlist.get(0);
+		bestHead.setIcon(new ImageIcon("image/player/portrait/"+topOne.getName()+".png"));
+		bestName.setText(topOne.getName());
+		positionAndTeamName.setText(topOne.getPosition()+"/" +topOne.getOwingTeam());
+		//data.setText(topOne.getScore()+"");
+		bestTeamIcon.setIcon(new ImageIcon("image/teamIcon/teamsPng150/"+topOne.getOwingTeam()+".png"));
+		model.setHead(head);
+		model.Refresh(vlist);	
+		table.revalidate();
+		}
+			
 	}
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
+		BottomButton m=(BottomButton)e.getSource();
+		currentBtn.setBackground(Style.HOT_YELLOW);
+		if(m==scoreBtn){
+			head[5]="得分";
+			currentBtn=scoreBtn;	
+			Refresh("score");
+								
+		}else if(m==reboundBtn){
+			head[5]="篮板";
+			currentBtn=reboundBtn;
+			Refresh("reboundNum");
+			
+		}else if(m==assistBtn){
+			head[5]="助攻";
+			currentBtn=assistBtn;
+			Refresh("assistNum");
+			
+		}else if(m==blockBtn){
+			head[5]="盖帽";
+			currentBtn=blockBtn;
+			Refresh("blockNum");
+			
+			
+		}else{
+			head[5]="抢断";
+			currentBtn=stealBtn;
+			Refresh("stealNum");
+		
+			
+		}	
+		currentBtn.setBackground(Style.HOT_YELLOWFOCUS);;
 		
 	}
 	public void mousePressed(MouseEvent e) {
@@ -127,8 +197,52 @@ public class HotTodayPanel extends HotFatherPanel implements MouseListener{
 	public void mouseExited(MouseEvent e) {
 		if(e.getSource().getClass()==BottomButton.class){
 			BottomButton btn=(BottomButton) e.getSource();
-			btn.setBackground(Style.HOT_YELLOW);
+			if(currentBtn!=btn)
+				btn.setBackground(Style.HOT_YELLOW);
 		}
 		
 	}
+	//"排名","(头像)","球员名称","所属球队","位置","得分"
+	class HotTodayModel extends HotTableModel{
+		
+		public HotTodayModel(String[] head) {
+			super(head);
+			
+			
+			// TODO Auto-generated constructor stub
+		}
+		public void Refresh(ArrayList<PlayerVO> vlist){
+			content.clear();
+			num=2;
+			for(int i=1;i<vlist.size();i++){
+				PlayerVO v=vlist.get(i);
+				ArrayList<Object> line=new ArrayList<Object>();
+				line.add(num);
+				num++;
+				ImageIcon icon=new ImageIcon("image/player/portrait/"+v.getName()+".png");
+				//设置宽高
+				
+				line.add(icon);
+				line.add(v.getName());
+				line.add(v.getOwingTeam());
+				line.add(v.getPosition());
+				if(currentBtn==scoreBtn){
+					line.add(v.getScore());
+				}else if(currentBtn==reboundBtn)
+					line.add(v.getReboundNum());
+				else if(currentBtn==assistBtn)
+					line.add(v.getAssistNum());
+				else if(currentBtn==blockBtn)
+					line.add(v.getBlockNum());
+				else
+					line.add(v.getStealNum());
+				content.add(line);
+				
+			}
+			
+		}
+	}
+	
+	
+	
 }
