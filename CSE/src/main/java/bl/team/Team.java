@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -761,15 +762,35 @@ public class Team implements TeamBLService {
 				isSeason = true;
 			}
 
+			DecimalFormat dec = new DecimalFormat("0.0000");
 			TeamVO teamVO = new TeamVO(teamName, abLocation, location,
 					conference, partition, homeCourt, setUpTime, matchesNum,
-					shootHitNum, shootAttemptNum, threeHitNum, threeAttemptNum,
-					freeThrowHitNum, freeThrowAttemptNum, offenReboundNum,
-					defenReboundNum, reboundNum, assistNum, stealNum, blockNum,
-					turnOverNum, foulNum, score, shootHitRate, threeHitRate,
-					freeThrowHitRate, winRate, offenRound, offenEfficiency,
-					defenEfficiency, offenReboundEfficiency,
-					defenReboundEfficiency, stealEfficiency, assistEfficiency);
+					Double.parseDouble(dec.format(shootHitNum)),
+					Double.parseDouble(dec.format(shootAttemptNum)),
+					Double.parseDouble(dec.format(threeHitNum)),
+					Double.parseDouble(dec.format(threeAttemptNum)),
+					Double.parseDouble(dec.format(freeThrowHitNum)),
+					Double.parseDouble(dec.format(freeThrowAttemptNum)),
+					Double.parseDouble(dec.format(offenReboundNum)),
+					Double.parseDouble(dec.format(defenReboundNum)),
+					Double.parseDouble(dec.format(reboundNum)),
+					Double.parseDouble(dec.format(assistNum)),
+					Double.parseDouble(dec.format(stealNum)),
+					Double.parseDouble(dec.format(blockNum)),
+					Double.parseDouble(dec.format(turnOverNum)),
+					Double.parseDouble(dec.format(foulNum)),
+					Double.parseDouble(dec.format(score)),
+					Double.parseDouble(dec.format(shootHitRate)),
+					Double.parseDouble(dec.format(threeHitRate)),
+					Double.parseDouble(dec.format(freeThrowHitRate)),
+					Double.parseDouble(dec.format(winRate)),
+					Double.parseDouble(dec.format(offenRound)),
+					Double.parseDouble(dec.format(offenEfficiency)),
+					Double.parseDouble(dec.format(defenEfficiency)),
+					Double.parseDouble(dec.format(offenReboundEfficiency)),
+					Double.parseDouble(dec.format(defenReboundEfficiency)),
+					Double.parseDouble(dec.format(stealEfficiency)),
+					Double.parseDouble(dec.format(assistEfficiency)));
 			return teamVO;
 		} else {
 			return null;
@@ -780,8 +801,7 @@ public class Team implements TeamBLService {
 	/**
 	 * 将球队中文名转为相应的英文缩写
 	 * 
-	 * @param CH
-	 *            球队中文名
+	 * @param 球队中文名
 	 * @return 英文缩写
 	 */
 	public static String changeTeamNameCHToEN(String CH) {
@@ -818,5 +838,4 @@ public class Team implements TeamBLService {
 			return EN;
 		}
 	}
-
 }
