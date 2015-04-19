@@ -1,9 +1,11 @@
 package newui.matchui;
 
+import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Image;
+import java.awt.Insets;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -27,6 +29,7 @@ public class TinyCard extends JPanel{
 		GridBagLayout gbl = new GridBagLayout();
 		GridBagConstraints gbc = new GridBagConstraints();
 		gbc.fill = GridBagConstraints.BOTH;
+		gbc.insets=new Insets(10,20,10,10);
 		setLayout(gbl);
 		isHomeBigger = MatchHelper.isHomeBigger(vo);
 		// ----------------
@@ -53,6 +56,7 @@ public class TinyCard extends JPanel{
 		gbc.gridy = 3;
 		gbc.gridheight = 1;
 		gbc.weighty = 1;
+		gbc.insets=new Insets(10,40,10,10);
 		gbl.setConstraints(nameLbl, gbc);
 		add(nameLbl);
 		// -----------------
@@ -65,6 +69,7 @@ public class TinyCard extends JPanel{
 		gbc.gridheight = 2;
 		gbc.weightx = 1;
 		gbc.weighty = 2;
+		gbc.insets=new Insets(10,20,10,10);
 		gbl.setConstraints(homeScoreLbl, gbc);
 		add(homeScoreLbl);
 		//---------------------
@@ -75,5 +80,6 @@ public class TinyCard extends JPanel{
 		gbc.gridx = 1;
 		gbl.setConstraints(visitingScoreLbl, gbc);
 		add(visitingScoreLbl);
+		this.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 	}
 }
