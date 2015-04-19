@@ -11,18 +11,24 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import newui.teamui.details.TeamDetailRecentPanel;
+import bl.player.Player;
+import blservice.PlayerBLService;
+import vo.PlayerVO;
+
 public class PlayerDetailInfoPanel extends JPanel {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	String name;
 	JPanel headPnl, infoPnl, recentPnl;
-
-	public PlayerDetailInfoPanel(String pname) {
-		name = pname;
+	PlayerVO vo;
+	PlayerBLService pservice;
+	public PlayerDetailInfoPanel(PlayerVO vo) {
+		this.vo=vo;
 		// -----------------
+		pservice=new Player();
 		GridBagLayout gbl = new GridBagLayout();
 		GridBagConstraints gbc = new GridBagConstraints();
 		gbc.fill = GridBagConstraints.BOTH;
@@ -43,10 +49,10 @@ public class PlayerDetailInfoPanel extends JPanel {
 		fl.setHgap(20);
 		headPnl.setLayout(fl);
 		// ------------------
-		JLabel portraitLbl = new JLabel(new ImageIcon(
-				"image/player/player65/"+name+".png"));
+		ImageIcon icon=pservice.getPlayerPortraitImage(vo.getName());
+		JLabel portraitLbl = new JLabel(icon);
 		headPnl.add(portraitLbl);
-		JLabel nameLbl = new JLabel(name);
+		JLabel nameLbl = new JLabel(vo.getName());
 		nameLbl.setFont(new Font("微软雅黑", Font.PLAIN, 28));
 		headPnl.add(nameLbl);
 		// -----infoPnl---------------
@@ -59,29 +65,29 @@ public class PlayerDetailInfoPanel extends JPanel {
 		add(infoPnl);
 		//------------------
 		infoPnl.setLayout(new GridLayout(4,2));
-		MyLabel numLbl=new MyLabel("球衣号码：监听");
+		MyLabel numLbl=new MyLabel("球衣号码："+vo.getNumber());
 		infoPnl.add(numLbl);
-		MyLabel positionLbl=new MyLabel("位置：JT");
+		MyLabel positionLbl=new MyLabel("位置："+vo.getPosition());
 		infoPnl.add(positionLbl);
-		MyLabel heightLbl=new MyLabel("身高（英尺-英寸）：J-T");
+		MyLabel heightLbl=new MyLabel("身高（英尺-英寸）："+vo.getHeight());
 		infoPnl.add(heightLbl);
-		MyLabel weightLbl=new MyLabel("体重（英镑）：监听");
+		MyLabel weightLbl=new MyLabel("体重（英镑）:"+vo.getWeight());
 		infoPnl.add(weightLbl);
-		MyLabel birthLbl=new MyLabel("生日：FEB 12,1988");
+		MyLabel birthLbl=new MyLabel("生日："+vo.getBirth());
 		infoPnl.add(birthLbl);
-		MyLabel ageLbl=new MyLabel("年龄：158");
+		MyLabel ageLbl=new MyLabel("年龄："+vo.getAge());
 		infoPnl.add(ageLbl);
-		MyLabel expLbl=new MyLabel("球龄：158");
+		MyLabel expLbl=new MyLabel("球龄："+vo.getExp());
 		infoPnl.add(expLbl);
-		MyLabel schoolLbl=new MyLabel("毕业学校：监听大学");
+		MyLabel schoolLbl=new MyLabel("毕业学校："+vo.getSchool());
 		infoPnl.add(schoolLbl);
 		// -------recentPnl-----------
 		/*
 		 * 注意：加监听时把下一行的注释解除，传入其所属的球队
 		 * 删除下面的recentPnl=new JPanel();
 		 */
-		//recentPnl = new TeamDetailRecentPanel("这里传队名");
-		recentPnl=new JPanel();
+		recentPnl = new TeamDetailRecentPanel(vo.getName(),vo.getOwingTeam());
+		//recentPnl=new JPanel();
 		gbc.gridy = 8;
 		gbc.gridheight = 2;
 		gbc.weighty = 2;

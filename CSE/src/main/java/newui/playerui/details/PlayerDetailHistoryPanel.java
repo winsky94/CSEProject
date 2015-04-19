@@ -10,6 +10,8 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
+import vo.PlayerVO;
+import newui.UIhelper;
 import newui.tables.PlayerHistoryTableModel;
 
 public class PlayerDetailHistoryPanel extends JPanel {
@@ -26,9 +28,9 @@ public class PlayerDetailHistoryPanel extends JPanel {
 	Font font = new Font("微软雅黑", Font.PLAIN, 15);
 	JPanel funcPnl;
 	MyBox seasonBox;
-
-	public PlayerDetailHistoryPanel(String pname) {
-		name = pname;
+	PlayerVO vo;
+	public PlayerDetailHistoryPanel(PlayerVO vo) {
+		this.vo=vo;
 		GridBagLayout gbl = new GridBagLayout();
 		GridBagConstraints gbc = new GridBagConstraints();
 		gbc.fill = GridBagConstraints.BOTH;
@@ -48,7 +50,7 @@ public class PlayerDetailHistoryPanel extends JPanel {
 		MyLabel seasonLbl = new MyLabel("赛季：");
 		funcPnl.add(seasonLbl);
 		//
-		String[] seasonText = { "我要监听" };
+		String[] seasonText = { "13-14" };//这是什么
 		seasonBox = new MyBox(seasonText);
 		funcPnl.add(seasonBox);
 		// ----------------------
@@ -60,7 +62,7 @@ public class PlayerDetailHistoryPanel extends JPanel {
 		gbc.weighty = 10;
 		gbl.setConstraints(jsp, gbc);
 		add(jsp);
-		phtm.Refresh(pname);
+		phtm.Refresh(vo.getName());
 		table.revalidate();
 
 	}
