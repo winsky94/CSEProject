@@ -1,5 +1,6 @@
 package newui.playerui.details;
 
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -9,10 +10,11 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.table.DefaultTableCellRenderer;
 
-import vo.PlayerVO;
-import newui.UIhelper;
+import newui.tables.MyTableCellRenderer;
 import newui.tables.PlayerHistoryTableModel;
+import vo.PlayerVO;
 
 public class PlayerDetailHistoryPanel extends JPanel {
 
@@ -29,8 +31,9 @@ public class PlayerDetailHistoryPanel extends JPanel {
 	JPanel funcPnl;
 	MyBox seasonBox;
 	PlayerVO vo;
+
 	public PlayerDetailHistoryPanel(PlayerVO vo) {
-		this.vo=vo;
+		this.vo = vo;
 		GridBagLayout gbl = new GridBagLayout();
 		GridBagConstraints gbc = new GridBagConstraints();
 		gbc.fill = GridBagConstraints.BOTH;
@@ -50,12 +53,23 @@ public class PlayerDetailHistoryPanel extends JPanel {
 		MyLabel seasonLbl = new MyLabel("赛季：");
 		funcPnl.add(seasonLbl);
 		//
-		String[] seasonText = { "13-14" };//这是什么
+		String[] seasonText = { "13-14" };// 这是什么
 		seasonBox = new MyBox(seasonText);
 		funcPnl.add(seasonBox);
 		// ----------------------
-		phtm=new PlayerHistoryTableModel();
-		table=new JTable(phtm);
+		phtm = new PlayerHistoryTableModel();
+		table = new JTable(phtm);
+
+		// table 渲染器，设置文字内容居中显示，设置背景色等
+		table.setSelectionBackground(new Color(225, 255, 255));// 设置选择行的颜色——淡蓝色
+		table.setFont(new Font("微软雅黑", 0, 12));
+		table.getTableHeader().setFont(new Font("微软雅黑", 0, 14));
+		table.getTableHeader().setBackground(new Color(211, 211, 211));
+		DefaultTableCellRenderer tcr = new MyTableCellRenderer();
+		for (int i = 0; i < table.getColumnCount(); i++) {
+			table.getColumn(table.getColumnName(i)).setCellRenderer(tcr);
+		}
+
 		jsp = new JScrollPane(table);
 		table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
 		gbc.gridy = 1;
