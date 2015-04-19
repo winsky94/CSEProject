@@ -14,8 +14,13 @@ public class TeamHistoryTableModel extends MyTableModel{
 	static String[] head = { "球员","出场", "首发", "时间", "投篮", "三分", "罚球","前篮板",
 		"后篮板", "总篮板","助攻","抢断","盖帽","失误","犯规","得分" };
 	PlayerBLService player;
+	ArrayList<PlayerVO> teamMember;
+	String tname;
 	//最后一行有统计
 	ArrayList<ArrayList<Object>> content = new ArrayList<ArrayList<Object>>();
+	public TeamHistoryTableModel(){
+		player=new Player();
+	}
 	public int getRowCount() {
 		// TODO Auto-generated method stub
 		return content.size();
@@ -43,14 +48,31 @@ public class TeamHistoryTableModel extends MyTableModel{
 
 
 	public void Refresh(String teamName){
-		player=new Player();
-		ArrayList<PlayerVO> teamMember=player.getPlayersByTeam(teamName);
+	
+		 teamMember=player.getPlayersByTeam(teamName);
 		if(teamMember!=null&&teamMember.size()!=0)
 			Refresh(teamMember,teamName);
+		this.tname=teamName;
+	}
+	public void RefreshSeason(String season){
+		ArrayList<PlayerVO> vo=new ArrayList<PlayerVO>();
+		for(PlayerVO v:teamMember){
+			vo.add(player.getPlayerSeasonInfo(season, v.getName()));
+		}
+		Refresh(vo,tname);
+	}
+	
+	public void RefreshAverage(){
+		ArrayList<PlayerVO> vo=new ArrayList<PlayerVO>();
+		for(PlayerVO v:teamMember){
+			vo.add(player.getPlayerAverageInfo(v.getName()));
+		}
+		Refresh(vo,tname);
 	}
 	
 	
 	public void Refresh(ArrayList<PlayerVO>  pp,String tname){
+		content.clear();
 		//据图  率以后的都是累加  之前的都是平均 首发为"-"  时间为"0" 不理解 为啥不平均一下呢
 		ArrayList<Object> last=new ArrayList<Object>();
 		int present=0;//出场次数
