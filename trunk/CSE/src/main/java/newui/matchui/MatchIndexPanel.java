@@ -91,7 +91,7 @@ public class MatchIndexPanel extends FatherPanel {
 		funcPnl.add(visitingLbl);
 		visitingBox=new MyComboBox(teamArr);
 		funcPnl.add(visitingBox);
-		mservice=new OldMatch();
+		mservice=new Match();
 		//------搜索按钮---------
 		searchBtn=new MyLabel("搜索");
 		searchBtn.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
