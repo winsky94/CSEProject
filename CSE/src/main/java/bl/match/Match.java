@@ -218,11 +218,6 @@ public class Match implements MatchBLService {
 			String homeTeam, String visitingTeam) {
 		Map<String, Map<String, MatchVO>> mapResult = new HashMap<String, Map<String, MatchVO>>();
 		ArrayList<MatchVO> result = new ArrayList<MatchVO>();
-
-		System.out.println(season);
-		System.out.println(date);
-		System.out.println(homeTeam);
-		System.out.println(visitingTeam);
 		
 		if (season.equals("全部") && date.equals("全部") && homeTeam.equals("全部")
 				&& visitingTeam.equals("全部")) {
