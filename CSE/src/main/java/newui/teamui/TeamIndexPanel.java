@@ -23,6 +23,7 @@ import blservice.TeamBLService;
 import newui.FatherPanel;
 import newui.Style;
 import newui.TableModel;
+import newui.mainui.MainFrame;
 import newui.tables.MySortableTable;
 import newui.tables.MyTableCellRenderer;
 import newui.tables.RowHeaderTable;
@@ -91,6 +92,7 @@ public class TeamIndexPanel extends FatherPanel implements MouseListener,
 		for (int i = 0; i < table.getColumnCount(); i++) {
 			table.getColumn(table.getColumnName(i)).setCellRenderer(tcr);
 		}
+		table.addMouseListener(this);
 		titleBar.setCurrentTableModel(ttm);
 		titleBar.setModelEnum(TableModel.TEAMRANK);
 		titleBar.setTable(table);
@@ -129,6 +131,13 @@ public class TeamIndexPanel extends FatherPanel implements MouseListener,
 		if (e.getSource() == refreshLbl) {
 			ttm.Refresh(typeBox.getSelectedItem().toString());
 			table.revalidate();
+		}
+		if(e.getSource()==table){
+			if(e.getClickCount()==2){
+				int row=table.getSelectedRow();
+				String tname=table.getValueAt(row, 1).toString();
+				MainFrame.getInstance().setContentPanel(new TeamDetailPanel(tname));
+			}
 		}
 
 	}

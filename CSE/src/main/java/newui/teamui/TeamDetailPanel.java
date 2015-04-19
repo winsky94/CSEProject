@@ -46,9 +46,11 @@ public class TeamDetailPanel extends FatherPanel{
 	TeamBLService team;
 	public TeamDetailPanel(String teamName){
 		team=new Team();
-		abbrName=Team.changeTeamNameCHToEN(teamName);
-		nameCH=teamName;
+		//abbrName=Team.changeTeamNameCHToEN(teamName);
+		abbrName=teamName;
+		nameCH=Team.changeTeamNameENToCH(teamName);
 		//----------------------
+	//	ImageIcon icon=team.getTeamImage(abbrName);
 		nameLbl=new JLabel(new ImageIcon("image/teamIcon/teamsPng150/"+abbrName+".png"));
 		gbc.gridx=0;
 		gbc.gridy=1;

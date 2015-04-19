@@ -31,7 +31,7 @@ public class PlayerDetailPanel extends FatherPanel{
 		vo=pservice.getPlayerBaseInfo(pname).get(0);
 		name=pname;
 		//----------------
-		ImageIcon icon=pservice.getPlayerActionImage(pname);
+		//ImageIcon icon=pservice.getPlayerActionImage(pname);
 		//设置icon大小
 		int screenWidth = UIhelper.getScreenWidth();
 		int screenHeight=UIhelper.getScreenHeight();
@@ -39,12 +39,12 @@ public class PlayerDetailPanel extends FatherPanel{
 		int height=screenHeight*95/100;
 		
 		
-		icon.setImage(icon.getImage().getScaledInstance(width*1/3, height*7/8, Image.SCALE_DEFAULT));
+		//icon.setImage(icon.getImage().getScaledInstance(width*1/3, height*7/8, Image.SCALE_DEFAULT));
 		ImageIcon i=new ImageIcon("image/player/action/"+name+".png");
 		
 	
 		
-		actionPicLbl=new JLabel(icon/*new ImageIcon("image/player/action/"+name+".png")*/);
+		actionPicLbl=new JLabel(i/*new ImageIcon("image/player/action/"+name+".png")*/);
 		gbc.gridx=0;
 		gbc.gridy=1;
 		gbc.gridwidth=1;
