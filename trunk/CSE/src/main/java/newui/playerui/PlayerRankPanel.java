@@ -133,6 +133,7 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener,
 		titleBar.setCurrentTableModel(ptm);
 		titleBar.setModelEnum(TableModel.PLAYERRANK);
 		titleBar.setTable(table);
+		table.addMouseListener(this);;
 		jsp = new JScrollPane(table);
 		gbc.gridy = 2;
 		gbc.gridheight = 10;
@@ -192,6 +193,13 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener,
 	}
 
 	public void mouseClicked(MouseEvent e) {
+		if(e.getSource()==table){
+			if(e.getClickCount()==2){
+				int row=table.getSelectedRow();
+				String name=table.getValueAt(row, 0).toString();
+				MainFrame.getInstance().setContentPanel(new PlayerDetailPanel(name));
+			}
+		}
 		if (e.getSource() == modeLbl)
 			MainFrame.getInstance().setContentPanel(new PlayerIndexPanel());
 		if (e.getSource() == filterLbl) {

@@ -3,11 +3,14 @@ package newui.matchui;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Image;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import bl.team.Team;
+import blservice.TeamBLService;
 import newui.Style;
 import vo.MatchVO;
 
@@ -18,7 +21,8 @@ public class TinyCard extends JPanel{
 	 */
 	private static final long serialVersionUID = 1L;
 	boolean isHomeBigger = false;
-	public TinyCard(MatchVO vo) {
+	TeamBLService team;
+	public TinyCard(MatchVO vo,String tName) {
 		setOpaque(false);
 		GridBagLayout gbl = new GridBagLayout();
 		GridBagConstraints gbc = new GridBagConstraints();
@@ -26,8 +30,14 @@ public class TinyCard extends JPanel{
 		setLayout(gbl);
 		isHomeBigger = MatchHelper.isHomeBigger(vo);
 		// ----------------
-		JLabel icon = new JLabel(new ImageIcon("image/teamIcon/teamsPng90/"
-				+ ".png"));
+		team=new Team();
+		ImageIcon imgicon;
+		if(tName.equals(vo.getHomeTeam()))
+			imgicon=team.getTeamImage(vo.getVisitingTeam());
+		else
+			imgicon=team.getTeamImage(tName);
+		imgicon.setImage(imgicon.getImage().getScaledInstance(90, 90,Image.SCALE_DEFAULT ));
+		JLabel icon = new JLabel(imgicon);
 		gbc.gridx = 0;
 		gbc.gridy = 0;
 		gbc.gridwidth = 2;

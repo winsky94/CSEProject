@@ -97,7 +97,7 @@ public class MainFrame extends JFrame{
 		contentPnl.removeAll();
 		contentPnl.setLayout(new GridLayout(1,1));
 		contentPnl.add(pnl);
-		contentPnl.repaint();
+		//contentPnl.repaint();
 		contentPnl.revalidate();
 	}
 	public static MainFrame getInstance(){

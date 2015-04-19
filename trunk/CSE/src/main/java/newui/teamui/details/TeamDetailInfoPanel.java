@@ -73,6 +73,7 @@ public class TeamDetailInfoPanel extends JPanel{
 		MyLabel setUpTimeLbl=new MyLabel("成立时间："+basevo.getSetUpTime());
 		infoPnl.add(setUpTimeLbl);
 		//----------------------------
+		//这边严重的有问题
 		recentPnl=new TeamDetailRecentPanel(abbrName);
 		gbc.gridy=7;
 		gbc.gridheight=3;

@@ -112,7 +112,7 @@ public class PlayerIndexPanel extends FatherPanel implements MouseListener {
 		table.revalidate();
 		// 设置表头颜色
 		table.getTableHeader().setBackground(new Color(158, 158, 158));
-
+		table.addMouseListener(this);
 		gbc.gridy = 2;
 		gbc.gridheight = 10;
 		gbc.weighty = 10;
@@ -187,6 +187,14 @@ public class PlayerIndexPanel extends FatherPanel implements MouseListener {
 			table.revalidate();
 
 		}
+		if(e.getSource()==table){
+			if(e.getClickCount()==2){
+				int row=table.getSelectedRow();
+				String pname=table.getValueAt(row, 1).toString();
+				MainFrame.getInstance().setContentPanel(new PlayerDetailPanel(pname));
+			}
+		}
+		
 
 	}
 
