@@ -68,7 +68,7 @@ public interface TeamBLService {
 	 * @param season
 	 *            赛季
 	 * @param condition
-	 *            排序条件，即某一项技术分析项，如：篮板率
+	 *            排序条件，即某一项技术分析项，如：篮板率(英文)
 	 * @param order
 	 *            升序还是降序 asc 表示升序 , desc表示降序 , 未明确写明排序方式时默认是升序
 	 * 
@@ -83,7 +83,7 @@ public interface TeamBLService {
 	 * @param season
 	 *            赛季
 	 * @param condition
-	 *            排序条件，即某一项技术分析项，如：篮板率
+	 *            排序条件，即某一项技术分析项，如：篮板率(英文)
 	 * @param order
 	 *            升序还是降序 asc 表示升序 , desc表示降序 , 未明确写明排序方式时默认是升序
 	 * 
