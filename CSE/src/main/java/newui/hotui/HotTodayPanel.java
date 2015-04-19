@@ -152,31 +152,36 @@ public class HotTodayPanel extends HotFatherPanel implements MouseListener{
 			head[5]="得分";
 			currentBtn=scoreBtn;	
 			Refresh("score");
+			data.setText(vlist.get(0).getScore()+"");
 								
 		}else if(m==reboundBtn){
 			head[5]="篮板";
 			currentBtn=reboundBtn;
 			Refresh("reboundNum");
+			data.setText(vlist.get(0).getReboundNum()+"");
 			
 		}else if(m==assistBtn){
 			head[5]="助攻";
 			currentBtn=assistBtn;
 			Refresh("assistNum");
+			data.setText(vlist.get(0).getAssistNum()+"");
 			
 		}else if(m==blockBtn){
 			head[5]="盖帽";
 			currentBtn=blockBtn;
 			Refresh("blockNum");
+			data.setText(vlist.get(0).getBlockNum()+"");
 			
 			
 		}else{
 			head[5]="抢断";
 			currentBtn=stealBtn;
 			Refresh("stealNum");
+			data.setText(vlist.get(0).getStealNum()+"");
 		
 			
 		}	
-		currentBtn.setBackground(Style.HOT_YELLOWFOCUS);;
+		currentBtn.setBackground(Style.HOT_YELLOWFOCUS);
 		
 	}
 	public void mousePressed(MouseEvent e) {

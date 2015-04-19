@@ -6,12 +6,18 @@ import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTable;
 
+import bl.player.Player;
+import blservice.PlayerBLService;
+import vo.PlayerVO;
 import newui.Style;
+import newui.tables.HotTableModel;
 
 public class HotSeasonPanel extends HotFatherPanel implements MouseListener {
 	private static final long serialVersionUID = 1L;
@@ -25,8 +31,14 @@ public class HotSeasonPanel extends HotFatherPanel implements MouseListener {
 	// ------bottomBar-----
 	BottomButton scoreBtn, reboundBtn, assistBtn, blockBtn, stealBtn,
 			threeRateBtn, shootRateBtn, freeRateBtn;
-
+	String[] head={"排名","(头像)","球员名称","所属球队","位置","场均得分"};
+	ArrayList<PlayerVO> vlist;
+	PlayerBLService player;
+	BottomButton currentBtn;
+	JTable table;
+	
 	public HotSeasonPanel() {
+		player=new Player();
 		GridBagLayout bl = new GridBagLayout();
 		GridBagConstraints bc = new GridBagConstraints();
 		bc.fill = GridBagConstraints.BOTH;
@@ -84,6 +96,7 @@ public class HotSeasonPanel extends HotFatherPanel implements MouseListener {
 		scoreBtn.setBackground(Style.HOT_RED);
 		scoreBtn.addMouseListener(this);
 		bottomBar.add(scoreBtn);
+		currentBtn=scoreBtn;
 		//-----------
 		reboundBtn = new BottomButton("场均篮板");
 		reboundBtn.setBackground(Style.HOT_RED);
@@ -123,7 +136,26 @@ public class HotSeasonPanel extends HotFatherPanel implements MouseListener {
 
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
-
+		currentBtn.setBackground(Style.HOT_RED);
+		BottomButton m=(BottomButton)e.getSource();
+		if(m==scoreBtn){
+			
+		}else if(m==scoreBtn){
+			
+		}else if(m==scoreBtn){
+			
+		}else if(m==scoreBtn){
+			
+		}else if(m==scoreBtn){
+			
+		}else if(m==scoreBtn){
+			
+		}else if(m==scoreBtn){
+			
+		}else{
+			
+		}
+		currentBtn.setBackground(Style.HOT_REDFOCUS);
 	}
 
 	public void mousePressed(MouseEvent e) {
@@ -147,8 +179,23 @@ public class HotSeasonPanel extends HotFatherPanel implements MouseListener {
 	public void mouseExited(MouseEvent e) {
 		if (e.getSource().getClass() == BottomButton.class) {
 			BottomButton btn = (BottomButton) e.getSource();
-			btn.setBackground(Style.HOT_RED);
+			if(currentBtn!=btn)
+				btn.setBackground(Style.HOT_RED);
 		}
 
+	}
+	
+	class HotSeasonModel extends HotTableModel{
+		public HotSeasonModel(String[] head){
+			super(head);
+		}
+		public void Refresh(ArrayList<PlayerVO> vlist){
+			content.clear();
+			for(int i=1;i<vlist.size();i++){
+				PlayerVO v=vlist.get(i);
+				
+			}
+			
+		}
 	}
 }
