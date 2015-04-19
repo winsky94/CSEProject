@@ -923,7 +923,7 @@ public class NewNewPlayer implements PlayerBLService {
 	}
 
 	public ArrayList<PlayerVO> getOrderedPlayersBySeason(String season,
-			String condition, String order, int num) throws RemoteException {
+			String condition, String order, int num)  {
 		// TODO Auto-generated method stub
 		return null;
 	}
