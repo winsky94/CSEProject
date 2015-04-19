@@ -189,8 +189,8 @@ public class Match implements MatchBLService {
 		}
 
 		// 初始化后 开启线程：
-		updateMatch um = new updateMatch();
-		um.startThread();
+//		updateMatch um = new updateMatch();
+//		um.startThread();
 
 		return matches;
 	}
