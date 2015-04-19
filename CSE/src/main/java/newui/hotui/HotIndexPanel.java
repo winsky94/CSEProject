@@ -60,7 +60,9 @@ public class HotIndexPanel extends FatherPanel implements MouseListener{
 		add(downPnl);
 		downPnl.removeAll();
 		downPnl.setLayout(new GridLayout(1,1));
-		downPnl.add(new HotTodayPanel());
+		HotTodayPanel hottoday=new HotTodayPanel();
+		downPnl.add(hottoday);
+		hottoday.Refresh("score");
 		downPnl.repaint();
 		downPnl.revalidate();
 	}
