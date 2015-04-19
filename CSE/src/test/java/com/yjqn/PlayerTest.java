@@ -3,7 +3,7 @@ package com.yjqn;
 import junit.framework.TestCase;
 import 
 
-public class Player extends TestCase{
+public class PlayerTest extends TestCase{
 	public void setUp() throws Exception{
 		bl.player.Player
 	}

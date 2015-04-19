@@ -1,5 +1,5 @@
 package com.yjqn;
 
-public class Team {
+public class TeamTest {
 
 }
