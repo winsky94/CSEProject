@@ -195,6 +195,11 @@ public class Match implements MatchBLService {
 		return matches;
 	}
 
+	/**
+	 * 得到全部比赛数据
+	 * 
+	 * @return 按赛季分map，里面再套一个map记录这个赛季的比赛
+	 */
 	public Map<String, Map<String, MatchVO>> getAllMatches() {
 		// TODO 自动生成的方法存根
 		return matches;
@@ -218,7 +223,7 @@ public class Match implements MatchBLService {
 			String homeTeam, String visitingTeam) {
 		Map<String, Map<String, MatchVO>> mapResult = new HashMap<String, Map<String, MatchVO>>();
 		ArrayList<MatchVO> result = new ArrayList<MatchVO>();
-		
+
 		if (season.equals("全部") && date.equals("全部") && homeTeam.equals("全部")
 				&& visitingTeam.equals("全部")) {
 			mapResult = matches;
