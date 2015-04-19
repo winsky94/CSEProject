@@ -38,7 +38,7 @@ public class PlayerDetailPanel extends FatherPanel{
 		int width=screenWidth*90/100;
 		int height=screenHeight*95/100;
 		
-		System.out.println(icon.toString());
+		
 		icon.setImage(icon.getImage().getScaledInstance(width*1/3, height*7/8, Image.SCALE_DEFAULT));
 		ImageIcon i=new ImageIcon("image/player/action/"+name+".png");
 		

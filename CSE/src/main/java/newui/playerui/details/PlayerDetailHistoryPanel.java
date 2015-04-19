@@ -57,6 +57,7 @@ public class PlayerDetailHistoryPanel extends JPanel {
 		phtm=new PlayerHistoryTableModel();
 		table=new JTable(phtm);
 		jsp = new JScrollPane(table);
+		table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
 		gbc.gridy = 1;
 		gbc.gridheight = 10;
 		gbc.weighty = 10;

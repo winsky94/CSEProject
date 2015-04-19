@@ -25,7 +25,9 @@ public class PlayerHistoryTableModel extends AbstractTableModel{
 		// TODO Auto-generated method stub
 		return head.length;
 	}
-	
+	public String getColumnName(int col) {
+		return head[col];
+	}
 
 	public Class getColumnClass(int column) {
 		return content.get(0).get(column).getClass();
