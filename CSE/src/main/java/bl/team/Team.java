@@ -146,7 +146,9 @@ public class Team implements TeamBLService {
 			TeamVO vo = (TeamVO) entry.getValue();
 
 			TeamVO teamVO = calculateTeamInfo(vo, season);
-			result.add(teamVO);
+			if (teamVO != null) {
+				result.add(teamVO);
+			}
 		}
 		return result;
 	}
@@ -227,7 +229,9 @@ public class Team implements TeamBLService {
 			}
 
 			TeamVO teamVO = calculateTeamInfo(vo, season);
-			result.add(teamVO);
+			if (teamVO != null) {
+				result.add(teamVO);
+			}
 		}
 		return result;
 	}
@@ -260,8 +264,9 @@ public class Team implements TeamBLService {
 				continue;
 			}
 			TeamVO teamVO = calculateTeamInfo(vo, "all");
-
-			result.add(teamVO);
+			if (teamVO != null) {
+				result.add(teamVO);
+			}
 		}
 		return result;
 	}
@@ -525,10 +530,12 @@ public class Team implements TeamBLService {
 			TeamVO vo = (TeamVO) entry.getValue();
 			String abLocation = vo.getAbLocation();
 			TeamVO teamVO = calculateTeamInfo(vo, "all");
-			if (isSeason && abLocation.equals("NOP")) {
-				abLocation = "NOH";
+			if (teamVO != null) {
+				if (isSeason && abLocation.equals("NOP")) {
+					abLocation = "NOH";
+				}
+				teamAverageInfo.put(abLocation, teamVO);
 			}
-			teamAverageInfo.put(abLocation, teamVO);
 		}
 
 	}
@@ -625,143 +632,149 @@ public class Team implements TeamBLService {
 
 			allMatches = matches.get(season);
 		}
-		Iterator<Entry<String, MatchVO>> allMatchIter = allMatches.entrySet()
-				.iterator();
-		while (allMatchIter.hasNext()) {
-			Map.Entry<String, MatchVO> matchEntry = (Map.Entry<String, MatchVO>) allMatchIter
-					.next();
-			MatchVO matchVO = (MatchVO) matchEntry.getValue();
-			int homeScore = matchVO.getHomeScore();
-			int visitingScore = matchVO.getVisitingScore();
-			String homeTeam = matchVO.getHomeTeam();
-			String visitingTeam = matchVO.getVisitingTeam();
+		if (allMatches != null) {
+			Iterator<Entry<String, MatchVO>> allMatchIter = allMatches
+					.entrySet().iterator();
+			while (allMatchIter.hasNext()) {
+				Map.Entry<String, MatchVO> matchEntry = (Map.Entry<String, MatchVO>) allMatchIter
+						.next();
+				MatchVO matchVO = (MatchVO) matchEntry.getValue();
+				int homeScore = matchVO.getHomeScore();
+				int visitingScore = matchVO.getVisitingScore();
+				String homeTeam = matchVO.getHomeTeam();
+				String visitingTeam = matchVO.getVisitingTeam();
 
-			boolean isHomeTeam = false;
-			boolean isVisitingTeam = false;
+				boolean isHomeTeam = false;
+				boolean isVisitingTeam = false;
 
-			if (team.equals("NOP") || team.equals("NOH")) {
-				isHomeTeam = homeTeam.equals("NOP") || homeTeam.equals("NOH");
-				isVisitingTeam = visitingTeam.equals("NOP")
-						|| visitingTeam.equals("NOH");
-			} else {
-				isHomeTeam = homeTeam.equals(team);
-				isVisitingTeam = visitingTeam.equals(team);
-			}
-			if (isHomeTeam) {
-				matchesNum++;
-				score += homeScore;
-				dsScore += visitingScore;
-				if (homeScore > visitingScore) {
-					winNum++;
+				if (team.equals("NOP") || team.equals("NOH")) {
+					isHomeTeam = homeTeam.equals("NOP")
+							|| homeTeam.equals("NOH");
+					isVisitingTeam = visitingTeam.equals("NOP")
+							|| visitingTeam.equals("NOH");
+				} else {
+					isHomeTeam = homeTeam.equals(team);
+					isVisitingTeam = visitingTeam.equals(team);
 				}
-			} else if (isVisitingTeam) {
-				matchesNum++;
-				score += visitingScore;
-				dsScore += homeScore;
-				if (visitingScore > homeScore) {
-					winNum++;
-				}
-			}
-			if (isHomeTeam || isVisitingTeam) {
-				ArrayList<RecordVO> records = matchVO.getRecords();
-				for (RecordVO recordVO : records) {
-					if (recordVO.getTeam().equals(team)) {
-						shootHitNum += recordVO.getShootHitNum(); // 投篮命中数
-						shootAttemptNum += recordVO.getShootAttemptNum(); // 投篮出手次数
-						threeHitNum += recordVO.getThreeHitNum(); // 三分命中数
-						threeAttemptNum += recordVO.getThreeAttemptNum(); // 三分出手数
-						freeThrowHitNum += recordVO.getFreeThrowHitNum(); // 罚球命中数
-						freeThrowAttemptNum += recordVO
-								.getFreeThrowAttemptNum(); // 罚球出手数
-						offenReboundNum += recordVO.getOffenReboundNum(); // 进攻篮板数
-						defenReboundNum += recordVO.getDefenReboundNum(); // 防守篮板数
-						reboundNum += recordVO.getReboundNum();// 篮板数
-						assistNum += recordVO.getAssistNum();// 助攻数
-						stealNum += recordVO.getStealNum();// 抢断数
-						blockNum += recordVO.getBlockNum();// 盖帽数
-						turnOverNum += recordVO.getTurnOverNum();// 失误数
-						foulNum += recordVO.getFoulNum();// 犯规数
-					} else {
-						// 计算对手的
-						dsShootHitNum += recordVO.getShootHitNum();
-						dsShootAttempNum += recordVO.getShootAttemptNum();
-						dsFreeThrowAttemptNum += recordVO
-								.getFreeThrowAttemptNum();
-						dsTurnOverNum += recordVO.getTurnOverNum();
-						dsOffenReboundNum += recordVO.getOffenReboundNum();
-						dsDefenReboundNum += recordVO.getDefenReboundNum();
+				if (isHomeTeam) {
+					matchesNum++;
+					score += homeScore;
+					dsScore += visitingScore;
+					if (homeScore > visitingScore) {
+						winNum++;
+					}
+				} else if (isVisitingTeam) {
+					matchesNum++;
+					score += visitingScore;
+					dsScore += homeScore;
+					if (visitingScore > homeScore) {
+						winNum++;
 					}
 				}
+				if (isHomeTeam || isVisitingTeam) {
+					ArrayList<RecordVO> records = matchVO.getRecords();
+					for (RecordVO recordVO : records) {
+						if (recordVO.getTeam().equals(team)) {
+							shootHitNum += recordVO.getShootHitNum(); // 投篮命中数
+							shootAttemptNum += recordVO.getShootAttemptNum(); // 投篮出手次数
+							threeHitNum += recordVO.getThreeHitNum(); // 三分命中数
+							threeAttemptNum += recordVO.getThreeAttemptNum(); // 三分出手数
+							freeThrowHitNum += recordVO.getFreeThrowHitNum(); // 罚球命中数
+							freeThrowAttemptNum += recordVO
+									.getFreeThrowAttemptNum(); // 罚球出手数
+							offenReboundNum += recordVO.getOffenReboundNum(); // 进攻篮板数
+							defenReboundNum += recordVO.getDefenReboundNum(); // 防守篮板数
+							reboundNum += recordVO.getReboundNum();// 篮板数
+							assistNum += recordVO.getAssistNum();// 助攻数
+							stealNum += recordVO.getStealNum();// 抢断数
+							blockNum += recordVO.getBlockNum();// 盖帽数
+							turnOverNum += recordVO.getTurnOverNum();// 失误数
+							foulNum += recordVO.getFoulNum();// 犯规数
+						} else {
+							// 计算对手的
+							dsShootHitNum += recordVO.getShootHitNum();
+							dsShootAttempNum += recordVO.getShootAttemptNum();
+							dsFreeThrowAttemptNum += recordVO
+									.getFreeThrowAttemptNum();
+							dsTurnOverNum += recordVO.getTurnOverNum();
+							dsOffenReboundNum += recordVO.getOffenReboundNum();
+							dsDefenReboundNum += recordVO.getDefenReboundNum();
+						}
+					}
 
-				shootHitRate = (double) shootHitNum / shootAttemptNum;// 投篮命中率
-				threeHitRate = (double) threeHitNum / threeAttemptNum;// 三分命中率
-				freeThrowHitRate = (double) freeThrowHitNum
-						/ freeThrowAttemptNum;// 罚球命中率
-				winRate = (double) winNum / matchesNum; // 胜率
-				// 进攻回合
-				offenRound = shootAttemptNum
-						+ 0.4
-						* freeThrowAttemptNum
-						- 1.07
-						* (offenReboundNum
-								/ (double) (offenReboundNum + dsDefenReboundNum) * (shootAttemptNum - shootHitNum))
-						+ 1.07 * turnOverNum;
-				dsOffenRound = dsShootAttempNum
-						+ 0.4
-						* dsFreeThrowAttemptNum
-						- 1.07
-						* (dsOffenReboundNum
-								/ (double) (dsOffenReboundNum + defenReboundNum) * (dsShootAttempNum - dsShootHitNum))
-						+ 1.07 * dsTurnOverNum;
+					shootHitRate = (double) shootHitNum / shootAttemptNum;// 投篮命中率
+					threeHitRate = (double) threeHitNum / threeAttemptNum;// 三分命中率
+					freeThrowHitRate = (double) freeThrowHitNum
+							/ freeThrowAttemptNum;// 罚球命中率
+					winRate = (double) winNum / matchesNum; // 胜率
+					// 进攻回合
+					offenRound = shootAttemptNum
+							+ 0.4
+							* freeThrowAttemptNum
+							- 1.07
+							* (offenReboundNum
+									/ (double) (offenReboundNum + dsDefenReboundNum) * (shootAttemptNum - shootHitNum))
+							+ 1.07 * turnOverNum;
+					dsOffenRound = dsShootAttempNum
+							+ 0.4
+							* dsFreeThrowAttemptNum
+							- 1.07
+							* (dsOffenReboundNum
+									/ (double) (dsOffenReboundNum + defenReboundNum) * (dsShootAttempNum - dsShootHitNum))
+							+ 1.07 * dsTurnOverNum;
 
-				offenEfficiency = (double) score / offenRound * 100; // 进攻效率
-				defenEfficiency = (double) dsScore / dsOffenRound * 100; // 防守效率
-				offenReboundEfficiency = (double) offenReboundNum
-						/ (offenReboundNum + dsDefenReboundNum); // 进攻篮板效率
-				defenReboundEfficiency = (double) defenReboundNum
-						/ (defenReboundNum + dsOffenReboundNum); // 防守篮板效率
-				stealEfficiency = (double) stealNum / dsOffenRound * 100; // 抢断效率
-				assistEfficiency = (double) assistNum / offenRound * 100; // 助攻率
+					offenEfficiency = (double) score / offenRound * 100; // 进攻效率
+					defenEfficiency = (double) dsScore / dsOffenRound * 100; // 防守效率
+					offenReboundEfficiency = (double) offenReboundNum
+							/ (offenReboundNum + dsDefenReboundNum); // 进攻篮板效率
+					defenReboundEfficiency = (double) defenReboundNum
+							/ (defenReboundNum + dsOffenReboundNum); // 防守篮板效率
+					stealEfficiency = (double) stealNum / dsOffenRound * 100; // 抢断效率
+					assistEfficiency = (double) assistNum / offenRound * 100; // 助攻率
+				}
 			}
-		}
 
-		if (season.equals("all")) {
-			// 需要的是场均数据，要除以比赛场数
-			shootHitNum = shootHitNum / (double) matchesNum;
-			shootAttemptNum = shootAttemptNum / (double) matchesNum;
-			threeHitNum = threeHitNum / (double) matchesNum;
-			threeAttemptNum = threeAttemptNum / (double) matchesNum;
-			freeThrowHitNum = freeThrowHitNum / (double) matchesNum;
-			freeThrowAttemptNum = freeThrowAttemptNum / (double) matchesNum;
-			offenReboundNum = offenReboundNum / (double) matchesNum;
-			defenReboundNum = defenReboundNum / (double) matchesNum;
-			reboundNum = reboundNum / (double) matchesNum;
-			assistNum = assistNum / (double) matchesNum;
-			stealNum = stealNum / (double) matchesNum;
-			blockNum = blockNum / (double) matchesNum;
-			turnOverNum = turnOverNum / (double) matchesNum;
-			foulNum = foulNum / (double) matchesNum;
-			score = score / (double) matchesNum;
+			if (season.equals("all")) {
+				// 需要的是场均数据，要除以比赛场数
+				shootHitNum = shootHitNum / (double) matchesNum;
+				shootAttemptNum = shootAttemptNum / (double) matchesNum;
+				threeHitNum = threeHitNum / (double) matchesNum;
+				threeAttemptNum = threeAttemptNum / (double) matchesNum;
+				freeThrowHitNum = freeThrowHitNum / (double) matchesNum;
+				freeThrowAttemptNum = freeThrowAttemptNum / (double) matchesNum;
+				offenReboundNum = offenReboundNum / (double) matchesNum;
+				defenReboundNum = defenReboundNum / (double) matchesNum;
+				reboundNum = reboundNum / (double) matchesNum;
+				assistNum = assistNum / (double) matchesNum;
+				stealNum = stealNum / (double) matchesNum;
+				blockNum = blockNum / (double) matchesNum;
+				turnOverNum = turnOverNum / (double) matchesNum;
+				foulNum = foulNum / (double) matchesNum;
+				score = score / (double) matchesNum;
 
-			if (isBad) {
+				if (isBad) {
+					abLocation = "NOH";
+				}
+			}
+			if (season.equals("12-13") && abLocation.equals("NOP")) {
 				abLocation = "NOH";
+				isSeason = true;
 			}
-		}
-		if (season.equals("12-13") && abLocation.equals("NOP")) {
-			abLocation = "NOH";
-			isSeason = true;
+
+			TeamVO teamVO = new TeamVO(teamName, abLocation, location,
+					conference, partition, homeCourt, setUpTime, matchesNum,
+					shootHitNum, shootAttemptNum, threeHitNum, threeAttemptNum,
+					freeThrowHitNum, freeThrowAttemptNum, offenReboundNum,
+					defenReboundNum, reboundNum, assistNum, stealNum, blockNum,
+					turnOverNum, foulNum, score, shootHitRate, threeHitRate,
+					freeThrowHitRate, winRate, offenRound, offenEfficiency,
+					defenEfficiency, offenReboundEfficiency,
+					defenReboundEfficiency, stealEfficiency, assistEfficiency);
+			return teamVO;
+		} else {
+			return null;
 		}
 
-		TeamVO teamVO = new TeamVO(teamName, abLocation, location, conference,
-				partition, homeCourt, setUpTime, matchesNum, shootHitNum,
-				shootAttemptNum, threeHitNum, threeAttemptNum, freeThrowHitNum,
-				freeThrowAttemptNum, offenReboundNum, defenReboundNum,
-				reboundNum, assistNum, stealNum, blockNum, turnOverNum,
-				foulNum, score, shootHitRate, threeHitRate, freeThrowHitRate,
-				winRate, offenRound, offenEfficiency, defenEfficiency,
-				offenReboundEfficiency, defenReboundEfficiency,
-				stealEfficiency, assistEfficiency);
-		return teamVO;
 	}
 
 	/**
