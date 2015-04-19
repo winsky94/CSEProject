@@ -1243,6 +1243,9 @@ public class Player implements PlayerBLService {
 	public static void main(String[] args) {
 		long start = System.currentTimeMillis();
 		Player player = new Player();
+		ArrayList<PlayerVO> players=player.getBestImprovedPlayer("recentFiveMatchesAssistUpRate", 5);
+		for(int i=0;i<5;i++)
+		  System.out.println(players.get(i).getName()+players.get(i).getRecentFiveMatchesAssistUpRate());
 //		ArrayList<PlayerVO> players=player.getPlayersByTeam("ATL");
 //		System.out.println(players.get(0).getName());
 //		ArrayList<PlayerVO> players = player.selectPlayersByAverage("C", "E", AgeEnum.M22_LE25, "reboundNum", "desc", 5);
@@ -1252,7 +1255,7 @@ public class Player implements PlayerBLService {
 //		ArrayList<PlayerVO> players=player.getPlayersByTeam("ATL");
 //		 System.out.println(players.get(0).getName());
 //		PlayerVO vo = player.getPlayerAverageInfo("Al Horford");
-		 ArrayList<PlayerVO> players=player.getPlayerAverageInfo();
+//		 ArrayList<PlayerVO> players=player.getPlayerAverageInfo();
 //		 System.out.println(players.get(405).getName()+" "+players.get(405).getPlayedGames()+" "+players.get(405).getEfficiency());
 //		 PlayerVO vo=players.get(0);
 //		 System.out.println(vo.getName());
