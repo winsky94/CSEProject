@@ -5,6 +5,7 @@ import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.text.SimpleDateFormat;
@@ -21,6 +22,7 @@ import newui.Style;
 import newui.UIhelper;
 import vo.MatchVO;
 import bl.match.Match;
+import bl.team.Team;
 import blservice.MatchBLService;
 
 import com.toedter.calendar.JDateChooser;
@@ -65,7 +67,16 @@ public class MatchIndexPanel extends FatherPanel {
 		// ----是否全季-----------
 		fullSeasonBox = new JCheckBox("全季");
 		// bl方法暂无该参数传递 ，先选着吧
-		fullSeasonBox.setSelected(true);
+		fullSeasonBox.setSelected(false);
+		fullSeasonBox.addMouseListener(new MouseAdapter(){
+			public void mouseClicked(MouseEvent e){
+				if(fullSeasonBox.isSelected()){
+					jdc.setEnabled(false);
+				}else
+					jdc.setEnabled(true);
+					
+			}
+		});
 		fullSeasonBox.setFont(font);
 		fullSeasonBox.setForeground(Color.WHITE);
 		fullSeasonBox.setBackground(Style.BACK_GREY);
@@ -114,50 +125,20 @@ public class MatchIndexPanel extends FatherPanel {
 			public void mouseClicked(MouseEvent e) {
 				// TODO Auto-generated method stub
 				// 按条件搜索比赛啦
-				String season = seasonBox.getSelectedItem().toString();
+				String date="全部";
+			if(jdc.isEnabled()){
 
 				SimpleDateFormat fmt = new SimpleDateFormat("yyyyMM-dd");
-				String date = fmt.format(jdc.getDate());
-				date = date.substring(4);
-				String hometeam = homeBox.getSelectedItem().toString();
-				String visitingteam = visitingBox.getSelectedItem().toString();
-				// 符合搜索条件的MatchVo
-				ArrayList<MatchVO> mlist = mservice.getMatchData(season, date,
-						hometeam, visitingteam);
-				System.out
-						.println("MatchIndexPanel.MatchIndexPanel().新建 MouseListener() {...}.mouseClicked()"+mlist.size());
-				ArrayList<MatchCard> matchCardList = new ArrayList<MatchCard>();
-				for (MatchVO m : mlist) {
-					MatchCard card = new MatchCard(m);
-					// System.out.println("我有啦");
-					matchCardList.add(card);
-				}
-
-				JPanel BIGPNL = new JPanel();
-				int row = matchCardList.size() / 2;
-				if (matchCardList.size() % 2 != 0)
-					row += 1;
-			//	if(row==1)
-				//	row+=1;
-				BIGPNL.setLayout(new GridLayout(row, 2));
-				for (int i = 0; i < matchCardList.size(); i++) {
-					BIGPNL.add(matchCardList.get(i));
-					
-					
-				}
-				int heightOfBIGPNL = 170 * row;// 这里一定要设置为180-200之间的值，代表每个卡片的高度，乘以卡片数量之后是整个BIGPNL的高度
-				int screenWidth = UIhelper.getScreenWidth();
-
-				int width = screenWidth * 90 / 100;
-				//if(row==1){
-				//	showPanel=new JPanel();
-					//BIGPNL.add(showPanel);
-					//JPanel p=new JPanel();
-					//BIGPNL.add(p);
-				//}
+				 date = fmt.format(jdc.getDate());
+				date = date.substring(4);}
 			
-				BIGPNL.setPreferredSize(new Dimension(width, heightOfBIGPNL));
-				jsp.getViewport().add(BIGPNL);
+				String hometeam = homeBox.getSelectedItem().toString();
+				hometeam=Team.changeTeamNameCHToEN(hometeam);
+				String visitingteam = visitingBox.getSelectedItem().toString();
+				visitingteam=Team.changeTeamNameCHToEN(visitingteam);
+				// 符合搜索条件的MatchVo
+				searchRefresh(hometeam, visitingteam, date);
+				
 			}
 		});
 		funcPnl.add(searchBtn);
@@ -170,6 +151,7 @@ public class MatchIndexPanel extends FatherPanel {
 		gbc.weighty = 10;
 		gbl.setConstraints(jsp, gbc);
 		add(jsp);
+		searchRefresh("全部", "全部", "01-01");
 	}
 
 	class MyComboBox extends JComboBox<String> {
@@ -191,5 +173,45 @@ public class MatchIndexPanel extends FatherPanel {
 			setFont(font);
 			setForeground(Color.white);
 		}
+	}
+	
+	public void searchRefresh(String h,String v,String date){
+		String season = seasonBox.getSelectedItem().toString();
+		ArrayList<MatchVO> mlist = mservice.getMatchData(season, date,
+				h, v);
+		System.out
+				.println("MatchIndexPanel.MatchIndexPanel().新建 MouseListener() {...}.mouseClicked()"+mlist.size());
+		ArrayList<MatchCard> matchCardList = new ArrayList<MatchCard>();
+		for (MatchVO m : mlist) {
+			MatchCard card = new MatchCard(m);
+			// System.out.println("我有啦");
+			matchCardList.add(card);
+		}
+
+		JPanel BIGPNL = new JPanel();
+		int row = matchCardList.size() / 2;
+		if (matchCardList.size() % 2 != 0)
+			row += 1;
+	//	if(row==1)
+		//	row+=1;
+		BIGPNL.setLayout(new GridLayout(row, 2));
+		for (int i = 0; i < matchCardList.size(); i++) {
+			BIGPNL.add(matchCardList.get(i));
+			
+			
+		}
+		int heightOfBIGPNL = 170 * row;// 这里一定要设置为180-200之间的值，代表每个卡片的高度，乘以卡片数量之后是整个BIGPNL的高度
+		int screenWidth = UIhelper.getScreenWidth();
+
+		int width = screenWidth * 90 / 100;
+		//if(row==1){
+		//	showPanel=new JPanel();
+			//BIGPNL.add(showPanel);
+			//JPanel p=new JPanel();
+			//BIGPNL.add(p);
+		//}
+	
+		BIGPNL.setPreferredSize(new Dimension(width, heightOfBIGPNL));
+		jsp.getViewport().add(BIGPNL);
 	}
 }

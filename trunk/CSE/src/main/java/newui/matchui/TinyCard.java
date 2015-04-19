@@ -36,12 +36,13 @@ public class TinyCard extends JPanel{
 		team=new Team();
 		ImageIcon imgicon;
 		String name;
+		
 		if(tName.equals(vo.getHomeTeam()))
 			//imgicon=team.getTeamImage(vo.getVisitingTeam());
 			name=vo.getVisitingTeam();
 		else
 			//imgicon=team.getTeamImage(tName);
-			name=tName;
+			name=vo.getHomeTeam();
 		//imgicon.setImage(imgicon.getImage().getScaledInstance(90, 90,Image.SCALE_DEFAULT ));
 		imgicon=new ImageIcon("image/teamIcon/teamsPng90/"+name+".png");
 		JLabel icon = new JLabel(imgicon);
