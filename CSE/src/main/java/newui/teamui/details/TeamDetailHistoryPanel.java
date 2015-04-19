@@ -1,5 +1,6 @@
 package newui.teamui.details;
 
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -11,10 +12,12 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.table.DefaultTableCellRenderer;
 
+import newui.tables.MyTableCellRenderer;
 import newui.tables.TeamHistoryTableModel;
 
-public class TeamDetailHistoryPanel extends JPanel{
+public class TeamDetailHistoryPanel extends JPanel {
 
 	/**
 	 * 
@@ -26,78 +29,94 @@ public class TeamDetailHistoryPanel extends JPanel{
 	JPanel funcPnl;
 	MyBox seasonBox;
 	MyBox typeBox;
-	Font font=new Font("微软雅黑",Font.PLAIN,15);
-	public TeamDetailHistoryPanel(String abbrName){
-		GridBagLayout gbl=new GridBagLayout();
-		GridBagConstraints gbc=new GridBagConstraints();
-		gbc.fill=GridBagConstraints.BOTH;
+	Font font = new Font("微软雅黑", Font.PLAIN, 15);
+
+	public TeamDetailHistoryPanel(String abbrName) {
+		GridBagLayout gbl = new GridBagLayout();
+		GridBagConstraints gbc = new GridBagConstraints();
+		gbc.fill = GridBagConstraints.BOTH;
 		setLayout(gbl);
-		//------------------------
-		funcPnl=new JPanel();
+		// ------------------------
+		funcPnl = new JPanel();
 		funcPnl.setOpaque(false);
-		gbc.gridx=0;
-		gbc.gridy=0;
-		gbc.gridwidth=10;
-		gbc.gridheight=1;
-		gbc.weightx=10;
-		gbc.weighty=0.1;
+		gbc.gridx = 0;
+		gbc.gridy = 0;
+		gbc.gridwidth = 10;
+		gbc.gridheight = 1;
+		gbc.weightx = 10;
+		gbc.weighty = 0.1;
 		gbl.setConstraints(funcPnl, gbc);
 		add(funcPnl);
-		//------------------------
-		MyLabel seasonLbl=new MyLabel("赛季：");
+		// ------------------------
+		MyLabel seasonLbl = new MyLabel("赛季：");
 		funcPnl.add(seasonLbl);
 		//
-		String[] seasonText={"13-14"};
-		seasonBox=new MyBox(seasonText);
+		String[] seasonText = { "13-14" };
+		seasonBox = new MyBox(seasonText);
 		funcPnl.add(seasonBox);
 		//
 		funcPnl.add(new JLabel("              "));
 		//
-		MyLabel typeLbl=new MyLabel("数据类型：");
+		MyLabel typeLbl = new MyLabel("数据类型：");
 		funcPnl.add(typeLbl);
 		//
-		String[] typeText={"场均","赛季"};
-		typeBox=new MyBox(typeText);
+		String[] typeText = { "场均", "赛季" };
+		typeBox = new MyBox(typeText);
 		funcPnl.add(typeBox);
-		//----------------------
-		thtm=new TeamHistoryTableModel();
-		table=new JTable(thtm);
-		jsp=new JScrollPane(table);
-		gbc.gridy=1;
-		gbc.gridheight=10;
-		gbc.weighty=10;
+		// ----------------------
+		thtm = new TeamHistoryTableModel();
+		table = new JTable(thtm);
+
+		// table 渲染器，设置文字内容居中显示，设置背景色等
+		table.setSelectionBackground(new Color(225, 255, 255));// 设置选择行的颜色——淡蓝色
+		table.setFont(new Font("微软雅黑", 0, 12));
+		table.getTableHeader().setFont(new Font("微软雅黑", 0, 14));
+		table.getTableHeader().setBackground(new Color(211, 211, 211));
+		DefaultTableCellRenderer tcr = new MyTableCellRenderer();
+		for (int i = 0; i < table.getColumnCount(); i++) {
+			table.getColumn(table.getColumnName(i)).setCellRenderer(tcr);
+		}
+
+		jsp = new JScrollPane(table);
+		gbc.gridy = 1;
+		gbc.gridheight = 10;
+		gbc.weighty = 10;
 		gbl.setConstraints(jsp, gbc);
 		add(jsp);
-		//注意  bl层方法的参数是球队缩写 这个是咩
+		// 注意 bl层方法的参数是球队缩写 这个是咩
 		thtm.Refresh(abbrName);
 		table.revalidate();
-		typeBox.addItemListener(new ItemListener(){
+		typeBox.addItemListener(new ItemListener() {
 
 			public void itemStateChanged(ItemEvent e) {
 				// TODO Auto-generated method stub
-				if(typeBox.getSelectedItem().toString().equals("场均")){
+				if (typeBox.getSelectedItem().toString().equals("场均")) {
 					thtm.RefreshAverage();
-				}else{
+				} else {
 					thtm.RefreshSeason(seasonBox.getSelectedItem().toString());
 				}
 				table.revalidate();
 				jsp.repaint();
 			}
-			
+
 		});
 	}
-	class MyBox extends JComboBox<String>{
+
+	class MyBox extends JComboBox<String> {
 
 		private static final long serialVersionUID = 1L;
-		public MyBox(String[] arr){
+
+		public MyBox(String[] arr) {
 			super(arr);
 			setFont(font);
 		}
 	}
-	class MyLabel extends JLabel{
+
+	class MyLabel extends JLabel {
 
 		private static final long serialVersionUID = 1L;
-		public MyLabel(String text){
+
+		public MyLabel(String text) {
 			super(text);
 			setFont(font);
 		}
