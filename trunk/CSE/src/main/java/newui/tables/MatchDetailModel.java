@@ -112,12 +112,15 @@ public class MatchDetailModel extends AbstractTableModel{
 		last.add("统计");
 		last.add("-");
 		last.add(time);
-		last.add(shootRate/n);
+		String s=df.format(shootRate/n);
+		last.add(s);
 		last.add(shootNum);
 		last.add(shootAtm);
-		last.add(threeRate/n);
+		String t=df.format(threeRate/n);
+		last.add(t);
 		last.add(threeNum);last.add(threeAtm);
-		last.add(freeRate/n);last.add(freeNum);last.add(freeAtm);
+		String f=df.format(freeRate/n);
+		last.add(f);last.add(freeNum);last.add(freeAtm);
 		last.add(offendR);last.add(defendR);last.add(offendR+defendR);
 		last.add(assist);last.add(steal);last.add(block);
 		last.add(turn);last.add(foul);last.add(score);
