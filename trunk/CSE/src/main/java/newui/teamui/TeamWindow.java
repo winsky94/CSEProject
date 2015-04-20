@@ -15,6 +15,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JWindow;
 
+import bl.team.Team;
 import newui.Style;
 import newui.UIhelper;
 import newui.mainui.MainFrame;
@@ -59,7 +60,7 @@ public class TeamWindow extends JWindow implements MouseListener {
 		if (e.getSource().getClass() == MyButton.class) {
 			MyButton btn = (MyButton) e.getSource();
 			MainFrame.getInstance().setContentPanel(
-					new TeamDetailPanel(btn.getText()));
+					new TeamDetailPanel(Team.changeTeamNameCHToEN(btn.getText())));
 			setVisible(false);
 		}
 	}
