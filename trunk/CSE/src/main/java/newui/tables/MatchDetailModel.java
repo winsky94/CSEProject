@@ -58,8 +58,9 @@ public class MatchDetailModel extends AbstractTableModel{
 			line.add(v.getPresentTime());
 			//保留一位小数
 			String shoot="0";
-			if(v.getShootAttemptNum()!=0)
-				shoot=df.format((double)(v.getShootHitNum()/v.getShootAttemptNum())*100);
+			if(v.getShootAttemptNum()!=0){
+				shoot=df.format((v.getShootHitNum()/(double)v.getShootAttemptNum())*100);
+			}
 			shootRate+=Double.parseDouble(shoot);
 			line.add(shoot);
 			line.add(v.getShootHitNum());
@@ -68,7 +69,7 @@ public class MatchDetailModel extends AbstractTableModel{
 			shootAtm+=v.getShootAttemptNum();
 			String three="0";
 			if(v.getThreeAttemptNum()!=0)
-				 three=df.format((double)(v.getThreeHitNum()/v.getThreeAttemptNum())*100);
+				 three=df.format((v.getThreeHitNum()/(double)v.getThreeAttemptNum())*100);
 			threeRate+=Double.parseDouble(three);
 			line.add(three);
 			line.add(v.getThreeHitNum());
@@ -77,7 +78,7 @@ public class MatchDetailModel extends AbstractTableModel{
 			threeAtm+=v.getThreeAttemptNum();
 			String free="0";
 			if(v.getFreeThrowAttemptNum()!=0)
-				free=df.format((double)(v.getFreeThrowHitNum()/v.getFreeThrowAttemptNum())*100);
+				free=df.format((v.getFreeThrowHitNum()/(double)v.getFreeThrowAttemptNum())*100);
 			freeRate+=Double.parseDouble(free);
 			line.add(free);
 			line.add(v.getFreeThrowHitNum());
