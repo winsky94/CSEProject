@@ -38,7 +38,7 @@ public class ProgressPanel extends HotFatherPanel implements MouseListener {
 	ProgressModel model;
 	JTable table;
 	ArrayList<PlayerVO> vlist;
-	String[] head = { "排名", "(头像)", "球员名称", "所属球队", "位置", "场均得分", "提升率" };
+	String[] head = { "排名", "", "球员名称", "所属球队", "位置", "场均得分", "提升率" };
 
 	public ProgressPanel() {
 		player = new Player();

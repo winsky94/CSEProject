@@ -34,7 +34,7 @@ public class HotTeamPanel extends HotFatherPanel implements MouseListener {
 	BottomButton scoreBtn, reboundBtn, assistBtn, blockBtn, stealBtn,
 			threeRateBtn, shootRateBtn, freeRateBtn, currentBtn;
 
-	String[] head = { "排名", "(logo)", "球队名称", "球队缩写", "所属联盟", "场均得分" };
+	String[] head = { "排名", "", "球队名称", "球队缩写", "所属联盟", "场均得分" };
 	JTable table;
 	HotTeamModel model;
 	TeamBLService team;
@@ -272,7 +272,7 @@ public class HotTeamPanel extends HotFatherPanel implements MouseListener {
 				// 设置宽高
 
 				line.add(icon);
-				line.add(v.getTeamName());
+				line.add(Team.changeTeamNameENToCH(v.getAbLocation()));
 				line.add(v.getAbLocation());
 				if (v.getConference().equals("E"))
 					line.add("东部联盟");
