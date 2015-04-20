@@ -15,6 +15,7 @@ import javax.swing.JPanel;
 import newui.FatherPanel;
 import newui.TopPanel;
 import newui.UIhelper;
+import newui.playerui.PlayerIndexPanel;
 
 
 public class MainFrame extends JFrame{
@@ -32,7 +33,9 @@ public class MainFrame extends JFrame{
 	private FatherPanel lastPnl;
 	JPanel topPnl;
 	JPanel contentPnl=new JPanel();
+
 	public static Stack<FatherPanel> stack;
+
 	private MainFrame(){
 		stack=new Stack<FatherPanel>();
 		GridBagLayout gbl = new GridBagLayout();
@@ -98,20 +101,35 @@ public class MainFrame extends JFrame{
 		        }
 		    );  
 	}
+
+	
+
 	public void setContentPanel(FatherPanel pnl){
 		if(pnl.isDetail){
 			stack.push(lastPnl);
 		}
 		lastPnl=pnl;
+
+	
 		contentPnl.removeAll();
+
 		contentPnl.setLayout(new GridLayout(1,1));
 		contentPnl.add(pnl);
 		//contentPnl.repaint();
 		contentPnl.revalidate();
+		
+		
+		
 	}
+	
+	
+	
+	
 	public static MainFrame getInstance(){
+		
 		if(instance==null)
 			instance=new MainFrame();
+
 		return instance;
 	}
 	public static void main(String[] args) {

@@ -27,7 +27,7 @@ public class PlayerDetailPanel extends FatherPanel{
 	PlayerBLService pservice;
 	PlayerVO vo;
 	public PlayerDetailPanel(String pname){
-		isDetail=true;
+		//isDetail=true;
 		pservice=new Player();// is this? 
 		vo=pservice.getPlayerBaseInfo(pname).get(0);
 		name=pname;
@@ -61,8 +61,13 @@ public class PlayerDetailPanel extends FatherPanel{
 		gbc.weightx=50;
 		gbl.setConstraints(tab, gbc);
 		add(tab);
+		double pre=System.currentTimeMillis();
 		tab.addTab("基本信息", new PlayerDetailInfoPanel(vo));
+		double pp=System.currentTimeMillis();
+		System.out.println("detaibaseinfo:"+(pp-pre));
 		tab.addTab("过往数据",new PlayerDetailHistoryPanel(vo));
+		double post=System.currentTimeMillis();
+		System.out.println("detailhistory:"+(post-pp));
 	}
 	public static void main(String[] args) {
 		JFrame f=new JFrame();

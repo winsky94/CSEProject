@@ -258,6 +258,7 @@ public class ProgressPanel extends HotFatherPanel implements MouseListener {
 				line.add(v.getPosition());
 				if (currentBtn == scoreBtn) {
 					line.add(v.getScore());
+					
 					line.add(v.getRecentFiveMatchesScoreUpRate() * 100 + "%");
 				} else if (currentBtn == reboundBtn) {
 					line.add(v.getReboundNum());

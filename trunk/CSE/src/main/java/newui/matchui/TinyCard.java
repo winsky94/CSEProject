@@ -6,6 +6,8 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Image;
 import java.awt.Insets;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -14,6 +16,7 @@ import javax.swing.JPanel;
 import bl.team.Team;
 import blservice.TeamBLService;
 import newui.Style;
+import newui.mainui.MainFrame;
 import vo.MatchVO;
 
 public class TinyCard extends JPanel{
@@ -24,7 +27,7 @@ public class TinyCard extends JPanel{
 	private static final long serialVersionUID = 1L;
 	boolean isHomeBigger = false;
 	TeamBLService team;
-	public TinyCard(MatchVO vo,String tName) {
+	public TinyCard(final MatchVO vo,String tName) {
 		setOpaque(false);
 		GridBagLayout gbl = new GridBagLayout();
 		GridBagConstraints gbc = new GridBagConstraints();
@@ -86,5 +89,12 @@ public class TinyCard extends JPanel{
 		gbl.setConstraints(visitingScoreLbl, gbc);
 		add(visitingScoreLbl);
 		this.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		this.setToolTipText("点击查看该比赛详情");
+		//点击跳转到该场比赛的技术统计界面
+		this.addMouseListener(new MouseAdapter(){
+			public void mouseClicked(MouseEvent e){
+				MainFrame.getInstance().setContentPanel(new MatchDetailPanel(vo));
+			}
+		});
 	}
 }

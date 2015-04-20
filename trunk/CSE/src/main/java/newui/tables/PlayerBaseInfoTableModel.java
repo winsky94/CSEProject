@@ -113,6 +113,7 @@ public class PlayerBaseInfoTableModel extends MyTableModel {
 	// { "(头像)", "球员名", "所属球队", "位置", "身高", "体重","生日","年龄" ,"经验" };
 	// 适应出网络连接方式来的数据
 	public void Refresh(ArrayList<PlayerVO> list) {
+		double pre=System.currentTimeMillis();
 		content.clear();
 		imgList.clear();
 		int i = 0;
@@ -125,9 +126,10 @@ public class PlayerBaseInfoTableModel extends MyTableModel {
 			ImageIcon icon = new ImageIcon(tou.getImage().getScaledInstance(
 					currentTable.getColumn(currentTable.getColumnName(0))
 							.getWidth(), 40
-					/* currentTable.getRowHeight(i) */, Image.SCALE_DEFAULT));
+				, Image.SCALE_DEFAULT));
 
 			line.add(icon);
+			//line.add("头像");
 			line.add(name);
 			line.add(vo.getOwingTeam());
 			line.add(vo.getPosition());
@@ -141,6 +143,8 @@ public class PlayerBaseInfoTableModel extends MyTableModel {
 			i++;
 
 		}
+		double post=System.currentTimeMillis();
+		System.out.println("baseinfotablerefresh:"+(post-pre));
 
 	}
 
