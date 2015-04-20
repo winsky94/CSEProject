@@ -57,7 +57,8 @@ public class Team implements TeamBLService {
 		// result = team.getTeamSeasonInfo(season);
 		// result = team.getTeamAverageInfo();
 		// result = team.getSeasonHotTeam(season, "score", 4);
-		result = team.getTeamSeasonInfo(season, "NOP");
+		// result = team.getTeamSeasonInfo(season, "NOP");
+		result = team.getSeasonHotTeam(season, "blockNum", 5);
 		// result = team.getTeamAverageInfo("NOH");
 		// result = team.getRecentMatches("ATL");
 		// result=team.getMatches("ATL");
@@ -552,6 +553,8 @@ public class Team implements TeamBLService {
 		String homeCourt = vo.getHomeCourt();
 		int setUpTime = vo.getSetUpTime();
 
+		String testSeason = "";
+
 		int matchesNum = 0; // 比赛场数
 		int winNum = 0;
 		double shootHitNum = 0; // 投篮命中数
@@ -599,6 +602,7 @@ public class Team implements TeamBLService {
 		}
 
 		if (season.equals("all")) {
+
 			// 得到全部比赛数据的，还是觉得有点傻逼
 			// 思路是将按赛季分的二维map读出来加到一个新的不按赛季分的map中
 			int flag = 0;
@@ -641,6 +645,7 @@ public class Team implements TeamBLService {
 				Map.Entry<String, MatchVO> matchEntry = (Map.Entry<String, MatchVO>) allMatchIter
 						.next();
 				MatchVO matchVO = (MatchVO) matchEntry.getValue();
+				testSeason = matchVO.getSeason();
 				int homeScore = matchVO.getHomeScore();
 				int visitingScore = matchVO.getVisitingScore();
 				String homeTeam = matchVO.getHomeTeam();
@@ -754,7 +759,8 @@ public class Team implements TeamBLService {
 				foulNum = foulNum / (double) matchesNum;
 				score = score / (double) matchesNum;
 
-				if (isBad) {
+				if (testSeason.equals("12-13") && isBad) {
+					System.out.println("jaj");
 					abLocation = "NOH";
 				}
 			}
