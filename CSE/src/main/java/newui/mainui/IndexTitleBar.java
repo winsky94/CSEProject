@@ -111,17 +111,23 @@ public class IndexTitleBar extends JPanel implements MouseListener {
 	}
 
 	public void mouseClicked(MouseEvent e) {
-		if (e.getSource() == indexBtn) 
+		if (e.getSource() == indexBtn){
 			MainFrame.getInstance().setContentPanel(new IndexPanel());
-		if (e.getSource() == teamBtn)
+		
+		}
+		else if (e.getSource() == teamBtn)
 			MainFrame.getInstance().setContentPanel(new TeamIndexPanel());
-		if (e.getSource() == playerBtn)
+		else if (e.getSource() == playerBtn){
+			double pre=System.currentTimeMillis();
 			MainFrame.getInstance().setContentPanel(new PlayerIndexPanel());
-		if (e.getSource() == matchBtn)
+			double post=System.currentTimeMillis();
+			System.out.println("maintoplayerindex:"+(post-pre));
+			}
+		else if (e.getSource() == matchBtn)
 			MainFrame.getInstance().setContentPanel(new MatchIndexPanel());
-		if (e.getSource() == hotBtn)
+		else if (e.getSource() == hotBtn)
 			MainFrame.getInstance().setContentPanel(new HotIndexPanel());
-		if (e.getSource() == searchBtn) {
+		else if (e.getSource() == searchBtn) {
 			// 监听
 			String scontent=searchFld.getText();
 			MainFrame.getInstance().setContentPanel(new SearchResultPanel(scontent));

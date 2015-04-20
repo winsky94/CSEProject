@@ -49,7 +49,9 @@ public class PlayerIndexPanel extends FatherPanel implements MouseListener {
 	JComboBox<String> teamBox;
 
 	public PlayerIndexPanel() {
+	
 		super();
+		double pre=System.currentTimeMillis();
 		// ------funcPnl--------
 		funcPnl = new JPanel();
 		funcPnl.setBackground(Style.BACK_GREY);
@@ -90,11 +92,14 @@ public class PlayerIndexPanel extends FatherPanel implements MouseListener {
 		table.setFont(new Font("微软雅黑", 0, 12));
 		table.getTableHeader().setFont(new Font("微软雅黑", 0, 14));
 		table.getTableHeader().setBackground(new Color(211, 211, 211));
+		
 		DefaultTableCellRenderer tcr = new MyTableCellRenderer(
 				pitm.getImgList());
 		for (int i = 1; i < table.getColumnCount(); i++) {
 			table.getColumn(table.getColumnName(i)).setCellRenderer(tcr);
 		}
+		
+		
 		titleBar.setCurrentTableModel(pitm);
 		titleBar.setModelEnum(TableModel.PLAYERBASEINFO);
 		titleBar.setTable(table);
@@ -131,10 +136,8 @@ public class PlayerIndexPanel extends FatherPanel implements MouseListener {
 			}
 
 		});
-
-	}
-	public void Refresh(){
-		
+		double post=System.currentTimeMillis();
+		System.out.println("playerindexConstruc:"+(post-pre));
 	}
 	
 
@@ -191,7 +194,10 @@ public class PlayerIndexPanel extends FatherPanel implements MouseListener {
 			if(e.getClickCount()==2){
 				int row=table.getSelectedRow();
 				String pname=table.getValueAt(row, 1).toString();
+				double pre=System.currentTimeMillis();
 				MainFrame.getInstance().setContentPanel(new PlayerDetailPanel(pname));
+				double post=System.currentTimeMillis();
+				System.out.println("playerindexto详情:"+(post-pre));
 			}
 		}
 		

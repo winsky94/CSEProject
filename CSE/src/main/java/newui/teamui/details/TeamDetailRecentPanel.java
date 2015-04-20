@@ -31,8 +31,12 @@ public class TeamDetailRecentPanel extends JPanel{
 		matches=pp.getRecentMatches(pName,5);
 		//-------------------
 		setLayout(new GridLayout(1,matches.size()));
+		double pre=System.currentTimeMillis();
 		for(int i=0;i<matches.size();i++)
 			add(new TinyCard(matches.get(i),tName));
+		double post=System.currentTimeMillis();
+		System.out.println("FiveTinyCard:"+(post-pre));
+		
 		
 	}
 	

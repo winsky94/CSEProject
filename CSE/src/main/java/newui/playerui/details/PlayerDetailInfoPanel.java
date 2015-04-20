@@ -26,6 +26,7 @@ public class PlayerDetailInfoPanel extends JPanel {
 	PlayerVO vo;
 	PlayerBLService pservice;
 	public PlayerDetailInfoPanel(PlayerVO vo) {
+	
 		this.vo=vo;
 		// -----------------
 		pservice=new Player();
@@ -87,13 +88,18 @@ public class PlayerDetailInfoPanel extends JPanel {
 		 * 注意：加监听时把下一行的注释解除，传入其所属的球队
 		 * 删除下面的recentPnl=new JPanel();
 		 */
+		double p1=System.currentTimeMillis();
 		recentPnl = new TeamDetailRecentPanel(vo.getName(),vo.getOwingTeam());
+		double p2=System.currentTimeMillis();
+		System.out.println("playerRecent:"+(p2-p1));
 		//recentPnl=new JPanel();
 		gbc.gridy = 8;
 		gbc.gridheight = 2;
 		gbc.weighty = 2;
 		gbl.setConstraints(recentPnl, gbc);
 		add(recentPnl);
+		double post=System.currentTimeMillis();
+		
 	}
 	class MyLabel extends JLabel{
 

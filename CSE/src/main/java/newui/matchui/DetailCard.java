@@ -140,6 +140,8 @@ public class DetailCard extends JPanel implements MouseListener {
 			detailPnl.add(temp);
 		}
 		ArrayList<String> detail=v.getDetailScores();
+		if(detail==null)
+			System.out.println("detail wei null");
 		ArrayList<String> vdet=new ArrayList<String>();
 		ArrayList<String> hdet=new ArrayList<String>();
 		for(int i=0;i<detail.size();i++){
