@@ -22,8 +22,9 @@ public class TopPanel extends JPanel implements MouseListener {
 	 * 期望实现：页面跳转功能
 	 */
 	private static final long serialVersionUID = 1L;
-	MyButton backBtn,miniBtn, maxBtn, exitBtn;
+	MyButton miniBtn, maxBtn, exitBtn;
 	boolean isMax = false;
+	public MyButton backBtn;
 
 	public TopPanel() {
 		GridBagLayout g = new GridBagLayout();
@@ -40,7 +41,7 @@ public class TopPanel extends JPanel implements MouseListener {
 		backBtn.addMouseListener(this);
 		g.setConstraints(backBtn, c);
 		add(backBtn);
-		//-------------------
+		// -------------------
 		JLabel blankLbl = new JLabel();
 		c.gridx = 6;
 		c.gridwidth = 10;
@@ -76,13 +77,14 @@ public class TopPanel extends JPanel implements MouseListener {
 			System.exit(0);
 		if (e.getSource() == maxBtn) {
 			// 监听
-			if (!isMax){
+			if (!isMax) {
 				MainFrame.getInstance().setExtendedState(JFrame.MAXIMIZED_BOTH);
-				isMax=true;
-			}
-			else{
+				maxBtn.setIcon(new ImageIcon("image/TopTitle/normal.png"));
+				isMax = true;
+			} else {
 				MainFrame.getInstance().setExtendedState(JFrame.NORMAL);
-				isMax=false;
+				maxBtn.setIcon(new ImageIcon("image/TopTitle/max.png"));
+				isMax = false;
 			}
 		}
 		if (e.getSource() == miniBtn) {
@@ -90,7 +92,8 @@ public class TopPanel extends JPanel implements MouseListener {
 			MainFrame.getInstance().setExtendedState(JFrame.HIDE_ON_CLOSE);
 		}
 		if (e.getSource() == backBtn) {
-			MainFrame.getInstance().setContentPanel(MainFrame.stack.pop());
+			if (!MainFrame.stack.isEmpty())
+				MainFrame.getInstance().setContentPanel(MainFrame.stack.pop());
 		}
 
 	}
@@ -113,7 +116,10 @@ public class TopPanel extends JPanel implements MouseListener {
 			miniBtn.setIcon(new ImageIcon("image/TopTitle/minimizeFocus.png"));
 		}
 		if (e.getSource() == maxBtn) {
-			maxBtn.setIcon(new ImageIcon("image/TopTitle/maxFocus.png"));
+			if (isMax)
+				maxBtn.setIcon(new ImageIcon("image/TopTitle/normalFocus.png"));
+			else
+				maxBtn.setIcon(new ImageIcon("image/TopTitle/maxFocus.png"));
 		}
 		if (e.getSource() == backBtn) {
 			backBtn.setIcon(new ImageIcon("image/TopTitle/backFocus.png"));
@@ -125,7 +131,10 @@ public class TopPanel extends JPanel implements MouseListener {
 			exitBtn.setIcon(new ImageIcon("image/TopTitle/exit.png"));
 		}
 		if (e.getSource() == maxBtn) {
-			maxBtn.setIcon(new ImageIcon("image/TopTitle/max.png"));
+			if (isMax)
+				maxBtn.setIcon(new ImageIcon("image/TopTitle/normal.png"));
+			else
+				maxBtn.setIcon(new ImageIcon("image/TopTitle/max.png"));
 		}
 		if (e.getSource() == miniBtn) {
 			miniBtn.setIcon(new ImageIcon("image/TopTitle/minimize.png"));
