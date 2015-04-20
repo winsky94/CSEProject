@@ -1,19 +1,19 @@
 package newui.playerui;
 
-import java.awt.Image;
+import java.awt.Color;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTabbedPane;
 
-import vo.PlayerVO;
-import bl.player.Player;
-import blservice.PlayerBLService;
 import newui.FatherPanel;
 import newui.UIhelper;
 import newui.playerui.details.PlayerDetailHistoryPanel;
 import newui.playerui.details.PlayerDetailInfoPanel;
+import vo.PlayerVO;
+import bl.player.Player;
+import blservice.PlayerBLService;
 
 public class PlayerDetailPanel extends FatherPanel{
 
@@ -30,6 +30,7 @@ public class PlayerDetailPanel extends FatherPanel{
 		//isDetail=true;
 		pservice=new Player();// is this? 
 		vo=pservice.getPlayerBaseInfo(pname).get(0);
+		
 		name=pname;
 		//----------------
 		//ImageIcon icon=pservice.getPlayerActionImage(pname);
