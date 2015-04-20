@@ -760,7 +760,6 @@ public class Team implements TeamBLService {
 				score = score / (double) matchesNum;
 
 				if (testSeason.equals("12-13") && isBad) {
-					System.out.println("jaj");
 					abLocation = "NOH";
 				}
 			}
