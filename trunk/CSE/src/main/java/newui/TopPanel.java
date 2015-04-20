@@ -22,7 +22,7 @@ public class TopPanel extends JPanel implements MouseListener {
 	 * 期望实现：页面跳转功能
 	 */
 	private static final long serialVersionUID = 1L;
-	MyButton miniBtn, maxBtn, exitBtn;
+	MyButton backBtn,miniBtn, maxBtn, exitBtn;
 	boolean isMax = false;
 
 	public TopPanel() {
@@ -33,6 +33,14 @@ public class TopPanel extends JPanel implements MouseListener {
 		setLayout(g);
 		setBackground(Color.white);
 		// --------------------
+		backBtn = new MyButton(new ImageIcon("image/TopTitle/back.png"));
+		c.gridx = 0;
+		c.gridwidth = 1;
+		c.weightx = 0.01;
+		backBtn.addMouseListener(this);
+		g.setConstraints(backBtn, c);
+		add(backBtn);
+		//-------------------
 		JLabel blankLbl = new JLabel();
 		c.gridx = 6;
 		c.gridwidth = 10;
@@ -81,6 +89,9 @@ public class TopPanel extends JPanel implements MouseListener {
 			// 监听
 			MainFrame.getInstance().setExtendedState(JFrame.HIDE_ON_CLOSE);
 		}
+		if (e.getSource() == backBtn) {
+			MainFrame.getInstance().setContentPanel(MainFrame.stack.pop());
+		}
 
 	}
 
@@ -104,6 +115,9 @@ public class TopPanel extends JPanel implements MouseListener {
 		if (e.getSource() == maxBtn) {
 			maxBtn.setIcon(new ImageIcon("image/TopTitle/maxFocus.png"));
 		}
+		if (e.getSource() == backBtn) {
+			backBtn.setIcon(new ImageIcon("image/TopTitle/backFocus.png"));
+		}
 	}
 
 	public void mouseExited(MouseEvent e) {
@@ -115,6 +129,9 @@ public class TopPanel extends JPanel implements MouseListener {
 		}
 		if (e.getSource() == miniBtn) {
 			miniBtn.setIcon(new ImageIcon("image/TopTitle/minimize.png"));
+		}
+		if (e.getSource() == backBtn) {
+			backBtn.setIcon(new ImageIcon("image/TopTitle/back.png"));
 		}
 
 	}

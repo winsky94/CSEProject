@@ -46,6 +46,7 @@ public class TeamDetailPanel extends FatherPanel{
 	JLabel nameLbl;
 	TeamBLService team;
 	public TeamDetailPanel(String teamName){
+		isDetail=true;
 		team=new Team();
 		//abbrName=Team.changeTeamNameCHToEN(teamName);
 		abbrName=teamName;

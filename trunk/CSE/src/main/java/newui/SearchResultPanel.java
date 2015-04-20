@@ -42,6 +42,7 @@ public class SearchResultPanel extends FatherPanel implements MouseListener{
 	public String content;
 	Font font = new Font("微软雅黑", Font.PLAIN, 15);
 	public SearchResultPanel(String scontent) {
+		isDetail=true;
 		// ------funcPnl--------
 		funcPnl = new JPanel();
 		content=scontent;

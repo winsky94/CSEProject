@@ -7,10 +7,12 @@ import java.awt.Point;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
+import java.util.Stack;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import newui.FatherPanel;
 import newui.TopPanel;
 import newui.UIhelper;
 
@@ -27,9 +29,12 @@ public class MainFrame extends JFrame{
 	int screenHeight=UIhelper.getScreenHeight();
 	int width=screenWidth*90/100;
 	int height=screenHeight*95/100;
+	private FatherPanel lastPnl;
 	JPanel topPnl;
 	JPanel contentPnl=new JPanel();
+	public static Stack<FatherPanel> stack;
 	private MainFrame(){
+		stack=new Stack<FatherPanel>();
 		GridBagLayout gbl = new GridBagLayout();
 		GridBagConstraints gbc = new GridBagConstraints();
 		gbc.fill=GridBagConstraints.BOTH;
@@ -93,7 +98,11 @@ public class MainFrame extends JFrame{
 		        }
 		    );  
 	}
-	public void setContentPanel(JPanel pnl){
+	public void setContentPanel(FatherPanel pnl){
+		if(pnl.isDetail){
+			stack.push(lastPnl);
+		}
+		lastPnl=pnl;
 		contentPnl.removeAll();
 		contentPnl.setLayout(new GridLayout(1,1));
 		contentPnl.add(pnl);

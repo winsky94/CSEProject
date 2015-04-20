@@ -37,6 +37,7 @@ public class MatchDetailPanel extends FatherPanel {
 	ArrayList<RecordVO> Vrecord = new ArrayList<RecordVO>();;
 
 	public MatchDetailPanel(final MatchVO v) {
+		isDetail=true;
 		// ----card------------
 		card = new DetailCard(v);
 		gbc.gridy = 1;

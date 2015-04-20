@@ -16,6 +16,7 @@ public class FatherPanel extends JPanel{
 	protected GridBagLayout gbl;
 	protected GridBagConstraints gbc;
 	protected TitleBar titleBar;
+	public boolean isDetail=false;
 	public FatherPanel(){
 		gbl=new GridBagLayout();
 		gbc=new GridBagConstraints();

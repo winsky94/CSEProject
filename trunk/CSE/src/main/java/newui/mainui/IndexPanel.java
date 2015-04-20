@@ -6,7 +6,9 @@ import java.awt.GridBagLayout;
 
 import javax.swing.JPanel;
 
-public class IndexPanel extends JPanel{
+import newui.FatherPanel;
+
+public class IndexPanel extends FatherPanel{
 	/**
 	 * 
 	 */
@@ -14,6 +16,7 @@ public class IndexPanel extends JPanel{
 	JPanel titlePnl,infoPnl;
 
 	public IndexPanel(){
+		removeAll();
 		GridBagLayout gbl = new GridBagLayout();
 		GridBagConstraints gbc = new GridBagConstraints();
 		gbc.fill=GridBagConstraints.BOTH;
