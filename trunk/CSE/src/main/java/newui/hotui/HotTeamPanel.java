@@ -1,10 +1,12 @@
 package newui.hotui;
 
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
@@ -16,8 +18,10 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 
 import newui.Style;
+import newui.mainui.MainFrame;
 import newui.tables.HotTableModel;
 import newui.tables.MyTableCellRenderer;
+import newui.teamui.TeamDetailPanel;
 import vo.TeamVO;
 import bl.team.Team;
 import blservice.TeamBLService;
@@ -57,6 +61,14 @@ public class HotTeamPanel extends HotFatherPanel implements MouseListener {
 		bc.weighty = 5;
 		bl.setConstraints(teamIcon, bc);
 		bestPnl.add(teamIcon);
+		teamIcon.setToolTipText("点击查看球队详情");
+		teamIcon.addMouseListener(new MouseAdapter(){
+			public void mouseClicked(MouseEvent e){
+				MainFrame.getInstance().setContentPanel(
+						new TeamDetailPanel(teamNameLbl.getText()));
+			}
+		});
+		teamIcon.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		// ------------
 		JPanel midPnl = new JPanel();
 		midPnl.setOpaque(false);
@@ -141,6 +153,7 @@ public class HotTeamPanel extends HotFatherPanel implements MouseListener {
 			table.getColumn(table.getColumnName(i)).setCellRenderer(tcr);
 		}
 		jsp.getViewport().add(table);
+		
 	}
 
 	public void Refresh(String sort) {
@@ -164,6 +177,15 @@ public class HotTeamPanel extends HotFatherPanel implements MouseListener {
 			table.revalidate();
 			jsp.getViewport().remove(table);
 			table = new JTable(model);
+			table.addMouseListener(new MouseAdapter(){
+				public void mouseClicked(MouseEvent e){
+					if(e.getClickCount()==2){
+						int row=table.getSelectedRow();
+						String name=table.getValueAt(row,3).toString();
+						MainFrame.getInstance().setContentPanel(new TeamDetailPanel(name));
+					}
+				}
+			});
 			// table 渲染器，设置文字内容居中显示，设置背景色等
 			table.setSelectionBackground(new Color(225, 255, 255));// 设置选择行的颜色——淡蓝色
 			table.setFont(new Font("微软雅黑", 0, 12));

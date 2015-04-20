@@ -1,11 +1,13 @@
 package newui.hotui;
 
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Image;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
@@ -17,8 +19,11 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 
 import newui.Style;
+import newui.mainui.MainFrame;
+import newui.playerui.PlayerDetailPanel;
 import newui.tables.HotTableModel;
 import newui.tables.MyTableCellRenderer;
+import newui.teamui.TeamDetailPanel;
 import vo.PlayerVO;
 import bl.player.Player;
 import blservice.PlayerBLService;
@@ -52,7 +57,14 @@ public class HotTodayPanel extends HotFatherPanel implements MouseListener {
 
 		// -------bestPnl--------------
 		bestHead = new JLabel();
+		bestHead.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		// 有需要就加上bestHead.setPreferredSize(new Dimension(width, height));
+		bestHead.setToolTipText("点击查看球员详情");
+		bestHead.addMouseListener(new MouseAdapter(){
+			public void mouseClicked(MouseEvent e){
+				MainFrame.getInstance().setContentPanel(new PlayerDetailPanel(bestName.getText()));
+			}
+		});
 		bc.gridx = 0;
 		bc.gridy = 0;
 		bc.gridwidth = 2;
@@ -94,6 +106,14 @@ public class HotTodayPanel extends HotFatherPanel implements MouseListener {
 		bc.weightx = 2;
 		bl.setConstraints(bestTeamIcon, bc);
 		bestPnl.add(bestTeamIcon);
+		bestTeamIcon.setToolTipText("点击查看球队详情");
+		bestTeamIcon.addMouseListener(new MouseAdapter(){
+			public void mouseClicked(MouseEvent e){
+				MainFrame.getInstance().setContentPanel(
+						new TeamDetailPanel(positionAndTeamName.getText().split("/")[1]));
+			}
+		});
+		bestTeamIcon.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		// ------------
 		bottomBar.setLayout(new GridLayout(1, 5));
 		// ------------
@@ -137,6 +157,7 @@ public class HotTodayPanel extends HotFatherPanel implements MouseListener {
 		}
 
 		jsp.getViewport().add(table);
+		
 
 	}
 
@@ -159,7 +180,15 @@ public class HotTodayPanel extends HotFatherPanel implements MouseListener {
 			table.revalidate();
 			jsp.getViewport().remove(table);
 			table = new JTable(model);
-
+			table.addMouseListener(new MouseAdapter(){
+				public void mouseClicked(MouseEvent e){
+					if(e.getClickCount()==2){
+						int row=table.getSelectedRow();
+						String name=table.getValueAt(row,2).toString();
+						MainFrame.getInstance().setContentPanel(new PlayerDetailPanel(name));
+					}
+				}
+			});
 			// table 渲染器，设置文字内容居中显示，设置背景色等
 			table.setSelectionBackground(new Color(225, 255, 255));// 设置选择行的颜色——淡蓝色
 			table.setFont(new Font("微软雅黑", 0, 12));
@@ -173,6 +202,7 @@ public class HotTodayPanel extends HotFatherPanel implements MouseListener {
 
 			jsp.getViewport().add(table);
 			jsp.repaint();
+		
 
 		}
 

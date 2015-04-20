@@ -109,10 +109,8 @@ public class MainFrame extends JFrame{
 			stack.push(lastPnl);
 		}
 		lastPnl=pnl;
-
 	
 		contentPnl.removeAll();
-
 		contentPnl.setLayout(new GridLayout(1,1));
 		contentPnl.add(pnl);
 		//contentPnl.repaint();
