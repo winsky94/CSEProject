@@ -8,6 +8,7 @@ import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
@@ -138,16 +139,20 @@ public class ProgressPanel extends HotFatherPanel implements MouseListener {
 			// data.setText(topOne.getScore()+"");
 			bestTeamIcon.setIcon(new ImageIcon("image/teamIcon/teamsPng150/"
 					+ topOne.getOwingTeam() + ".png"));
-			if (currentBtn == scoreBtn)
+			
+			DecimalFormat dec = new DecimalFormat("0.00");
+			
+			if (currentBtn == scoreBtn){
 				data.setText(topOne.getScore() + "/"
-						+ topOne.getRecentFiveMatchesScoreUpRate() * 100 + "%");
+						+ dec.format(topOne.getRecentFiveMatchesScoreUpRate() * 100) + "%");
+			}
 			else if (currentBtn == reboundBtn)
 				data.setText(topOne.getReboundNum() + "/"
-						+ topOne.getRecentFiveMatchesReboundUpRate() * 100
+						+ dec.format(topOne.getRecentFiveMatchesReboundUpRate() * 100)
 						+ "%");
 			else
 				data.setText(topOne.getAssistNum() + "/"
-						+ topOne.getRecentFiveMatchesAssistUpRate() * 100 + "%");
+						+ dec.format(topOne.getRecentFiveMatchesAssistUpRate() * 100) + "%");
 			model.Refresh(vlist);
 			table.revalidate();
 			jsp.getViewport().remove(table);
