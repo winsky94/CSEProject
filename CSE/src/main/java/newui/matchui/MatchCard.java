@@ -20,6 +20,7 @@ import blservice.TeamBLService;
 import vo.MatchVO;
 import newui.Style;
 import newui.mainui.MainFrame;
+import newui.teamui.TeamDetailPanel;
 
 public class MatchCard extends JPanel implements MouseListener {
 
@@ -74,6 +75,9 @@ public class MatchCard extends JPanel implements MouseListener {
 		homeIcon = new JLabel(
 				t);
 		homeIcon.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		//是否需要ToolTipText
+		homeIcon.setToolTipText("点击查看球队详情");
+		homeIcon.addMouseListener(this);
 		gbc.gridx = 0;
 		gbc.gridy = 1;
 		gbc.gridwidth = 1;
@@ -117,6 +121,8 @@ public class MatchCard extends JPanel implements MouseListener {
 		//v.setImage(v.getImage().getScaledInstance(150, 150,0));
 		visitingIcon = new JLabel(v);
 		visitingIcon.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		visitingIcon.setToolTipText("点击查看球队详情");
+		visitingIcon.addMouseListener(this);
 		gbc.gridx = 4;
 		gbc.weightx = 20;
 		gbc.weighty = 50;
@@ -167,6 +173,12 @@ public class MatchCard extends JPanel implements MouseListener {
 	public void mouseClicked(MouseEvent e) {
 		if (e.getSource() == detailLbl)// 注意，这里应当传一个比赛的特征值过去
 			MainFrame.getInstance().setContentPanel(new MatchDetailPanel(vo));
+		else{
+			String name=vo.getVisitingTeam();
+			if(e.getSource()==homeIcon)
+				name=vo.getHomeTeam();
+			MainFrame.getInstance().setContentPanel(new TeamDetailPanel(name));
+		}
 	}
 
 	public void mousePressed(MouseEvent e) {
