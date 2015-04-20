@@ -35,7 +35,7 @@ public class HotSeasonPanel extends HotFatherPanel implements MouseListener {
 	// ------bottomBar-----
 	BottomButton scoreBtn, reboundBtn, assistBtn, blockBtn, stealBtn,
 			threeRateBtn, shootRateBtn, freeRateBtn;
-	String[] head = { "排名", "(头像)", "球员名称", "所属球队", "位置", "场均得分" };
+	String[] head = { "排名", "", "球员名称", "所属球队", "位置", "场均得分" };
 	ArrayList<PlayerVO> vlist;
 	PlayerBLService player;
 	BottomButton currentBtn;

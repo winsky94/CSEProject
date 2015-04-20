@@ -32,7 +32,7 @@ public class HotTodayPanel extends HotFatherPanel implements MouseListener {
 	 * 需要新的表格及TableModel jsp已经在HotFatherPanel里建好了，这里只要table和tableModel
 	 * 表头：排名（2，3，4，5），头像，球员名，所属球队，位置，比赛数据
 	 */
-	String[] head = { "排名", "(头像)", "球员名称", "所属球队", "位置", "得分" };
+	String[] head = { "排名", "", "球员名称", "所属球队", "位置", "得分" };
 	JTable table;
 	PlayerBLService player;
 	// ------bottomBar-----
