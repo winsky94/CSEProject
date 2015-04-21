@@ -211,9 +211,9 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener,
 						new PlayerDetailPanel(name));
 			}
 		}
-		if (e.getSource() == modeLbl)
+		else if (e.getSource() == modeLbl)
 			MainFrame.getInstance().setContentPanel(new PlayerIndexPanel());
-		if (e.getSource() == filterLbl) {
+		else if (e.getSource() == filterLbl) {
 			// 执行筛选
 			String season = seasonBox.getSelectedItem().toString();
 			String position = locationBox.getSelectedItem().toString();
@@ -227,26 +227,30 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener,
 			else
 				vlist = player.selectPlayersByAverage(position, union,
 						AgeEnum.ALL, sort, "desc", 50);
-			// vlist.size()==0显示没有符合条件的球员
+			// vlist.size()==0显示没有符合条件的球
+			if(ptm.headmodel!=0)
+				ptm.setHead(0);
 			if (vlist != null) {
-				ptm.refreshContent(vlist);
+				ptm.refreshBase(vlist);
 			}
 			table.revalidate();
 
 		}
-		if (e.getSource() ==fieldLbl) {
+		else if (e.getSource() ==fieldLbl) {
 			if(isHighInfo){
 				//监听，切换到基础数据表格
 				fieldLbl.setText("查看高阶数据");
 				isHighInfo=false;
+				ptm.setHead(0);
 			}
 			else{
 				//监听，切换到高阶数据表格
 				fieldLbl.setText("查看基础数据");
 				isHighInfo=true;
+				ptm.setHead(1);
 			}
 		}
-		if (e.getSource() == refreshLbl) {
+		else if (e.getSource() == refreshLbl) {
 			ptm.Refresh(typeBox.getSelectedItem().toString());
 			table.revalidate();
 		}
@@ -268,15 +272,15 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener,
 			refreshLbl.setForeground(Style.FOCUS_BLUE);
 			refreshLbl.setIcon(new ImageIcon("image/refreshFocus.png"));
 		}
-		if (e.getSource() == filterLbl) {
+		else if (e.getSource() == filterLbl) {
 			filterLbl.setForeground(Style.FOCUS_BLUE);
 			filterLbl.setIcon(new ImageIcon("image/player/filterFocus.png"));
 		}
-		if (e.getSource() == modeLbl) {
+		else if (e.getSource() == modeLbl) {
 			modeLbl.setForeground(Style.FOCUS_BLUE);
 			modeLbl.setIcon(new ImageIcon("image/player/headmodeBlue.png"));
 		}
-		if (e.getSource() ==fieldLbl) {
+		else if (e.getSource() ==fieldLbl) {
 			fieldLbl.setForeground(Style.FOCUS_BLUE);
 		}
 	}
@@ -286,15 +290,15 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener,
 			refreshLbl.setForeground(Color.white);
 			refreshLbl.setIcon(new ImageIcon("image/refreshWhite.png"));
 		}
-		if (e.getSource() == filterLbl) {
+		else if (e.getSource() == filterLbl) {
 			filterLbl.setForeground(Color.white);
 			filterLbl.setIcon(new ImageIcon("image/player/filterWhite.png"));
 		}
-		if (e.getSource() == modeLbl) {
+		else if (e.getSource() == modeLbl) {
 			modeLbl.setForeground(Color.white);
 			modeLbl.setIcon(new ImageIcon("image/player/headmode.png"));
 		}
-		if (e.getSource() ==fieldLbl) {
+		else if (e.getSource() ==fieldLbl) {
 			fieldLbl.setForeground(Color.white);
 		}
 	}
@@ -309,8 +313,13 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener,
 			else
 				vlist = player.getPlayerAverageInfo();
 			// vlist.size()==0显示没有符合条件的球员
-			if (vlist != null)
-				ptm.refreshContent(vlist);
+			if (vlist != null){
+				if(isHighInfo)
+					ptm.refreshHigh(vlist);
+				else
+					ptm.refreshBase(vlist);
+				
+			}
 			table.revalidate();
 			titleBar.setSeason(season);
 			titleBar.setAveOrAll(s);
