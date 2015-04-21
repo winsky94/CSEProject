@@ -122,6 +122,7 @@ public class PlayerTableModel extends MyTableModel{
 	//"效率","得分","投篮命中率","三分命中率","罚球命中率","两双"
 	public void refreshBase(ArrayList<PlayerVO> result){
 		content.clear();
+		System.out.println("PlayerTableModel.refreshBase()");
 		for(PlayerVO vo:result){
 			ArrayList<Object> line=new ArrayList<Object>();
 			line.add(vo.getName());
@@ -132,10 +133,10 @@ public class PlayerTableModel extends MyTableModel{
 			 line.add(vo.getPresentTime());
 			line.add(vo.getReboundNum());
 			line.add(vo.getAssistNum());
-			line.add(vo.getStealNum());
 			line.add(vo.getBlockNum());
-			line.add(vo.getTurnOverNum());
+			line.add(vo.getStealNum());
 			 line.add(vo.getFoulNum());
+			 line.add(vo.getTurnOverNum());
 		    line.add(vo.getEfficiency());
 		    line.add(vo.getScore());
 		    line.add(vo.getShootHitRate());
