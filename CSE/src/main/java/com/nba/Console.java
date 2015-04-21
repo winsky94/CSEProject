@@ -439,7 +439,7 @@ public class Console {
 		playerNormalInfo.setName(vo.getName());
 		playerNormalInfo.setNumOfGame(vo.getPlayedGames());
 		playerNormalInfo.setOffend(vo.getOffenReboundNum());
-		playerNormalInfo.setPenalty(vo.getShootHitRate());
+		playerNormalInfo.setPenalty(vo.getFreeThrowHitRate());
 		playerNormalInfo.setPoint(vo.getScore());
 		playerNormalInfo.setRebound(vo.getReboundNum());
 		playerNormalInfo.setShot(vo.getShootHitRate());
