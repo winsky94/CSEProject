@@ -1,6 +1,6 @@
 package newui;
 
-//用于给各个表格界面刷新 包括 player team match hot
+//用于给各个表格界面刷新 包括 player team match hot  是否需要
 public class UITableThread extends Thread{
 	private int model; //0 player,1 team 2 match,3 hot 决定使用什么方法刷新
 	private boolean stop;

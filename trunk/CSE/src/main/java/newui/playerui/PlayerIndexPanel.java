@@ -45,7 +45,7 @@ public class PlayerIndexPanel  extends FatherPanel implements MouseListener {
 	// --------------
 	JScrollPane jsp;
 	JTable table;
-	PlayerBaseInfoTableModel pitm = new PlayerBaseInfoTableModel();
+	PlayerBaseInfoTableModel pitm /*= new PlayerBaseInfoTableModel()*/;
 	// ---------------
 	Font font = new Font("微软雅黑", Font.PLAIN, 15);
 	// ---------------
@@ -94,19 +94,19 @@ public class PlayerIndexPanel  extends FatherPanel implements MouseListener {
 				"image/player/rankmode.png"));
 		funcPnl.add(modeLbl);
 		// ----jsp--------------
-		table = new JTable(pitm);
+		table = new JTable(/*pitm*/);
 		// table 渲染器，设置文字内容居中显示，设置背景色等
 		table.setSelectionBackground(new Color(225, 255, 255));// 设置选择行的颜色——淡蓝色
 		table.setFont(new Font("微软雅黑", 0, 12));
 		table.getTableHeader().setFont(new Font("微软雅黑", 0, 14));
 		table.getTableHeader().setBackground(new Color(211, 211, 211));
-		
+	/*	
 		DefaultTableCellRenderer tcr = new MyTableCellRenderer(
 				pitm.getImgList());
 		for (int i = 1; i < table.getColumnCount(); i++) {
 			table.getColumn(table.getColumnName(i)).setCellRenderer(tcr);
 		}
-		
+		*/
 		
 		titleBar.setCurrentTableModel(pitm);
 		titleBar.setModelEnum(TableModel.PLAYERBASEINFO);
@@ -120,9 +120,9 @@ public class PlayerIndexPanel  extends FatherPanel implements MouseListener {
 				20));
 		jsp.setCorner(JScrollPane.UPPER_RIGHT_CORNER, jb);
 		// 刷新
-		pitm.setCurrentTable(table);
+	//	pitm.setCurrentTable(table);
 		
-		pitm.Refresh();
+		//pitm.Refresh();
 		table.revalidate();
 		// 设置表头颜色
 		table.getTableHeader().setBackground(new Color(158, 158, 158));
@@ -209,7 +209,8 @@ public class PlayerIndexPanel  extends FatherPanel implements MouseListener {
 				int row=table.getSelectedRow();
 				String pname=table.getValueAt(row, 1).toString();
 				double pre=System.currentTimeMillis();
-				MainFrame.getInstance().setContentPanel(new PlayerDetailPanel(pname));
+				MainFrame.getInstance().setContentPanel(new PlayerDetailPanel(pname
+						));
 				double post=System.currentTimeMillis();
 				System.out.println("playerindexto详情:"+(post-pre));
 			}

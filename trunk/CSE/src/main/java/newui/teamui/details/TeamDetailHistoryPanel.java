@@ -6,6 +6,8 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -14,6 +16,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 
+import newui.mainui.MainFrame;
+import newui.playerui.PlayerDetailPanel;
 import newui.tables.MyTableCellRenderer;
 import newui.tables.TeamHistoryTableModel;
 
@@ -99,6 +103,16 @@ public class TeamDetailHistoryPanel extends JPanel {
 				jsp.repaint();
 			}
 
+		});
+		
+		table.addMouseListener(new MouseAdapter(){
+			public void mouseClicked(MouseEvent e){
+				if(e.getClickCount()==2){
+					int row=table.getSelectedRow();
+					String name=table.getValueAt(row, 0).toString();
+					MainFrame.getInstance().setContentPanel(new PlayerDetailPanel(name));
+				}
+			}
 		});
 	}
 

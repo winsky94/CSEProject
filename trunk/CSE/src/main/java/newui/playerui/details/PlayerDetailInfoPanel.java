@@ -37,12 +37,13 @@ public class PlayerDetailInfoPanel extends JPanel {
 	PlayerVO vo;
 	PlayerBLService pservice;
 
-	public PlayerDetailInfoPanel(PlayerVO vo) {
+	public PlayerDetailInfoPanel(PlayerVO vo,PlayerBLService p) {
 
 		this.vo=vo;
 
 		// -----------------
-		pservice = new Player();
+		//pservice = new Player();
+		pservice =p;
 		GridBagLayout gbl = new GridBagLayout();
 		GridBagConstraints gbc = new GridBagConstraints();
 		gbc.fill = GridBagConstraints.BOTH;
