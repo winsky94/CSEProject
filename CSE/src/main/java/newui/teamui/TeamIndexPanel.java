@@ -85,8 +85,9 @@ public class TeamIndexPanel extends FatherPanel implements MouseListener
 		refreshLbl.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		funcPnl.add(refreshLbl);
 		// -----table-----------
-		ttm = new TeamTableModel();
+		ttm = new TeamTableModel(0);
 		table = new MySortableTable(ttm, 1);
+
 		// table 渲染器，设置文字内容居中显示，设置背景色等
 		table.setSelectionBackground(new Color(225, 255, 255));// 设置选择行的颜色——淡蓝色
 		table.setFont(new Font("微软雅黑", 0, 12));
@@ -97,6 +98,7 @@ public class TeamIndexPanel extends FatherPanel implements MouseListener
 			table.getColumn(table.getColumnName(i)).setCellRenderer(tcr);
 		}
 		table.addMouseListener(this);
+		table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
 		titleBar.setCurrentTableModel(ttm);
 		titleBar.setModelEnum(TableModel.TEAMRANK);
 		titleBar.setTable(table);
@@ -159,15 +161,21 @@ public class TeamIndexPanel extends FatherPanel implements MouseListener
 			}
 		}
 		if (e.getSource() == fieldLbl) {
+			String type = typeBox.getSelectedItem().toString();
 			if (isHighInfo) {
 				// 监听,切换到基础数据表格
 				fieldLbl.setText("查看高阶数据");
 				isHighInfo = false;
+				ttm.setHead(0);
+				ttm.Refresh(type);
 			} else {
 				// 监听,切换到高阶数据表格
 				fieldLbl.setText("查看基础数据");
 				isHighInfo = true;
+				ttm.setHead(1);
+				ttm.Refresh(type);
 			}
+			table.repaint();
 		}
 
 	}
@@ -247,8 +255,13 @@ public class TeamIndexPanel extends FatherPanel implements MouseListener
 			else
 				vlist = team.getTeamAverageInfo();
 			// vlist.size()==0显示没有符合条件的球员
-			if (vlist != null)
-				ttm.refreshContent(vlist);
+			if (vlist != null) {
+				// ttm.refreshContent(vlist);
+				if (isHighInfo)
+					ttm.refreshHigh(vlist);
+				else
+					ttm.refreshBase(vlist);
+			}
 			table.revalidate();
 			titleBar.setSeason(season);
 			titleBar.setAveOrAll(s);
