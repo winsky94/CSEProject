@@ -2,10 +2,9 @@ package newui.tables;
 
 import java.util.ArrayList;
 
+import vo.TeamVO;
 import bl.team.Team;
 import blservice.TeamBLService;
-import vo.TeamVO;
-
 
 public class TeamTableModel extends MyTableModel {
 	/**
@@ -15,21 +14,22 @@ public class TeamTableModel extends MyTableModel {
 	private static final long serialVersionUID = 1L;
 	TeamBLService team = new Team();
 	ArrayList<ArrayList<Object>> content = new ArrayList<ArrayList<Object>>();
-	static String[] head = { "球队名称","简称", "比赛场数", "投篮命中数", "投篮出手次数", "投篮命中率",
+	static String[] head = { "球队名称", "简称", "比赛场数", "投篮命中数", "投篮出手次数", "投篮命中率",
 			"三分命中数", "三分出手数", "三分命中率", "罚球命中数", "罚球出手数", "罚球命中率", "进攻篮板数",
-			"防守篮板数", "篮板数", "进攻篮板效率","防守篮板效率", "进攻回合", "进攻效率", "防守效率", "助攻数", "助攻率",
-			"抢断数", "抢断效率", "盖帽数", "失误数", "犯规数", "比赛得分", "胜率" };
+			"防守篮板数", "篮板数", "进攻篮板效率", "防守篮板效率", "进攻回合", "进攻效率", "防守效率", "助攻数",
+			"助攻率", "抢断数", "抢断效率", "盖帽数", "失误数", "犯规数", "比赛得分", "胜率" };
 
 	String[] example = { "金大大", "10", "10", "10", "100%", "10", "10", "100%",
 			"0", "0", "100%", "1", "2", "3", "100%", "2", "100%", "100%", "1",
-			"100%","100%", "1", "100%", "1", "0", "0", "100", "100%" };
+			"100%", "100%", "1", "100%", "1", "0", "0", "100", "100%" };
 
 	public TeamTableModel() {
-//		ArrayList<Object> e = new ArrayList<Object>();
-//		for (Object str : example)
-//			e.add(str);
-//		content.add(e);
+		// ArrayList<Object> e = new ArrayList<Object>();
+		// for (Object str : example)
+		// e.add(str);
+		// content.add(e);
 	}
+
 	@Override
 	public Class getColumnClass(int c) {
 		return content.get(0).get(c).getClass();
@@ -62,12 +62,11 @@ public class TeamTableModel extends MyTableModel {
 		ArrayList<TeamVO> teamvo;
 		if (model.equals("赛季"))
 			teamvo = team.getTeamSeasonInfo("13-14");
-		else{
+		else {
 			teamvo = team.getTeamAverageInfo();
-			
+
 		}
-		if (teamvo != null && teamvo.size() != 0){
-			System.out.println("TeamTableModel.Refresh()"+teamvo.size());
+		if (teamvo != null && teamvo.size() != 0) {
 			refreshContent(teamvo);
 		}
 		/*
@@ -81,7 +80,7 @@ public class TeamTableModel extends MyTableModel {
 	}
 
 	public void refreshContent(ArrayList<TeamVO> result) {
-System.out.println("TeamTableModel.refreshContent()");
+		System.out.println("TeamTableModel.refreshContent()");
 		content.clear();
 		for (TeamVO vo : result) {
 			ArrayList<Object> line = new ArrayList<Object>();
@@ -117,12 +116,13 @@ System.out.println("TeamTableModel.refreshContent()");
 			content.add(line);
 		}
 	}
-	public void SearchRefresh(Object vv){
-		ArrayList<TeamVO> v=(ArrayList<TeamVO>)vv;
-		if(v!=null&&v.size()!=0){
-			
+
+	public void SearchRefresh(Object vv) {
+		ArrayList<TeamVO> v = (ArrayList<TeamVO>) vv;
+		if (v != null && v.size() != 0) {
+
 			refreshContent(v);
 		}
-		
+
 	}
 }
