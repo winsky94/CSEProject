@@ -4,9 +4,11 @@ import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.Graphics;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -16,6 +18,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import newui.Style;
 import newui.mainui.MainFrame;
 import newui.teamui.TeamDetailPanel;
 import newui.teamui.details.TeamDetailRecentPanel;
@@ -39,7 +42,6 @@ public class PlayerDetailInfoPanel extends JPanel {
 		this.vo=vo;
 
 		// -----------------
-		setBackground(Color.white);
 		pservice = new Player();
 		GridBagLayout gbl = new GridBagLayout();
 		GridBagConstraints gbc = new GridBagConstraints();
@@ -147,7 +149,12 @@ public class PlayerDetailInfoPanel extends JPanel {
 		double post=System.currentTimeMillis();
 		
 	}
-
+	protected void paintComponent(Graphics g) {
+		ImageIcon icon = new ImageIcon("image/detailBack.png");
+		Image img = icon.getImage();
+		g.drawImage(img, 0, 0, icon.getIconWidth(),
+				icon.getIconHeight(), icon.getImageObserver());
+	}
 	class MyLabel extends JLabel {
 
 		/**
@@ -157,7 +164,8 @@ public class PlayerDetailInfoPanel extends JPanel {
 
 		public MyLabel(String t) {
 			super(t);
-			setFont(new Font("微软雅黑", Font.PLAIN, 15));
+			setForeground(Style.FOCUS_GREY);
+			setFont(new Font("微软雅黑",Font.PLAIN,20));
 		}
 
 	}
