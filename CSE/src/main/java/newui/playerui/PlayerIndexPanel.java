@@ -19,6 +19,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 
+
 import newui.FatherPanel;
 import newui.Style;
 import newui.TableModel;
@@ -47,7 +48,7 @@ public class PlayerIndexPanel extends FatherPanel implements MouseListener {
 	// ---------------
 	ArrayList<MyCharacter> characterLblList = new ArrayList<MyCharacter>(26);
 	JComboBox<String> teamBox;
-
+	
 	public PlayerIndexPanel() {
 	
 		super();
@@ -66,9 +67,10 @@ public class PlayerIndexPanel extends FatherPanel implements MouseListener {
 		for (int i = 0; i < 26; i++) {
 			MyCharacter temp = new MyCharacter(i);
 			characterLblList.add(temp);
-		}
-		for (int i = 0; i < 26; i++)
 			funcPnl.add(characterLblList.get(i));
+		}
+	
+			
 		// ----按球队查看---------
 		funcPnl.add(new JLabel("       "));
 		teamBox = new JComboBox<String>(teams);
@@ -113,8 +115,10 @@ public class PlayerIndexPanel extends FatherPanel implements MouseListener {
 		jsp.setCorner(JScrollPane.UPPER_RIGHT_CORNER, jb);
 		// 刷新
 		pitm.setCurrentTable(table);
-		pitm.Refresh();
-		table.revalidate();
+		//ArrayList<PlayerVO> playerlist = player.getPlayerBaseInfo();
+		//pitm.Refresh(playerlist);
+	//	pitm.Refresh();
+	//	table.revalidate();
 		// 设置表头颜色
 		table.getTableHeader().setBackground(new Color(158, 158, 158));
 		table.addMouseListener(this);
@@ -140,6 +144,11 @@ public class PlayerIndexPanel extends FatherPanel implements MouseListener {
 		System.out.println("playerindexConstruc:"+(post-pre));
 	}
 	
+	
+	public void Refresh(){
+		pitm.Refresh();
+		table.revalidate();
+	}
 
 	class MyCharacter extends JLabel {
 
