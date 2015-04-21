@@ -1,6 +1,7 @@
 package newui.teamui.details;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.GridLayout;
@@ -35,7 +36,7 @@ public class TeamDetailRecentPanel extends JPanel{
 		setLayout(new BorderLayout());
 		JLabel titleLbl=new JLabel("最近比赛");
 		titleLbl.setFont(new Font("微软雅黑",Font.PLAIN,14));
-		titleLbl.setForeground(Style.HOT_RED);
+		titleLbl.setForeground(Color.white);
 		add(titleLbl,BorderLayout.NORTH);
 		pp=new Player();
 		matches=pp.getRecentMatches(pName,5);
@@ -60,7 +61,7 @@ public class TeamDetailRecentPanel extends JPanel{
 		setLayout(new BorderLayout());
 		JLabel titleLbl=new JLabel("最近比赛");
 		titleLbl.setFont(new Font("微软雅黑",Font.PLAIN,16));
-		titleLbl.setForeground(Style.HOT_RED);
+		titleLbl.setForeground(Color.white);
 		add(titleLbl,BorderLayout.NORTH);
 		team=new Team();
 		matches=team.getRecentMatches(abbrName);
