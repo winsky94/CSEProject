@@ -45,7 +45,7 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener,
 	// --------------
 	JScrollPane jsp;
 	JTable table;
-	PlayerTableModel ptm = new PlayerTableModel();
+	PlayerTableModel ptm = new PlayerTableModel(0);
 	// ---------------
 	JLabel refreshLbl, filterLbl, modeLbl, fieldLbl;
 	JComboBox<String> locationBox, partitionBox, filterRankBox, seasonBox,
@@ -131,20 +131,14 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener,
 		table = new MySortableTable(ptm, 0);
 		table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
 		// table 渲染器，设置文字内容居中显示，设置背景色等
-		table.setSelectionBackground(new Color(225, 255, 255));// 设置选择行的颜色——淡蓝色
-		table.setFont(new Font("微软雅黑", 0, 12));
-		table.getTableHeader().setFont(new Font("微软雅黑", 0, 14));
-		table.getTableHeader().setBackground(new Color(211, 211, 211));
-		DefaultTableCellRenderer tcr = new MyTableCellRenderer();
-		for (int i = 0; i < table.getColumnCount(); i++) {
-			table.getColumn(table.getColumnName(i)).setCellRenderer(tcr);
-		}
+	
 		titleBar.setCurrentTableModel(ptm);
 		titleBar.setModelEnum(TableModel.PLAYERRANK);
 		titleBar.setTable(table);
 		table.addMouseListener(this);
 		;
-		jsp = new JScrollPane(table);
+		jsp = new JScrollPane();
+		jsp.getViewport().add(table);
 		gbc.gridy = 2;
 		gbc.gridheight = 10;
 		gbc.weighty = 10;
@@ -152,10 +146,7 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener,
 		add(jsp);
 
 		ptm.Refresh(typeBox.getSelectedItem().toString());
-		MyTableCellRenderer.adjustTableColumnWidths(table);
-		table.revalidate();
-		// 设置表头颜色
-		table.getTableHeader().setBackground(new Color(158, 158, 158));
+		CellRender();
 
 		JLabel jb = new JLabel();
 		jb.setOpaque(true);
@@ -228,12 +219,19 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener,
 				vlist = player.selectPlayersByAverage(position, union,
 						AgeEnum.ALL, sort, "desc", 50);
 			// vlist.size()==0显示没有符合条件的球
-			if(ptm.headmodel!=0)
-				ptm.setHead(0);
+			if(ptm.headmodel!=0){
+				ptm=new PlayerTableModel(0);
+				jsp.remove(table);
+				table=new JTable(ptm);	
+				jsp.getViewport().add(table);
+				
+			}
 			if (vlist != null) {
 				ptm.refreshBase(vlist);
+				
 			}
 			table.revalidate();
+			CellRender();
 
 		}
 		else if (e.getSource() ==fieldLbl) {
@@ -243,7 +241,8 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener,
 				System.out.println("低阶");
 				fieldLbl.setText("查看高阶数据");
 				isHighInfo=false;
-				ptm.setHead(0);
+				ptm=new PlayerTableModel(0);
+				
 				ptm.Refresh(type);
 			}
 			else{
@@ -251,9 +250,17 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener,
 				System.out.println("高阶");
 				fieldLbl.setText("查看基础数据");
 				isHighInfo=true;
-				ptm.setHead(1);
+				ptm=new PlayerTableModel(1);
 				ptm.Refresh(type);
 			}
+			ptm.Refresh(typeBox.getSelectedItem().toString());
+			table.revalidate();;
+			jsp.remove(table);
+			table=new JTable(ptm);
+			
+			jsp.getViewport().add(table);
+			CellRender();
+			
 		}
 		else if (e.getSource() == refreshLbl) {
 			ptm.Refresh(typeBox.getSelectedItem().toString());
@@ -328,6 +335,22 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener,
 			table.revalidate();
 			titleBar.setSeason(season);
 			titleBar.setAveOrAll(s);
+		}
+	}
+	
+	
+	public void CellRender(){
+		table.setSelectionBackground(new Color(225, 255, 255));// 设置选择行的颜色——淡蓝色
+		table.setFont(new Font("微软雅黑", 0, 12));
+		table.getTableHeader().setFont(new Font("微软雅黑", 0, 14));
+		table.getTableHeader().setBackground(new Color(211, 211, 211));
+		DefaultTableCellRenderer tcr = new MyTableCellRenderer();
+		for (int i = 0; i < table.getColumnCount(); i++) {
+			table.getColumn(table.getColumnName(i)).setCellRenderer(tcr);
+			MyTableCellRenderer.adjustTableColumnWidths(table);
+			table.revalidate();
+			// 设置表头颜色
+			table.getTableHeader().setBackground(new Color(158, 158, 158));
 		}
 	}
 

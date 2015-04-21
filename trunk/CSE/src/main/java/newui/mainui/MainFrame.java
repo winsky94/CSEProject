@@ -30,9 +30,9 @@ public class MainFrame extends JFrame{
 	int screenHeight=UIhelper.getScreenHeight();
 	int width=screenWidth*90/100;
 	int height=screenHeight*95/100;
-	private FatherPanel lastPnl;
+	private static FatherPanel lastPnl;
 	JPanel topPnl;
-	JPanel contentPnl=new JPanel();
+	static JPanel contentPnl=new JPanel();
 
 	public static Stack<FatherPanel> stack;
 
@@ -105,7 +105,7 @@ public class MainFrame extends JFrame{
 
 	
 
-	public void setContentPanel(FatherPanel pnl){
+	public static  void setContentPanel(FatherPanel pnl){
 		if(pnl.isDetail){
 			stack.push(lastPnl);
 		}
@@ -116,10 +116,7 @@ public class MainFrame extends JFrame{
 		
 		contentPnl.add(pnl);
 
-		contentPnl.revalidate();
-		
-		
-		
+		contentPnl.revalidate();	
 		
 	}
 	
@@ -130,12 +127,11 @@ public class MainFrame extends JFrame{
 		
 		if(instance==null)
 			instance=new MainFrame();
-
 		return instance;
 	}
 	public static void main(String[] args) {
 		MainFrame.getInstance();
-		//MainFrame frame=new MainFrame();
+		
 	}
 	
 }
