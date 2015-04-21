@@ -1,18 +1,23 @@
 package newui.teamui.details;
 
-import java.awt.Color;
+import java.awt.BorderLayout;
+import java.awt.Font;
+import java.awt.Graphics;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.util.ArrayList;
 
-import javax.swing.JFrame;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import newui.Style;
+import newui.matchui.TinyCard;
+import vo.MatchVO;
 import bl.player.Player;
 import bl.team.Team;
 import blservice.PlayerBLService;
 import blservice.TeamBLService;
-import newui.matchui.TinyCard;
-import vo.MatchVO;
 
 
 public class TeamDetailRecentPanel extends JPanel{
@@ -25,15 +30,26 @@ public class TeamDetailRecentPanel extends JPanel{
 	String abbrName;
 	TeamBLService team;
 	ArrayList<MatchVO> matches=new ArrayList<MatchVO>();
+	JPanel cardPnl;
 	public TeamDetailRecentPanel(String pName,String tName){
+		setLayout(new BorderLayout());
+		JLabel titleLbl=new JLabel("最近比赛");
+		titleLbl.setFont(new Font("微软雅黑",Font.PLAIN,14));
+		titleLbl.setForeground(Style.HOT_RED);
+		add(titleLbl,BorderLayout.NORTH);
 		pp=new Player();
-		setBackground(Color.white);
 		matches=pp.getRecentMatches(pName,5);
 		//-------------------
-		setLayout(new GridLayout(1,matches.size()));
+		cardPnl=new JPanel();
+		cardPnl.setOpaque(false);
+		add(cardPnl,BorderLayout.CENTER);
+		cardPnl.setLayout(new GridLayout(1,5));
 		double pre=System.currentTimeMillis();
-		for(int i=0;i<matches.size();i++)
-			add(new TinyCard(matches.get(i),tName));
+			cardPnl.add(new TinyCard(matches.get(0),tName));
+			cardPnl.add(new TinyCard(matches.get(1),tName));
+			cardPnl.add(new TinyCard(matches.get(2),tName));
+			cardPnl.add(new TinyCard(matches.get(3),tName));
+			cardPnl.add(new TinyCard(matches.get(4),tName));
 		double post=System.currentTimeMillis();
 		System.out.println("FiveTinyCard:"+(post-pre));
 		
@@ -41,19 +57,28 @@ public class TeamDetailRecentPanel extends JPanel{
 	}
 	
 	public TeamDetailRecentPanel(String abbrName){
+		setLayout(new BorderLayout());
+		JLabel titleLbl=new JLabel("最近比赛");
+		titleLbl.setFont(new Font("微软雅黑",Font.PLAIN,16));
+		titleLbl.setForeground(Style.HOT_RED);
+		add(titleLbl,BorderLayout.NORTH);
 		team=new Team();
-		setBackground(Color.white);
 		matches=team.getRecentMatches(abbrName);
 		//-------------------
-		setLayout(new GridLayout(1,matches.size()));
-		for(int i=0;i<matches.size();i++)
-			add(new TinyCard(matches.get(i),abbrName));
+		cardPnl=new JPanel();
+		cardPnl.setOpaque(false);
+		add(cardPnl,BorderLayout.CENTER);
+		cardPnl.setLayout(new GridLayout(1,5));
+		cardPnl.add(new TinyCard(matches.get(0),abbrName));
+		cardPnl.add(new TinyCard(matches.get(1),abbrName));
+		cardPnl.add(new TinyCard(matches.get(2),abbrName));
+		cardPnl.add(new TinyCard(matches.get(3),abbrName));
+		cardPnl.add(new TinyCard(matches.get(4),abbrName));
 	}
-	public static void main(String[] args){
-		JFrame f=new JFrame();
-		f.setBounds(100, 100, 600, 200);
-		f.setVisible(true);
-		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		f.add(new TeamDetailRecentPanel(" "," "));
+	protected void paintComponent(Graphics g) {
+		ImageIcon icon = new ImageIcon("image/card.png");
+		Image img = icon.getImage();
+		g.drawImage(img, 0, 0, icon.getIconWidth(),
+				icon.getIconHeight(), icon.getImageObserver());
 	}
 }

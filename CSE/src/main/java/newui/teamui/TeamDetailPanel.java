@@ -9,6 +9,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -66,7 +67,7 @@ public class TeamDetailPanel extends FatherPanel{
 		playerJsp=new JScrollPane();
 		playerJsp.setOpaque(false);
 		playerJsp.getViewport().setOpaque(false);
-		playerJsp.setBorder(null);
+		playerJsp.setBorder(BorderFactory.createTitledBorder("队员"));
 		gbc.gridy=2;
 		gbc.gridheight=9;
 		gbc.weighty=90;
@@ -106,13 +107,6 @@ public class TeamDetailPanel extends FatherPanel{
 		tab.addTab("基本信息", infoPnl);
 		tab.addTab("过往数据",historyPnl);
 		tab.setBorder(null);
-	}
-	public static void main(String[] args) {
-		JFrame f=new JFrame();
-		f.add(new TeamDetailPanel("马刺"));
-		f.setBounds(100,100,1000,600);
-		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		f.setVisible(true);
 	}
 	class MyLabel extends JLabel{
 
