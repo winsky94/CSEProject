@@ -18,8 +18,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 
-import bl.team.Team;
-import blservice.TeamBLService;
 import newui.FatherPanel;
 import newui.Style;
 import newui.TableModel;
@@ -29,7 +27,8 @@ import newui.tables.MyTableCellRenderer;
 import newui.tables.RowHeaderTable;
 import newui.tables.TeamTableModel;
 import vo.TeamVO;
-
+import bl.team.Team;
+import blservice.TeamBLService;
 
 public class TeamIndexPanel extends FatherPanel implements MouseListener,
 		ItemListener {
@@ -43,10 +42,11 @@ public class TeamIndexPanel extends FatherPanel implements MouseListener,
 	JTable table;
 	TeamTableModel ttm;
 	//
-	JLabel refreshLbl,fieldLbl;
+	JLabel refreshLbl, fieldLbl;
 	JComboBox<String> seasonBox, typeBox;
 	Font font = new Font("微软雅黑", Font.PLAIN, 13);
-	boolean isHighInfo=false;
+	boolean isHighInfo = false;
+
 	public TeamIndexPanel() {
 		super();
 		// ------funcPnl--------
@@ -74,8 +74,8 @@ public class TeamIndexPanel extends FatherPanel implements MouseListener,
 		typeBox.addItemListener(this);
 		funcPnl.add(typeBox);
 		funcPnl.add(new JLabel("       "));
-		//------fieldLbl--------
-		fieldLbl=new MyJLabel("查看高阶数据");
+		// ------fieldLbl--------
+		fieldLbl = new MyJLabel("查看高阶数据");
 		fieldLbl.addMouseListener(this);
 		fieldLbl.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		funcPnl.add(fieldLbl);
@@ -88,9 +88,7 @@ public class TeamIndexPanel extends FatherPanel implements MouseListener,
 		ttm = new TeamTableModel();
 		table = new MySortableTable(ttm, 1);
 		// table 渲染器，设置文字内容居中显示，设置背景色等
-
 		table.setSelectionBackground(new Color(225, 255, 255));// 设置选择行的颜色——淡蓝色
-
 		table.setFont(new Font("微软雅黑", 0, 12));
 		table.getTableHeader().setFont(new Font("微软雅黑", 0, 14));
 		table.getTableHeader().setBackground(new Color(211, 211, 211));
@@ -116,11 +114,10 @@ public class TeamIndexPanel extends FatherPanel implements MouseListener,
 		MyTableCellRenderer.adjustTableColumnWidths(table);// 自动设置列宽
 		// 设置表头颜色
 		table.getTableHeader().setBackground(new Color(158, 158, 158));
-		
+
 		// 设置显示行号
 		jsp.setRowHeaderView(new RowHeaderTable(table, 20));
-		
-		
+
 		JLabel jb = new JLabel();
 		jb.setOpaque(true);
 		jb.setBackground(Color.black);
@@ -129,6 +126,20 @@ public class TeamIndexPanel extends FatherPanel implements MouseListener,
 		jsp.setCorner(JScrollPane.UPPER_RIGHT_CORNER, jb);
 		titleBar.setSeason(seasonBox.getSelectedItem().toString());
 		titleBar.setAveOrAll(typeBox.getSelectedItem().toString());
+
+		typeBox.addItemListener(new ItemListener() {
+
+			public void itemStateChanged(ItemEvent e) {
+				// TODO Auto-generated method stub
+				String type = typeBox.getSelectedItem().toString();
+				ttm.Refresh(type);
+				table.revalidate();
+				// table.repaint();
+
+			}
+
+		});
+
 	}
 
 	public void mouseClicked(MouseEvent e) {
@@ -138,24 +149,24 @@ public class TeamIndexPanel extends FatherPanel implements MouseListener,
 			ttm.Refresh(typeBox.getSelectedItem().toString());
 			table.revalidate();
 		}
-		
-		if(e.getSource()==table){
-			if(e.getClickCount()==2){
-				int row=table.getSelectedRow();
-				String tname=table.getValueAt(row, 1).toString();
-				MainFrame.getInstance().setContentPanel(new TeamDetailPanel(tname));
+
+		if (e.getSource() == table) {
+			if (e.getClickCount() == 2) {
+				int row = table.getSelectedRow();
+				String tname = table.getValueAt(row, 1).toString();
+				MainFrame.getInstance().setContentPanel(
+						new TeamDetailPanel(tname));
 			}
 		}
 		if (e.getSource() == fieldLbl) {
-			if(isHighInfo){
-				//监听,切换到基础数据表格
+			if (isHighInfo) {
+				// 监听,切换到基础数据表格
 				fieldLbl.setText("查看高阶数据");
-				isHighInfo=false;
-			}
-			else{
-				//监听,切换到高阶数据表格
+				isHighInfo = false;
+			} else {
+				// 监听,切换到高阶数据表格
 				fieldLbl.setText("查看基础数据");
-				isHighInfo=true;
+				isHighInfo = true;
 			}
 		}
 
