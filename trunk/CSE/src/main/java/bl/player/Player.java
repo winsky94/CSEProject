@@ -47,6 +47,15 @@ public class Player implements PlayerBLService {
 	boolean needUpdatePlayerSeason = false;
 	boolean needUpdatePlayerAverage = false;
 	boolean needUpdatePlayersToday = false;
+	
+	private static String[] player_CH = new String[] { "全部", "前锋", "中锋",
+		"后卫", "得分", "篮板", "助攻", "得分/篮板/助攻(1:1:1)", 
+		"投篮", "盖帽", "抢断", "罚球", "犯规", "失误",
+		"分钟", "效率", "两双", "西部球队", "东部球队" };
+    private static String[] player_EN = new String[] { "all", "F", "C",
+		"G", "score", "reboundNum", "assistNum", "score_rebound_assist", 
+		"shootHitRate", "blockNum", "stealNum", "freeThrowHitRate", "foulNum", "turnOverNum",
+		"presentTime", "efficiency", "doubleDoubleNum", "W", "E" };
 
 	public Player() {
 		baseInfoInit();
@@ -884,6 +893,9 @@ public class Player implements PlayerBLService {
 	private ArrayList<PlayerVO> selectPlayers(ArrayList<PlayerVO> thePlayers,
 			String position, String union, AgeEnum ageClass, String column,
 			String order, int num) {
+		position=changePlayerCHToEN(position);
+		union=changePlayerCHToEN(union);
+		column=changePlayerCHToEN(column);
 		ArrayList<PlayerVO> result = new ArrayList<PlayerVO>();
 		if (!position.equals("all")) {
 			for (int i = 0; i < thePlayers.size(); i++) {
@@ -1207,6 +1219,50 @@ public class Player implements PlayerBLService {
 		int second = Integer.parseInt(temp[1]);
 		return minute * 60 + second;
 	}
+	
+	/**
+	 * 将球员数据中文名转为相应的英文缩写
+	 * 
+	 * @param 球员中文名
+	 * @return 英文缩写
+	 */
+	public static String changePlayerCHToEN(String CH) {
+		int index = -1;
+		for (int i = 0; i < player_CH.length; i++) {
+			if (player_CH[i].equals(CH)) {
+				index = i;
+			}
+		}
+		if (index != -1) {
+			return player_EN[index];
+		} else {
+			return CH;
+		}
+	}
+
+	/**
+	 * 将球员数据中文名转为相应的英文缩写
+	 * 
+	 * @param EN
+	 *            球员数据英文名
+	 * @return 中文名
+	 */
+	public static String changePlayerENToCH(String EN) {
+		int index = -1;
+		for (int i = 0; i < player_CH.length; i++) {
+			if (player_EN[i].equals(EN)) {
+				index = i;
+			}
+		}
+		if (index != -1) {
+			return player_CH[index];
+		} else {
+			return EN;
+		}
+	}
+	
+	
+	
 
 	/**
 	 * 向match中增加比赛信息
@@ -1272,11 +1328,28 @@ public class Player implements PlayerBLService {
 	public static void main(String[] args) {
 		long start = System.currentTimeMillis();
 		Player player = new Player();
-		ArrayList<PlayerVO> players = player.getBestImprovedPlayer(
-				"recentFiveMatchesAssistUpRate", 5);
+		ArrayList<PlayerVO> players =player.selectPlayersBySeason("13-14", "C", "E",
+				AgeEnum.ALL, "score", "desc", 50);
 		for (int i = 0; i < 5; i++)
 			System.out.println(players.get(i).getName()
-					+ players.get(i).getRecentFiveMatchesAssistUpRate());
+					+ players.get(i).getScore());
+		System.out.println("___________________");
+		players =player.selectPlayersBySeason("13-14", "C", "W",
+				AgeEnum.ALL, "score", "desc", 50);
+		for (int i = 0; i < 5; i++)
+			System.out.println(players.get(i).getName()
+					+ players.get(i).getScore());
+		System.out.println("___________________");
+		players =player.selectPlayersBySeason("13-14", "C", "W",
+				AgeEnum.ALL, "reboundNum", "desc", 50);
+		for (int i = 0; i < 5; i++)
+			System.out.println(players.get(i).getName()
+					+ players.get(i).getReboundNum());
+//		ArrayList<PlayerVO> players = player.getBestImprovedPlayer(
+//				"recentFiveMatchesAssistUpRate", 5);
+//		for (int i = 0; i < 5; i++)
+//			System.out.println(players.get(i).getName()
+//					+ players.get(i).getRecentFiveMatchesAssistUpRate());
 		// ArrayList<PlayerVO> players=player.getPlayersByTeam("ATL");
 		// System.out.println(players.get(0).getName());
 		// ArrayList<PlayerVO> players = player.selectPlayersByAverage("C", "E",
