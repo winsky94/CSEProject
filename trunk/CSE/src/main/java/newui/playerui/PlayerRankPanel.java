@@ -256,7 +256,7 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener,
 				funcPnl.remove(filterRankBox);
 				filterRankBox = new MyComboBox(filterRankText2);
 				filterRankBox.setMaximumRowCount(13);
-				funcPnl.add(filterRankBox);aaaaaaaaaaaaa
+				funcPnl.add(filterRankBox);
 				funcPnl.repaint();
 				funcPnl.revalidate();
 			}
