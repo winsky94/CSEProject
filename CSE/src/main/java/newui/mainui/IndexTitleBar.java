@@ -121,7 +121,7 @@ public class IndexTitleBar extends JPanel implements MouseListener {
 		else if (e.getSource() == playerBtn){
 			double pre=System.currentTimeMillis();
 			PlayerIndexPanel p=new PlayerIndexPanel();
-			MainFrame.getInstance().setContentPanel(p);
+			MainFrame.setContentPanel(p);
 			//frame.setContentPanel(new PlayerIndexPanel());
 			double post=System.currentTimeMillis();
 			System.out.println("maintoplayerindex:"+(post-pre));

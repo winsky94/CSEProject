@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.MouseEvent;
@@ -20,6 +22,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 
 
+
 import newui.FatherPanel;
 import newui.Style;
 import newui.TableModel;
@@ -27,7 +30,7 @@ import newui.mainui.MainFrame;
 import newui.tables.MyTableCellRenderer;
 import newui.tables.PlayerBaseInfoTableModel;
 
-public class PlayerIndexPanel extends FatherPanel implements MouseListener {
+public class PlayerIndexPanel  extends FatherPanel implements MouseListener {
 	/**
 	 * 
 	 */
@@ -49,10 +52,13 @@ public class PlayerIndexPanel extends FatherPanel implements MouseListener {
 	ArrayList<MyCharacter> characterLblList = new ArrayList<MyCharacter>(26);
 	JComboBox<String> teamBox;
 	
+	
 	public PlayerIndexPanel() {
 	
 		super();
 		double pre=System.currentTimeMillis();
+	
+		
 		// ------funcPnl--------
 		funcPnl = new JPanel();
 		funcPnl.setBackground(Style.BACK_GREY);
@@ -115,10 +121,9 @@ public class PlayerIndexPanel extends FatherPanel implements MouseListener {
 		jsp.setCorner(JScrollPane.UPPER_RIGHT_CORNER, jb);
 		// 刷新
 		pitm.setCurrentTable(table);
-		//ArrayList<PlayerVO> playerlist = player.getPlayerBaseInfo();
-		//pitm.Refresh(playerlist);
-	//	pitm.Refresh();
-	//	table.revalidate();
+		
+		pitm.Refresh();
+		table.revalidate();
 		// 设置表头颜色
 		table.getTableHeader().setBackground(new Color(158, 158, 158));
 		table.addMouseListener(this);
