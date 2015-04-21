@@ -151,6 +151,7 @@ public class Player implements PlayerBLService {
 		String date = null;// 比赛日期
 		String teams = null;// 对阵队伍
 		String score = null;
+		ArrayList<String> detailScores = new ArrayList<String>();// 各节比分
 		ArrayList<RecordVO> records = new ArrayList<RecordVO>();// 球员比分数据记录
 
 		String tp[] = fileName.split("matches");
@@ -177,6 +178,10 @@ public class Player implements PlayerBLService {
 
 			temp = br.readLine();
 			String[] scoresData = temp.split(";");
+			for (int i = 0; i < scoresData.length; i++) {
+				detailScores.add(scoresData[i]);
+			}
+
 			int partNum = scoresData.length;
 
 			String team = null;// 球队
@@ -249,7 +254,7 @@ public class Player implements PlayerBLService {
 			int homeScore = Integer.parseInt(s[1]);
 
 			theMatch = new MatchVO(season, date, visitingTeam, homeTeam,
-					visitingScore, homeScore, partNum, records);
+					visitingScore, homeScore, partNum, detailScores, records);
 			allSeasonMatches.add(theMatch);
 
 			br.close();
@@ -300,7 +305,8 @@ public class Player implements PlayerBLService {
 
 	}
 
-	private void calculatePlayerSeason(PlayerVO playerSeason) throws NumberFormatException{
+	private void calculatePlayerSeason(PlayerVO playerSeason)
+			throws NumberFormatException {
 		int playedGames;
 
 		playedGames = playerSeason.getPlayedGames();
@@ -357,30 +363,29 @@ public class Player implements PlayerBLService {
 			double allfoulNum = playerSeason.getFoulNum();
 			double allturnOverNum = playerSeason.getTurnOverNum();
 			double allscore = playerSeason.getScore();
-            
+
 			DecimalFormat dec = new DecimalFormat("0.0000");
-			
+
 			shootHitRate = allshootHitNum / allshootAttemptNum;
-			shootHitRate=Double.parseDouble(dec.format(shootHitRate));
-			if(allthreeAttemptNum!=0){
-			  threeHitRate = allthreeHitNum / allthreeAttemptNum;
-			  threeHitRate=Double.parseDouble(dec.format(threeHitRate));
+			shootHitRate = Double.parseDouble(dec.format(shootHitRate));
+			if (allthreeAttemptNum != 0) {
+				threeHitRate = allthreeHitNum / allthreeAttemptNum;
+				threeHitRate = Double.parseDouble(dec.format(threeHitRate));
+			} else {
+				threeHitRate = 0;
 			}
-			else{
-				threeHitRate=0;
-			}
-			if(allfreeThrowAttemptNum!=0){
-			  freeThrowHitRate = allfreeThrowHitNum / allfreeThrowAttemptNum;
-			  freeThrowHitRate=Double.parseDouble(dec.format(freeThrowHitRate));
-			}
-			else{
-			  freeThrowHitRate=0;
+			if (allfreeThrowAttemptNum != 0) {
+				freeThrowHitRate = allfreeThrowHitNum / allfreeThrowAttemptNum;
+				freeThrowHitRate = Double.parseDouble(dec
+						.format(freeThrowHitRate));
+			} else {
+				freeThrowHitRate = 0;
 			}
 			efficiency = (allscore + allreboundNum + allassistNum + allstealNum + allblockNum)
 					- (allshootAttemptNum - allshootHitNum)
 					- (allfreeThrowAttemptNum - allfreeThrowHitNum)
 					- allturnOverNum;
-            efficiency=Double.parseDouble(dec.format(efficiency));
+			efficiency = Double.parseDouble(dec.format(efficiency));
 			ArrayList<Integer> matchIDs = playerSeason.getMatchesID();
 			Map<Integer, Boolean> isVisitingTeam = playerSeason
 					.getIsVisitingTeam();
@@ -405,34 +410,34 @@ public class Player implements PlayerBLService {
 				double beforeRecentReboundNum = allreboundNum
 						- recentReboundNum;
 				double beforeRecentAssistNum = allassistNum - recentAssistNum;
-			if(beforeRecentFiveScore!=0){
-				recentFiveMatchesScoreUpRate = ((recentFiveScore / 5) - beforeRecentFiveScore
-						/ (playedGames - 5))
-						/ (beforeRecentFiveScore / (playedGames - 5));
-				recentFiveMatchesScoreUpRate=Double.parseDouble(dec.format(recentFiveMatchesScoreUpRate));
+				if (beforeRecentFiveScore != 0) {
+					recentFiveMatchesScoreUpRate = ((recentFiveScore / 5) - beforeRecentFiveScore
+							/ (playedGames - 5))
+							/ (beforeRecentFiveScore / (playedGames - 5));
+					recentFiveMatchesScoreUpRate = Double.parseDouble(dec
+							.format(recentFiveMatchesScoreUpRate));
+				} else {
+					recentFiveMatchesScoreUpRate = 0;
+				}
+				if (beforeRecentReboundNum != 0) {
+					recentFiveMatchesReboundUpRate = ((recentReboundNum / 5) - beforeRecentReboundNum
+							/ (playedGames - 5))
+							/ (beforeRecentReboundNum / (playedGames - 5));
+					recentFiveMatchesReboundUpRate = Double.parseDouble(dec
+							.format(recentFiveMatchesReboundUpRate));
+				} else {
+					recentFiveMatchesReboundUpRate = 0;
+				}
+				if (beforeRecentAssistNum != 0) {
+					recentFiveMatchesAssistUpRate = ((recentAssistNum / 5) - beforeRecentAssistNum
+							/ (playedGames - 5))
+							/ (beforeRecentAssistNum / (playedGames - 5));
+					recentFiveMatchesAssistUpRate = Double.parseDouble(dec
+							.format(recentFiveMatchesAssistUpRate));
+				} else {
+					recentFiveMatchesAssistUpRate = 0;
+				}
 			}
-			else{
-				recentFiveMatchesScoreUpRate=0;
-			}
-			if(beforeRecentReboundNum!=0){
-				recentFiveMatchesReboundUpRate = ((recentReboundNum / 5) - beforeRecentReboundNum
-						/ (playedGames - 5))
-						/ (beforeRecentReboundNum / (playedGames - 5));
-				recentFiveMatchesReboundUpRate=Double.parseDouble(dec.format(recentFiveMatchesReboundUpRate));
-	         }
-	         else{
-	        	 recentFiveMatchesReboundUpRate=0;
-	         }
-	         if(beforeRecentAssistNum!=0){
-				recentFiveMatchesAssistUpRate = ((recentAssistNum / 5) - beforeRecentAssistNum
-						/ (playedGames - 5))
-						/ (beforeRecentAssistNum / (playedGames - 5));
-				recentFiveMatchesAssistUpRate=Double.parseDouble(dec.format(recentFiveMatchesAssistUpRate));
-	         }
-	         else{
-	        	 recentFiveMatchesAssistUpRate=0;
-	         }
-	         }
 
 			GmScEfficiencyValue = allscore + 0.4 * allshootHitNum - 0.7
 					* allshootAttemptNum - 0.4
@@ -440,18 +445,19 @@ public class Player implements PlayerBLService {
 					* alloffenReboundNum + 0.3 * alldefenReboundNum
 					+ allstealNum + 0.7 * allassistNum + 0.7 * allblockNum
 					- 0.4 * allfoulNum - allturnOverNum;
-			GmScEfficiencyValue=Double.parseDouble(dec.format(GmScEfficiencyValue));
+			GmScEfficiencyValue = Double.parseDouble(dec
+					.format(GmScEfficiencyValue));
 			trueHitRate = (double) allscore
 					/ (2 * (allshootAttemptNum + 0.44 * allfreeThrowAttemptNum));
-			trueHitRate=Double.parseDouble(dec.format(trueHitRate));
-		if(allshootAttemptNum!=0){
-			shootEfficiency = (double) (allshootHitNum + 0.5 * allthreeHitNum)
-					/ allshootAttemptNum;
-			shootEfficiency=Double.parseDouble(dec.format(shootEfficiency));
-		}
-		else{
-			shootEfficiency=0;
-		}
+			trueHitRate = Double.parseDouble(dec.format(trueHitRate));
+			if (allshootAttemptNum != 0) {
+				shootEfficiency = (double) (allshootHitNum + 0.5 * allthreeHitNum)
+						/ allshootAttemptNum;
+				shootEfficiency = Double.parseDouble(dec
+						.format(shootEfficiency));
+			} else {
+				shootEfficiency = 0;
+			}
 			for (Integer id : matchIDs) {
 				MatchVO match = matches.get(id);
 				allMatchTime += match.getMatchTime();
@@ -507,41 +513,42 @@ public class Player implements PlayerBLService {
 
 			reboundRate = allreboundNum * allMatchTime / allpresentTime
 					/ (teamReboundNum + dsReboundNum);
-			
-			reboundRate=Double.parseDouble(dec.format(reboundRate));
-			
+
+			reboundRate = Double.parseDouble(dec.format(reboundRate));
+
 			offenReboundRate = alloffenReboundNum * allMatchTime
 					/ allpresentTime
 					/ (teamOffenReboundNum + dsOffenReboundNum);
-			
-			offenReboundRate=Double.parseDouble(dec.format(offenReboundRate));
-			
+
+			offenReboundRate = Double.parseDouble(dec.format(offenReboundRate));
+
 			defenReboundRate = alldefenReboundNum * allMatchTime
 					/ allpresentTime
 					/ (teamDefenReboundNum + dsDefenReboundNum);
-			
-			defenReboundRate=Double.parseDouble(dec.format(defenReboundRate));
-			
+
+			defenReboundRate = Double.parseDouble(dec.format(defenReboundRate));
+
 			assistRate = allassistNum
 					/ (allpresentTime / allMatchTime * teamShootHitNum - allshootHitNum);
-			assistRate=Double.parseDouble(dec.format(assistRate));
+			assistRate = Double.parseDouble(dec.format(assistRate));
 			stealRate = (double) allassistNum * allMatchTime / allpresentTime
 					/ dsOffenRoundNum;
-			stealRate=Double.parseDouble(dec.format(stealRate));
+			stealRate = Double.parseDouble(dec.format(stealRate));
 			blockRate = allblockNum * allMatchTime / allpresentTime
 					/ dsTwoAttemptNum;
-			blockRate=Double.parseDouble(dec.format(blockRate));
+			blockRate = Double.parseDouble(dec.format(blockRate));
 			turnOverRate = allturnOverNum
 					/ (allshootAttemptNum - allthreeAttemptNum + 0.4
 							* allfreeThrowAttemptNum + allturnOverNum);
-			turnOverRate=Double.parseDouble(dec.format(turnOverRate));
+			turnOverRate = Double.parseDouble(dec.format(turnOverRate));
 			usageRate = (allshootAttemptNum + 0.44 * allfreeThrowAttemptNum + allturnOverNum)
 					* allMatchTime
 					/ allpresentTime
 					/ (teamShootAttemptNum + 0.44 * teamFreeThrowAttemptNum + teamTurnOverNum);
-			usageRate=Double.parseDouble(dec.format(usageRate));
+			usageRate = Double.parseDouble(dec.format(usageRate));
 			score_rebound_assist = (allscore + allreboundNum + allassistNum) / 3;
-            score_rebound_assist=Double.parseDouble(dec.format(score_rebound_assist));
+			score_rebound_assist = Double.parseDouble(dec
+					.format(score_rebound_assist));
 			playerSeason.setShootHitRate(shootHitRate);
 			playerSeason.setThreeHitRate(threeHitRate);
 			playerSeason.setFreeThrowHitRate(freeThrowHitRate);
@@ -743,58 +750,80 @@ public class Player implements PlayerBLService {
 			PlayerVO playerSeason = (PlayerVO) entry.getValue();
 			int playedGames = playerSeason.getPlayedGames();
 			PlayerVO newPlayer;
-			if(playedGames!=0){
-				DecimalFormat dec = new DecimalFormat("0.0000");	
-                    newPlayer=new PlayerVO(playerSeason.getName(), playerSeason.getNumber(),
-					playerSeason.getPosition(), playerSeason.getHeight(), playerSeason.getWeight(), 
-					playerSeason.getBirth(), playerSeason.getAge(), playerSeason.getExp(), 
-					playerSeason.getSchool(), playerSeason.getOwingTeam(),playerSeason.getLeague(),
-					playedGames, playerSeason.getGameStartingNum(),
-					Double.parseDouble(dec.format(playerSeason.getReboundNum() / playedGames)),
-					Double.parseDouble(dec.format(playerSeason.getAssistNum() / playedGames)),
-					Double.parseDouble(dec.format(playerSeason.getPresentTime() / playedGames)),
-					Double.parseDouble(dec.format(playerSeason.getShootHitNum() / playedGames)),
-					Double.parseDouble(dec.format(playerSeason.getShootAttemptNum() / playedGames)),
-					playerSeason.getShootHitRate(),
-					Double.parseDouble(dec.format(playerSeason.getThreeHitNum() / playedGames)),
-					Double.parseDouble(dec.format(playerSeason.getThreeAttemptNum() / playedGames)),
-					playerSeason.getThreeHitRate(),
-					Double.parseDouble(dec.format(playerSeason.getFreeThrowHitNum() / playedGames)),
-					Double.parseDouble(dec.format(playerSeason.getFreeThrowAttemptNum() / playedGames)),
-					playerSeason.getFreeThrowHitRate(),
-					Double.parseDouble(dec.format(playerSeason.getOffenReboundNum() / playedGames)),
-					Double.parseDouble(dec.format(playerSeason.getDefenReboundNum() / playedGames)),
-					Double.parseDouble(dec.format(playerSeason.getStealNum() / playedGames)),
-					Double.parseDouble(dec.format(playerSeason.getBlockNum() / playedGames)),
-					Double.parseDouble(dec.format(playerSeason.getTurnOverNum() / playedGames)),
-					Double.parseDouble(dec.format(playerSeason.getFoulNum() / playedGames)),
-					Double.parseDouble(dec.format(playerSeason.getScore() / playedGames)),
-					playerSeason.getEfficiency(),
-					playerSeason.getRecentFiveMatchesScoreUpRate(),
-					playerSeason.getRecentFiveMatchesReboundUpRate(),
-					playerSeason.getRecentFiveMatchesAssistUpRate(),
-					playerSeason.getGmScEfficiencyValue(),
-					playerSeason.getTrueHitRate(),
-					playerSeason.getShootHitEfficiency(),
-					playerSeason.getReboundRate(),
-					playerSeason.getOffenReboundRate(),
-					playerSeason.getDefenReboundRate(),
-					playerSeason.getAssistRate(), playerSeason.getStealRate(),
-					playerSeason.getBlockRate(),
-					playerSeason.getTurnOverRate(),
-					playerSeason.getUsageRate(),
-					Double.parseDouble(dec.format(playerSeason.getScore_rebound_assist() / playedGames)),
-					Double.parseDouble(dec.format(playerSeason.getDoubleDoubleNum() / playedGames)));
+			if (playedGames != 0) {
+				DecimalFormat dec = new DecimalFormat("0.0000");
+				newPlayer = new PlayerVO(playerSeason.getName(),
+						playerSeason.getNumber(), playerSeason.getPosition(),
+						playerSeason.getHeight(), playerSeason.getWeight(),
+						playerSeason.getBirth(), playerSeason.getAge(),
+						playerSeason.getExp(), playerSeason.getSchool(),
+						playerSeason.getOwingTeam(), playerSeason.getLeague(),
+						playedGames, playerSeason.getGameStartingNum(),
+						Double.parseDouble(dec.format(playerSeason
+								.getReboundNum() / playedGames)),
+						Double.parseDouble(dec.format(playerSeason
+								.getAssistNum() / playedGames)),
+						Double.parseDouble(dec.format(playerSeason
+								.getPresentTime() / playedGames)),
+						Double.parseDouble(dec.format(playerSeason
+								.getShootHitNum() / playedGames)),
+						Double.parseDouble(dec.format(playerSeason
+								.getShootAttemptNum() / playedGames)),
+						playerSeason.getShootHitRate(), Double.parseDouble(dec
+								.format(playerSeason.getThreeHitNum()
+										/ playedGames)), Double.parseDouble(dec
+								.format(playerSeason.getThreeAttemptNum()
+										/ playedGames)),
+						playerSeason.getThreeHitRate(), Double.parseDouble(dec
+								.format(playerSeason.getFreeThrowHitNum()
+										/ playedGames)), Double.parseDouble(dec
+								.format(playerSeason.getFreeThrowAttemptNum()
+										/ playedGames)),
+						playerSeason.getFreeThrowHitRate(),
+						Double.parseDouble(dec.format(playerSeason
+								.getOffenReboundNum() / playedGames)),
+						Double.parseDouble(dec.format(playerSeason
+								.getDefenReboundNum() / playedGames)),
+						Double.parseDouble(dec.format(playerSeason
+								.getStealNum() / playedGames)),
+						Double.parseDouble(dec.format(playerSeason
+								.getBlockNum() / playedGames)),
+						Double.parseDouble(dec.format(playerSeason
+								.getTurnOverNum() / playedGames)),
+						Double.parseDouble(dec.format(playerSeason.getFoulNum()
+								/ playedGames)),
+						Double.parseDouble(dec.format(playerSeason.getScore()
+								/ playedGames)), playerSeason.getEfficiency(),
+						playerSeason.getRecentFiveMatchesScoreUpRate(),
+						playerSeason.getRecentFiveMatchesReboundUpRate(),
+						playerSeason.getRecentFiveMatchesAssistUpRate(),
+						playerSeason.getGmScEfficiencyValue(),
+						playerSeason.getTrueHitRate(),
+						playerSeason.getShootHitEfficiency(),
+						playerSeason.getReboundRate(),
+						playerSeason.getOffenReboundRate(),
+						playerSeason.getDefenReboundRate(),
+						playerSeason.getAssistRate(),
+						playerSeason.getStealRate(),
+						playerSeason.getBlockRate(),
+						playerSeason.getTurnOverRate(),
+						playerSeason.getUsageRate(), Double.parseDouble(dec
+								.format(playerSeason.getScore_rebound_assist()
+										/ playedGames)), Double.parseDouble(dec
+								.format(playerSeason.getDoubleDoubleNum()
+										/ playedGames)));
+			} else {
+				newPlayer = new PlayerVO(playerSeason.getName(),
+						playerSeason.getNumber(), playerSeason.getPosition(),
+						playerSeason.getHeight(), playerSeason.getWeight(),
+						playerSeason.getBirth(), playerSeason.getAge(),
+						playerSeason.getExp(), playerSeason.getSchool(),
+						playerSeason.getOwingTeam(), playerSeason.getLeague(),
+						playedGames, playerSeason.getGameStartingNum(), 0, 0,
+						0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+						0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
 			}
-			else{
-                    newPlayer=new PlayerVO(playerSeason.getName(), playerSeason.getNumber(),
-						playerSeason.getPosition(), playerSeason.getHeight(), playerSeason.getWeight(), 
-						playerSeason.getBirth(), playerSeason.getAge(), playerSeason.getExp(), 
-						playerSeason.getSchool(), playerSeason.getOwingTeam(),playerSeason.getLeague(),
-						playedGames, playerSeason.getGameStartingNum(),0, 0,0, 0,0, 0,0, 0,0, 0,0, 0,
-						0, 0,0, 0,0, 0,0, 0,0, 0,0, 0,0, 0,0, 0,0, 0, 0,0, 0, 0,0, 0);
-			}
-            
+
 			playersAverage.add(newPlayer);
 		}
 
@@ -823,7 +852,7 @@ public class Player implements PlayerBLService {
 	}
 
 	public ArrayList<PlayerVO> getOrderedPlayersBySeason(String season,
-			String condition, String order, int num){
+			String condition, String order, int num) {
 		ArrayList<PlayerVO> result = new ArrayList<PlayerVO>();
 		ArrayList<PlayerVO> allPlayers = getPlayerSeasonInfo(season);
 		Collections.sort(allPlayers, new SequenceOfPlayer(condition, order));
@@ -943,7 +972,7 @@ public class Player implements PlayerBLService {
 		}
 		String todaySeason = result;
 		result = todaySeason + "_" + todayDate;
-		//return result;
+		// return result;
 		return "13-14_01-01";
 	}
 
@@ -988,7 +1017,7 @@ public class Player implements PlayerBLService {
 				team = record.getTeam();
 				playerName = record.getPlayerName();
 				PlayerVO thisPlayer = players.get(playerName);
-				if(thisPlayer==null)
+				if (thisPlayer == null)
 					continue;
 				presentTime = convertMinuteToSecond(record.getPresentTime());
 				shootHitNum = record.getShootHitNum();// 投篮命中数
@@ -1006,7 +1035,7 @@ public class Player implements PlayerBLService {
 				turnOverNum = record.getTurnOverNum();// 失误数
 				foulNum = record.getFoulNum();// 犯规数
 				personScore = record.getScore();// 个人得分
-				
+
 				PlayerVO player = new PlayerVO(thisPlayer.getName(),
 						thisPlayer.getNumber(), thisPlayer.getPosition(),
 						thisPlayer.getHeight(), thisPlayer.getWeight(),
@@ -1054,11 +1083,11 @@ public class Player implements PlayerBLService {
 	public ArrayList<PlayerVO> getDayHotPlayer(String column, int num) {
 		ArrayList<PlayerVO> result = new ArrayList<PlayerVO>();
 
-		if (isCalculatePlayersToday == false||needUpdatePlayersToday==true) {
+		if (isCalculatePlayersToday == false || needUpdatePlayersToday == true) {
 			playersToday.clear();
 			calCulateDayData();
 			isCalculatePlayersToday = true;
-			needUpdatePlayersToday=false;
+			needUpdatePlayersToday = false;
 		}
 
 		Collections.sort(playersToday, new SequenceOfPlayer(column, "desc"));
@@ -1153,7 +1182,7 @@ public class Player implements PlayerBLService {
 		for (PlayerVO vo : thePlayers) {
 			if (vo.getOwingTeam().equals(teamAbLocation))
 				result.add(vo);
-			
+
 		}
 		return result;
 	}
@@ -1196,7 +1225,7 @@ public class Player implements PlayerBLService {
 					calculatePlayerSeason(thisPlayer);
 					needUpdatePlayerSeason = true;
 					needUpdatePlayerAverage = true;
-				  needUpdatePlayersToday=true;
+					needUpdatePlayersToday = true;
 				}
 			}
 		}
@@ -1243,56 +1272,61 @@ public class Player implements PlayerBLService {
 	public static void main(String[] args) {
 		long start = System.currentTimeMillis();
 		Player player = new Player();
-		ArrayList<PlayerVO> players=player.getBestImprovedPlayer("recentFiveMatchesAssistUpRate", 5);
-		for(int i=0;i<5;i++)
-		  System.out.println(players.get(i).getName()+players.get(i).getRecentFiveMatchesAssistUpRate());
-//		ArrayList<PlayerVO> players=player.getPlayersByTeam("ATL");
-//		System.out.println(players.get(0).getName());
-//		ArrayList<PlayerVO> players = player.selectPlayersByAverage("C", "E", AgeEnum.M22_LE25, "reboundNum", "desc", 5);
-//		players = player.selectPlayersByAverage("C", "E", AgeEnum.M22_LE25, "reboundNum", "desc", 5);
-//		ArrayList<PlayerVO> players = player.getOrderedPlayersByAverage("score", "desc", 5);
-//		System.out.println(players.get(0).getName()+" "+players.get(0).getScore());
-//		ArrayList<PlayerVO> players=player.getPlayersByTeam("ATL");
-//		 System.out.println(players.get(0).getName());
-//		PlayerVO vo = player.getPlayerAverageInfo("Al Horford");
-//		 ArrayList<PlayerVO> players=player.getPlayerAverageInfo();
-//		 System.out.println(players.get(405).getName()+" "+players.get(405).getPlayedGames()+" "+players.get(405).getEfficiency());
-//		 PlayerVO vo=players.get(0);
-//		 System.out.println(vo.getName());
-//		 System.out.println(vo.getOwingTeam());
-//		 System.out.println(vo.getLeague());
-//		 System.out.println(vo.getPlayedGames());
-//		 System.out.println(vo.getGameStartingNum());
-//		 System.out.println(vo.getReboundNum());
-//		 System.out.println(vo.getAssistNum());
-//		 System.out.println(vo.getPresentTime());
-//		 System.out.println(vo.getShootHitRate());
-//		 System.out.println(vo.getThreeHitRate());
-//		 System.out.println(vo.getFreeThrowHitRate());
-//		 System.out.println(vo.getOffenReboundNum());
-//		 System.out.println(vo.getDefenReboundNum());
-//		 System.out.println(vo.getStealNum());
-//		 System.out.println(vo.getBlockNum());
-//		 System.out.println(vo.getFoulNum());
-//		 System.out.println(vo.getTurnOverNum());
-//		 System.out.println(vo.getScore());
-//		 System.out.println(vo.getEfficiency());
-//		 System.out.println(vo.getRecentFiveMatchesScoreUpRate());
-//		 System.out.println(vo.getRecentFiveMatchesReboundUpRate());
-//		 System.out.println(vo.getRecentFiveMatchesAssistUpRate());
-//		 System.out.println(vo.getGmScEfficiencyValue());
-//		 System.out.println(vo.getTrueHitRate());
-//		 System.out.println(vo.getShootHitEfficiency());
-//		 System.out.println(vo.getReboundRate());
-//		 System.out.println(vo.getOffenReboundRate());
-//		 System.out.println(vo.getDefenReboundRate());
-//		 System.out.println(vo.getAssistRate());
-//		 System.out.println(vo.getStealRate());
-//		 System.out.println(vo.getBlockRate());
-//		 System.out.println(vo.getTurnOverRate());
-//		 System.out.println(vo.getUsageRate());
-//		 System.out.println(vo.getScore_rebound_assist());
-//		 System.out.println(vo.getDoubleDoubleNum());
+		ArrayList<PlayerVO> players = player.getBestImprovedPlayer(
+				"recentFiveMatchesAssistUpRate", 5);
+		for (int i = 0; i < 5; i++)
+			System.out.println(players.get(i).getName()
+					+ players.get(i).getRecentFiveMatchesAssistUpRate());
+		// ArrayList<PlayerVO> players=player.getPlayersByTeam("ATL");
+		// System.out.println(players.get(0).getName());
+		// ArrayList<PlayerVO> players = player.selectPlayersByAverage("C", "E",
+		// AgeEnum.M22_LE25, "reboundNum", "desc", 5);
+		// players = player.selectPlayersByAverage("C", "E", AgeEnum.M22_LE25,
+		// "reboundNum", "desc", 5);
+		// ArrayList<PlayerVO> players =
+		// player.getOrderedPlayersByAverage("score", "desc", 5);
+		// System.out.println(players.get(0).getName()+" "+players.get(0).getScore());
+		// ArrayList<PlayerVO> players=player.getPlayersByTeam("ATL");
+		// System.out.println(players.get(0).getName());
+		// PlayerVO vo = player.getPlayerAverageInfo("Al Horford");
+		// ArrayList<PlayerVO> players=player.getPlayerAverageInfo();
+		// System.out.println(players.get(405).getName()+" "+players.get(405).getPlayedGames()+" "+players.get(405).getEfficiency());
+		// PlayerVO vo=players.get(0);
+		// System.out.println(vo.getName());
+		// System.out.println(vo.getOwingTeam());
+		// System.out.println(vo.getLeague());
+		// System.out.println(vo.getPlayedGames());
+		// System.out.println(vo.getGameStartingNum());
+		// System.out.println(vo.getReboundNum());
+		// System.out.println(vo.getAssistNum());
+		// System.out.println(vo.getPresentTime());
+		// System.out.println(vo.getShootHitRate());
+		// System.out.println(vo.getThreeHitRate());
+		// System.out.println(vo.getFreeThrowHitRate());
+		// System.out.println(vo.getOffenReboundNum());
+		// System.out.println(vo.getDefenReboundNum());
+		// System.out.println(vo.getStealNum());
+		// System.out.println(vo.getBlockNum());
+		// System.out.println(vo.getFoulNum());
+		// System.out.println(vo.getTurnOverNum());
+		// System.out.println(vo.getScore());
+		// System.out.println(vo.getEfficiency());
+		// System.out.println(vo.getRecentFiveMatchesScoreUpRate());
+		// System.out.println(vo.getRecentFiveMatchesReboundUpRate());
+		// System.out.println(vo.getRecentFiveMatchesAssistUpRate());
+		// System.out.println(vo.getGmScEfficiencyValue());
+		// System.out.println(vo.getTrueHitRate());
+		// System.out.println(vo.getShootHitEfficiency());
+		// System.out.println(vo.getReboundRate());
+		// System.out.println(vo.getOffenReboundRate());
+		// System.out.println(vo.getDefenReboundRate());
+		// System.out.println(vo.getAssistRate());
+		// System.out.println(vo.getStealRate());
+		// System.out.println(vo.getBlockRate());
+		// System.out.println(vo.getTurnOverRate());
+		// System.out.println(vo.getUsageRate());
+		// System.out.println(vo.getScore_rebound_assist());
+		// System.out.println(vo.getDoubleDoubleNum());
 
 		long end = System.currentTimeMillis();
 		System.out.println("运行时间：" + (end - start) + "毫秒");// 应该是end - start
