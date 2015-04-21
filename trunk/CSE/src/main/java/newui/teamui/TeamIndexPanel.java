@@ -30,8 +30,8 @@ import vo.TeamVO;
 import bl.team.Team;
 import blservice.TeamBLService;
 
-public class TeamIndexPanel extends FatherPanel implements MouseListener,
-		ItemListener {
+public class TeamIndexPanel extends FatherPanel implements MouseListener
+		 {
 	/**
 	 * 
 	 */
@@ -63,7 +63,7 @@ public class TeamIndexPanel extends FatherPanel implements MouseListener,
 		// 暂时没有bl方法
 		String[] seasonBoxText = { "13-14" };
 		seasonBox = new MyComboBox(seasonBoxText);
-		seasonBox.addItemListener(this);
+		//seasonBox.addItemListener(this);
 		funcPnl.add(seasonBox);
 		funcPnl.add(new JLabel("       "));
 		// ----DataType---------
@@ -71,7 +71,7 @@ public class TeamIndexPanel extends FatherPanel implements MouseListener,
 		funcPnl.add(typeLbl);
 		String[] typeText = { "赛季", "场均" };
 		typeBox = new MyComboBox(typeText);
-		typeBox.addItemListener(this);
+		//typeBox.addItemListener(this);
 		funcPnl.add(typeBox);
 		funcPnl.add(new JLabel("       "));
 		// ------fieldLbl--------
@@ -235,7 +235,7 @@ public class TeamIndexPanel extends FatherPanel implements MouseListener,
 		}
 	}
 
-	public void itemStateChanged(ItemEvent e) {
+	/*public void itemStateChanged(ItemEvent e) {
 		// TODO 自动生成的方法存根
 		if (e.getStateChange() == ItemEvent.SELECTED) {
 			String season = seasonBox.getSelectedItem().toString();
@@ -253,5 +253,5 @@ public class TeamIndexPanel extends FatherPanel implements MouseListener,
 			titleBar.setSeason(season);
 			titleBar.setAveOrAll(s);
 		}
-	}
+	}*/
 }
