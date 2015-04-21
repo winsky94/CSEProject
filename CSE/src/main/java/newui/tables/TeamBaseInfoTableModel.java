@@ -18,7 +18,7 @@ public class TeamBaseInfoTableModel extends MyTableModel{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	static String[] head ={"(logo)","球队","缩写","联盟","分区","主场","成立时间"};
+	static String[] head ={"","球队","缩写","联盟","分区","主场","成立时间"};
 	ArrayList<ArrayList<Object>> content = new ArrayList<ArrayList<Object>>();
 	private TeamBLService team;
 	private JTable currentTable;
@@ -62,9 +62,10 @@ public class TeamBaseInfoTableModel extends MyTableModel{
 		teamIcon.clear();
 		for(TeamVO vo:v){
 			ArrayList<Object> line=new ArrayList<Object>();
-			String name=vo.getAbLocation();
+			String name=vo.getTeamName();
+			String abLocation=vo.getAbLocation();
 			//ImageIcon img=team.getTeamImage(name);
-			ImageIcon img=new ImageIcon("image/player/portrait/"+name+".png");
+			ImageIcon img=new ImageIcon("image/teamIcon/teamsPng90/"+abLocation+".png");
 			img.setImage(img.getImage().getScaledInstance(
 					currentTable.getColumn(currentTable.getColumnName(0))
 							.getWidth(), 40
@@ -72,7 +73,7 @@ public class TeamBaseInfoTableModel extends MyTableModel{
 			teamIcon.add(img);
 			line.add(img);
 			line.add(name);
-			line.add(vo.getAbLocation());
+			line.add(abLocation);
 			line.add(vo.getConference());
 			line.add(vo.getPartition());
 			line.add(vo.getHomeCourt());

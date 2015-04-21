@@ -2,6 +2,7 @@ package newui.tables;
 
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Font;
 import java.awt.Image;
 import java.util.ArrayList;
 
@@ -59,6 +60,7 @@ public class MyTableCellRenderer extends DefaultTableCellRenderer {
 	@Override
 	public Component getTableCellRendererComponent(JTable table, Object value,
 			boolean isSelected, boolean hasFocus, int row, int column) {
+		table.setFont(new Font("微软雅黑", 0, 14));
 		setHorizontalAlignment(SwingConstants.CENTER);
 		if (table.getModel().toString().contains("PlayerBaseInfoTableModel")) {
 			// 设置列宽自己设置
@@ -92,7 +94,8 @@ public class MyTableCellRenderer extends DefaultTableCellRenderer {
 			table.getColumn(columnName1).setPreferredWidth(200);
 		}
 
-		if (table.getModel().toString().contains("TeamHistoryTableModel")||table.getModel().toString().contains("MatchDetailModel")) {
+		if (table.getModel().toString().contains("TeamHistoryTableModel")
+				|| table.getModel().toString().contains("MatchDetailModel")) {
 			String columnName1 = table.getColumnName(0);
 			table.getColumn(columnName1).setPreferredWidth(200);
 		}
@@ -129,6 +132,14 @@ public class MyTableCellRenderer extends DefaultTableCellRenderer {
 			table.getColumn(columnName2).setMaxWidth(100);
 
 			table.setRowHeight(row, 80);
+		}
+
+		if (table.getModel().toString().contains("TeamBaseInfoTableModel")) {
+			table.setRowHeight(row, 80);
+			String columnName1 = table.getColumnName(0);
+			table.getColumn(columnName1).setPreferredWidth(80);
+			table.getColumn(columnName1).setMinWidth(80);
+			table.getColumn(columnName1).setMaxWidth(80);
 		}
 
 		return super.getTableCellRendererComponent(table, value, isSelected,
