@@ -245,7 +245,7 @@ public class TeamIndexPanel extends FatherPanel implements MouseListener,
 			if (s.equals("赛季"))
 				vlist = team.getTeamSeasonInfo(season);
 			else
-				vlist = team.getTeamAverageInfo(season);
+				vlist = team.getTeamAverageInfo();
 			// vlist.size()==0显示没有符合条件的球员
 			if (vlist != null)
 				ttm.refreshContent(vlist);
