@@ -16,6 +16,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
+import javax.swing.border.TitledBorder;
 
 import vo.PlayerVO;
 import bl.player.Player;
@@ -67,7 +68,7 @@ public class TeamDetailPanel extends FatherPanel{
 		playerJsp=new JScrollPane();
 		playerJsp.setOpaque(false);
 		playerJsp.getViewport().setOpaque(false);
-		playerJsp.setBorder(BorderFactory.createTitledBorder("队员"));
+		playerJsp.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Style.HOT_YELLOWFOCUS),"球队成员",TitledBorder.CENTER,TitledBorder.TOP,new Font("微软雅黑",Font.PLAIN,17),Style.HOT_YELLOWFOCUS));
 		gbc.gridy=2;
 		gbc.gridheight=9;
 		gbc.weighty=90;
