@@ -129,16 +129,18 @@ public class MainFrame extends JFrame{
 	}
 	
 	public void BackSetContent(FatherPanel pnl){
-		if(!pnl.isDetail){
-			topPnl.hideBtn();
-			stack.removeAllElements();
-		}
+		
+		lastPnl=pnl;
 		contentPnl.removeAll();
 		contentPnl.setLayout(new GridLayout(1,1));
 		
 		contentPnl.add(pnl);
 		
 		contentPnl.revalidate();
+		if(!pnl.isDetail){
+			topPnl.hideBtn();
+			stack.removeAllElements();
+		}
 	}
 	
 	

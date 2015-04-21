@@ -80,6 +80,7 @@ public class DetailCard extends JPanel implements MouseListener {
 		gbl.setConstraints(homeIcon, gbc);
 		add(homeIcon);
 		homeIcon.addMouseListener(this);
+		homeIcon.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		// -----vs----------------
 		JLabel vs = new JLabel("  VS  ");
 		vs.setFont(new Font("微软雅黑", Font.BOLD, 22));
@@ -98,6 +99,7 @@ public class DetailCard extends JPanel implements MouseListener {
 		gbl.setConstraints(visitingIcon, gbc);
 		add(visitingIcon);
 		visitingIcon.addMouseListener(this);
+		visitingIcon.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		// ------visitingScore-------
 		visitingScore = new ScoreLabel(v.getVisitingScore()+"");
 		gbc.gridx = 8;
@@ -213,8 +215,9 @@ public class DetailCard extends JPanel implements MouseListener {
 		// TODO Auto-generated method stub
 		String name=vabbrNameLbl.getText();
 		if(e.getSource()==hchNameLbl||e.getSource()==homeIcon){
-			name=habbrNameLbl.getName();
+			name=habbrNameLbl.getText();
 		}
+	
 		MainFrame.getInstance().setContentPanel(new TeamDetailPanel(name));
 	}
 

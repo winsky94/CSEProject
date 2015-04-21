@@ -121,15 +121,15 @@ public class PlayerBaseInfoTableModel extends MyTableModel {
 			ArrayList<Object> line = new ArrayList<Object>();
 			String name = vo.getName();
 			//ImageIcon tou = player.getPlayerPortraitImage(name);
-			/*ImageIcon tou=new ImageIcon("image/player/portrait/"+name+".png");
+			ImageIcon tou=new ImageIcon("image/player/portrait/"+name+".png");
 			imgList.add(tou);
 			ImageIcon icon = new ImageIcon(tou.getImage().getScaledInstance(
 					currentTable.getColumn(currentTable.getColumnName(0))
 							.getWidth(), 40
 				, Image.SCALE_DEFAULT));
 
-			line.add(icon);*/
-			line.add("头像");
+			line.add(icon);
+			//line.add("头像");
 			line.add(name);
 			line.add(vo.getOwingTeam());
 			line.add(vo.getPosition());
@@ -191,6 +191,10 @@ public class PlayerBaseInfoTableModel extends MyTableModel {
 			Refresh(v);
 		}
 		
+	}
+	
+	public PlayerBLService getService(){
+		return player;
 	}
 
 }

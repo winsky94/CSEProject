@@ -14,7 +14,7 @@ public class TeamHistoryTableModel extends MyTableModel{
 	static String[] head = { "球员","出场", "首发", "时间", "投篮", "三分", "罚球","前篮板",
 		"后篮板", "总篮板","助攻","抢断","盖帽","失误","犯规","得分" };
 	PlayerBLService player;
-	ArrayList<PlayerVO> teamMember;
+	public ArrayList<PlayerVO> teamMember;
 	String tname;
 	//最后一行有统计
 	ArrayList<ArrayList<Object>> content = new ArrayList<ArrayList<Object>>();

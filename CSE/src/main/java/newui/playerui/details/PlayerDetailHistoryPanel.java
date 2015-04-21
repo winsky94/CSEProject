@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -12,8 +14,11 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 
+import newui.mainui.MainFrame;
+import newui.matchui.MatchDetailPanel;
 import newui.tables.MyTableCellRenderer;
 import newui.tables.PlayerHistoryTableModel;
+import vo.MatchVO;
 import vo.PlayerVO;
 
 public class PlayerDetailHistoryPanel extends JPanel {
@@ -79,6 +84,15 @@ public class PlayerDetailHistoryPanel extends JPanel {
 		add(jsp);
 		phtm.Refresh(vo.getName());
 		table.revalidate();
+		table.addMouseListener(new MouseAdapter(){
+			public void mouseClicked(MouseEvent e){
+				if(e.getClickCount()==2){
+					int row=table.getSelectedRow();
+					MatchVO vo=phtm.match.get(row);
+					MainFrame.getInstance().setContentPanel(new MatchDetailPanel(vo));
+				}
+			}
+		});
 
 	}
 
