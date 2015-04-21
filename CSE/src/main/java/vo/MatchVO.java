@@ -78,7 +78,7 @@ public class MatchVO {
 
 	public MatchVO(String season, String date, String visitingTeam,
 			String homeTeam, int visitingScore, int homeScore, int partNum,
-			ArrayList<RecordVO> records) {
+			ArrayList<String> detailScores, ArrayList<RecordVO> records) {
 		super();
 		this.season = season;
 		this.date = date;
@@ -91,6 +91,7 @@ public class MatchVO {
 		} else {
 			matchTime = (48 + (partNum - 4) * 5) * 60;
 		}
+		this.detailScores = detailScores;
 		this.records = records;
 	}
 
