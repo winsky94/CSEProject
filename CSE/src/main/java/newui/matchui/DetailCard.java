@@ -17,11 +17,15 @@ import javax.swing.JPanel;
 
 
 
+
+
 import bl.team.Team;
 import vo.MatchVO;
 
 
 import newui.Style;
+import newui.mainui.MainFrame;
+import newui.teamui.TeamDetailPanel;
 
 public class DetailCard extends JPanel implements MouseListener {
 
@@ -75,6 +79,7 @@ public class DetailCard extends JPanel implements MouseListener {
 		gbc.weightx = 2;
 		gbl.setConstraints(homeIcon, gbc);
 		add(homeIcon);
+		homeIcon.addMouseListener(this);
 		// -----vs----------------
 		JLabel vs = new JLabel("  VS  ");
 		vs.setFont(new Font("微软雅黑", Font.BOLD, 22));
@@ -92,6 +97,7 @@ public class DetailCard extends JPanel implements MouseListener {
 		gbc.weightx = 2;
 		gbl.setConstraints(visitingIcon, gbc);
 		add(visitingIcon);
+		visitingIcon.addMouseListener(this);
 		// ------visitingScore-------
 		visitingScore = new ScoreLabel(v.getVisitingScore()+"");
 		gbc.gridx = 8;
@@ -102,7 +108,7 @@ public class DetailCard extends JPanel implements MouseListener {
 		if(isHomeHigh)
 			homeScore.setBackground(Style.WINNER_RED);
 		else
-			visitingIcon.setBackground(Style.WINNER_RED);
+			visitingScore.setBackground(Style.WINNER_RED);
 		// ----visitingNamePnl--------
 		visitingNamePnl = new JPanel();
 		visitingNamePnl.setLayout(new GridLayout(2, 1));
@@ -205,7 +211,11 @@ public class DetailCard extends JPanel implements MouseListener {
 
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
-
+		String name=vabbrNameLbl.getText();
+		if(e.getSource()==hchNameLbl||e.getSource()==homeIcon){
+			name=habbrNameLbl.getName();
+		}
+		MainFrame.getInstance().setContentPanel(new TeamDetailPanel(name));
 	}
 
 	public void mousePressed(MouseEvent e) {

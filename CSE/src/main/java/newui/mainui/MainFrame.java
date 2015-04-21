@@ -11,6 +11,7 @@ import java.util.Stack;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JSplitPane;
 
 import newui.FatherPanel;
 import newui.TopPanel;
@@ -31,9 +32,9 @@ public class MainFrame extends JFrame{
 	int width=screenWidth*90/100;
 	int height=screenHeight*95/100;
 	private static FatherPanel lastPnl;
-	JPanel topPnl;
+	private static TopPanel topPnl;
 	static JPanel contentPnl=new JPanel();
-
+	public static JSplitPane jsp;
 	public static Stack<FatherPanel> stack;
 
 	private MainFrame(){
@@ -60,13 +61,15 @@ public class MainFrame extends JFrame{
 		gbl.setConstraints(topPnl, gbc);
 		add(topPnl);
 		//------contentPnl内容部分-------
-		//contentPnl=new IndexPanel();
+		contentPnl=new JPanel();
 		gbc.gridy =1;
 		gbc.gridheight=10;
 		gbc.weighty=10;
 		gbl.setConstraints(contentPnl, gbc);
 		add(contentPnl);
+		//jsp = new JSplitPane(JSplitPane.VERTICAL_SPLIT, topPnl, contentPnl);
 		setContentPanel(new IndexPanel());
+		//add(jsp);
 		this.origin=new Point();
 		
 		 //由于取消了默认的窗体结构，所以我们要手动设置一下移动窗体的方法
@@ -106,19 +109,39 @@ public class MainFrame extends JFrame{
 	
 
 	public static  void setContentPanel(FatherPanel pnl){
+		
+		
 		if(pnl.isDetail){
+			topPnl.showBtn();
 			stack.push(lastPnl);
-		}
+		}	
 		lastPnl=pnl;
 	
 		contentPnl.removeAll();
 		contentPnl.setLayout(new GridLayout(1,1));
 		
 		contentPnl.add(pnl);
-
+		
 		contentPnl.revalidate();	
 		
+
+		
 	}
+	
+	public void BackSetContent(FatherPanel pnl){
+		if(!pnl.isDetail){
+			topPnl.hideBtn();
+			stack.removeAllElements();
+		}
+		contentPnl.removeAll();
+		contentPnl.setLayout(new GridLayout(1,1));
+		
+		contentPnl.add(pnl);
+		
+		contentPnl.revalidate();
+	}
+	
+	
 	
 	
 	

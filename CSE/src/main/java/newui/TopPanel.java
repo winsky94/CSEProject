@@ -24,7 +24,7 @@ public class TopPanel extends JPanel implements MouseListener {
 	private static final long serialVersionUID = 1L;
 	MyButton miniBtn, maxBtn, exitBtn;
 	boolean isMax = false;
-	public MyButton backBtn;
+	private MyButton backBtn;
 
 	public TopPanel() {
 		GridBagLayout g = new GridBagLayout();
@@ -41,6 +41,7 @@ public class TopPanel extends JPanel implements MouseListener {
 		backBtn.addMouseListener(this);
 		g.setConstraints(backBtn, c);
 		add(backBtn);
+		backBtn.setVisible(false);
 		// -------------------
 		JLabel blankLbl = new JLabel();
 		c.gridx = 6;
@@ -93,7 +94,7 @@ public class TopPanel extends JPanel implements MouseListener {
 		}
 		if (e.getSource() == backBtn) {
 			if (!MainFrame.stack.isEmpty())
-				MainFrame.getInstance().setContentPanel(MainFrame.stack.pop());
+				MainFrame.getInstance().BackSetContent(MainFrame.stack.pop());
 		}
 
 	}
@@ -144,10 +145,15 @@ public class TopPanel extends JPanel implements MouseListener {
 		}
 
 	}
-
+	public void showBtn(){
+		backBtn.setVisible(true);;
+		}
+	public void hideBtn(){
+		backBtn.setVisible(false);
+	}
 }
 
-class MyButton extends JLabel {
+ class MyButton extends JLabel {
 
 	/**
 	 * 
@@ -158,5 +164,7 @@ class MyButton extends JLabel {
 		super(img);
 		this.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 	}
+	
+	
 
 }

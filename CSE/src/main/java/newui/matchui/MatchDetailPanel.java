@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
@@ -16,6 +17,8 @@ import javax.swing.table.DefaultTableCellRenderer;
 
 import newui.FatherPanel;
 import newui.Style;
+import newui.mainui.MainFrame;
+import newui.playerui.PlayerDetailPanel;
 import newui.tables.MatchDetailModel;
 import newui.tables.MyTableCellRenderer;
 import vo.MatchVO;
@@ -108,6 +111,17 @@ public class MatchDetailPanel extends FatherPanel {
 		// ---jsp---------------
 		model = new MatchDetailModel();
 		table = new JTable(model);
+		
+		table.addMouseListener(new MouseAdapter(){
+			public void mouseClicked(MouseEvent e){
+				if(e.getClickCount()==2){
+					int row=table.getSelectedRow();
+					String name=table.getValueAt(row, 0).toString();
+					MainFrame.getInstance().setContentPanel(new PlayerDetailPanel(name));
+					
+				}
+			}
+		});
 		// table 渲染器，设置文字内容居中显示，设置背景色等
 		table.setSelectionBackground(new Color(225, 255, 255));// 设置选择行的颜色——淡蓝色
 		table.setFont(new Font("微软雅黑", 0, 12));
