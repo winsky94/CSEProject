@@ -89,14 +89,7 @@ public class TeamIndexPanel extends FatherPanel implements MouseListener
 		table = new MySortableTable(ttm, 1);
 
 		// table 渲染器，设置文字内容居中显示，设置背景色等
-		table.setSelectionBackground(new Color(225, 255, 255));// 设置选择行的颜色——淡蓝色
-		table.setFont(new Font("微软雅黑", 0, 12));
-		table.getTableHeader().setFont(new Font("微软雅黑", 0, 14));
-		table.getTableHeader().setBackground(new Color(211, 211, 211));
-		DefaultTableCellRenderer tcr = new MyTableCellRenderer();
-		for (int i = 0; i < table.getColumnCount(); i++) {
-			table.getColumn(table.getColumnName(i)).setCellRenderer(tcr);
-		}
+	
 		table.addMouseListener(this);
 		table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
 		titleBar.setCurrentTableModel(ttm);
@@ -113,9 +106,10 @@ public class TeamIndexPanel extends FatherPanel implements MouseListener
 		// ====初始化数据=====
 		ttm.Refresh(typeBox.getSelectedItem().toString());
 		table.revalidate();
+		CellRender();
 		MyTableCellRenderer.adjustTableColumnWidths(table);// 自动设置列宽
 		// 设置表头颜色
-		table.getTableHeader().setBackground(new Color(158, 158, 158));
+		
 
 		// 设置显示行号
 		jsp.setRowHeaderView(new RowHeaderTable(table, 20));
@@ -166,16 +160,22 @@ public class TeamIndexPanel extends FatherPanel implements MouseListener
 				// 监听,切换到基础数据表格
 				fieldLbl.setText("查看高阶数据");
 				isHighInfo = false;
-				ttm.setHead(0);
-				ttm.Refresh(type);
+				ttm=new TeamTableModel(0);
+				
 			} else {
 				// 监听,切换到高阶数据表格
 				fieldLbl.setText("查看基础数据");
 				isHighInfo = true;
-				ttm.setHead(1);
-				ttm.Refresh(type);
+				ttm=new TeamTableModel(1);
+				
 			}
-			table.repaint();
+			ttm.Refresh(type);
+			table.revalidate();;
+			jsp.remove(table);
+			table=new JTable(ttm);
+			
+			jsp.getViewport().add(table);
+			CellRender();
 		}
 
 	}
@@ -243,28 +243,15 @@ public class TeamIndexPanel extends FatherPanel implements MouseListener
 		}
 	}
 
-	/*public void itemStateChanged(ItemEvent e) {
-		// TODO 自动生成的方法存根
-		if (e.getStateChange() == ItemEvent.SELECTED) {
-			String season = seasonBox.getSelectedItem().toString();
-			ArrayList<TeamVO> vlist;
-			String s = (String) typeBox.getSelectedItem();
-			TeamBLService team = new Team();
-			if (s.equals("赛季"))
-				vlist = team.getTeamSeasonInfo(season);
-			else
-				vlist = team.getTeamAverageInfo();
-			// vlist.size()==0显示没有符合条件的球员
-			if (vlist != null) {
-				// ttm.refreshContent(vlist);
-				if (isHighInfo)
-					ttm.refreshHigh(vlist);
-				else
-					ttm.refreshBase(vlist);
-			}
-			table.revalidate();
-			titleBar.setSeason(season);
-			titleBar.setAveOrAll(s);
+	public void CellRender(){
+		table.setSelectionBackground(new Color(225, 255, 255));// 设置选择行的颜色——淡蓝色
+		table.setFont(new Font("微软雅黑", 0, 12));
+		table.getTableHeader().setFont(new Font("微软雅黑", 0, 14));
+		table.getTableHeader().setBackground(new Color(211, 211, 211));
+		DefaultTableCellRenderer tcr = new MyTableCellRenderer();
+		for (int i = 0; i < table.getColumnCount(); i++) {
+			table.getColumn(table.getColumnName(i)).setCellRenderer(tcr);
 		}
-	}*/
+		table.getTableHeader().setBackground(new Color(158, 158, 158));
+	}
 }

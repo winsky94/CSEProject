@@ -30,10 +30,12 @@ public class TeamTableModel extends MyTableModel {
 	public TeamTableModel(int model) {
 		if (model == 0) {
 			head = headbase;
+			headmodel=0;
 		} else {
 			head = headhigh;
+			headmodel=1;
 		}
-		headmodel = model;
+	
 	}
 
 	@Override

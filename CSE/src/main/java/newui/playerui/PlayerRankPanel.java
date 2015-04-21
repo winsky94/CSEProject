@@ -243,7 +243,7 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener,
 				isHighInfo=false;
 				ptm=new PlayerTableModel(0);
 				
-				ptm.Refresh(type);
+				
 			}
 			else{
 				//监听，切换到高阶数据表格
@@ -251,9 +251,10 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener,
 				fieldLbl.setText("查看基础数据");
 				isHighInfo=true;
 				ptm=new PlayerTableModel(1);
-				ptm.Refresh(type);
+				
 			}
-			ptm.Refresh(typeBox.getSelectedItem().toString());
+			ptm.Refresh(type);
+		
 			table.revalidate();;
 			jsp.remove(table);
 			table=new JTable(ptm);
