@@ -43,10 +43,10 @@ public class TeamIndexPanel extends FatherPanel implements MouseListener,
 	JTable table;
 	TeamTableModel ttm;
 	//
-	JLabel refreshLbl;
+	JLabel refreshLbl,fieldLbl;
 	JComboBox<String> seasonBox, typeBox;
 	Font font = new Font("微软雅黑", Font.PLAIN, 13);
-
+	boolean isHighInfo=false;
 	public TeamIndexPanel() {
 		super();
 		// ------funcPnl--------
@@ -74,9 +74,15 @@ public class TeamIndexPanel extends FatherPanel implements MouseListener,
 		typeBox.addItemListener(this);
 		funcPnl.add(typeBox);
 		funcPnl.add(new JLabel("       "));
+		//------fieldLbl--------
+		fieldLbl=new MyJLabel("查看高阶数据");
+		fieldLbl.addMouseListener(this);
+		fieldLbl.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		funcPnl.add(fieldLbl);
 		// -----refreshLbl------
 		refreshLbl = new MyJLabel("刷新", new ImageIcon("image/refreshWhite.png"));
 		refreshLbl.addMouseListener(this);
+		refreshLbl.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		funcPnl.add(refreshLbl);
 		// -----table-----------
 		ttm = new TeamTableModel();
@@ -132,11 +138,24 @@ public class TeamIndexPanel extends FatherPanel implements MouseListener,
 			ttm.Refresh(typeBox.getSelectedItem().toString());
 			table.revalidate();
 		}
+		
 		if(e.getSource()==table){
 			if(e.getClickCount()==2){
 				int row=table.getSelectedRow();
 				String tname=table.getValueAt(row, 1).toString();
 				MainFrame.getInstance().setContentPanel(new TeamDetailPanel(tname));
+			}
+		}
+		if (e.getSource() == fieldLbl) {
+			if(isHighInfo){
+				//监听,切换到基础数据表格
+				fieldLbl.setText("查看高阶数据");
+				isHighInfo=false;
+			}
+			else{
+				//监听,切换到高阶数据表格
+				fieldLbl.setText("查看基础数据");
+				isHighInfo=true;
 			}
 		}
 
@@ -156,18 +175,20 @@ public class TeamIndexPanel extends FatherPanel implements MouseListener,
 		if (e.getSource() == refreshLbl) {
 			refreshLbl.setForeground(Style.FOCUS_BLUE);
 			refreshLbl.setIcon(new ImageIcon("image/refreshFocus.png"));
-			refreshLbl.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		}
-
+		if (e.getSource() == fieldLbl) {
+			fieldLbl.setForeground(Style.FOCUS_BLUE);
+		}
 	}
 
 	public void mouseExited(MouseEvent e) {
 		if (e.getSource() == refreshLbl) {
 			refreshLbl.setForeground(Color.white);
 			refreshLbl.setIcon(new ImageIcon("image/refreshWhite.png"));
-			refreshLbl.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
 		}
-
+		if (e.getSource() == fieldLbl) {
+			fieldLbl.setForeground(Color.white);
+		}
 	}
 
 	class MyJLabel extends JLabel {
