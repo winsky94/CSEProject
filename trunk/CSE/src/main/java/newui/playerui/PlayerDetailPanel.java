@@ -51,7 +51,7 @@ public class PlayerDetailPanel extends FatherPanel{
 		gbc.gridy=1;
 		gbc.gridwidth=1;
 		gbc.gridheight=10;
-		gbc.weightx=1;
+		gbc.weightx=0.1;
 		gbc.weighty=100;
 		gbl.setConstraints(actionPicLbl, gbc);
 		add(actionPicLbl);
@@ -59,7 +59,7 @@ public class PlayerDetailPanel extends FatherPanel{
 		tab=new JTabbedPane();
 		gbc.gridx=1;
 		gbc.gridwidth=9;
-		gbc.weightx=50;
+		gbc.weightx=500;
 		gbl.setConstraints(tab, gbc);
 		add(tab);
 		double pre=System.currentTimeMillis();
@@ -70,12 +70,5 @@ public class PlayerDetailPanel extends FatherPanel{
 		double post=System.currentTimeMillis();
 		System.out.println("detailhistory:"+(post-pp));
 	}
-	public static void main(String[] args) {
-		JFrame f=new JFrame();
-		f.setVisible(true);
-		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		f.setBounds(50, 50, 1100, 670);
-		f.add(new PlayerDetailPanel("Kobe Bryant"));
-		f.repaint();
-	}
+	
 }
