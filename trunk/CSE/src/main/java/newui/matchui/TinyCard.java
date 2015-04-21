@@ -89,7 +89,7 @@ public class TinyCard extends JPanel{
 		gbl.setConstraints(visitingScoreLbl, gbc);
 		add(visitingScoreLbl);
 		this.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		this.setToolTipText("点击查看该比赛详情");
+		//this.setToolTipText("点击查看该比赛详情");
 		//点击跳转到该场比赛的技术统计界面
 		this.addMouseListener(new MouseAdapter(){
 			public void mouseClicked(MouseEvent e){

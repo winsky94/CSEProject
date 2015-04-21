@@ -8,6 +8,7 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -16,6 +17,12 @@ import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 
+import vo.PlayerVO;
+import vo.TeamVO;
+import bl.player.Player;
+import bl.team.Team;
+import blservice.PlayerBLService;
+import blservice.TeamBLService;
 import newui.hotui.HotIndexPanel;
 import newui.mainui.IndexPanel;
 import newui.mainui.MainFrame;
@@ -144,45 +151,48 @@ public class TitleBar extends JPanel implements MouseListener {
 			
 		}
 		if (e.getSource() == searchBtn) {
-//			PlayerBLService p;TeamBLService t;
-//			// 监听
-//			String scontent=searchFld.getText();
-//			ArrayList<PlayerVO> result;
-//			ArrayList<TeamVO> team;
-//			switch(model){
-//			case PLAYERBASEINFO:
-//				p=new Player();
-//				 result=p.getPlayerBaseInfo(scontent);
-//				tablemodel.SearchRefresh(result);break;
-//			case PLAYERRANK:
-//				p=new Player();
-//
-//				if(aveOrAll.equals("场均"))
-//					//可能调用错方法了 方法重名
-//					result=p.getPlayerAverageInfo(scontent);
-//				else
-//					result=p.getPlayerSeasonInfo(season, scontent);
-//				tablemodel.SearchRefresh(result);break;
-//			case TEAMBASEINFO:
-//				t=new Team();
-//				team=t.getTeamBaseInfo(scontent);
-//				tablemodel.SearchRefresh(team);break;
-//			case TEAMRANK:
-//				t=new Team();
-//				if(aveOrAll.equals("场均"))
-//					//可能调用错方法了 方法重名
-//					team=t.getTeamAverageInfo(scontent);
-//				else
-//					team=t.getTeamSeasonInfo(season, scontent);
-//				tablemodel.SearchRefresh(team);break;
-//				
-//				
+			PlayerBLService p;TeamBLService t;
+			// 监听
+			String scontent=searchFld.getText();
+			ArrayList<PlayerVO> result;
+			ArrayList<TeamVO> team;
+			switch(model){
+			case PLAYERBASEINFO:
+				p=new Player();
+				 result=p.getPlayerBaseInfo(scontent);
+				tablemodel.SearchRefresh(result);break;
+			case PLAYERRANK:
+				p=new Player();
+
+			//	if(aveOrAll.equals("场均"))
+					//可能调用错方法了 方法重名
+					//result=p.getPlayerAverageInfo(scontent);
+			//	else
+					//result=p.getPlayerSeasonInfo(season, scontent);
+			//	tablemodel.SearchRefresh(result);break;
+			case TEAMBASEINFO:
+				t=new Team();
+				team=t.getTeamBaseInfo(scontent);
+				tablemodel.SearchRefresh(team);break;
+			case TEAMRANK:
+			//	t=new Team();
+			//	if(aveOrAll.equals("场均"))
+					//可能调用错方法了 方法重名
+				//	team=t.getTeamAverageInfo(scontent);
+				//else
+				//	team=t.getTeamSeasonInfo(season, scontent);
+				//tablemodel.SearchRefresh(team);break;
+				
+			}
+			table.revalidate();
 				
 				
 			
-			table.revalidate();
+			
 			
 			//MainFrame.getInstance().setContentPanel(new SearchResultPanel(scontent));
+		
+			
 		}
 	}
 

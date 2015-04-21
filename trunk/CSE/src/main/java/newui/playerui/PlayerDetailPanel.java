@@ -27,7 +27,7 @@ public class PlayerDetailPanel extends FatherPanel{
 	PlayerBLService pservice;
 	PlayerVO vo;
 	public PlayerDetailPanel(String pname){
-		//isDetail=true;
+		isDetail=true;
 		pservice=new Player();// is this? 
 		vo=pservice.getPlayerBaseInfo(pname).get(0);
 		
