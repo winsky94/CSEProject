@@ -158,8 +158,7 @@ public class PlayerTableModel extends MyTableModel{
 			line.add(vo.getStealRate());
 			line.add(vo.getBlockRate());
 			line.add(vo.getTurnOverRate());
-			line.add(vo.getUsageRate());
-			
+			line.add(vo.getUsageRate());	
 			content.add(line);
 		}
 		

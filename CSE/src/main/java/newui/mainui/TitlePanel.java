@@ -16,7 +16,9 @@ public class TitlePanel extends JPanel{
 	private static final long serialVersionUID = 1L;
 	JLabel logoLbl,textLbl;
 	IndexTitleBar titleBar;
-	public TitlePanel(){
+	                     
+	public TitlePanel( ){
+
 		GridBagLayout gbl = new GridBagLayout();
 		GridBagConstraints gbc = new GridBagConstraints();
 		gbc.fill=GridBagConstraints.BOTH;

@@ -17,6 +17,7 @@ public class IndexPanel extends FatherPanel{
 
 	public IndexPanel(){
 		removeAll();
+
 		GridBagLayout gbl = new GridBagLayout();
 		GridBagConstraints gbc = new GridBagConstraints();
 		gbc.fill=GridBagConstraints.BOTH;

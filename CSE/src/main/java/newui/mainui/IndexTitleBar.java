@@ -34,6 +34,7 @@ public class IndexTitleBar extends JPanel implements MouseListener {
 	JLabel searchBtn;
 
 	public IndexTitleBar() {
+
 		setBackground(Style.DEEP_BLUE);
 		GridBagLayout gbl = new GridBagLayout();
 		GridBagConstraints gbc = new GridBagConstraints();
@@ -120,6 +121,7 @@ public class IndexTitleBar extends JPanel implements MouseListener {
 		else if (e.getSource() == playerBtn){
 			double pre=System.currentTimeMillis();
 			MainFrame.getInstance().setContentPanel(new PlayerIndexPanel());
+			//frame.setContentPanel(new PlayerIndexPanel());
 			double post=System.currentTimeMillis();
 			System.out.println("maintoplayerindex:"+(post-pre));
 			}

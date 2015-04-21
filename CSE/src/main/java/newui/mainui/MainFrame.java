@@ -60,6 +60,7 @@ public class MainFrame extends JFrame{
 		gbl.setConstraints(topPnl, gbc);
 		add(topPnl);
 		//------contentPnl内容部分-------
+		//contentPnl=new IndexPanel();
 		gbc.gridy =1;
 		gbc.gridheight=10;
 		gbc.weighty=10;
@@ -112,9 +113,11 @@ public class MainFrame extends JFrame{
 	
 		contentPnl.removeAll();
 		contentPnl.setLayout(new GridLayout(1,1));
+		
 		contentPnl.add(pnl);
-		//contentPnl.repaint();
+
 		contentPnl.revalidate();
+		
 		
 		
 		
@@ -132,6 +135,7 @@ public class MainFrame extends JFrame{
 	}
 	public static void main(String[] args) {
 		MainFrame.getInstance();
+		//MainFrame frame=new MainFrame();
 	}
 	
 }
