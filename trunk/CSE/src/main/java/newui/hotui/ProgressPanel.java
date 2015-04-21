@@ -45,7 +45,8 @@ public class ProgressPanel extends HotFatherPanel implements MouseListener {
 	JTable table;
 	ArrayList<PlayerVO> vlist;
 	String[] head = { "排名", "", "球员名称", "所属球队", "位置", "场均得分", "提升率" };
-
+	DecimalFormat dec = new DecimalFormat("0.00");
+	
 	public ProgressPanel() {
 		player = new Player();
 		GridBagLayout bl = new GridBagLayout();
@@ -160,8 +161,6 @@ public class ProgressPanel extends HotFatherPanel implements MouseListener {
 			// data.setText(topOne.getScore()+"");
 			bestTeamIcon.setIcon(new ImageIcon("image/teamIcon/teamsPng150/"
 					+ topOne.getOwingTeam() + ".png"));
-			
-			DecimalFormat dec = new DecimalFormat("0.00");
 			
 			if (currentBtn == scoreBtn){
 				data.setText(topOne.getScore() + "/"
@@ -289,13 +288,13 @@ public class ProgressPanel extends HotFatherPanel implements MouseListener {
 				if (currentBtn == scoreBtn) {
 					line.add(v.getScore());
 					
-					line.add(v.getRecentFiveMatchesScoreUpRate() * 100 + "%");
+					line.add(dec.format(v.getRecentFiveMatchesScoreUpRate() * 100) + "%");
 				} else if (currentBtn == reboundBtn) {
 					line.add(v.getReboundNum());
-					line.add(v.getRecentFiveMatchesReboundUpRate() * 100 + "%");
+					line.add(dec.format(v.getRecentFiveMatchesReboundUpRate() * 100) + "%");
 				} else {
 					line.add(v.getAssistNum());
-					line.add(v.getRecentFiveMatchesAssistUpRate() * 100 + "%");
+					line.add(dec.format(v.getRecentFiveMatchesAssistUpRate() * 100) + "%");
 				}
 				content.add(line);
 			}
