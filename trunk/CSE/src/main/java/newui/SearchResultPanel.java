@@ -12,6 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.table.DefaultTableCellRenderer;
 
 import bl.player.Player;
 import bl.team.Team;
@@ -20,6 +21,7 @@ import blservice.TeamBLService;
 import vo.PlayerVO;
 import vo.TeamVO;
 import newui.tables.MyBaseTable;
+import newui.tables.MyTableCellRenderer;
 import newui.tables.PlayerBaseInfoTableModel;
 import newui.tables.TeamBaseInfoTableModel;
 
@@ -65,6 +67,17 @@ public class SearchResultPanel extends FatherPanel implements MouseListener{
 		ttm=new TeamBaseInfoTableModel();
 		ptm=new PlayerBaseInfoTableModel();
 		table=new MyBaseTable(ttm);
+		
+		// table 渲染器，设置文字内容居中显示，设置背景色等
+		table.setSelectionBackground(new Color(225, 255, 255));// 设置选择行的颜色——淡蓝色
+		table.setFont(new Font("微软雅黑", 0, 12));
+		table.getTableHeader().setFont(new Font("微软雅黑", 0, 14));
+		table.getTableHeader().setBackground(new Color(211, 211, 211));
+		DefaultTableCellRenderer tcr = new MyTableCellRenderer();
+		for (int i = 1; i < table.getColumnCount(); i++) {
+			table.getColumn(table.getColumnName(i)).setCellRenderer(tcr);
+		}
+		
 		ptm.setCurrentTable(table);
 		ttm.setCurrentTable(table);
 		
@@ -90,7 +103,16 @@ public class SearchResultPanel extends FatherPanel implements MouseListener{
 		ArrayList<TeamVO> v=tservice.getTeamBaseInfo(scontent);
 		resultLbl.setText("在球队中检索到"+v.size()+"条符合关键字"+scontent+"的结果...");
 		ttm.SearchRefresh(v);
+		// table 渲染器，设置文字内容居中显示，设置背景色等
+				table.setSelectionBackground(new Color(225, 255, 255));// 设置选择行的颜色——淡蓝色
+				table.setFont(new Font("微软雅黑", 0, 12));
+				table.getTableHeader().setFont(new Font("微软雅黑", 0, 14));
+				table.getTableHeader().setBackground(new Color(211, 211, 211));
+				for (int i = 1; i < table.getColumnCount(); i++) {
+					table.getColumn(table.getColumnName(i)).setCellRenderer(tcr);
+				}
 		table.revalidate();
+		
 	}
 	class MyLabel extends JLabel{
 
@@ -117,15 +139,33 @@ public class SearchResultPanel extends FatherPanel implements MouseListener{
 				
 				resultLbl.setText("在球员中检索到"+re.size()+"条符合关键字"+content+"的结果...");
 				ptm.SearchRefresh(re);
+				// table 渲染器，设置文字内容居中显示，设置背景色等
+				table.setSelectionBackground(new Color(225, 255, 255));// 设置选择行的颜色——淡蓝色
+				table.setFont(new Font("微软雅黑", 0, 12));
+				table.getTableHeader().setFont(new Font("微软雅黑", 0, 14));
+				table.getTableHeader().setBackground(new Color(211, 211, 211));
+				DefaultTableCellRenderer tcr = new MyTableCellRenderer();
+				for (int i = 1; i < table.getColumnCount(); i++) {
+					table.getColumn(table.getColumnName(i)).setCellRenderer(tcr);
+				}
 			
 			}else{
 				//换为ttm
 				isTeamTable=true;
 				
 				ArrayList<TeamVO> re=tservice.getTeamBaseInfo(content);
-				resultLbl.setText("在球员中检索到"+re.size()+"条符合关键字"+content+"的结果...");
+				resultLbl.setText("在球队中检索到"+re.size()+"条符合关键字"+content+"的结果...");
 				table.setModel(ttm);;
 				ttm.SearchRefresh(re);
+				// table 渲染器，设置文字内容居中显示，设置背景色等
+				table.setSelectionBackground(new Color(225, 255, 255));// 设置选择行的颜色——淡蓝色
+				table.setFont(new Font("微软雅黑", 0, 12));
+				table.getTableHeader().setFont(new Font("微软雅黑", 0, 14));
+				table.getTableHeader().setBackground(new Color(211, 211, 211));
+				DefaultTableCellRenderer tcr = new MyTableCellRenderer();
+				for (int i = 1; i < table.getColumnCount(); i++) {
+					table.getColumn(table.getColumnName(i)).setCellRenderer(tcr);
+				}
 				
 				
 			}
