@@ -1,17 +1,22 @@
 package newui.teamui.details;
 
+import java.awt.Color;
 import java.awt.Font;
+import java.awt.Graphics;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.Insets;
 
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import newui.Style;
+import vo.TeamVO;
 import bl.team.Team;
 import blservice.TeamBLService;
-import vo.TeamVO;
 
 
 public class TeamDetailInfoPanel extends JPanel{
@@ -40,6 +45,7 @@ public class TeamDetailInfoPanel extends JPanel{
 		//----------------------------
 		JLabel enNameLbl=new JLabel(enName);
 		enNameLbl.setFont(new Font("微软雅黑",Font.PLAIN,35));
+		enNameLbl.setForeground(Style.FOCUS_GREY);
 		gbc.gridx=0;
 		gbc.gridy=0;
 		gbc.gridwidth=10;
@@ -77,9 +83,15 @@ public class TeamDetailInfoPanel extends JPanel{
 		recentPnl=new TeamDetailRecentPanel(abbrName);
 		gbc.gridy=7;
 		gbc.gridheight=3;
-		gbc.weighty=3;
+		gbc.weighty=1;
 		gbl.setConstraints(recentPnl, gbc);
 		add(recentPnl);
+	}
+	protected void paintComponent(Graphics g) {
+		ImageIcon icon = new ImageIcon("image/detailBack.png");
+		Image img = icon.getImage();
+		g.drawImage(img, 0, 0, icon.getIconWidth(),
+				icon.getIconHeight(), icon.getImageObserver());
 	}
 	class MyLabel extends JLabel{
 
@@ -89,7 +101,8 @@ public class TeamDetailInfoPanel extends JPanel{
 		private static final long serialVersionUID = 1L;
 		public MyLabel(String t){
 			super(t);
-			setFont(new Font("微软雅黑",Font.PLAIN,15));
+			setForeground(Style.FOCUS_GREY);
+			setFont(new Font("微软雅黑",Font.PLAIN,20));
 		}
 		
 	}
