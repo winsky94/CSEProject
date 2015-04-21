@@ -19,9 +19,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 
-import bl.player.Player;
-import blservice.AgeEnum;
-import blservice.PlayerBLService;
 import newui.FatherPanel;
 import newui.Style;
 import newui.TableModel;
@@ -31,7 +28,9 @@ import newui.tables.MyTableCellRenderer;
 import newui.tables.PlayerTableModel;
 import newui.tables.RowHeaderTable;
 import vo.PlayerVO;
-
+import bl.player.Player;
+import blservice.AgeEnum;
+import blservice.PlayerBLService;
 
 public class PlayerRankPanel extends FatherPanel implements MouseListener,
 		ItemListener {
@@ -42,12 +41,13 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener,
 	private static final long serialVersionUID = 1L;
 	JPanel funcPnl;
 	private PlayerBLService player;
+	boolean isHighInfo = false;
 	// --------------
 	JScrollPane jsp;
 	JTable table;
 	PlayerTableModel ptm = new PlayerTableModel();
 	// ---------------
-	JLabel refreshLbl, filterLbl, modeLbl;
+	JLabel refreshLbl, filterLbl, modeLbl, fieldLbl;
 	JComboBox<String> locationBox, partitionBox, filterRankBox, seasonBox,
 			typeBox;
 	Font font = new Font("微软雅黑", Font.PLAIN, 13);
@@ -58,6 +58,7 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener,
 			"盖帽", "抢断", "罚球", "犯规", "失误", "分钟", "效率", "两双" };
 
 	public PlayerRankPanel() {
+
 		player = new Player();
 		// ------funcPnl--------
 		funcPnl = new JPanel();
@@ -91,6 +92,7 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener,
 		filterLbl = new MyJLabel("筛选", new ImageIcon(
 				"image/player/filterWhite.png"));
 		filterLbl.addMouseListener(this);
+		filterLbl.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		funcPnl.add(filterLbl);
 		funcPnl.add(new JLabel("       "));
 		// -----season----------
@@ -109,14 +111,21 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener,
 		typeBox.addItemListener(this);
 		funcPnl.add(typeBox);
 		funcPnl.add(new JLabel("       "));
+		// ------fieldLbl--------
+		fieldLbl = new MyJLabel("查看高阶数据");
+		fieldLbl.addMouseListener(this);
+		fieldLbl.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		funcPnl.add(fieldLbl);
 		// -----refreshLbl------
 		refreshLbl = new MyJLabel("刷新", new ImageIcon("image/refreshWhite.png"));
 		refreshLbl.addMouseListener(this);
+		refreshLbl.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		funcPnl.add(refreshLbl);
 		// -----modeLbl---------
 		modeLbl = new MyJLabel("至快速查询模式", new ImageIcon(
 				"image/player/headmode.png"));
 		modeLbl.addMouseListener(this);
+		modeLbl.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		funcPnl.add(modeLbl);
 		// ----jsp--------------
 		table = new MySortableTable(ptm, 0);
@@ -133,7 +142,8 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener,
 		titleBar.setCurrentTableModel(ptm);
 		titleBar.setModelEnum(TableModel.PLAYERRANK);
 		titleBar.setTable(table);
-		table.addMouseListener(this);;
+		table.addMouseListener(this);
+		;
 		jsp = new JScrollPane(table);
 		gbc.gridy = 2;
 		gbc.gridheight = 10;
@@ -193,11 +203,12 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener,
 	}
 
 	public void mouseClicked(MouseEvent e) {
-		if(e.getSource()==table){
-			if(e.getClickCount()==2){
-				int row=table.getSelectedRow();
-				String name=table.getValueAt(row, 0).toString();
-				MainFrame.getInstance().setContentPanel(new PlayerDetailPanel(name));
+		if (e.getSource() == table) {
+			if (e.getClickCount() == 2) {
+				int row = table.getSelectedRow();
+				String name = table.getValueAt(row, 0).toString();
+				MainFrame.getInstance().setContentPanel(
+						new PlayerDetailPanel(name));
 			}
 		}
 		if (e.getSource() == modeLbl)
@@ -212,16 +223,28 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener,
 			String type = typeBox.getSelectedItem().toString();
 			if (type.equals("赛季"))
 				vlist = player.selectPlayersBySeason(season, position, union,
-						AgeEnum.ALL,sort,"desc",50);
+						AgeEnum.ALL, sort, "desc", 50);
 			else
 				vlist = player.selectPlayersByAverage(position, union,
-						AgeEnum.ALL,sort,"desc",50);
+						AgeEnum.ALL, sort, "desc", 50);
 			// vlist.size()==0显示没有符合条件的球员
-			if (vlist != null){
+			if (vlist != null) {
 				ptm.refreshContent(vlist);
 			}
 			table.revalidate();
 
+		}
+		if (e.getSource() ==fieldLbl) {
+			if(isHighInfo){
+				//监听，切换到基础数据表格
+				fieldLbl.setText("查看高阶数据");
+				isHighInfo=false;
+			}
+			else{
+				//监听，切换到高阶数据表格
+				fieldLbl.setText("查看基础数据");
+				isHighInfo=true;
+			}
 		}
 		if (e.getSource() == refreshLbl) {
 			ptm.Refresh(typeBox.getSelectedItem().toString());
@@ -244,17 +267,17 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener,
 		if (e.getSource() == refreshLbl) {
 			refreshLbl.setForeground(Style.FOCUS_BLUE);
 			refreshLbl.setIcon(new ImageIcon("image/refreshFocus.png"));
-			refreshLbl.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		}
 		if (e.getSource() == filterLbl) {
 			filterLbl.setForeground(Style.FOCUS_BLUE);
 			filterLbl.setIcon(new ImageIcon("image/player/filterFocus.png"));
-			filterLbl.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		}
 		if (e.getSource() == modeLbl) {
 			modeLbl.setForeground(Style.FOCUS_BLUE);
 			modeLbl.setIcon(new ImageIcon("image/player/headmodeBlue.png"));
-			modeLbl.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		}
+		if (e.getSource() ==fieldLbl) {
+			fieldLbl.setForeground(Style.FOCUS_BLUE);
 		}
 	}
 
@@ -262,17 +285,17 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener,
 		if (e.getSource() == refreshLbl) {
 			refreshLbl.setForeground(Color.white);
 			refreshLbl.setIcon(new ImageIcon("image/refreshWhite.png"));
-			refreshLbl.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
 		}
 		if (e.getSource() == filterLbl) {
 			filterLbl.setForeground(Color.white);
 			filterLbl.setIcon(new ImageIcon("image/player/filterWhite.png"));
-			filterLbl.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
 		}
 		if (e.getSource() == modeLbl) {
 			modeLbl.setForeground(Color.white);
 			modeLbl.setIcon(new ImageIcon("image/player/headmode.png"));
-			modeLbl.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+		}
+		if (e.getSource() ==fieldLbl) {
+			fieldLbl.setForeground(Color.white);
 		}
 	}
 
