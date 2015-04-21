@@ -129,7 +129,7 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener,
 		funcPnl.add(modeLbl);
 		// ----jsp--------------
 		table = new MySortableTable(ptm, 0);
-
+		table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
 		// table 渲染器，设置文字内容居中显示，设置背景色等
 		table.setSelectionBackground(new Color(225, 255, 255));// 设置选择行的颜色——淡蓝色
 		table.setFont(new Font("微软雅黑", 0, 12));
@@ -237,17 +237,22 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener,
 
 		}
 		else if (e.getSource() ==fieldLbl) {
+			String type=typeBox.getSelectedItem().toString();
 			if(isHighInfo){
 				//监听，切换到基础数据表格
+				System.out.println("低阶");
 				fieldLbl.setText("查看高阶数据");
 				isHighInfo=false;
 				ptm.setHead(0);
+				ptm.Refresh(type);
 			}
 			else{
 				//监听，切换到高阶数据表格
+				System.out.println("高阶");
 				fieldLbl.setText("查看基础数据");
 				isHighInfo=true;
 				ptm.setHead(1);
+				ptm.Refresh(type);
 			}
 		}
 		else if (e.getSource() == refreshLbl) {
