@@ -1,9 +1,8 @@
 package newui.playerui;
 
-import java.awt.Color;
+import java.io.File;
 
 import javax.swing.ImageIcon;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTabbedPane;
 
@@ -13,7 +12,6 @@ import newui.UIhelper;
 import newui.playerui.details.PlayerDetailHistoryPanel;
 import newui.playerui.details.PlayerDetailInfoPanel;
 import vo.PlayerVO;
-import bl.player.Player;
 import blservice.PlayerBLService;
 
 public class PlayerDetailPanel extends FatherPanel{
@@ -44,7 +42,12 @@ public class PlayerDetailPanel extends FatherPanel{
 		
 		
 		//icon.setImage(icon.getImage().getScaledInstance(width*1/3, height*7/8, Image.SCALE_DEFAULT));
-		ImageIcon i=new ImageIcon("image/player/action/"+name+".png");
+		String actionIconName=name;
+		File file=new File("image/player/action/"+actionIconName+".png");
+		
+		if(!file.exists())
+			actionIconName="unknown";
+		ImageIcon i=new ImageIcon("image/player/action/"+actionIconName+".png");
 		
 	
 		
