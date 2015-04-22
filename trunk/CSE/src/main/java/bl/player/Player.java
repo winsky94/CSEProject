@@ -67,8 +67,8 @@ public class Player implements PlayerBLService {
 		baseInfoInit();
 		teams = Team.getTeamsPartition();
 		allMatchInfoInit();
-		// updateMatch um = new updateMatch(); //!!!!注意，这个是检查性能时交代码时才交！！
-		// um.startThread();
+		 updateMatch um = new updateMatch(); //!!!!注意，这个是检查性能时交代码时才交！！
+		 um.startThread();
 	}
 
 	private void baseInfoInit() {
