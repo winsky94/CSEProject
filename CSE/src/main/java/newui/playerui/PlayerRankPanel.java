@@ -365,7 +365,8 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener,
 		table.setFont(new Font("微软雅黑", 0, 12));
 		table.getTableHeader().setFont(new Font("微软雅黑", 0, 14));
 		table.getTableHeader().setBackground(new Color(211, 211, 211));
-		DefaultTableCellRenderer tcr = new MyTableCellRenderer();
+		MyTableCellRenderer tcr = new MyTableCellRenderer();
+//		tcr.setHighlightColumn(1);
 		for (int i = 0; i < table.getColumnCount(); i++) {
 			table.getColumn(table.getColumnName(i)).setCellRenderer(tcr);
 			MyTableCellRenderer.adjustTableColumnWidths(table);
