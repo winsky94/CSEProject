@@ -229,6 +229,7 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener,
 					ptm=new PlayerTableModel(1);
 				jsp.remove(table);
 				table=new JTable(ptm);	
+				table.addMouseListener(this);
 				jsp.getViewport().add(table);
 				
 			}
@@ -270,7 +271,7 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener,
 			table.revalidate();;
 			jsp.remove(table);
 			table=new JTable(ptm);
-			
+			table.addMouseListener(this);
 			jsp.getViewport().add(table);
 			CellRender();
 			
