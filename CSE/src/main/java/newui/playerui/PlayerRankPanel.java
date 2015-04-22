@@ -222,15 +222,20 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener,
 						AgeEnum.ALL, sort, "desc", 50);
 			// vlist.size()==0显示没有符合条件的球
 			if(ptm.headmodel!=0){
-				ptm=new PlayerTableModel(0);
+				if(isHighInfo==false)
+				   ptm=new PlayerTableModel(0);
+				else 
+					ptm=new PlayerTableModel(1);
 				jsp.remove(table);
 				table=new JTable(ptm);	
 				jsp.getViewport().add(table);
 				
 			}
 			if (vlist != null) {
-				ptm.refreshBase(vlist);
-				
+				if(isHighInfo==false)
+				  ptm.refreshBase(vlist);
+				else
+				  ptm.refreshHigh(vlist);
 			}
 			table.revalidate();
 			CellRender();
@@ -253,12 +258,11 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener,
 				fieldLbl.setText("查看基础数据");
 				isHighInfo=true;
 				ptm=new PlayerTableModel(1);
-				funcPnl.remove(filterRankBox);
-				filterRankBox = new MyComboBox(filterRankText2);
-				filterRankBox.setMaximumRowCount(13);
-				funcPnl.add(filterRankBox);
-				funcPnl.repaint();
-				funcPnl.revalidate();
+				filterRankBox.removeAllItems();
+				for(int i=0;i<filterRankText2.length;i++){
+					filterRankBox.addItem(filterRankText2[i]);
+				}
+				
 			}
 			ptm.Refresh(type);
 		
