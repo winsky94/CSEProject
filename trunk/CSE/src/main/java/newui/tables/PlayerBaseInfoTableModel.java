@@ -7,6 +7,7 @@ import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JTable;
 
+import newui.Service;
 import bl.player.Player;
 import bl.team.Team;
 import blservice.PlayerBLService;
@@ -27,7 +28,7 @@ public class PlayerBaseInfoTableModel extends MyTableModel {
 
 	public PlayerBaseInfoTableModel() {
 
-		player = new Player();
+		player = Service.player;
 		playerlist = new ArrayList<PlayerVO>();
 	}
 
@@ -121,15 +122,16 @@ public class PlayerBaseInfoTableModel extends MyTableModel {
 			ArrayList<Object> line = new ArrayList<Object>();
 			String name = vo.getName();
 			//ImageIcon tou = player.getPlayerPortraitImage(name);
-			ImageIcon tou=new ImageIcon("image/player/portrait/"+name+".png");
+		/*	ImageIcon tou=new ImageIcon("image/player/portrait/"+name+".png");
 			imgList.add(tou);
 			ImageIcon icon = new ImageIcon(tou.getImage().getScaledInstance(
 					currentTable.getColumn(currentTable.getColumnName(0))
 							.getWidth(), 40
 				, Image.SCALE_DEFAULT));
 
-			line.add(icon);
-			//line.add("头像");
+			line.add(icon);*/
+			//需要通过线程来加头像
+			line.add("头像");
 			line.add(name);
 			line.add(vo.getOwingTeam());
 			line.add(vo.getPosition());

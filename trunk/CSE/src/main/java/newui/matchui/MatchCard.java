@@ -18,6 +18,7 @@ import javax.swing.JPanel;
 import bl.team.Team;
 import blservice.TeamBLService;
 import vo.MatchVO;
+import newui.Service;
 import newui.Style;
 import newui.mainui.MainFrame;
 import newui.teamui.TeamDetailPanel;
@@ -37,7 +38,7 @@ public class MatchCard extends JPanel implements MouseListener {
 //显示单场比赛信息
 	public MatchCard(MatchVO vo) {
 		this.vo=vo;
-		team=new Team();
+		team=Service.team;
 		GridBagLayout gbl = new GridBagLayout();
 		GridBagConstraints gbc = new GridBagConstraints();
 		gbc.fill = GridBagConstraints.BOTH;

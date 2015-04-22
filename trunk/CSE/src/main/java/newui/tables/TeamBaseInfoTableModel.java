@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JTable;
 
+import newui.Service;
 import bl.team.Team;
 import blservice.TeamBLService;
 import vo.PlayerVO;
@@ -24,7 +25,7 @@ public class TeamBaseInfoTableModel extends MyTableModel{
 	private JTable currentTable;
 	private ArrayList<ImageIcon> teamIcon;
 	public TeamBaseInfoTableModel(){
-		team=new Team();
+		team=Service.team;
 		teamIcon=new ArrayList<ImageIcon>();
 	}
 	public int getRowCount() {

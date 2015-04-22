@@ -2,6 +2,7 @@ package newui.tables;
 
 import java.util.ArrayList;
 
+import newui.Service;
 import vo.TeamVO;
 import bl.team.Team;
 import blservice.TeamBLService;
@@ -12,7 +13,7 @@ public class TeamTableModel extends MyTableModel {
 	 */
 
 	private static final long serialVersionUID = 1L;
-	TeamBLService team = new Team();
+	TeamBLService team = Service.team;
 	ArrayList<ArrayList<Object>> content = new ArrayList<ArrayList<Object>>();
 	public int headmodel;
 	static String[] head;

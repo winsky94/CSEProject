@@ -18,6 +18,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import newui.Service;
 import newui.Style;
 import newui.mainui.MainFrame;
 import newui.teamui.TeamDetailPanel;
@@ -37,13 +38,13 @@ public class PlayerDetailInfoPanel extends JPanel {
 	PlayerVO vo;
 	PlayerBLService pservice;
 
-	public PlayerDetailInfoPanel(PlayerVO vo,PlayerBLService p) {
+	public PlayerDetailInfoPanel(PlayerVO vo) {
 
 		this.vo=vo;
 
 		// -----------------
 		//pservice = new Player();
-		pservice =p;
+		pservice =Service.player;
 		GridBagLayout gbl = new GridBagLayout();
 		GridBagConstraints gbc = new GridBagConstraints();
 		gbc.fill = GridBagConstraints.BOTH;

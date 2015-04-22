@@ -26,9 +26,7 @@ import newui.tables.MySortableTable;
 import newui.tables.MyTableCellRenderer;
 import newui.tables.RowHeaderTable;
 import newui.tables.TeamTableModel;
-import vo.TeamVO;
-import bl.team.Team;
-import blservice.TeamBLService;
+
 
 public class TeamIndexPanel extends FatherPanel implements MouseListener
 		 {

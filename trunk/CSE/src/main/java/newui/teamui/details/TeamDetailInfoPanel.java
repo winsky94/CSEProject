@@ -13,6 +13,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import newui.Service;
 import newui.Style;
 import vo.TeamVO;
 import bl.team.Team;
@@ -31,7 +32,7 @@ public class TeamDetailInfoPanel extends JPanel{
 	JPanel infoPnl,recentPnl;
 	public TeamDetailInfoPanel(String ch,String abbr){
 		//-----名字获取及VO生成----------
-		team=new Team();
+		team=Service.team;
 		chName=ch;
 		abbrName=abbr;
 		basevo=team.getTeamBaseInfo(abbr).get(0);

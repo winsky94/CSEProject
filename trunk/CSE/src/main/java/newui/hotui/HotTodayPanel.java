@@ -18,6 +18,7 @@ import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 
+import newui.Service;
 import newui.Style;
 import newui.mainui.MainFrame;
 import newui.playerui.PlayerDetailPanel;
@@ -52,7 +53,7 @@ public class HotTodayPanel extends HotFatherPanel implements MouseListener {
 		GridBagConstraints bc = new GridBagConstraints();
 		bc.fill = GridBagConstraints.BOTH;
 		bestPnl.setLayout(bl);
-		player = new Player();
+		player = Service.player;
 		// ========initial======
 
 		// -------bestPnl--------------

@@ -24,6 +24,7 @@ import bl.team.Team;
 import blservice.PlayerBLService;
 import blservice.TeamBLService;
 import newui.FatherPanel;
+import newui.Service;
 import newui.Style;
 import newui.mainui.MainFrame;
 import newui.playerui.PlayerDetailPanel;
@@ -49,7 +50,7 @@ public class TeamDetailPanel extends FatherPanel{
 	TeamBLService team;
 	public TeamDetailPanel(String teamName){
 		isDetail=true;
-		team=new Team();
+		team=Service.team;
 		//abbrName=Team.changeTeamNameCHToEN(teamName);
 		abbrName=teamName;
 		nameCH=Team.changeTeamNameENToCH(teamName);
@@ -76,7 +77,7 @@ public class TeamDetailPanel extends FatherPanel{
 		add(playerJsp);
 		
 		//------显示全部球员大头-----
-		PlayerBLService play=new Player();
+		PlayerBLService play=Service.player;
 		//这是那个方法？？？
 		players=play.getPlayersByTeam(abbrName);
 		

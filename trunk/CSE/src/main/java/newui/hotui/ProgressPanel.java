@@ -19,6 +19,7 @@ import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 
+import newui.Service;
 import newui.Style;
 import newui.mainui.MainFrame;
 import newui.playerui.PlayerDetailPanel;
@@ -26,7 +27,7 @@ import newui.tables.HotTableModel;
 import newui.tables.MyTableCellRenderer;
 import newui.teamui.TeamDetailPanel;
 import vo.PlayerVO;
-import bl.player.Player;
+
 import blservice.PlayerBLService;
 
 public class ProgressPanel extends HotFatherPanel implements MouseListener {
@@ -48,7 +49,7 @@ public class ProgressPanel extends HotFatherPanel implements MouseListener {
 	DecimalFormat dec = new DecimalFormat("0.00");
 	
 	public ProgressPanel() {
-		player = new Player();
+		player = Service.player;
 		GridBagLayout bl = new GridBagLayout();
 		GridBagConstraints bc = new GridBagConstraints();
 		bc.fill = GridBagConstraints.BOTH;

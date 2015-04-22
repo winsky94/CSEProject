@@ -18,6 +18,7 @@ import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 
+import newui.Service;
 import newui.Style;
 import newui.mainui.MainFrame;
 import newui.playerui.PlayerDetailPanel;
@@ -25,7 +26,6 @@ import newui.tables.HotTableModel;
 import newui.tables.MyTableCellRenderer;
 import newui.teamui.TeamDetailPanel;
 import vo.PlayerVO;
-import bl.player.Player;
 import blservice.PlayerBLService;
 
 public class HotSeasonPanel extends HotFatherPanel implements MouseListener {
@@ -48,7 +48,7 @@ public class HotSeasonPanel extends HotFatherPanel implements MouseListener {
 	HotSeasonModel model;
 
 	public HotSeasonPanel() {
-		player = new Player();
+		player = Service.player;
 		GridBagLayout bl = new GridBagLayout();
 		GridBagConstraints bc = new GridBagConstraints();
 		bc.fill = GridBagConstraints.BOTH;

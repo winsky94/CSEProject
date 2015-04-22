@@ -18,6 +18,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
 import newui.FatherPanel;
+import newui.Service;
 import newui.Style;
 import newui.UIhelper;
 import vo.MatchVO;
@@ -96,7 +97,7 @@ public class MatchIndexPanel extends FatherPanel {
 		funcPnl.add(visitingLbl);
 		visitingBox = new MyComboBox(teamArr);
 		funcPnl.add(visitingBox);
-		mservice = new Match();
+		mservice = Service.match;
 		// ------搜索按钮---------
 		searchBtn = new MyLabel("搜索");
 		searchBtn.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));

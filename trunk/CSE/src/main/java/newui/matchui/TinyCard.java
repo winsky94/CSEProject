@@ -15,6 +15,7 @@ import javax.swing.JPanel;
 
 import bl.team.Team;
 import blservice.TeamBLService;
+import newui.Service;
 import newui.Style;
 import newui.mainui.MainFrame;
 import vo.MatchVO;
@@ -36,7 +37,7 @@ public class TinyCard extends JPanel{
 		setLayout(gbl);
 		isHomeBigger = MatchHelper.isHomeBigger(vo);
 		// ----------------
-		team=new Team();
+		team=Service.team;
 		ImageIcon imgicon;
 		String name;
 		
