@@ -51,7 +51,7 @@ public class Player implements PlayerBLService {
 	private static String[] player_CH = new String[] { "全部", "前锋", "中锋",
 		"后卫", "得分", "篮板数", "助攻数", "得分/篮板/助攻(1:1:1)", 
 		"投篮命中率", "盖帽数", "抢断数", "罚球命中率", "犯规数", "失误数",
-		"分钟", "效率", "两双", "西部球队", "东部球队", 
+		"在场时间", "效率", "两双", "西部球队", "东部球队", 
 		 "真实命中率", "GmSc效率值", "投篮效率", "篮板率", "进攻篮板数",
 		 "防守篮板数", "进攻篮板率", "防守篮板率", "助攻率", "抢断率", 
 		 "盖帽率", "失误率", "使用率"};
@@ -907,8 +907,10 @@ public class Player implements PlayerBLService {
 		ArrayList<PlayerVO> result = new ArrayList<PlayerVO>();
 		if (!position.equals("all")) {
 			for (int i = 0; i < thePlayers.size(); i++) {
-				if (!thePlayers.get(i).getPosition().contains(position))
+				if (!thePlayers.get(i).getPosition().contains(position)){
 					thePlayers.remove(i);
+					
+				}
 			}
 		}
 		if (!union.equals("all")) {
@@ -1436,6 +1438,13 @@ public class Player implements PlayerBLService {
 	public static void main(String[] args) {
 		long start = System.currentTimeMillis();
 		Player player = new Player();
+		ArrayList<PlayerVO> players = player.selectPlayersBySeason("13-14",
+				"G", "all", AgeEnum.ALL, "score", "desc", 50);
+		for (int i = 0; i < 5; i++)
+			System.out.println(players.get(i).getName()
+					+ players.get(i).getScore());
+		PlayerVO player1 = player.getPlayerSeasonInfo("13-14","Kevin Love");
+		System.out.println("----"+player1.getPosition());
 //		ArrayList<PlayerVO> players = player.getPlayerSeasonInfo("13-14");
 //		for (int i = 0; i < 5; i++)
 //			System.out.println(players.get(i).getName()
