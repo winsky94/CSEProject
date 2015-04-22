@@ -186,7 +186,8 @@ public class TitleBar extends JPanel implements MouseListener {
 
 		}
 		else{
-		window.setVisible(false);	
+		if(window!=null)
+			window.setVisible(false);	
 		if (e.getSource() == indexBtn)
 			indexBtn.setBackground(Style.FOCUS_BLUE);
 		else if (e.getSource() == playerBtn)
