@@ -2,6 +2,7 @@ package newui;
 
 import java.awt.Color;
 import java.awt.Cursor;
+import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -24,7 +25,7 @@ public class TopPanel extends JPanel implements MouseListener {
 	private static final long serialVersionUID = 1L;
 	MyButton miniBtn, maxBtn, exitBtn;
 	boolean isMax = false;
-	private MyButton backBtn;
+	private JLabel backBtn;
 
 	public TopPanel() {
 		GridBagLayout g = new GridBagLayout();
@@ -34,7 +35,10 @@ public class TopPanel extends JPanel implements MouseListener {
 		setLayout(g);
 		setBackground(Color.white);
 		// --------------------
-		backBtn = new MyButton(new ImageIcon("image/TopTitle/back.png"));
+		backBtn = new JLabel("返回",new ImageIcon("image/TopTitle/back.png"),JLabel.LEFT);
+		backBtn.setFont(new Font("微软雅黑",Font.PLAIN,18));
+		backBtn.setForeground(Style.DEEP_BLUE);
+		backBtn.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		c.gridx = 0;
 		c.gridwidth = 1;
 		c.weightx = 0.01;
@@ -124,6 +128,7 @@ public class TopPanel extends JPanel implements MouseListener {
 		}
 		if (e.getSource() == backBtn) {
 			backBtn.setIcon(new ImageIcon("image/TopTitle/backFocus.png"));
+			backBtn.setForeground(Style.FOCUS_BLUE);
 		}
 	}
 
@@ -142,6 +147,7 @@ public class TopPanel extends JPanel implements MouseListener {
 		}
 		if (e.getSource() == backBtn) {
 			backBtn.setIcon(new ImageIcon("image/TopTitle/back.png"));
+			backBtn.setForeground(Style.DEEP_BLUE);
 		}
 
 	}

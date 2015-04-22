@@ -1,5 +1,7 @@
 package newui.playerui;
 
+import java.awt.Color;
+import java.awt.Font;
 import java.io.File;
 
 import javax.swing.ImageIcon;
@@ -8,6 +10,7 @@ import javax.swing.JTabbedPane;
 
 import newui.FatherPanel;
 import newui.Service;
+import newui.Style;
 import newui.UIhelper;
 import newui.playerui.details.PlayerDetailHistoryPanel;
 import newui.playerui.details.PlayerDetailInfoPanel;
@@ -67,6 +70,9 @@ public class PlayerDetailPanel extends FatherPanel{
 		gbc.weightx=500;
 		gbl.setConstraints(tab, gbc);
 		add(tab);
+		tab.setFont(new Font("微软雅黑",Font.PLAIN,15));
+		tab.setBackground(Color.white);
+		tab.setForeground(Style.DEEP_BLUE);
 		double pre=System.currentTimeMillis();
 		tab.addTab("基本信息", new PlayerDetailInfoPanel(vo));
 		double pp=System.currentTimeMillis();

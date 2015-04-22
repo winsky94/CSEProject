@@ -42,6 +42,7 @@ public class TeamDetailHistoryPanel extends JPanel {
 		GridBagConstraints gbc = new GridBagConstraints();
 		gbc.fill = GridBagConstraints.BOTH;
 		setLayout(gbl);
+		setBackground(Color.white);
 		// ------------------------
 		funcPnl = new JPanel();
 		funcPnl.setOpaque(false);
