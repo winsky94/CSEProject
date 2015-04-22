@@ -105,6 +105,8 @@ public class PlayerDetailHistoryPanel extends JPanel {
 		public MyBox(String[] arr) {
 			super(arr);
 			setFont(font);
+			this.setBackground(Style.BACK_GREY);
+			this.setForeground(Color.white);
 		}
 	}
 
