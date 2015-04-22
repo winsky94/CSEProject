@@ -1,15 +1,19 @@
 package newui.mainui;
 
+import java.awt.Graphics;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.Point;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 import java.util.Stack;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 
@@ -49,6 +53,7 @@ public class MainFrame extends JFrame{
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		//-------下面是布局---------------
+		
 		
 		//-------topPnl关闭按钮与最小化-----
 		topPnl=new TopPanel();
@@ -158,6 +163,8 @@ public class MainFrame extends JFrame{
 			instance=new MainFrame();
 		return instance;
 	}
+	
+	
 	public static void main(String[] args) {
 		MainFrame.getInstance();
 		InitialThread thread=new InitialThread();
@@ -165,4 +172,12 @@ public class MainFrame extends JFrame{
 		
 	}
 	
+	class BigPanel extends JPanel{
+		protected void paintComponent(Graphics g) {
+			ImageIcon icon = new ImageIcon("image/1.jpg");
+			Image img = icon.getImage();
+			g.drawImage(img, 0, 0, icon.getIconWidth(),
+					icon.getIconHeight(), icon.getImageObserver());
+		}
+	}
 }

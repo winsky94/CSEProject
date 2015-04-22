@@ -949,15 +949,23 @@ public class Player implements PlayerBLService {
 	public ArrayList<PlayerVO> selectPlayersBySeason(String season,
 			String position, String union, AgeEnum ageClass, String column,
 			String order, int num) {
+		ArrayList<PlayerVO> result=new ArrayList<PlayerVO>();
 		ArrayList<PlayerVO> thePlayers = getPlayerSeasonInfo(season);
-		return selectPlayers(thePlayers, position, union, ageClass, column,
+		for(PlayerVO vo:thePlayers){
+			result.add(vo);
+		}
+		return selectPlayers(result, position, union, ageClass, column,
 				order, num);
 	}
 
 	public ArrayList<PlayerVO> selectPlayersByAverage(String position,
 			String union, AgeEnum ageClass, String column, String order, int num) {
+		ArrayList<PlayerVO> result=new ArrayList<PlayerVO>();
 		ArrayList<PlayerVO> thePlayers = getPlayerAverageInfo();
-		return selectPlayers(thePlayers, position, union, ageClass, column,
+		for(PlayerVO vo:thePlayers){
+			result.add(vo);
+		}
+		return selectPlayers(result, position, union, ageClass, column,
 				order, num);
 	}
 
