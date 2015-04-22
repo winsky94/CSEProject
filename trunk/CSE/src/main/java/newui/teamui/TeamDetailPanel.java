@@ -103,6 +103,9 @@ public class TeamDetailPanel extends FatherPanel{
 		gbc.weighty=100;
 		gbl.setConstraints(tab, gbc);
 		add(tab);
+		tab.setFont(new Font("微软雅黑",Font.PLAIN,15));
+		tab.setBackground(Color.white);
+		tab.setForeground(Style.DEEP_BLUE);
 		//---------------------
 		infoPnl=new TeamDetailInfoPanel(nameCH,abbrName);
 		historyPnl=new TeamDetailHistoryPanel(abbrName);
