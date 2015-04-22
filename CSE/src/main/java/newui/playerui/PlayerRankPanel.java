@@ -66,6 +66,7 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener,
 	public PlayerRankPanel() {
 		ptm = new PlayerTableModel(0);
 		player = Service.player;
+		listen=new highlisten();
 		// ------funcPnl--------
 		funcPnl = new JPanel();
 		funcPnl.setBackground(Style.BACK_GREY);
@@ -148,8 +149,8 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener,
 		titleBar.setCurrentTableModel(ptm);
 		titleBar.setModelEnum(TableModel.PLAYERRANK);
 		titleBar.setTable(table);
-		table.addMouseListener(this);
-		;
+		
+		
 		gbc.insets=new Insets(0, 2, 1, 2);
 		jsp = new JScrollPane();
 		jsp.getViewport().add(table);
@@ -172,7 +173,7 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener,
 		jsp.setRowHeaderView(new RowHeaderTable(table, 30));
 		titleBar.setSeason(seasonBox.getSelectedItem().toString());
 		titleBar.setAveOrAll(typeBox.getSelectedItem().toString());
-		table.getTableHeader().addMouseListener(listen);
+	
 		
 	}
 
@@ -256,8 +257,9 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener,
 					ptm.refreshHigh(vlist);
 			}
 			table.revalidate();
+
 			table.repaint();
-			table.getTableHeader().addMouseListener(listen);
+
 			int col=ptm.findColumn(sort);
 			tcr.setHighlightColumn(col);
 			lastcolumn=col;
@@ -299,7 +301,7 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener,
 			titleBar.setCurrentTableModel(ptm);
 			table.addMouseListener(this);
 			jsp.getViewport().add(table);
-			table.getTableHeader().addMouseListener(listen);
+			//table.getTableHeader().addMouseListener(listen);
 			CellRender();
 
 		} else if (e.getSource() == refreshLbl) {
@@ -387,8 +389,12 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener,
 		}
 		table.getTableHeader().setForeground(Color.white);
 		table.getTableHeader().setBackground(Style.FOCUS_BLUE);
+
+		table.getTableHeader().addMouseListener(listen);
+		table.addMouseListener(this);
 		table.revalidate();
 		table.repaint();
+
 	}
 	
 	class highlisten extends MouseAdapter{
