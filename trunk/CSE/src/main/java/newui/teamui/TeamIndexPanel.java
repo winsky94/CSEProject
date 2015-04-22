@@ -153,9 +153,12 @@ public class TeamIndexPanel extends FatherPanel implements MouseListener {
 			ttm.Refresh(typeBox.getSelectedItem().toString());
 			table.revalidate();
 			table.repaint();
+			tcr.setHighlightColumn(-1);
+			lastcolumn=-1;
+			clicktime=0;
 		}
 
-		if (e.getSource() == table) {
+		else if (e.getSource() == table) {
 			if (e.getClickCount() == 2) {
 				int row = table.getSelectedRow();
 				String tname = table.getValueAt(row, 1).toString();
@@ -163,7 +166,7 @@ public class TeamIndexPanel extends FatherPanel implements MouseListener {
 						new TeamDetailPanel(tname));
 			}
 		}
-		if (e.getSource() == fieldLbl) {
+		else if (e.getSource() == fieldLbl) {
 			String type = typeBox.getSelectedItem().toString();
 			if (isHighInfo) {
 				// 监听,切换到基础数据表格
