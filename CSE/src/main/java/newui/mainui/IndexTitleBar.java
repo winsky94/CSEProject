@@ -6,6 +6,9 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -90,6 +93,21 @@ public class IndexTitleBar extends JPanel implements MouseListener {
 		searchBtn.addMouseListener(this);
 		searchBtn.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		add(searchBtn);
+		searchBtn.addKeyListener(new KeyAdapter(){
+
+			public void keyPressed(KeyEvent e) {
+				// TODO Auto-generated method stub
+				if(e.getKeyCode()==KeyEvent.VK_ENTER){
+					//回车监听
+					String scontent=searchFld.getText();
+					MainFrame.getInstance().setContentPanel(new SearchResultPanel(scontent));
+				}
+	
+			}
+
+		
+			
+		});
 
 	}
 

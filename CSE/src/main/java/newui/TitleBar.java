@@ -6,6 +6,8 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
@@ -113,6 +115,13 @@ public class TitleBar extends JPanel implements MouseListener {
 		searchBtn.addMouseListener(this);
 		searchBtn.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		add(searchBtn);
+		searchBtn.addKeyListener(new KeyAdapter(){
+			public void keyPressed(KeyEvent e){
+				if(e.getKeyCode()==KeyEvent.VK_ENTER){
+					searchExcute();
+				}
+			}
+		});
 	}
 
 	class MyButton extends JButton {
@@ -152,56 +161,8 @@ public class TitleBar extends JPanel implements MouseListener {
 			
 		}
 		if (e.getSource() == searchBtn) {
-			PlayerBLService p;TeamBLService t;
-			// 监听
-			String scontent=searchFld.getText();
-			ArrayList<PlayerVO> result;
-			ArrayList<TeamVO> team;
-			switch(model){
-			case RESULTPLAYER:
-				SearchResultPanel.setContent(scontent);
-				tablemodel.setContent(scontent);
-			case PLAYERBASEINFO:
-				p=Service.player;
-				 result=p.getPlayerBaseInfo(scontent);
-				tablemodel.SearchRefresh(result);break;
-			case PLAYERRANK:
-				p=Service.player;
-
-			//	if(aveOrAll.equals("场均"))
-					//可能调用错方法了 方法重名
-					//result=p.getPlayerAverageInfo(scontent);
-			//	else
-					//result=p.getPlayerSeasonInfo(season, scontent);
-			//	tablemodel.SearchRefresh(result);break;
-				break;
-			case RESULTTEAM:
-				SearchResultPanel.setContent(scontent);
-				tablemodel.setContent(scontent);
-			case TEAMBASEINFO:
-				t=Service.team;
-				team=t.getTeamBaseInfo(scontent);
-				tablemodel.SearchRefresh(team);break;
-			case TEAMRANK:
-			//	t=Service.team;
-			//	if(aveOrAll.equals("场均"))
-					//可能调用错方法了 方法重名
-				//	team=t.getTeamAverageInfo(scontent);
-				//else
-				//	team=t.getTeamSeasonInfo(season, scontent);
-				//tablemodel.SearchRefresh(team);break;
-				break;
-				
-			}
-			table.revalidate();
-				
-				
-			
-			
-			
-			//MainFrame.getInstance().setContentPanel(new SearchResultPanel(scontent));
-		
-			
+	
+			searchExcute();	
 		}
 	}
 
@@ -268,5 +229,49 @@ public class TitleBar extends JPanel implements MouseListener {
 		this.aveOrAll=i;
 	}
 	
+	public void searchExcute(){
+		PlayerBLService p;TeamBLService t;
+		// 监听
+		String scontent=searchFld.getText();
+		ArrayList<PlayerVO> result;
+		ArrayList<TeamVO> team;
+		switch(model){
+		case RESULTPLAYER:
+			SearchResultPanel.setContent(scontent);
+			tablemodel.setContent(scontent);
+		case PLAYERBASEINFO:
+			p=Service.player;
+			 result=p.getPlayerBaseInfo(scontent);
+			tablemodel.SearchRefresh(result);break;
+		case PLAYERRANK:
+			p=Service.player;
+
+		//	if(aveOrAll.equals("场均"))
+				//可能调用错方法了 方法重名
+				//result=p.getPlayerAverageInfo(scontent);
+		//	else
+				//result=p.getPlayerSeasonInfo(season, scontent);
+		//	tablemodel.SearchRefresh(result);break;
+			break;
+		case RESULTTEAM:
+			SearchResultPanel.setContent(scontent);
+			tablemodel.setContent(scontent);
+		case TEAMBASEINFO:
+			t=Service.team;
+			team=t.getTeamBaseInfo(scontent);
+			tablemodel.SearchRefresh(team);break;
+		case TEAMRANK:
+		//	t=Service.team;
+		//	if(aveOrAll.equals("场均"))
+				//可能调用错方法了 方法重名
+			//	team=t.getTeamAverageInfo(scontent);
+			//else
+			//	team=t.getTeamSeasonInfo(season, scontent);
+			//tablemodel.SearchRefresh(team);break;
+			break;
+			
+		}
+		table.revalidate();
+	}
 	
 }
