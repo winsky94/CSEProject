@@ -2,17 +2,23 @@ package newui.matchui;
 
 import java.awt.Cursor;
 import java.awt.Font;
+import java.awt.Graphics;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.Insets;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+
+
+
 
 
 
@@ -126,8 +132,10 @@ public class DetailCard extends JPanel implements MouseListener {
 		// ----habbrNameLbl-----
 		vabbrNameLbl = new AbbrNameLabel(v.getVisitingTeam());
 		visitingNamePnl.add(vabbrNameLbl);
+		
 		//----------detailPanel-------
 		detailPnl=new JPanel();
+		detailPnl.setBorder(BorderFactory.createLineBorder(Style.DEEP_BLUE));
 		detailPnl.setOpaque(false);
 		gbc.gridx =2;
 		gbc.gridy = 1;
@@ -140,16 +148,19 @@ public class DetailCard extends JPanel implements MouseListener {
 		//------------
 		ArrayList<String> detail=v.getDetailScores();
 		int col=detail.size()+1;
-		detailPnl.setLayout(new GridLayout(3,col));
+		GridLayout gridLayout=new GridLayout(3,col);
+		detailPnl.setLayout(gridLayout);
 	//	detailPnl.add(new JLabel());
 		JLabel temp1=new DetailLabel("各节比分");
 		temp1.setFont(new Font("微软雅黑",Font.BOLD,18));
 		temp1.setForeground(Style.FOCUS_GREY);
+		temp1.setHorizontalAlignment(JLabel.CENTER);
 		detailPnl.add(temp1);
 		for(int i=1;i<col;i++){
 			JLabel temp=new DetailLabel(String.valueOf(i));
 			temp.setFont(new Font("微软雅黑",Font.BOLD,18));
 			temp.setForeground(Style.FOCUS_GREY);
+			temp.setHorizontalAlignment(JLabel.CENTER);
 			detailPnl.add(temp);
 		}
 
@@ -162,13 +173,22 @@ public class DetailCard extends JPanel implements MouseListener {
 			vdet.add(s[0]);
 			hdet.add(s[1]);
 		}
-		detailPnl.add(new DetailLabel(v.getVisitingTeam()));
-		for(String s:vdet)
-			detailPnl.add(new DetailLabel(s));
-		detailPnl.add(new DetailLabel(v.getHomeTeam()));
-		for(String s:hdet)
-			detailPnl.add(new DetailLabel(s));
-		
+		DetailLabel detailLabel1=new DetailLabel(v.getVisitingTeam());
+		detailLabel1.setHorizontalAlignment(JLabel.CENTER);
+		detailPnl.add(detailLabel1);
+		for(String s:vdet){
+			DetailLabel dl=new DetailLabel(s);
+			dl.setHorizontalAlignment(JLabel.CENTER);
+			detailPnl.add(dl);
+		}
+		DetailLabel detailLabel2=new DetailLabel(v.getHomeTeam());
+		detailLabel2.setHorizontalAlignment(JLabel.CENTER);
+		detailPnl.add(detailLabel2);
+		for(String s:hdet){
+			DetailLabel dl=new DetailLabel(s);
+			dl.setHorizontalAlignment(JLabel.CENTER);
+			detailPnl.add(dl);
+		}
 		
 	}
 	class DetailLabel extends JLabel{
@@ -214,6 +234,13 @@ public class DetailCard extends JPanel implements MouseListener {
 			 * 谁的分高就是红色(Style.WINNER_RED)
 			 */
 		}
+	}
+	
+	class LinePanel extends JPanel{
+		 public void paintComponent(Graphics g){
+             // TODO Auto-generated method stub
+             g.drawLine(40,40,80,40);
+         }
 	}
 
 	public void mouseClicked(MouseEvent e) {
