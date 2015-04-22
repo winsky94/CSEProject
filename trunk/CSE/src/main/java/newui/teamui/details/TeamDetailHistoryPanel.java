@@ -78,12 +78,13 @@ public class TeamDetailHistoryPanel extends JPanel {
 		table.setFont(new Font("微软雅黑", 0, 12));
 		table.getTableHeader().setFont(new Font("微软雅黑", 0, 14));
 		table.getTableHeader().setForeground(Color.white);
-		table.getTableHeader().setBackground(Style.FOCUS_BLUE);		DefaultTableCellRenderer tcr = new MyTableCellRenderer();
+		table.getTableHeader().setBackground(Style.FOCUS_BLUE);
+		DefaultTableCellRenderer tcr = new MyTableCellRenderer();
 		for (int i = 0; i < table.getColumnCount(); i++) {
 			table.getColumn(table.getColumnName(i)).setCellRenderer(tcr);
 		}
 
-		gbc.insets=new Insets(0, 2, 1, 2);
+		gbc.insets = new Insets(0, 2, 1, 2);
 		jsp = new JScrollPane(table);
 		gbc.gridy = 1;
 		gbc.gridheight = 10;
@@ -107,13 +108,14 @@ public class TeamDetailHistoryPanel extends JPanel {
 			}
 
 		});
-		
-		table.addMouseListener(new MouseAdapter(){
-			public void mouseClicked(MouseEvent e){
-				if(e.getClickCount()==2){
-					int row=table.getSelectedRow();
-					String name=table.getValueAt(row, 0).toString();
-					MainFrame.getInstance().setContentPanel(new PlayerDetailPanel(name));
+
+		table.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				if (e.getClickCount() == 2) {
+					int row = table.getSelectedRow();
+					String name = table.getValueAt(row, 0).toString();
+					MainFrame.getInstance().setContentPanel(
+							new PlayerDetailPanel(name));
 				}
 			}
 		});
@@ -126,6 +128,8 @@ public class TeamDetailHistoryPanel extends JPanel {
 		public MyBox(String[] arr) {
 			super(arr);
 			setFont(font);
+			this.setBackground(Style.BACK_GREY);
+			this.setForeground(Color.white);
 		}
 	}
 
