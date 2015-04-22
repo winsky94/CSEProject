@@ -183,6 +183,9 @@ public class PlayerTableModel extends MyTableModel {
 			else
 				refreshHigh(v);
 		}
+		else {
+			content.clear();
+		}
 
 	}
 
