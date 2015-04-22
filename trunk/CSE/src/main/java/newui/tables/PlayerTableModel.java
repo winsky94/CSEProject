@@ -87,7 +87,8 @@ public class PlayerTableModel extends MyTableModel {
 			else
 				refreshHigh(result);
 
-		}
+		}else
+			content.clear();
 
 		/*
 		 * d={"球员名称","所属球队","参赛场数","先发场数","篮板数","助攻数","在场时间",

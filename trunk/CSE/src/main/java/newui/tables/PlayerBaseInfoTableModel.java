@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.JTable;
 
 import newui.Service;
@@ -25,7 +26,7 @@ public class PlayerBaseInfoTableModel extends MyTableModel {
 	private ArrayList<ImageIcon> imgList = new ArrayList<ImageIcon>();
 	private ArrayList<PlayerVO> playerlist;
 	private JTable currentTable;
-
+	private JLabel label;
 	public PlayerBaseInfoTableModel() {
 
 		player = Service.player;
@@ -101,6 +102,7 @@ public class PlayerBaseInfoTableModel extends MyTableModel {
 		playerlist = player.getPlayerBaseInfo();
 		if (playerlist == null || playerlist.size() == 0) {
 			// 显示没有符合消息的数据
+			content.clear();
 		} else
 			Refresh(playerlist);
 
@@ -122,16 +124,16 @@ public class PlayerBaseInfoTableModel extends MyTableModel {
 			ArrayList<Object> line = new ArrayList<Object>();
 			String name = vo.getName();
 			//ImageIcon tou = player.getPlayerPortraitImage(name);
-		/*	ImageIcon tou=new ImageIcon("image/player/portrait/"+name+".png");
+			ImageIcon tou=new ImageIcon("image/player/portrait/"+name+".png");
 			imgList.add(tou);
 			ImageIcon icon = new ImageIcon(tou.getImage().getScaledInstance(
 					currentTable.getColumn(currentTable.getColumnName(0))
 							.getWidth(), 40
 				, Image.SCALE_DEFAULT));
 
-			line.add(icon);*/
+			line.add(icon);
 			//需要通过线程来加头像
-			line.add("头像");
+			//line.add("头像");
 			line.add(name);
 			line.add(vo.getOwingTeam());
 			line.add(vo.getPosition());
@@ -191,12 +193,14 @@ public class PlayerBaseInfoTableModel extends MyTableModel {
 		if(v!=null&&v.size()!=0){
 			
 			Refresh(v);
-		}
-		
+		}else
+			content.clear();
+		label.setText("在球员中检索到"+v.size()+"条符合关键字"+ss+"的结果...");
 	}
 	
-	public PlayerBLService getService(){
-		return player;
+	
+	public void setCurrentLable(JLabel label){
+		this.label=label;
+		
 	}
-
 }

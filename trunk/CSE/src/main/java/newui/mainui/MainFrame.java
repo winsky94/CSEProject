@@ -114,6 +114,10 @@ public class MainFrame extends JFrame{
 		if(pnl.isDetail){
 			topPnl.showBtn();
 			stack.push(lastPnl);
+		}else{
+			topPnl.hideBtn();
+			//是否置空
+			stack.removeAllElements();
 		}	
 		lastPnl=pnl;
 	

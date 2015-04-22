@@ -10,7 +10,7 @@ public class MyTableModel extends AbstractTableModel{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-
+	protected String ss;
 	public int getRowCount() {
 		// TODO Auto-generated method stub
 		return 0;
@@ -40,6 +40,8 @@ public class MyTableModel extends AbstractTableModel{
 		
 	}
 	
-	
+	public void setContent(String s){
+		ss=s;
+	}
 
 }
