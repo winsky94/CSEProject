@@ -7,7 +7,6 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -22,14 +21,12 @@ import newui.FatherPanel;
 import newui.Style;
 import newui.TableModel;
 import newui.mainui.MainFrame;
-import newui.tables.MySortableTable;
 import newui.tables.MyTableCellRenderer;
 import newui.tables.RowHeaderTable;
+import newui.tables.TableSorter;
 import newui.tables.TeamTableModel;
 
-
-public class TeamIndexPanel extends FatherPanel implements MouseListener
-		 {
+public class TeamIndexPanel extends FatherPanel implements MouseListener {
 	/**
 	 * 
 	 */
@@ -61,7 +58,7 @@ public class TeamIndexPanel extends FatherPanel implements MouseListener
 		// 暂时没有bl方法
 		String[] seasonBoxText = { "13-14" };
 		seasonBox = new MyComboBox(seasonBoxText);
-		//seasonBox.addItemListener(this);
+		// seasonBox.addItemListener(this);
 		funcPnl.add(seasonBox);
 		funcPnl.add(new JLabel("       "));
 		// ----DataType---------
@@ -69,7 +66,7 @@ public class TeamIndexPanel extends FatherPanel implements MouseListener
 		funcPnl.add(typeLbl);
 		String[] typeText = { "赛季", "场均" };
 		typeBox = new MyComboBox(typeText);
-		//typeBox.addItemListener(this);
+		// typeBox.addItemListener(this);
 		funcPnl.add(typeBox);
 		funcPnl.add(new JLabel("       "));
 		// ------fieldLbl--------
@@ -84,10 +81,14 @@ public class TeamIndexPanel extends FatherPanel implements MouseListener
 		funcPnl.add(refreshLbl);
 		// -----table-----------
 		ttm = new TeamTableModel(0);
-		table = new MySortableTable(ttm, 1);
+		// table = new MySortableTable(ttm, 1);
+		table = new JTable(ttm);
+		TableSorter ts = new TableSorter(table.getModel(),
+				table.getTableHeader());
+		table.setModel(ts);
 
 		// table 渲染器，设置文字内容居中显示，设置背景色等
-	
+
 		table.addMouseListener(this);
 		table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
 		titleBar.setCurrentTableModel(ttm);
@@ -107,7 +108,6 @@ public class TeamIndexPanel extends FatherPanel implements MouseListener
 		CellRender();
 		MyTableCellRenderer.adjustTableColumnWidths(table);// 自动设置列宽
 		// 设置表头颜色
-		
 
 		// 设置显示行号
 		jsp.setRowHeaderView(new RowHeaderTable(table, 20));
@@ -158,20 +158,21 @@ public class TeamIndexPanel extends FatherPanel implements MouseListener
 				// 监听,切换到基础数据表格
 				fieldLbl.setText("查看高阶数据");
 				isHighInfo = false;
-				ttm=new TeamTableModel(0);
-				
+				ttm = new TeamTableModel(0);
+
 			} else {
 				// 监听,切换到高阶数据表格
 				fieldLbl.setText("查看基础数据");
 				isHighInfo = true;
-				ttm=new TeamTableModel(1);
-				
+				ttm = new TeamTableModel(1);
+
 			}
 			ttm.Refresh(type);
-			table.revalidate();;
+			table.revalidate();
+			;
 			jsp.remove(table);
-			table=new JTable(ttm);
-			
+			table = new JTable(ttm);
+
 			jsp.getViewport().add(table);
 			CellRender();
 		}
@@ -241,7 +242,7 @@ public class TeamIndexPanel extends FatherPanel implements MouseListener
 		}
 	}
 
-	public void CellRender(){
+	public void CellRender() {
 		table.setSelectionBackground(new Color(225, 255, 255));// 设置选择行的颜色——淡蓝色
 		table.setFont(new Font("微软雅黑", 0, 12));
 		table.getTableHeader().setFont(new Font("微软雅黑", 0, 14));
