@@ -84,6 +84,7 @@ public class TeamIndexPanel extends FatherPanel implements MouseListener {
 		fieldLbl.addMouseListener(this);
 		fieldLbl.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		funcPnl.add(fieldLbl);
+		funcPnl.add(new JLabel("       "));
 		// -----refreshLbl------
 		refreshLbl = new MyJLabel("刷新", new ImageIcon("image/refreshWhite.png"));
 		refreshLbl.addMouseListener(this);
