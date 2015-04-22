@@ -84,7 +84,7 @@ public class IndexPanel extends FatherPanel implements MouseListener{
 		add(infoPnl);
 		infoPnl.setLayout(new GridLayout(1, 4));
 		// -----todayPnl-----------
-		IndexCard todayPnl = new IndexCard();
+		 todayPnl = new IndexCard();
 		todayPnl.setTitleAndName("今日得分王", dname);
 		todayPnl.addMouseListener(this);
 		//todayPnl.iconPnl.setBackground(new Color(254,239,182));
@@ -98,7 +98,7 @@ public class IndexPanel extends FatherPanel implements MouseListener{
 		todayPnl.namePnl.setBackground(Style.HOT_YELLOWFOCUS);
 		infoPnl.add(todayPnl);
 		// -----seasonPnl-----------
-		IndexCard seasonPnl = new IndexCard();
+		 seasonPnl = new IndexCard();
 		seasonPnl.setTitleAndName("赛季得分王", sname);
 		seasonPnl.addMouseListener(this);
 		//seasonPnl.iconPnl.setBackground(new Color(255,147,147));
@@ -113,7 +113,7 @@ public class IndexPanel extends FatherPanel implements MouseListener{
 		seasonPnl.namePnl.setBackground(Style.HOT_REDFOCUS);
 		infoPnl.add(seasonPnl);
 		// -----teamPnl-----------
-		IndexCard teamPnl = new IndexCard();
+		 teamPnl = new IndexCard();
 		teamPnl.setTitleAndName("场均得分最高球队", tname);
 		teamPnl.addMouseListener(this);
 		//teamPnl.iconPnl.setBackground(new Color(179,255,188));
@@ -127,7 +127,7 @@ public class IndexPanel extends FatherPanel implements MouseListener{
 		teamPnl.namePnl.setBackground(Style.HOT_BLUEFOCUS);
 		infoPnl.add(teamPnl);
 		// -----progressPnl-----------
-		IndexCard progressPnl = new IndexCard();
+		 progressPnl = new IndexCard();
 		progressPnl.setTitleAndName("得分进步最快球员", pname);
 		progressPnl.addMouseListener(this);
 		//progressPnl.iconPnl.setBackground(new Color(204,153,255));

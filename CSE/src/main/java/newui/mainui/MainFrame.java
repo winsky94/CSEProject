@@ -173,11 +173,14 @@ public class MainFrame extends JFrame{
 	//欢迎动画
 		/*InitialThread thread=new InitialThread();
 		thread.startThread();*/
+		double pre=System.currentTimeMillis();
 		PlayerBLService p=Service.player;
 		TeamBLService t=Service.team;
 		MatchBLService m=Service.match;
 		p.getPlayerAverageInfo();
 		p.getPlayerSeasonInfo("13-14");
+		double post=System.currentTimeMillis();
+		System.out.println("init"+(post-pre));
 		MainFrame.getInstance();
 		
 	}
