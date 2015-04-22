@@ -6,7 +6,9 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.awt.Point;
 import java.awt.Window;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -39,12 +41,22 @@ public class TeamWindow extends JWindow implements MouseListener {
 		add(pnl);
 		setBounds(x - 55, y, width, height);
 		setVisible(true);
-		addMouseListener(this);
+	//	addMouseListener(this);
 		pnl.setLayout(new GridLayout(1, 2));
 		westPnl = new PartitionPanel(0);
 		pnl.add(westPnl);
 		eastPnl = new PartitionPanel(1);
 		pnl.add(eastPnl);
+		
+		pnl.addMouseListener(new MouseAdapter(){
+			public void mouseEntered(MouseEvent e){
+				TeamWindow.this.setVisible(true);
+			}
+			public void mouseExited(MouseEvent e){
+
+				TeamWindow.this.setVisible(false);
+			}
+		});
 
 	}
 	
@@ -76,8 +88,7 @@ public class TeamWindow extends JWindow implements MouseListener {
 	}
 
 	public void mouseEntered(MouseEvent e) {
-		if (e.getSource() == TeamWindow.this)
-			setVisible(true);
+		
 		if (e.getSource().getClass() == MyButton.class) {
 			setVisible(true);
 			MyButton btn = (MyButton) e.getSource();
@@ -86,9 +97,7 @@ public class TeamWindow extends JWindow implements MouseListener {
 	}
 
 	public void mouseExited(MouseEvent e) {
-		if (e.getSource() == TeamWindow.this) {
-			setVisible(false);
-		}
+		
 		if (e.getSource().getClass() == MyButton.class) {
 			MyButton btn = (MyButton) e.getSource();
 			btn.setForeground(Color.black);
@@ -242,6 +251,7 @@ public class TeamWindow extends JWindow implements MouseListener {
 			gbc.gridy = 6;
 			gbl.setConstraints(btn35, gbc);
 			add(btn35);
+			
 		}
 
 	}
