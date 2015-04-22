@@ -17,9 +17,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.UIManager;
-import javax.swing.UIManager.LookAndFeelInfo;
-import javax.swing.table.DefaultTableCellRenderer;
 
 import newui.FatherPanel;
 import newui.Style;
@@ -45,8 +42,8 @@ public class TeamIndexPanel extends FatherPanel implements MouseListener {
 	JComboBox<String> seasonBox, typeBox;
 	Font font = new Font("微软雅黑", Font.PLAIN, 13);
 	boolean isHighInfo = false;
-	int clicktime=0;//升序  降序  恢复
-	int lastcolumn=-1;
+	int clicktime = 0;// 升序 降序 恢复
+	int lastcolumn = -1;
 	MyTableCellRenderer tcr;
 	highlisten listen;
 	public TeamIndexPanel() {
@@ -94,7 +91,7 @@ public class TeamIndexPanel extends FatherPanel implements MouseListener {
 		TableSorter ts = new TableSorter(table.getModel(),
 				table.getTableHeader());
 		table.setModel(ts);
-		
+
 		table.addMouseListener(this);
 		table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
 
@@ -103,7 +100,7 @@ public class TeamIndexPanel extends FatherPanel implements MouseListener {
 		titleBar.setCurrentTableModel(ttm);
 		titleBar.setModelEnum(TableModel.TEAMRANK);
 		titleBar.setTable(table);
-		gbc.insets=new Insets(0, 2, 1, 2);
+		gbc.insets = new Insets(0, 2, 1, 2);
 		jsp = new JScrollPane(table);
 
 		jsp.getViewport().setOpaque(false);
@@ -118,6 +115,7 @@ public class TeamIndexPanel extends FatherPanel implements MouseListener {
 		// ====初始化数据=====
 		ttm.Refresh(typeBox.getSelectedItem().toString());
 		table.revalidate();
+		table.repaint();
 		CellRender();
 		MyTableCellRenderer.adjustTableColumnWidths(table);// 自动设置列宽
 
@@ -139,10 +137,32 @@ public class TeamIndexPanel extends FatherPanel implements MouseListener {
 				String type = typeBox.getSelectedItem().toString();
 				ttm.Refresh(type);
 				table.revalidate();
-				// table.repaint();
+				table.repaint();
 
 			}
 
+		});
+
+		table.getTableHeader().addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				int col = table.getTableHeader().columnAtPoint(e.getPoint());
+				System.out.println(col);
+				if (lastcolumn == -1 || lastcolumn != col) {
+					lastcolumn = col;
+					clicktime = 1;
+					tcr.setHighlightColumn(col);
+
+				} else {
+					clicktime++;
+					if (clicktime == 3) {
+						tcr.setHighlightColumn(-1);
+						lastcolumn = -1;
+						clicktime = 0;
+					}
+
+				}
+
+			}
 		});
 		table.getTableHeader().addMouseListener(listen);
 
@@ -154,6 +174,7 @@ public class TeamIndexPanel extends FatherPanel implements MouseListener {
 		if (e.getSource() == refreshLbl) {
 			ttm.Refresh(typeBox.getSelectedItem().toString());
 			table.revalidate();
+			table.repaint();
 		}
 
 		if (e.getSource() == table) {
@@ -181,7 +202,8 @@ public class TeamIndexPanel extends FatherPanel implements MouseListener {
 			}
 			ttm.Refresh(type);
 			table.revalidate();
-			
+			table.repaint();
+			;
 			jsp.remove(table);
 			table = new JTable(ttm);
 			TableSorter ts = new TableSorter(table.getModel(),
@@ -268,12 +290,12 @@ public class TeamIndexPanel extends FatherPanel implements MouseListener {
 		table.getTableHeader().setFont(new Font("微软雅黑", 0, 14));
 		table.getTableHeader().setForeground(Color.white);
 		table.getTableHeader().setBackground(Style.FOCUS_BLUE);
-		 tcr = new MyTableCellRenderer();
+		tcr = new MyTableCellRenderer();
 		for (int i = 0; i < table.getColumnCount(); i++) {
 			table.getColumn(table.getColumnName(i)).setCellRenderer(tcr);
 		}
 		// table.getTableHeader().setBackground(new Color(158, 158, 158));
-		
+
 	}
 	
 	class highlisten extends MouseAdapter{
