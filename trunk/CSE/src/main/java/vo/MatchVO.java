@@ -74,6 +74,12 @@ public class MatchVO {
 		this.homeScore = homeScore;
 		this.detailScores = detailScores;
 		this.records = records;
+		int partNum=detailScores.size();
+		if (partNum == 4) {
+			matchTime = 48;
+		} else {
+			matchTime = (48 + (partNum - 4) * 5);
+		}
 	}
 
 	public MatchVO(String season, String date, String visitingTeam,
