@@ -42,6 +42,7 @@ public class TitleBar extends JPanel implements MouseListener {
 	JTextField searchFld;
 	JLabel searchBtn;
 	int startX, startY;
+	TeamWindow window;
 
 	private MyTableModel tablemodel;
 	private TableModel model;
@@ -176,22 +177,27 @@ public class TitleBar extends JPanel implements MouseListener {
 	}
 
 	public void mouseEntered(MouseEvent e) {
-		if (e.getSource() == indexBtn)
-			indexBtn.setBackground(Style.FOCUS_BLUE);
+		
 		if (e.getSource() == teamBtn) {
 			teamBtn.setBackground(Style.FOCUS_BLUE);
-			TeamWindow.getInstance(e.getXOnScreen(), e.getYOnScreen())
-					.setVisible(true);
+			window=TeamWindow.getInstance(e.getXOnScreen(), e.getYOnScreen());
+				window.setVisible(true);
+			
 
 		}
-		if (e.getSource() == playerBtn)
+		else{
+		window.setVisible(false);	
+		if (e.getSource() == indexBtn)
+			indexBtn.setBackground(Style.FOCUS_BLUE);
+		else if (e.getSource() == playerBtn)
 			playerBtn.setBackground(Style.FOCUS_BLUE);
-		if (e.getSource() == matchBtn)
+		else if (e.getSource() == matchBtn)
 			matchBtn.setBackground(Style.FOCUS_BLUE);
-		if (e.getSource() == hotBtn)
+		else if (e.getSource() == hotBtn)
 			hotBtn.setBackground(Style.FOCUS_BLUE);
-		if (e.getSource() == searchBtn)
+		else if (e.getSource() == searchBtn)
 			searchBtn.setIcon(new ImageIcon("image/searchFocus.png"));
+		}
 	}
 
 	public void mouseExited(MouseEvent e) {
@@ -199,8 +205,7 @@ public class TitleBar extends JPanel implements MouseListener {
 			indexBtn.setBackground(Style.DEEP_BLUE);
 		if (e.getSource() == teamBtn) {
 			teamBtn.setBackground(Style.DEEP_BLUE);
-			TeamWindow.getInstance(e.getXOnScreen(), e.getYOnScreen())
-					.setVisible(false);
+			//window.setVisible(false);
 		}
 		if (e.getSource() == playerBtn)
 			playerBtn.setBackground(Style.DEEP_BLUE);
