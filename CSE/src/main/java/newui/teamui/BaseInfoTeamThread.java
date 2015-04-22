@@ -25,7 +25,7 @@ public class BaseInfoTeamThread extends Thread{
 					50, 40
 				, Image.SCALE_DEFAULT));
 			table.setValueAt(tou, i, 0);
-			System.out.println(table.getValueAt(i, 0));
+			
 			
 			
 		}
