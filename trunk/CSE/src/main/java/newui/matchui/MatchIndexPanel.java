@@ -57,7 +57,7 @@ public class MatchIndexPanel extends FatherPanel {
 		funcPnl.setBackground(Style.BACK_GREY);
 		gbc.gridy = 1;
 		gbc.gridheight = 1;
-		gbc.weighty = 0.1;
+		gbc.weighty = 0.01;
 		gbl.setConstraints(funcPnl, gbc);
 		add(funcPnl);
 		// -----赛季选择--------
@@ -150,7 +150,7 @@ public class MatchIndexPanel extends FatherPanel {
 		// jsp.setLayout(new ScrollPaneLayout());
 		gbc.gridy = 2;
 		gbc.gridheight = 10;
-		gbc.weighty = 50;
+		gbc.weighty =10;
 		gbl.setConstraints(jsp, gbc);
 		add(jsp);
 		searchRefresh("全部", "全部", "01-01");
