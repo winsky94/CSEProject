@@ -256,6 +256,7 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener,
 					ptm.refreshHigh(vlist);
 			}
 			table.revalidate();
+			table.repaint();
 			table.getTableHeader().addMouseListener(listen);
 			int col=ptm.findColumn(sort);
 			tcr.setHighlightColumn(col);
@@ -289,7 +290,7 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener,
 			ptm.Refresh(type);
 
 			table.revalidate();
-			
+			table.repaint();
 			jsp.remove(table);
 			table = new JTable(ptm);
 			TableSorter ts = new TableSorter(table.getModel(),
@@ -304,6 +305,7 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener,
 		} else if (e.getSource() == refreshLbl) {
 			ptm.Refresh(typeBox.getSelectedItem().toString());
 			table.revalidate();
+			table.repaint();
 		}
 
 	}
@@ -366,6 +368,7 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener,
 
 			}
 			table.revalidate();
+			table.repaint();
 			titleBar.setSeason(season);
 			titleBar.setAveOrAll(s);
 		}
@@ -378,15 +381,14 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener,
 		table.getTableHeader().setBackground(new Color(211, 211, 211));
 		tcr = new MyTableCellRenderer();
 		// tcr.setHighlightColumn(1);
+		MyTableCellRenderer.adjustTableColumnWidths(table);
 		for (int i = 0; i < table.getColumnCount(); i++) {
 			table.getColumn(table.getColumnName(i)).setCellRenderer(tcr);
-			MyTableCellRenderer.adjustTableColumnWidths(table);
-			table.revalidate();
-			// 设置表头颜色
-			table.getTableHeader().setBackground(new Color(158, 158, 158));
 		}
 		table.getTableHeader().setForeground(Color.white);
 		table.getTableHeader().setBackground(Style.FOCUS_BLUE);
+		table.revalidate();
+		table.repaint();
 	}
 	
 	class highlisten extends MouseAdapter{
