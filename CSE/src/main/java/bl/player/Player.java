@@ -1231,6 +1231,24 @@ public class Player implements PlayerBLService {
 		DecimalFormat dec=new DecimalFormat("0.00");
 		return Double.parseDouble(dec.format(minute));
 	}
+	
+	public static String changeSecondToTime(double second) {
+		double time=convertSecondToMinuete(second);
+		String result;
+		String temp = String.valueOf(time);
+		String[] tempp = temp.split("\\.");
+		if (tempp.length == 2) {
+			result = tempp[0] + ":";
+			double xiaoshu = Double.parseDouble("0." + tempp[1]);
+
+			DecimalFormat dec = new DecimalFormat("0");
+			String xiaoshu60 = dec.format(xiaoshu * 60);
+			result = result + xiaoshu60;
+		} else {
+			result = tempp[0];
+		}
+		return result;
+	}
 
 	/**
 	 * 将球员数据中文名转为相应的英文缩写
