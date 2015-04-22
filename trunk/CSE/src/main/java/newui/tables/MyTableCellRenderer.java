@@ -14,15 +14,15 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
-import javax.swing.text.Style;
+
+import newui.Style;
 
 public class MyTableCellRenderer extends DefaultTableCellRenderer {
 	private static final long serialVersionUID = 1L;
 	private ArrayList<Integer> rowList;
 	private ArrayList<ImageIcon> imageIcons;
-	private int columnToHighlight=-1;
-	
-	
+	private int columnToHighlight = -1;
+
 	// ==直接用Arraylist的话，会不会后面容易乱，毕竟是直接根据下标来取图片的，考虑一下用什么来存图片的列表并且跟名字绑定
 
 	/**
@@ -59,14 +59,13 @@ public class MyTableCellRenderer extends DefaultTableCellRenderer {
 		this.rowList = rowList;
 		this.imageIcons = imageIcons;
 	}
-	
+
 	public MyTableCellRenderer(int column) {
 		super();
 		this.rowList = new ArrayList<Integer>();
 		this.imageIcons = new ArrayList<ImageIcon>();
-		this.columnToHighlight=column;
+		this.columnToHighlight = column;
 	}
-	
 
 	@Override
 	public Component getTableCellRendererComponent(JTable table, Object value,
@@ -117,19 +116,22 @@ public class MyTableCellRenderer extends DefaultTableCellRenderer {
 		table.setShowHorizontalLines(false);
 		table.setShowVerticalLines(false);
 
+		table.getTableHeader().setForeground(Color.white);
+		table.getTableHeader().setBackground(Style.FOCUS_BLUE);
+
 		if (row % 2 == 1)
 			setBackground(Color.white); // 设置奇数行底色
 		else if (row % 2 == 0)
-//			setBackground(new Color(246, 246, 246)); // 设置偶数行底色
-			setBackground(new Color(230,230,250));
-			
+			// setBackground(new Color(246, 246, 246)); // 设置偶数行底色
+			setBackground(new Color(230, 230, 250));
+
 		for (int i = 0; i < rowList.size(); i++) {
 			if (row == rowList.get(i)) {
 				setBackground(new Color(255, 255, 0));// 设置某些特定的行的底色
 			}
 		}
-		if(column==columnToHighlight){
-			setBackground(new Color(158,184,199));
+		if (column == columnToHighlight) {
+			setBackground(new Color(158, 184, 199));
 		}
 
 		if (table.getModel().toString().contains("HotTodayModel")
@@ -219,8 +221,8 @@ public class MyTableCellRenderer extends DefaultTableCellRenderer {
 
 		table.doLayout(); // 按照刚才设置的宽度重新布局各个列
 	}
-	
-	public void setHighlightColumn(int column){
-		this.columnToHighlight=column;
+
+	public void setHighlightColumn(int column) {
+		this.columnToHighlight = column;
 	}
 }
