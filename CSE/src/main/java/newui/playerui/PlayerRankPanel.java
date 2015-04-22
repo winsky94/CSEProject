@@ -8,6 +8,7 @@ import java.awt.Font;
 import java.awt.Insets;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
@@ -58,7 +59,10 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener,
 			"盖帽数", "抢断数", "罚球命中率", "犯规数", "失误数", "分钟", "效率", "两双" };
 	String[] filterRankText2 = { "真实命中率", "GmSc效率值", "投篮效率", "篮板率", "进攻篮板数",
 			"防守篮板数", "进攻篮板率", "防守篮板率", "助攻率", "抢断率", "盖帽率", "失误率", "使用率" };
-
+	int lastcolumn=-1;
+	int clicktime=0;
+	MyTableCellRenderer tcr;
+	highlisten listen;
 	public PlayerRankPanel() {
 		ptm = new PlayerTableModel(0);
 		player = Service.player;
@@ -168,6 +172,8 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener,
 		jsp.setRowHeaderView(new RowHeaderTable(table, 30));
 		titleBar.setSeason(seasonBox.getSelectedItem().toString());
 		titleBar.setAveOrAll(typeBox.getSelectedItem().toString());
+		table.getTableHeader().addMouseListener(listen);
+		
 	}
 
 	class MyJLabel extends JLabel {
@@ -250,6 +256,11 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener,
 					ptm.refreshHigh(vlist);
 			}
 			table.revalidate();
+			table.getTableHeader().addMouseListener(listen);
+			int col=ptm.findColumn(sort);
+			tcr.setHighlightColumn(col);
+			lastcolumn=col;
+			clicktime=0;
 			CellRender();
 
 		} else if (e.getSource() == fieldLbl) {
@@ -278,7 +289,7 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener,
 			ptm.Refresh(type);
 
 			table.revalidate();
-			;
+			
 			jsp.remove(table);
 			table = new JTable(ptm);
 			TableSorter ts = new TableSorter(table.getModel(),
@@ -287,6 +298,7 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener,
 			titleBar.setCurrentTableModel(ptm);
 			table.addMouseListener(this);
 			jsp.getViewport().add(table);
+			table.getTableHeader().addMouseListener(listen);
 			CellRender();
 
 		} else if (e.getSource() == refreshLbl) {
@@ -364,7 +376,7 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener,
 		table.setFont(new Font("微软雅黑", 0, 12));
 		table.getTableHeader().setFont(new Font("微软雅黑", 0, 14));
 		table.getTableHeader().setBackground(new Color(211, 211, 211));
-		MyTableCellRenderer tcr = new MyTableCellRenderer();
+		tcr = new MyTableCellRenderer();
 		// tcr.setHighlightColumn(1);
 		for (int i = 0; i < table.getColumnCount(); i++) {
 			table.getColumn(table.getColumnName(i)).setCellRenderer(tcr);
@@ -375,6 +387,27 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener,
 		}
 		table.getTableHeader().setForeground(Color.white);
 		table.getTableHeader().setBackground(Style.FOCUS_BLUE);
+	}
+	
+	class highlisten extends MouseAdapter{
+		public void mouseClicked(MouseEvent e){
+			int col=table.getTableHeader().columnAtPoint(e.getPoint());
+			if(lastcolumn==-1||lastcolumn!=col){
+				lastcolumn=col;
+				clicktime=1;
+				tcr.setHighlightColumn(col);
+				
+			}else {
+				clicktime++;
+				if(clicktime==3){	
+					tcr.setHighlightColumn(-1);
+					lastcolumn=-1;
+					clicktime=0;
+				}
+		
+			}
+			
+		}
 	}
 
 }

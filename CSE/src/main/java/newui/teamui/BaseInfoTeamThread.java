@@ -22,7 +22,7 @@ public class BaseInfoTeamThread extends Thread{
 			String s=name.get(i);
 			ImageIcon tou=new ImageIcon("image/teamIcon/teamsPng90/"+s+".png");
 			tou.setImage(tou.getImage().getScaledInstance(
-					50, 40
+					80, 80
 				, Image.SCALE_DEFAULT));
 			table.setValueAt(tou, i, 0);
 			

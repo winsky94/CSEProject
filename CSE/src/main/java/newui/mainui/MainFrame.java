@@ -17,7 +17,11 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 
+import blservice.MatchBLService;
+import blservice.PlayerBLService;
+import blservice.TeamBLService;
 import newui.FatherPanel;
+import newui.Service;
 import newui.TopPanel;
 import newui.UIhelper;
 import newui.playerui.PlayerIndexPanel;
@@ -166,9 +170,15 @@ public class MainFrame extends JFrame{
 	
 	
 	public static void main(String[] args) {
+	//欢迎动画
+		/*InitialThread thread=new InitialThread();
+		thread.startThread();*/
+		PlayerBLService p=Service.player;
+		TeamBLService t=Service.team;
+		MatchBLService m=Service.match;
+		p.getPlayerAverageInfo();
+		p.getPlayerSeasonInfo("13-14");
 		MainFrame.getInstance();
-		InitialThread thread=new InitialThread();
-		thread.startThread();
 		
 	}
 	
