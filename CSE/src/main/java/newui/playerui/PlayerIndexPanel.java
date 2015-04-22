@@ -25,6 +25,9 @@ import javax.swing.table.DefaultTableCellRenderer;
 
 
 
+
+import bl.team.Team;
+
 import newui.FatherPanel;
 import newui.Style;
 import newui.TableModel;
@@ -53,14 +56,12 @@ public class PlayerIndexPanel  extends FatherPanel implements MouseListener {
 	// ---------------
 	ArrayList<MyCharacter> characterLblList = new ArrayList<MyCharacter>(26);
 	JComboBox<String> teamBox;
-	
+	MyCharacter currentLbl=null;
 	
 	public PlayerIndexPanel() {
 	
 		super();
-		double pre=System.currentTimeMillis();
-	
-		
+
 		// ------funcPnl--------
 		funcPnl = new JPanel();
 		funcPnl.setBackground(Style.BACK_GREY);
@@ -86,6 +87,7 @@ public class PlayerIndexPanel  extends FatherPanel implements MouseListener {
 		teamBox.setForeground(Color.white);
 		teamBox.setFont(new Font("微软雅黑", Font.PLAIN, 12));
 		teamBox.setMaximumRowCount(20);
+		
 		funcPnl.add(teamBox);
 		// -----刷新--------------
 		refreshLbl = new MyLabel("刷新", new ImageIcon("image/refreshWhite.png"));
@@ -141,23 +143,25 @@ public class PlayerIndexPanel  extends FatherPanel implements MouseListener {
 
 			public void itemStateChanged(ItemEvent e) {
 				// TODO Auto-generated method stub
-				String teamName = teamBox.getSelectedItem().toString();
+				String teamName = Team.changeTeamNameCHToEN(teamBox.getSelectedItem().toString());
 				pitm.findByTeam(teamName);
 				table.revalidate();
 				// table.repaint();
+				if(currentLbl!=null){
+					currentLbl.setOpaque(false);
+					currentLbl.setBackground(Style.BACK_GREY);
+					currentLbl.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+				}
+				currentLbl=null;
 
 			}
 
 		});
-		double post=System.currentTimeMillis();
-		System.out.println("playerindexConstruc:"+(post-pre));
+		
 	}
 	
 	
-	public void Refresh(){
-		pitm.Refresh();
-		table.revalidate();
-	}
+	
 
 	class MyCharacter extends JLabel {
 
@@ -196,16 +200,31 @@ public class PlayerIndexPanel  extends FatherPanel implements MouseListener {
 		if (e.getSource() == modeLbl)
 			MainFrame.getInstance().setContentPanel(new PlayerRankPanel());
 		if (e.getSource() instanceof MyCharacter) {
-			String sort = ((MyCharacter) e.getSource()).getText();
+			if(currentLbl!=null){
+				currentLbl.setOpaque(false);
+				currentLbl.setBackground(Style.BACK_GREY);
+				currentLbl.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+			}
+			MyCharacter lbl = (MyCharacter) e.getSource();
+			String sort = lbl.getText();
 			sort = sort.trim();
 			teamBox.setSelectedIndex(0);
 			pitm.sortByCharacter(sort);
 			table.revalidate();
-
+			lbl.setOpaque(true);
+			lbl.setBackground(Style.FOCUS_GREY);
+			lbl.setCursor(new Cursor(Cursor.HAND_CURSOR));
+			currentLbl=lbl;
 		}
 		if (e.getSource() == refreshLbl) {
 			pitm.Refresh();
 			table.revalidate();
+			if(currentLbl!=null){
+				currentLbl.setOpaque(false);
+				currentLbl.setBackground(Style.BACK_GREY);
+				currentLbl.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+			}
+			currentLbl=null;
 
 		}
 		if(e.getSource()==table){
@@ -255,9 +274,11 @@ public class PlayerIndexPanel  extends FatherPanel implements MouseListener {
 	public void mouseExited(MouseEvent e) {
 		if (e.getSource().getClass() == MyCharacter.class) {
 			MyCharacter lbl = (MyCharacter) e.getSource();
+			if(lbl!=currentLbl){
 			lbl.setOpaque(false);
 			lbl.setBackground(Style.BACK_GREY);
 			lbl.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+			}
 		}
 		if (e.getSource() == refreshLbl) {
 			refreshLbl.setForeground(Color.white);

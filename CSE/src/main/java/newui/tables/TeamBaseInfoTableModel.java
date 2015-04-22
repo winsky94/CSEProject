@@ -87,6 +87,7 @@ public class TeamBaseInfoTableModel extends MyTableModel{
 		}
 		BaseInfoTeamThread btt=new BaseInfoTeamThread(nameList,currentTable);
 		btt.start();
+		currentTable.revalidate();
 		
 	}
 	
