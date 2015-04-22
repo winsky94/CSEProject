@@ -28,7 +28,7 @@ public class HotIndexPanel extends FatherPanel implements MouseListener{
 		funcPnl.setLayout(new GridLayout(1,4));
 		gbc.gridy = 1;
 		gbc.gridheight = 1;
-		gbc.weighty = 1;
+		gbc.weighty = 0.1;
 		gbl.setConstraints(funcPnl, gbc);
 		add(funcPnl);
 		//------四个按钮------------
@@ -55,7 +55,7 @@ public class HotIndexPanel extends FatherPanel implements MouseListener{
 		downPnl=new JPanel();
 		gbc.gridy = 2;
 		gbc.gridheight = 10;
-		gbc.weighty = 15;
+		gbc.weighty = 5;
 		gbl.setConstraints(downPnl, gbc);
 		add(downPnl);
 		downPnl.removeAll();
