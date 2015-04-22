@@ -198,7 +198,11 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener,
 		public MyComboBox(String[] text) {
 			super(text);
 			setFont(font);
+			this.setBackground(Style.BACK_GREY);
+			this.setForeground(Color.white);
 		}
+		
+		
 	}
 
 	public void mouseClicked(MouseEvent e) {
@@ -366,6 +370,8 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener,
 			// 设置表头颜色
 			table.getTableHeader().setBackground(new Color(158, 158, 158));
 		}
+		table.getTableHeader().setForeground(Color.white);
+		table.getTableHeader().setBackground(Style.FOCUS_BLUE);
 	}
 
 }

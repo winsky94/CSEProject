@@ -17,6 +17,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.UIManager;
+import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.table.DefaultTableCellRenderer;
 
 import newui.FatherPanel;
@@ -48,6 +50,7 @@ public class TeamIndexPanel extends FatherPanel implements MouseListener {
 	MyTableCellRenderer tcr;
 	public TeamIndexPanel() {
 		super();
+
 		// ------funcPnl--------
 		funcPnl = new JPanel();
 		funcPnl.setBackground(Style.BACK_GREY);
@@ -62,6 +65,8 @@ public class TeamIndexPanel extends FatherPanel implements MouseListener {
 		// 暂时没有bl方法
 		String[] seasonBoxText = { "13-14" };
 		seasonBox = new MyComboBox(seasonBoxText);
+		seasonBox.setBackground(Style.BACK_GREY);
+		seasonBox.setForeground(Color.white);
 		// seasonBox.addItemListener(this);
 		funcPnl.add(seasonBox);
 		funcPnl.add(new JLabel("       "));
@@ -70,7 +75,8 @@ public class TeamIndexPanel extends FatherPanel implements MouseListener {
 		funcPnl.add(typeLbl);
 		String[] typeText = { "赛季", "场均" };
 		typeBox = new MyComboBox(typeText);
-		// typeBox.addItemListener(this);
+		typeBox.setBackground(Style.BACK_GREY);
+		typeBox.setForeground(Color.white);
 		funcPnl.add(typeBox);
 		funcPnl.add(new JLabel("       "));
 		// ------fieldLbl--------
@@ -95,11 +101,17 @@ public class TeamIndexPanel extends FatherPanel implements MouseListener {
 
 		table.addMouseListener(this);
 		table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
+
+		table.setShowGrid(false);
+
 		titleBar.setCurrentTableModel(ttm);
 		titleBar.setModelEnum(TableModel.TEAMRANK);
 		titleBar.setTable(table);
 		gbc.insets=new Insets(0, 2, 1, 2);
 		jsp = new JScrollPane(table);
+
+		jsp.getViewport().setOpaque(false);
+		jsp.setOpaque(false);
 
 		gbc.gridy = 2;
 		gbc.gridheight = 10;
@@ -274,11 +286,13 @@ public class TeamIndexPanel extends FatherPanel implements MouseListener {
 		table.setSelectionBackground(new Color(225, 255, 255));// 设置选择行的颜色——淡蓝色
 		table.setFont(new Font("微软雅黑", 0, 12));
 		table.getTableHeader().setFont(new Font("微软雅黑", 0, 14));
-		table.getTableHeader().setBackground(new Color(211, 211, 211));
+		table.getTableHeader().setForeground(Color.white);
+		table.getTableHeader().setBackground(Style.FOCUS_BLUE);
 		 tcr = new MyTableCellRenderer();
 		for (int i = 0; i < table.getColumnCount(); i++) {
 			table.getColumn(table.getColumnName(i)).setCellRenderer(tcr);
 		}
-		table.getTableHeader().setBackground(new Color(158, 158, 158));
+		// table.getTableHeader().setBackground(new Color(158, 158, 158));
+		
 	}
 }
