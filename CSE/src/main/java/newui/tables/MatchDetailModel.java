@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import javax.swing.table.AbstractTableModel;
 
+import bl.player.Player;
 import vo.RecordVO;
 
 public class MatchDetailModel extends AbstractTableModel{
