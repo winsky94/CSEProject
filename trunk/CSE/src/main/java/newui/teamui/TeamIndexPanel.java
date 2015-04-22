@@ -3,6 +3,7 @@ package newui.teamui;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Font;
+import java.awt.Insets;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.MouseEvent;
@@ -94,6 +95,7 @@ public class TeamIndexPanel extends FatherPanel implements MouseListener {
 		titleBar.setCurrentTableModel(ttm);
 		titleBar.setModelEnum(TableModel.TEAMRANK);
 		titleBar.setTable(table);
+		gbc.insets=new Insets(0, 2, 1, 2);
 		jsp = new JScrollPane(table);
 
 		gbc.gridy = 2;

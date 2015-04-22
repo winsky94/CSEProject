@@ -6,6 +6,7 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.MouseEvent;
@@ -20,6 +21,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
+
 
 
 
@@ -111,6 +113,7 @@ public class PlayerIndexPanel  extends FatherPanel implements MouseListener {
 		titleBar.setCurrentTableModel(pitm);
 		titleBar.setModelEnum(TableModel.PLAYERBASEINFO);
 		titleBar.setTable(table);
+		gbc.insets=new Insets(0, 2, 1, 2);
 		jsp = new JScrollPane(table);
 
 		JLabel jb = new JLabel();
