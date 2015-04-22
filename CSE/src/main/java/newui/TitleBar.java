@@ -158,11 +158,11 @@ public class TitleBar extends JPanel implements MouseListener {
 			ArrayList<TeamVO> team;
 			switch(model){
 			case PLAYERBASEINFO:
-				p=new Player();
+				p=Service.player;
 				 result=p.getPlayerBaseInfo(scontent);
 				tablemodel.SearchRefresh(result);break;
 			case PLAYERRANK:
-				p=new Player();
+				p=Service.player;
 
 			//	if(aveOrAll.equals("场均"))
 					//可能调用错方法了 方法重名
@@ -171,11 +171,11 @@ public class TitleBar extends JPanel implements MouseListener {
 					//result=p.getPlayerSeasonInfo(season, scontent);
 			//	tablemodel.SearchRefresh(result);break;
 			case TEAMBASEINFO:
-				t=new Team();
+				t=Service.team;
 				team=t.getTeamBaseInfo(scontent);
 				tablemodel.SearchRefresh(team);break;
 			case TEAMRANK:
-			//	t=new Team();
+			//	t=Service.team;
 			//	if(aveOrAll.equals("场均"))
 					//可能调用错方法了 方法重名
 				//	team=t.getTeamAverageInfo(scontent);
