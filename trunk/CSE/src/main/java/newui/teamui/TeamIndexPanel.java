@@ -48,7 +48,7 @@ public class TeamIndexPanel extends FatherPanel implements MouseListener {
 	highlisten listen;
 	public TeamIndexPanel() {
 		super();
-
+		listen=new highlisten();
 		// ------funcPnl--------
 		funcPnl = new JPanel();
 		funcPnl.setBackground(Style.BACK_GREY);
@@ -92,7 +92,7 @@ public class TeamIndexPanel extends FatherPanel implements MouseListener {
 				table.getTableHeader());
 		table.setModel(ts);
 
-		table.addMouseListener(this);
+		
 		table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
 
 		table.setShowGrid(false);
@@ -143,28 +143,6 @@ public class TeamIndexPanel extends FatherPanel implements MouseListener {
 
 		});
 
-		table.getTableHeader().addMouseListener(new MouseAdapter() {
-			public void mouseClicked(MouseEvent e) {
-				int col = table.getTableHeader().columnAtPoint(e.getPoint());
-				System.out.println(col);
-				if (lastcolumn == -1 || lastcolumn != col) {
-					lastcolumn = col;
-					clicktime = 1;
-					tcr.setHighlightColumn(col);
-
-				} else {
-					clicktime++;
-					if (clicktime == 3) {
-						tcr.setHighlightColumn(-1);
-						lastcolumn = -1;
-						clicktime = 0;
-					}
-
-				}
-
-			}
-		});
-		table.getTableHeader().addMouseListener(listen);
 
 	}
 
@@ -210,7 +188,7 @@ public class TeamIndexPanel extends FatherPanel implements MouseListener {
 					table.getTableHeader());
 			table.setModel(ts);
 
-			table.getTableHeader().addMouseListener(listen);
+			//table.getTableHeader().addMouseListener(listen);
 			titleBar.setCurrentTableModel(ttm);
 
 			jsp.getViewport().add(table);
@@ -295,6 +273,10 @@ public class TeamIndexPanel extends FatherPanel implements MouseListener {
 			table.getColumn(table.getColumnName(i)).setCellRenderer(tcr);
 		}
 		// table.getTableHeader().setBackground(new Color(158, 158, 158));
+
+		table.getTableHeader().addMouseListener(listen);
+		table.addMouseListener(this);
+
 
 	}
 	

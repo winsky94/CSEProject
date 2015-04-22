@@ -193,7 +193,10 @@ public class TeamTableModel extends MyTableModel {
 				refreshBase(v);
 			else
 				refreshHigh(v);
+		}else{
+			content.clear();
 		}
+		
 
 	}
 }
