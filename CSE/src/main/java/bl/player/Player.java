@@ -1000,8 +1000,7 @@ public class Player implements PlayerBLService {
 		}
 		String todaySeason = result;
 		result = todaySeason + "_" + todayDate;
-		// return result;
-		return "13-14_01-01";
+		 return result;
 	}
 
 	private ArrayList<MatchVO> getTodayMatch() {
@@ -1009,12 +1008,67 @@ public class Player implements PlayerBLService {
 		String[] buffer = getToday().split("_");
 		String season = buffer[0];
 		String date = buffer[1];
+		ArrayList<MatchVO> mostRecentDateMatches=new ArrayList<MatchVO>();
+		String seasonRecent="";
+		String dateRecent="";
+		boolean isFirst=true;
+		boolean todayExists=false;
 		for (MatchVO match : allSeasonMatches) {
-			if (match.getSeason().equals(season)
-					&& match.getDate().equals(date))
+			String theMatchSeason=match.getSeason();
+			String theMatchDate=match.getDate();
+			if (theMatchSeason.equals(season)&& theMatchDate.equals(date)){
 				result.add(match);
+				todayExists=true;
+				continue;
+			}
+			
+			if(todayExists==false&&isFirst==true){
+				seasonRecent=theMatchSeason;
+				dateRecent=theMatchDate;
+				isFirst=false;
+				continue;
+			}
+			
+			String sd1=theMatchSeason+"_"+theMatchDate;
+			String sd2=seasonRecent+"_"+dateRecent;
+			if(todayExists==false&&sd1.compareTo(sd2)==0){
+				mostRecentDateMatches.add(match);
+				continue;
+			}
+			if(todayExists==false&&isMostRecent(theMatchSeason, theMatchDate, seasonRecent, dateRecent)){
+				mostRecentDateMatches.clear();
+				mostRecentDateMatches.add(match);
+				seasonRecent=theMatchSeason;
+				dateRecent=theMatchDate;
+			}
 		}
-		return result;
+		if(todayExists==true)
+		   return result;
+		else 
+		   return mostRecentDateMatches;
+		
+	}
+	/**
+	 * 
+	 * @param season1
+	 * @param date1
+	 * @param season2
+	 * @param date2
+	 * @return 是否日期一比日期二更靠近现在,由于老师说"默认读入的最后一场比赛就是最近的",所以，日期一与日期二不同为日期一更近
+	 */
+	private boolean isMostRecent(String season1,String date1,String season2,String date2){
+		if(season1.compareTo(season2)>0)
+			return true;
+		else if(season1.compareTo(season2)<0)
+			return true;
+		else{
+			if(date1.compareTo(date2)>0)
+				return true;
+			else if(date1.compareTo(date2)<0)
+				return true;
+			else 
+				return false;
+		}
 	}
 
 	private void calCulateDayData() {
