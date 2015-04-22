@@ -150,7 +150,7 @@ public class MatchIndexPanel extends FatherPanel {
 		// jsp.setLayout(new ScrollPaneLayout());
 		gbc.gridy = 2;
 		gbc.gridheight = 10;
-		gbc.weighty = 10;
+		gbc.weighty = 50;
 		gbl.setConstraints(jsp, gbc);
 		add(jsp);
 		searchRefresh("全部", "全部", "01-01");
@@ -201,7 +201,7 @@ public class MatchIndexPanel extends FatherPanel {
 		int heightOfBIGPNL = 170 * row;// 这里一定要设置为180-200之间的值，代表每个卡片的高度，乘以卡片数量之后是整个BIGPNL的高度
 		int screenWidth = UIhelper.getScreenWidth();
 
-		int width = screenWidth * 90 / 100;
+		int width = screenWidth * 85/ 100;
 		// if(row==1){
 		// showPanel=new JPanel();
 		// BIGPNL.add(showPanel);
