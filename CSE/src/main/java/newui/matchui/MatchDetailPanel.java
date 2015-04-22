@@ -40,7 +40,7 @@ public class MatchDetailPanel extends FatherPanel {
 	ArrayList<RecordVO> Vrecord = new ArrayList<RecordVO>();;
 
 	public MatchDetailPanel(final MatchVO v) {
-		isDetail=true;
+		isDetail = true;
 		// ----card------------
 		card = new DetailCard(v);
 		gbc.gridy = 1;
@@ -111,14 +111,15 @@ public class MatchDetailPanel extends FatherPanel {
 		// ---jsp---------------
 		model = new MatchDetailModel();
 		table = new JTable(model);
-		
-		table.addMouseListener(new MouseAdapter(){
-			public void mouseClicked(MouseEvent e){
-				if(e.getClickCount()==2){
-					int row=table.getSelectedRow();
-					String name=table.getValueAt(row, 0).toString();
-					MainFrame.getInstance().setContentPanel(new PlayerDetailPanel(name));
-					
+
+		table.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				if (e.getClickCount() == 2) {
+					int row = table.getSelectedRow();
+					String name = table.getValueAt(row, 0).toString();
+					MainFrame.getInstance().setContentPanel(
+							new PlayerDetailPanel(name));
+
 				}
 			}
 		});
@@ -133,7 +134,7 @@ public class MatchDetailPanel extends FatherPanel {
 		}
 
 		jsp = new JScrollPane(table);
-		model.setTime(v.getMatchTime() * 5);
+		model.setTime(v.getMatchTime());
 		ArrayList<RecordVO> vv = v.getRecords();
 		for (RecordVO r : vv) {
 			if (r.getTeam().equals(v.getHomeTeam()))
