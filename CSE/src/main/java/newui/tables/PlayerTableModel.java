@@ -121,7 +121,7 @@ public class PlayerTableModel extends MyTableModel {
 			line.add(vo.getPosition());
 			line.add(vo.getPlayedGames());
 			line.add(vo.getGameStartingNum());
-			line.add(Player.convertSecondToMinuete(vo.getPresentTime()));
+			line.add(Player.changeSecondToTime(vo.getPresentTime()));
 			line.add(vo.getReboundNum());
 			line.add(vo.getAssistNum());
 			line.add(vo.getBlockNum());
