@@ -251,7 +251,10 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener,
 				fieldLbl.setText("查看高阶数据");
 				isHighInfo=false;
 				ptm=new PlayerTableModel(0);
-				
+				filterRankBox.removeAllItems();
+				for(int i=0;i<filterRankText.length;i++){
+					filterRankBox.addItem(filterRankText[i]);
+				}
 				
 			}
 			else{
