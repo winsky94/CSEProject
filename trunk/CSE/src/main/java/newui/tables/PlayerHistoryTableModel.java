@@ -12,7 +12,7 @@ import vo.RecordVO;
 
 public class PlayerHistoryTableModel extends AbstractTableModel{
 	
-	static String[] head = { "比赛","类型", "日期","首发", "时间", "投篮", "三分", "罚球","前篮板",
+	static String[] head = { "比赛",/*"类型",*/ "日期","首发", "时间", "投篮", "三分", "罚球","前篮板",
 		"后篮板", "总篮板","助攻","抢断","盖帽","失误","犯规","得分" };
 
 	 ArrayList<ArrayList<Object>> content = new ArrayList<ArrayList<Object>>();
@@ -75,7 +75,7 @@ public class PlayerHistoryTableModel extends AbstractTableModel{
 				
 			line.add(m.getHomeScore()+"-"+m.getVisitingScore()+" "+tname);
 			//项目里么有区分常规赛和季后赛肿么破
-			line.add("常规赛");
+//			line.add("常规赛");
 			line.add(m.getDate());
 			if(isHome)
 				line.add("是");
