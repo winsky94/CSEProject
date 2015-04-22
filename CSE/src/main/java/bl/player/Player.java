@@ -1212,8 +1212,12 @@ public class Player implements PlayerBLService {
 	public ArrayList<PlayerVO> getPlayerBaseInfo(String name) {
 		ArrayList<PlayerVO> result = new ArrayList<PlayerVO>();
 		ArrayList<PlayerVO> thePlayers = getPlayerAverageInfo();
+		String s1="";
+		String s2=name.toLowerCase();
 		for (PlayerVO vo : thePlayers) {
-			if (vo.getName().contains(name))
+			s1=vo.getName().toLowerCase();
+			s2=name.toLowerCase();
+			if (s1.contains(s2))
 				result.add(vo);
 		}
 		return result;
