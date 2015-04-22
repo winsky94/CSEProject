@@ -206,6 +206,7 @@ public class TeamIndexPanel extends FatherPanel implements MouseListener {
 			TableSorter ts = new TableSorter(table.getModel(),
 					table.getTableHeader());
 			table.setModel(ts);
+			titleBar.setCurrentTableModel(ttm);
 			jsp.getViewport().add(table);
 			CellRender();
 		}
