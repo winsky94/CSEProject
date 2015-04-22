@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import newui.Service;
 import vo.TeamVO;
-import bl.team.Team;
 import blservice.TeamBLService;
 
 public class TeamTableModel extends MyTableModel {
@@ -31,12 +30,12 @@ public class TeamTableModel extends MyTableModel {
 	public TeamTableModel(int model) {
 		if (model == 0) {
 			head = headbase;
-			headmodel=0;
+			headmodel = 0;
 		} else {
 			head = headhigh;
-			headmodel=1;
+			headmodel = 1;
 		}
-	
+
 	}
 
 	@Override
@@ -89,7 +88,7 @@ public class TeamTableModel extends MyTableModel {
 			// refreshContent(teamvo);
 			if (headmodel == 0)
 				refreshBase(teamvo);
-			else{
+			else {
 				refreshHigh(teamvo);
 			}
 		}
@@ -193,10 +192,8 @@ public class TeamTableModel extends MyTableModel {
 				refreshBase(v);
 			else
 				refreshHigh(v);
-		}else{
+		} else {
 			content.clear();
 		}
-		
-
 	}
 }
