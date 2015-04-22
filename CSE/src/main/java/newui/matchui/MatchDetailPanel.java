@@ -112,14 +112,21 @@ public class MatchDetailPanel extends FatherPanel {
 		model = new MatchDetailModel();
 		table = new JTable(model);
 
-		table.addMouseListener(new MouseAdapter() {
-			public void mouseClicked(MouseEvent e) {
-				if (e.getClickCount() == 2) {
-					int row = table.getSelectedRow();
-					String name = table.getValueAt(row, 0).toString();
-					MainFrame.getInstance().setContentPanel(
-							new PlayerDetailPanel(name));
-
+		table.getColumnModel().getColumn(5).setPreferredWidth(120);
+		table.getColumnModel().getColumn(6).setPreferredWidth(100);
+		table.getColumnModel().getColumn(7).setPreferredWidth(100);
+		table.getColumnModel().getColumn(8).setPreferredWidth(120);
+		table.getColumnModel().getColumn(9).setPreferredWidth(100);
+		table.getColumnModel().getColumn(10).setPreferredWidth(100);
+		table.getColumnModel().getColumn(11).setPreferredWidth(120);
+		
+		table.addMouseListener(new MouseAdapter(){
+			public void mouseClicked(MouseEvent e){
+				if(e.getClickCount()==2){
+					int row=table.getSelectedRow();
+					String name=table.getValueAt(row, 0).toString();
+					MainFrame.getInstance().setContentPanel(new PlayerDetailPanel(name));
+					
 				}
 			}
 		});
