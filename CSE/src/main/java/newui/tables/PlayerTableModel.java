@@ -56,7 +56,7 @@ public class PlayerTableModel extends MyTableModel {
 	public int findColumn(String sort){
 		int a=-1;
 		for(int i=0;i<head.length;i++)
-			if(head[0].contains(sort))
+			if(head[i].contains(sort))
 				return i;
 		return a;
 	}
