@@ -113,13 +113,13 @@ public class MatchDetailPanel extends FatherPanel {
 		model = new MatchDetailModel();
 		table = new JTable(model);
 
-		table.getColumnModel().getColumn(5).setPreferredWidth(120);
+		table.getColumnModel().getColumn(5).setPreferredWidth(130);
 		table.getColumnModel().getColumn(6).setPreferredWidth(100);
 		table.getColumnModel().getColumn(7).setPreferredWidth(100);
-		table.getColumnModel().getColumn(8).setPreferredWidth(120);
+		table.getColumnModel().getColumn(8).setPreferredWidth(130);
 		table.getColumnModel().getColumn(9).setPreferredWidth(100);
 		table.getColumnModel().getColumn(10).setPreferredWidth(100);
-		table.getColumnModel().getColumn(11).setPreferredWidth(120);
+		table.getColumnModel().getColumn(11).setPreferredWidth(130);
 		
 		table.addMouseListener(new MouseAdapter(){
 			public void mouseClicked(MouseEvent e){
@@ -140,7 +140,7 @@ public class MatchDetailPanel extends FatherPanel {
 		for (int i = 0; i < table.getColumnCount(); i++) {
 			table.getColumn(table.getColumnName(i)).setCellRenderer(tcr);
 		}
-		gbc.insets=new Insets(10, 20, 10, 20);
+		gbc.insets=new Insets(0, 2, 1, 2);
 		jsp = new JScrollPane(table);
 		jsp.getViewport().setBackground(Color.white);
 		model.setTime(v.getMatchTime());

@@ -5,6 +5,7 @@ import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Insets;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -37,6 +38,7 @@ public class HotFatherPanel extends JPanel{
 		gbl.setConstraints(bestPnl, gbc);
 		add(bestPnl);
 		//----------------------
+		gbc.insets=new Insets(0, 2, 1, 2);
 		jsp=new JScrollPane();
 		gbc.gridy=3;
 		gbc.gridheight=5;

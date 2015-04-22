@@ -5,6 +5,7 @@ import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.Insets;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.MouseEvent;
@@ -144,6 +145,7 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener,
 		titleBar.setTable(table);
 		table.addMouseListener(this);
 		;
+		gbc.insets=new Insets(0, 2, 1, 2);
 		jsp = new JScrollPane();
 		jsp.getViewport().add(table);
 		gbc.gridy = 2;

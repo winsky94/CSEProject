@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -74,7 +75,7 @@ public class PlayerDetailHistoryPanel extends JPanel {
 		for (int i = 0; i < table.getColumnCount(); i++) {
 			table.getColumn(table.getColumnName(i)).setCellRenderer(tcr);
 		}
-
+		gbc.insets=new Insets(0, 2, 1, 2);
 		jsp = new JScrollPane(table);
 		table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
 		gbc.gridy = 1;

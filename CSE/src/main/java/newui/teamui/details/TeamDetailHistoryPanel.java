@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.MouseAdapter;
@@ -81,6 +82,7 @@ public class TeamDetailHistoryPanel extends JPanel {
 			table.getColumn(table.getColumnName(i)).setCellRenderer(tcr);
 		}
 
+		gbc.insets=new Insets(0, 2, 1, 2);
 		jsp = new JScrollPane(table);
 		gbc.gridy = 1;
 		gbc.gridheight = 10;

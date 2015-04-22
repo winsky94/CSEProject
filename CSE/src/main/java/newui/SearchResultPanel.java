@@ -3,6 +3,7 @@ package newui;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Font;
+import java.awt.Insets;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -95,6 +96,7 @@ public class SearchResultPanel extends FatherPanel implements MouseListener{
 		titleBar.setModelEnum(TableModel.RESULTTEAM);
 		titleBar.setTable(table);
 
+		gbc.insets=new Insets(0, 2, 1, 2);
 		jsp=new JScrollPane(table);
 		isTeamTable=true;
 		gbc.gridy =2;
