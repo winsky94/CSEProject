@@ -98,8 +98,8 @@ public class SearchResultPanel extends FatherPanel implements MouseListener{
 		gbc.weighty = 10;
 		gbl.setConstraints(jsp, gbc);
 		add(jsp);
-		pservice=new Player();//这里有问题
-		tservice=new Team();
+		pservice=Service.player;//这里有问题
+		tservice=Service.team;
 		ArrayList<TeamVO> v=tservice.getTeamBaseInfo(scontent);
 		resultLbl.setText("在球队中检索到"+v.size()+"条符合关键字"+scontent+"的结果...");
 		ttm.SearchRefresh(v);
