@@ -4,6 +4,7 @@ import java.awt.Image;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.JTable;
 
 import newui.Service;
@@ -24,6 +25,8 @@ public class TeamBaseInfoTableModel extends MyTableModel{
 	private TeamBLService team;
 	private JTable currentTable;
 	private ArrayList<ImageIcon> teamIcon;
+	
+	private JLabel label;
 	public TeamBaseInfoTableModel(){
 		team=Service.team;
 		teamIcon=new ArrayList<ImageIcon>();
@@ -31,6 +34,8 @@ public class TeamBaseInfoTableModel extends MyTableModel{
 	public int getRowCount() {
 		return content.size();
 	}
+	
+	
 	@Override
 	public Class getColumnClass(int c) {
 		return content.get(0).get(c).getClass();
@@ -93,12 +98,19 @@ public class TeamBaseInfoTableModel extends MyTableModel{
 		if(v!=null&&v.size()!=0){
 			
 			Refresh(v);
-		}
+		}else
+			content.clear();
+		label.setText("在球队中检索到"+v.size()+"条符合关键字"+ss+"的结果...");
 		
 	}
 	
 	public void setCurrentTable(JTable table){
 		this.currentTable=table;
+		
+	}
+
+	public void setCurrentLable(JLabel label){
+		this.label=label;
 		
 	}
 }

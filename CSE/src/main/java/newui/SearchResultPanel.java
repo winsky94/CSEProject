@@ -44,7 +44,7 @@ public class SearchResultPanel extends FatherPanel implements MouseListener{
 	JPanel funcPnl;
 	private PlayerBLService pservice;
 	private TeamBLService tservice;
-	public String content;
+	public static String content;
 	private teamMouse tmouse;
 	private playerMouse pmouse;
 	Font font = new Font("微软雅黑", Font.PLAIN, 15);
@@ -73,6 +73,10 @@ public class SearchResultPanel extends FatherPanel implements MouseListener{
 		//------jsp--------------------
 		ttm=new TeamBaseInfoTableModel();
 		ptm=new PlayerBaseInfoTableModel();
+		ptm.setCurrentLable(resultLbl);
+		ttm.setCurrentLable(resultLbl);
+		ptm.setContent(scontent);
+		ttm.setContent(scontent);
 		table=new MyBaseTable(ttm);
 		
 		// table 渲染器，设置文字内容居中显示，设置背景色等
@@ -87,17 +91,10 @@ public class SearchResultPanel extends FatherPanel implements MouseListener{
 		
 		ptm.setCurrentTable(table);
 		ttm.setCurrentTable(table);
-		
-		titleBar.searchBtn.addMouseListener(new MouseAdapter(){
-			public void mouseClicked(MouseEvent e){
-				table=new MyBaseTable(ttm);
-				titleBar.setCurrentTableModel(ttm);
-				titleBar.setModelEnum(TableModel.TEAMBASEINFO);
-				titleBar.setTable(table);
-				content=titleBar.searchFld.getText();
-			}
-			
-		});
+		titleBar.setCurrentTableModel(ttm);
+		titleBar.setModelEnum(TableModel.RESULTTEAM);
+		titleBar.setTable(table);
+
 		jsp=new JScrollPane(table);
 		isTeamTable=true;
 		gbc.gridy =2;
@@ -144,9 +141,11 @@ public class SearchResultPanel extends FatherPanel implements MouseListener{
 				
 				ArrayList<PlayerVO> re=pservice.getPlayerBaseInfo(content);
 				table.setModel(ptm);
-				
-				resultLbl.setText("在球员中检索到"+re.size()+"条符合关键字"+content+"的结果...");
+				//ptm.setCurrentLable(resultLbl);
+				//resultLbl.setText("在球员中检索到"+re.size()+"条符合关键字"+content+"的结果...");
+				ptm.setContent(content);
 				ptm.SearchRefresh(re);
+				table.revalidate();
 				// table 渲染器，设置文字内容居中显示，设置背景色等
 				table.setSelectionBackground(new Color(225, 255, 255));// 设置选择行的颜色——淡蓝色
 				table.setFont(new Font("微软雅黑", 0, 12));
@@ -156,16 +155,22 @@ public class SearchResultPanel extends FatherPanel implements MouseListener{
 				for (int i = 1; i < table.getColumnCount(); i++) {
 					table.getColumn(table.getColumnName(i)).setCellRenderer(tcr);
 				}
+				table.removeMouseListener(tmouse);
 				table.addMouseListener(pmouse);
+				titleBar.setCurrentTableModel(ptm);
+				titleBar.setModelEnum(TableModel.RESULTPLAYER);
+				titleBar.setTable(table);
 			
 			}else{
 				//换为ttm
 				isTeamTable=true;
 				
 				ArrayList<TeamVO> re=tservice.getTeamBaseInfo(content);
-				resultLbl.setText("在球队中检索到"+re.size()+"条符合关键字"+content+"的结果...");
-				table.setModel(ttm);;
+				ttm.setContent(content);
+				table.setModel(ttm);
 				ttm.SearchRefresh(re);
+				table.revalidate();
+				ttm.setCurrentTable(table);
 				// table 渲染器，设置文字内容居中显示，设置背景色等
 				table.setSelectionBackground(new Color(225, 255, 255));// 设置选择行的颜色——淡蓝色
 				table.setFont(new Font("微软雅黑", 0, 12));
@@ -175,10 +180,14 @@ public class SearchResultPanel extends FatherPanel implements MouseListener{
 				for (int i = 1; i < table.getColumnCount(); i++) {
 					table.getColumn(table.getColumnName(i)).setCellRenderer(tcr);
 				}
+				table.removeMouseListener(pmouse);
 				table.addMouseListener(tmouse);
-				
+				titleBar.setCurrentTableModel(ttm);
+				//ttm.setCurrentLable(resultLbl);
+				titleBar.setModelEnum(TableModel.RESULTTEAM);
+				titleBar.setTable(table);
 			}
-			table.revalidate();
+			
 			jsp.revalidate();
 		}
 		
@@ -218,5 +227,10 @@ public class SearchResultPanel extends FatherPanel implements MouseListener{
 			MainFrame.getInstance().setContentPanel(new PlayerDetailPanel(name));
 		}
 		}
+	}
+	
+	public static void setContent(String ss){
+		content=ss;
+		
 	}
 }

@@ -42,6 +42,7 @@ public class TitleBar extends JPanel implements MouseListener {
 	JTextField searchFld;
 	JLabel searchBtn;
 	int startX,startY;
+	
 	private MyTableModel tablemodel;
 	private TableModel model;
 	private String season;
@@ -157,6 +158,9 @@ public class TitleBar extends JPanel implements MouseListener {
 			ArrayList<PlayerVO> result;
 			ArrayList<TeamVO> team;
 			switch(model){
+			case RESULTPLAYER:
+				SearchResultPanel.setContent(scontent);
+				tablemodel.setContent(scontent);
 			case PLAYERBASEINFO:
 				p=Service.player;
 				 result=p.getPlayerBaseInfo(scontent);
@@ -170,6 +174,10 @@ public class TitleBar extends JPanel implements MouseListener {
 			//	else
 					//result=p.getPlayerSeasonInfo(season, scontent);
 			//	tablemodel.SearchRefresh(result);break;
+				break;
+			case RESULTTEAM:
+				SearchResultPanel.setContent(scontent);
+				tablemodel.setContent(scontent);
 			case TEAMBASEINFO:
 				t=Service.team;
 				team=t.getTeamBaseInfo(scontent);
@@ -182,6 +190,7 @@ public class TitleBar extends JPanel implements MouseListener {
 				//else
 				//	team=t.getTeamSeasonInfo(season, scontent);
 				//tablemodel.SearchRefresh(team);break;
+				break;
 				
 			}
 			table.revalidate();
@@ -258,4 +267,6 @@ public class TitleBar extends JPanel implements MouseListener {
 	public void setAveOrAll(String i){
 		this.aveOrAll=i;
 	}
+	
+	
 }
