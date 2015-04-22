@@ -180,36 +180,26 @@ public class MatchIndexPanel extends FatherPanel {
 	public void searchRefresh(String h, String v, String date) {
 		String season = seasonBox.getSelectedItem().toString();
 		ArrayList<MatchVO> mlist = mservice.getMatchData(season, date, h, v);
-		ArrayList<MatchCard> matchCardList = new ArrayList<MatchCard>();
-		for (MatchVO m : mlist) {
-			MatchCard card = new MatchCard(m);
-			// System.out.println("我有啦");
-			matchCardList.add(card);
-		}
+		//ArrayList<MatchCard> matchCardList = new ArrayList<MatchCard>();
+		
 
 		JPanel BIGPNL = new JPanel();
-		int row = matchCardList.size() / 2;
-		if (matchCardList.size() % 2 != 0)
+	//	BIGPNL.setLayout();
+		/*int row = mlist.size() / 2;
+		if (mlist.size() % 2 != 0)
 			row += 1;
-		// if(row==1)
-		// row+=1;
+		
 		BIGPNL.setLayout(new GridLayout(row, 2));
-		for (int i = 0; i < matchCardList.size(); i++) {
-			BIGPNL.add(matchCardList.get(i));
-
-		}
+		
 		int heightOfBIGPNL = 170 * row;// 这里一定要设置为180-200之间的值，代表每个卡片的高度，乘以卡片数量之后是整个BIGPNL的高度
 		int screenWidth = UIhelper.getScreenWidth();
 
 		int width = screenWidth * 85/ 100;
-		// if(row==1){
-		// showPanel=new JPanel();
-		// BIGPNL.add(showPanel);
-		// JPanel p=new JPanel();
-		// BIGPNL.add(p);
-		// }
+		
 
-		BIGPNL.setPreferredSize(new Dimension(width, heightOfBIGPNL));
+		BIGPNL.setPreferredSize(new Dimension(width, heightOfBIGPNL));*/
 		jsp.getViewport().add(BIGPNL);
+		MatchCardThread th=new MatchCardThread(mlist,BIGPNL,jsp);
+		th.start();
 	}
 }

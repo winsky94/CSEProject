@@ -115,7 +115,7 @@ public class TitleBar extends JPanel implements MouseListener {
 		searchBtn.addMouseListener(this);
 		searchBtn.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		add(searchBtn);
-		searchBtn.addKeyListener(new KeyAdapter(){
+		searchFld.addKeyListener(new KeyAdapter(){
 			public void keyPressed(KeyEvent e){
 				if(e.getKeyCode()==KeyEvent.VK_ENTER){
 					searchExcute();

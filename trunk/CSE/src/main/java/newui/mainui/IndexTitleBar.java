@@ -93,7 +93,7 @@ public class IndexTitleBar extends JPanel implements MouseListener {
 		searchBtn.addMouseListener(this);
 		searchBtn.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		add(searchBtn);
-		searchBtn.addKeyListener(new KeyAdapter(){
+		searchFld.addKeyListener(new KeyAdapter(){
 
 			public void keyPressed(KeyEvent e) {
 				// TODO Auto-generated method stub
