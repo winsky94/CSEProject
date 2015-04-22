@@ -93,9 +93,7 @@ public class TeamIndexPanel extends FatherPanel implements MouseListener {
 		TableSorter ts = new TableSorter(table.getModel(),
 				table.getTableHeader());
 		table.setModel(ts);
-
-		// table 渲染器，设置文字内容居中显示，设置背景色等
-
+		
 		table.addMouseListener(this);
 		table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
 
@@ -121,9 +119,7 @@ public class TeamIndexPanel extends FatherPanel implements MouseListener {
 		table.revalidate();
 		CellRender();
 		MyTableCellRenderer.adjustTableColumnWidths(table);// 自动设置列宽
-		// 设置表头颜色
 
-		// 设置显示行号
 		jsp.setRowHeaderView(new RowHeaderTable(table, 20));
 
 		JLabel jb = new JLabel();
