@@ -251,7 +251,6 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener,
 			String type=typeBox.getSelectedItem().toString();
 			if(isHighInfo){
 				//监听，切换到基础数据表格
-				System.out.println("低阶");
 				fieldLbl.setText("查看高阶数据");
 				isHighInfo=false;
 				ptm=new PlayerTableModel(0);
@@ -263,7 +262,6 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener,
 			}
 			else{
 				//监听，切换到高阶数据表格
-				System.out.println("高阶");
 				fieldLbl.setText("查看基础数据");
 				isHighInfo=true;
 				ptm=new PlayerTableModel(1);
