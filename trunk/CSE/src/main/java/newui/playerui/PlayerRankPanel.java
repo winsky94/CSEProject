@@ -18,19 +18,17 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.table.DefaultTableCellRenderer;
 
 import newui.FatherPanel;
 import newui.Service;
 import newui.Style;
 import newui.TableModel;
 import newui.mainui.MainFrame;
-import newui.tables.MySortableTable;
 import newui.tables.MyTableCellRenderer;
 import newui.tables.PlayerTableModel;
 import newui.tables.RowHeaderTable;
+import newui.tables.TableSorter;
 import vo.PlayerVO;
-import bl.player.Player;
 import blservice.AgeEnum;
 import blservice.PlayerBLService;
 
@@ -47,7 +45,7 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener,
 	// --------------
 	JScrollPane jsp;
 	JTable table;
-	PlayerTableModel ptm = new PlayerTableModel(0);
+	PlayerTableModel ptm;
 	// ---------------
 	JLabel refreshLbl, filterLbl, modeLbl, fieldLbl;
 	JComboBox<String> locationBox, partitionBox, filterRankBox, seasonBox,
@@ -62,7 +60,7 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener,
 			"防守篮板数", "进攻篮板率", "防守篮板率", "助攻率", "抢断率", "盖帽率", "失误率", "使用率" };
 
 	public PlayerRankPanel() {
-
+		ptm = new PlayerTableModel(0);
 		player = Service.player;
 		// ------funcPnl--------
 		funcPnl = new JPanel();
@@ -91,9 +89,9 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener,
 		funcPnl.add(filterRankLbl);
 		filterRankBox = new MyComboBox(filterRankText);
 		filterRankBox.setMaximumRowCount(13);
-		filterRankBox.setMaximumSize(new Dimension(100,28));
-		filterRankBox.setMinimumSize(new Dimension(100,28));
-		filterRankBox.setPreferredSize(new Dimension(100,28));
+		filterRankBox.setMaximumSize(new Dimension(100, 28));
+		filterRankBox.setMinimumSize(new Dimension(100, 28));
+		filterRankBox.setPreferredSize(new Dimension(100, 28));
 		funcPnl.add(filterRankBox);
 		// -----filterLbl-----
 		filterLbl = new MyJLabel("筛选", new ImageIcon(
@@ -135,10 +133,12 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener,
 		modeLbl.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		funcPnl.add(modeLbl);
 		// ----jsp--------------
-		table = new MySortableTable(ptm, 0);
+		// table = new MySortableTable(ptm, 0);
+		table = new JTable(ptm);
+		TableSorter ts = new TableSorter(table.getModel(),
+				table.getTableHeader());
+		table.setModel(ts);
 		table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
-		// table 渲染器，设置文字内容居中显示，设置背景色等
-	
 		titleBar.setCurrentTableModel(ptm);
 		titleBar.setModelEnum(TableModel.PLAYERRANK);
 		titleBar.setTable(table);
@@ -208,8 +208,7 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener,
 				MainFrame.getInstance().setContentPanel(
 						new PlayerDetailPanel(name));
 			}
-		}
-		else if (e.getSource() == modeLbl)
+		} else if (e.getSource() == modeLbl)
 			MainFrame.getInstance().setContentPanel(new PlayerIndexPanel());
 		else if (e.getSource() == filterLbl) {
 			// 执行筛选
@@ -226,62 +225,63 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener,
 				vlist = player.selectPlayersByAverage(position, union,
 						AgeEnum.ALL, sort, "desc", 50);
 			// vlist.size()==0显示没有符合条件的球
-			if(ptm.headmodel!=0){
-				if(isHighInfo==false)
-				   ptm=new PlayerTableModel(0);
-				else 
-					ptm=new PlayerTableModel(1);
+			if (ptm.headmodel != 0) {
+				if (isHighInfo == false)
+					ptm = new PlayerTableModel(0);
+				else
+					ptm = new PlayerTableModel(1);
 				jsp.remove(table);
-				table=new JTable(ptm);	
+				table = new JTable(ptm);
 				table.addMouseListener(this);
 				jsp.getViewport().add(table);
-				
+
 			}
 			if (vlist != null) {
-				if(isHighInfo==false)
-				  ptm.refreshBase(vlist);
+				if (isHighInfo == false)
+					ptm.refreshBase(vlist);
 				else
-				  ptm.refreshHigh(vlist);
+					ptm.refreshHigh(vlist);
 			}
 			table.revalidate();
 			CellRender();
 
-		}
-		else if (e.getSource() ==fieldLbl) {
-			String type=typeBox.getSelectedItem().toString();
-			if(isHighInfo){
-				//监听，切换到基础数据表格
+		} else if (e.getSource() == fieldLbl) {
+			String type = typeBox.getSelectedItem().toString();
+			if (isHighInfo) {
+				// 监听，切换到基础数据表格
 				fieldLbl.setText("查看高阶数据");
-				isHighInfo=false;
-				ptm=new PlayerTableModel(0);
+				isHighInfo = false;
+				ptm = new PlayerTableModel(0);
 				filterRankBox.removeAllItems();
-				for(int i=0;i<filterRankText.length;i++){
+				for (int i = 0; i < filterRankText.length; i++) {
 					filterRankBox.addItem(filterRankText[i]);
 				}
-				
-			}
-			else{
-				//监听，切换到高阶数据表格
+
+			} else {
+				// 监听，切换到高阶数据表格
 				fieldLbl.setText("查看基础数据");
-				isHighInfo=true;
-				ptm=new PlayerTableModel(1);
+				isHighInfo = true;
+				ptm = new PlayerTableModel(1);
 				filterRankBox.removeAllItems();
-				for(int i=0;i<filterRankText2.length;i++){
+				for (int i = 0; i < filterRankText2.length; i++) {
 					filterRankBox.addItem(filterRankText2[i]);
 				}
-				
+
 			}
 			ptm.Refresh(type);
-		
-			table.revalidate();;
+
+			table.revalidate();
+			;
 			jsp.remove(table);
-			table=new JTable(ptm);
+			table = new JTable(ptm);
+			TableSorter ts = new TableSorter(table.getModel(),
+					table.getTableHeader());
+			table.setModel(ts);
 			table.addMouseListener(this);
 			jsp.getViewport().add(table);
 			CellRender();
-			
-		}
-		else if (e.getSource() == refreshLbl) {
+
+		} else if (e.getSource() == refreshLbl) {
 			ptm.Refresh(typeBox.getSelectedItem().toString());
 			table.revalidate();
 		}
@@ -302,16 +302,13 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener,
 		if (e.getSource() == refreshLbl) {
 			refreshLbl.setForeground(Style.FOCUS_BLUE);
 			refreshLbl.setIcon(new ImageIcon("image/refreshFocus.png"));
-		}
-		else if (e.getSource() == filterLbl) {
+		} else if (e.getSource() == filterLbl) {
 			filterLbl.setForeground(Style.FOCUS_BLUE);
 			filterLbl.setIcon(new ImageIcon("image/player/filterFocus.png"));
-		}
-		else if (e.getSource() == modeLbl) {
+		} else if (e.getSource() == modeLbl) {
 			modeLbl.setForeground(Style.FOCUS_BLUE);
 			modeLbl.setIcon(new ImageIcon("image/player/headmodeBlue.png"));
-		}
-		else if (e.getSource() ==fieldLbl) {
+		} else if (e.getSource() == fieldLbl) {
 			fieldLbl.setForeground(Style.FOCUS_BLUE);
 		}
 	}
@@ -320,16 +317,13 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener,
 		if (e.getSource() == refreshLbl) {
 			refreshLbl.setForeground(Color.white);
 			refreshLbl.setIcon(new ImageIcon("image/refreshWhite.png"));
-		}
-		else if (e.getSource() == filterLbl) {
+		} else if (e.getSource() == filterLbl) {
 			filterLbl.setForeground(Color.white);
 			filterLbl.setIcon(new ImageIcon("image/player/filterWhite.png"));
-		}
-		else if (e.getSource() == modeLbl) {
+		} else if (e.getSource() == modeLbl) {
 			modeLbl.setForeground(Color.white);
 			modeLbl.setIcon(new ImageIcon("image/player/headmode.png"));
-		}
-		else if (e.getSource() ==fieldLbl) {
+		} else if (e.getSource() == fieldLbl) {
 			fieldLbl.setForeground(Color.white);
 		}
 	}
@@ -344,27 +338,26 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener,
 			else
 				vlist = player.getPlayerAverageInfo();
 			// vlist.size()==0显示没有符合条件的球员
-			if (vlist != null){
-				if(isHighInfo)
+			if (vlist != null) {
+				if (isHighInfo)
 					ptm.refreshHigh(vlist);
 				else
 					ptm.refreshBase(vlist);
-				
+
 			}
 			table.revalidate();
 			titleBar.setSeason(season);
 			titleBar.setAveOrAll(s);
 		}
 	}
-	
-	
-	public void CellRender(){
+
+	public void CellRender() {
 		table.setSelectionBackground(new Color(225, 255, 255));// 设置选择行的颜色——淡蓝色
 		table.setFont(new Font("微软雅黑", 0, 12));
 		table.getTableHeader().setFont(new Font("微软雅黑", 0, 14));
 		table.getTableHeader().setBackground(new Color(211, 211, 211));
 		MyTableCellRenderer tcr = new MyTableCellRenderer();
-//		tcr.setHighlightColumn(1);
+		// tcr.setHighlightColumn(1);
 		for (int i = 0; i < table.getColumnCount(); i++) {
 			table.getColumn(table.getColumnName(i)).setCellRenderer(tcr);
 			MyTableCellRenderer.adjustTableColumnWidths(table);
