@@ -14,14 +14,6 @@ import java.util.Map;
 
 import javax.swing.ImageIcon;
 
-import vo.LittleRecordVO;
-import vo.MatchVO;
-import vo.PlayerVO;
-import vo.RecordVO;
-import vo.TeamVO;
-import bl.DirtyDataManager;
-import bl.FileList;
-import blservice.PlayerBLService;
 
 public class NewPlayer {
 	
@@ -1028,11 +1020,11 @@ public class NewPlayer {
 	   System.out.println(vo.getUsageRate());
 	   System.out.println(vo.getScore_rebound_assist()*vo.getPlayedGames());
 	   System.out.println(vo.getDoubleDoubleNum()*vo.getPlayedGames());
-	   PlayerVO vo2=player.getPlayerAverageInfo("Aaron Brooks");
-	   PlayerVO vo3=player.getPlayerAverageInfo("Adonis Thomas");
-	   PlayerVO vo4=player.getPlayerAverageInfo("Aaron Gray");
-	   PlayerVO vo5=player.getPlayerAverageInfo("Al Harrington");
-	   PlayerVO vo6=player.getPlayerAverageInfo("Al Jefferson");
+//	   PlayerVO vo2=player.getPlayerAverageInfo("Aaron Brooks");
+//	   PlayerVO vo3=player.getPlayerAverageInfo("Adonis Thomas");
+//	   PlayerVO vo4=player.getPlayerAverageInfo("Aaron Gray");
+//	   PlayerVO vo5=player.getPlayerAverageInfo("Al Harrington");
+//	   PlayerVO vo6=player.getPlayerAverageInfo("Al Jefferson");
 	   player.getPlayerAverageInfo();
 	   long end = System.currentTimeMillis();
        System.out.println("运行时间：" + (end - start) + "毫秒");//应该是end - start
