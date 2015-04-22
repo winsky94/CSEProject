@@ -89,6 +89,7 @@ public class MatchIndexPanel extends FatherPanel {
 		 */
 		jdc = new JDateChooser();
 		funcPnl.add(jdc);
+		jdc.setEnabled(false);
 		// ----主队客队---------
 		MyLabel homeLbl = new MyLabel("主队：");
 		funcPnl.add(homeLbl);
