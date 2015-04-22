@@ -1358,23 +1358,28 @@ public class Player implements PlayerBLService {
 	public static void main(String[] args) {
 		long start = System.currentTimeMillis();
 		Player player = new Player();
-		ArrayList<PlayerVO> players = player.selectPlayersBySeason("13-14",
-				"C", "E", AgeEnum.ALL, "score", "desc", 50);
-		for (int i = 0; i < 5; i++)
-			System.out.println(players.get(i).getName()
-					+ players.get(i).getScore());
-		System.out.println("___________________");
-		players = player.selectPlayersBySeason("13-14", "C", "W", AgeEnum.ALL,
-				"score", "desc", 50);
-		for (int i = 0; i < 5; i++)
-			System.out.println(players.get(i).getName()
-					+ players.get(i).getScore());
-		System.out.println("___________________");
-		players = player.selectPlayersBySeason("13-14", "C", "W", AgeEnum.ALL,
-				"reboundNum", "desc", 50);
-		for (int i = 0; i < 5; i++)
-			System.out.println(players.get(i).getName()
-					+ players.get(i).getReboundNum());
+//		ArrayList<PlayerVO> players = player.getPlayerSeasonInfo("13-14");
+//		for (int i = 0; i < 5; i++)
+//			System.out.println(players.get(i).getName()
+//					+ players.get(i).getPresentTime());
+//		System.out.println(changeSecondToTime(153195));
+//		ArrayList<PlayerVO> players = player.selectPlayersBySeason("13-14",
+//				"C", "E", AgeEnum.ALL, "score", "desc", 50);
+//		for (int i = 0; i < 5; i++)
+//			System.out.println(players.get(i).getName()
+//					+ players.get(i).getScore());
+//		System.out.println("___________________");
+//		players = player.selectPlayersBySeason("13-14", "C", "W", AgeEnum.ALL,
+//				"score", "desc", 50);
+//		for (int i = 0; i < 5; i++)
+//			System.out.println(players.get(i).getName()
+//					+ players.get(i).getScore());
+//		System.out.println("___________________");
+//		players = player.selectPlayersBySeason("13-14", "C", "W", AgeEnum.ALL,
+//				"reboundNum", "desc", 50);
+//		for (int i = 0; i < 5; i++)
+//			System.out.println(players.get(i).getName()
+//					+ players.get(i).getReboundNum());
 		// ArrayList<PlayerVO> players = player.getBestImprovedPlayer(
 		// "recentFiveMatchesAssistUpRate", 5);
 		// for (int i = 0; i < 5; i++)
@@ -1391,45 +1396,46 @@ public class Player implements PlayerBLService {
 		// System.out.println(players.get(0).getName()+" "+players.get(0).getScore());
 		// ArrayList<PlayerVO> players=player.getPlayersByTeam("ATL");
 		// System.out.println(players.get(0).getName());
-		// PlayerVO vo = player.getPlayerAverageInfo("Al Horford");
+		 
 		// ArrayList<PlayerVO> players=player.getPlayerAverageInfo();
 		// System.out.println(players.get(405).getName()+" "+players.get(405).getPlayedGames()+" "+players.get(405).getEfficiency());
 		// PlayerVO vo=players.get(0);
-		// System.out.println(vo.getName());
-		// System.out.println(vo.getOwingTeam());
-		// System.out.println(vo.getLeague());
-		// System.out.println(vo.getPlayedGames());
-		// System.out.println(vo.getGameStartingNum());
-		// System.out.println(vo.getReboundNum());
-		// System.out.println(vo.getAssistNum());
-		// System.out.println(vo.getPresentTime());
-		// System.out.println(vo.getShootHitRate());
-		// System.out.println(vo.getThreeHitRate());
-		// System.out.println(vo.getFreeThrowHitRate());
-		// System.out.println(vo.getOffenReboundNum());
-		// System.out.println(vo.getDefenReboundNum());
-		// System.out.println(vo.getStealNum());
-		// System.out.println(vo.getBlockNum());
-		// System.out.println(vo.getFoulNum());
-		// System.out.println(vo.getTurnOverNum());
-		// System.out.println(vo.getScore());
-		// System.out.println(vo.getEfficiency());
-		// System.out.println(vo.getRecentFiveMatchesScoreUpRate());
-		// System.out.println(vo.getRecentFiveMatchesReboundUpRate());
-		// System.out.println(vo.getRecentFiveMatchesAssistUpRate());
-		// System.out.println(vo.getGmScEfficiencyValue());
-		// System.out.println(vo.getTrueHitRate());
-		// System.out.println(vo.getShootHitEfficiency());
-		// System.out.println(vo.getReboundRate());
-		// System.out.println(vo.getOffenReboundRate());
-		// System.out.println(vo.getDefenReboundRate());
-		// System.out.println(vo.getAssistRate());
-		// System.out.println(vo.getStealRate());
-		// System.out.println(vo.getBlockRate());
-		// System.out.println(vo.getTurnOverRate());
-		// System.out.println(vo.getUsageRate());
-		// System.out.println(vo.getScore_rebound_assist());
-		// System.out.println(vo.getDoubleDoubleNum());
+		PlayerVO vo = player.getPlayerSeasonInfo("13-14","Al Horford");
+		 System.out.println(vo.getName());
+		 System.out.println(vo.getOwingTeam());
+		 System.out.println(vo.getLeague());
+		 System.out.println(vo.getPlayedGames());
+		 System.out.println(vo.getGameStartingNum());
+		 System.out.println(vo.getReboundNum());
+		 System.out.println(vo.getAssistNum());
+		 System.out.println(vo.getPresentTime());
+		 System.out.println(vo.getShootHitRate());
+		 System.out.println(vo.getThreeHitRate());
+		 System.out.println(vo.getFreeThrowHitRate());
+		 System.out.println(vo.getOffenReboundNum());
+		 System.out.println(vo.getDefenReboundNum());
+		 System.out.println(vo.getStealNum());
+		 System.out.println(vo.getBlockNum());
+		 System.out.println(vo.getFoulNum());
+		 System.out.println(vo.getTurnOverNum());
+		 System.out.println(vo.getScore());
+		 System.out.println(vo.getEfficiency());
+		 System.out.println(vo.getRecentFiveMatchesScoreUpRate());
+		 System.out.println(vo.getRecentFiveMatchesReboundUpRate());
+		 System.out.println(vo.getRecentFiveMatchesAssistUpRate());
+		 System.out.println(vo.getGmScEfficiencyValue());
+		 System.out.println(vo.getTrueHitRate());
+		 System.out.println(vo.getShootHitEfficiency());
+		 System.out.println(vo.getReboundRate());
+		 System.out.println(vo.getOffenReboundRate());
+		 System.out.println(vo.getDefenReboundRate());
+		 System.out.println(vo.getAssistRate());
+		 System.out.println(vo.getStealRate());
+		 System.out.println(vo.getBlockRate());
+		 System.out.println(vo.getTurnOverRate());
+		 System.out.println(vo.getUsageRate());
+		 System.out.println(vo.getScore_rebound_assist());
+		 System.out.println(vo.getDoubleDoubleNum());
 
 		long end = System.currentTimeMillis();
 		System.out.println("运行时间：" + (end - start) + "毫秒");// 应该是end - start
