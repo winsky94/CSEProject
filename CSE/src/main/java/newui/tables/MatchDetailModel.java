@@ -9,8 +9,8 @@ import bl.player.Player;
 import vo.RecordVO;
 
 public class MatchDetailModel extends AbstractTableModel{
-	String[] head={"姓名","位置", "分钟", "%", "命中", "出手","三分%","三分命中","三分出手",
-			"罚球%","罚球命中","罚球出手","进攻","防守",
+	String[] head={"姓名","位置", "分钟", "命中", "出手", "投篮命中率","三分命中","三分出手","三分命中率",
+			"罚球命中","罚球出手","罚球命中率","进攻","防守",
 			 "篮板","助攻","抢断","盖帽","失误","犯规","得分"};
 	ArrayList<ArrayList<Object>> content=new ArrayList<ArrayList<Object>>();
 	//最后一行统计
@@ -61,31 +61,35 @@ public class MatchDetailModel extends AbstractTableModel{
 			String shoot="0";
 			if(v.getShootAttemptNum()!=0){
 				shoot=df.format((v.getShootHitNum()/(double)v.getShootAttemptNum())*100);
+				
 			}
 			shootRate+=Double.parseDouble(shoot);
-			line.add(shoot);
+			shoot=shoot+'%';
 			line.add(v.getShootHitNum());
 			shootNum+=v.getShootHitNum();
 			line.add(v.getShootAttemptNum());
 			shootAtm+=v.getShootAttemptNum();
+			line.add(shoot);
 			String three="0";
 			if(v.getThreeAttemptNum()!=0)
 				 three=df.format((v.getThreeHitNum()/(double)v.getThreeAttemptNum())*100);
 			threeRate+=Double.parseDouble(three);
-			line.add(three);
+			three=three+'%';
 			line.add(v.getThreeHitNum());
 			threeNum+=v.getThreeHitNum();
 			line.add(v.getThreeAttemptNum());
 			threeAtm+=v.getThreeAttemptNum();
+			line.add(three);
 			String free="0";
 			if(v.getFreeThrowAttemptNum()!=0)
 				free=df.format((v.getFreeThrowHitNum()/(double)v.getFreeThrowAttemptNum())*100);
 			freeRate+=Double.parseDouble(free);
-			line.add(free);
+			free=free+'%';
 			line.add(v.getFreeThrowHitNum());
 			freeNum+=v.getFreeThrowHitNum();
 			line.add(v.getFreeThrowAttemptNum());
 			freeAtm+=v.getFreeThrowAttemptNum();
+			line.add(free);
 			
 			line.add(v.getOffenReboundNum());
 			offendR+=v.getOffenReboundNum();
@@ -114,15 +118,15 @@ public class MatchDetailModel extends AbstractTableModel{
 		last.add("统计");
 		last.add("-");
 		last.add(time);
-		String s=df.format(shootRate/n);
-		last.add(s);
+		String s=df.format(shootRate/n)+"%";		
 		last.add(shootNum);
 		last.add(shootAtm);
-		String t=df.format(threeRate/n);
-		last.add(t);
+		last.add(s);
+		String t=df.format(threeRate/n)+"%";
 		last.add(threeNum);last.add(threeAtm);
-		String f=df.format(freeRate/n);
-		last.add(f);last.add(freeNum);last.add(freeAtm);
+		last.add(t);
+		String f=df.format(freeRate/n)+"%";
+		last.add(freeNum);last.add(freeAtm);last.add(f);
 		last.add(offendR);last.add(defendR);last.add(offendR+defendR);
 		last.add(assist);last.add(steal);last.add(block);
 		last.add(turn);last.add(foul);last.add(score);
