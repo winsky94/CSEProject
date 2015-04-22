@@ -1216,7 +1216,6 @@ public class Player implements PlayerBLService {
 		String s2=name.toLowerCase();
 		for (PlayerVO vo : thePlayers) {
 			s1=vo.getName().toLowerCase();
-			s2=name.toLowerCase();
 			if (s1.contains(s2))
 				result.add(vo);
 		}
