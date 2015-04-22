@@ -127,4 +127,5 @@ public interface TeamBLService {
 	 * @return 返回到 目前为止所有参加过比赛的球队中筛选出前 5 名球队（按照 降序排列进行筛选）
 	 */
 	public ArrayList<TeamVO> getSeasonHotTeam(String season, String column,int num);
+	
 }
