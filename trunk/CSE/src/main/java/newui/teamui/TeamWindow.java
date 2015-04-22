@@ -35,7 +35,7 @@ public class TeamWindow extends JWindow implements MouseListener {
 	int height = screenHeight * 40 / 100;
 	JPanel pnl, westPnl, eastPnl;
 
-	private TeamWindow(int x, int y) {
+	private TeamWindow(final int x,final  int y) {
 		super(MainFrame.getInstance());
 		pnl = new JPanel();
 		add(pnl);
@@ -53,8 +53,14 @@ public class TeamWindow extends JWindow implements MouseListener {
 				TeamWindow.this.setVisible(true);
 			}
 			public void mouseExited(MouseEvent e){
-
-				TeamWindow.this.setVisible(false);
+			double x=	westPnl.getLocationOnScreen().getX();
+			double y=westPnl.getLocationOnScreen().getY();
+			int X=e.getXOnScreen();
+			int Y=e.getYOnScreen();
+				if((x<=X&&X<=x+width&&y<=Y&&Y<=(y+height)))
+					;
+				else
+					TeamWindow.this.setVisible(false);
 			}
 		});
 
@@ -90,7 +96,7 @@ public class TeamWindow extends JWindow implements MouseListener {
 	public void mouseEntered(MouseEvent e) {
 		
 		if (e.getSource().getClass() == MyButton.class) {
-			setVisible(true);
+		//	setVisible(true);
 			MyButton btn = (MyButton) e.getSource();
 			btn.setForeground(Style.FOCUS_BLUE);
 		}
@@ -269,6 +275,7 @@ public class TeamWindow extends JWindow implements MouseListener {
 					+ ".png"), JLabel.LEFT);
 			setFont(font);
 			addMouseListener(TeamWindow.this);
+				
 			setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		}
 
