@@ -2,6 +2,7 @@ package newui.tables;
 
 import java.util.ArrayList;
 
+import newui.Service;
 import vo.PlayerVO;
 import bl.player.Player;
 import blservice.PlayerBLService;
@@ -11,7 +12,7 @@ public class PlayerTableModel extends MyTableModel {
 	/**
 	 * 表格球员信息列表模式model
 	 */
-	PlayerBLService player = new Player();
+	PlayerBLService player =Service.player;
 	private static final long serialVersionUID = 1L;
 	ArrayList<ArrayList<Object>> content = new ArrayList<ArrayList<Object>>();
 	static String[] head;

@@ -8,6 +8,7 @@ import javax.swing.JLabel;
 import javax.swing.JTabbedPane;
 
 import newui.FatherPanel;
+import newui.Service;
 import newui.UIhelper;
 import newui.playerui.details.PlayerDetailHistoryPanel;
 import newui.playerui.details.PlayerDetailInfoPanel;
@@ -28,7 +29,7 @@ public class PlayerDetailPanel extends FatherPanel{
 	PlayerVO vo;
 	public PlayerDetailPanel(String pname){
 		isDetail=true;
-		pservice=new Player();// is this? 
+		pservice=Service.player;// is this? 
 		//pservice=p;
 		vo=pservice.getPlayerBaseInfo(pname).get(0);
 		
@@ -64,7 +65,7 @@ public class PlayerDetailPanel extends FatherPanel{
 		gbl.setConstraints(tab, gbc);
 		add(tab);
 		double pre=System.currentTimeMillis();
-		tab.addTab("基本信息", new PlayerDetailInfoPanel(vo,pservice));
+		tab.addTab("基本信息", new PlayerDetailInfoPanel(vo));
 		double pp=System.currentTimeMillis();
 		System.out.println("detaibaseinfo:"+(pp-pre));
 		tab.addTab("过往数据",new PlayerDetailHistoryPanel(vo));

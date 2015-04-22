@@ -156,6 +156,8 @@ public class MainFrame extends JFrame{
 	}
 	public static void main(String[] args) {
 		MainFrame.getInstance();
+		InitialThread thread=new InitialThread();
+		thread.startThread();
 		
 	}
 	

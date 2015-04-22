@@ -20,6 +20,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 
 import newui.FatherPanel;
+import newui.Service;
 import newui.Style;
 import newui.TableModel;
 import newui.mainui.MainFrame;
@@ -61,7 +62,7 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener,
 
 	public PlayerRankPanel() {
 
-		player = new Player();
+		player = Service.player;
 		// ------funcPnl--------
 		funcPnl = new JPanel();
 		funcPnl.setBackground(Style.BACK_GREY);

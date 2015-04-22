@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import javax.swing.table.AbstractTableModel;
 
+import newui.Service;
 import bl.player.Player;
 import blservice.PlayerBLService;
 import vo.MatchVO;
@@ -40,7 +41,7 @@ public class PlayerHistoryTableModel extends AbstractTableModel{
 	}
 	
 	public void Refresh(String pname){
-		player=new Player();
+		player=Service.player;
 		 match=player.getMatches(pname);
 		if(match!=null&&match.size()!=0)
 			Refresh(match,pname);

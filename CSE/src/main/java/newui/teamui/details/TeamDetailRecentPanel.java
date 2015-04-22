@@ -12,6 +12,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import newui.Service;
 import newui.Style;
 import newui.matchui.TinyCard;
 import vo.MatchVO;
@@ -38,7 +39,7 @@ public class TeamDetailRecentPanel extends JPanel{
 		titleLbl.setFont(new Font("微软雅黑",Font.PLAIN,14));
 		titleLbl.setForeground(Color.white);
 		add(titleLbl,BorderLayout.NORTH);
-		pp=new Player();
+		pp=Service.player;
 		matches=pp.getRecentMatches(pName,5);
 		//-------------------
 		cardPnl=new JPanel();
@@ -63,7 +64,7 @@ public class TeamDetailRecentPanel extends JPanel{
 		titleLbl.setFont(new Font("微软雅黑",Font.PLAIN,16));
 		titleLbl.setForeground(Color.white);
 		add(titleLbl,BorderLayout.NORTH);
-		team=new Team();
+		team=Service.team;
 		matches=team.getRecentMatches(abbrName);
 		//-------------------
 		cardPnl=new JPanel();

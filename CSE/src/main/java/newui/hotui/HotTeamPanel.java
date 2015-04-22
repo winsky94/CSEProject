@@ -17,6 +17,7 @@ import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 
+import newui.Service;
 import newui.Style;
 import newui.mainui.MainFrame;
 import newui.tables.HotTableModel;
@@ -45,7 +46,7 @@ public class HotTeamPanel extends HotFatherPanel implements MouseListener {
 	ArrayList<TeamVO> vlist;
 
 	public HotTeamPanel() {
-		team = new Team();
+		team = Service.team;
 		GridBagLayout bl = new GridBagLayout();
 		GridBagConstraints bc = new GridBagConstraints();
 		bc.fill = GridBagConstraints.BOTH;

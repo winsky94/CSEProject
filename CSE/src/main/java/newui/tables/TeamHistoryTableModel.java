@@ -2,6 +2,7 @@ package newui.tables;
 
 import java.util.ArrayList;
 
+import newui.Service;
 import bl.player.Player;
 import blservice.PlayerBLService;
 import vo.PlayerVO;
@@ -19,7 +20,7 @@ public class TeamHistoryTableModel extends MyTableModel{
 	//最后一行有统计
 	ArrayList<ArrayList<Object>> content = new ArrayList<ArrayList<Object>>();
 	public TeamHistoryTableModel(){
-		player=new Player();
+		player=Service.player;
 	}
 	public int getRowCount() {
 		// TODO Auto-generated method stub
