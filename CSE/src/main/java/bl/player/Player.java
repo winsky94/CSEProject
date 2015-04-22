@@ -870,6 +870,7 @@ public class Player implements PlayerBLService {
 			String condition, String order, int num) {
 		ArrayList<PlayerVO> result = new ArrayList<PlayerVO>();
 		ArrayList<PlayerVO> allPlayers = getPlayerSeasonInfo(season);
+		condition=changePlayerCHToEN(condition);
 		Collections.sort(allPlayers, new SequenceOfPlayer(condition, order));
 		int count = 0;
 		for (PlayerVO vo : allPlayers) {
@@ -885,6 +886,7 @@ public class Player implements PlayerBLService {
 			String order, int num) {
 		ArrayList<PlayerVO> result = new ArrayList<PlayerVO>();
 		ArrayList<PlayerVO> allPlayers = getPlayerAverageInfo();
+		condition=changePlayerCHToEN(condition);
 		Collections.sort(allPlayers, new SequenceOfPlayer(condition, order));
 		int count = 0;
 		for (PlayerVO vo : allPlayers) {
