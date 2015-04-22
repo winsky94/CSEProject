@@ -2,6 +2,7 @@ package newui.playerui;
 
 import java.awt.Color;
 import java.awt.Cursor;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ItemEvent;
@@ -90,6 +91,9 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener,
 		funcPnl.add(filterRankLbl);
 		filterRankBox = new MyComboBox(filterRankText);
 		filterRankBox.setMaximumRowCount(13);
+		filterRankBox.setMaximumSize(new Dimension(100,28));
+		filterRankBox.setMinimumSize(new Dimension(100,28));
+		filterRankBox.setPreferredSize(new Dimension(100,28));
 		funcPnl.add(filterRankBox);
 		// -----filterLbl-----
 		filterLbl = new MyJLabel("筛选", new ImageIcon(
