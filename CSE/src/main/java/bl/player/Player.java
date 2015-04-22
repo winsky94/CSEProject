@@ -47,21 +47,20 @@ public class Player implements PlayerBLService {
 	boolean needUpdatePlayerSeason = false;
 	boolean needUpdatePlayerAverage = false;
 	boolean needUpdatePlayersToday = false;
-	
-	private static String[] player_CH = new String[] { "全部", "前锋", "中锋",
-		"后卫", "得分", "篮板数", "助攻数", "得分/篮板/助攻(1:1:1)", 
-		"投篮命中率", "盖帽数", "抢断数", "罚球命中率", "犯规数", "失误数",
-		"分钟", "效率", "两双", "西部球队", "东部球队", 
-		 "真实命中率", "GmSc效率值", "投篮效率", "篮板率", "进攻篮板数",
-		 "防守篮板数", "进攻篮板率", "防守篮板率", "助攻率", "抢断率", 
-		 "盖帽率", "失误率", "使用率"};
-    private static String[] player_EN = new String[] { "all", "F", "C",
-		"G", "score", "reboundNum", "assistNum", "score_rebound_assist", 
-		"shootHitRate", "blockNum", "stealNum", "freeThrowHitRate", "foulNum", "turnOverNum",
-		"presentTime", "efficiency", "doubleDoubleNum", "W", "E",
-		"trueHitRate","GmScEfficiency","shootHitEfficiency","reboundRate","offenReboundNum",
-		"defenReboundNum","offenReboundRate","defenReboundRate","assistRate","stealRate",
-		"blockRate","turnOverRate","usageRate"};
+
+	private static String[] player_CH = new String[] { "全部", "前锋", "中锋", "后卫",
+			"得分", "篮板数", "助攻数", "得分/篮板/助攻(1:1:1)", "投篮命中率", "盖帽数", "抢断数",
+			"罚球命中率", "犯规数", "失误数", "分钟", "效率", "两双", "西部球队", "东部球队", "真实命中率",
+			"GmSc效率值", "投篮效率", "篮板率", "进攻篮板数", "防守篮板数", "进攻篮板率", "防守篮板率",
+			"助攻率", "抢断率", "盖帽率", "失误率", "使用率" };
+	private static String[] player_EN = new String[] { "all", "F", "C", "G",
+			"score", "reboundNum", "assistNum", "score_rebound_assist",
+			"shootHitRate", "blockNum", "stealNum", "freeThrowHitRate",
+			"foulNum", "turnOverNum", "presentTime", "efficiency",
+			"doubleDoubleNum", "W", "E", "trueHitRate", "GmScEfficiency",
+			"shootHitEfficiency", "reboundRate", "offenReboundNum",
+			"defenReboundNum", "offenReboundRate", "defenReboundRate",
+			"assistRate", "stealRate", "blockRate", "turnOverRate", "usageRate" };
 
 	public Player() {
 		baseInfoInit();
@@ -899,9 +898,9 @@ public class Player implements PlayerBLService {
 	private ArrayList<PlayerVO> selectPlayers(ArrayList<PlayerVO> thePlayers,
 			String position, String union, AgeEnum ageClass, String column,
 			String order, int num) {
-		position=changePlayerCHToEN(position);
-		union=changePlayerCHToEN(union);
-		column=changePlayerCHToEN(column);
+		position = changePlayerCHToEN(position);
+		union = changePlayerCHToEN(union);
+		column = changePlayerCHToEN(column);
 		ArrayList<PlayerVO> result = new ArrayList<PlayerVO>();
 		if (!position.equals("all")) {
 			for (int i = 0; i < thePlayers.size(); i++) {
@@ -1225,7 +1224,13 @@ public class Player implements PlayerBLService {
 		int second = Integer.parseInt(temp[1]);
 		return minute * 60 + second;
 	}
-	
+
+	public static double convertSecondToMinuete(double second) {
+		double minute= second / 60;
+		DecimalFormat dec=new DecimalFormat("0.00");
+		return Double.parseDouble(dec.format(minute));
+	}
+
 	/**
 	 * 将球员数据中文名转为相应的英文缩写
 	 * 
@@ -1266,9 +1271,6 @@ public class Player implements PlayerBLService {
 			return EN;
 		}
 	}
-	
-	
-	
 
 	/**
 	 * 向match中增加比赛信息
@@ -1334,28 +1336,28 @@ public class Player implements PlayerBLService {
 	public static void main(String[] args) {
 		long start = System.currentTimeMillis();
 		Player player = new Player();
-		ArrayList<PlayerVO> players =player.selectPlayersBySeason("13-14", "C", "E",
-				AgeEnum.ALL, "score", "desc", 50);
+		ArrayList<PlayerVO> players = player.selectPlayersBySeason("13-14",
+				"C", "E", AgeEnum.ALL, "score", "desc", 50);
 		for (int i = 0; i < 5; i++)
 			System.out.println(players.get(i).getName()
 					+ players.get(i).getScore());
 		System.out.println("___________________");
-		players =player.selectPlayersBySeason("13-14", "C", "W",
-				AgeEnum.ALL, "score", "desc", 50);
+		players = player.selectPlayersBySeason("13-14", "C", "W", AgeEnum.ALL,
+				"score", "desc", 50);
 		for (int i = 0; i < 5; i++)
 			System.out.println(players.get(i).getName()
 					+ players.get(i).getScore());
 		System.out.println("___________________");
-		players =player.selectPlayersBySeason("13-14", "C", "W",
-				AgeEnum.ALL, "reboundNum", "desc", 50);
+		players = player.selectPlayersBySeason("13-14", "C", "W", AgeEnum.ALL,
+				"reboundNum", "desc", 50);
 		for (int i = 0; i < 5; i++)
 			System.out.println(players.get(i).getName()
 					+ players.get(i).getReboundNum());
-//		ArrayList<PlayerVO> players = player.getBestImprovedPlayer(
-//				"recentFiveMatchesAssistUpRate", 5);
-//		for (int i = 0; i < 5; i++)
-//			System.out.println(players.get(i).getName()
-//					+ players.get(i).getRecentFiveMatchesAssistUpRate());
+		// ArrayList<PlayerVO> players = player.getBestImprovedPlayer(
+		// "recentFiveMatchesAssistUpRate", 5);
+		// for (int i = 0; i < 5; i++)
+		// System.out.println(players.get(i).getName()
+		// + players.get(i).getRecentFiveMatchesAssistUpRate());
 		// ArrayList<PlayerVO> players=player.getPlayersByTeam("ATL");
 		// System.out.println(players.get(0).getName());
 		// ArrayList<PlayerVO> players = player.selectPlayersByAverage("C", "E",
