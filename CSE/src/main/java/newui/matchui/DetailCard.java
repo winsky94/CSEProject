@@ -138,16 +138,21 @@ public class DetailCard extends JPanel implements MouseListener {
 		gbl.setConstraints(detailPnl, gbc);
 		add(detailPnl);
 		//------------
-		int col=5;
+		ArrayList<String> detail=v.getDetailScores();
+		int col=detail.size()+1;
 		detailPnl.setLayout(new GridLayout(3,col));
-		detailPnl.add(new JLabel());
+	//	detailPnl.add(new JLabel());
+		JLabel temp1=new DetailLabel("各节比分");
+		temp1.setFont(new Font("微软雅黑",Font.BOLD,18));
+		temp1.setForeground(Style.FOCUS_GREY);
+		detailPnl.add(temp1);
 		for(int i=1;i<col;i++){
 			JLabel temp=new DetailLabel(String.valueOf(i));
-			temp.setFont(new Font("微软雅黑",Font.PLAIN,14));
+			temp.setFont(new Font("微软雅黑",Font.BOLD,18));
 			temp.setForeground(Style.FOCUS_GREY);
 			detailPnl.add(temp);
 		}
-		ArrayList<String> detail=v.getDetailScores();
+
 		if(detail==null)
 			System.out.println("detail wei null");
 		ArrayList<String> vdet=new ArrayList<String>();
