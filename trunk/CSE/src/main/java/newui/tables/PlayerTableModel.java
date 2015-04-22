@@ -52,6 +52,14 @@ public class PlayerTableModel extends MyTableModel {
 		return head.length;
 	}
 
+	@Override
+	public int findColumn(String sort){
+		int a=-1;
+		for(int i=0;i<head.length;i++)
+			if(head[0].contains(sort))
+				return i;
+		return a;
+	}
 	public Object getValueAt(int rowIndex, int columnIndex) {
 		// TODO Auto-generated method stub
 		return content.get(rowIndex).get(columnIndex);

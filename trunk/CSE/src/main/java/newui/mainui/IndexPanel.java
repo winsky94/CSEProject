@@ -6,13 +6,20 @@ import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.Insets;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
 import newui.FatherPanel;
+import newui.Service;
 import newui.Style;
 import newui.UIhelper;
+import newui.hotui.HotIndexPanel;
+import newui.hotui.HotSeasonPanel;
+import newui.hotui.HotTeamPanel;
+import newui.hotui.ProgressPanel;
 import vo.PlayerVO;
 import vo.TeamVO;
 import bl.player.Player;
@@ -20,7 +27,7 @@ import bl.team.Team;
 import blservice.PlayerBLService;
 import blservice.TeamBLService;
 
-public class IndexPanel extends FatherPanel {
+public class IndexPanel extends FatherPanel implements MouseListener{
 	/**
 	 * 
 	 */
@@ -33,8 +40,11 @@ public class IndexPanel extends FatherPanel {
 
 	public IndexPanel() {
 		removeAll();
-		player = new Player();
-		team = new Team();
+	
+		player = Service.player;
+		team = Service.team;
+		
+	
 		// -----获得热点球员们---------
 		PlayerVO dayP = player.getDayHotPlayer("score", 1).get(0);
 		PlayerVO seasonP = player.getSeasonHotPlayer("13-14", "score", 1)
@@ -76,6 +86,7 @@ public class IndexPanel extends FatherPanel {
 		// -----todayPnl-----------
 		IndexCard todayPnl = new IndexCard();
 		todayPnl.setTitleAndName("今日得分王", dname);
+		todayPnl.addMouseListener(this);
 		//todayPnl.iconPnl.setBackground(new Color(254,239,182));
 		todayPnl.iconPnl.setBackground(Style.HOT_YELLOW);
 		ImageIcon todayIcon = new ImageIcon("image/player/action/" + dname
@@ -89,6 +100,7 @@ public class IndexPanel extends FatherPanel {
 		// -----seasonPnl-----------
 		IndexCard seasonPnl = new IndexCard();
 		seasonPnl.setTitleAndName("赛季得分王", sname);
+		seasonPnl.addMouseListener(this);
 		//seasonPnl.iconPnl.setBackground(new Color(255,147,147));
 		seasonPnl.iconPnl.setBackground(Style.HOT_RED);
 		ImageIcon seasonIcon = new ImageIcon("image/player/action/" + sname
@@ -103,6 +115,7 @@ public class IndexPanel extends FatherPanel {
 		// -----teamPnl-----------
 		IndexCard teamPnl = new IndexCard();
 		teamPnl.setTitleAndName("场均得分最高球队", tname);
+		teamPnl.addMouseListener(this);
 		//teamPnl.iconPnl.setBackground(new Color(179,255,188));
 		teamPnl.iconPnl.setBackground(Style.HOT_BLUE);
 		ImageIcon teamIcon = new ImageIcon("image/player/action/" + tPlayername
@@ -116,6 +129,7 @@ public class IndexPanel extends FatherPanel {
 		// -----progressPnl-----------
 		IndexCard progressPnl = new IndexCard();
 		progressPnl.setTitleAndName("得分进步最快球员", pname);
+		progressPnl.addMouseListener(this);
 		//progressPnl.iconPnl.setBackground(new Color(204,153,255));
 		progressPnl.iconPnl.setBackground(Style.HOT_PURPLE);
 		String pImgName=pname;
@@ -129,5 +143,54 @@ public class IndexPanel extends FatherPanel {
 		//
 		progressPnl.namePnl.setBackground(Style.HOT_PURPLEFOCUS);
 		infoPnl.add(progressPnl);
+	}
+
+	public void mouseClicked(MouseEvent e) {
+		// TODO Auto-generated method stub
+		HotIndexPanel pp=new HotIndexPanel();
+	if(e.getSource()!=todayPnl){
+		pp.downPnl.removeAll();
+		pp.downPnl.setLayout(new GridLayout(1,1));
+		if(e.getSource()==progressPnl){
+			
+			ProgressPanel p=new ProgressPanel();
+			pp.downPnl.add(p);
+			p.Refresh("recentFiveMatchesScoreUpRate");
+			
+		}else if(e.getSource()==seasonPnl){
+			
+			HotSeasonPanel p=new HotSeasonPanel();
+			pp.downPnl.add(p);
+			p.Refresh("score");
+		}else if(e.getSource()==teamPnl){
+			HotTeamPanel p=new HotTeamPanel();
+			pp.downPnl.add(p);
+			p.Refresh("score");
+		}
+		
+		pp.downPnl.repaint();
+		pp.downPnl.revalidate();
+		}
+		MainFrame.getInstance().setContentPanel(pp);
+	}
+
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 }

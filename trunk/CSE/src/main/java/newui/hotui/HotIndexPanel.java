@@ -19,8 +19,8 @@ public class HotIndexPanel extends FatherPanel implements MouseListener{
 	 */
 
 	private static final long serialVersionUID = 1L;
-	JPanel funcPnl,downPnl;
-	TopButton todayBtn,seasonBtn,teamBtn,progressBtn;
+	public JPanel funcPnl,downPnl;
+	public TopButton todayBtn,seasonBtn,teamBtn,progressBtn;
 	//
 	Font font=new Font("微软雅黑",Font.PLAIN,15);
 	public HotIndexPanel(){
