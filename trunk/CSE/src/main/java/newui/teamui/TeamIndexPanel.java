@@ -65,8 +65,6 @@ public class TeamIndexPanel extends FatherPanel implements MouseListener {
 		// 暂时没有bl方法
 		String[] seasonBoxText = { "13-14" };
 		seasonBox = new MyComboBox(seasonBoxText);
-		seasonBox.setBackground(Style.BACK_GREY);
-		seasonBox.setForeground(Color.white);
 		// seasonBox.addItemListener(this);
 		funcPnl.add(seasonBox);
 		funcPnl.add(new JLabel("       "));
@@ -75,8 +73,6 @@ public class TeamIndexPanel extends FatherPanel implements MouseListener {
 		funcPnl.add(typeLbl);
 		String[] typeText = { "赛季", "场均" };
 		typeBox = new MyComboBox(typeText);
-		typeBox.setBackground(Style.BACK_GREY);
-		typeBox.setForeground(Color.white);
 		funcPnl.add(typeBox);
 		funcPnl.add(new JLabel("       "));
 		// ------fieldLbl--------
@@ -280,6 +276,8 @@ public class TeamIndexPanel extends FatherPanel implements MouseListener {
 		public MyComboBox(String[] text) {
 			super(text);
 			setFont(font);
+			this.setBackground(Style.BACK_GREY);
+			this.setForeground(Color.white);
 		}
 	}
 
