@@ -310,6 +310,9 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener,
 			ptm.Refresh(typeBox.getSelectedItem().toString());
 			table.revalidate();
 			table.repaint();
+			tcr.setHighlightColumn(-1);
+			lastcolumn=-1;
+			clicktime=0;
 		}
 
 	}
