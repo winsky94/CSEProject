@@ -38,7 +38,7 @@ public interface PlayerBLService {
 	 * @return
 	 */
 	public ArrayList<PlayerVO> getPlayerBaseInfo(String name);
-
+	public ArrayList<PlayerVO> getPlayerBaseInfoSeason(String season,String name);
 	/**
 	 * 根据赛季和球员名称返回球员这个赛季的总的技术数据
 	 * 

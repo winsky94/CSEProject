@@ -1232,6 +1232,19 @@ public class Player implements PlayerBLService {
 		}
 		return result;
 	}
+	
+	public ArrayList<PlayerVO> getPlayerBaseInfoSeason(String season,String name) {
+		ArrayList<PlayerVO> result = new ArrayList<PlayerVO>();
+		ArrayList<PlayerVO> thePlayers = getPlayerSeasonInfo(season);
+		String s1="";
+		String s2=name.toLowerCase();
+		for (PlayerVO vo : thePlayers) {
+			s1=vo.getName().toLowerCase();
+			if (s1.contains(s2))
+				result.add(vo);
+		}
+		return result;
+	}
 
 	private int convertMinuteToSecond(String s) {
 		String[] temp = s.split(":");
