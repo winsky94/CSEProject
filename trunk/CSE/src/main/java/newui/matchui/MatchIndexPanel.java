@@ -69,7 +69,7 @@ public class MatchIndexPanel extends FatherPanel {
 		// ----是否全季-----------
 		fullSeasonBox = new JCheckBox("全季");
 		// bl方法暂无该参数传递 ，先选着吧
-		fullSeasonBox.setSelected(false);
+		fullSeasonBox.setSelected(true);
 		fullSeasonBox.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
 				if (fullSeasonBox.isSelected()) {
