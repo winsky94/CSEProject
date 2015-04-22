@@ -19,12 +19,6 @@ import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 
-import vo.PlayerVO;
-import vo.TeamVO;
-import bl.player.Player;
-import bl.team.Team;
-import blservice.PlayerBLService;
-import blservice.TeamBLService;
 import newui.hotui.HotIndexPanel;
 import newui.mainui.IndexPanel;
 import newui.mainui.MainFrame;
@@ -33,6 +27,10 @@ import newui.playerui.PlayerIndexPanel;
 import newui.tables.MyTableModel;
 import newui.teamui.TeamIndexPanel;
 import newui.teamui.TeamWindow;
+import vo.PlayerVO;
+import vo.TeamVO;
+import blservice.PlayerBLService;
+import blservice.TeamBLService;
 
 public class TitleBar extends JPanel implements MouseListener {
 	/**
@@ -43,13 +41,14 @@ public class TitleBar extends JPanel implements MouseListener {
 	MyButton indexBtn, teamBtn, playerBtn, matchBtn, hotBtn;
 	JTextField searchFld;
 	JLabel searchBtn;
-	int startX,startY;
-	
+	int startX, startY;
+
 	private MyTableModel tablemodel;
 	private TableModel model;
 	private String season;
 	private String aveOrAll;
 	private JTable table;
+
 	public TitleBar() {
 		setBackground(Style.DEEP_BLUE);
 		GridBagLayout gbl = new GridBagLayout();
@@ -71,8 +70,8 @@ public class TitleBar extends JPanel implements MouseListener {
 		gbc.gridx = 1;
 		gbl.setConstraints(teamBtn, gbc);
 		add(teamBtn);
-		startX=teamBtn.getX()+teamBtn.getWidth()/2;
-		startY=teamBtn.getY()+teamBtn.getHeight();
+		startX = teamBtn.getX() + teamBtn.getWidth() / 2;
+		startY = teamBtn.getY() + teamBtn.getHeight();
 		// ----------------------------
 		playerBtn = new MyButton("球员");
 		gbc.gridx = 2;
@@ -115,9 +114,9 @@ public class TitleBar extends JPanel implements MouseListener {
 		searchBtn.addMouseListener(this);
 		searchBtn.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		add(searchBtn);
-		searchFld.addKeyListener(new KeyAdapter(){
-			public void keyPressed(KeyEvent e){
-				if(e.getKeyCode()==KeyEvent.VK_ENTER){
+		searchFld.addKeyListener(new KeyAdapter() {
+			public void keyPressed(KeyEvent e) {
+				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
 					searchExcute();
 				}
 			}
@@ -148,21 +147,21 @@ public class TitleBar extends JPanel implements MouseListener {
 		}
 		if (e.getSource() == teamBtn)
 			MainFrame.getInstance().setContentPanel(new TeamIndexPanel());
-		if (e.getSource() == playerBtn)
-		{PlayerIndexPanel p=new PlayerIndexPanel();
+		if (e.getSource() == playerBtn) {
+			PlayerIndexPanel p = new PlayerIndexPanel();
 			MainFrame.getInstance().setContentPanel(p);
-			//p.Refresh();
+			// p.Refresh();
 		}
 		if (e.getSource() == matchBtn)
 			MainFrame.getInstance().setContentPanel(new MatchIndexPanel());
-		if (e.getSource() == hotBtn){
-			
+		if (e.getSource() == hotBtn) {
+
 			MainFrame.getInstance().setContentPanel(new HotIndexPanel());
-			
+
 		}
 		if (e.getSource() == searchBtn) {
-	
-			searchExcute();	
+
+			searchExcute();
 		}
 	}
 
@@ -181,7 +180,8 @@ public class TitleBar extends JPanel implements MouseListener {
 			indexBtn.setBackground(Style.FOCUS_BLUE);
 		if (e.getSource() == teamBtn) {
 			teamBtn.setBackground(Style.FOCUS_BLUE);
-			TeamWindow.getInstance(e.getXOnScreen(), e.getYOnScreen()).setVisible(true);
+			TeamWindow.getInstance(e.getXOnScreen(), e.getYOnScreen())
+					.setVisible(true);
 
 		}
 		if (e.getSource() == playerBtn)
@@ -197,9 +197,10 @@ public class TitleBar extends JPanel implements MouseListener {
 	public void mouseExited(MouseEvent e) {
 		if (e.getSource() == indexBtn)
 			indexBtn.setBackground(Style.DEEP_BLUE);
-		if (e.getSource() == teamBtn){
+		if (e.getSource() == teamBtn) {
 			teamBtn.setBackground(Style.DEEP_BLUE);
-			TeamWindow.getInstance(e.getXOnScreen(), e.getYOnScreen()).setVisible(false);
+			TeamWindow.getInstance(e.getXOnScreen(), e.getYOnScreen())
+					.setVisible(false);
 		}
 		if (e.getSource() == playerBtn)
 			playerBtn.setBackground(Style.DEEP_BLUE);
@@ -212,66 +213,74 @@ public class TitleBar extends JPanel implements MouseListener {
 
 	}
 
-	public void setCurrentTableModel(MyTableModel model){
-		this.tablemodel=model;
+	public void setCurrentTableModel(MyTableModel model) {
+		this.tablemodel = model;
 	}
-	
-	public void setModelEnum(TableModel m){
-		this.model=m;
+
+	public void setModelEnum(TableModel m) {
+		this.model = m;
 	}
-	public void setSeason(String s){
-		this.season=s;
+
+	public void setSeason(String s) {
+		this.season = s;
 	}
-	public void setTable(JTable t){
-		this.table=t;
+
+	public void setTable(JTable t) {
+		this.table = t;
 	}
-	public void setAveOrAll(String i){
-		this.aveOrAll=i;
+
+	public void setAveOrAll(String i) {
+		this.aveOrAll = i;
 	}
-	
-	public void searchExcute(){
-		PlayerBLService p;TeamBLService t;
+
+	public void searchExcute() {
+		PlayerBLService p;
+		TeamBLService t;
 		// 监听
-		String scontent=searchFld.getText();
+		String scontent = searchFld.getText();
 		ArrayList<PlayerVO> result;
 		ArrayList<TeamVO> team;
-		if(model==null)
-			MainFrame.getInstance().setContentPanel(new SearchResultPanel(scontent));
-		switch(model){
+		if (model == null)
+			MainFrame.getInstance().setContentPanel(
+					new SearchResultPanel(scontent));
+		switch (model) {
 		case RESULTPLAYER:
 			SearchResultPanel.setContent(scontent);
 			tablemodel.setContent(scontent);
 		case PLAYERBASEINFO:
-			p=Service.player;
-			 result=p.getPlayerBaseInfo(scontent);
-			tablemodel.SearchRefresh(result);break;
+			p = Service.player;
+			result = p.getPlayerBaseInfo(scontent);
+			tablemodel.SearchRefresh(result);
+			break;
 		case PLAYERRANK:
-			p=Service.player;
+			p = Service.player;
 
-			if(aveOrAll.equals("场均"))
-				result=p.getPlayerBaseInfo(scontent);
+			if (aveOrAll.equals("场均"))
+				result = p.getPlayerBaseInfo(scontent);
 			else
-				result=p.getPlayerBaseInfoSeason(season, scontent);
+				result = p.getPlayerBaseInfoSeason(season, scontent);
 			tablemodel.SearchRefresh(result);
 			break;
 		case RESULTTEAM:
 			SearchResultPanel.setContent(scontent);
 			tablemodel.setContent(scontent);
 		case TEAMBASEINFO:
-			t=Service.team;
-			team=t.getTeamBaseInfo(scontent);
-			tablemodel.SearchRefresh(team);break;
+			t = Service.team;
+			team = t.getTeamBaseInfo(scontent);
+			tablemodel.SearchRefresh(team);
+			break;
 		case TEAMRANK:
-			t=Service.team;
-			if(aveOrAll.equals("场均"))
-				team=t.getTeamAverageInfo(scontent);
+			t = Service.team;
+			if (aveOrAll.equals("场均"))
+				team = t.getTeamAverageInfo(scontent);
 			else
-				team=t.getTeamSeasonInfo(season, scontent);
+				team = t.getTeamSeasonInfo(season, scontent);
 			tablemodel.SearchRefresh(team);
 			break;
 
 		}
 		table.revalidate();
+		table.repaint();
 	}
-	
+
 }
