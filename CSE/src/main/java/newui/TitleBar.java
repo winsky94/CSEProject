@@ -11,6 +11,8 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -49,7 +51,7 @@ public class TitleBar extends JPanel implements MouseListener {
 	private String season;
 	private String aveOrAll;
 	private JTable table;
-
+	private int test=0;
 	public TitleBar() {
 		setBackground(Style.DEEP_BLUE);
 		GridBagLayout gbl = new GridBagLayout();
@@ -176,12 +178,20 @@ public class TitleBar extends JPanel implements MouseListener {
 
 	}
 
-	public void mouseEntered(MouseEvent e) {
+	public void mouseEntered(final MouseEvent e) {
 		
 		if (e.getSource() == teamBtn) {
 			teamBtn.setBackground(Style.FOCUS_BLUE);
-			window=TeamWindow.getInstance(e.getXOnScreen(), e.getYOnScreen());
-				window.setVisible(true);
+			test=1;
+			new Timer().schedule(new TimerTask() {
+				
+				@Override
+				public void run() {
+					// TODO Auto-generated method stub
+					showWin(e.getXOnScreen(), e.getYOnScreen());
+				}
+			}, 1000);
+				
 			
 
 		}
@@ -206,6 +216,7 @@ public class TitleBar extends JPanel implements MouseListener {
 			indexBtn.setBackground(Style.DEEP_BLUE);
 		if (e.getSource() == teamBtn) {
 			teamBtn.setBackground(Style.DEEP_BLUE);
+			test=0;
 			//window.setVisible(false);
 		}
 		if (e.getSource() == playerBtn)
@@ -289,4 +300,12 @@ public class TitleBar extends JPanel implements MouseListener {
 		table.repaint();
 	}
 
+	public void showWin(int x,int y){
+		if(test==1){
+		window=TeamWindow.getInstance(x,y);
+		window.setVisible(true);
+		
+		}
+	
+	}
 }
