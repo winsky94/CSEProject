@@ -9,6 +9,7 @@ import javax.swing.JLabel;
 import javax.swing.JTable;
 
 import newui.Service;
+import newui.playerui.BaseInfoPlayerThread;
 import bl.player.Player;
 import bl.team.Team;
 import blservice.PlayerBLService;
@@ -27,10 +28,12 @@ public class PlayerBaseInfoTableModel extends MyTableModel {
 	private ArrayList<PlayerVO> playerlist;
 	private JTable currentTable;
 	private JLabel label;
+	private ArrayList<String> nameList;
 	public PlayerBaseInfoTableModel() {
 
 		player = Service.player;
 		playerlist = new ArrayList<PlayerVO>();
+		
 	}
 
 	public void setCurrentTable(JTable t) {
@@ -56,6 +59,9 @@ public class PlayerBaseInfoTableModel extends MyTableModel {
 		return content.get(rowIndex).get(columnIndex);
 	}
 
+	public void setValueAt(Object value,int row,int column){
+		content.get(row).set(column, value);
+	}
 	public String getColumnName(int col) {
 		return head[col];
 	}
@@ -118,22 +124,24 @@ public class PlayerBaseInfoTableModel extends MyTableModel {
 	public void Refresh(ArrayList<PlayerVO> list) {
 		double pre=System.currentTimeMillis();
 		content.clear();
-		imgList.clear();
+		//imgList.clear();
+		nameList=new ArrayList<String>();
 		int i = 0;
 		for (PlayerVO vo : list) {
 			ArrayList<Object> line = new ArrayList<Object>();
 			String name = vo.getName();
 			//ImageIcon tou = player.getPlayerPortraitImage(name);
-			ImageIcon tou=new ImageIcon("image/player/portrait/"+name+".png");
-			imgList.add(tou);
+		/*	ImageIcon tou=new ImageIcon("image/player/portrait/"+name+".png");
+			//imgList.add(tou);
 			ImageIcon icon = new ImageIcon(tou.getImage().getScaledInstance(
 					currentTable.getColumn(currentTable.getColumnName(0))
 							.getWidth(), 40
 				, Image.SCALE_DEFAULT));
 
-			line.add(icon);
+			line.add(icon);*/
 			//需要通过线程来加头像
-			//line.add("头像");
+			nameList.add(name);
+			line.add("加载中");
 			line.add(name);
 			line.add(vo.getOwingTeam());
 			line.add(vo.getPosition());
@@ -149,6 +157,9 @@ public class PlayerBaseInfoTableModel extends MyTableModel {
 		}
 		double post=System.currentTimeMillis();
 		System.out.println("baseinfotablerefresh:"+(post-pre));
+		//线程加载图片
+		BaseInfoPlayerThread thre=new BaseInfoPlayerThread(nameList,currentTable);
+		thre.start();
 
 	}
 
@@ -184,9 +195,9 @@ public class PlayerBaseInfoTableModel extends MyTableModel {
 
 	}
 
-	public ArrayList<ImageIcon> getImgList() {
+	/*public ArrayList<ImageIcon> getImgList() {
 		return imgList;
-	}
+	}*/
 	
 	public void SearchRefresh(Object vv){
 		ArrayList<PlayerVO> v=(ArrayList<PlayerVO>)vv;
@@ -202,5 +213,9 @@ public class PlayerBaseInfoTableModel extends MyTableModel {
 	public void setCurrentLable(JLabel label){
 		this.label=label;
 		
+	}
+	
+	public ArrayList<String> getNameList(){
+		return nameList;
 	}
 }

@@ -102,7 +102,7 @@ public class PlayerIndexPanel  extends FatherPanel implements MouseListener {
 		table.getTableHeader().setBackground(new Color(211, 211, 211));
 		
 		DefaultTableCellRenderer tcr = new MyTableCellRenderer(
-				pitm.getImgList());
+				/*pitm.getImgList()*/);
 		for (int i = 1; i < table.getColumnCount(); i++) {
 			table.getColumn(table.getColumnName(i)).setCellRenderer(tcr);
 		}
@@ -124,6 +124,7 @@ public class PlayerIndexPanel  extends FatherPanel implements MouseListener {
 		
 		pitm.Refresh();
 		table.revalidate();
+		
 		// 设置表头颜色
 		table.getTableHeader().setBackground(new Color(158, 158, 158));
 		table.addMouseListener(this);
