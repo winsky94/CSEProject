@@ -1205,6 +1205,7 @@ public class Player implements PlayerBLService {
 	public ArrayList<PlayerVO> getPlayersByTeam(String teamAbLocation) {
 		ArrayList<PlayerVO> result = new ArrayList<PlayerVO>();
 		ArrayList<PlayerVO> thePlayers = getPlayerAverageInfo();
+		teamAbLocation=changePlayerCHToEN(teamAbLocation);
 		for (PlayerVO vo : thePlayers) {
 			if (vo.getOwingTeam().equals(teamAbLocation))
 				result.add(vo);
