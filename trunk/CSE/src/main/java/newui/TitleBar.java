@@ -246,12 +246,11 @@ public class TitleBar extends JPanel implements MouseListener {
 		case PLAYERRANK:
 			p=Service.player;
 
-		//	if(aveOrAll.equals("场均"))
-				//可能调用错方法了 方法重名
-				//result=p.getPlayerAverageInfo(scontent);
-		//	else
-				//result=p.getPlayerSeasonInfo(season, scontent);
-		//	tablemodel.SearchRefresh(result);break;
+			if(aveOrAll.equals("场均"))
+				result=p.getPlayerBaseInfo(scontent);
+			else
+				result=p.getPlayerBaseInfoSeason(season, scontent);
+			tablemodel.SearchRefresh(result);
 			break;
 		case RESULTTEAM:
 			SearchResultPanel.setContent(scontent);
@@ -261,13 +260,12 @@ public class TitleBar extends JPanel implements MouseListener {
 			team=t.getTeamBaseInfo(scontent);
 			tablemodel.SearchRefresh(team);break;
 		case TEAMRANK:
-		//	t=Service.team;
-		//	if(aveOrAll.equals("场均"))
-				//可能调用错方法了 方法重名
-			//	team=t.getTeamAverageInfo(scontent);
-			//else
-			//	team=t.getTeamSeasonInfo(season, scontent);
-			//tablemodel.SearchRefresh(team);break;
+			t=Service.team;
+			if(aveOrAll.equals("场均"))
+				team=t.getTeamAverageInfo(scontent);
+			else
+				team=t.getTeamSeasonInfo(season, scontent);
+			tablemodel.SearchRefresh(team);
 			break;
 			
 		}
