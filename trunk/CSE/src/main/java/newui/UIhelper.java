@@ -3,6 +3,7 @@ package newui;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.io.File;
 
 public class UIhelper {
 	static Toolkit kit = Toolkit.getDefaultToolkit();
@@ -24,5 +25,12 @@ public class UIhelper {
 	public static Image getImage(String filename){
 		Image image=kit.getImage(filename);
 		return image;
+	}
+	public static boolean isImgExists(String filename){
+		File file=new File(filename);
+		if(file.exists())
+			return true;
+		else
+			return false;
 	}
 }
