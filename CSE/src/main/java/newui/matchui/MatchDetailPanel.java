@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.Insets;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -139,8 +140,9 @@ public class MatchDetailPanel extends FatherPanel {
 		for (int i = 0; i < table.getColumnCount(); i++) {
 			table.getColumn(table.getColumnName(i)).setCellRenderer(tcr);
 		}
-
+		gbc.insets=new Insets(10, 20, 10, 20);
 		jsp = new JScrollPane(table);
+		jsp.getViewport().setBackground(Color.white);
 		model.setTime(v.getMatchTime());
 		ArrayList<RecordVO> vv = v.getRecords();
 		for (RecordVO r : vv) {
