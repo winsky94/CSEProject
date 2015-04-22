@@ -284,6 +284,7 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener,
 			TableSorter ts = new TableSorter(table.getModel(),
 					table.getTableHeader());
 			table.setModel(ts);
+			titleBar.setCurrentTableModel(ptm);
 			table.addMouseListener(this);
 			jsp.getViewport().add(table);
 			CellRender();
