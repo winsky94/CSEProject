@@ -20,10 +20,13 @@ import blservice.PlayerBLService;
 import blservice.TeamBLService;
 import vo.PlayerVO;
 import vo.TeamVO;
+import newui.mainui.MainFrame;
+import newui.playerui.PlayerDetailPanel;
 import newui.tables.MyBaseTable;
 import newui.tables.MyTableCellRenderer;
 import newui.tables.PlayerBaseInfoTableModel;
 import newui.tables.TeamBaseInfoTableModel;
+import newui.teamui.TeamDetailPanel;
 
 public class SearchResultPanel extends FatherPanel implements MouseListener{
 	/**
@@ -42,9 +45,13 @@ public class SearchResultPanel extends FatherPanel implements MouseListener{
 	private PlayerBLService pservice;
 	private TeamBLService tservice;
 	public String content;
+	private teamMouse tmouse;
+	private playerMouse pmouse;
 	Font font = new Font("微软雅黑", Font.PLAIN, 15);
 	public SearchResultPanel(String scontent) {
 		isDetail=true;
+		tmouse=new teamMouse();
+		pmouse=new playerMouse();
 		// ------funcPnl--------
 		funcPnl = new JPanel();
 		content=scontent;
@@ -112,6 +119,7 @@ public class SearchResultPanel extends FatherPanel implements MouseListener{
 					table.getColumn(table.getColumnName(i)).setCellRenderer(tcr);
 				}
 		table.revalidate();
+		table.addMouseListener(tmouse);
 		
 	}
 	class MyLabel extends JLabel{
@@ -148,6 +156,7 @@ public class SearchResultPanel extends FatherPanel implements MouseListener{
 				for (int i = 1; i < table.getColumnCount(); i++) {
 					table.getColumn(table.getColumnName(i)).setCellRenderer(tcr);
 				}
+				table.addMouseListener(pmouse);
 			
 			}else{
 				//换为ttm
@@ -166,7 +175,7 @@ public class SearchResultPanel extends FatherPanel implements MouseListener{
 				for (int i = 1; i < table.getColumnCount(); i++) {
 					table.getColumn(table.getColumnName(i)).setCellRenderer(tcr);
 				}
-				
+				table.addMouseListener(tmouse);
 				
 			}
 			table.revalidate();
@@ -190,5 +199,24 @@ public class SearchResultPanel extends FatherPanel implements MouseListener{
 	public void mouseExited(MouseEvent e) {
 		if(e.getSource()==changeLbl)
 			changeLbl.setForeground(Color.white);
+	}
+	class teamMouse extends MouseAdapter{
+		public void mouseClicked(MouseEvent e){
+			if(e.getClickCount()==2){
+				int row=table.getSelectedRow();
+				String name=table.getValueAt(row, 2).toString();
+				MainFrame.getInstance().setContentPanel(new TeamDetailPanel(name));
+			}
+		}
+	}
+	
+	class playerMouse extends MouseAdapter{
+		public void mouseClicked(MouseEvent e){
+		if(e.getClickCount()==2){
+			int row=table.getSelectedRow();
+			String name=table.getValueAt(row, 1).toString();
+			MainFrame.getInstance().setContentPanel(new PlayerDetailPanel(name));
+		}
+		}
 	}
 }
