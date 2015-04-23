@@ -126,25 +126,24 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener,
 		typeBox = new MyComboBox(typeText);
 		typeBox.addItemListener(this);
 		f2.add(typeBox);
-		funcPnl.add(new JLabel("       "));
 		// ------fieldLbl--------
 		fieldLbl = new MyJLabel("查看高阶数据");
 		fieldLbl.addMouseListener(this);
 		fieldLbl.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		funcPnl.add(fieldLbl);
-		funcPnl.add(new JLabel("       "));
+		f2.add(fieldLbl);
+		f2.add(new JLabel("       "));
 		// -----refreshLbl------
 		refreshLbl = new MyJLabel("刷新", new ImageIcon("image/refreshWhite.png"));
 		refreshLbl.addMouseListener(this);
 		refreshLbl.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		funcPnl.add(refreshLbl);
-		funcPnl.add(new JLabel("       "));
+		f2.add(refreshLbl);
+		f2.add(new JLabel("       "));
 		// -----modeLbl---------
 		modeLbl = new MyJLabel("至快速查询模式", new ImageIcon(
 				"image/player/headmode.png"));
 		modeLbl.addMouseListener(this);
 		modeLbl.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		funcPnl.add(modeLbl);
+		f2.add(modeLbl);
 		// ----jsp--------------
 		// table = new MySortableTable(ptm, 0);
 		table = new JTable(ptm);
