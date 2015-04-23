@@ -3,8 +3,8 @@ package newui.playerui;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
@@ -76,52 +76,56 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener,
 		gbc.gridheight = 1;
 		gbc.weighty = 0.8;
 		gbl.setConstraints(funcPnl, gbc);
-		FlowLayout fl = new FlowLayout(FlowLayout.LEFT);
-		funcPnl.setLayout(fl);
+		funcPnl.setLayout(new GridLayout(2,1));
 		add(funcPnl);
+		JPanel f1=new JPanel();
+		JPanel f2=new JPanel();
+		f1.setOpaque(false);
+		f2.setOpaque(false);
+		funcPnl.add(f1);
+		funcPnl.add(f2);
 		// -------筛选---------------------------------------
 		// -----位置---------
 		JLabel locationLbl = new MyJLabel("球员位置：");
-		funcPnl.add(locationLbl);
+		f1.add(locationLbl);
 		locationBox = new MyComboBox(locationText);
-		funcPnl.add(locationBox);
+		f1.add(locationBox);
 		// -----分区---------
 		JLabel partitionLbl = new MyJLabel("分区：");
-		funcPnl.add(partitionLbl);
+		f1.add(partitionLbl);
 		partitionBox = new MyComboBox(partitionText);
 		partitionBox.setMaximumRowCount(10);
-		funcPnl.add(partitionBox);
+		f1.add(partitionBox);
 		// ----排序条件--------
 		JLabel filterRankLbl = new MyJLabel("排序条件：");
-		funcPnl.add(filterRankLbl);
+		f1.add(filterRankLbl);
 		filterRankBox = new MyComboBox(filterRankText);
 		filterRankBox.setMaximumRowCount(13);
 		filterRankBox.setMaximumSize(new Dimension(100, 28));
 		filterRankBox.setMinimumSize(new Dimension(100, 28));
 		filterRankBox.setPreferredSize(new Dimension(100, 28));
-		funcPnl.add(filterRankBox);
+		f1.add(filterRankBox);
 		// -----filterLbl-----
 		filterLbl = new MyJLabel("筛选", new ImageIcon(
 				"image/player/filterWhite.png"));
 		filterLbl.addMouseListener(this);
 		filterLbl.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		funcPnl.add(filterLbl);
-		funcPnl.add(new JLabel("       "));
+		f1.add(filterLbl);
 		// -----season----------
 		JLabel seasonBoxLbl = new MyJLabel("赛季：");
-		funcPnl.add(seasonBoxLbl);
+		f2.add(seasonBoxLbl);
 		// 暂无获取赛季的bl方法
 		String[] seasonBoxText = { "13-14" };
 		seasonBox = new MyComboBox(seasonBoxText);
 		seasonBox.addItemListener(this);
-		funcPnl.add(seasonBox);
+		f2.add(seasonBox);
 		// ----DataType---------
 		JLabel typeLbl = new MyJLabel("数据类型：");
-		funcPnl.add(typeLbl);
+		f2.add(typeLbl);
 		String[] typeText = { "赛季", "场均" };
 		typeBox = new MyComboBox(typeText);
 		typeBox.addItemListener(this);
-		funcPnl.add(typeBox);
+		f2.add(typeBox);
 		funcPnl.add(new JLabel("       "));
 		// ------fieldLbl--------
 		fieldLbl = new MyJLabel("查看高阶数据");
