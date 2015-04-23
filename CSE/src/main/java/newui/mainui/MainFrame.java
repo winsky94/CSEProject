@@ -187,13 +187,15 @@ public class MainFrame extends JFrame{
 						public void run(){
 							while(p.stop){
 								p.dispose();
-								MainFrame.getInstance().setVisible(true);;		
-						}		
+								MainFrame.getInstance().setVisible(true);		
+							}	
 						}
-					}, 1000);
+					}, 1200);
 								
 				}
 		},3200);
+		
+		
 	//	ImageIcon icon=new ImageIcon("image/backup.gif");
 		
 //		new Thread(){
@@ -215,6 +217,8 @@ public class MainFrame extends JFrame{
 	
 		
 	}
+	
+	
 	
 	class BigPanel extends JPanel{
 		protected void paintComponent(Graphics g) {
