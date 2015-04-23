@@ -39,6 +39,8 @@ public class MainFrame extends JFrame{
 	private static MainFrame instance=null;
 	private int fx,fy;//实时坐标位置
 	private Point origin;
+	static Timer t1;
+	static  Timer t2=null;
 	int screenWidth=UIhelper.getScreenWidth();
 	int screenHeight=UIhelper.getScreenHeight();
 	int width=screenWidth*90/100;
@@ -116,9 +118,9 @@ public class MainFrame extends JFrame{
 		          }          
 		        }
 		    );  
-		    this.setAlwaysOnTop(false);
+		   // this.setAlwaysOnTop(false);
 		    this.setFocusableWindowState(false);
-		   
+		 
 	}
 
 	
@@ -183,21 +185,27 @@ public class MainFrame extends JFrame{
 		final boolean stop=false;
 		final InitialThread thread=new InitialThread(p);
 		thread.startThread();
-		new Timer().schedule(new TimerTask(){
+		
+		t1=new Timer();t2=new Timer();
+		t1.schedule(new TimerTask(){
 				
 				@Override
 				public void run() {
 					p.setBackImage(new ImageIcon("image/back.png"));
-					new Timer().schedule(new TimerTask(){
+					t2.schedule(new TimerTask(){
 						public void run(){
 							
 							while(p.stop){
+								
 								p.dispose();
 								MainFrame.getInstance().setVisible(true);
+								//t1.cancel();t2.cancel();
+								break;
 								
+						
 							}	
 						}
-					}, 1000);
+					}, 1100);
 								
 				}
 		},3200);
