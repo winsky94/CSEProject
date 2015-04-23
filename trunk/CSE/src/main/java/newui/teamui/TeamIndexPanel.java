@@ -46,6 +46,9 @@ public class TeamIndexPanel extends FatherPanel implements MouseListener {
 	int lastcolumn = -1;
 	MyTableCellRenderer tcr;
 	highlisten listen;
+	
+	TableSorter ts ;
+	
 	public TeamIndexPanel() {
 		super();
 		listen=new highlisten();
@@ -88,7 +91,7 @@ public class TeamIndexPanel extends FatherPanel implements MouseListener {
 		ttm = new TeamTableModel(0);
 		// table = new MySortableTable(ttm, 1);
 		table = new JTable(ttm);
-		TableSorter ts = new TableSorter(table.getModel(),
+		ts = new TableSorter(table.getModel(),
 				table.getTableHeader());
 		table.setModel(ts);
 
@@ -154,7 +157,9 @@ public class TeamIndexPanel extends FatherPanel implements MouseListener {
 			table.revalidate();
 			table.repaint();
 			tcr.setHighlightColumn(-1);
+			ts.setSortingStatus(lastcolumn, 0);
 			lastcolumn=-1;
+			
 			clicktime=0;
 		}
 
@@ -187,11 +192,11 @@ public class TeamIndexPanel extends FatherPanel implements MouseListener {
 			;
 			jsp.remove(table);
 			table = new JTable(ttm);
-			TableSorter ts = new TableSorter(table.getModel(),
+			ts = new TableSorter(table.getModel(),
 					table.getTableHeader());
 			table.setModel(ts);
 
-			//table.getTableHeader().addMouseListener(listen);
+//			table.getTableHeader().addMouseListener(listen);
 			titleBar.setCurrentTableModel(ttm);
 
 			jsp.getViewport().add(table);
