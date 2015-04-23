@@ -238,14 +238,30 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener,
 		} else if (e.getSource() == modeLbl)
 			MainFrame.getInstance().setContentPanel(new PlayerIndexPanel());
 		else if (e.getSource() == filterLbl) {
-			if (timeField.getText() != null) {
-				int time = Integer.parseInt(timeField.getText());
+			if (timeField.getText() != null||!(timeField.getText().equals(""))||timeField.getText()!="") {
+				int time=0;
+				try{
+				   time = Integer.parseInt(timeField.getText());
+				}catch(NumberFormatException nfe){
+					time=0;
+				}
 				ArrayList<PlayerVO> vlist;
 				String type = typeBox.getSelectedItem().toString();
 				if (type.equals("赛季"))
 					vlist = player.getPlayersUptheTimeSeason("13-14", time);
 				else
 					vlist = player.getPlayersUptheTimeAverage(time);
+				
+				if (vlist != null) {
+					if (isHighInfo == false)
+						ptm.refreshBase(vlist);
+					else
+						ptm.refreshHigh(vlist);
+				}
+				table.revalidate();
+
+				table.repaint();
+
 
 			} else {
 				// 执行筛选
