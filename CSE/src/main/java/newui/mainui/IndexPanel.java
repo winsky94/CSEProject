@@ -92,7 +92,7 @@ public class IndexPanel extends FatherPanel implements MouseListener{
 		ImageIcon todayIcon = new ImageIcon("image/player/action/" + dname
 				+ ".png");
 		todayIcon.setImage(todayIcon.getImage().getScaledInstance(220, 350,
-				Image.SCALE_DEFAULT));
+				Image.SCALE_SMOOTH));
 		todayPnl.iconLbl.setIcon(todayIcon);
 		//
 		todayPnl.namePnl.setBackground(Style.HOT_YELLOWFOCUS);
@@ -107,7 +107,7 @@ public class IndexPanel extends FatherPanel implements MouseListener{
 				+ ".png");
 		
 		seasonIcon.setImage(seasonIcon.getImage().getScaledInstance(220, 350,
-				Image.SCALE_DEFAULT));
+				Image.SCALE_SMOOTH));
 		seasonPnl.iconLbl.setIcon(seasonIcon);
 		//
 		seasonPnl.namePnl.setBackground(Style.HOT_REDFOCUS);
@@ -121,7 +121,7 @@ public class IndexPanel extends FatherPanel implements MouseListener{
 		ImageIcon teamIcon = new ImageIcon("image/player/action/" + tPlayername
 				+ ".png");
 		teamIcon.setImage(teamIcon.getImage().getScaledInstance(220,350,
-				Image.SCALE_DEFAULT));
+				Image.SCALE_SMOOTH));
 		teamPnl.iconLbl.setIcon(teamIcon);
 		//
 		teamPnl.namePnl.setBackground(Style.HOT_BLUEFOCUS);
@@ -138,7 +138,7 @@ public class IndexPanel extends FatherPanel implements MouseListener{
 		ImageIcon progressIcon = new ImageIcon("image/player/action/" + pImgName
 				+ ".png");
 		progressIcon.setImage(progressIcon.getImage().getScaledInstance(220, 350,
-				Image.SCALE_DEFAULT));
+				Image.SCALE_SMOOTH));
 		progressPnl.iconLbl.setIcon(progressIcon);
 		//
 		progressPnl.namePnl.setBackground(Style.HOT_PURPLEFOCUS);

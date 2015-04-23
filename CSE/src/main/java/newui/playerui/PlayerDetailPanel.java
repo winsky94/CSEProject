@@ -52,7 +52,7 @@ public class PlayerDetailPanel extends FatherPanel{
 		if(!file.exists())
 			actionIconName="unknown";
 		ImageIcon i=new ImageIcon("image/player/action/"+actionIconName+".png");
-		i.setImage(i.getImage().getScaledInstance(300, 478,Image.SCALE_DEFAULT ));
+		i.setImage(i.getImage().getScaledInstance(300, 478,Image.SCALE_SMOOTH ));
 		
 		actionPicLbl=new JLabel(i/*new ImageIcon("image/player/action/"+name+".png")*/);
 		gbc.gridx=0;
