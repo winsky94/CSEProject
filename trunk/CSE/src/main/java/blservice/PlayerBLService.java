@@ -183,6 +183,12 @@ public interface PlayerBLService {
 	public ArrayList<PlayerVO> getPlayersByInitialName(char character);
 
 	/**
+	 * 
+	 * @param minute找出出场时间大于等于该分钟的球员
+	 * @return
+	 */
+	public ArrayList<PlayerVO> getPlayersUptheTime(int minute);
+	/**
 	 * 获得该球员最近5场比赛的数据
 	 * 
 	 * @param playerName
