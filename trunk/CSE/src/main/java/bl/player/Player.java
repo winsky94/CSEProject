@@ -49,14 +49,14 @@ public class Player implements PlayerBLService {
 	boolean needUpdatePlayersToday = false;
 	
 	private static String[] player_CH = new String[] { "全部", "前锋", "中锋",
-		"后卫", "得分", "篮板数", "助攻数", "得分/篮板/助攻(1:1:1)", 
+		"后卫","前锋-中锋","中锋-后卫", "得分", "篮板数", "助攻数", "得分/篮板/助攻(1:1:1)", 
 		"投篮命中率", "盖帽数", "抢断数", "罚球命中率", "犯规数", "失误数",
 		"在场时间", "效率", "两双", "西部球队", "东部球队", 
 		 "真实命中率", "GmSc效率值", "投篮效率", "篮板率", "进攻篮板数",
 		 "防守篮板数", "进攻篮板率", "防守篮板率", "助攻率", "抢断率", 
 		 "盖帽率", "失误率", "使用率"};
     private static String[] player_EN = new String[] { "all", "F", "C",
-		"G", "score", "reboundNum", "assistNum", "score_rebound_assist", 
+		"G", "F-C","C-G","score", "reboundNum", "assistNum", "score_rebound_assist", 
 		"shootHitRate", "blockNum", "stealNum", "freeThrowHitRate", "foulNum", "turnOverNum",
 		"presentTime", "efficiency", "doubleDoubleNum", "W", "E",
 		"trueHitRate","GmScEfficiencyValue","shootEfficiency","reboundRate","offenReboundNum",
