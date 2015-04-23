@@ -312,7 +312,8 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener,
 			table.revalidate();
 			table.repaint();
 			tcr.setHighlightColumn(-1);
-			ts.setSortingStatus(lastcolumn, 0);
+//			ts.setSortingStatus(lastcolumn, 0);
+			ts.cancelSorting();
 			lastcolumn=-1;
 			clicktime=0;
 		}
