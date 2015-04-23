@@ -1235,8 +1235,13 @@ public class Player implements PlayerBLService {
 		ArrayList<PlayerVO> result = new ArrayList<PlayerVO>();
 		ArrayList<PlayerVO> thePlayers = getPlayerAverageInfo();
 		for (PlayerVO vo : thePlayers) {
-			if (vo.getName().startsWith(character + ""))
-				result.add(vo);
+			String[] name=vo.getName().split(" ");
+			int size=name.length;
+			String lastName=name[size-1];
+			
+			if (lastName.startsWith(character + ""))
+					result.add(vo);			
+			
 		}
 		return result;
 	}
