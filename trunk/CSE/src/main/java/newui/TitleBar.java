@@ -148,6 +148,7 @@ public class TitleBar extends JPanel implements MouseListener {
 	public void mouseClicked(MouseEvent e) {
 		if (e.getSource() == indexBtn) {
 			MainFrame.getInstance().setContentPanel(new IndexPanel());
+			IndexPanel.startT();
 		}
 		if (e.getSource() == teamBtn)
 			MainFrame.getInstance().setContentPanel(new TeamIndexPanel());
