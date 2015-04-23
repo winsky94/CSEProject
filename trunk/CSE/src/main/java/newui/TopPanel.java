@@ -95,6 +95,7 @@ public class TopPanel extends JPanel implements MouseListener {
 		if (e.getSource() == miniBtn) {
 			// 监听
 			MainFrame.getInstance().setExtendedState(JFrame.HIDE_ON_CLOSE);
+			
 		}
 		if (e.getSource() == backBtn) {
 			if (!MainFrame.stack.isEmpty())

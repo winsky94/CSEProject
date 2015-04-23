@@ -27,7 +27,6 @@ import newui.tables.HotTableModel;
 import newui.tables.MyTableCellRenderer;
 import newui.teamui.TeamDetailPanel;
 import vo.PlayerVO;
-
 import blservice.PlayerBLService;
 
 public class ProgressPanel extends HotFatherPanel implements MouseListener {
@@ -47,8 +46,9 @@ public class ProgressPanel extends HotFatherPanel implements MouseListener {
 	ArrayList<PlayerVO> vlist;
 	String[] head = { "排名", "", "球员名称", "所属球队", "位置", "场均得分", "提升率" };
 	DecimalFormat dec = new DecimalFormat("0.00");
-	
-	public ProgressPanel() {
+	HotThread thr;
+	public ProgressPanel(HotThread th) {
+		this.thr=th;
 		player = Service.player;
 		GridBagLayout bl = new GridBagLayout();
 		GridBagConstraints bc = new GridBagConstraints();
@@ -209,20 +209,28 @@ public class ProgressPanel extends HotFatherPanel implements MouseListener {
 		currentBtn.setBackground(Style.HOT_PURPLE);
 		BottomButton m = (BottomButton) e.getSource();
 		PlayerVO v = vlist.get(0);
+		if(thr!=null)
+			thr.stopThead();
 		if (m == scoreBtn) {
 			head[5] = "场均得分";
 			currentBtn = scoreBtn;
 			Refresh("recentFiveMatchesScoreUpRate");
+			thr=new HotThread(ProgressPanel.this,"recentFiveMatchesScoreUpRate");
+			thr.startThread();
 			// data.setText(v.getScore()+"/"+v.getRecentFiveMatchesScoreUpRate()*100+"%");
 		} else if (m == reboundBtn) {
 			head[5] = "场均篮板";
 			currentBtn = reboundBtn;
 			Refresh("recentFiveMatchesReboundUpRate");
+			thr=new HotThread(ProgressPanel.this,"recentFiveMatchesReboundUpRate");
+			thr.startThread();
 			// data.setText(v.getReboundNum()+"/"+v.getRecentFiveMatchesReboundUpRate()*100+"%");
 		} else {
 			head[5] = "场均助攻";
 			currentBtn = assistBtn;
 			Refresh("recentFiveMatchesAssistUpRate");
+			thr=new HotThread(ProgressPanel.this,"recentFiveMatchesAssistUpRate");
+			thr.startThread();
 			// data.setText(v.getAssistNum()+"/"+v.getRecentFiveMatchesAssistUpRate()*100+"%");
 		}
 
