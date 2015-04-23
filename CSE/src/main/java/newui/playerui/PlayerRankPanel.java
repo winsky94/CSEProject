@@ -53,10 +53,10 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener,
 	JComboBox<String> locationBox, partitionBox, filterRankBox, seasonBox,
 			typeBox;
 	Font font = new Font("微软雅黑", Font.PLAIN, 13);
-	String[] locationText = { "全部", "前锋", "中锋", "后卫" ,"前锋-中锋","中锋-后卫"};
+	String[] locationText = { "全部", "前锋", "中锋", "后卫", "前锋-中锋", "中锋-后卫", "前锋-后卫" };
 	String[] partitionText = { "全部", "西部球队", "东部球队" };
-	String[] filterRankText = { "得分", "篮板数", "助攻数", "得分/篮板/助攻", "投篮命中率",
-			"盖帽数", "抢断数", "罚球命中率", "犯规数", "失误数", "在场时间", "效率", "两双" };
+	String[] filterRankText = { "得分", "篮板数", "助攻数", "得分/篮板/助攻", "投篮命中率", "盖帽数",
+			"抢断数", "罚球命中率", "犯规数", "失误数", "在场时间", "效率", "两双" };
 	String[] filterRankText2 = { "真实命中率", "GmSc效率值", "投篮效率", "篮板率", "进攻篮板数",
 			"防守篮板数", "进攻篮板率", "防守篮板率", "助攻率", "抢断率", "盖帽率", "失误率", "使用率" };
 	int lastcolumn = -1;
@@ -76,10 +76,10 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener,
 		gbc.gridheight = 1;
 		gbc.weighty = 0.8;
 		gbl.setConstraints(funcPnl, gbc);
-		funcPnl.setLayout(new GridLayout(2,1));
+		funcPnl.setLayout(new GridLayout(2, 1));
 		add(funcPnl);
-		JPanel f1=new JPanel();
-		JPanel f2=new JPanel();
+		JPanel f1 = new JPanel();
+		JPanel f2 = new JPanel();
 		f1.setOpaque(false);
 		f2.setOpaque(false);
 		funcPnl.add(f1);
@@ -252,11 +252,11 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener,
 					ptm = new PlayerTableModel(1);
 				jsp.remove(table);
 				table = new JTable(ptm);
-				
+
 				ts = new TableSorter(table.getModel(), table.getTableHeader());
 				table.setModel(ts);
-				
-				//table.addMouseListener(this);
+
+				// table.addMouseListener(this);
 				jsp.getViewport().add(table);
 
 			}
@@ -309,7 +309,7 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener,
 			ts = new TableSorter(table.getModel(), table.getTableHeader());
 			table.setModel(ts);
 			titleBar.setCurrentTableModel(ptm);
-			//table.addMouseListener(this);
+			// table.addMouseListener(this);
 			jsp.getViewport().add(table);
 			// table.getTableHeader().addMouseListener(listen);
 			CellRender();
