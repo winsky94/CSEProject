@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import newui.Service;
 import vo.PlayerVO;
+import bl.player.Player;
 import blservice.PlayerBLService;
 
 public class TeamHistoryTableModel extends MyTableModel {
@@ -94,7 +95,7 @@ public class TeamHistoryTableModel extends MyTableModel {
 			line.add(p.getPlayedGames());
 			present += p.getPlayedGames();
 			line.add(p.getGameStartingNum());
-			line.add(p.getPresentTime());
+			line.add(Player.changeSecondToTime(p.getPresentTime()));
 			line.add(p.getShootHitRate());
 			shootHitRate += p.getShootHitRate();
 			line.add(p.getThreeHitRate());
