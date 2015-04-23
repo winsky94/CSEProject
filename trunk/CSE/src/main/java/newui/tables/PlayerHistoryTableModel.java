@@ -83,9 +83,9 @@ public class PlayerHistoryTableModel extends AbstractTableModel{
 			//时间为球员的在场时间啦
 			line.add(v.getPresentTime());
 			//不确定是不是队伍数据
-			line.add(m.getHomeShootHitNum()+"-"+m.getVisitingShootHitNum());
-			line.add(m.getHomeThreeHitNum()+"-"+m.getVisitingThreeHitNum());
-			line.add(m.getHomeFreeThrowHitNum()+"-"+m.getVisitingFreeThrowHitNum());
+			line.add(v.getShootHitNum()+"-"+v.getShootAttemptNum());
+			line.add(v.getThreeHitNum()+"-"+v.getThreeAttemptNum());
+			line.add(v.getFreeThrowHitNum()+"-"+v.getFreeThrowAttemptNum());
 			//开始为个人数据
 			line.add(v.getOffenReboundNum());
 			line.add(v.getDefenReboundNum());
