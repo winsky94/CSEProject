@@ -52,6 +52,7 @@ public class TeamDetailPanel extends FatherPanel{
 		isDetail=true;
 		team=Service.team;
 		//abbrName=Team.changeTeamNameCHToEN(teamName);
+		System.out.println(teamName);
 		abbrName=teamName;
 		nameCH=Team.changeTeamNameENToCH(teamName);
 		//----------------------
