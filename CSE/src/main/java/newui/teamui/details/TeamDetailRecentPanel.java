@@ -13,16 +13,12 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import newui.Service;
-import newui.Style;
 import newui.matchui.TinyCard;
 import vo.MatchVO;
-import bl.player.Player;
-import bl.team.Team;
 import blservice.PlayerBLService;
 import blservice.TeamBLService;
 
-
-public class TeamDetailRecentPanel extends JPanel{
+public class TeamDetailRecentPanel extends JPanel {
 
 	/**
 	 * 
@@ -31,56 +27,57 @@ public class TeamDetailRecentPanel extends JPanel{
 	PlayerBLService pp;
 	String abbrName;
 	TeamBLService team;
-	ArrayList<MatchVO> matches=new ArrayList<MatchVO>();
+	ArrayList<MatchVO> matches = new ArrayList<MatchVO>();
 	JPanel cardPnl;
-	public TeamDetailRecentPanel(String pName,String tName){
+
+	public TeamDetailRecentPanel(String pName, String tName) {
 		setLayout(new BorderLayout());
-		JLabel titleLbl=new JLabel("最近比赛");
-		titleLbl.setFont(new Font("微软雅黑",Font.PLAIN,14));
+		JLabel titleLbl = new JLabel("最近比赛");
+		titleLbl.setFont(new Font("微软雅黑", Font.PLAIN, 14));
 		titleLbl.setForeground(Color.white);
-		add(titleLbl,BorderLayout.NORTH);
-		pp=Service.player;
-		matches=pp.getRecentMatches(pName,5);
-		//-------------------
-		cardPnl=new JPanel();
+		add(titleLbl, BorderLayout.NORTH);
+		pp = Service.player;
+		matches = pp.getRecentMatches(pName, 5);
+		// -------------------
+		cardPnl = new JPanel();
 		cardPnl.setOpaque(false);
-		add(cardPnl,BorderLayout.CENTER);
-		cardPnl.setLayout(new GridLayout(1,5));
-		double pre=System.currentTimeMillis();
-			cardPnl.add(new TinyCard(matches.get(0),tName));
-			cardPnl.add(new TinyCard(matches.get(1),tName));
-			cardPnl.add(new TinyCard(matches.get(2),tName));
-			cardPnl.add(new TinyCard(matches.get(3),tName));
-			cardPnl.add(new TinyCard(matches.get(4),tName));
-		double post=System.currentTimeMillis();
-		System.out.println("FiveTinyCard:"+(post-pre));
-		
-		
+		add(cardPnl, BorderLayout.CENTER);
+		cardPnl.setLayout(new GridLayout(1, 5));
+		double pre = System.currentTimeMillis();
+		cardPnl.add(new TinyCard(matches.get(0), tName));
+		cardPnl.add(new TinyCard(matches.get(1), tName));
+		cardPnl.add(new TinyCard(matches.get(2), tName));
+		cardPnl.add(new TinyCard(matches.get(3), tName));
+		cardPnl.add(new TinyCard(matches.get(4), tName));
+		double post = System.currentTimeMillis();
+		System.out.println("FiveTinyCard:" + (post - pre));
+
 	}
-	
-	public TeamDetailRecentPanel(String abbrName){
+
+	public TeamDetailRecentPanel(String abbrName) {
 		setLayout(new BorderLayout());
-		JLabel titleLbl=new JLabel("最近比赛");
-		titleLbl.setFont(new Font("微软雅黑",Font.PLAIN,16));
+		JLabel titleLbl = new JLabel("最近比赛");
+		titleLbl.setFont(new Font("微软雅黑", Font.PLAIN, 16));
 		titleLbl.setForeground(Color.white);
-		add(titleLbl,BorderLayout.NORTH);
-		team=Service.team;
-		matches=team.getRecentMatches(abbrName);
-		//-------------------
-		cardPnl=new JPanel();
+		add(titleLbl, BorderLayout.NORTH);
+		team = Service.team;
+		matches = team.getRecentMatches(abbrName);
+		// -------------------
+		cardPnl = new JPanel();
 		cardPnl.setOpaque(false);
-		add(cardPnl,BorderLayout.CENTER);
-		cardPnl.setLayout(new GridLayout(1,5));
-		cardPnl.add(new TinyCard(matches.get(0),abbrName));
-		cardPnl.add(new TinyCard(matches.get(1),abbrName));
-		cardPnl.add(new TinyCard(matches.get(2),abbrName));
-		cardPnl.add(new TinyCard(matches.get(3),abbrName));
-		cardPnl.add(new TinyCard(matches.get(4),abbrName));
+		add(cardPnl, BorderLayout.CENTER);
+		cardPnl.setLayout(new GridLayout(1, 5));
+		cardPnl.add(new TinyCard(matches.get(0), abbrName));
+		cardPnl.add(new TinyCard(matches.get(1), abbrName));
+		cardPnl.add(new TinyCard(matches.get(2), abbrName));
+		cardPnl.add(new TinyCard(matches.get(3), abbrName));
+		cardPnl.add(new TinyCard(matches.get(4), abbrName));
 	}
+
 	protected void paintComponent(Graphics g) {
 		ImageIcon icon = new ImageIcon("image/card.png");
 		Image img = icon.getImage();
-		g.drawImage(img, 0, 0, icon.getIconWidth(),
-				icon.getIconHeight(), icon.getImageObserver());
+		g.drawImage(img, 0, 0, icon.getIconWidth(), icon.getIconHeight(),
+				icon.getImageObserver());
 	}
 }
