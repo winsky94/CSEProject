@@ -129,8 +129,8 @@ public class TeamDetailHistoryPanel extends JPanel {
 		public MyBox(String[] arr) {
 			super(arr);
 			setFont(font);
-			this.setBackground(Style.BACK_GREY);
-			this.setForeground(Color.white);
+			this.setBackground(Color.white);
+			this.setForeground(Style.DEEP_BLUE);
 		}
 	}
 

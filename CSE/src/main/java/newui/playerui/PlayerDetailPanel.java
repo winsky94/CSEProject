@@ -2,6 +2,7 @@ package newui.playerui;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Image;
 import java.io.File;
 
 import javax.swing.ImageIcon;
@@ -51,8 +52,7 @@ public class PlayerDetailPanel extends FatherPanel{
 		if(!file.exists())
 			actionIconName="unknown";
 		ImageIcon i=new ImageIcon("image/player/action/"+actionIconName+".png");
-		
-	
+		i.setImage(i.getImage().getScaledInstance(300, 478,Image.SCALE_DEFAULT ));
 		
 		actionPicLbl=new JLabel(i/*new ImageIcon("image/player/action/"+name+".png")*/);
 		gbc.gridx=0;
