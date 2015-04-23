@@ -34,8 +34,9 @@ public class TeamDetailInfoPanel extends JPanel{
 		//-----名字获取及VO生成----------
 		team=Service.team;
 		chName=ch;
-		abbrName=abbr;
-		basevo=team.getTeamBaseInfo(abbr).get(0);
+		abbrName=abbr;//Team.changeTeamNameCHToEN(abbr);
+//		System.out.println(abbr);
+		basevo=team.getTeamBaseInfo(Team.changeTeamNameCHToEN(abbrName)).get(0);
 		enName=basevo.getTeamName();
 		//----------------------------
 		GridBagLayout gbl=new GridBagLayout();
@@ -81,7 +82,7 @@ public class TeamDetailInfoPanel extends JPanel{
 		infoPnl.add(setUpTimeLbl);
 		//----------------------------
 		//这边严重的有问题
-		recentPnl=new TeamDetailRecentPanel(abbrName);
+		recentPnl=new TeamDetailRecentPanel(Team.changeTeamNameCHToEN(abbrName));
 		gbc.gridy=7;
 		gbc.gridheight=3;
 		gbc.weighty=1;
