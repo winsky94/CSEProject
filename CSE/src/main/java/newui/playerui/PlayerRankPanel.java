@@ -53,7 +53,7 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener,
 	JComboBox<String> locationBox, partitionBox, filterRankBox, seasonBox,
 			typeBox;
 	Font font = new Font("微软雅黑", Font.PLAIN, 13);
-	String[] locationText = { "全部", "前锋", "中锋", "后卫" };
+	String[] locationText = { "全部", "前锋", "中锋", "后卫" ,"前锋-中锋","中锋-后卫"};
 	String[] partitionText = { "全部", "西部球队", "东部球队" };
 	String[] filterRankText = { "得分", "篮板数", "助攻数", "得分/篮板/助攻", "投篮命中率",
 			"盖帽数", "抢断数", "罚球命中率", "犯规数", "失误数", "在场时间", "效率", "两双" };
