@@ -260,6 +260,7 @@ public class TitleBar extends JPanel implements MouseListener {
 		if (model == null)
 			MainFrame.getInstance().setContentPanel(
 					new SearchResultPanel(scontent));
+		else{
 		switch (model) {
 		case RESULTPLAYER:
 			SearchResultPanel.setContent(scontent);
@@ -295,6 +296,7 @@ public class TitleBar extends JPanel implements MouseListener {
 			tablemodel.SearchRefresh(team);
 			break;
 
+		}
 		}
 		table.revalidate();
 		table.repaint();
