@@ -119,7 +119,8 @@ public class MainFrame extends JFrame{
 		        }
 		    );  
 		   // this.setAlwaysOnTop(false);
-		    this.setFocusableWindowState(false);
+		  // this.setFocusableWindowState(false);
+		    this.setAutoRequestFocus(false);
 		 
 	}
 
