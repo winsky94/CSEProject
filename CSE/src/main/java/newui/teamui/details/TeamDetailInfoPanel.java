@@ -35,7 +35,6 @@ public class TeamDetailInfoPanel extends JPanel{
 		team=Service.team;
 		chName=ch;
 		abbrName=abbr;//Team.changeTeamNameCHToEN(abbr);
-//		System.out.println(abbr);
 		basevo=team.getTeamBaseInfo(Team.changeTeamNameCHToEN(abbrName)).get(0);
 		enName=basevo.getTeamName();
 		//----------------------------
