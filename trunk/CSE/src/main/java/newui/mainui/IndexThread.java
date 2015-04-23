@@ -10,9 +10,9 @@ public class IndexThread extends Thread{
 	public void run(){
 		while(!stop){
 			
-			
+			p.Refresh();
 			try {
-				this.sleep(2000);
+				this.sleep(4000);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
