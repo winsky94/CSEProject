@@ -170,8 +170,8 @@ public class TableSorter extends AbstractTableModel {
 		return new Arrow(directive.direction == DESCENDING, size,
 				sortingColumns.indexOf(directive));
 	}
-
-	private void cancelSorting() {
+	
+	public void cancelSorting() {
 		sortingColumns.clear();
 		sortingStatusChanged();
 	}
