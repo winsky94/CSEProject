@@ -248,7 +248,7 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener,
 				ts = new TableSorter(table.getModel(), table.getTableHeader());
 				table.setModel(ts);
 				
-				table.addMouseListener(this);
+				//table.addMouseListener(this);
 				jsp.getViewport().add(table);
 
 			}
@@ -301,7 +301,7 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener,
 			ts = new TableSorter(table.getModel(), table.getTableHeader());
 			table.setModel(ts);
 			titleBar.setCurrentTableModel(ptm);
-			table.addMouseListener(this);
+			//table.addMouseListener(this);
 			jsp.getViewport().add(table);
 			// table.getTableHeader().addMouseListener(listen);
 			CellRender();
