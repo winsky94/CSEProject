@@ -54,20 +54,21 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener,
 			typeBox;
 	Font font = new Font("微软雅黑", Font.PLAIN, 13);
 	String[] locationText = { "全部", "前锋", "中锋", "后卫" };
-	String[] partitionText = { "全部", "西部球队",  "东部球队" };
+	String[] partitionText = { "全部", "西部球队", "东部球队" };
 	String[] filterRankText = { "得分", "篮板数", "助攻数", "得分/篮板/助攻(1:1:1)", "投篮命中率",
 			"盖帽数", "抢断数", "罚球命中率", "犯规数", "失误数", "在场时间", "效率", "两双" };
 	String[] filterRankText2 = { "真实命中率", "GmSc效率值", "投篮效率", "篮板率", "进攻篮板数",
 			"防守篮板数", "进攻篮板率", "防守篮板率", "助攻率", "抢断率", "盖帽率", "失误率", "使用率" };
-	int lastcolumn=-1;
-	int clicktime=0;
+	int lastcolumn = -1;
+	int clicktime = 0;
 	MyTableCellRenderer tcr;
 	highlisten listen;
-	TableSorter ts ;
+	TableSorter ts;
+
 	public PlayerRankPanel() {
 		ptm = new PlayerTableModel(0);
 		player = Service.player;
-		listen=new highlisten();
+		listen = new highlisten();
 		// ------funcPnl--------
 		funcPnl = new JPanel();
 		funcPnl.setBackground(Style.BACK_GREY);
@@ -143,16 +144,14 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener,
 		// ----jsp--------------
 		// table = new MySortableTable(ptm, 0);
 		table = new JTable(ptm);
-		ts = new TableSorter(table.getModel(),
-				table.getTableHeader());
+		ts = new TableSorter(table.getModel(), table.getTableHeader());
 		table.setModel(ts);
 		table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
 		titleBar.setCurrentTableModel(ptm);
 		titleBar.setModelEnum(TableModel.PLAYERRANK);
 		titleBar.setTable(table);
-		
-		
-		gbc.insets=new Insets(0, 2, 1, 2);
+
+		gbc.insets = new Insets(0, 2, 1, 2);
 		jsp = new JScrollPane();
 		jsp.getViewport().add(table);
 		gbc.gridy = 2;
@@ -174,8 +173,7 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener,
 		jsp.setRowHeaderView(new RowHeaderTable(table, 30));
 		titleBar.setSeason(seasonBox.getSelectedItem().toString());
 		titleBar.setAveOrAll(typeBox.getSelectedItem().toString());
-	
-		
+
 	}
 
 	class MyJLabel extends JLabel {
@@ -211,8 +209,7 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener,
 			this.setBackground(Style.BACK_GREY);
 			this.setForeground(Color.white);
 		}
-		
-		
+
 	}
 
 	public void mouseClicked(MouseEvent e) {
@@ -247,6 +244,10 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener,
 					ptm = new PlayerTableModel(1);
 				jsp.remove(table);
 				table = new JTable(ptm);
+				
+				ts = new TableSorter(table.getModel(), table.getTableHeader());
+				table.setModel(ts);
+				
 				table.addMouseListener(this);
 				jsp.getViewport().add(table);
 
@@ -261,11 +262,10 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener,
 
 			table.repaint();
 
-			int col=ptm.findColumn(sort);
-		
-			
-			lastcolumn=col;
-			clicktime=0;
+			int col = ptm.findColumn(sort);
+
+			lastcolumn = col;
+			clicktime = 0;
 			CellRender();
 			tcr.setHighlightColumn(col);
 
@@ -298,13 +298,12 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener,
 			table.repaint();
 			jsp.remove(table);
 			table = new JTable(ptm);
-			ts= new TableSorter(table.getModel(),
-					table.getTableHeader());
+			ts = new TableSorter(table.getModel(), table.getTableHeader());
 			table.setModel(ts);
 			titleBar.setCurrentTableModel(ptm);
 			table.addMouseListener(this);
 			jsp.getViewport().add(table);
-			//table.getTableHeader().addMouseListener(listen);
+			// table.getTableHeader().addMouseListener(listen);
 			CellRender();
 
 		} else if (e.getSource() == refreshLbl) {
@@ -312,10 +311,9 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener,
 			table.revalidate();
 			table.repaint();
 			tcr.setHighlightColumn(-1);
-//			ts.setSortingStatus(lastcolumn, 0);
 			ts.cancelSorting();
-			lastcolumn=-1;
-			clicktime=0;
+			lastcolumn = -1;
+			clicktime = 0;
 		}
 
 	}
@@ -404,25 +402,25 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener,
 		table.repaint();
 
 	}
-	
-	class highlisten extends MouseAdapter{
-		public void mouseClicked(MouseEvent e){
-			int col=table.getTableHeader().columnAtPoint(e.getPoint());
-			if(lastcolumn==-1||lastcolumn!=col){
-				lastcolumn=col;
-				clicktime=1;
+
+	class highlisten extends MouseAdapter {
+		public void mouseClicked(MouseEvent e) {
+			int col = table.getTableHeader().columnAtPoint(e.getPoint());
+			if (lastcolumn == -1 || lastcolumn != col) {
+				lastcolumn = col;
+				clicktime = 1;
 				tcr.setHighlightColumn(col);
-				
-			}else {
+
+			} else {
 				clicktime++;
-				if(clicktime==3){	
+				if (clicktime == 3) {
 					tcr.setHighlightColumn(-1);
-					lastcolumn=-1;
-					clicktime=0;
+					lastcolumn = -1;
+					clicktime = 0;
 				}
-		
+
 			}
-			
+
 		}
 	}
 
