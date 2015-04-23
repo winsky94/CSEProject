@@ -20,6 +20,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 
 import newui.FatherPanel;
 import newui.Service;
@@ -49,7 +50,8 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener,
 	JTable table;
 	PlayerTableModel ptm;
 	// ---------------
-	JLabel refreshLbl, filterLbl, modeLbl, fieldLbl;
+	JLabel refreshLbl, filterLbl, modeLbl, fieldLbl, timeLbl;
+	JTextField timeField;
 	JComboBox<String> locationBox, partitionBox, filterRankBox, seasonBox,
 			typeBox;
 	Font font = new Font("微软雅黑", Font.PLAIN, 13);
@@ -108,6 +110,11 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener,
 		filterRankBox.setPreferredSize(new Dimension(100, 28));
 		f1.add(filterRankBox);
 		f1.add(new JLabel("       "));
+		// -------timeLbl------
+		timeLbl = new MyJLabel("在场时间大于(分钟)：");
+		f1.add(timeLbl);
+		timeField = new JTextField(5);
+		f1.add(timeField);
 		// -----filterLbl-----
 		filterLbl = new MyJLabel("筛选", new ImageIcon(
 				"image/player/filterWhite.png"));
@@ -231,51 +238,63 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener,
 		} else if (e.getSource() == modeLbl)
 			MainFrame.getInstance().setContentPanel(new PlayerIndexPanel());
 		else if (e.getSource() == filterLbl) {
-			// 执行筛选
-			String season = seasonBox.getSelectedItem().toString();
-			String position = locationBox.getSelectedItem().toString();
-			String union = partitionBox.getSelectedItem().toString();
-			String sort = filterRankBox.getSelectedItem().toString();
-			ArrayList<PlayerVO> vlist;
-			String type = typeBox.getSelectedItem().toString();
-			if (type.equals("赛季"))
-				vlist = player.selectPlayersBySeason(season, position, union,
-						AgeEnum.ALL, sort, "desc", 50);
-			else
-				vlist = player.selectPlayersByAverage(position, union,
-						AgeEnum.ALL, sort, "desc", 50);
-			// vlist.size()==0显示没有符合条件的球
-			if (ptm.headmodel != 0) {
-				if (isHighInfo == false)
-					ptm = new PlayerTableModel(0);
+			if (timeField.getText() != null) {
+				int time = Integer.parseInt(timeField.getText());
+				ArrayList<PlayerVO> vlist;
+				String type = typeBox.getSelectedItem().toString();
+				if (type.equals("赛季"))
+					vlist = player.getPlayersUptheTimeSeason("13-14", time);
 				else
-					ptm = new PlayerTableModel(1);
-				jsp.remove(table);
-				table = new JTable(ptm);
+					vlist = player.getPlayersUptheTimeAverage(time);
 
-				ts = new TableSorter(table.getModel(), table.getTableHeader());
-				table.setModel(ts);
-
-				// table.addMouseListener(this);
-				jsp.getViewport().add(table);
-
-			}
-			if (vlist != null) {
-				if (isHighInfo == false)
-					ptm.refreshBase(vlist);
+			} else {
+				// 执行筛选
+				String season = seasonBox.getSelectedItem().toString();
+				String position = locationBox.getSelectedItem().toString();
+				String union = partitionBox.getSelectedItem().toString();
+				String sort = filterRankBox.getSelectedItem().toString();
+				ArrayList<PlayerVO> vlist;
+				String type = typeBox.getSelectedItem().toString();
+				if (type.equals("赛季"))
+					vlist = player.selectPlayersBySeason(season, position,
+							union, AgeEnum.ALL, sort, "desc", 50);
 				else
-					ptm.refreshHigh(vlist);
+					vlist = player.selectPlayersByAverage(position, union,
+							AgeEnum.ALL, sort, "desc", 50);
+				// vlist.size()==0显示没有符合条件的球
+				if (ptm.headmodel != 0) {
+					if (isHighInfo == false)
+						ptm = new PlayerTableModel(0);
+					else
+						ptm = new PlayerTableModel(1);
+					jsp.remove(table);
+					table = new JTable(ptm);
+
+					ts = new TableSorter(table.getModel(),
+							table.getTableHeader());
+					table.setModel(ts);
+
+					// table.addMouseListener(this);
+					jsp.getViewport().add(table);
+
+				}
+				if (vlist != null) {
+					if (isHighInfo == false)
+						ptm.refreshBase(vlist);
+					else
+						ptm.refreshHigh(vlist);
+				}
+				table.revalidate();
+
+				table.repaint();
+
+				int col = ptm.findColumn(sort);
+
+				lastcolumn = col;
+				clicktime = 0;
+				CellRender();
+				tcr.setHighlightColumn(col);
 			}
-			table.revalidate();
-
-			table.repaint();
-
-			int col = ptm.findColumn(sort);
-
-			lastcolumn = col;
-			clicktime = 0;
-			CellRender();
-			tcr.setHighlightColumn(col);
 
 		} else if (e.getSource() == fieldLbl) {
 			String type = typeBox.getSelectedItem().toString();
