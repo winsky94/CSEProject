@@ -25,6 +25,7 @@ import newui.teamui.TeamDetailPanel;
 import newui.teamui.details.TeamDetailRecentPanel;
 import vo.PlayerVO;
 import bl.player.Player;
+import bl.team.Team;
 import blservice.PlayerBLService;
 
 public class PlayerDetailInfoPanel extends JPanel {
@@ -75,6 +76,7 @@ public class PlayerDetailInfoPanel extends JPanel {
 		headPnl.add(nameLbl);
 		headPnl.add(new JLabel("             "));
 		headPnl.add(new JLabel("             "));
+		headPnl.add(new JLabel("             "));
 		teamIcon = new JLabel(new ImageIcon("image/teamIcon/teamsPng150/"
 				+ vo.getOwingTeam() + ".png"));
 		teamIcon.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -115,7 +117,9 @@ public class PlayerDetailInfoPanel extends JPanel {
 		gbl.setConstraints(infoPnl, gbc);
 		add(infoPnl);
 		// ------------------
-		infoPnl.setLayout(new GridLayout(4, 2));
+		infoPnl.setLayout(new GridLayout(3, 3));
+		MyLabel teamLbl=new MyLabel("所属球队："+Team.changeTeamNameENToCH(vo.getOwingTeam()));
+		infoPnl.add(teamLbl);
 		MyLabel numLbl = new MyLabel("球衣号码：" + vo.getNumber());
 		infoPnl.add(numLbl);
 		MyLabel positionLbl = new MyLabel("位置：" + vo.getPosition());
