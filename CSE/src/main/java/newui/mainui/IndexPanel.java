@@ -19,6 +19,7 @@ import newui.UIhelper;
 import newui.hotui.HotIndexPanel;
 import newui.hotui.HotSeasonPanel;
 import newui.hotui.HotTeamPanel;
+import newui.hotui.HotThread;
 import newui.hotui.ProgressPanel;
 import vo.PlayerVO;
 import vo.TeamVO;
@@ -37,7 +38,7 @@ public class IndexPanel extends FatherPanel implements MouseListener{
 	TeamBLService team;
 	String dname, sname, tname, tPlayername, pname;
 	IndexCard todayPnl, seasonPnl, teamPnl, progressPnl;
-
+	HotThread thr;
 	public IndexPanel() {
 		removeAll();
 	
@@ -148,24 +149,31 @@ public class IndexPanel extends FatherPanel implements MouseListener{
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
 		HotIndexPanel pp=new HotIndexPanel();
+		
 	if(e.getSource()!=todayPnl){
 		pp.downPnl.removeAll();
 		pp.downPnl.setLayout(new GridLayout(1,1));
 		if(e.getSource()==progressPnl){
 			
-			ProgressPanel p=new ProgressPanel();
+			ProgressPanel p=new ProgressPanel(thr);
 			pp.downPnl.add(p);
 			p.Refresh("recentFiveMatchesScoreUpRate");
+			thr=new HotThread(p,"recentFiveMatchesScoreUpRate");
+			thr.startThread();
 			
 		}else if(e.getSource()==seasonPnl){
 			
-			HotSeasonPanel p=new HotSeasonPanel();
+			HotSeasonPanel p=new HotSeasonPanel(thr);
 			pp.downPnl.add(p);
 			p.Refresh("score");
+			thr=new HotThread(p,"score");
+			thr.startThread();
 		}else if(e.getSource()==teamPnl){
-			HotTeamPanel p=new HotTeamPanel();
+			HotTeamPanel p=new HotTeamPanel(thr);
 			pp.downPnl.add(p);
 			p.Refresh("score");
+			thr=new HotThread(p,"score");
+			thr.startThread();
 		}
 		
 		pp.downPnl.repaint();

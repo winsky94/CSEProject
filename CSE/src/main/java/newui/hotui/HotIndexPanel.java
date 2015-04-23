@@ -23,6 +23,7 @@ public class HotIndexPanel extends FatherPanel implements MouseListener{
 	public TopButton todayBtn,seasonBtn,teamBtn,progressBtn;
 	//
 	Font font=new Font("微软雅黑",Font.PLAIN,15);
+	public HotThread thr;
 	public HotIndexPanel(){
 		funcPnl=new JPanel();
 		funcPnl.setLayout(new GridLayout(1,4));
@@ -60,11 +61,16 @@ public class HotIndexPanel extends FatherPanel implements MouseListener{
 		add(downPnl);
 		downPnl.removeAll();
 		downPnl.setLayout(new GridLayout(1,1));
-		HotTodayPanel hottoday=new HotTodayPanel();
+		HotFatherPanel p=new HotFatherPanel();
+		thr=new HotThread(p,"score");
+		HotTodayPanel hottoday=new HotTodayPanel(thr);
 		downPnl.add(hottoday);
 		hottoday.Refresh("score");
+		thr=new HotThread(hottoday,"score");
+		thr.startThread();
 		downPnl.repaint();
 		downPnl.revalidate();
+		
 	}
 	class TopButton extends JButton{
 
@@ -80,39 +86,49 @@ public class HotIndexPanel extends FatherPanel implements MouseListener{
 		}
 	}
 	public void mouseClicked(MouseEvent e) {
+	if(thr!=null)
+		thr.startThread();
 		if(e.getSource()==todayBtn){
 			downPnl.removeAll();
 			downPnl.setLayout(new GridLayout(1,1));
-			HotTodayPanel p=new HotTodayPanel();
+			HotTodayPanel p=new HotTodayPanel(thr);
 			downPnl.add(p);
 			p.Refresh("score");
+			thr=new HotThread(p,"score");
+			thr.startThread();
 			downPnl.repaint();
 			downPnl.revalidate();
 		}
 		if(e.getSource()==seasonBtn){
 			downPnl.removeAll();
 			downPnl.setLayout(new GridLayout(1,1));
-			HotSeasonPanel p=new HotSeasonPanel();
+			HotSeasonPanel p=new HotSeasonPanel(thr);
 			downPnl.add(p);
 			p.Refresh("score");
+			thr=new HotThread(p,"score");
+			thr.startThread();
 			downPnl.repaint();
 			downPnl.revalidate();
 		}
 		if(e.getSource()==teamBtn){
 			downPnl.removeAll();
 			downPnl.setLayout(new GridLayout(1,1));
-			HotTeamPanel p=new HotTeamPanel();
+			HotTeamPanel p=new HotTeamPanel(thr);
 			downPnl.add(p);
 			p.Refresh("score");
+			thr=new HotThread(p,"score");
+			thr.startThread();
 			downPnl.repaint();
 			downPnl.revalidate();
 		}
 		if(e.getSource()==progressBtn){
 			downPnl.removeAll();
 			downPnl.setLayout(new GridLayout(1,1));
-			ProgressPanel p=new ProgressPanel();
+			ProgressPanel p=new ProgressPanel(thr);
 			downPnl.add(p);
 			p.Refresh("recentFiveMatchesScoreUpRate");
+			thr=new HotThread(p,"recentFiveMatchesScoreUpRate");
+			thr.startThread();
 			downPnl.repaint();
 			downPnl.revalidate();
 		}

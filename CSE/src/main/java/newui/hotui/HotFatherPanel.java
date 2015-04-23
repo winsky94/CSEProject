@@ -64,4 +64,8 @@ public class HotFatherPanel extends JPanel{
 			setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		}
 	}
+	
+	public void Refresh(String s){
+		
+	}
 }

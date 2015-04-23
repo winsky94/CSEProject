@@ -46,8 +46,9 @@ public class HotSeasonPanel extends HotFatherPanel implements MouseListener {
 	BottomButton currentBtn;
 	JTable table;
 	HotSeasonModel model;
-
-	public HotSeasonPanel() {
+	HotThread thr;
+	public HotSeasonPanel(HotThread th) {
+		this.thr=th;
 		player = Service.player;
 		GridBagLayout bl = new GridBagLayout();
 		GridBagConstraints bc = new GridBagConstraints();
@@ -225,45 +226,65 @@ public class HotSeasonPanel extends HotFatherPanel implements MouseListener {
 		// TODO Auto-generated method stub
 		currentBtn.setBackground(Style.HOT_RED);
 		BottomButton m = (BottomButton) e.getSource();
+		if(thr!=null)
+			thr.stopThead();
 		if (m == scoreBtn) {
 			head[5] = "场均得分";
 			currentBtn = scoreBtn;
 			Refresh("score");
+			thr=new HotThread(HotSeasonPanel.this,"score");
+			thr.startThread();
 			data.setText(vlist.get(0).getScore() + "");
 		} else if (m == reboundBtn) {
 			head[5] = "场均篮板";
 			currentBtn = reboundBtn;
 			Refresh("reboundNum");
+			thr=new HotThread(HotSeasonPanel.this,"reboundNum");
+			thr.startThread();
 			data.setText(vlist.get(0).getReboundNum() + "");
 		} else if (m == assistBtn) {
 			head[5] = "场均助攻";
 			currentBtn = assistBtn;
+			
 			Refresh("assistNum");
+			thr=new HotThread(HotSeasonPanel.this,"assistNum");
+			thr.startThread();
+			
 			data.setText(vlist.get(0).getAssistNum() + "");
 		} else if (m == blockBtn) {
 			head[5] = "场均盖帽";
 			currentBtn = blockBtn;
 			Refresh("blockNum");
+			thr=new HotThread(HotSeasonPanel.this,"blockNum");
+			thr.startThread();
 			data.setText(vlist.get(0).getBlockNum() + "");
 		} else if (m == stealBtn) {
 			head[5] = "场均抢断";
 			currentBtn = stealBtn;
 			Refresh("stealNum");
+			thr=new HotThread(HotSeasonPanel.this,"stealNum");
+			thr.startThread();
 			data.setText(vlist.get(0).getStealNum() + "");
 		} else if (m == threeRateBtn) {
 			head[5] = "三分命中率";
 			currentBtn = threeRateBtn;
 			Refresh("threeHitRate");
+			thr=new HotThread(HotSeasonPanel.this,"threeHitRate");
+			thr.startThread();
 			data.setText(vlist.get(0).getThreeHitRate() + "");
 		} else if (m == shootRateBtn) {
 			head[5] = "投篮命中率";
 			currentBtn = shootRateBtn;
 			Refresh("shootHitRate");
+			thr=new HotThread(HotSeasonPanel.this,"shootHitRate");
+			thr.startThread();
 			data.setText(vlist.get(0).getShootHitRate() + "");
 		} else {
 			head[5] = "罚球命中率";
 			currentBtn = freeRateBtn;
 			Refresh("freeThrowHitRate");
+			thr=new HotThread(HotSeasonPanel.this,"freeThrowHitRate");
+			thr.startThread();
 			data.setText(vlist.get(0).getFreeThrowHitRate() + "");
 		}
 		currentBtn.setBackground(Style.HOT_REDFOCUS);

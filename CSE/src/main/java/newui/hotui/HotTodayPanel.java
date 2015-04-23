@@ -48,7 +48,9 @@ public class HotTodayPanel extends HotFatherPanel implements MouseListener {
 	ArrayList<PlayerVO> vlist;
 
 	// ----------------------------
-	public HotTodayPanel() {
+	HotThread thr;
+	public HotTodayPanel(HotThread th) {
+		this.thr=th;
 		GridBagLayout bl = new GridBagLayout();
 		GridBagConstraints bc = new GridBagConstraints();
 		bc.fill = GridBagConstraints.BOTH;
@@ -213,34 +215,45 @@ public class HotTodayPanel extends HotFatherPanel implements MouseListener {
 		// TODO Auto-generated method stub
 		BottomButton m = (BottomButton) e.getSource();
 		currentBtn.setBackground(Style.HOT_YELLOW);
+		thr.stopThead();
 		if (m == scoreBtn) {
 			head[5] = "得分";
 			currentBtn = scoreBtn;
 			Refresh("score");
+			thr=new HotThread(HotTodayPanel.this,"score");
+			thr.startThread();
 			data.setText(vlist.get(0).getScore() + "");
 
 		} else if (m == reboundBtn) {
 			head[5] = "篮板";
 			currentBtn = reboundBtn;
 			Refresh("reboundNum");
+			thr=new HotThread(HotTodayPanel.this,"reboundNum");
+			thr.startThread();
 			data.setText(vlist.get(0).getReboundNum() + "");
 
 		} else if (m == assistBtn) {
 			head[5] = "助攻";
 			currentBtn = assistBtn;
 			Refresh("assistNum");
+			thr=new HotThread(HotTodayPanel.this,"assistNum");
+			thr.startThread();
 			data.setText(vlist.get(0).getAssistNum() + "");
 
 		} else if (m == blockBtn) {
 			head[5] = "盖帽";
 			currentBtn = blockBtn;
 			Refresh("blockNum");
+			thr=new HotThread(HotTodayPanel.this,"blockNum");
+			thr.startThread();
 			data.setText(vlist.get(0).getBlockNum() + "");
 
 		} else {
 			head[5] = "抢断";
 			currentBtn = stealBtn;
 			Refresh("stealNum");
+			thr=new HotThread(HotTodayPanel.this,"stealNum");
+			thr.startThread();
 			data.setText(vlist.get(0).getStealNum() + "");
 
 		}
