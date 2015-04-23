@@ -87,7 +87,7 @@ public class HotIndexPanel extends FatherPanel implements MouseListener{
 	}
 	public void mouseClicked(MouseEvent e) {
 	if(thr!=null)
-		thr.startThread();
+		thr.stopThead();
 		if(e.getSource()==todayBtn){
 			downPnl.removeAll();
 			downPnl.setLayout(new GridLayout(1,1));
