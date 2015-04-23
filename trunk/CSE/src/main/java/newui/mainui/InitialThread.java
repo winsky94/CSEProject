@@ -21,7 +21,8 @@ public class InitialThread extends Thread{
 		p.getPlayerAverageInfo();
 		p.getPlayerSeasonInfo("13-14");
 		MainFrame.getInstance();
-		AnimeFrame.setStop();
+		while(!stop);
+			AnimeFrame.setStop();
 		double post=System.currentTimeMillis();
 		System.out.println("initialThread:"+(post-pre));
 	
