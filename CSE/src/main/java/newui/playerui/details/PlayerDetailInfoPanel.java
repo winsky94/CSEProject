@@ -114,7 +114,7 @@ public class PlayerDetailInfoPanel extends JPanel {
 		gbl.setConstraints(infoPnl, gbc);
 		add(infoPnl);
 		// ------------------
-		infoPnl.setLayout(new GridLayout(3, 3));
+		infoPnl.setLayout(new GridLayout(5,2));
 		MyLabel teamLbl=new MyLabel("所属球队："+Team.changeTeamNameENToCH(vo.getOwingTeam()));
 		infoPnl.add(teamLbl);
 		MyLabel numLbl = new MyLabel("球衣号码：" + vo.getNumber());
