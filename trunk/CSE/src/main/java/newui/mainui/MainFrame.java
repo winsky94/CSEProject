@@ -201,6 +201,7 @@ public class MainFrame extends JFrame{
 								p.dispose();
 								MainFrame.getInstance().setVisible(true);
 								//t1.cancel();t2.cancel();
+								IndexPanel.startT();
 								break;
 								
 						
