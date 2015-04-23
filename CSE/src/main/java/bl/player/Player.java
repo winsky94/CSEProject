@@ -379,7 +379,7 @@ public class Player implements PlayerBLService {
 			double allturnOverNum = playerSeason.getTurnOverNum();
 			double allscore = playerSeason.getScore();
 
-			DecimalFormat dec = new DecimalFormat("0.0000");
+			DecimalFormat dec = new DecimalFormat("0.00");
 
 			shootHitRate = allshootHitNum / allshootAttemptNum;
 			shootHitRate = Double.parseDouble(dec.format(shootHitRate));
@@ -766,7 +766,7 @@ public class Player implements PlayerBLService {
 			int playedGames = playerSeason.getPlayedGames();
 			PlayerVO newPlayer;
 			if (playedGames != 0) {
-				DecimalFormat dec = new DecimalFormat("0.0000");
+				DecimalFormat dec = new DecimalFormat("0.00");
 				newPlayer = new PlayerVO(playerSeason.getName(),
 						playerSeason.getNumber(), playerSeason.getPosition(),
 						playerSeason.getHeight(), playerSeason.getWeight(),

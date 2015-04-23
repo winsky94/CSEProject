@@ -769,7 +769,7 @@ public class Team implements TeamBLService {
 				isSeason = true;
 			}
 
-			DecimalFormat dec = new DecimalFormat("0.0000");
+			DecimalFormat dec = new DecimalFormat("0.00");
 			TeamVO teamVO = new TeamVO(teamName, abLocation, location,
 					conference, partition, homeCourt, setUpTime, matchesNum,
 					Double.parseDouble(dec.format(shootHitNum)),
