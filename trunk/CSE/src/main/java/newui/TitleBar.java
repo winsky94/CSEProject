@@ -51,7 +51,8 @@ public class TitleBar extends JPanel implements MouseListener {
 	private String season;
 	private String aveOrAll;
 	private JTable table;
-	private int test=0;
+	private int test = 0;
+
 	public TitleBar() {
 		setBackground(Style.DEEP_BLUE);
 		GridBagLayout gbl = new GridBagLayout();
@@ -179,35 +180,32 @@ public class TitleBar extends JPanel implements MouseListener {
 	}
 
 	public void mouseEntered(final MouseEvent e) {
-		
+
 		if (e.getSource() == teamBtn) {
 			teamBtn.setBackground(Style.FOCUS_BLUE);
-			test=1;
+			test = 1;
 			new Timer().schedule(new TimerTask() {
-				
+
 				@Override
 				public void run() {
 					// TODO Auto-generated method stub
 					showWin(e.getXOnScreen(), e.getYOnScreen());
 				}
 			}, 1000);
-				
-			
 
-		}
-		else{
-		if(window!=null)
-			window.setVisible(false);	
-		if (e.getSource() == indexBtn)
-			indexBtn.setBackground(Style.FOCUS_BLUE);
-		else if (e.getSource() == playerBtn)
-			playerBtn.setBackground(Style.FOCUS_BLUE);
-		else if (e.getSource() == matchBtn)
-			matchBtn.setBackground(Style.FOCUS_BLUE);
-		else if (e.getSource() == hotBtn)
-			hotBtn.setBackground(Style.FOCUS_BLUE);
-		else if (e.getSource() == searchBtn)
-			searchBtn.setIcon(new ImageIcon("image/searchFocus.png"));
+		} else {
+			if (window != null)
+				window.setVisible(false);
+			if (e.getSource() == indexBtn)
+				indexBtn.setBackground(Style.FOCUS_BLUE);
+			else if (e.getSource() == playerBtn)
+				playerBtn.setBackground(Style.FOCUS_BLUE);
+			else if (e.getSource() == matchBtn)
+				matchBtn.setBackground(Style.FOCUS_BLUE);
+			else if (e.getSource() == hotBtn)
+				hotBtn.setBackground(Style.FOCUS_BLUE);
+			else if (e.getSource() == searchBtn)
+				searchBtn.setIcon(new ImageIcon("image/searchFocus.png"));
 		}
 	}
 
@@ -216,8 +214,8 @@ public class TitleBar extends JPanel implements MouseListener {
 			indexBtn.setBackground(Style.DEEP_BLUE);
 		if (e.getSource() == teamBtn) {
 			teamBtn.setBackground(Style.DEEP_BLUE);
-			test=0;
-			//window.setVisible(false);
+			test = 0;
+			// window.setVisible(false);
 		}
 		if (e.getSource() == playerBtn)
 			playerBtn.setBackground(Style.DEEP_BLUE);
@@ -260,54 +258,56 @@ public class TitleBar extends JPanel implements MouseListener {
 		if (model == null)
 			MainFrame.getInstance().setContentPanel(
 					new SearchResultPanel(scontent));
-		else{
-		switch (model) {
-		case RESULTPLAYER:
-			SearchResultPanel.setContent(scontent);
-			tablemodel.setContent(scontent);
-		case PLAYERBASEINFO:
-			p = Service.player;
-			result = p.getPlayerBaseInfo(scontent);
-			tablemodel.SearchRefresh(result);
-			break;
-		case PLAYERRANK:
-			p = Service.player;
-
-			if (aveOrAll.equals("场均"))
+		else {
+			switch (model) {
+			case RESULTPLAYER:
+				SearchResultPanel.setContent(scontent);
+				tablemodel.setContent(scontent);
+			case PLAYERBASEINFO:
+				p = Service.player;
 				result = p.getPlayerBaseInfo(scontent);
-			else
-				result = p.getPlayerBaseInfoSeason(season, scontent);
-			tablemodel.SearchRefresh(result);
-			break;
-		case RESULTTEAM:
-			SearchResultPanel.setContent(scontent);
-			tablemodel.setContent(scontent);
-		case TEAMBASEINFO:
-			t = Service.team;
-			team = t.getTeamBaseInfo(scontent);
-			tablemodel.SearchRefresh(team);
-			break;
-		case TEAMRANK:
-			t = Service.team;
-			if (aveOrAll.equals("场均"))
-				team = t.getTeamAverageInfo(scontent);
-			else
-				team = t.getTeamSeasonInfo(season, scontent);
-			tablemodel.SearchRefresh(team);
-			break;
+				tablemodel.SearchRefresh(result);
+				break;
+			case PLAYERRANK:
+				p = Service.player;
 
+				if (aveOrAll.equals("场均"))
+					result = p.getPlayerBaseInfo(scontent);
+				else
+					result = p.getPlayerBaseInfoSeason(season, scontent);
+				tablemodel.SearchRefresh(result);
+				break;
+			case RESULTTEAM:
+				SearchResultPanel.setContent(scontent);
+				tablemodel.setContent(scontent);
+			case TEAMBASEINFO:
+				t = Service.team;
+				team = t.getTeamBaseInfo(scontent);
+				tablemodel.SearchRefresh(team);
+				break;
+			case TEAMRANK:
+				t = Service.team;
+				if (aveOrAll.equals("场均"))
+					team = t.getTeamAverageInfo(scontent);
+				else
+					team = t.getTeamSeasonInfo(season, scontent);
+				tablemodel.SearchRefresh(team);
+				break;
+
+			}
 		}
+		if (table != null) {
+			table.revalidate();
+			table.repaint();
 		}
-		table.revalidate();
-		table.repaint();
 	}
 
-	public void showWin(int x,int y){
-		if(test==1){
-		window=TeamWindow.getInstance(x,y);
-		window.setVisible(true);
-		
+	public void showWin(int x, int y) {
+		if (test == 1) {
+			window = TeamWindow.getInstance(x, y);
+			window.setVisible(true);
+
 		}
-	
+
 	}
 }
