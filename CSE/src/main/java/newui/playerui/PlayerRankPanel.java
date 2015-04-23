@@ -90,12 +90,14 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener,
 		f1.add(locationLbl);
 		locationBox = new MyComboBox(locationText);
 		f1.add(locationBox);
+		f1.add(new JLabel("       "));
 		// -----分区---------
 		JLabel partitionLbl = new MyJLabel("分区：");
 		f1.add(partitionLbl);
 		partitionBox = new MyComboBox(partitionText);
 		partitionBox.setMaximumRowCount(10);
 		f1.add(partitionBox);
+		f1.add(new JLabel("       "));
 		// ----排序条件--------
 		JLabel filterRankLbl = new MyJLabel("排序条件：");
 		f1.add(filterRankLbl);
@@ -105,6 +107,7 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener,
 		filterRankBox.setMinimumSize(new Dimension(100, 28));
 		filterRankBox.setPreferredSize(new Dimension(100, 28));
 		f1.add(filterRankBox);
+		f1.add(new JLabel("       "));
 		// -----filterLbl-----
 		filterLbl = new MyJLabel("筛选", new ImageIcon(
 				"image/player/filterWhite.png"));
@@ -119,6 +122,7 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener,
 		seasonBox = new MyComboBox(seasonBoxText);
 		seasonBox.addItemListener(this);
 		f2.add(seasonBox);
+		f2.add(new JLabel("       "));
 		// ----DataType---------
 		JLabel typeLbl = new MyJLabel("数据类型：");
 		f2.add(typeLbl);
@@ -126,6 +130,7 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener,
 		typeBox = new MyComboBox(typeText);
 		typeBox.addItemListener(this);
 		f2.add(typeBox);
+		f2.add(new JLabel("       "));
 		// ------fieldLbl--------
 		fieldLbl = new MyJLabel("查看高阶数据");
 		fieldLbl.addMouseListener(this);
