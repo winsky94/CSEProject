@@ -8,9 +8,10 @@ import newui.Service;
 //界面服务初始化Thread
 public class InitialThread extends Thread{
 	boolean stop=false;
+	AnimeFrame frame;
 	
-	public InitialThread(){
-		
+	public InitialThread(AnimeFrame frame){
+		this.frame=frame;
 	}
 	public void run(){
 		//初始化数据
@@ -21,8 +22,7 @@ public class InitialThread extends Thread{
 		p.getPlayerAverageInfo();
 		p.getPlayerSeasonInfo("13-14");
 		MainFrame.getInstance();
-		while(!stop);
-			AnimeFrame.setStop();
+		frame.setStop();
 		double post=System.currentTimeMillis();
 		System.out.println("initialThread:"+(post-pre));
 	

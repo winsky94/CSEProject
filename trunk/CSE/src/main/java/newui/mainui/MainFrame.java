@@ -176,7 +176,7 @@ public class MainFrame extends JFrame{
 		thread.startThread();*/
 		final AnimeFrame p=new AnimeFrame();
 		final boolean stop=false;
-		final InitialThread thread=new InitialThread();
+		final InitialThread thread=new InitialThread(p);
 		thread.startThread();
 		new Timer().schedule(new TimerTask(){
 				
@@ -185,7 +185,7 @@ public class MainFrame extends JFrame{
 					p.setBackImage(new ImageIcon("image/back.png"));
 					new Timer().schedule(new TimerTask(){
 						public void run(){
-							thread.stopThead();
+							
 							while(p.stop){
 								p.dispose();
 								MainFrame.getInstance().setVisible(true);
