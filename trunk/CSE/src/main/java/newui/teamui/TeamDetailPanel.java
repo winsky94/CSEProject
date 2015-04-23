@@ -78,7 +78,6 @@ public class TeamDetailPanel extends FatherPanel{
 		
 		//------显示全部球员大头-----
 		PlayerBLService play=Service.player;
-		//这是那个方法？？？
 		players=play.getPlayersByTeam(Team.changeTeamNameCHToEN(abbrName));
 		playerPortraits=new ArrayList<JLabel>(players.size());
 		playerPnl=new JPanel();

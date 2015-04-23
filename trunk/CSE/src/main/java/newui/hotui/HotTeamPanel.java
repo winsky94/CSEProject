@@ -63,10 +63,11 @@ public class HotTeamPanel extends HotFatherPanel implements MouseListener {
 		bl.setConstraints(teamIcon, bc);
 		bestPnl.add(teamIcon);
 		teamIcon.setToolTipText("点击查看球队详情");
-		teamIcon.addMouseListener(new MouseAdapter(){
-			public void mouseClicked(MouseEvent e){
+		teamIcon.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
 				MainFrame.getInstance().setContentPanel(
-						new TeamDetailPanel(teamNameLbl.getText()));
+						new TeamDetailPanel(Team
+								.changeTeamNameCHToEN(teamNameLbl.getText())));
 			}
 		});
 		teamIcon.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -155,7 +156,7 @@ public class HotTeamPanel extends HotFatherPanel implements MouseListener {
 			table.getColumn(table.getColumnName(i)).setCellRenderer(tcr);
 		}
 		jsp.getViewport().add(table);
-		
+
 	}
 
 	public void Refresh(String sort) {
@@ -179,12 +180,13 @@ public class HotTeamPanel extends HotFatherPanel implements MouseListener {
 			table.revalidate();
 			jsp.getViewport().remove(table);
 			table = new JTable(model);
-			table.addMouseListener(new MouseAdapter(){
-				public void mouseClicked(MouseEvent e){
-					if(e.getClickCount()==2){
-						int row=table.getSelectedRow();
-						String name=table.getValueAt(row,3).toString();
-						MainFrame.getInstance().setContentPanel(new TeamDetailPanel(name));
+			table.addMouseListener(new MouseAdapter() {
+				public void mouseClicked(MouseEvent e) {
+					if (e.getClickCount() == 2) {
+						int row = table.getSelectedRow();
+						String name = table.getValueAt(row, 3).toString();
+						MainFrame.getInstance().setContentPanel(
+								new TeamDetailPanel(name));
 					}
 				}
 			});
