@@ -1287,9 +1287,22 @@ public class Player implements PlayerBLService {
 		return result;
 	}
 	
-	public ArrayList<PlayerVO> getPlayersUptheTime(int minute) {
+	
+	
+	public ArrayList<PlayerVO> getPlayersUptheTimeAverage(int minute) {
 		ArrayList<PlayerVO> result = new ArrayList<PlayerVO>();
 		ArrayList<PlayerVO> thePlayers = getPlayerAverageInfo();
+        int second=minute*60;
+		for (PlayerVO vo : thePlayers) {
+			if (vo.getPresentTime()>=second)
+				result.add(vo);
+		}
+		return result;
+	}
+	
+	public ArrayList<PlayerVO> getPlayersUptheTimeSeason(String season,int minute) {
+		ArrayList<PlayerVO> result = new ArrayList<PlayerVO>();
+		ArrayList<PlayerVO> thePlayers = getPlayerSeasonInfo("13-14");
         int second=minute*60;
 		for (PlayerVO vo : thePlayers) {
 			if (vo.getPresentTime()>=second)
