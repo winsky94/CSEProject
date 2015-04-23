@@ -39,7 +39,7 @@ public class IndexPanel extends FatherPanel implements MouseListener{
 	public String dname, sname, tname, tPlayername, pname;
 	IndexCard todayPnl, seasonPnl, teamPnl, progressPnl;
 	HotThread thr;
-	IndexThread th;
+	static IndexThread th;
 	public IndexPanel() {
 		removeAll();
 		
@@ -146,7 +146,7 @@ public class IndexPanel extends FatherPanel implements MouseListener{
 		progressPnl.namePnl.setBackground(Style.HOT_PURPLEFOCUS);
 		infoPnl.add(progressPnl);
 		th=new IndexThread(this);
-		th.startThread();
+		
 	}
 
 	public void mouseClicked(MouseEvent e) {
@@ -262,5 +262,9 @@ public class IndexPanel extends FatherPanel implements MouseListener{
 		}
 		this.repaint();
 		
+	}
+	
+	public  static void startT(){
+		th.startThread();
 	}
 }
