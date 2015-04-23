@@ -9,6 +9,8 @@ import java.awt.Point;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowFocusListener;
 import java.util.Stack;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -114,6 +116,9 @@ public class MainFrame extends JFrame{
 		          }          
 		        }
 		    );  
+		    this.setAlwaysOnTop(false);
+		    this.setFocusableWindowState(false);
+		   
 	}
 
 	
