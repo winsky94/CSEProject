@@ -63,6 +63,7 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener,
 	int clicktime=0;
 	MyTableCellRenderer tcr;
 	highlisten listen;
+	TableSorter ts ;
 	public PlayerRankPanel() {
 		ptm = new PlayerTableModel(0);
 		player = Service.player;
@@ -142,7 +143,7 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener,
 		// ----jsp--------------
 		// table = new MySortableTable(ptm, 0);
 		table = new JTable(ptm);
-		TableSorter ts = new TableSorter(table.getModel(),
+		ts = new TableSorter(table.getModel(),
 				table.getTableHeader());
 		table.setModel(ts);
 		table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
@@ -297,7 +298,7 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener,
 			table.repaint();
 			jsp.remove(table);
 			table = new JTable(ptm);
-			TableSorter ts = new TableSorter(table.getModel(),
+			ts= new TableSorter(table.getModel(),
 					table.getTableHeader());
 			table.setModel(ts);
 			titleBar.setCurrentTableModel(ptm);
@@ -311,6 +312,7 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener,
 			table.revalidate();
 			table.repaint();
 			tcr.setHighlightColumn(-1);
+			ts.setSortingStatus(lastcolumn, 0);
 			lastcolumn=-1;
 			clicktime=0;
 		}
