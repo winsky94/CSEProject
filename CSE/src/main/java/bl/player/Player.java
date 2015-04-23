@@ -49,14 +49,14 @@ public class Player implements PlayerBLService {
 	boolean needUpdatePlayersToday = false;
 	
 	private static String[] player_CH = new String[] { "全部", "前锋", "中锋",
-		"后卫","前锋-中锋","中锋-后卫", "得分", "篮板数", "助攻数", "得分/篮板/助攻(1:1:1)", 
+		"后卫","前锋-中锋","中锋-后卫","前锋-后卫", "得分", "篮板数", "助攻数", "得分/篮板/助攻(1:1:1)", 
 		"投篮命中率", "盖帽数", "抢断数", "罚球命中率", "犯规数", "失误数",
 		"在场时间", "效率", "两双", "西部球队", "东部球队", 
 		 "真实命中率", "GmSc效率值", "投篮效率", "篮板率", "进攻篮板数",
 		 "防守篮板数", "进攻篮板率", "防守篮板率", "助攻率", "抢断率", 
 		 "盖帽率", "失误率", "使用率"};
     private static String[] player_EN = new String[] { "all", "F", "C",
-		"G", "F-C","C-G","score", "reboundNum", "assistNum", "score_rebound_assist", 
+		"G", "F-C","C-G","F-G","score", "reboundNum", "assistNum", "score_rebound_assist", 
 		"shootHitRate", "blockNum", "stealNum", "freeThrowHitRate", "foulNum", "turnOverNum",
 		"presentTime", "efficiency", "doubleDoubleNum", "W", "E",
 		"trueHitRate","GmScEfficiencyValue","shootEfficiency","reboundRate","offenReboundNum",
@@ -905,11 +905,30 @@ public class Player implements PlayerBLService {
 		union = changePlayerCHToEN(union);
 		column = changePlayerCHToEN(column);
 		ArrayList<PlayerVO> result = new ArrayList<PlayerVO>();
+		String[] positions=position.split("-");
+		int size=position.length();
+		String p1="";
+		String p2="";
+		if(size==1)
+			p1=positions[0];
+		else{
+			p1=positions[0];
+			p2=positions[1];
+		}
+		
 		if (!position.equals("all")) {
 			for (int i = 0; i < thePlayers.size(); i++) {
-				if (!thePlayers.get(i).getPosition().contains(position)){
-					thePlayers.remove(i);
-					i--;
+				if(size==1){
+				  if (!thePlayers.get(i).getPosition().contains(p1)){
+					  thePlayers.remove(i);
+					  i--;
+				  }
+				}
+				else{
+					if (!(thePlayers.get(i).getPosition().contains(p1)&&thePlayers.get(i).getPosition().contains(p2))){
+						thePlayers.remove(i);
+						i--;
+					}
 				}
 			}
 		}
