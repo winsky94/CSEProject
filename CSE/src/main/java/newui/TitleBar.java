@@ -267,6 +267,8 @@ public class TitleBar extends JPanel implements MouseListener {
 				p = Service.player;
 				result = p.getPlayerBaseInfo(scontent);
 				tablemodel.SearchRefresh(result);
+				table.revalidate();
+				table.repaint();
 				break;
 			case PLAYERRANK:
 				p = Service.player;
@@ -276,6 +278,8 @@ public class TitleBar extends JPanel implements MouseListener {
 				else
 					result = p.getPlayerBaseInfoSeason(season, scontent);
 				tablemodel.SearchRefresh(result);
+				table.revalidate();
+				table.repaint();
 				break;
 			case RESULTTEAM:
 				SearchResultPanel.setContent(scontent);
@@ -284,6 +288,8 @@ public class TitleBar extends JPanel implements MouseListener {
 				t = Service.team;
 				team = t.getTeamBaseInfo(scontent);
 				tablemodel.SearchRefresh(team);
+				table.revalidate();
+				table.repaint();
 				break;
 			case TEAMRANK:
 				t = Service.team;
@@ -292,13 +298,11 @@ public class TitleBar extends JPanel implements MouseListener {
 				else
 					team = t.getTeamSeasonInfo(season, scontent);
 				tablemodel.SearchRefresh(team);
+				table.revalidate();
+				table.repaint();
 				break;
 
 			}
-		}
-		if (table != null) {
-			table.revalidate();
-			table.repaint();
 		}
 	}
 
