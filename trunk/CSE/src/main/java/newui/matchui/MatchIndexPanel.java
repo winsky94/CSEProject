@@ -66,6 +66,7 @@ public class MatchIndexPanel extends FatherPanel {
 		funcPnl.add(seasonLbl);
 		seasonBox = new MyComboBox(seasonText);
 		funcPnl.add(seasonBox);
+		funcPnl.add(new JLabel("       "));
 		// ----是否全季-----------
 		fullSeasonBox = new JCheckBox("全季");
 		// bl方法暂无该参数传递 ，先选着吧
@@ -89,16 +90,19 @@ public class MatchIndexPanel extends FatherPanel {
 		 */
 		jdc = new JDateChooser();
 		funcPnl.add(jdc);
+		funcPnl.add(new JLabel("       "));
 		jdc.setEnabled(false);
 		// ----主队客队---------
 		MyLabel homeLbl = new MyLabel("主队：");
 		funcPnl.add(homeLbl);
 		homeBox = new MyComboBox(teamArr);
 		funcPnl.add(homeBox);
+		funcPnl.add(new JLabel("       "));
 		MyLabel visitingLbl = new MyLabel("客队：");
 		funcPnl.add(visitingLbl);
 		visitingBox = new MyComboBox(teamArr);
 		funcPnl.add(visitingBox);
+		funcPnl.add(new JLabel("       "));
 		mservice = Service.match;
 		// ------搜索按钮---------
 		searchBtn = new MyLabel("搜索");
