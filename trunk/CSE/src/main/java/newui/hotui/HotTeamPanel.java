@@ -29,7 +29,7 @@ import blservice.TeamBLService;
 
 public class HotTeamPanel extends HotFatherPanel implements MouseListener {
 	private static final long serialVersionUID = 1L;
-	JLabel teamIcon, unionLbl, teamNameLbl, data;
+	JLabel teamIcon, unionLbl, teamNameLbl,abbrNameLbl, data;
 	// --剩余四人的表格---------
 	/**
 	 * 需要新的表格及TableModel jsp已经在HotFatherPanel里建好了，这里只要table和tableModel
@@ -79,11 +79,15 @@ public class HotTeamPanel extends HotFatherPanel implements MouseListener {
 		bc.weightx = 5;
 		bl.setConstraints(midPnl, bc);
 		bestPnl.add(midPnl);
-		midPnl.setLayout(new GridLayout(2, 1));
+		midPnl.setLayout(new GridLayout(3, 1));
 		teamNameLbl = new JLabel();
 		teamNameLbl.setHorizontalAlignment(JLabel.CENTER);
 		teamNameLbl.setFont(new Font("微软雅黑", Font.PLAIN, 28));
 		midPnl.add(teamNameLbl);
+		abbrNameLbl = new JLabel();
+		abbrNameLbl.setHorizontalAlignment(JLabel.CENTER);
+		abbrNameLbl.setFont(new Font("微软雅黑", Font.PLAIN, 22));
+		midPnl.add(abbrNameLbl);
 		unionLbl = new JLabel();
 		unionLbl.setHorizontalAlignment(JLabel.CENTER);
 		unionLbl.setFont(new Font("微软雅黑", Font.PLAIN, 20));
@@ -169,6 +173,7 @@ public class HotTeamPanel extends HotFatherPanel implements MouseListener {
 					+ topOne.getAbLocation() + ".png"));
 			teamNameLbl.setText(Team.changeTeamNameENToCH(topOne
 					.getAbLocation()));
+			abbrNameLbl.setText(topOne.getAbLocation());
 			data.setText(topOne.getScore() + "");
 			// 通过Team调用
 			if (topOne.getConference().equals("E"))
