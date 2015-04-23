@@ -10,6 +10,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 import java.util.Stack;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -44,7 +46,6 @@ public class MainFrame extends JFrame{
 	static JPanel contentPnl=new JPanel();
 	public static JSplitPane jsp;
 	public static Stack<FatherPanel> stack;
-
 	private MainFrame(){
 		stack=new Stack<FatherPanel>();
 		GridBagLayout gbl = new GridBagLayout();
@@ -54,7 +55,7 @@ public class MainFrame extends JFrame{
 		setBounds((screenWidth-width)/2,(screenHeight-height)/2,width,height);
 		setIconImage(UIhelper.getImage("image/appicon.png"));
 		this.setUndecorated(true);
-		setVisible(true);
+		setVisible(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		//-------下面是布局---------------
 		
@@ -173,15 +174,45 @@ public class MainFrame extends JFrame{
 	//欢迎动画
 		/*InitialThread thread=new InitialThread();
 		thread.startThread();*/
-		double pre=System.currentTimeMillis();
-		PlayerBLService p=Service.player;
-		TeamBLService t=Service.team;
-		MatchBLService m=Service.match;
-		p.getPlayerAverageInfo();
-		p.getPlayerSeasonInfo("13-14");
-		double post=System.currentTimeMillis();
-		System.out.println("init"+(post-pre));
-		MainFrame.getInstance();
+		final AnimeFrame p=new AnimeFrame();
+		final boolean stop=false;
+		InitialThread thread=new InitialThread();
+		thread.startThread();
+		new Timer().schedule(new TimerTask(){
+				
+				@Override
+				public void run() {
+					p.setBackImage(new ImageIcon("image/back.png"));
+					new Timer().schedule(new TimerTask(){
+						public void run(){
+							while(p.stop){
+								p.dispose();
+								MainFrame.getInstance().setVisible(true);;		
+						}		
+						}
+					}, 1000);
+								
+				}
+		},3200);
+	//	ImageIcon icon=new ImageIcon("image/backup.gif");
+		
+//		new Thread(){
+//			public void run(){
+//				PlayerBLService p=Service.player;
+//				TeamBLService t=Service.team;
+//				MatchBLService m=Service.match;
+//				p.getPlayerAverageInfo();
+//				p.getPlayerSeasonInfo("13-14");
+//				
+//				MainFrame.getInstance();
+//			}
+//		}
+//		double pre=System.currentTimeMillis();
+//		
+//		
+//		double post=System.currentTimeMillis();
+//		System.out.println("init"+(post-pre));
+	
 		
 	}
 	

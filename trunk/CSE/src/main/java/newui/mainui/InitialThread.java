@@ -20,8 +20,11 @@ public class InitialThread extends Thread{
 		MatchBLService m=Service.match;
 		p.getPlayerAverageInfo();
 		p.getPlayerSeasonInfo("13-14");
+		MainFrame.getInstance();
+		AnimeFrame.setStop();
 		double post=System.currentTimeMillis();
 		System.out.println("initialThread:"+(post-pre));
+	
 	}
 	
 	public void startThread(){
