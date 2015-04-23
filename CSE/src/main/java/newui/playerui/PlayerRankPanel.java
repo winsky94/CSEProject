@@ -238,13 +238,16 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener,
 		} else if (e.getSource() == modeLbl)
 			MainFrame.getInstance().setContentPanel(new PlayerIndexPanel());
 		else if (e.getSource() == filterLbl) {
+			int time=0;
 			if (timeField.getText() != null||!(timeField.getText().equals(""))||timeField.getText()!="") {
-				int time=0;
+				
 				try{
 				   time = Integer.parseInt(timeField.getText());
 				}catch(NumberFormatException nfe){
 					time=0;
 				}
+			}
+			if(time!=0){
 				ArrayList<PlayerVO> vlist;
 				String type = typeBox.getSelectedItem().toString();
 				if (type.equals("赛季"))
@@ -261,9 +264,9 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener,
 				table.revalidate();
 
 				table.repaint();
+			}
 
-
-			} else {
+			else {
 				// 执行筛选
 				String season = seasonBox.getSelectedItem().toString();
 				String position = locationBox.getSelectedItem().toString();

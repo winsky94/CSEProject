@@ -909,14 +909,14 @@ public class Player implements PlayerBLService {
 		int size=position.length();
 		String p1="";
 		String p2="";
-		if(size==1)
-			p1=positions[0];
-		else{
-			p1=positions[0];
-			p2=positions[1];
-		}
 		
 		if (!position.equals("all")) {
+			if(size==1)
+				p1=positions[0];
+			else{
+				p1=positions[0];
+				p2=positions[1];
+			}
 			for (int i = 0; i < thePlayers.size(); i++) {
 				if(size==1){
 				  if (!thePlayers.get(i).getPosition().contains(p1)){
