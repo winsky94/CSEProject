@@ -909,31 +909,41 @@ public class Player implements PlayerBLService {
 			for (int i = 0; i < thePlayers.size(); i++) {
 				if (!thePlayers.get(i).getPosition().contains(position)){
 					thePlayers.remove(i);
-					
+					i--;
 				}
 			}
 		}
 		if (!union.equals("all")) {
 			for (int i = 0; i < thePlayers.size(); i++) {
-				if (!thePlayers.get(i).getLeague().equals(union))
+				if (!thePlayers.get(i).getLeague().equals(union)){
 					thePlayers.remove(i);
+					i--;
+				}
 			}
 		}
 		if (ageClass != AgeEnum.ALL) {
 			for (int i = 0; i < thePlayers.size(); i++) {
 				int age = thePlayers.get(i).getAge();
 				if (ageClass == AgeEnum.LE22) {
-					if (age > 22)
+					if (age > 22){
 						thePlayers.remove(i);
+						i--;
+					}
 				} else if (ageClass == AgeEnum.M22_LE25) {
-					if (age <= 22 || age > 25)
+					if (age <= 22 || age > 25){
 						thePlayers.remove(i);
+						i--;
+					}
 				} else if (ageClass == AgeEnum.M25_LE30) {
-					if (age <= 25 || age > 30)
+					if (age <= 25 || age > 30){
 						thePlayers.remove(i);
+						i--;
+					}
 				} else {
-					if (age <= 30)
+					if (age <= 30){
 						thePlayers.remove(i);
+						i--;
+					}
 				}
 			}
 		}
