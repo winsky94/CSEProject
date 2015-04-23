@@ -18,7 +18,7 @@ public class AnimeFrame extends JFrame{
 	JLabel back;
 	public static boolean stop=false;
 	public AnimeFrame(){
-		setBounds((sWidth-570)/22,(sHeight-304)/2,570,304);
+		setBounds((sWidth-570)/2,(sHeight-304)/2,570,304);
 		setUndecorated(true);
 		setIconImage(UIhelper.getImage("image/appicon.png"));
 //		pnl = new JPanel(){
