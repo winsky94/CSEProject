@@ -375,6 +375,8 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener,
 					ptm.refreshBase(vlist);
 
 			}
+			tcr.setHighlightColumn(-1);
+			ts.cancelSorting();
 			table.revalidate();
 			table.repaint();
 			titleBar.setSeason(season);
