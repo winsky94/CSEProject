@@ -14,7 +14,7 @@ public class HotThread extends Thread{
 		while(!stop){
 			p.Refresh(sort);
 			try {
-				this.sleep(2000);
+				this.sleep(4000);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
