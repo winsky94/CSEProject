@@ -36,12 +36,13 @@ public class IndexPanel extends FatherPanel implements MouseListener{
 	JPanel titlePnl, infoPnl;
 	PlayerBLService player;
 	TeamBLService team;
-	String dname, sname, tname, tPlayername, pname;
+	public String dname, sname, tname, tPlayername, pname;
 	IndexCard todayPnl, seasonPnl, teamPnl, progressPnl;
 	HotThread thr;
+	IndexThread th;
 	public IndexPanel() {
 		removeAll();
-	
+		
 		player = Service.player;
 		team = Service.team;
 		
@@ -144,9 +145,12 @@ public class IndexPanel extends FatherPanel implements MouseListener{
 		//
 		progressPnl.namePnl.setBackground(Style.HOT_PURPLEFOCUS);
 		infoPnl.add(progressPnl);
+		th=new IndexThread(this);
+		th.startThread();
 	}
 
 	public void mouseClicked(MouseEvent e) {
+		th.startThread();
 		// TODO Auto-generated method stub
 		HotIndexPanel pp=new HotIndexPanel();
 		
@@ -199,6 +203,64 @@ public class IndexPanel extends FatherPanel implements MouseListener{
 
 	public void mouseExited(MouseEvent e) {
 		// TODO Auto-generated method stub
+		
+	}
+	
+	public void Refresh(){
+		
+		PlayerVO dayP = player.getDayHotPlayer("score", 1).get(0);
+		PlayerVO seasonP = player.getSeasonHotPlayer("13-14", "score", 1)
+				.get(0);
+		TeamVO t = team.getSeasonHotTeam("13-14", "score", 1).get(0);
+		PlayerVO proP = player.getBestImprovedPlayer("recentFiveMatchesScoreUpRate", 1).get(0);
+		String d= dayP.getName();
+		String s= seasonP.getName();
+		String tn=t.getTeamName();
+		String tt=player.getPlayersByTeam(t.getAbLocation()).get(1).getName();
+		String p=proP.getName();
+		if(!d.equals(dname)){
+		dname=d;
+		todayPnl.setTitleAndName("今日得分王", dname);
+		ImageIcon todayIcon = new ImageIcon("image/player/action/" + dname
+				+ ".png");
+		todayIcon.setImage(todayIcon.getImage().getScaledInstance(220, 350,
+				Image.SCALE_SMOOTH));
+		todayPnl.iconLbl.setIcon(todayIcon);
+		}
+		if(!sname.equals(s)){
+		sname=s;
+		seasonPnl.setTitleAndName("赛季得分王", sname);
+		ImageIcon seasonIcon = new ImageIcon("image/player/action/" + sname
+				+ ".png");
+		
+		seasonIcon.setImage(seasonIcon.getImage().getScaledInstance(220, 350,
+				Image.SCALE_SMOOTH));
+		seasonPnl.iconLbl.setIcon(seasonIcon);
+		}
+		if(!tname.equals(tn)){
+		tname=tn;
+		tPlayername=tt;
+		teamPnl.setTitleAndName("场均得分最高球队", tname);
+		ImageIcon teamIcon = new ImageIcon("image/player/action/" + tPlayername
+				+ ".png");
+		teamIcon.setImage(teamIcon.getImage().getScaledInstance(220,350,
+				Image.SCALE_SMOOTH));
+		teamPnl.iconLbl.setIcon(teamIcon);
+		}
+		if(!pname.equals(p)){
+			pname=p;
+		
+		progressPnl.setTitleAndName("得分进步最快球员", pname);
+		String pImgName=pname;
+		if(!UIhelper.isImgExists(pImgName))
+			pImgName="null";
+		ImageIcon progressIcon = new ImageIcon("image/player/action/" + pImgName
+				+ ".png");
+		progressIcon.setImage(progressIcon.getImage().getScaledInstance(220, 350,
+				Image.SCALE_SMOOTH));
+		progressPnl.iconLbl.setIcon(progressIcon);
+		}
+		this.repaint();
 		
 	}
 }
