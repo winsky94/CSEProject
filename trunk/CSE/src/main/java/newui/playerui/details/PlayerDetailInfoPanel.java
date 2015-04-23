@@ -9,8 +9,6 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Image;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -24,7 +22,6 @@ import newui.mainui.MainFrame;
 import newui.teamui.TeamDetailPanel;
 import newui.teamui.details.TeamDetailRecentPanel;
 import vo.PlayerVO;
-import bl.player.Player;
 import bl.team.Team;
 import blservice.PlayerBLService;
 
@@ -72,7 +69,7 @@ public class PlayerDetailInfoPanel extends JPanel {
 		JLabel portraitLbl = new JLabel(icon);
 		headPnl.add(portraitLbl);
 		JLabel nameLbl = new JLabel(vo.getName());
-		nameLbl.setFont(new Font("微软雅黑", Font.PLAIN, 28));
+		nameLbl.setFont(new Font("华文细黑", Font.PLAIN, 28));
 		headPnl.add(nameLbl);
 		headPnl.add(new JLabel("             "));
 		headPnl.add(new JLabel("             "));
@@ -171,7 +168,7 @@ public class PlayerDetailInfoPanel extends JPanel {
 		public MyLabel(String t) {
 			super(t);
 			setForeground(Style.FOCUS_GREY);
-			setFont(new Font("微软雅黑",Font.PLAIN,20));
+			setFont(new Font("华文细黑",Font.PLAIN,20));
 		}
 
 	}

@@ -45,7 +45,7 @@ public class TeamDetailInfoPanel extends JPanel{
 		setLayout(gbl);
 		//----------------------------
 		JLabel enNameLbl=new JLabel(enName);
-		enNameLbl.setFont(new Font("微软雅黑",Font.PLAIN,35));
+		enNameLbl.setFont(new Font("华文细黑",Font.PLAIN,35));
 		enNameLbl.setForeground(Style.FOCUS_GREY);
 		gbc.gridx=0;
 		gbc.gridy=0;
@@ -103,7 +103,7 @@ public class TeamDetailInfoPanel extends JPanel{
 		public MyLabel(String t){
 			super(t);
 			setForeground(Style.FOCUS_GREY);
-			setFont(new Font("微软雅黑",Font.PLAIN,20));
+			setFont(new Font("华文细黑",Font.PLAIN,20));
 		}
 		
 	}
