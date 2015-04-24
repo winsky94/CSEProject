@@ -18,7 +18,7 @@ public class HotFatherPanel extends JPanel{
 	JPanel bottomBar;
 	JPanel bestPnl;
 	JScrollPane jsp;
-	
+	protected HotThread thr;
 	
 	public HotFatherPanel(){
 		

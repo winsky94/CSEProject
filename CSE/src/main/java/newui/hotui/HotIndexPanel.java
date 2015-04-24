@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -21,10 +22,11 @@ public class HotIndexPanel extends FatherPanel implements MouseListener{
 	private static final long serialVersionUID = 1L;
 	public JPanel funcPnl,downPnl;
 	public TopButton todayBtn,seasonBtn,teamBtn,progressBtn;
+	public static HotFatherPanel today,season,team,progress;
 	//
 	Font font=new Font("微软雅黑",Font.PLAIN,15);
-	public HotThread thr;
 	public HotIndexPanel(){
+		
 		funcPnl=new JPanel();
 		funcPnl.setLayout(new GridLayout(1,4));
 		gbc.gridy = 1;
@@ -61,13 +63,11 @@ public class HotIndexPanel extends FatherPanel implements MouseListener{
 		add(downPnl);
 		downPnl.removeAll();
 		downPnl.setLayout(new GridLayout(1,1));
-		HotFatherPanel p=new HotFatherPanel();
-		thr=new HotThread(p,"score");
-		HotTodayPanel hottoday=new HotTodayPanel(thr);
-		downPnl.add(hottoday);
-		hottoday.Refresh("score");
-		thr=new HotThread(hottoday,"score");
-		thr.startThread();
+		//HotFatherPanel p=new HotFatherPanel();
+		if(today==null)
+			today=new HotTodayPanel();
+		downPnl.add(today);
+	//	hottoday.Refresh("score");
 		downPnl.repaint();
 		downPnl.revalidate();
 		
@@ -86,49 +86,58 @@ public class HotIndexPanel extends FatherPanel implements MouseListener{
 		}
 	}
 	public void mouseClicked(MouseEvent e) {
-	if(thr!=null)
-		thr.stopThead();
+
 		if(e.getSource()==todayBtn){
+			
 			downPnl.removeAll();
 			downPnl.setLayout(new GridLayout(1,1));
-			HotTodayPanel p=new HotTodayPanel(thr);
-			downPnl.add(p);
-			p.Refresh("score");
-			thr=new HotThread(p,"score");
-			thr.startThread();
+			//today.thr.stopThead();
+			//today=new HotTodayPanel();
+			downPnl.add(today);
+			//p.Refresh("score");
+//			thr=new HotThread(p,"score");
+//			thr.startThread();
 			downPnl.repaint();
 			downPnl.revalidate();
+		
 		}
 		if(e.getSource()==seasonBtn){
 			downPnl.removeAll();
 			downPnl.setLayout(new GridLayout(1,1));
-			HotSeasonPanel p=new HotSeasonPanel(thr);
-			downPnl.add(p);
-			p.Refresh("score");
-			thr=new HotThread(p,"score");
-			thr.startThread();
+			if(season==null)
+				//season.thr.stopThead();
+			 season=new HotSeasonPanel();
+			downPnl.add(season);
+			//p.Refresh("score");
+			//thr=new HotThread(p,"score");
+			//thr.startThread();
 			downPnl.repaint();
 			downPnl.revalidate();
 		}
 		if(e.getSource()==teamBtn){
 			downPnl.removeAll();
 			downPnl.setLayout(new GridLayout(1,1));
-			HotTeamPanel p=new HotTeamPanel(thr);
-			downPnl.add(p);
-			p.Refresh("score");
-			thr=new HotThread(p,"score");
-			thr.startThread();
+			if(team==null)
+				//team.thr.stopThead();
+		
+				team=new HotTeamPanel();
+			downPnl.add(team);
+		//	p.Refresh("score");
+//			thr=new HotThread(p,"score");
+//			thr.startThread();
 			downPnl.repaint();
 			downPnl.revalidate();
 		}
 		if(e.getSource()==progressBtn){
 			downPnl.removeAll();
 			downPnl.setLayout(new GridLayout(1,1));
-			ProgressPanel p=new ProgressPanel(thr);
-			downPnl.add(p);
-			p.Refresh("recentFiveMatchesScoreUpRate");
-			thr=new HotThread(p,"recentFiveMatchesScoreUpRate");
-			thr.startThread();
+			if(progress==null)
+				//progress.thr.stopThead();
+			progress=new ProgressPanel();
+			downPnl.add(progress);
+		//	p.Refresh("recentFiveMatchesScoreUpRate");
+//			thr=new HotThread(p,"recentFiveMatchesScoreUpRate");
+//			thr.startThread();
 			downPnl.repaint();
 			downPnl.revalidate();
 		}
@@ -161,5 +170,15 @@ public class HotIndexPanel extends FatherPanel implements MouseListener{
 			teamBtn.setBackground(Style.HOT_BLUE);
 		if(e.getSource()==progressBtn)
 			progressBtn.setBackground(Style.HOT_PURPLE);
+	}
+	
+	public void clearThread(){
+		if(season!=null)
+			season.thr.stopThead();
+		if(team!=null)
+			team.thr.stopThead();
+		if(progress!=null)
+			progress.thr.stopThead();
+		today.thr.stopThead();
 	}
 }
