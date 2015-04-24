@@ -150,7 +150,7 @@ public class IndexPanel extends FatherPanel implements MouseListener{
 	}
 
 	public void mouseClicked(MouseEvent e) {
-		th.startThread();
+	
 		// TODO Auto-generated method stub
 		HotIndexPanel pp=new HotIndexPanel();
 		
