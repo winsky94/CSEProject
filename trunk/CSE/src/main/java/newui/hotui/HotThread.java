@@ -16,7 +16,7 @@ public class HotThread extends Thread{
 		//	System.out.println(p.toString()+":"+sort);
 			p.Refresh(sort);
 			try {
-				this.sleep(4000);
+				this.sleep(5000);
 			
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
