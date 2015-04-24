@@ -88,7 +88,7 @@ public class Console {
 				for (PlayerVO vo : result) {
 					// =====================================================
 					PlayerNormalInfo playerNormalInfo = setPlayerNormalInfo(vo);
-					out.append(playerNormalInfo.toString());
+					out.println(playerNormalInfo.toString());
 				}
 				return;// 返回得分前50的球员的场均比赛数据 调用
 			}
@@ -108,7 +108,7 @@ public class Console {
 					// =====================================================
 					PlayerHotInfo playerHotInfo = setplayerHotInfo(vo,
 							playerhotField);
-					out.append(playerHotInfo.toString());
+					out.println(playerHotInfo.toString());
 				}
 			} else if ((i = command.indexOf("-king")) >= 0) {
 				playerkingField = command.get(i + 1);
@@ -125,7 +125,7 @@ public class Console {
 						// =====================================================
 						PlayerKingInfo playerKingInfo = setPlayerKingInfo(vo,
 								playerkingField);
-						out.append(playerKingInfo.toString());
+						out.println(playerKingInfo.toString());
 					}
 				} else {
 					result = player.getDayHotPlayer(playerkingField,playerNum);
@@ -133,7 +133,7 @@ public class Console {
 						// =====================================================
 						PlayerKingInfo playerKingInfo = setPlayerKingInfo(vo,
 								playerkingField);
-						out.append(playerKingInfo.toString());
+						out.println(playerKingInfo.toString());
 					}
 				}
 			} else {
@@ -185,7 +185,7 @@ public class Console {
 						for (PlayerVO vo : result) {
 							// =====================================================
 							PlayerNormalInfo playerNormalInfo = setPlayerNormalInfo(vo);
-							out.append(playerNormalInfo.toString());
+							out.println(playerNormalInfo.toString());
 						}
 					} else {
 						if(isPHigh==true){
@@ -199,7 +199,7 @@ public class Console {
 						for (PlayerVO vo : result) {
 							// =====================================================
 							PlayerNormalInfo playerNormalInfo = setPlayerNormalInfo(vo);
-							out.append(playerNormalInfo.toString());
+							out.println(playerNormalInfo.toString());
 						}
 					}
 					clearFilter();
@@ -220,10 +220,10 @@ public class Console {
 							// =====================================================
 							if (isPHigh) {
 								PlayerHighInfo playerHighInfo = setPlayerHighInfo(vo);
-								out.append(playerHighInfo.toString());
+								out.println(playerHighInfo.toString());
 							} else {
 								PlayerNormalInfo playerNormalInfo = setPlayerNormalInfo(vo);
-								out.append(playerNormalInfo.toString());
+								out.println(playerNormalInfo.toString());
 							}
 						}
 					} else {
@@ -241,10 +241,10 @@ public class Console {
 							// =====================================================
 							if (isPHigh) {
 								PlayerHighInfo playerHighInfo = setPlayerHighInfo(vo);
-								out.append(playerHighInfo.toString());
+								out.println(playerHighInfo.toString());
 							} else {
 								PlayerNormalInfo playerNormalInfo = setPlayerNormalInfo(vo);
-								out.append(playerNormalInfo.toString());
+								out.println(playerNormalInfo.toString());
 							}
 						}
 					}
@@ -258,7 +258,7 @@ public class Console {
 				for (TeamVO vo : result) {
 					// ===================================================
 					TeamNormalInfo teamNormalInfo = setTeamNormalInfo(vo);
-					out.append(teamNormalInfo.toString());
+					out.println(teamNormalInfo.toString());
 				}
 				return;// 返回得分前30的球队的场均比赛数据
 			}
@@ -277,7 +277,7 @@ public class Console {
 				for (TeamVO vo : result) {
 					// ===================================================
 					TeamHotInfo teamHotInfo = setTeamHotInfo(vo, teamhotField);
-					out.append(teamHotInfo.toString());
+					out.println(teamHotInfo.toString());
 				}
 			} else {
 				// contain all
@@ -319,10 +319,10 @@ public class Console {
 						// ===================================================
 						if (isTHigh) {
 							TeamHighInfo teamHighInfo = setTeamHighInfo(vo);
-							out.append(teamHighInfo.toString());
+							out.println(teamHighInfo.toString());
 						} else {
 							TeamNormalInfo teamNormalInfo = setTeamNormalInfo(vo);
-							out.append(teamNormalInfo.toString());
+							out.println(teamNormalInfo.toString());
 						}
 					}
 				} else {
@@ -332,10 +332,10 @@ public class Console {
 						// ===================================================
 						if (isTHigh) {
 							TeamHighInfo teamHighInfo = setTeamHighInfo(vo);
-							out.append(teamHighInfo.toString());
+							out.println(teamHighInfo.toString());
 						} else {
 							TeamNormalInfo teamNormalInfo = setTeamNormalInfo(vo);
-							out.append(teamNormalInfo.toString());
+							out.println(teamNormalInfo.toString());
 						}
 					}
 				}
