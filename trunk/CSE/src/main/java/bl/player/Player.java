@@ -1308,25 +1308,44 @@ public class Player implements PlayerBLService {
 	
 	
 	
-	public ArrayList<PlayerVO> getPlayersUptheTimeAverage(int minute) {
+	public ArrayList<PlayerVO> selectPlayersUptheTimeAverage(String position,
+			String union, AgeEnum ageClass, String column, String order,int minute,int num) {
 		ArrayList<PlayerVO> result = new ArrayList<PlayerVO>();
 		ArrayList<PlayerVO> thePlayers = getPlayerAverageInfo();
-        int second=minute*60;
-		for (PlayerVO vo : thePlayers) {
-			if (vo.getPresentTime()>=second)
-				result.add(vo);
+		if(minute>0){
+           int second=minute*60;
+		   for (PlayerVO vo : thePlayers) {
+			 if (vo.getPresentTime()>=second)
+				  result.add(vo);
+		     }
 		}
+		else{
+			 for (PlayerVO vo : thePlayers) 
+					  result.add(vo);			     
+		}
+	
+		result=selectPlayers(result, position, union, ageClass, column, order, num);
 		return result;
 	}
 	
-	public ArrayList<PlayerVO> getPlayersUptheTimeSeason(String season,int minute) {
+	public ArrayList<PlayerVO> selectPlayersUptheTimeSeason(String season,String position,
+			String union, AgeEnum ageClass, String column, String order,int minute,int num) {
 		ArrayList<PlayerVO> result = new ArrayList<PlayerVO>();
 		ArrayList<PlayerVO> thePlayers = getPlayerSeasonInfo("13-14");
-        int second=minute*60;
-		for (PlayerVO vo : thePlayers) {
-			if (vo.getPresentTime()>=second)
-				result.add(vo);
+		if(minute>0){
+           int second=minute*60;
+		   for (PlayerVO vo : thePlayers) {
+			  if (vo.getPresentTime()>=second)
+				  result.add(vo);
+		    }
 		}
+		else{
+			for (PlayerVO vo : thePlayers) {
+					  result.add(vo);
+			    }   
+		}
+		
+	    result=selectPlayers(result, position, union, ageClass, column, order, num);
 		return result;
 	}
 

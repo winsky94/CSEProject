@@ -187,8 +187,10 @@ public interface PlayerBLService {
 	 * @param minute找出出场时间大于等于该分钟的球员
 	 * @return
 	 */
-	public ArrayList<PlayerVO> getPlayersUptheTimeAverage(int minute);
-	public ArrayList<PlayerVO> getPlayersUptheTimeSeason(String season,int minute);
+	public ArrayList<PlayerVO> selectPlayersUptheTimeAverage(String position,
+			String union, AgeEnum ageClass, String column, String order,int minute,int num);
+	public ArrayList<PlayerVO> selectPlayersUptheTimeSeason(String season,String position,
+			String union, AgeEnum ageClass, String column, String order,int minute,int num);
 	/**
 	 * 获得该球员最近5场比赛的数据
 	 * 
