@@ -6,8 +6,12 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Insets;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -66,7 +70,7 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener,
 	MyTableCellRenderer tcr;
 	highlisten listen;
 	TableSorter ts;
-
+	int lastTime=0;
 	public PlayerRankPanel() {
 		ptm = new PlayerTableModel(0);
 		player = Service.player;
@@ -93,6 +97,7 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener,
 		locationBox = new MyComboBox(locationText);
 		f1.add(locationBox);
 		f1.add(new JLabel("       "));
+		locationBox.addItemListener(this);
 		// -----分区---------
 		JLabel partitionLbl = new MyJLabel("分区：");
 		f1.add(partitionLbl);
@@ -100,6 +105,7 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener,
 		partitionBox.setMaximumRowCount(10);
 		f1.add(partitionBox);
 		f1.add(new JLabel("       "));
+		partitionBox.addItemListener(this);
 		// ----排序条件--------
 		JLabel filterRankLbl = new MyJLabel("排序条件：");
 		f1.add(filterRankLbl);
@@ -109,12 +115,34 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener,
 		filterRankBox.setMinimumSize(new Dimension(100, 28));
 		filterRankBox.setPreferredSize(new Dimension(100, 28));
 		f1.add(filterRankBox);
+		filterRankBox.addItemListener(this);
 		f1.add(new JLabel("       "));
 		// -------timeLbl------
 		timeLbl = new MyJLabel("在场时间大于(分钟)：");
 		f1.add(timeLbl);
 		timeField = new JTextField(5);
 		f1.add(timeField);
+		timeField.addFocusListener(new FocusAdapter(){
+			public void focusLost(FocusEvent e){
+				String text=timeField.getText();
+				int t=-1;
+				try{
+					 t=Integer.parseInt(text);
+				}catch(Exception ex){
+					//不处理
+				}
+				if(t!=lastTime)
+					Filter();
+			}
+		});
+		
+		timeField.addKeyListener(new KeyAdapter(){
+			public void keyPressed(KeyEvent e){
+				if(e.getKeyCode()==KeyEvent.VK_ENTER){
+					Filter();
+				}
+			}
+		});
 		// -----filterLbl-----
 		filterLbl = new MyJLabel("筛选", new ImageIcon(
 				"image/player/filterWhite.png"));
@@ -238,64 +266,7 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener,
 		} else if (e.getSource() == modeLbl)
 			MainFrame.getInstance().setContentPanel(new PlayerIndexPanel());
 		else if (e.getSource() == filterLbl) {
-			int time=0;
-			if (timeField.getText() != null||!(timeField.getText().equals(""))||timeField.getText()!="") {
-				
-				try{
-				   time = Integer.parseInt(timeField.getText());
-				}catch(NumberFormatException nfe){
-					time=0;
-				}
-			}
-		
-				// 执行筛选
-				String season = seasonBox.getSelectedItem().toString();
-				String position = locationBox.getSelectedItem().toString();
-				String union = partitionBox.getSelectedItem().toString();
-				String sort = filterRankBox.getSelectedItem().toString();
-				ArrayList<PlayerVO> vlist;
-				String type = typeBox.getSelectedItem().toString();
-				if (type.equals("赛季"))
-					vlist = player.selectPlayersUptheTimeSeason(season, position,
-							union, AgeEnum.ALL, sort, "desc",time, 50);
-				else
-					vlist = player.selectPlayersUptheTimeAverage(position, union,
-							AgeEnum.ALL, sort, "desc",time, 50);
-				// vlist.size()==0显示没有符合条件的球
-				if (ptm.headmodel != 0) {
-					if (isHighInfo == false)
-						ptm = new PlayerTableModel(0);
-					else
-						ptm = new PlayerTableModel(1);
-					jsp.remove(table);
-					table = new JTable(ptm);
-
-					ts = new TableSorter(table.getModel(),
-							table.getTableHeader());
-					table.setModel(ts);
-
-					// table.addMouseListener(this);
-					jsp.getViewport().add(table);
-
-				}
-				if (vlist != null) {
-					if (isHighInfo == false)
-						ptm.refreshBase(vlist);
-					else
-						ptm.refreshHigh(vlist);
-				}
-				table.revalidate();
-
-				table.repaint();
-
-				int col = ptm.findColumn(sort);
-
-				lastcolumn = col;
-				clicktime = 0;
-				CellRender();
-				tcr.setHighlightColumn(col);
-		
-
+			Filter();
 		} else if (e.getSource() == fieldLbl) {
 			String type = typeBox.getSelectedItem().toString();
 			if (isHighInfo) {
@@ -387,6 +358,7 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener,
 
 	public void itemStateChanged(ItemEvent e) {
 		if (e.getStateChange() == ItemEvent.SELECTED) {
+			if(e.getSource()==typeBox){
 			String season = seasonBox.getSelectedItem().toString();
 			ArrayList<PlayerVO> vlist;
 			String s = (String) typeBox.getSelectedItem();
@@ -408,6 +380,12 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener,
 			table.repaint();
 			titleBar.setSeason(season);
 			titleBar.setAveOrAll(s);
+			}else if(e.getSource()==locationBox||e.getSource()==partitionBox
+					||e.getSource()==filterRankBox){
+				Filter();
+			}
+					
+			
 		}
 	}
 
@@ -451,6 +429,65 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener,
 			}
 
 		}
+	}
+	
+	public void Filter(){
+		int time=0;
+		if (timeField.getText() != null||!(timeField.getText().equals(""))||timeField.getText()!="") {
+			
+			try{
+			   time = Integer.parseInt(timeField.getText());
+			}catch(NumberFormatException nfe){
+				time=0;
+			}
+		}
+		lastTime=time;
+			// 执行筛选
+			String season = seasonBox.getSelectedItem().toString();
+			String position = locationBox.getSelectedItem().toString();
+			String union = partitionBox.getSelectedItem().toString();
+			String sort = filterRankBox.getSelectedItem().toString();
+			ArrayList<PlayerVO> vlist;
+			String type = typeBox.getSelectedItem().toString();
+			if (type.equals("赛季"))
+				vlist = player.selectPlayersUptheTimeSeason(season, position,
+						union, AgeEnum.ALL, sort, "desc",time, 50);
+			else
+				vlist = player.selectPlayersUptheTimeAverage(position, union,
+						AgeEnum.ALL, sort, "desc",time, 50);
+			// vlist.size()==0显示没有符合条件的球
+			if (ptm.headmodel != 0) {
+				if (isHighInfo == false)
+					ptm = new PlayerTableModel(0);
+				else
+					ptm = new PlayerTableModel(1);
+				jsp.remove(table);
+				table = new JTable(ptm);
+
+				ts = new TableSorter(table.getModel(),
+						table.getTableHeader());
+				table.setModel(ts);
+
+				// table.addMouseListener(this);
+				jsp.getViewport().add(table);
+
+			}
+			if (vlist != null) {
+				if (isHighInfo == false)
+					ptm.refreshBase(vlist);
+				else
+					ptm.refreshHigh(vlist);
+			}
+			table.revalidate();
+
+			table.repaint();
+
+			int col = ptm.findColumn(sort);
+
+			lastcolumn = col;
+			clicktime = 0;
+			CellRender();
+			tcr.setHighlightColumn(col);
 	}
 
 }
