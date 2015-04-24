@@ -172,7 +172,6 @@ public class TeamTableModel extends MyTableModel {
 			ArrayList<Object> line = new ArrayList<Object>();
 			line.add(vo.getTeamName());
 			line.add(vo.getAbLocation());
-			line.add(vo.getMatchesNum());
 			line.add(vo.getOffenReboundEfficiency());
 			line.add(vo.getDefenReboundEfficiency());
 			line.add(vo.getOffenRound());
