@@ -247,26 +247,7 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener,
 					time=0;
 				}
 			}
-			if(time!=0){
-				ArrayList<PlayerVO> vlist;
-				String type = typeBox.getSelectedItem().toString();
-				if (type.equals("赛季"))
-					vlist = player.getPlayersUptheTimeSeason("13-14", time);
-				else
-					vlist = player.getPlayersUptheTimeAverage(time);
-				
-				if (vlist != null) {
-					if (isHighInfo == false)
-						ptm.refreshBase(vlist);
-					else
-						ptm.refreshHigh(vlist);
-				}
-				table.revalidate();
-
-				table.repaint();
-			}
-
-			else {
+		
 				// 执行筛选
 				String season = seasonBox.getSelectedItem().toString();
 				String position = locationBox.getSelectedItem().toString();
@@ -275,11 +256,11 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener,
 				ArrayList<PlayerVO> vlist;
 				String type = typeBox.getSelectedItem().toString();
 				if (type.equals("赛季"))
-					vlist = player.selectPlayersBySeason(season, position,
-							union, AgeEnum.ALL, sort, "desc", 50);
+					vlist = player.selectPlayersUptheTimeSeason(season, position,
+							union, AgeEnum.ALL, sort, "desc",time, 50);
 				else
-					vlist = player.selectPlayersByAverage(position, union,
-							AgeEnum.ALL, sort, "desc", 50);
+					vlist = player.selectPlayersUptheTimeAverage(position, union,
+							AgeEnum.ALL, sort, "desc",time, 50);
 				// vlist.size()==0显示没有符合条件的球
 				if (ptm.headmodel != 0) {
 					if (isHighInfo == false)
@@ -313,7 +294,7 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener,
 				clicktime = 0;
 				CellRender();
 				tcr.setHighlightColumn(col);
-			}
+		
 
 		} else if (e.getSource() == fieldLbl) {
 			String type = typeBox.getSelectedItem().toString();
