@@ -12,13 +12,17 @@ public class HotThread extends Thread{
 	
 	public void run(){
 		while(!stop){
+			
+		//	System.out.println(p.toString()+":"+sort);
 			p.Refresh(sort);
 			try {
 				this.sleep(4000);
+			
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+				//e.printStackTrace();
 			}
+			
 		}
 	}
 	
@@ -28,6 +32,7 @@ public class HotThread extends Thread{
 	public void stopThead(){
 		this.stop=true;
 	}
+
 
 	
 }

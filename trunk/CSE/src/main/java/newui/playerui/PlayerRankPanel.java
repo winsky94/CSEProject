@@ -269,11 +269,13 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener,
 			Filter();
 		} else if (e.getSource() == fieldLbl) {
 			String type = typeBox.getSelectedItem().toString();
+			filterRankBox.removeItemListener(this);
 			if (isHighInfo) {
 				// 监听，切换到基础数据表格
 				fieldLbl.setText("查看高阶数据");
 				isHighInfo = false;
 				ptm = new PlayerTableModel(0);
+				filterRankBox.removeAll();
 				filterRankBox.removeAllItems();
 				for (int i = 0; i < filterRankText.length; i++) {
 					filterRankBox.addItem(filterRankText[i]);
@@ -290,6 +292,7 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener,
 				}
 
 			}
+			filterRankBox.addItemListener(this);
 			ptm.Refresh(type);
 
 			table.revalidate();

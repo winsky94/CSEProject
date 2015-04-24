@@ -159,25 +159,19 @@ public class IndexPanel extends FatherPanel implements MouseListener{
 		pp.downPnl.setLayout(new GridLayout(1,1));
 		if(e.getSource()==progressPnl){
 			
-			ProgressPanel p=new ProgressPanel(thr);
+			ProgressPanel p=new ProgressPanel();
 			pp.downPnl.add(p);
 			p.Refresh("recentFiveMatchesScoreUpRate");
-			thr=new HotThread(p,"recentFiveMatchesScoreUpRate");
-			thr.startThread();
 			
 		}else if(e.getSource()==seasonPnl){
 			
-			HotSeasonPanel p=new HotSeasonPanel(thr);
+			HotSeasonPanel p=new HotSeasonPanel();
 			pp.downPnl.add(p);
 			p.Refresh("score");
-			thr=new HotThread(p,"score");
-			thr.startThread();
 		}else if(e.getSource()==teamPnl){
-			HotTeamPanel p=new HotTeamPanel(thr);
+			HotTeamPanel p=new HotTeamPanel();
 			pp.downPnl.add(p);
 			p.Refresh("score");
-			thr=new HotThread(p,"score");
-			thr.startThread();
 		}
 		
 		pp.downPnl.repaint();
