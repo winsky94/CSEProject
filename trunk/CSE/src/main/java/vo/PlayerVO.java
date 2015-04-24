@@ -681,6 +681,10 @@ public class PlayerVO {
 	public void setEfficiency(double efficiency) {
 		this.efficiency = efficiency;
 	}
+	
+	public void addEfficiency(int efficiency){
+		this.efficiency+=efficiency;
+	}
 
 	public void setRecentFiveMatchesScoreUpRate(
 			double recentFiveMatchesScoreUpRate) {
@@ -698,7 +702,11 @@ public class PlayerVO {
 	}
 
 	public void setGmScEfficiencyValue(double gmScEfficiencyValue) {
-		GmScEfficiencyValue = gmScEfficiencyValue;
+		this.GmScEfficiencyValue = gmScEfficiencyValue;
+	}
+	
+	public void addGmScEfficiencyValue(double gmscEfficiencyValue){
+		this.GmScEfficiencyValue+=gmscEfficiencyValue;
 	}
 
 	public void setTrueHitRate(double trueHitRate) {
@@ -792,12 +800,33 @@ public class PlayerVO {
 		else if(v1.getSeason().compareTo(v2.getSeason())>0)
 			return 1;
 		else{
-			if(v1.getDate().compareTo(v2.getDate())<0)
-				return -1;
-			else if(v1.getDate().compareTo(v2.getDate())>0)
+			String month1=v1.getDate().split("-")[0];
+			String month2=v2.getDate().split("-")[0];
+			int type1=0;
+			int type2=0; //type=0代表在6月前，=1代表在6月后
+			if(month1.compareTo("06")>0){
+				type1=1;
+			}
+			if(month2.compareTo("06")>0){
+				type2=1;
+			}
+			
+			if(type1==0&&type2==1){
 				return 1;
-			else 
-				return 0;
+			}
+			
+			if(type1==1&&type2==0){
+				return-1;
+			}
+			
+			//下面是2个都是6月前或6月后的情况
+		     	if(v1.getDate().compareTo(v2.getDate())<0)
+				   return -1;
+			    else if(v1.getDate().compareTo(v2.getDate())>0)
+				   return 1;
+			    else 
+				   return 0;
+		     	
 		}
 	}
 	
@@ -808,16 +837,11 @@ public class PlayerVO {
 			return true;
 		else{
 			LittleRecordVO vo=fiveRecentRecords[0];
-			if(season.compareTo(vo.getSeason())>0)
+			LittleRecordVO v1=new LittleRecordVO(season, date, 0, 0, 0);
+			if(compare(vo,v1)==-1)
 				return true;
-			else if(season.compareTo(vo.getSeason())<0)
+			else
 				return false;
-			else{
-				if(date.compareTo(vo.getDate())>0)
-					return true;
-				else 
-					return false;
-			}
 		}
 	}
 	
@@ -827,20 +851,12 @@ public class PlayerVO {
 			fiveRecentRecords[length]=vo;
 		}
 		else{
-			LittleRecordVO v1=fiveRecentRecords[0];
-			if(vo.getSeason().compareTo(v1.getSeason())>0){
+			if(isMoreRecent(vo.getSeason(), vo.getDate())==true){
 				fiveRecentRecords[0]=vo;
 				return;
 			}
-			else if(vo.getSeason().compareTo(v1.getSeason())<0)
-				return;
 			else{
-				if(vo.getDate().compareTo(v1.getDate())>0){
-					fiveRecentRecords[0]=vo;
-					return;
-				}
-				else 
-					return ;
+				return;
 			}
 		}
 	}
