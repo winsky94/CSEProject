@@ -143,7 +143,7 @@ public class Console {
 				if ((i = command.indexOf("-sort")) >= 0) {
 					String[] t = command.get(i + 1).split(",");
 					for (String s : t) {
-						String[] p = s.split(".");
+						String[] p= s.split("\\.");
 						playerSort.add(p[0]);
 						sortP.add(p[1]);
 					}
@@ -287,7 +287,7 @@ public class Console {
 
 					String[] t = command.get(i + 1).split(",");
 					for (String s : t) {
-						String[] p = s.split(".");
+						String[] p = s.split("\\.");
 						teamSort.add(p[0]);
 						sortT.add(p[1]);
 					}
@@ -391,11 +391,11 @@ public class Console {
 		String age;
 		for (String s : playerFilter) {
 			if (s.contains("position"))
-				pPosition = s.split(".")[1];
+				pPosition = s.split("\\.")[1];
 			else if (s.contains("league"))
-				pUnion = s.split(".")[1];
+				pUnion = s.split("\\.")[1];
 			else{
-				 age = s.split(".")[1];
+				 age = s.split("\\.")[1];
 				 if(age.contains("<=22"))
 					 pAge=AgeEnum.LE22;
 				 else if(age.contains("<=25"))
