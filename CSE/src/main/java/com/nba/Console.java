@@ -266,7 +266,7 @@ public class Console {
 			if ((i = command.indexOf("-n")) >= 0)
 				teamNum = Integer.parseInt(command.get(i + 1));
 			else
-				teamNum = 50;
+				teamNum = 30;
 
 			if ((i = command.indexOf("-hot")) >= 0) {
 				teamhotField = command.get(i + 1);
