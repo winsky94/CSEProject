@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.event.FocusAdapter;
@@ -249,9 +250,14 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener,
 		public MyComboBox(String[] text) {
 			super(text);
 			setFont(font);
-			this.setBackground(Style.BACK_GREY);
+			
+			
 			this.setForeground(Color.white);
+			this.setBackground(Style.BACK_GREY);
+		
+			
 		}
+	
 
 	}
 
