@@ -29,7 +29,7 @@ import bl.team.Team;
 import blservice.AgeEnum;
 import blservice.PlayerBLService;
 
-public class Player implements PlayerBLService {
+public class NewPlayer  {
 
 	Map<String, PlayerVO> players = new HashMap<String, PlayerVO>(32);
 	Map<String, TeamVO> teams;
@@ -48,26 +48,12 @@ public class Player implements PlayerBLService {
 	boolean needUpdatePlayerAverage = false;
 	boolean needUpdatePlayersToday = false;
 	
-	private static String[] player_CH = new String[] { "全部", "前锋", "中锋",
-		"后卫","前锋-中锋","中锋-后卫","前锋-后卫", "得分", "篮板数", "助攻数", "得分/篮板/助攻(1:1:1)", 
-		"投篮命中率", "盖帽数", "抢断数", "罚球命中率", "犯规数", "失误数",
-		"在场时间", "效率", "两双", "西部球队", "东部球队", 
-		 "真实命中率", "GmSc效率值", "投篮效率", "篮板率", "进攻篮板数",
-		 "防守篮板数", "进攻篮板率", "防守篮板率", "助攻率", "抢断率", 
-		 "盖帽率", "失误率", "使用率"};
-    private static String[] player_EN = new String[] { "all", "F", "C",
-		"G", "F-C","C-G","F-G","score", "reboundNum", "assistNum", "score_rebound_assist", 
-		"shootHitRate", "blockNum", "stealNum", "freeThrowHitRate", "foulNum", "turnOverNum",
-		"presentTime", "efficiency", "doubleDoubleNum", "W", "E",
-		"trueHitRate","GmScEfficiencyValue","shootEfficiency","reboundRate","offenReboundNum",
-		"defenReboundNum","offenReboundRate","defenReboundRate","assistRate","stealRate",
-		"blockRate","turnOverRate","usageRate"};
 
-	public Player() {
+	public NewPlayer() {
 		baseInfoInit();
 		teams = Team.getTeamsPartition();
 		allMatchInfoInit();
-    	 updateMatch um = new updateMatch(); //!!!!注意，这个是检查性能时交代码时才交！！
+		 updateMatch um = new updateMatch(); //!!!!注意，这个是检查性能时交代码时才交！！
 		 um.startThread();
 	}
 
@@ -155,9 +141,6 @@ public class Player implements PlayerBLService {
 			e.printStackTrace();
 		}
 
-		// 初始化后 开启线程：
-		// updateMatch um = new updateMatch();
-		// um.startThread();
 	}
 
 	private MatchVO readMatchInfoFromFile(String fileName) {
@@ -918,11 +901,10 @@ public class Player implements PlayerBLService {
 	}
 
 	public ArrayList<PlayerVO> getOrderedPlayersBySeason(String season,
-			String condition, String order, int num) {
+			ArrayList<String> condition, ArrayList<String> order, int num) {
 		ArrayList<PlayerVO> result = new ArrayList<PlayerVO>();
 		ArrayList<PlayerVO> allPlayers = getPlayerSeasonInfo(season);
-		condition=changePlayerCHToEN(condition);
-		Collections.sort(allPlayers, new SequenceOfPlayer(condition, order));
+		Collections.sort(allPlayers, new NewSequenceOfPlayer(condition, order));
 		int count = 0;
 		for (PlayerVO vo : allPlayers) {
 			result.add(vo);
@@ -933,12 +915,11 @@ public class Player implements PlayerBLService {
 		return result;
 	}
 
-	public ArrayList<PlayerVO> getOrderedPlayersByAverage(String condition,
-			String order, int num) {
+	public ArrayList<PlayerVO> getOrderedPlayersByAverage(ArrayList<String> condition,
+			ArrayList<String> order, int num) {
 		ArrayList<PlayerVO> result = new ArrayList<PlayerVO>();
 		ArrayList<PlayerVO> allPlayers = getPlayerAverageInfo();
-		condition=changePlayerCHToEN(condition);
-		Collections.sort(allPlayers, new SequenceOfPlayer(condition, order));
+		Collections.sort(allPlayers, new NewSequenceOfPlayer(condition, order));
 		int count = 0;
 		for (PlayerVO vo : allPlayers) {
 			result.add(vo);
@@ -950,11 +931,8 @@ public class Player implements PlayerBLService {
 	}
 
 	private ArrayList<PlayerVO> selectPlayers(ArrayList<PlayerVO> thePlayers,
-			String position, String union, AgeEnum ageClass, String column,
-			String order, int num) {
-		position = changePlayerCHToEN(position);
-		union = changePlayerCHToEN(union);
-		column = changePlayerCHToEN(column);
+			String position, String union, AgeEnum ageClass, ArrayList<String> column,
+			ArrayList<String> order, int num) {
 		ArrayList<PlayerVO> result = new ArrayList<PlayerVO>();
 		String[] positions=position.split("-");
 		int size=position.length();
@@ -1018,7 +996,7 @@ public class Player implements PlayerBLService {
 			}
 		}
 
-		Collections.sort(thePlayers, new SequenceOfPlayer(column, order));
+		Collections.sort(thePlayers, new NewSequenceOfPlayer(column, order));
 
 		int count = 0;
 		for (PlayerVO vo : thePlayers) {
@@ -1031,8 +1009,8 @@ public class Player implements PlayerBLService {
 	}
 
 	public ArrayList<PlayerVO> selectPlayersBySeason(String season,
-			String position, String union, AgeEnum ageClass, String column,
-			String order, int num) {
+			String position, String union, AgeEnum ageClass, ArrayList<String> column,
+			ArrayList<String> order, int num) {
 		ArrayList<PlayerVO> result=new ArrayList<PlayerVO>();
 		ArrayList<PlayerVO> thePlayers = getPlayerSeasonInfo(season);
 		for(PlayerVO vo:thePlayers){
@@ -1043,7 +1021,7 @@ public class Player implements PlayerBLService {
 	}
 
 	public ArrayList<PlayerVO> selectPlayersByAverage(String position,
-			String union, AgeEnum ageClass, String column, String order, int num) {
+			String union, AgeEnum ageClass, ArrayList<String> column, ArrayList<String> order, int num) {
 		ArrayList<PlayerVO> result=new ArrayList<PlayerVO>();
 		ArrayList<PlayerVO> thePlayers = getPlayerAverageInfo();
 		for(PlayerVO vo:thePlayers){
@@ -1348,7 +1326,6 @@ public class Player implements PlayerBLService {
 	public ArrayList<PlayerVO> getPlayersByTeam(String teamAbLocation) {
 		ArrayList<PlayerVO> result = new ArrayList<PlayerVO>();
 		ArrayList<PlayerVO> thePlayers = getPlayerAverageInfo();
-		teamAbLocation=changePlayerCHToEN(teamAbLocation);
 		for (PlayerVO vo : thePlayers) {
 			if (vo.getOwingTeam().equals(teamAbLocation))
 				result.add(vo);
@@ -1357,48 +1334,6 @@ public class Player implements PlayerBLService {
 		return result;
 	}
 	
-	
-	
-	public ArrayList<PlayerVO> selectPlayersUptheTimeAverage(String position,
-			String union, AgeEnum ageClass, String column, String order,int minute,int num) {
-		ArrayList<PlayerVO> result = new ArrayList<PlayerVO>();
-		ArrayList<PlayerVO> thePlayers = getPlayerAverageInfo();
-		if(minute>0){
-           int second=minute*60;
-		   for (PlayerVO vo : thePlayers) {
-			 if (vo.getPresentTime()>=second)
-				  result.add(vo);
-		     }
-		}
-		else{
-			 for (PlayerVO vo : thePlayers) 
-					  result.add(vo);			     
-		}
-	
-		result=selectPlayers(result, position, union, ageClass, column, order, num);
-		return result;
-	}
-	
-	public ArrayList<PlayerVO> selectPlayersUptheTimeSeason(String season,String position,
-			String union, AgeEnum ageClass, String column, String order,int minute,int num) {
-		ArrayList<PlayerVO> result = new ArrayList<PlayerVO>();
-		ArrayList<PlayerVO> thePlayers = getPlayerSeasonInfo("13-14");
-		if(minute>0){
-           int second=minute*60;
-		   for (PlayerVO vo : thePlayers) {
-			  if (vo.getPresentTime()>=second)
-				  result.add(vo);
-		    }
-		}
-		else{
-			for (PlayerVO vo : thePlayers) {
-					  result.add(vo);
-			    }   
-		}
-		
-	    result=selectPlayers(result, position, union, ageClass, column, order, num);
-		return result;
-	}
 
 	public ArrayList<PlayerVO> getPlayerBaseInfo() {
 		return getPlayerAverageInfo();
@@ -1461,46 +1396,6 @@ public class Player implements PlayerBLService {
 		return result;
 	}
 
-	/**
-	 * 将球员数据中文名转为相应的英文缩写
-	 * 
-	 * @param 球员中文名
-	 * @return 英文缩写
-	 */
-	public static String changePlayerCHToEN(String CH) {
-		int index = -1;
-		for (int i = 0; i < player_CH.length; i++) {
-			if (player_CH[i].equals(CH)) {
-				index = i;
-			}
-		}
-		if (index != -1) {
-			return player_EN[index];
-		} else {
-			return CH;
-		}
-	}
-
-	/**
-	 * 将球员数据中文名转为相应的英文缩写
-	 * 
-	 * @param EN
-	 *            球员数据英文名
-	 * @return 中文名
-	 */
-	public static String changePlayerENToCH(String EN) {
-		int index = -1;
-		for (int i = 0; i < player_CH.length; i++) {
-			if (player_EN[i].equals(EN)) {
-				index = i;
-			}
-		}
-		if (index != -1) {
-			return player_CH[index];
-		} else {
-			return EN;
-		}
-	}
 
 	/**
 	 * 向match中增加比赛信息
