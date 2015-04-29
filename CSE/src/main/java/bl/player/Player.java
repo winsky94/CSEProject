@@ -477,10 +477,16 @@ public class Player implements PlayerBLService {
 			} else {
 				shootEfficiency = 0;
 			}
+			
 			for (Integer id : matchIDs) {
 				MatchVO match = matches.get(id);
 				allMatchTime += match.getMatchTime();
 				if (isVisitingTeam.get(id) == true) {
+					if(playerSeason.getName().equals("Kobe Bryant")){
+						System.out.println(match.getDate());
+						System.out.println("match.getVisitingOffenReboundNum()"+match.getVisitingOffenReboundNum());
+						System.out.println("match.getVisitingDefenReboundNum()"+match.getVisitingDefenReboundNum());
+					}
 					teamOffenReboundNum += match.getVisitingOffenReboundNum();
 					dsOffenReboundNum += match.getHomeOffenReboundNum();
 					teamDefenReboundNum += match.getVisitingDefenReboundNum();
@@ -503,6 +509,11 @@ public class Player implements PlayerBLService {
 									.getHomeShootHitNum())) + 1.07
 							* match.getHomeTurnOverNum();
 				} else {
+					if(playerSeason.getName().equals("Kobe Bryant")){
+						System.out.println(match.getDate());
+						System.out.println("match.getHomeOffenReboundNum()"+match.getHomeOffenReboundNum());
+						System.out.println("match.getHomeDefenReboundNum()"+match.getHomeDefenReboundNum());
+					}
 					teamOffenReboundNum += match.getHomeOffenReboundNum();
 					dsOffenReboundNum += match.getVisitingOffenReboundNum();
 					teamDefenReboundNum += match.getHomeDefenReboundNum();
@@ -526,15 +537,29 @@ public class Player implements PlayerBLService {
 							* match.getVisitingTurnOverNum();
 
 				}
+				
 			}
 			teamReboundNum = teamOffenReboundNum + teamDefenReboundNum;
 			dsReboundNum = dsOffenReboundNum + dsDefenReboundNum;
 
+//			if(playerSeason.getName().equals("Kobe Bryant")){
+//				System.out.println(matchIDs.size());
+//				System.out.println("teamOffenReboundNum="+teamOffenReboundNum);
+//				System.out.println("teamDefenReboundNum="+teamDefenReboundNum);
+//				System.out.println("allreboundNum="+allreboundNum);
+//				System.out.println("allMatchTime="+allMatchTime);
+//				System.out.println("allpresentTime="+allpresentTime);
+//				System.out.println("teamReboundNum="+teamReboundNum);
+//				System.out.println("dsReboundNum="+dsReboundNum);
+//				System.out.println("=============================");
+//			}
+			
 			reboundRate = allreboundNum * allMatchTime / allpresentTime
 					/ (teamReboundNum + dsReboundNum);
 
 //			reboundRate = Double.parseDouble(dec.format(reboundRate));
 
+			
 			offenReboundRate = alloffenReboundNum * allMatchTime
 					/ allpresentTime
 					/ (teamOffenReboundNum + dsOffenReboundNum);
@@ -564,6 +589,18 @@ public class Player implements PlayerBLService {
 					* allMatchTime
 					/ allpresentTime
 					/ (teamShootAttemptNum + 0.44 * teamFreeThrowAttemptNum + teamTurnOverNum);
+			
+				if(playerSeason.getName().equals("Kevin Durant")){
+					System.out.println("allshootAttemptNum="+allshootAttemptNum);
+					System.out.println("allfreeThrowAttemptNum="+allfreeThrowAttemptNum);
+					System.out.println("allturnOverNum="+allturnOverNum);
+					System.out.println("allMatchTime="+allMatchTime);
+					System.out.println("allpresentTime="+allpresentTime);
+					System.out.println("teamShootAttemptNum="+teamShootAttemptNum);
+					System.out.println("teamFreeThrowAttemptNum="+teamFreeThrowAttemptNum);
+					System.out.println("teamTurnOverNum="+teamTurnOverNum);
+				}
+			
 //			usageRate = Double.parseDouble(dec.format(usageRate));
 			score_rebound_assist = (allscore + allreboundNum + allassistNum) / 3;
 //			score_rebound_assist = Double.parseDouble(dec
@@ -644,6 +681,7 @@ public class Player implements PlayerBLService {
 			foulNum = record.getFoulNum();// 犯规数
 			personScore = record.getScore();// 个人得分
 			PlayerVO thisPlayer = players.get(playerName);
+			
 			if (thisPlayer == null)
 				continue;
 			LittleRecordVO littleRecordVO = new LittleRecordVO(season, date,
@@ -1566,13 +1604,13 @@ public class Player implements PlayerBLService {
 	public static void main(String[] args) {
 		long start = System.currentTimeMillis();
 		Player player = new Player();
-		ArrayList<PlayerVO> players = player.selectPlayersBySeason("13-14",
-				"G", "all", AgeEnum.ALL, "score", "desc", 50);
-		for (int i = 0; i < 5; i++)
-			System.out.println(players.get(i).getName()
-					+ players.get(i).getScore());
-		PlayerVO player1 = player.getPlayerSeasonInfo("13-14","Kevin Love");
-		System.out.println("----"+player1.getPosition());
+//		ArrayList<PlayerVO> players = player.selectPlayersBySeason("13-14",
+//				"G", "all", AgeEnum.ALL, "score", "desc", 50);
+//		for (int i = 0; i < 5; i++)
+//			System.out.println(players.get(i).getName()
+//					+ players.get(i).getScore());
+//		PlayerVO player1 = player.getPlayerSeasonInfo("13-14","Kevin Love");
+//		System.out.println("----"+player1.getPosition());
 //		ArrayList<PlayerVO> players = player.getPlayerSeasonInfo("13-14");
 //		for (int i = 0; i < 5; i++)
 //			System.out.println(players.get(i).getName()
