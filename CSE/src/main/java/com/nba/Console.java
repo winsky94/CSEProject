@@ -73,11 +73,18 @@ public class Console {
 	NewPlayer player = new NewPlayer();
 	NewTeam team = new NewTeam();
 	private boolean defaultPSort=true,defaultTSort=true;
-	public void execute(PrintStream out, String[] args) {
+	public Console(){
 		playerBaseSort.add("score");
 		playerHighSort.add("trueHitRate");
 		sortP.add("desc");
 		sortHP.add("desc");
+		teamBaseSort.add("score");
+		teamHighSort.add("winRate");
+		sortT.add("desc");
+		sortHT.add("desc");
+	}
+	public void execute(PrintStream out, String[] args) {
+		
 		ArrayList<String> command = new ArrayList<String>();
 		for (int i = 1; i < args.length; i++)
 			command.add(args[i]);
@@ -85,7 +92,7 @@ public class Console {
 			// 球队命令解析
 			if (command.size() == 0) {
 				ArrayList<PlayerVO> result = player.getOrderedPlayersByAverage(
-						"score", "desc", 50);
+						playerBaseSort,sortP, 50);
 				for (PlayerVO vo : result) {
 					// =====================================================
 					PlayerNormalInfo playerNormalInfo = setPlayerNormalInfo(vo);
@@ -266,7 +273,7 @@ public class Console {
 			// 球员命令解析
 			if (command.size() == 0) {
 				ArrayList<TeamVO> result = team.getOrderedTeamsByAverage(
-						"score", "desc", 30);
+						teamBaseSort, sortT, 30);
 				for (TeamVO vo : result) {
 					// ===================================================
 					TeamNormalInfo teamNormalInfo = setTeamNormalInfo(vo);
@@ -317,15 +324,16 @@ public class Console {
 					// 返回高阶数据的 sort方法 其他返回均未基本数据
 				} else
 					isTHigh = false;
-				if((!defaultTSort)&&isTHigh){
-					sortHT=sortT;teamHighSort=teamBaseSort;
-				}
+				
 				if (command.indexOf("-total") >= 0)
 					// 返回的是总和数据
 					isTTotal = true;
 				else
 					isTTotal = false;
 				TeamSortFieldChange();
+				if((!defaultTSort)&&isTHigh){
+					sortHT=sortT;teamHighSort=teamBaseSort;
+				}
 				// 调用 sort方法
 				ArrayList<TeamVO> result = new ArrayList<TeamVO>();
 				if (isTTotal) {
@@ -390,22 +398,22 @@ public class Console {
 	}
 
 	public void PlayerSortFieldChange() {
-		for (int i = 0; i < playerSort.size(); i++) {
-			String s = playerSort.get(i);
+		for (int i = 0; i < playerBaseSort.size(); i++) {
+			String s = playerBaseSort.get(i);
 			for (int j = 0; j < player_sort.length; j++)
 				if (s.equals(player_sort[j])) {
-					playerSort.set(i, player_real_sort[j]);
+					playerBaseSort.set(i, player_real_sort[j]);
 					break;
 				}
 		}
 	}
 
 	public void TeamSortFieldChange() {
-		for (int i = 0; i < teamSort.size(); i++) {
-			String s = teamSort.get(i);
+		for (int i = 0; i < teamBaseSort.size(); i++) {
+			String s = teamBaseSort.get(i);
 			for (int j = 0; j < team_sort.length; j++)
 				if (s.equals(team_sort[j])) {
-					teamSort.set(i, team_sort_real[j]);
+					teamBaseSort.set(i, team_sort_real[j]);
 					break;
 				}
 		}
