@@ -10,6 +10,83 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class DirtyDataManager {
+	
+	public static boolean calculateMatchTime(String fileName) {
+		String result = "0:00";
+		int time = 0;
+		ArrayList<Map<String, String>> players = new ArrayList<Map<String, String>>();
+		try {
+			File file = new File(fileName);
+			if (!file.exists()) {
+				file.createNewFile();
+			}
+			BufferedReader br = new BufferedReader(new InputStreamReader(
+					new FileInputStream(file), "UTF-8"));
+			String temp = null;
+			temp = br.readLine();
+			temp = br.readLine();
+			String[] scoresData = temp.split(";");
+			int parts = scoresData.length;
+			if (parts <= 4) {
+				time = 48;
+			} else {
+				time = 48 + (parts - 4) * 5;
+			}
+
+			temp = br.readLine();
+			boolean start = false;
+			boolean hasDone = false;
+			while (temp != null) {
+				if (start) {
+					hasDone = true;
+					Map<String, String> presentTimeMap = new HashMap<String, String>();
+					String[] line = temp.split(";");
+					String player = 
+							line[0];
+					String presentTime = line[2];// 在场时间
+					presentTimeMap.put("playerName", player);
+					presentTimeMap.put("presentTime", presentTime);
+					players.add(presentTimeMap);
+				}
+
+				if (fileName.contains(temp) ) {
+					start = true;
+				}
+				if (fileName.contains(temp)  && hasDone) {
+					break;
+				}
+				temp = br.readLine();
+				if (temp != null && fileName.contains(temp)) {
+					start = false;
+				}
+
+			}
+
+			br.close();
+
+			int others = 0;
+			for (int i = 0; i < players.size(); i++) {
+				Map<String, String> playerPresentTime = players.get(i);
+				String presentTime = playerPresentTime.get("presentTime");
+
+					String[] times = presentTime.split(":");
+					others += Integer.parseInt(times[0]) * 60
+							+ Integer.parseInt(times[1]);
+			}
+			if (time*5*60==others) {
+				return true;
+			}else {
+				System.out.println(fileName);
+				return false;
+			}
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		return false;
+	}
+	
 	/**
 	 * 处理字符串中含有'导致数据录入数据库过程中导致的数据库语句错误的问题
 	 * 
