@@ -13,11 +13,9 @@ import test.data.TeamNormalInfo;
 import vo.PlayerVO;
 import vo.TeamVO;
 import bl.DataSourse;
-import bl.player.Player;
-import bl.team.Team;
+import bl.player.NewPlayer;
+import bl.team.NewTeam;
 import blservice.AgeEnum;
-import blservice.PlayerBLService;
-import blservice.TeamBLService;
 
 public class Console {
 
@@ -72,8 +70,8 @@ public class Console {
 	private ArrayList<String> teamHighSort=new ArrayList<String>();
 	private ArrayList<String> sortHT=new ArrayList<String>();
 
-	PlayerBLService player = new Player();
-	TeamBLService team = new Team();
+	NewPlayer player = new NewPlayer();
+	NewTeam team = new NewTeam();
 	private boolean defaultPSort=true,defaultTSort=true;
 	public void execute(PrintStream out, String[] args) {
 		playerBaseSort.add("score");
@@ -218,7 +216,7 @@ public class Console {
 					// 调用sort方法
 					if (isPTotal) {
 						ArrayList<PlayerVO> result;
-						if(isPHigh==true){j
+						if(isPHigh==true){
 							//season命令中未给出
 							result=player.getOrderedPlayersBySeason("13-14", playerHighSort, sortHP, playerNum);
 //							result = player.selectPlayersBySeason("all", pPosition,
@@ -336,7 +334,7 @@ public class Console {
 							teamHighSort, sortHT, teamNum);
 					else
 						result=team.getOrderedTeamsBySeason("13-14", teamBaseSort, sortT,
-								teamNum)
+								teamNum);
 					for (TeamVO vo : result) {
 						// ===================================================
 						if (isTHigh) {
