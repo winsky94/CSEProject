@@ -585,7 +585,6 @@ public class Player implements PlayerBLService {
 					/ dsOffenRoundNum;
 //			stealRate = Double.parseDouble(dec.format(stealRate));
 			if(playerSeason.getName().equals("Kevin Durant")){
-				System.out.println("------------------------------!!!---------------------");
 				System.out.println("stealNum:"+allstealNum);
 				System.out.println("matchTime:"+allMatchTime);
 				System.out.println("prsentTime:"+allpresentTime);
@@ -597,9 +596,10 @@ public class Player implements PlayerBLService {
 					/ dsTwoAttemptNum;
 //			blockRate = Double.parseDouble(dec.format(blockRate));
 			turnOverRate = allturnOverNum
-					/ (allshootAttemptNum - allthreeAttemptNum + 0.4
+					/ (allshootAttemptNum - allthreeAttemptNum + 0.44
 							* allfreeThrowAttemptNum + allturnOverNum);
 //			turnOverRate = Double.parseDouble(dec.format(turnOverRate));
+			
 			usageRate = (allshootAttemptNum + 0.44 * allfreeThrowAttemptNum + allturnOverNum)
 					* allMatchTime
 					/ allpresentTime

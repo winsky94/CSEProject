@@ -533,14 +533,14 @@ public class NewPlayer  {
 			assistRate = allassistNum
 					/ (allpresentTime / allMatchTime * teamShootHitNum - allshootHitNum);
 //			assistRate = Double.parseDouble(dec.format(assistRate));
-			stealRate = (double) allassistNum * allMatchTime / allpresentTime
+			stealRate = (double) allstealNum * allMatchTime / allpresentTime
 					/ dsOffenRoundNum;
 //			stealRate = Double.parseDouble(dec.format(stealRate));
 			blockRate = allblockNum * allMatchTime / allpresentTime
 					/ dsTwoAttemptNum;
 //			blockRate = Double.parseDouble(dec.format(blockRate));
 			turnOverRate = allturnOverNum
-					/ (allshootAttemptNum - allthreeAttemptNum + 0.4
+					/ (allshootAttemptNum - allthreeAttemptNum + 0.44
 							* allfreeThrowAttemptNum + allturnOverNum);
 //			turnOverRate = Double.parseDouble(dec.format(turnOverRate));
 			usageRate = (allshootAttemptNum + 0.44 * allfreeThrowAttemptNum + allturnOverNum)
@@ -1490,56 +1490,8 @@ public class NewPlayer  {
 
 	public static void main(String[] args) {
 		long start = System.currentTimeMillis();
-		Player player = new Player();
-		ArrayList<PlayerVO> players = player.selectPlayersBySeason("13-14",
-				"G", "all", AgeEnum.ALL, "score", "desc", 50);
-		for (int i = 0; i < 5; i++)
-			System.out.println(players.get(i).getName()
-					+ players.get(i).getScore());
-		PlayerVO player1 = player.getPlayerSeasonInfo("13-14","Kevin Love");
-		System.out.println("----"+player1.getPosition());
-//		ArrayList<PlayerVO> players = player.getPlayerSeasonInfo("13-14");
-//		for (int i = 0; i < 5; i++)
-//			System.out.println(players.get(i).getName()
-//					+ players.get(i).getPresentTime());
-//		System.out.println(changeSecondToTime(153195));
-//		ArrayList<PlayerVO> players = player.selectPlayersBySeason("13-14",
-//				"C", "E", AgeEnum.ALL, "score", "desc", 50);
-//		for (int i = 0; i < 5; i++)
-//			System.out.println(players.get(i).getName()
-//					+ players.get(i).getScore());
-//		System.out.println("___________________");
-//		players = player.selectPlayersBySeason("13-14", "C", "W", AgeEnum.ALL,
-//				"score", "desc", 50);
-//		for (int i = 0; i < 5; i++)
-//			System.out.println(players.get(i).getName()
-//					+ players.get(i).getScore());
-//		System.out.println("___________________");
-//		players = player.selectPlayersBySeason("13-14", "C", "W", AgeEnum.ALL,
-//				"reboundNum", "desc", 50);
-//		for (int i = 0; i < 5; i++)
-//			System.out.println(players.get(i).getName()
-//					+ players.get(i).getReboundNum());
-		// ArrayList<PlayerVO> players = player.getBestImprovedPlayer(
-		// "recentFiveMatchesAssistUpRate", 5);
-		// for (int i = 0; i < 5; i++)
-		// System.out.println(players.get(i).getName()
-		// + players.get(i).getRecentFiveMatchesAssistUpRate());
-		// ArrayList<PlayerVO> players=player.getPlayersByTeam("ATL");
-		// System.out.println(players.get(0).getName());
-		// ArrayList<PlayerVO> players = player.selectPlayersByAverage("C", "E",
-		// AgeEnum.M22_LE25, "reboundNum", "desc", 5);
-		// players = player.selectPlayersByAverage("C", "E", AgeEnum.M22_LE25,
-		// "reboundNum", "desc", 5);
-		// ArrayList<PlayerVO> players =
-		// player.getOrderedPlayersByAverage("score", "desc", 5);
-		// System.out.println(players.get(0).getName()+" "+players.get(0).getScore());
-		// ArrayList<PlayerVO> players=player.getPlayersByTeam("ATL");
-		// System.out.println(players.get(0).getName());
-		 
-		// ArrayList<PlayerVO> players=player.getPlayerAverageInfo();
-		// System.out.println(players.get(405).getName()+" "+players.get(405).getPlayedGames()+" "+players.get(405).getEfficiency());
-		// PlayerVO vo=players.get(0);
+		NewPlayer player = new NewPlayer();
+		
 		PlayerVO vo = player.getPlayerAverageInfo("Kevin Durant");
 	//	PlayerVO vo = player.getPlayerAverageInfo("LeBron James");
 		 System.out.println("name: "+vo.getName());
@@ -1578,11 +1530,6 @@ public class NewPlayer  {
 		 System.out.println("score_rebound_assist: "+vo.getScore_rebound_assist());
 		 System.out.println("doubleDoubleNum: "+vo.getDoubleDoubleNum());
 
-		 
-		 ArrayList<PlayerVO> players1 = player.getBestImprovedPlayer("recentFiveMatchesReboundUpRate", 5);
-			for (int i = 0; i < 5; i++)
-				System.out.println(players1.get(i).getName()
-						+ players1.get(i).getRecentFiveMatchesReboundUpRate());
 		long end = System.currentTimeMillis();
 		System.out.println("运行时间：" + (end - start) + "毫秒");// 应该是end - start
 	}
