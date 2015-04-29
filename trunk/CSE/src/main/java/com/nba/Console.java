@@ -229,8 +229,13 @@ public class Console {
 					} else {
 						ArrayList<PlayerVO> result;
 						if(isPHigh==true){
-							result = player.selectPlayersByAverage(pPosition,
-									pUnion, pAge, playerSort.get(1),sortP.get(1),playerNum);
+							if(playerSort.size()>=2)
+							    result = player.selectPlayersByAverage(pPosition,
+								    	pUnion, pAge, playerSort.get(1),sortP.get(1),playerNum);
+							else{
+								 result = player.selectPlayersByAverage(pPosition,
+									    	pUnion, pAge, playerSort.get(0),sortP.get(0),playerNum);
+							}
 						}
 						else{
 						    result = player.selectPlayersByAverage(pPosition,
