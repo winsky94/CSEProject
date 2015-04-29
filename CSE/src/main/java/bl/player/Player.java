@@ -559,7 +559,14 @@ public class Player implements PlayerBLService {
 
 //			reboundRate = Double.parseDouble(dec.format(reboundRate));
 
-			
+			if(playerSeason.getName().equals("Kevin Durant")){
+				System.out.println("------------------------------!!!---------------------");
+				System.out.println("reboundNum:"+allreboundNum);
+				System.out.println("matchTime:"+allMatchTime);
+				System.out.println("prsentTime:"+allpresentTime);
+				System.out.println("teamReboundNum:"+teamReboundNum);
+				System.out.println("dsReboundNum:"+dsReboundNum);
+			}
 			offenReboundRate = alloffenReboundNum * allMatchTime
 					/ allpresentTime
 					/ (teamOffenReboundNum + dsOffenReboundNum);
@@ -682,8 +689,39 @@ public class Player implements PlayerBLService {
 			personScore = record.getScore();// 个人得分
 			PlayerVO thisPlayer = players.get(playerName);
 			
-			if (thisPlayer == null)
+			if (thisPlayer == null){
+				if (team.equals(homeTeam)) {
+					thisMatch.addHomeShootHitNum(shootHitNum);
+					thisMatch.addHomeShootAttemptNum(shootAttemptNum);
+					thisMatch.addHomeThreeHitNum(threeHitNum);
+					thisMatch.addHomeThreeAttemptNum(threeAttemptNum);
+					thisMatch.addHomeFreeThrowHitNum(freeThrowHitNum);
+					thisMatch.addHomeFreeThrowAttemptNum(freeThrowAttemptNum);
+					thisMatch.addHomeOffenReboundNum(offenReboundNum);
+					thisMatch.addHomeDefenReboundNum(defenReboundNum);
+					thisMatch.addHomeAssistNum(assistNum);
+					thisMatch.addHomeStealNum(stealNum);
+					thisMatch.addHomeBlockNum(blockNum);
+					thisMatch.addHomeTurnOverNum(turnOverNum);
+					thisMatch.addHomeFoulNum(foulNum);
+				} else {
+					thisMatch.addVisitingShootHitNum(shootHitNum);
+					thisMatch.addVisitingShootAttemptNum(shootAttemptNum);
+					thisMatch.addVisitingThreeHitNum(threeHitNum);
+					thisMatch.addVisitingThreeAttemptNum(threeAttemptNum);
+					thisMatch.addVisitingFreeThrowHitNum(freeThrowHitNum);
+					thisMatch.addVisitingFreeThrowAttemptNum(freeThrowAttemptNum);
+					thisMatch.addVisitingOffenReboundNum(offenReboundNum);
+					thisMatch.addVisitingDefenReboundNum(defenReboundNum);
+					thisMatch.addVisitingAssistNum(assistNum);
+					thisMatch.addVisitingStealNum(stealNum);
+					thisMatch.addVisitingBlockNum(blockNum);
+					thisMatch.addVisitingTurnOverNum(turnOverNum);
+					thisMatch.addVisitingFoulNum(foulNum);
+				}
 				continue;
+			}
+				
 			LittleRecordVO littleRecordVO = new LittleRecordVO(season, date,
 					personScore, reboundNum, assistNum);
 
