@@ -60,23 +60,26 @@ public class Console {
 	private AgeEnum pAge = AgeEnum.ALL;
 	private String pUnion = "All";
 	private String pPosition = "All";
-	private ArrayList<String> playerSort = new ArrayList<String>();//
+	//为清晰命令 ，低阶高阶排序  存储分开
+	private ArrayList<String> playerBaseSort = new ArrayList<String>();//
+	private ArrayList<String> playerHighSort=new ArrayList<String>();
 	private ArrayList<String> sortP = new ArrayList<String>();
+	private ArrayList<String> sortHP=new ArrayList<String>();
 	private ArrayList<String> playerFilter = new ArrayList<String>();// 优先级
 																		// field.value
-	private ArrayList<String> teamSort = new ArrayList<String>();// aas.dsec
-																	// ddd.asc
-																	// 邮件及
+	private ArrayList<String> teamBaseSort = new ArrayList<String>();// aas.dsec
 	private ArrayList<String> sortT = new ArrayList<String>();// 可以不声明
+	private ArrayList<String> teamHighSort=new ArrayList<String>();
+	private ArrayList<String> sortHT=new ArrayList<String>();
 
 	PlayerBLService player = new Player();
 	TeamBLService team = new Team();
-
+	private boolean defaultPSort=true,defaultTSort=true;
 	public void execute(PrintStream out, String[] args) {
-		playerSort.add("score");
-		playerSort.add("trueHitRate");
+		playerBaseSort.add("score");
+		playerHighSort.add("trueHitRate");
 		sortP.add("desc");
-		sortP.add("desc");
+		sortHP.add("desc");
 		ArrayList<String> command = new ArrayList<String>();
 		for (int i = 1; i < args.length; i++)
 			command.add(args[i]);
@@ -138,26 +141,31 @@ public class Console {
 				}
 			} else {
 				// contain all
-				playerSort.clear();
-				sortP.clear();
-				if ((i = command.indexOf("-sort")) >= 0) {
-					String[] t = command.get(i + 1).split(",");
-					for (String s : t) {
-						String[] p= s.split("\\.");
-						playerSort.add(p[0]);
-						sortP.add(p[1]);
-					}
-				} else {
-					playerSort.add("score");
-					playerSort.add("trueHitRate");
-					sortP.add("desc");
-					sortP.add("desc");
-				}
 				if (command.indexOf("-high") >= 0) {
 					isPHigh = true;
 					// 返回高阶数据的 sort方法 其他返回均未基本数据
 				} else
 					isPHigh = false;
+	
+				playerBaseSort.clear();
+				playerHighSort.clear();
+				sortP.clear();sortHP.clear();//冗余  为减少if else 消耗一点时间0.几毫秒左右
+				if ((i = command.indexOf("-sort")) >= 0) {
+					defaultPSort=false;
+					String[] t = command.get(i + 1).split(",");
+					for (String s : t) {
+						String[] p= s.split("\\.");
+						playerBaseSort.add(p[0]);
+						sortP.add(p[1]);
+					}
+				} else {
+					defaultTSort=true;
+					playerBaseSort.add("score");
+					playerHighSort.add("trueHitRate");
+					sortP.add("desc");
+					sortHP.add("desc");
+				}
+				
 
 				if (command.indexOf("-total") >= 0)
 					// 返回的是总和数据
@@ -165,6 +173,9 @@ public class Console {
 				else
 					isPTotal = false;
 				PlayerSortFieldChange();
+				if((!defaultPSort)&&isPHigh){
+					playerHighSort=playerBaseSort;sortHP=sortP;
+				}
 				if ((i = command.indexOf("-filter")) > 0) {
 					playerFilter.clear();
 					String[] t = command.get(i + 1).split(",");
@@ -174,13 +185,13 @@ public class Console {
 					// 调用sort+filter方法
 					ArrayList<PlayerVO> result = new ArrayList<PlayerVO>();
 					if (isPTotal) {
-						if(isPHigh==true){
+						if(isPHigh==true){						
 							result = player.selectPlayersBySeason("all", pPosition,
-									pUnion, pAge, playerSort.get(1),sortP.get(1),playerNum);
+									pUnion, pAge, playerHighSort,sortHP,playerNum);
 						}
 						else{
 						    result = player.selectPlayersBySeason("all", pPosition,
-								pUnion, pAge, playerSort.get(0),sortP.get(0),playerNum);
+								pUnion, pAge, playerBaseSort,sortP,playerNum);
 						}
 						for (PlayerVO vo : result) {
 							// =====================================================
@@ -190,11 +201,11 @@ public class Console {
 					} else {
 						if(isPHigh==true){
 							result = player.selectPlayersByAverage(pPosition,
-									pUnion, pAge, playerSort.get(1),sortP.get(1),playerNum);
+									pUnion, pAge, playerHighSort,sortHP,playerNum);
 						}
 						else{
 						    result = player.selectPlayersByAverage(pPosition,
-								pUnion, pAge, playerSort.get(0),sortP.get(0),playerNum);
+								pUnion, pAge, playerBaseSort,sortP,playerNum);
 						}
 						for (PlayerVO vo : result) {
 							// =====================================================
@@ -207,13 +218,16 @@ public class Console {
 					// 调用sort方法
 					if (isPTotal) {
 						ArrayList<PlayerVO> result;
-						if(isPHigh==true){
-							result = player.selectPlayersBySeason("all", pPosition,
-									pUnion, pAge, playerSort.get(1),sortP.get(1),playerNum);
+						if(isPHigh==true){j
+							//season命令中未给出
+							result=player.getOrderedPlayersBySeason("13-14", playerHighSort, sortHP, playerNum);
+//							result = player.selectPlayersBySeason("all", pPosition,
+//									pUnion, pAge, playerSort.get(1),sortP.get(1),playerNum);
 						}
 						else{
-						    result = player.selectPlayersBySeason("all", pPosition,
-								pUnion, pAge, playerSort.get(0),sortP.get(0),playerNum);
+							result=player.getOrderedPlayersBySeason("13-14", playerBaseSort, sortP, playerNum);
+//						    result = player.selectPlayersBySeason("all", pPosition,
+//								pUnion, pAge, playerSort.get(0),sortP.get(0),playerNum);
 						}
 						
 						for (PlayerVO vo : result) {
@@ -229,17 +243,12 @@ public class Console {
 					} else {
 						ArrayList<PlayerVO> result;
 						if(isPHigh==true){
-							if(playerSort.size()>=2)
-							    result = player.selectPlayersByAverage(pPosition,
-								    	pUnion, pAge, playerSort.get(1),sortP.get(1),playerNum);
-							else{
-								 result = player.selectPlayersByAverage(pPosition,
-									    	pUnion, pAge, playerSort.get(0),sortP.get(0),playerNum);
-							}
+							result=player.getOrderedPlayersByAverage(playerHighSort, sortHP, playerNum);
+							
 						}
 						else{
-						    result = player.selectPlayersByAverage(pPosition,
-								pUnion, pAge, playerSort.get(0),sortP.get(0),playerNum);
+							result=player.getOrderedPlayersByAverage(playerBaseSort, sortP, playerNum);
+
 						}
 
 						for (PlayerVO vo : result) {
@@ -286,29 +295,33 @@ public class Console {
 				}
 			} else {
 				// contain all
-				teamSort.clear();
+				teamBaseSort.clear();
 				sortT.clear();
+				teamHighSort.clear();sortHT.clear();
 				if ((i = command.indexOf("-sort")) >= 0) {
-
+					defaultTSort=false;
 					String[] t = command.get(i + 1).split(",");
 					for (String s : t) {
 						String[] p = s.split("\\.");
-						teamSort.add(p[0]);
+						teamBaseSort.add(p[0]);
 						sortT.add(p[1]);
 					}
 
 				} else {
-					teamSort.add("score");
-					teamSort.add("winRate");
+					defaultTSort=true;
+					teamBaseSort.add("score");
+					teamHighSort.add("winRate");
 					sortT.add("desc");
-					sortT.add("desc");
+					sortHT.add("desc");
 				}
 				if (command.indexOf("-high") >= 0) {
 					isTHigh = true;
 					// 返回高阶数据的 sort方法 其他返回均未基本数据
 				} else
 					isTHigh = false;
-
+				if((!defaultTSort)&&isTHigh){
+					sortHT=sortT;teamHighSort=teamBaseSort;
+				}
 				if (command.indexOf("-total") >= 0)
 					// 返回的是总和数据
 					isTTotal = true;
@@ -318,8 +331,12 @@ public class Console {
 				// 调用 sort方法
 				ArrayList<TeamVO> result = new ArrayList<TeamVO>();
 				if (isTTotal) {
-					result = team.getOrderedTeamsBySeason("all",
-							teamSort.get(0), sortT.get(0), teamNum);
+					if(isTHigh)
+						result = team.getOrderedTeamsBySeason("13-14",
+							teamHighSort, sortHT, teamNum);
+					else
+						result=team.getOrderedTeamsBySeason("13-14", teamBaseSort, sortT,
+								teamNum)
 					for (TeamVO vo : result) {
 						// ===================================================
 						if (isTHigh) {
@@ -331,8 +348,12 @@ public class Console {
 						}
 					}
 				} else {
-					result = team.getOrderedTeamsByAverage(teamSort.get(0),
-							sortT.get(0), teamNum);
+					if(isTHigh)
+						result = team.getOrderedTeamsByAverage(teamHighSort,
+							sortHT, teamNum);
+					else
+						result = team.getOrderedTeamsByAverage(teamBaseSort,
+								sortT, teamNum);
 					for (TeamVO vo : result) {
 						// ===================================================
 						if (isTHigh) {
