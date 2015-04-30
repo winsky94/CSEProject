@@ -110,8 +110,17 @@ public class Console {
 				playerhotField = command.get(i + 1);
 				PlayerHotFieldChange();
 				// 调用 player hot 方法
-				ArrayList<PlayerVO> result = player.selectPlayersByAverage(
-						"all", "all", pAge,playerhotField,"desc", playerNum);
+				ArrayList<PlayerVO> result = null;
+				if(playerhotField.equals("score")){
+					result=player.getBestImprovedPlayer("recentFiveMatchesScoreUpRate", playerNum);
+				}
+				else if(playerhotField.equals("rebound")){
+					result=player.getBestImprovedPlayer("recentFiveMatchesReboundUpRate", playerNum);
+				}
+				else{
+					result=player.getBestImprovedPlayer("recentFiveMatchesAssistUpRate", playerNum);
+				}
+				
 				for (PlayerVO vo : result) {
 					// =====================================================
 					PlayerHotInfo playerHotInfo = setplayerHotInfo(vo,
