@@ -548,7 +548,7 @@ public class NewPlayer  {
 					/ allpresentTime
 					/ (teamShootAttemptNum + 0.44 * teamFreeThrowAttemptNum + teamTurnOverNum);
 //			usageRate = Double.parseDouble(dec.format(usageRate));
-			score_rebound_assist = (allscore + allreboundNum + allassistNum) / 3;
+			score_rebound_assist = allscore + allreboundNum + allassistNum;
 //			score_rebound_assist = Double.parseDouble(dec
 //					.format(score_rebound_assist));
 			playerSeason.setShootHitRate(shootHitRate);
