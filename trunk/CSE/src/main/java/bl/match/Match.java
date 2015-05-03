@@ -22,6 +22,12 @@ public class Match implements MatchBLService {
 	private Map<String, Map<String, MatchVO>> matches = new HashMap<String, Map<String, MatchVO>>();
 	private FileList fl;
 
+	public static void main(String[] args) {
+		System.out.println("fdsaq");
+		new Match();
+		System.out.println("fdsa");
+	}
+	
 	public Match() {
 		matches = getMatches();
 	}
@@ -169,6 +175,7 @@ public class Match implements MatchBLService {
 			fl = new FileList(DataSourse.dataSourse + "/matches", this);
 			ArrayList<String> names = fl.getList();
 			for (String name : names) {
+//				DirtyDataManager.calculateMatchTime(name);
 				String key = getKeyName(name);
 				String season = getSeason(name);
 				Map<String, MatchVO> test = matches.get(season);
