@@ -493,10 +493,6 @@ public class NewTeam{
 			homeCourt = content[5];
 			setUpTime = Integer.parseInt(content[6]);
 
-			// if (abLocation.equals("NOP")) {
-			// abLocation = "NOH";
-			// }
-
 			team = new TeamVO(name, abLocation, location, conference,
 					partition, homeCourt, setUpTime);
 			teamsBaseInfo.put(abLocation, team);
@@ -716,22 +712,6 @@ public class NewTeam{
 					freeThrowHitRate = (double) freeThrowHitNum
 							/ freeThrowAttemptNum;// 罚球命中率
 					winRate = (double) winNum / matchesNum; // 胜率
-					// 进攻回合
-//					offenRound += shootAttemptNum
-//							+ 0.4
-//							* freeThrowAttemptNum
-//							- 1.07
-//							* (offenReboundNum
-//									/ (double) (offenReboundNum + dsDefenReboundNum) * (shootAttemptNum - shootHitNum))
-//							+ 1.07 * turnOverNum;
-//					dsOffenRound += dsShootAttempNum
-//							+ 0.4
-//							* dsFreeThrowAttemptNum
-//							- 1.07
-//							* (dsOffenReboundNum
-//									/ (double) (dsOffenReboundNum + defenReboundNum) * (dsShootAttempNum - dsShootHitNum))
-//							+ 1.07 * dsTurnOverNum;
-					
 					
 					// 进攻回合
 					offenRound += perShootAttemptNum
@@ -741,10 +721,6 @@ public class NewTeam{
 							* (perOffenReboundNum
 									/ (double) (perOffenReboundNum + dsDefenReboundNum) * (perMissShoot))
 							+ 1.07 * perTurnOverNum;
-//					System.out.println(perOffenReboundNum);
-//					System.out.println(dsDefenReboundNum);
-//					System.out.println(perMissShoot);
-//					System.out.println("==");
 					dsOffenRound += dsShootAttempNum
 							+ 0.4
 							* dsFreeThrowAttemptNum
@@ -752,18 +728,18 @@ public class NewTeam{
 							* (dsOffenReboundNum
 									/ (double) (dsOffenReboundNum + perDefenReboundNum) * (dsShootAttempNum - dsShootHitNum))
 							+ 1.07 * dsTurnOverNum;
-
-					offenEfficiency = (double) score / offenRound * 100; // 进攻效率
-					defenEfficiency = (double) dsScore / dsOffenRound * 100; // 防守效率
-					offenReboundEfficiency = (double) offenReboundNum
-							/ (offenReboundNum + dsDefenReboundNum); // 进攻篮板效率
-					defenReboundEfficiency = (double) defenReboundNum
-							/ (defenReboundNum + dsOffenReboundNum); // 防守篮板效率
-					stealEfficiency = (double) stealNum / dsOffenRound * 100; // 抢断效率
-					assistEfficiency = (double) assistNum / offenRound * 100; // 助攻率
 				}
 			}
 
+			offenEfficiency = (double) score / offenRound * 100; // 进攻效率
+			defenEfficiency = (double) dsScore / dsOffenRound * 100; // 防守效率
+			offenReboundEfficiency = (double) offenReboundNum
+					/ (offenReboundNum + dsDefenReboundNum); // 进攻篮板效率
+			defenReboundEfficiency = (double) defenReboundNum
+					/ (defenReboundNum + dsOffenReboundNum); // 防守篮板效率
+			stealEfficiency = (double) stealNum / dsOffenRound * 100; // 抢断效率
+			assistEfficiency = (double) assistNum / offenRound * 100; // 助攻率
+			
 			if (season.equals("all")) {
 				// 需要的是场均数据，要除以比赛场数
 				shootHitNum = shootHitNum / (double) matchesNum;
@@ -820,16 +796,6 @@ public class NewTeam{
 			// Double.parseDouble(dec.format(defenReboundEfficiency)),
 			// Double.parseDouble(dec.format(stealEfficiency)),
 			// Double.parseDouble(dec.format(assistEfficiency)));
-			if(team.equals("SAS")){
-				System.out.println("================================");
-				System.out.println("shootAttemptNum="+shootAttemptNum*(double) matchesNum);
-				System.out.println("freeThrowAttemptNum="+freeThrowAttemptNum*(double) matchesNum);
-				System.out.println("offenReboundNum="+offenReboundNum*(double) matchesNum);
-				System.out.println("dsDefenReboundNum="+dsDefenReboundNum);
-				System.out.println("shootHitNum="+shootHitNum*(double) matchesNum);
-				System.out.println("turnOverNum="+turnOverNum*(double) matchesNum);
-				System.out.println("================================");
-			}
 			TeamVO teamVO = new TeamVO(teamName, abLocation, location,
 					conference, partition, homeCourt, setUpTime, matchesNum,
 					shootHitNum, shootAttemptNum, threeHitNum, threeAttemptNum,
