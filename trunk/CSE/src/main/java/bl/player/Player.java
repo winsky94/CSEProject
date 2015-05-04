@@ -482,11 +482,6 @@ public class Player implements PlayerBLService {
 				MatchVO match = matches.get(id);
 				allMatchTime += match.getMatchTime();
 				if (isVisitingTeam.get(id) == true) {
-					if(playerSeason.getName().equals("Kobe Bryant")){
-						System.out.println(match.getDate());
-						System.out.println("match.getVisitingOffenReboundNum()"+match.getVisitingOffenReboundNum());
-						System.out.println("match.getVisitingDefenReboundNum()"+match.getVisitingDefenReboundNum());
-					}
 					teamOffenReboundNum += match.getVisitingOffenReboundNum();
 					dsOffenReboundNum += match.getHomeOffenReboundNum();
 					teamDefenReboundNum += match.getVisitingDefenReboundNum();
@@ -509,11 +504,6 @@ public class Player implements PlayerBLService {
 									.getHomeShootHitNum())) + 1.07
 							* match.getHomeTurnOverNum();
 				} else {
-					if(playerSeason.getName().equals("Kobe Bryant")){
-						System.out.println(match.getDate());
-						System.out.println("match.getHomeOffenReboundNum()"+match.getHomeOffenReboundNum());
-						System.out.println("match.getHomeDefenReboundNum()"+match.getHomeDefenReboundNum());
-					}
 					teamOffenReboundNum += match.getHomeOffenReboundNum();
 					dsOffenReboundNum += match.getVisitingOffenReboundNum();
 					teamDefenReboundNum += match.getHomeDefenReboundNum();
@@ -542,30 +532,11 @@ public class Player implements PlayerBLService {
 			teamReboundNum = teamOffenReboundNum + teamDefenReboundNum;
 			dsReboundNum = dsOffenReboundNum + dsDefenReboundNum;
 
-//			if(playerSeason.getName().equals("Kobe Bryant")){
-//				System.out.println(matchIDs.size());
-//				System.out.println("teamOffenReboundNum="+teamOffenReboundNum);
-//				System.out.println("teamDefenReboundNum="+teamDefenReboundNum);
-//				System.out.println("allreboundNum="+allreboundNum);
-//				System.out.println("allMatchTime="+allMatchTime);
-//				System.out.println("allpresentTime="+allpresentTime);
-//				System.out.println("teamReboundNum="+teamReboundNum);
-//				System.out.println("dsReboundNum="+dsReboundNum);
-//				System.out.println("=============================");
-//			}
-			
 			reboundRate = allreboundNum * allMatchTime / allpresentTime
 					/ (teamReboundNum + dsReboundNum);
 
 //			reboundRate = Double.parseDouble(dec.format(reboundRate));
 
-			if(playerSeason.getName().equals("Kevin Durant")){
-				System.out.println("reboundNum:"+allreboundNum);
-				System.out.println("matchTime:"+allMatchTime);
-				System.out.println("prsentTime:"+allpresentTime);
-				System.out.println("teamReboundNum:"+teamReboundNum);
-				System.out.println("dsReboundNum:"+dsReboundNum);
-			}
 			offenReboundRate = alloffenReboundNum * allMatchTime
 					/ allpresentTime
 					/ (teamOffenReboundNum + dsOffenReboundNum);
@@ -584,13 +555,6 @@ public class Player implements PlayerBLService {
 			stealRate = (double) allstealNum * allMatchTime / allpresentTime
 					/ dsOffenRoundNum;
 //			stealRate = Double.parseDouble(dec.format(stealRate));
-			if(playerSeason.getName().equals("Kevin Durant")){
-				System.out.println("stealNum:"+allstealNum);
-				System.out.println("matchTime:"+allMatchTime);
-				System.out.println("prsentTime:"+allpresentTime);
-				System.out.println("dsOffenRoundNum:"+dsOffenRoundNum);
-			}
-			
 			
 			blockRate = allblockNum * allMatchTime / allpresentTime
 					/ dsTwoAttemptNum;
@@ -604,17 +568,6 @@ public class Player implements PlayerBLService {
 					* allMatchTime
 					/ allpresentTime
 					/ (teamShootAttemptNum + 0.44 * teamFreeThrowAttemptNum + teamTurnOverNum);
-			
-				if(playerSeason.getName().equals("Kevin Durant")){
-					System.out.println("allshootAttemptNum="+allshootAttemptNum);
-					System.out.println("allfreeThrowAttemptNum="+allfreeThrowAttemptNum);
-					System.out.println("allturnOverNum="+allturnOverNum);
-					System.out.println("allMatchTime="+allMatchTime);
-					System.out.println("allpresentTime="+allpresentTime);
-					System.out.println("teamShootAttemptNum="+teamShootAttemptNum);
-					System.out.println("teamFreeThrowAttemptNum="+teamFreeThrowAttemptNum);
-					System.out.println("teamTurnOverNum="+teamTurnOverNum);
-				}
 			
 //			usageRate = Double.parseDouble(dec.format(usageRate));
 			score_rebound_assist = allscore + allreboundNum + allassistNum;
