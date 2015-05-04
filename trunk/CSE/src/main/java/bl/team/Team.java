@@ -509,10 +509,6 @@ public class Team implements TeamBLService {
 			homeCourt = content[5];
 			setUpTime = Integer.parseInt(content[6]);
 
-			// if (abLocation.equals("NOP")) {
-			// abLocation = "NOH";
-			// }
-
 			team = new TeamVO(name, abLocation, location, conference,
 					partition, homeCourt, setUpTime);
 			teamsBaseInfo.put(abLocation, team);
@@ -737,22 +733,6 @@ public class Team implements TeamBLService {
 							/ freeThrowAttemptNum;// 罚球命中率
 					winRate = (double) winNum / matchesNum; // 胜率
 					// 进攻回合
-//					offenRound += shootAttemptNum
-//							+ 0.4
-//							* freeThrowAttemptNum
-//							- 1.07
-//							* (offenReboundNum
-//									/ (double) (offenReboundNum + dsDefenReboundNum) * (shootAttemptNum - shootHitNum))
-//							+ 1.07 * turnOverNum;
-//					dsOffenRound += dsShootAttempNum
-//							+ 0.4
-//							* dsFreeThrowAttemptNum
-//							- 1.07
-//							* (dsOffenReboundNum
-//									/ (double) (dsOffenReboundNum + defenReboundNum) * (dsShootAttempNum - dsShootHitNum))
-//							+ 1.07 * dsTurnOverNum;
-					
-					// 进攻回合
 					double temp = perShootAttemptNum
 							+ 0.4
 							* perFreeThrowAttemptNum
@@ -762,11 +742,6 @@ public class Team implements TeamBLService {
 							+ 1.07 * perTurnOverNum;
 					offenRound+=temp;
 
-					
-//					System.out.println(perOffenReboundNum);
-//					System.out.println(dsDefenReboundNum);
-//					System.out.println(perMissShoot);
-//					System.out.println("==");
 					double dstemp=dsShootAttempNum
 							+ 0.4
 							* dsFreeThrowAttemptNum
@@ -775,42 +750,24 @@ public class Team implements TeamBLService {
 									/ (double) (dsOffenReboundNum + perDefenReboundNum) * (dsShootAttempNum - dsShootHitNum))
 							+ 1.07 * dsTurnOverNum;
 					dsOffenRound += dstemp;
-
-					offenEfficiency = (double) score / offenRound * 100; // 进攻效率
-					defenEfficiency = (double) dsScore / dsOffenRound * 100; // 防守效率
-					offenReboundEfficiency = (double) offenReboundNum
-							/ (offenReboundNum + dsDefenReboundNumAll); // 进攻篮板效率
-					defenReboundEfficiency = (double) defenReboundNum
-							/ (defenReboundNum + dsOffenReboundNumAll); // 防守篮板效率
-					stealEfficiency = (double) stealNum / dsOffenRound * 100; // 抢断效率
-					assistEfficiency = (double) assistNum / offenRound * 100; // 助攻率
-					
-					if(homeTeam.equals("SAS")||visitingTeam.equals("SAS")){
-						System.out.println(matchVO.getDate());
-						System.out.println("dsShootAttempNum="+dsShootAttempNum);
-						System.out.println("dsFreeThrowAttemptNum="+dsFreeThrowAttemptNum);
-						System.out.println("dsOffenReboundNum="+dsOffenReboundNum);
-						System.out.println("perDefenReboundNum="+perDefenReboundNum);
-						System.out.println("dsShootHitNum="+dsShootHitNum);
-						System.out.println("dsTurnOverNum="+dsTurnOverNum);
-						System.out.println("对手进攻回合："+dstemp);
-						System.out.println("================================");
-					}
 					
 					dsShootHitNum = 0;
 					dsShootAttempNum = 0;
 					dsFreeThrowAttemptNum = 0;
 					dsTurnOverNum = 0;
-//					dsScore = 0;
 					dsOffenReboundNum = 0;
 					dsDefenReboundNum = 0;
-//					dsOffenRound = 0;
-					
-					
-					
-					
 				}
 			}
+			
+			offenEfficiency = (double) score / offenRound * 100; // 进攻效率
+			defenEfficiency = (double) dsScore / dsOffenRound * 100; // 防守效率
+			offenReboundEfficiency = (double) offenReboundNum
+					/ (offenReboundNum + dsDefenReboundNumAll); // 进攻篮板效率
+			defenReboundEfficiency = (double) defenReboundNum
+					/ (defenReboundNum + dsOffenReboundNumAll); // 防守篮板效率
+			stealEfficiency = (double) stealNum / dsOffenRound * 100; // 抢断效率
+			assistEfficiency = (double) assistNum / offenRound * 100; // 助攻率
 			
 			if (season.equals("all")) {
 				// 需要的是场均数据，要除以比赛场数
@@ -839,10 +796,6 @@ public class Team implements TeamBLService {
 				abLocation = "NOH";
 				isSeason = true;
 			}
-//			if(team.equals("SAS")){
-//				System.out.println(matchVO.getDate());
-//				System.out.println("对手进攻回合ss："+dsOffenRound/82.0);
-//			}
 			// DecimalFormat dec = new DecimalFormat("0.000");
 			// TeamVO teamVO = new TeamVO(teamName, abLocation, location,
 			// conference, partition, homeCourt, setUpTime, matchesNum,
@@ -872,16 +825,6 @@ public class Team implements TeamBLService {
 			// Double.parseDouble(dec.format(defenReboundEfficiency)),
 			// Double.parseDouble(dec.format(stealEfficiency)),
 			// Double.parseDouble(dec.format(assistEfficiency)));
-//			if(team.equals("SAS")){
-//				System.out.println("================================");
-//				System.out.println("shootAttemptNum="+shootAttemptNum*(double) matchesNum);
-//				System.out.println("freeThrowAttemptNum="+freeThrowAttemptNum*(double) matchesNum);
-//				System.out.println("offenReboundNum="+offenReboundNum*(double) matchesNum);
-//				System.out.println("dsDefenReboundNum="+dsDefenReboundNum);
-//				System.out.println("shootHitNum="+shootHitNum*(double) matchesNum);
-//				System.out.println("turnOverNum="+turnOverNum*(double) matchesNum);
-//				System.out.println("================================");
-//			}
 			
 			TeamVO teamVO = new TeamVO(teamName, abLocation, location,
 					conference, partition, homeCourt, setUpTime, matchesNum,
