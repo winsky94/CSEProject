@@ -436,8 +436,15 @@ public class Console {
 		for (String s : playerFilter) {
 			if (s.contains("position"))
 				pPosition = s.split("\\.")[1];
-			else if (s.contains("league"))
+			else if (s.contains("league")){
 				pUnion = s.split("\\.")[1];
+				if(pUnion.equals("West")){
+					pUnion="W";
+				}
+				else{
+					pUnion="E";
+				}
+			}
 			else{
 				 age = s.split("\\.")[1];
 				 if(age.contains("<=22"))
