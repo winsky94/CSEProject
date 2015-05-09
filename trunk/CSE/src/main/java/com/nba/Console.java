@@ -194,7 +194,7 @@ public class Console {
 					String[] t = command.get(i + 1).split(",");
 					for (String s : t)
 						playerFilter.add(s);
-					PalyerFilterChange();
+					PlayerFilterChange();
 					// 调用sort+filter方法
 					ArrayList<PlayerVO> result = new ArrayList<PlayerVO>();
 					if (isPTotal) {
@@ -409,7 +409,7 @@ public class Console {
 	}
 
 	public void TeamHotFieldChange() {
-		for (int i = 1; i < 12; i++)
+		for (int i = 1; i < team_sort.length; i++)
 			if (teamhotField.equals(team_sort[i])) {
 				teamhotField = team_sort_real[i];
 				break;
@@ -443,7 +443,7 @@ public class Console {
 		}
 	}
 
-	public void PalyerFilterChange() {
+	public void PlayerFilterChange() {
 		String age;
 		for (String s : playerFilter) {
 			if (s.contains("position"))
@@ -542,13 +542,13 @@ public class Console {
 		playerHotInfo.setTeamName(vo.getOwingTeam());
 		double upgradeRate = 0;
 		double value = 0;
-		if (field.equals("score")) {
+		if (field.equals("recentFiveMatchesScoreUpRate")) {
 			upgradeRate = vo.getRecentFiveMatchesScoreUpRate();
 			value = vo.getScore();
-		} else if (field.equals("reboundNum")) {
+		} else if (field.equals("recentFiveMatchesReboundUpRate")) {
 			upgradeRate = vo.getRecentFiveMatchesReboundUpRate();
 			value = vo.getReboundNum();
-		} else if (field.equals("assistNum")) {
+		} else if (field.equals("recentFiveMatchesAssistUpRate")) {
 			upgradeRate = vo.getRecentFiveMatchesAssistUpRate();
 			value = vo.getAssistNum();
 		}
