@@ -110,6 +110,7 @@ public class Console {
 
 			if ((i = command.indexOf("-hot")) >= 0) {
 				playerhotField = command.get(i + 1);
+				String originalHotField=playerhotField;
 				PlayerHotFieldChange();
 				// 调用 player hot 方法
 				ArrayList<PlayerVO> result = null;
@@ -121,12 +122,12 @@ public class Console {
 				for (PlayerVO vo : result) {
 					// =====================================================
 					PlayerHotInfo playerHotInfo = setplayerHotInfo(vo,
-							playerhotField);
+							originalHotField);
 					out.println(playerHotInfo.toString());
 				}
 			} else if ((i = command.indexOf("-king")) >= 0) {
 				playerkingField = command.get(i + 1);
-				String tempKingField=playerkingField;
+				String originalKingField=playerkingField;
 				if (command.get(i + 2).equals("-season"))
 					isSeason = true;
 				else
@@ -148,7 +149,7 @@ public class Console {
 					for (PlayerVO vo : result) {
 						// =====================================================
 						PlayerKingInfo playerKingInfo = setPlayerKingInfo(vo,
-								tempKingField);
+								originalKingField);
 						out.println(playerKingInfo.toString());
 					}
 				}
