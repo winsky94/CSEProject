@@ -355,11 +355,12 @@ public class Console {
 				// 调用 sort方法
 				ArrayList<TeamVO> result = new ArrayList<TeamVO>();
 				if (isTTotal) {
-					if (isTHigh)
-						result = team.getOrderedTeamsBySeason("13-14",
+					if (isTHigh){
+						result = team.getOrderedTeamsBySeason("all",
 								teamHighSort, sortHT, teamNum);
+					}
 					else
-						result = team.getOrderedTeamsBySeason("13-14",
+						result = team.getOrderedTeamsBySeason("all",
 								teamBaseSort, sortT, teamNum);
 					for (TeamVO vo : result) {
 						// ===================================================
