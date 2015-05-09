@@ -259,7 +259,7 @@ public class Team implements TeamBLService {
 					name = teamsBaseInfo.get("NOH").getTeamName();
 				}
 			}
-
+			
 			name = name.toLowerCase();
 			flag = teamName.toLowerCase().contains(name)
 					|| team.toLowerCase().contains(name);
