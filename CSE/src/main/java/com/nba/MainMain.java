@@ -3,7 +3,83 @@ package com.nba;
 public class MainMain {
 	public static void main(String[] args) {
 		// TODO 自动生成的方法存根
-		String command="-team -all -n 10";
+		String command="-player -total -sort steal.desc";
+		System.out.println(command);
+		Main.main(command.split(" ")); 
+			
+		command="-player -total -sort foul.desc";
+		System.out.println(command);
+		Main.main(command.split(" ")); 
+		
+		command=" -player -total -sort fault.asc";
+		System.out.println(command);
+		Main.main(command.split(" "));
+		
+		command="-player -total -sort minute.asc";
+		System.out.println(command);
+		Main.main(command.split(" "));
+		
+		command="-player -sort efficient.desc";
+		System.out.println(command);
+		Main.main(command.split(" "));
+		
+		command="-player -sort shot.desc";
+		System.out.println(command);
+		Main.main(command.split(" "));
+		
+		command="-player -sort three.desc";
+		System.out.println(command);
+		Main.main(command.split(" "));
+		
+		command="-player -sort penalty.asc";
+		System.out.println(command);
+		Main.main(command.split(" "));
+		
+		command="-player -sort doubleTwo.asc";
+		System.out.println(command);
+		Main.main(command.split(" "));
+		
+		command="-player -high -sort realShot.desc";
+		System.out.println(command);
+		Main.main(command.split(" "));
+		
+		command="-player -high -sort GmSc.desc";
+		System.out.println(command);
+		Main.main(command.split(" "));
+		
+		command="-player -high -sort shotEfficient.desc";
+		System.out.println(command);
+		Main.main(command.split(" "));
+		
+		command="-player -high -sort reboundEfficient.desc";
+		System.out.println(command);
+		Main.main(command.split(" "));
+		
+		command="-player -high -sort offendReboundEfficient.desc";
+		System.out.println(command);
+		Main.main(command.split(" "));
+		
+		command="-player -high -sort deffendReboundEfficient.asc";
+		System.out.println(command);
+		Main.main(command.split(" "));
+		
+		command="-player -high -sort assistEfficient.asc";
+		System.out.println(command);
+		Main.main(command.split(" "));
+		
+		command="-player -high -sort stealEfficient.asc";
+		System.out.println(command);
+		Main.main(command.split(" "));
+		
+		command="-player -high -sort blockShotEfficient.asc";
+		System.out.println(command);
+		Main.main(command.split(" "));
+		
+		
+		
+		
+		
+		command="-team -all -n 10";
 		System.out.println(command);
 		Main.main(command.split(" ")); 
 		
@@ -12,7 +88,7 @@ public class MainMain {
 		Main.main(command.split(" ")); 
 		
 		command="-player -all -n 10";
-		System.out.println(command);
+		System.out.println(command);  
 		Main.main(command.split(" ")); 
 		
 		command="-player -high -n 10 -sort frequency.desc";
