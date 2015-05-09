@@ -529,7 +529,14 @@ public class Console {
 		playerHighInfo.setFrequency(vo.getUsageRate());
 		playerHighInfo.setGmSc(vo.getGmScEfficiencyValue());
 		// ===============球员联盟是个什么鬼@倩倩
-		playerHighInfo.setLeague(vo.getLeague());
+		String league=vo.getLeague();
+		String realLeague="";
+		if(league.equalsIgnoreCase("W")){
+			realLeague="WEST";
+		}else if(league.equalsIgnoreCase("W")){
+			realLeague="EAST";
+		}
+		playerHighInfo.setLeague(realLeague);
 		playerHighInfo.setName(vo.getName());
 		playerHighInfo.setOffendReboundEfficient(vo.getOffenReboundRate());
 		playerHighInfo.setPosition(vo.getPosition());
