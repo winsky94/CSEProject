@@ -307,7 +307,7 @@ public class Console {
 				teamhotField = command.get(i + 1);
 				TeamHotFieldChange();
 				// 调用 team hot 方法
-				ArrayList<TeamVO> result = team.getSeasonHotTeam("all",
+				ArrayList<TeamVO> result = team.getSeasonHotTeam("13-14",
 						teamhotField, teamNum);
 				for (TeamVO vo : result) {
 					// ===================================================
@@ -356,11 +356,11 @@ public class Console {
 				ArrayList<TeamVO> result = new ArrayList<TeamVO>();
 				if (isTTotal) {
 					if (isTHigh){
-						result = team.getOrderedTeamsBySeason("all",
+						result = team.getOrderedTeamsBySeason("13-14",
 								teamHighSort, sortHT, teamNum);
 					}
 					else
-						result = team.getOrderedTeamsBySeason("all",
+						result = team.getOrderedTeamsBySeason("13-14",
 								teamBaseSort, sortT, teamNum);
 					for (TeamVO vo : result) {
 						// ===================================================
