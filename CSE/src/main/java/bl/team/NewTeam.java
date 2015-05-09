@@ -60,11 +60,11 @@ public class NewTeam {
 		sortT.add("asc");
 		
 		result = team.getOrderedTeamsByAverage(
-				teamBaseSort, sortT, 5);
+				teamBaseSort, sortT, 30);
 		System.out.println(result.size());
 
 		for (TeamVO vo : result) {
-			System.out.println(vo.getAbLocation() + " " + vo.getAssistRate());
+			System.out.println(vo.getAbLocation() + " " + vo.getWinRate());
 
 //			 System.out.println(vo.getAbLocation());
 //			 System.out.println("matchesNum："+vo.getMatchesNum());
