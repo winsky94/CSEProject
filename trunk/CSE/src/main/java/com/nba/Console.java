@@ -141,7 +141,7 @@ public class Console {
 					for (PlayerVO vo : result) {
 						// =====================================================
 						PlayerKingInfo playerKingInfo = setPlayerKingInfo(vo,
-								playerkingField);
+								originalKingField);
 						out.println(playerKingInfo.toString());
 					}
 				} else {
@@ -549,13 +549,13 @@ public class Console {
 		playerHotInfo.setTeamName(vo.getOwingTeam());
 		double upgradeRate = 0;
 		double value = 0;
-		if (field.equals("recentFiveMatchesScoreUpRate")) {
+		if (field.equals("score")) {
 			upgradeRate = vo.getRecentFiveMatchesScoreUpRate();
 			value = vo.getScore();
-		} else if (field.equals("recentFiveMatchesReboundUpRate")) {
+		} else if (field.equals("rebound")) {
 			upgradeRate = vo.getRecentFiveMatchesReboundUpRate();
 			value = vo.getReboundNum();
-		} else if (field.equals("recentFiveMatchesAssistUpRate")) {
+		} else if (field.equals("assist")) {
 			upgradeRate = vo.getRecentFiveMatchesAssistUpRate();
 			value = vo.getAssistNum();
 		}
@@ -573,9 +573,9 @@ public class Console {
 		double value = 0;
 		if (field.equals("score")) {
 			value = vo.getScore();
-		} else if (field.equals("reboundNum")) {
+		} else if (field.equals("rebound")) {
 			value = vo.getReboundNum();
-		} else if (field.equals("assistNum")) {
+		} else if (field.equals("assist")) {
 			value = vo.getAssistNum();
 		}
 		playerKingInfo.setValue(value);
