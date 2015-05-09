@@ -58,22 +58,23 @@ public class Console {
 	private AgeEnum pAge = AgeEnum.ALL;
 	private String pUnion = "All";
 	private String pPosition = "All";
-	//为清晰命�? ，低阶高阶排�?  存储分开
+	// 为清晰命令 ，低阶高阶排序 存储分开
 	private ArrayList<String> playerBaseSort = new ArrayList<String>();//
-	private ArrayList<String> playerHighSort=new ArrayList<String>();
+	private ArrayList<String> playerHighSort = new ArrayList<String>();
 	private ArrayList<String> sortP = new ArrayList<String>();
-	private ArrayList<String> sortHP=new ArrayList<String>();
-	private ArrayList<String> playerFilter = new ArrayList<String>();// 优先�?
+	private ArrayList<String> sortHP = new ArrayList<String>();
+	private ArrayList<String> playerFilter = new ArrayList<String>();// 优先级
 																		// field.value
 	private ArrayList<String> teamBaseSort = new ArrayList<String>();// aas.dsec
-	private ArrayList<String> sortT = new ArrayList<String>();// 可以不声�?
-	private ArrayList<String> teamHighSort=new ArrayList<String>();
-	private ArrayList<String> sortHT=new ArrayList<String>();
+	private ArrayList<String> sortT = new ArrayList<String>();// 可以不声明
+	private ArrayList<String> teamHighSort = new ArrayList<String>();
+	private ArrayList<String> sortHT = new ArrayList<String>();
 
 	NewPlayer player = new NewPlayer();
 	NewTeam team = new NewTeam();
-	private boolean defaultPSort=true,defaultTSort=true;
-	public Console(){
+	private boolean defaultPSort = true, defaultTSort = true;
+
+	public Console() {
 		playerBaseSort.add("score");
 		playerHighSort.add("trueHitRate");
 		sortP.add("desc");
@@ -83,8 +84,9 @@ public class Console {
 		sortT.add("desc");
 		sortHT.add("desc");
 	}
+
 	public void execute(PrintStream out, String[] args) {
-		
+
 		ArrayList<String> command = new ArrayList<String>();
 		for (int i = 1; i < args.length; i++)
 			command.add(args[i]);
@@ -92,13 +94,13 @@ public class Console {
 			// 球队命令解析
 			if (command.size() == 0) {
 				ArrayList<PlayerVO> result = player.getOrderedPlayersByAverage(
-						playerBaseSort,sortP, 50);
+						playerBaseSort, sortP, 50);
 				for (PlayerVO vo : result) {
 					// =====================================================
 					PlayerNormalInfo playerNormalInfo = setPlayerNormalInfo(vo);
 					out.println(playerNormalInfo.toString());
 				}
-				return;// 返回得分�?50的球员的场均比赛数据 调用
+				return;// 返回得分前50的球员的场均比赛数据 调用
 			}
 			int i = 0;
 			if ((i = command.indexOf("-n")) >= 0)
@@ -111,16 +113,17 @@ public class Console {
 				PlayerHotFieldChange();
 				// 调用 player hot 方法
 				ArrayList<PlayerVO> result = null;
-				if(playerhotField.equals("score")){
-					result=player.getBestImprovedPlayer("recentFiveMatchesScoreUpRate", playerNum);
+				if (playerhotField.equals("score")) {
+					result = player.getBestImprovedPlayer(
+							"recentFiveMatchesScoreUpRate", playerNum);
+				} else if (playerhotField.equals("rebound")) {
+					result = player.getBestImprovedPlayer(
+							"recentFiveMatchesReboundUpRate", playerNum);
+				} else {
+					result = player.getBestImprovedPlayer(
+							"recentFiveMatchesAssistUpRate", playerNum);
 				}
-				else if(playerhotField.equals("rebound")){
-					result=player.getBestImprovedPlayer("recentFiveMatchesReboundUpRate", playerNum);
-				}
-				else{
-					result=player.getBestImprovedPlayer("recentFiveMatchesAssistUpRate", playerNum);
-				}
-				
+
 				for (PlayerVO vo : result) {
 					// =====================================================
 					PlayerHotInfo playerHotInfo = setplayerHotInfo(vo,
@@ -134,10 +137,11 @@ public class Console {
 				else
 					isSeason = false;
 				PlayerKingFieldChange();
-				// 调用返回数据王信�?
+				// 调用返回数据王信息
 				ArrayList<PlayerVO> result = new ArrayList<PlayerVO>();
 				if (isSeason) {
-					result = player.getSeasonHotPlayer("all", playerkingField,playerNum);
+					result = player.getSeasonHotPlayer("all", playerkingField,
+							playerNum);
 					for (PlayerVO vo : result) {
 						// =====================================================
 						PlayerKingInfo playerKingInfo = setPlayerKingInfo(vo,
@@ -145,7 +149,7 @@ public class Console {
 						out.println(playerKingInfo.toString());
 					}
 				} else {
-					result = player.getDayHotPlayer(playerkingField,playerNum);
+					result = player.getDayHotPlayer(playerkingField, playerNum);
 					for (PlayerVO vo : result) {
 						// =====================================================
 						PlayerKingInfo playerKingInfo = setPlayerKingInfo(vo,
@@ -157,29 +161,29 @@ public class Console {
 				// contain all
 				if (command.indexOf("-high") >= 0) {
 					isPHigh = true;
-					// 返回高阶数据�? sort方法 其他返回均未基本数据
+					// 返回高阶数据的 sort方法 其他返回均未基本数据
 				} else
 					isPHigh = false;
-	
+
 				playerBaseSort.clear();
 				playerHighSort.clear();
-				sortP.clear();sortHP.clear();//冗余  为减少if else 消�?�一点时�?0.几毫秒左�?
+				sortP.clear();
+				sortHP.clear();// 冗余 为减少if else 消耗一点时间0.几毫秒左右
 				if ((i = command.indexOf("-sort")) >= 0) {
-					defaultPSort=false;
+					defaultPSort = false;
 					String[] t = command.get(i + 1).split(",");
 					for (String s : t) {
-						String[] p= s.split("\\.");
+						String[] p = s.split("\\.");
 						playerBaseSort.add(p[0]);
 						sortP.add(p[1]);
 					}
 				} else {
-					defaultTSort=true;
+					defaultTSort = true;
 					playerBaseSort.add("score");
 					playerHighSort.add("trueHitRate");
 					sortP.add("desc");
 					sortHP.add("desc");
 				}
-				
 
 				if (command.indexOf("-total") >= 0)
 					// 返回的是总和数据
@@ -187,8 +191,9 @@ public class Console {
 				else
 					isPTotal = false;
 				PlayerSortFieldChange();
-				if((!defaultPSort)&&isPHigh){
-					playerHighSort=playerBaseSort;sortHP=sortP;
+				if ((!defaultPSort) && isPHigh) {
+					playerHighSort = playerBaseSort;
+					sortHP = sortP;
 				}
 				if ((i = command.indexOf("-filter")) > 0) {
 					playerFilter.clear();
@@ -199,13 +204,14 @@ public class Console {
 					// 调用sort+filter方法
 					ArrayList<PlayerVO> result = new ArrayList<PlayerVO>();
 					if (isPTotal) {
-						if(isPHigh==true){						
-							result = player.selectPlayersBySeason("all", pPosition,
-									pUnion, pAge, playerHighSort,sortHP,playerNum);
-						}
-						else{
-						    result = player.selectPlayersBySeason("all", pPosition,
-								pUnion, pAge, playerBaseSort,sortP,playerNum);
+						if (isPHigh == true) {
+							result = player.selectPlayersBySeason("all",
+									pPosition, pUnion, pAge, playerHighSort,
+									sortHP, playerNum);
+						} else {
+							result = player.selectPlayersBySeason("all",
+									pPosition, pUnion, pAge, playerBaseSort,
+									sortP, playerNum);
 						}
 						for (PlayerVO vo : result) {
 							// =====================================================
@@ -213,13 +219,14 @@ public class Console {
 							out.println(playerNormalInfo.toString());
 						}
 					} else {
-						if(isPHigh==true){
+						if (isPHigh == true) {
 							result = player.selectPlayersByAverage(pPosition,
-									pUnion, pAge, playerHighSort,sortHP,playerNum);
-						}
-						else{
-						    result = player.selectPlayersByAverage(pPosition,
-								pUnion, pAge, playerBaseSort,sortP,playerNum);
+									pUnion, pAge, playerHighSort, sortHP,
+									playerNum);
+						} else {
+							result = player.selectPlayersByAverage(pPosition,
+									pUnion, pAge, playerBaseSort, sortP,
+									playerNum);
 						}
 						for (PlayerVO vo : result) {
 							// =====================================================
@@ -232,18 +239,23 @@ public class Console {
 					// 调用sort方法
 					if (isPTotal) {
 						ArrayList<PlayerVO> result;
-						if(isPHigh==true){
-							//season命令中未给出
-							result=player.getOrderedPlayersBySeason("13-14", playerHighSort, sortHP, playerNum);
-//							result = player.selectPlayersBySeason("all", pPosition,
-//									pUnion, pAge, playerSort.get(1),sortP.get(1),playerNum);
+						if (isPHigh == true) {
+							// season命令中未给出
+							result = player.getOrderedPlayersBySeason("13-14",
+									playerHighSort, sortHP, playerNum);
+							// result = player.selectPlayersBySeason("all",
+							// pPosition,
+							// pUnion, pAge,
+							// playerSort.get(1),sortP.get(1),playerNum);
+						} else {
+							result = player.getOrderedPlayersBySeason("13-14",
+									playerBaseSort, sortP, playerNum);
+							// result = player.selectPlayersBySeason("all",
+							// pPosition,
+							// pUnion, pAge,
+							// playerSort.get(0),sortP.get(0),playerNum);
 						}
-						else{
-							result=player.getOrderedPlayersBySeason("13-14", playerBaseSort, sortP, playerNum);
-//						    result = player.selectPlayersBySeason("all", pPosition,
-//								pUnion, pAge, playerSort.get(0),sortP.get(0),playerNum);
-						}
-						
+
 						for (PlayerVO vo : result) {
 							// =====================================================
 							if (isPHigh) {
@@ -256,12 +268,13 @@ public class Console {
 						}
 					} else {
 						ArrayList<PlayerVO> result;
-						if(isPHigh==true){
-							result=player.getOrderedPlayersByAverage(playerHighSort, sortHP, playerNum);
-							
-						}
-						else{
-							result=player.getOrderedPlayersByAverage(playerBaseSort, sortP, playerNum);
+						if (isPHigh == true) {
+							result = player.getOrderedPlayersByAverage(
+									playerHighSort, sortHP, playerNum);
+
+						} else {
+							result = player.getOrderedPlayersByAverage(
+									playerBaseSort, sortP, playerNum);
 
 						}
 
@@ -288,7 +301,7 @@ public class Console {
 					TeamNormalInfo teamNormalInfo = setTeamNormalInfo(vo);
 					out.println(teamNormalInfo.toString());
 				}
-				return;// 返回得分�?30的球队的场均比赛数据
+				return;// 返回得分前30的球队的场均比赛数据
 			}
 			int i = 0;
 			if ((i = command.indexOf("-n")) >= 0)
@@ -311,9 +324,10 @@ public class Console {
 				// contain all
 				teamBaseSort.clear();
 				sortT.clear();
-				teamHighSort.clear();sortHT.clear();
+				teamHighSort.clear();
+				sortHT.clear();
 				if ((i = command.indexOf("-sort")) >= 0) {
-					defaultTSort=false;
+					defaultTSort = false;
 					String[] t = command.get(i + 1).split(",");
 					for (String s : t) {
 						String[] p = s.split("\\.");
@@ -322,7 +336,7 @@ public class Console {
 					}
 
 				} else {
-					defaultTSort=true;
+					defaultTSort = true;
 					teamBaseSort.add("score");
 					teamHighSort.add("winRate");
 					sortT.add("desc");
@@ -330,28 +344,29 @@ public class Console {
 				}
 				if (command.indexOf("-high") >= 0) {
 					isTHigh = true;
-					// 返回高阶数据�? sort方法 其他返回均未基本数据
+					// 返回高阶数据的 sort方法 其他返回均未基本数据
 				} else
 					isTHigh = false;
-				
+
 				if (command.indexOf("-total") >= 0)
 					// 返回的是总和数据
 					isTTotal = true;
 				else
 					isTTotal = false;
 				TeamSortFieldChange();
-				if((!defaultTSort)&&isTHigh){
-					sortHT=sortT;teamHighSort=teamBaseSort;
+				if ((!defaultTSort) && isTHigh) {
+					sortHT = sortT;
+					teamHighSort = teamBaseSort;
 				}
 				// 调用 sort方法
 				ArrayList<TeamVO> result = new ArrayList<TeamVO>();
 				if (isTTotal) {
-					if(isTHigh)
+					if (isTHigh)
 						result = team.getOrderedTeamsBySeason("13-14",
-							teamHighSort, sortHT, teamNum);
+								teamHighSort, sortHT, teamNum);
 					else
-						result=team.getOrderedTeamsBySeason("13-14", teamBaseSort, sortT,
-								teamNum);
+						result = team.getOrderedTeamsBySeason("13-14",
+								teamBaseSort, sortT, teamNum);
 					for (TeamVO vo : result) {
 						// ===================================================
 						if (isTHigh) {
@@ -363,9 +378,9 @@ public class Console {
 						}
 					}
 				} else {
-					if(isTHigh)
+					if (isTHigh)
 						result = team.getOrderedTeamsByAverage(teamHighSort,
-							sortHT, teamNum);
+								sortHT, teamNum);
 					else
 						result = team.getOrderedTeamsByAverage(teamBaseSort,
 								sortT, teamNum);
@@ -382,7 +397,7 @@ public class Console {
 				}
 			}
 		} else {
-			// 设置数据�?
+			// 设置数据源
 			setData(args[1]);
 		}
 
@@ -433,28 +448,26 @@ public class Console {
 		for (String s : playerFilter) {
 			if (s.contains("position"))
 				pPosition = s.split("\\.")[1];
-			else if (s.contains("league")){
+			else if (s.contains("league")) {
 				pUnion = s.split("\\.")[1];
-				if(pUnion.equals("West")){
-					pUnion="W";
+				if (pUnion.equals("West")) {
+					pUnion = "W";
+				} else {
+					pUnion = "E";
 				}
-				else{
-					pUnion="E";
-				}
-			}
-			else{
-				 age = s.split("\\.")[1];
-				 if(age.contains("<=22"))
-					 pAge=AgeEnum.LE22;
-				 else if(age.contains("<=25"))
-					 pAge=AgeEnum.M22_LE25;
-				 else if(age.contains("<=30"))
-					 pAge=AgeEnum.M25_LE30;
-				 else if(age.contains(">30"))
-					 pAge=AgeEnum.M30;
-				 else
-					 pAge=AgeEnum.ALL;
-				 
+			} else {
+				age = s.split("\\.")[1];
+				if (age.contains("<=22"))
+					pAge = AgeEnum.LE22;
+				else if (age.contains("<=25"))
+					pAge = AgeEnum.M22_LE25;
+				else if (age.contains("<=30"))
+					pAge = AgeEnum.M25_LE30;
+				else if (age.contains(">30"))
+					pAge = AgeEnum.M30;
+				else
+					pAge = AgeEnum.ALL;
+
 			}
 		}
 
@@ -462,11 +475,11 @@ public class Console {
 
 	public void clearFilter() {
 		pPosition = pUnion = "All";
-		pAge=AgeEnum.ALL;
+		pAge = AgeEnum.ALL;
 	}
 
 	/**
-	 * 设置数据源地�?
+	 * 设置数据源地址
 	 * 
 	 * @param address
 	 */
@@ -483,7 +496,7 @@ public class Console {
 		playerNormalInfo.setEfficiency(vo.getEfficiency());
 		playerNormalInfo.setFault(vo.getTurnOverNum());
 		playerNormalInfo.setFoul(vo.getFoulNum());
-		playerNormalInfo.setMinute(vo.getPresentTime()/(double)60);
+		playerNormalInfo.setMinute(vo.getPresentTime() / (double) 60);
 		playerNormalInfo.setName(vo.getName());
 		playerNormalInfo.setNumOfGame(vo.getPlayedGames());
 		playerNormalInfo.setOffend(vo.getOffenReboundNum());
@@ -499,7 +512,7 @@ public class Console {
 		return playerNormalInfo;
 	}
 
-	// @倩�??
+	// @倩倩
 	private PlayerHighInfo setPlayerHighInfo(PlayerVO vo) {
 		PlayerHighInfo playerHighInfo = new PlayerHighInfo();
 		playerHighInfo.setAssistEfficient(vo.getAssistRate());
@@ -508,7 +521,7 @@ public class Console {
 		playerHighInfo.setFaultEfficient(vo.getTurnOverRate());
 		playerHighInfo.setFrequency(vo.getUsageRate());
 		playerHighInfo.setGmSc(vo.getGmScEfficiencyValue());
-		// ===============球员联盟是个�?么鬼@倩�??
+		// ===============球员联盟是个什么鬼@倩倩
 		playerHighInfo.setLeague(vo.getLeague());
 		playerHighInfo.setName(vo.getName());
 		playerHighInfo.setOffendReboundEfficient(vo.getOffenReboundRate());
@@ -576,7 +589,7 @@ public class Console {
 		teamNormalInfo.setRebound(vo.getReboundNum());
 		teamNormalInfo.setShot(vo.getShootHitRate());
 		teamNormalInfo.setSteal(vo.getStealNum());
-		teamNormalInfo.setTeamName(vo.getTeamName());
+		teamNormalInfo.setTeamName(vo.getAbLocation());
 		teamNormalInfo.setThree(vo.getThreeHitRate());
 		return teamNormalInfo;
 	}
@@ -631,7 +644,5 @@ public class Console {
 
 		return teamHotInfo;
 	}
-	
-	
-	
+
 }
