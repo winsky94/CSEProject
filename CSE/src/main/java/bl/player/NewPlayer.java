@@ -1492,8 +1492,9 @@ public class NewPlayer  {
 		long start = System.currentTimeMillis();
 		NewPlayer player = new NewPlayer();
 		
-		PlayerVO vo = player.getPlayerAverageInfo("Kevin Durant");
+	//	PlayerVO vo = player.getPlayerAverageInfo("Kevin Durant");
 	//	PlayerVO vo = player.getPlayerAverageInfo("LeBron James");
+		PlayerVO vo = player.getPlayerSeasonInfo("13-14", "Kevin Durant");
 		 System.out.println("name: "+vo.getName());
 		 System.out.println("owingTeam: "+vo.getOwingTeam());
 		 System.out.println("league: "+vo.getLeague());
@@ -1512,7 +1513,7 @@ public class NewPlayer  {
 		 System.out.println("foulNum: "+vo.getFoulNum());
 		 System.out.println("turnOverNum: "+vo.getTurnOverNum());
 		 System.out.println("score: "+vo.getScore());
-		 System.out.println("efficiency"+vo.getEfficiency());
+		 System.out.println("efficiency:"+vo.getEfficiency());
 		 System.out.println("recentFiveMatchesScoreUpRate: "+vo.getRecentFiveMatchesScoreUpRate());
 		 System.out.println("recentFiveMatchesReboundUpRate: "+vo.getRecentFiveMatchesReboundUpRate());
 		 System.out.println("recentFiveMatchesAssistRate: "+vo.getRecentFiveMatchesAssistUpRate());
