@@ -23,7 +23,7 @@ public class Console {
 			"steal", "foul", "fault", "minute", "efficient", "shot", "three",
 			"penalty", "doubleTwo", "realShot", "GmSc", "shotEfficient",
 			"reboundEfficient", "offendReboundEfficient",
-			"defendReboundEfficient", "assistEfficent", "stealEfficient",
+			"defendReboundEfficient", "assistEfficient", "stealEfficient",
 			"blockShotEfficient", "faultEfficient", "frequency" };
 	private String[] player_real_sort = { "score", "reboundNum", "assistNum",
 			"blockNum", "stealNum", "foulNum", "turnOverNum", "presentTime",
@@ -35,13 +35,13 @@ public class Console {
 
 	private String[] team_sort = { "point", "rebound", "assist", "blockShot",
 			"steal", "foul", "fault", "shot", "three", "penalty",
-			"defendRebound", "offendRebound", "offendRound", "offendEfficient",
+			"defendRebound", "offendRebound","rebound", "offendRound", "offendEfficient",
 			"defendEfficient", "offendReboundEfficient",
-			"defendReboundEfficient", "stealEfficeint", "assistEfficient" };
+			"defendReboundEfficient", "stealEfficient", "assistEfficient" };
 	private String[] team_sort_real = { "score", "reboundNum", "assistNum",
 			"blockNum", "stealNum", "foulNum", "turnOverNum", "shootHitRate",
 			"threeHitRate", "freeThrowHitRate", "defenReboundNum",
-			"offenReboundNum", "offenRound", "offenEfficiency",
+			"offenReboundNum","reboundNum", "offenRound", "offenEfficiency",
 			"defenEfficiency", "offenReboundEfficiency",
 			"defenReboundEfficiency", "stealEfficiency", "assistRate" };
 
@@ -91,7 +91,7 @@ public class Console {
 		for (int i = 1; i < args.length; i++)
 			command.add(args[i]);
 		if (args[0].equals("-player")) {
-			// 球队命令解析
+			// 球员命令解析
 			if (command.size() == 0) {
 				ArrayList<PlayerVO> result = player.getOrderedPlayersByAverage(
 						playerBaseSort, sortP, 50);
@@ -126,6 +126,7 @@ public class Console {
 				}
 			} else if ((i = command.indexOf("-king")) >= 0) {
 				playerkingField = command.get(i + 1);
+				String tempKingField=playerkingField;
 				if (command.get(i + 2).equals("-season"))
 					isSeason = true;
 				else
@@ -147,7 +148,7 @@ public class Console {
 					for (PlayerVO vo : result) {
 						// =====================================================
 						PlayerKingInfo playerKingInfo = setPlayerKingInfo(vo,
-								playerkingField);
+								tempKingField);
 						out.println(playerKingInfo.toString());
 					}
 				}
@@ -286,10 +287,11 @@ public class Console {
 				}
 			}
 		} else if (args[0].equals("-team")) {
-			// 球员命令解析
+			// 球队命令解析
 			if (command.size() == 0) {
 				ArrayList<TeamVO> result = team.getOrderedTeamsByAverage(
 						teamBaseSort, sortT, 30);
+				
 				for (TeamVO vo : result) {
 					// ===================================================
 					TeamNormalInfo teamNormalInfo = setTeamNormalInfo(vo);
@@ -305,13 +307,14 @@ public class Console {
 
 			if ((i = command.indexOf("-hot")) >= 0) {
 				teamhotField = command.get(i + 1);
+				String originField=teamhotField;
 				TeamHotFieldChange();
 				// 调用 team hot 方法
 				ArrayList<TeamVO> result = team.getSeasonHotTeam("13-14",
 						teamhotField, teamNum);
 				for (TeamVO vo : result) {
 					// ===================================================
-					TeamHotInfo teamHotInfo = setTeamHotInfo(vo, teamhotField);
+					TeamHotInfo teamHotInfo = setTeamHotInfo(vo, originField);
 					out.println(teamHotInfo.toString());
 				}
 			} else {
@@ -376,9 +379,12 @@ public class Console {
 					if (isTHigh)
 						result = team.getOrderedTeamsByAverage(teamHighSort,
 								sortHT, teamNum);
-					else
+					else{
+//						System.out.println("Console.execute():"+teamBaseSort.get(0));
+//						System.out.println("Console.execute():"+sortT.get(0));
 						result = team.getOrderedTeamsByAverage(teamBaseSort,
 								sortT, teamNum);
+					}
 					for (TeamVO vo : result) {
 						// ===================================================
 						if (isTHigh) {
@@ -617,28 +623,30 @@ public class Console {
 
 		if (hotField.equals("score")) {
 			value = vo.getScore();
-		} else if (hotField.equals("reboundNum")) {
+		} else if (hotField.equals("rebound")) {
 			value = vo.getReboundNum();
-		} else if (hotField.equals("assistNum")) {
+		} else if (hotField.equals("assist")) {
 			value = vo.getAssistNum();
-		} else if (hotField.equals("blockNum")) {
+		} else if (hotField.equals("blockShot")) {
 			value = vo.getBlockNum();
-		} else if (hotField.equals("stealNum")) {
+		} else if (hotField.equals("steal")) {
 			value = vo.getStealNum();
-		} else if (hotField.equals("foulNum")) {
+		} else if (hotField.equals("foul")) {
 			value = vo.getFoulNum();
-		} else if (hotField.equals("turnOverNum")) {
+		} else if (hotField.equals("fault")) {
 			value = vo.getTurnOverNum();
-		} else if (hotField.equals("shootHitRate")) {
+		} else if (hotField.equals("shot")) {
 			value = vo.getShootHitRate();
-		} else if (hotField.equals("threeHitRate")) {
+		} else if (hotField.equals("three")) {
 			value = vo.getThreeHitRate();
-		} else if (hotField.equals("freeThrowHitRate")) {
+		} else if (hotField.equals("penalty")) {
 			value = vo.getFreeThrowHitRate();
-		} else if (hotField.equals("defenReboundNum")) {
+		} else if (hotField.equals("defenRebound")) {
 			value = vo.getDefenReboundNum();
-		} else if (hotField.equals("offendReboundNum")) {
+		} else if (hotField.equals("offendRebound")) {
 			value = vo.getOffenReboundNum();
+		}else if(hotField.equals("rebound")){
+			value=vo.getReboundNum();
 		}
 		teamHotInfo.setValue(value);
 
