@@ -55,7 +55,7 @@ public class NewTeam {
 		// result=team.getMatches("ATL");
 //		result = team.getSeasonHotTeam(season, "stealNum", 5);
 		ArrayList<String> teamBaseSort=new ArrayList<String>();
-		teamBaseSort.add("assistRate");
+		teamBaseSort.add("winRate");
 		ArrayList<String> sortT=new ArrayList<String>();
 		sortT.add("asc");
 		
@@ -254,19 +254,23 @@ public class NewTeam {
 			String team = vo.getAbLocation();
 
 			boolean flag = false;
+			String realTeamName=null;
 			
-			
+			if (name.equals("NOH")) {
+				vo.setAbLocation("NOH");
+			}
+
 			if (name.equals("NOP") || name.equals("NOH")) {
-				name = teamsBaseInfo.get("NOP").getTeamName(); 
+				realTeamName = teamsBaseInfo.get("NOP").getTeamName(); 
 				
-				if (name == null) {
-					name = teamsBaseInfo.get("NOH").getTeamName();
+				if (realTeamName == null) {
+					realTeamName = teamsBaseInfo.get("NOH").getTeamName();
 					vo.setAbLocation("NOH");
 				}
 			}
-			name = name.toLowerCase();
-			flag = teamName.toLowerCase().contains(name)
-					|| team.toLowerCase().contains(name);
+			realTeamName = realTeamName.toLowerCase();
+			flag = teamName.toLowerCase().contains(realTeamName)
+					|| team.toLowerCase().contains(realTeamName);
 			if (!flag) {
 				// 当前球队不是我要的球队，就跳过他不进行计算
 				continue;
