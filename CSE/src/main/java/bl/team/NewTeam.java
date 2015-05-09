@@ -582,7 +582,7 @@ public class NewTeam{
 			isBad = true;
 		}
 
-		if (season.equals("all")) {
+//		if (season.equals("all")) {
 			// 得到全部比赛数据的，还是觉得有点傻逼
 			// 思路是将按赛季分的二维map读出来加到一个新的不按赛季分的map中
 			int flag = 0;
@@ -612,12 +612,11 @@ public class NewTeam{
 				}
 				flag++;
 			}
-		} else {
-			// ====================================
-			matches = match.getAllMatches();
-
-			allMatches = matches.get(season);
-		}
+//		} else {
+//			// ====================================
+//			matches = match.getAllMatches();
+//			allMatches = matches.get(season);
+//		}
 		if (allMatches != null) {
 			Iterator<Entry<String, MatchVO>> allMatchIter = allMatches
 					.entrySet().iterator();
