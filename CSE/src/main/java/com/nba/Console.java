@@ -73,7 +73,8 @@ public class Console {
 	NewPlayer player = new NewPlayer();
 	NewTeam team = new NewTeam();
 	private boolean defaultPSort = true, defaultTSort = true;
-
+	private int id=0;//排序序号，每次试用前请置为0一下
+	
 	public Console() {
 		playerBaseSort.add("score");
 		playerHighSort.add("trueHitRate");
@@ -95,8 +96,10 @@ public class Console {
 			if (command.size() == 0) {
 				ArrayList<PlayerVO> result = player.getOrderedPlayersByAverage(
 						playerBaseSort, sortP, 50);
+				id=0;
 				for (PlayerVO vo : result) {
 					// =====================================================
+					out.println(++id);
 					PlayerNormalInfo playerNormalInfo = setPlayerNormalInfo(vo);
 					out.println(playerNormalInfo.toString());
 				}
@@ -118,9 +121,10 @@ public class Console {
 				result = player.getBestImprovedPlayer(
 							playerhotField, playerNum);
 				
-
+				id=0;
 				for (PlayerVO vo : result) {
 					// =====================================================
+					out.println(++id);
 					PlayerHotInfo playerHotInfo = setplayerHotInfo(vo,
 							originalHotField);
 					out.println(playerHotInfo.toString());
@@ -138,16 +142,20 @@ public class Console {
 				if (isSeason) {
 					result = player.getSeasonHotPlayer("all", playerkingField,
 							playerNum);
+					id=0;
 					for (PlayerVO vo : result) {
 						// =====================================================
+						out.println(++id);
 						PlayerKingInfo playerKingInfo = setPlayerKingInfo(vo,
 								originalKingField);
 						out.println(playerKingInfo.toString());
 					}
 				} else {
 					result = player.getDayHotPlayer(playerkingField, playerNum);
+					id=0;
 					for (PlayerVO vo : result) {
 						// =====================================================
+						out.println(++id);
 						PlayerKingInfo playerKingInfo = setPlayerKingInfo(vo,
 								originalKingField);
 						out.println(playerKingInfo.toString());
@@ -209,8 +217,10 @@ public class Console {
 									pPosition, pUnion, pAge, playerBaseSort,
 									sortP, playerNum);
 						}
+						id=0;
 						for (PlayerVO vo : result) {
 							// =====================================================
+							out.println(++id);
 							PlayerNormalInfo playerNormalInfo = setPlayerNormalInfo(vo);
 							out.println(playerNormalInfo.toString());
 						}
@@ -224,8 +234,10 @@ public class Console {
 									pUnion, pAge, playerBaseSort, sortP,
 									playerNum);
 						}
+						id=0;
 						for (PlayerVO vo : result) {
 							// =====================================================
+							out.println(++id);
 							PlayerNormalInfo playerNormalInfo = setPlayerNormalInfo(vo);
 							out.println(playerNormalInfo.toString());
 						}
@@ -239,25 +251,20 @@ public class Console {
 							// season命令中未给出
 							result = player.getOrderedPlayersBySeason("13-14",
 									playerHighSort, sortHP, playerNum);
-							// result = player.selectPlayersBySeason("all",
-							// pPosition,
-							// pUnion, pAge,
-							// playerSort.get(1),sortP.get(1),playerNum);
 						} else {
 							result = player.getOrderedPlayersBySeason("13-14",
 									playerBaseSort, sortP, playerNum);
-							// result = player.selectPlayersBySeason("all",
-							// pPosition,
-							// pUnion, pAge,
-							// playerSort.get(0),sortP.get(0),playerNum);
 						}
 
+						id=0;
 						for (PlayerVO vo : result) {
 							// =====================================================
 							if (isPHigh) {
+								out.println(++id);
 								PlayerHighInfo playerHighInfo = setPlayerHighInfo(vo);
 								out.println(playerHighInfo.toString());
 							} else {
+								out.println(++id);
 								PlayerNormalInfo playerNormalInfo = setPlayerNormalInfo(vo);
 								out.println(playerNormalInfo.toString());
 							}
@@ -273,13 +280,16 @@ public class Console {
 									playerBaseSort, sortP, playerNum);
 
 						}
-
+						
+						id=0;
 						for (PlayerVO vo : result) {
 							// =====================================================
 							if (isPHigh) {
+								out.println(++id);
 								PlayerHighInfo playerHighInfo = setPlayerHighInfo(vo);
 								out.println(playerHighInfo.toString());
 							} else {
+								out.println(++id);
 								PlayerNormalInfo playerNormalInfo = setPlayerNormalInfo(vo);
 								out.println(playerNormalInfo.toString());
 							}
@@ -293,8 +303,10 @@ public class Console {
 				ArrayList<TeamVO> result = team.getOrderedTeamsByAverage(
 						teamBaseSort, sortT, 30);
 				
+				id=0;
 				for (TeamVO vo : result) {
 					// ===================================================
+					out.println(++id);
 					TeamNormalInfo teamNormalInfo = setTeamNormalInfo(vo);
 					out.println(teamNormalInfo.toString());
 				}
@@ -313,8 +325,10 @@ public class Console {
 				// 调用 team hot 方法
 				ArrayList<TeamVO> result = team.getSeasonHotTeam("13-14",
 						teamhotField, teamNum);
+				id=0;
 				for (TeamVO vo : result) {
 					// ===================================================
+					out.println(++id);
 					TeamHotInfo teamHotInfo = setTeamHotInfo(vo, originField);
 					out.println(teamHotInfo.toString());
 				}
@@ -366,12 +380,15 @@ public class Console {
 					else
 						result = team.getOrderedTeamsBySeason("13-14",
 								teamBaseSort, sortT, teamNum);
+					id=0;
 					for (TeamVO vo : result) {
 						// ===================================================
 						if (isTHigh) {
+							out.println(++id);
 							TeamHighInfo teamHighInfo = setTeamHighInfo(vo);
 							out.println(teamHighInfo.toString());
 						} else {
+							out.println(++id);
 							TeamNormalInfo teamNormalInfo = setTeamNormalInfo(vo);
 							out.println(teamNormalInfo.toString());
 						}
@@ -386,12 +403,15 @@ public class Console {
 						result = team.getOrderedTeamsByAverage(teamBaseSort,
 								sortT, teamNum);
 					}
+					id=0;
 					for (TeamVO vo : result) {
 						// ===================================================
 						if (isTHigh) {
+							out.println(++id);
 							TeamHighInfo teamHighInfo = setTeamHighInfo(vo);
 							out.println(teamHighInfo.toString());
 						} else {
+							out.println(++id);
 							TeamNormalInfo teamNormalInfo = setTeamNormalInfo(vo);
 							out.println(teamNormalInfo.toString());
 						}
