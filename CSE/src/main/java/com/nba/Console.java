@@ -113,16 +113,10 @@ public class Console {
 				PlayerHotFieldChange();
 				// 调用 player hot 方法
 				ArrayList<PlayerVO> result = null;
-				if (playerhotField.equals("score")) {
-					result = player.getBestImprovedPlayer(
-							"recentFiveMatchesScoreUpRate", playerNum);
-				} else if (playerhotField.equals("rebound")) {
-					result = player.getBestImprovedPlayer(
-							"recentFiveMatchesReboundUpRate", playerNum);
-				} else {
-					result = player.getBestImprovedPlayer(
-							"recentFiveMatchesAssistUpRate", playerNum);
-				}
+				
+				result = player.getBestImprovedPlayer(
+							playerhotField, playerNum);
+				
 
 				for (PlayerVO vo : result) {
 					// =====================================================
@@ -404,8 +398,13 @@ public class Console {
 	}
 
 	public void PlayerHotFieldChange() {
-		if (!playerhotField.equals("score"))
-			playerhotField += "Num";
+		if (playerhotField.equals("score"))
+			playerhotField="recentFiveMatchesScoreUpRate";
+		else if(playerhotField.equals("rebound"))
+			playerhotField="recentFiveMatchesReboundUpRate";
+		else{
+			playerhotField="recentFiveMatchesAssistUpRate";
+		}
 	}
 
 	public void TeamHotFieldChange() {
@@ -450,7 +449,7 @@ public class Console {
 				pPosition = s.split("\\.")[1];
 			else if (s.contains("league")) {
 				pUnion = s.split("\\.")[1];
-				if (pUnion.equals("West")) {
+				if (pUnion.equalsIgnoreCase("West")) {
 					pUnion = "W";
 				} else {
 					pUnion = "E";
