@@ -579,7 +579,7 @@ public class Console {
 		teamNormalInfo.setRebound(vo.getReboundNum());
 		teamNormalInfo.setShot(vo.getShootHitRate());
 		teamNormalInfo.setSteal(vo.getStealNum());
-		teamNormalInfo.setTeamName(vo.getTeamName());
+		teamNormalInfo.setTeamName(vo.getAbLocation());
 		teamNormalInfo.setThree(vo.getThreeHitRate());
 		return teamNormalInfo;
 	}
