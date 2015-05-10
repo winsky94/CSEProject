@@ -398,8 +398,8 @@ public class Console {
 						result = team.getOrderedTeamsByAverage(teamHighSort,
 								sortHT, teamNum);
 					else{
-//						System.out.println("Console.execute():"+teamBaseSort.get(0));
-//						System.out.println("Console.execute():"+sortT.get(0));
+						System.out.println("Console.execute():"+teamBaseSort.get(0));
+						System.out.println("Console.execute():"+sortT.get(0));
 						result = team.getOrderedTeamsByAverage(teamBaseSort,
 								sortT, teamNum);
 					}
@@ -552,9 +552,9 @@ public class Console {
 		String league=vo.getLeague();
 		String realLeague="";
 		if(league.equalsIgnoreCase("W")){
-			realLeague="WEST";
-		}else if(league.equalsIgnoreCase("W")){
-			realLeague="EAST";
+			realLeague="West";
+		}else if(league.equalsIgnoreCase("E")){
+			realLeague="East";
 		}
 		playerHighInfo.setLeague(realLeague);
 		playerHighInfo.setName(vo.getName());
@@ -669,7 +669,7 @@ public class Console {
 			value = vo.getThreeHitRate();
 		} else if (hotField.equals("penalty")) {
 			value = vo.getFreeThrowHitRate();
-		} else if (hotField.equals("defenRebound")) {
+		} else if (hotField.equals("defendRebound")) {
 			value = vo.getDefenReboundNum();
 		} else if (hotField.equals("offendRebound")) {
 			value = vo.getOffenReboundNum();
