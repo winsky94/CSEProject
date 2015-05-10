@@ -27,7 +27,6 @@ import bl.FileList;
 import bl.match.SequenceOfMatch;
 import bl.team.Team;
 import blservice.AgeEnum;
-import blservice.PlayerBLService;
 
 public class NewPlayer  {
 
@@ -1509,45 +1508,49 @@ public class NewPlayer  {
 	public static void main(String[] args) {
 		long start = System.currentTimeMillis();
 		NewPlayer player = new NewPlayer();
+		ArrayList<PlayerVO> vos=player.getPlayerAverageInfo();
+		for(PlayerVO vv:vos){
+			System.out.println(vv.getName());
+		}
 		
 	//	PlayerVO vo = player.getPlayerAverageInfo("Kevin Durant");
 	//	PlayerVO vo = player.getPlayerAverageInfo("LeBron James");
-		PlayerVO vo = player.getPlayerSeasonInfo("13-14", "Kevin Durant");
-		 System.out.println("name: "+vo.getName());
-		 System.out.println("owingTeam: "+vo.getOwingTeam());
-		 System.out.println("league: "+vo.getLeague());
-		 System.out.println("playedGames: "+vo.getPlayedGames());
-		 System.out.println("gameStartingNum: "+vo.getGameStartingNum());
-		 System.out.println("reboundNum: "+vo.getReboundNum());
-		 System.out.println("assistNum: "+vo.getAssistNum());
-		 System.out.println("presentTime: "+vo.getPresentTime());
-		 System.out.println("shootHitRate: "+vo.getShootHitRate());
-		 System.out.println("threeHitRate: "+vo.getThreeHitRate());
-		 System.out.println("freeThrowHitRate: "+vo.getFreeThrowHitRate());
-		 System.out.println("offenReboundNum: "+vo.getOffenReboundNum());
-		 System.out.println("defenReboundNum: "+vo.getDefenReboundNum());
-		 System.out.println("stealnum:   "+vo.getStealNum());
-		 System.out.println("blockNum: "+vo.getBlockNum());
-		 System.out.println("foulNum: "+vo.getFoulNum());
-		 System.out.println("turnOverNum: "+vo.getTurnOverNum());
-		 System.out.println("score: "+vo.getScore());
-		 System.out.println("efficiency:"+vo.getEfficiency());
-		 System.out.println("recentFiveMatchesScoreUpRate: "+vo.getRecentFiveMatchesScoreUpRate());
-		 System.out.println("recentFiveMatchesReboundUpRate: "+vo.getRecentFiveMatchesReboundUpRate());
-		 System.out.println("recentFiveMatchesAssistRate: "+vo.getRecentFiveMatchesAssistUpRate());
-		 System.out.println("gmscEfficiency: "+vo.getGmScEfficiencyValue());
-		 System.out.println("truehitrate:  "+vo.getTrueHitRate());
-		 System.out.println("shootHitEfficiency: "+vo.getShootHitEfficiency());
-		 System.out.println("reboundRate: "+vo.getReboundRate());
-		 System.out.println("offenReboundRate: "+vo.getOffenReboundRate());
-		 System.out.println("defenReboundRate: "+vo.getDefenReboundRate());
-		 System.out.println("assistRate: "+vo.getAssistRate());
-		 System.out.println("stealRate: "+vo.getStealRate());
-		 System.out.println("blockRate: "+vo.getBlockRate());
-		 System.out.println("turnOverRate: "+vo.getTurnOverRate());
-		 System.out.println("usageRate: "+vo.getUsageRate());
-		 System.out.println("score_rebound_assist: "+vo.getScore_rebound_assist());
-		 System.out.println("doubleDoubleNum: "+vo.getDoubleDoubleNum());
+//		PlayerVO vo = player.getPlayerSeasonInfo("13-14", "Kevin Durant");
+//		 System.out.println("name: "+vo.getName());
+//		 System.out.println("owingTeam: "+vo.getOwingTeam());
+//		 System.out.println("league: "+vo.getLeague());
+//		 System.out.println("playedGames: "+vo.getPlayedGames());
+//		 System.out.println("gameStartingNum: "+vo.getGameStartingNum());
+//		 System.out.println("reboundNum: "+vo.getReboundNum());
+//		 System.out.println("assistNum: "+vo.getAssistNum());
+//		 System.out.println("presentTime: "+vo.getPresentTime());
+//		 System.out.println("shootHitRate: "+vo.getShootHitRate());
+//		 System.out.println("threeHitRate: "+vo.getThreeHitRate());
+//		 System.out.println("freeThrowHitRate: "+vo.getFreeThrowHitRate());
+//		 System.out.println("offenReboundNum: "+vo.getOffenReboundNum());
+//		 System.out.println("defenReboundNum: "+vo.getDefenReboundNum());
+//		 System.out.println("stealnum:   "+vo.getStealNum());
+//		 System.out.println("blockNum: "+vo.getBlockNum());
+//		 System.out.println("foulNum: "+vo.getFoulNum());
+//		 System.out.println("turnOverNum: "+vo.getTurnOverNum());
+//		 System.out.println("score: "+vo.getScore());
+//		 System.out.println("efficiency:"+vo.getEfficiency());
+//		 System.out.println("recentFiveMatchesScoreUpRate: "+vo.getRecentFiveMatchesScoreUpRate());
+//		 System.out.println("recentFiveMatchesReboundUpRate: "+vo.getRecentFiveMatchesReboundUpRate());
+//		 System.out.println("recentFiveMatchesAssistRate: "+vo.getRecentFiveMatchesAssistUpRate());
+//		 System.out.println("gmscEfficiency: "+vo.getGmScEfficiencyValue());
+//		 System.out.println("truehitrate:  "+vo.getTrueHitRate());
+//		 System.out.println("shootHitEfficiency: "+vo.getShootHitEfficiency());
+//		 System.out.println("reboundRate: "+vo.getReboundRate());
+//		 System.out.println("offenReboundRate: "+vo.getOffenReboundRate());
+//		 System.out.println("defenReboundRate: "+vo.getDefenReboundRate());
+//		 System.out.println("assistRate: "+vo.getAssistRate());
+//		 System.out.println("stealRate: "+vo.getStealRate());
+//		 System.out.println("blockRate: "+vo.getBlockRate());
+//		 System.out.println("turnOverRate: "+vo.getTurnOverRate());
+//		 System.out.println("usageRate: "+vo.getUsageRate());
+//		 System.out.println("score_rebound_assist: "+vo.getScore_rebound_assist());
+//		 System.out.println("doubleDoubleNum: "+vo.getDoubleDoubleNum());
 
 		long end = System.currentTimeMillis();
 		System.out.println("运行时间：" + (end - start) + "毫秒");// 应该是end - start
