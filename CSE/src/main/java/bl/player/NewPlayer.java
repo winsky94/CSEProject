@@ -1155,18 +1155,39 @@ public class NewPlayer  {
 	 * @return 是否日期一比日期二更靠近现在,由于老师说"默认读入的最后一场比赛就是最近的",所以，日期一与日期二不同为日期一更近
 	 */
 	private boolean isMostRecent(String season1,String date1,String season2,String date2){
-		if(season1.compareTo(season2)>0)
-			return true;
-		else if(season1.compareTo(season2)<0)
-			return true;
-		else{
-			if(date1.compareTo(date2)>0)
-				return true;
-			else if(date1.compareTo(date2)<0)
-				return true;
-			else 
-				return false;
-		}
+		if(season1.compareTo(season2)<0)
+  			return false;
+  		else if(season1.compareTo(season2)>0)
+  			return true;
+  		else{
+  			String month1=date1.split("-")[0];
+  			String month2=date2.split("-")[0];
+  			int type1=0;
+  			int type2=0; //type=0代表在6月前，=1代表在6月后
+  			if(month1.compareTo("06")>0){
+  				type1=1;
+  			}
+  			if(month2.compareTo("06")>0){
+  				type2=1;
+  			}
+  			
+  			if(type1==0&&type2==1){
+  				return true;
+  			}
+  			
+  			if(type1==1&&type2==0){
+  				return false;
+  			}
+  			
+  			//下面是2个都是6月前或6月后的情况
+  		     	if(date1.compareTo(date2)<0)
+  				   return false;
+  			    else if(date1.compareTo(date2)>0)
+  				   return true;
+  			    else 
+  				   return false;
+  		     	
+  		}
 	}
 
 	private void calCulateDayData() {
