@@ -7,9 +7,9 @@ public class MainMainMain {
 		
 		NewMain main=new NewMain();
 		
-		String command="-player -total -sort steal.desc";
-//		System.out.println(command);
-//		main.main(command.split(" ")); 
+		String command="-player -king assist -daily";
+		System.out.println(command);
+		main.main(command.split(" ")); 
 //			
 //		command="-player -total -sort foul.desc";
 //		System.out.println(command);
@@ -240,9 +240,9 @@ public class MainMainMain {
 //		command="-team -high -n 5 -sort stealEfficient.asc";
 //		System.out.println(command);
 //		main.main(command.split(" ")); 
-		command="-player -king assist -daily";
-		System.out.println(command);
-		main.main(command.split(" ")); 
+//		command="-player -king assist -daily";
+//		System.out.println(command);
+//		main.main(command.split(" ")); 
 		
 		System.out.println("好了！");
 	}
