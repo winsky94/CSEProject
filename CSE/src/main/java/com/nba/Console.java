@@ -549,14 +549,7 @@ public class Console {
 		playerHighInfo.setFrequency(vo.getUsageRate());
 		playerHighInfo.setGmSc(vo.getGmScEfficiencyValue());
 		// ===============球员联盟是个什么鬼@倩倩
-		String league=vo.getLeague();
-		String realLeague="";
-		if(league.equalsIgnoreCase("W")){
-			realLeague="West";
-		}else if(league.equalsIgnoreCase("E")){
-			realLeague="East";
-		}
-		playerHighInfo.setLeague(realLeague);
+		playerHighInfo.setLeague(changeLeague(vo.getLeague()));
 		playerHighInfo.setName(vo.getName());
 		playerHighInfo.setOffendReboundEfficient(vo.getOffenReboundRate());
 		playerHighInfo.setPosition(vo.getPosition());
@@ -644,7 +637,7 @@ public class Console {
 
 	private TeamHotInfo setTeamHotInfo(TeamVO vo, String hotField) {
 		TeamHotInfo teamHotInfo = new TeamHotInfo();
-		teamHotInfo.setLeague(vo.getConference());
+		teamHotInfo.setLeague(changeLeague(vo.getConference()));
 		teamHotInfo.setTeamName(vo.getAbLocation());
 		teamHotInfo.setField(hotField);
 		double value = 0;
@@ -679,6 +672,16 @@ public class Console {
 		teamHotInfo.setValue(value);
 
 		return teamHotInfo;
+	}
+	
+	private String changeLeague(String league){
+		String result="";
+		if(league.equalsIgnoreCase("W")){
+			result="West";
+		}else if(league.equalsIgnoreCase("E")){
+			result="East";
+		}
+		return result;
 	}
 
 }
