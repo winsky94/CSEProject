@@ -117,7 +117,7 @@ public class Console {
 				PlayerHotFieldChange();
 				// 调用 player hot 方法
 				ArrayList<PlayerVO> result = null;
-				
+				if(playerNum==50) playerNum=5; 
 				result = player.getBestImprovedPlayer(
 							playerhotField, playerNum);
 				
@@ -130,6 +130,7 @@ public class Console {
 					out.println(playerHotInfo.toString());
 				}
 			} else if ((i = command.indexOf("-king")) >= 0) {
+				if(playerNum==50) playerNum=5;
 				playerkingField = command.get(i + 1);
 				String originalKingField=playerkingField;
 				if (command.get(i + 2).equals("-season"))
@@ -319,6 +320,7 @@ public class Console {
 				teamNum = 30;
 
 			if ((i = command.indexOf("-hot")) >= 0) {
+				if(teamNum==30) teamNum=5;
 				teamhotField = command.get(i + 1);
 				String originField=teamhotField;
 				TeamHotFieldChange();
