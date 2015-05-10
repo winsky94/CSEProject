@@ -1,5 +1,6 @@
 package bl.player;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 
 import vo.PlayerVO;
@@ -29,7 +30,7 @@ public	class SequenceOfPlayer implements Comparator<PlayerVO> {
     	int result=0;
     	
         if(sortBy.equals("name"))
-        	result= a1.getName().compareTo(a2.getName());      
+        	result= nameCompare(a1.getName(), a2.getName());      
         else if(sortBy.equals("playedGames")){
 		    result= Integer.compare(a1.getPlayedGames(), a2.getPlayedGames());
         }
@@ -186,6 +187,35 @@ public	class SequenceOfPlayer implements Comparator<PlayerVO> {
 				return result;
 			}
     
+    }
+    
+    public int nameCompare(String name1,String name2){
+    	
+			String[] nameTemp1=name1.split(" ");
+			String[] nameTemp2=name2.split(" ");
+			int size1=nameTemp1.length;
+			int size2=nameTemp2.length;		
+			String xing1=nameTemp1[size1-1];
+			String xing2=nameTemp2[size2-1];
+			String ming1="";
+			String ming2="";
+			
+			if(size1!=1){
+				for(int i=0;i<size1-1;i++){
+					ming1=ming1+nameTemp1[i];
+				}
+			}
+			
+			if(size2!=1){
+				for(int i=0;i<size2-1;i++){
+					ming2=ming2+nameTemp2[i];
+				}
+			}
+			
+			String all1=xing1+ming1;
+			String all2=xing2+ming2;
+			
+		    return all1.compareTo(all2);
     }
     
    
