@@ -23,9 +23,7 @@ public class Match implements MatchBLService {
 	private FileList fl;
 
 	public static void main(String[] args) {
-		System.out.println("fdsaq");
 		new Match();
-		System.out.println("fdsa");
 	}
 	
 	public Match() {
