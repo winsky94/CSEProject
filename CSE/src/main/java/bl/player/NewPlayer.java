@@ -937,6 +937,9 @@ public class NewPlayer  {
 		Collections.sort(allPlayers, new NewSequenceOfPlayer(condition, order));
 		int count = 0;
 		for (PlayerVO vo : allPlayers) {
+			if(vo.getPlayedGames()==0)
+				continue;
+			
 			result.add(vo);
 			count++;
 			if (count >= num)
@@ -952,6 +955,9 @@ public class NewPlayer  {
 		Collections.sort(allPlayers, new NewSequenceOfPlayer(condition, order));
 		int count = 0;
 		for (PlayerVO vo : allPlayers) {
+			if(vo.getPlayedGames()==0)
+				continue;
+			
 			result.add(vo);
 			count++;
 			if (count >= num)
@@ -1030,6 +1036,9 @@ public class NewPlayer  {
 
 		int count = 0;
 		for (PlayerVO vo : thePlayers) {
+			if(vo.getPlayedGames()==0)
+				continue;
+			
 			result.add(vo);
 			count++;
 			if (count >= num)
@@ -1266,6 +1275,9 @@ public class NewPlayer  {
 
 		int count = 0;
 		for (PlayerVO vo : playersToday) {
+			if(vo.getPlayedGames()==0)
+				continue;
+			
 			result.add(vo);
 			count++;
 			if (count >= num)
@@ -1284,6 +1296,9 @@ public class NewPlayer  {
 		Collections.sort(thePlayers, new SequenceOfPlayer(column, "desc"));
 		int count = 0;
 		for (PlayerVO vo : thePlayers) {
+			if(vo.getPlayedGames()==0)
+				continue;
+			
 			result.add(vo);
 			count++;
 			if (count >= num)
@@ -1300,6 +1315,9 @@ public class NewPlayer  {
 		Collections.sort(thePlayers, new SequenceOfPlayer(column, "desc"));
 		int count = 0;
 		for (PlayerVO vo : thePlayers) {
+			if(vo.getPlayedGames()==0)
+				continue;
+			
 			result.add(vo);
 			count++;
 			if (count >= num)
