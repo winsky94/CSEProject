@@ -680,6 +680,8 @@ public class Console {
 			result="West";
 		}else if(league.equalsIgnoreCase("E")){
 			result="East";
+		}else {
+			result=league;
 		}
 		return result;
 	}
