@@ -1268,6 +1268,7 @@ public class NewPlayer  {
 			calCulateDayData();
 			isCalculatePlayersToday = true;
 			needUpdatePlayersToday = false;
+			Collections.sort(playersToday,new SequenceOfPlayer());
 		}
 
 		Collections.sort(playersToday, new SequenceOfPlayer(column, "desc"));
