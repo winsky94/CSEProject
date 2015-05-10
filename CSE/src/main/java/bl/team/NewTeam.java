@@ -49,55 +49,55 @@ public class NewTeam {
 		// result = team.getTeamSeasonInfo(season, "NOP");
 		// result = team.getSeasonHotTeam(season, "blockNum", 5);
 		// result=team.getTeamBaseInfo("p");
-		// result = team.getTeamAverageInfo("SAS");
+		 result = team.getTeamAverageInfo("NYK");
 //		result = team.getTeamAverageInfo("NOH");
 		// result = team.getRecentMatches("ATL");
 		// result=team.getMatches("ATL");
 //		result = team.getSeasonHotTeam(season, "stealNum", 5);
-		ArrayList<String> teamBaseSort=new ArrayList<String>();
-		teamBaseSort.add("winRate");
-		ArrayList<String> sortT=new ArrayList<String>();
-		sortT.add("asc");
-		
-		result = team.getOrderedTeamsByAverage(
-				teamBaseSort, sortT, 30);
+//		ArrayList<String> teamBaseSort=new ArrayList<String>();
+//		teamBaseSort.add("offenRound");
+//		ArrayList<String> sortT=new ArrayList<String>();
+//		sortT.add("asc");
+//		
+//		result = team.getOrderedTeamsByAverage(
+//				teamBaseSort, sortT, 5);
 		System.out.println(result.size());
 
 		for (TeamVO vo : result) {
-			System.out.println(vo.getAbLocation() + " " + vo.getWinRate());
+//			System.out.println(vo.getAbLocation() + " " + vo.getOffenRound());
 
-//			 System.out.println(vo.getAbLocation());
+			 System.out.println(vo.getAbLocation());
 //			 System.out.println("matchesNum："+vo.getMatchesNum());
-//			 System.out.println("winRate：" + vo.getWinRate());
-//			 System.out.println("shootHitNum：" + vo.getShootHitNum());
-//			 System.out.println("shootAttemptNum：" + vo.getShootAttemptNum());
-//			 System.out.println("threeHitNum：" + vo.getThreeHitNum());
-//			 System.out.println("threeAttemptNum：" + vo.getThreeAttemptNum());
-//			 System.out.println("freeThrowHitNum：" + vo.getFreeThrowHitNum());
-//			 System.out.println("freeThrowAttemptNum："
-//			 + vo.getFreeThrowAttemptNum());
-//			 System.out.println("offenReboundNum：" + vo.getOffenReboundNum());
-//			 System.out.println("defenReboundNum：" + vo.getDefenReboundNum());
-//			 System.out.println("reboundNum：" + vo.getReboundNum());
-//			 System.out.println("assistNum：" + vo.getAssistNum());
-//			 System.out.println("stealNum：" + vo.getStealNum());
-//			 System.out.println("blockNum：" + vo.getBlockNum());
-//			 System.out.println("turnOverNum：" + vo.getTurnOverNum());
-//			 System.out.println("foulNum：" + vo.getFoulNum());
-//			 System.out.println("score：" + vo.getScore());
-//			 System.out.println("shootHitRate:" + vo.getShootHitRate());
-//			 System.out.println("threeHitRate:" + vo.getThreeHitRate());
-//			 System.out.println("freeThrowHitRate:" +
-//			 vo.getFreeThrowHitRate());
-//			 System.out.println("offenRound:" + vo.getOffenRound());
-//			 System.out.println("offenEfficiency:" + vo.getOffenEfficiency());
-//			 System.out.println("defenEfficiency:" + vo.getDefenEfficiency());
-//			 System.out.println("offenReboundEfficiency:"
-//			 + vo.getOffenReboundEfficiency());
-//			 System.out.println("defenReboundEfficiency:"
-//			 + vo.getDefenReboundEfficiency());
-//			 System.out.println("stealEfficiency:" + vo.getStealEfficiency());
-//			 System.out.println("assistRate:" + vo.getAssistRate());
+			 System.out.println("winRate：" + vo.getWinRate());
+			 System.out.println("shootHitNum：" + vo.getShootHitNum());
+			 System.out.println("shootAttemptNum：" + vo.getShootAttemptNum());
+			 System.out.println("threeHitNum：" + vo.getThreeHitNum());
+			 System.out.println("threeAttemptNum：" + vo.getThreeAttemptNum());
+			 System.out.println("freeThrowHitNum：" + vo.getFreeThrowHitNum());
+			 System.out.println("freeThrowAttemptNum："
+			 + vo.getFreeThrowAttemptNum());
+			 System.out.println("offenReboundNum：" + vo.getOffenReboundNum());
+			 System.out.println("defenReboundNum：" + vo.getDefenReboundNum());
+			 System.out.println("reboundNum：" + vo.getReboundNum());
+			 System.out.println("assistNum：" + vo.getAssistNum());
+			 System.out.println("stealNum：" + vo.getStealNum());
+			 System.out.println("blockNum：" + vo.getBlockNum());
+			 System.out.println("turnOverNum：" + vo.getTurnOverNum());
+			 System.out.println("foulNum：" + vo.getFoulNum());
+			 System.out.println("score：" + vo.getScore());
+			 System.out.println("shootHitRate:" + vo.getShootHitRate());
+			 System.out.println("threeHitRate:" + vo.getThreeHitRate());
+			 System.out.println("freeThrowHitRate:" +
+			 vo.getFreeThrowHitRate());
+			 System.out.println("offenRound:" + vo.getOffenRound());
+			 System.out.println("offenEfficiency:" + vo.getOffenEfficiency());
+			 System.out.println("defenEfficiency:" + vo.getDefenEfficiency());
+			 System.out.println("offenReboundEfficiency:"
+			 + vo.getOffenReboundEfficiency());
+			 System.out.println("defenReboundEfficiency:"
+			 + vo.getDefenReboundEfficiency());
+			 System.out.println("stealEfficiency:" + vo.getStealEfficiency());
+			 System.out.println("assistRate:" + vo.getAssistRate());
 			 System.out.println("----------------------------------");
 
 		}
@@ -267,6 +267,8 @@ public class NewTeam {
 					realTeamName = teamsBaseInfo.get("NOH").getTeamName();
 					vo.setAbLocation("NOH");
 				}
+			}else {
+				realTeamName=teamsBaseInfo.get(name).getTeamName();
 			}
 			realTeamName = realTeamName.toLowerCase();
 			flag = teamName.toLowerCase().contains(realTeamName)
@@ -590,6 +592,8 @@ public class NewTeam {
 		int dsScore = 0;
 		int dsOffenReboundNum = 0;
 		int dsDefenReboundNum = 0;
+		int dsOffenReboundNumAll = 0;
+		int dsDefenReboundNumAll = 0;
 		double dsOffenRound = 0;
 
 		boolean isBad = false;
@@ -600,41 +604,42 @@ public class NewTeam {
 			isBad = true;
 		}
 
-		// if (season.equals("all")) {
-		// 得到全部比赛数据的，还是觉得有点傻逼
-		// 思路是将按赛季分的二维map读出来加到一个新的不按赛季分的map中
-		int flag = 0;
+		if (season.equals("all")) {
+			// 得到全部比赛数据的，还是觉得有点傻逼
+			// 思路是将按赛季分的二维map读出来加到一个新的不按赛季分的map中
+			int flag = 0;
 
-		// ====================================
-		matches = match.getAllMatches();
+			// ====================================
+			matches = match.getAllMatches();
 
-		Iterator<Entry<String, Map<String, MatchVO>>> iter = matches.entrySet()
-				.iterator();
-		while (iter.hasNext()) {
-			Map.Entry<String, Map<String, MatchVO>> entry = (Map.Entry<String, Map<String, MatchVO>>) iter
-					.next();
-			if (flag == 0) {
-				allMatches = entry.getValue();
-			} else {
-				Map<String, MatchVO> map = new HashMap<String, MatchVO>();
-				map = entry.getValue();
-				Iterator<Entry<String, MatchVO>> matchIterator = map.entrySet()
-						.iterator();
-				while (matchIterator.hasNext()) {
-					Map.Entry<String, MatchVO> matchEntry = (Map.Entry<String, MatchVO>) matchIterator
-							.next();
-					String key = matchEntry.getKey();
-					MatchVO matchVO = matchEntry.getValue();
-					allMatches.put(key, matchVO);
+			Iterator<Entry<String, Map<String, MatchVO>>> iter = matches
+					.entrySet().iterator();
+			while (iter.hasNext()) {
+				Map.Entry<String, Map<String, MatchVO>> entry = (Map.Entry<String, Map<String, MatchVO>>) iter
+						.next();
+				if (flag == 0) {
+					allMatches = entry.getValue();
+				} else {
+					Map<String, MatchVO> map = new HashMap<String, MatchVO>();
+					map = entry.getValue();
+					Iterator<Entry<String, MatchVO>> matchIterator = map
+							.entrySet().iterator();
+					while (matchIterator.hasNext()) {
+						Map.Entry<String, MatchVO> matchEntry = (Map.Entry<String, MatchVO>) matchIterator
+								.next();
+						String key = matchEntry.getKey();
+						MatchVO matchVO = matchEntry.getValue();
+						allMatches.put(key, matchVO);
+					}
 				}
+				flag++;
 			}
-			flag++;
+		} else {
+			// ====================================
+			matches = match.getAllMatches();
+
+			allMatches = matches.get(season);
 		}
-		// } else {
-		// // ====================================
-		// matches = match.getAllMatches();
-		// allMatches = matches.get(season);
-		// }
 		if (allMatches != null) {
 			Iterator<Entry<String, MatchVO>> allMatchIter = allMatches
 					.entrySet().iterator();
@@ -682,17 +687,10 @@ public class NewTeam {
 					int perDefenReboundNum = 0;
 					int perMissShoot = 0;
 					int perTurnOverNum = 0;
-
+					
 					ArrayList<RecordVO> records = matchVO.getRecords();
 					for (RecordVO recordVO : records) {
-						boolean isRight=false;
-						if (team.equals("NOP") || team.equals("NOH")) {
-							isRight=recordVO.getTeam().equals("NOP")||recordVO.getTeam().equals("NOH");
-						}
-						else {
-							isRight=recordVO.getTeam().equals(team);
-						}
-						if (isRight) {
+						if (recordVO.getTeam().equals(team)) {
 							shootHitNum += recordVO.getShootHitNum(); // 投篮命中数
 							shootAttemptNum += recordVO.getShootAttemptNum(); // 投篮出手次数
 							threeHitNum += recordVO.getThreeHitNum(); // 三分命中数
@@ -708,16 +706,15 @@ public class NewTeam {
 							blockNum += recordVO.getBlockNum();// 盖帽数
 							turnOverNum += recordVO.getTurnOverNum();// 失误数
 							foulNum += recordVO.getFoulNum();// 犯规数
-
-							perShootAttemptNum += recordVO.getShootAttemptNum();
-							perFreeThrowAttemptNum += recordVO
-									.getFreeThrowAttemptNum();
+							
+							perShootAttemptNum+=recordVO.getShootAttemptNum();
+							perFreeThrowAttemptNum += recordVO.getFreeThrowAttemptNum();
 							perOffenReboundNum += recordVO.getOffenReboundNum();
 							perDefenReboundNum += recordVO.getDefenReboundNum();
-							perMissShoot += perShootAttemptNum
-									- recordVO.getShootHitNum();
+							perMissShoot +=recordVO.getShootAttemptNum()- recordVO.getShootHitNum();
 							perTurnOverNum += recordVO.getTurnOverNum();
 
+							
 						} else {
 							// 计算对手的
 							dsShootHitNum += recordVO.getShootHitNum();
@@ -726,9 +723,12 @@ public class NewTeam {
 									.getFreeThrowAttemptNum();
 							dsTurnOverNum += recordVO.getTurnOverNum();
 							dsOffenReboundNum += recordVO.getOffenReboundNum();
+							dsOffenReboundNumAll+=recordVO.getOffenReboundNum();
 							dsDefenReboundNum += recordVO.getDefenReboundNum();
+							dsDefenReboundNumAll+= recordVO.getDefenReboundNum();
 						}
-
+						
+						
 					}
 
 					shootHitRate = (double) shootHitNum / shootAttemptNum;// 投篮命中率
@@ -736,36 +736,46 @@ public class NewTeam {
 					freeThrowHitRate = (double) freeThrowHitNum
 							/ freeThrowAttemptNum;// 罚球命中率
 					winRate = (double) winNum / matchesNum; // 胜率
-
 					// 进攻回合
-					offenRound += perShootAttemptNum
+					double temp = perShootAttemptNum
 							+ 0.4
 							* perFreeThrowAttemptNum
 							- 1.07
 							* (perOffenReboundNum
 									/ (double) (perOffenReboundNum + dsDefenReboundNum) * (perMissShoot))
 							+ 1.07 * perTurnOverNum;
-					dsOffenRound += dsShootAttempNum
+					offenRound+=temp;
+
+					double dstemp=dsShootAttempNum
 							+ 0.4
 							* dsFreeThrowAttemptNum
 							- 1.07
 							* (dsOffenReboundNum
 									/ (double) (dsOffenReboundNum + perDefenReboundNum) * (dsShootAttempNum - dsShootHitNum))
 							+ 1.07 * dsTurnOverNum;
+					dsOffenRound += dstemp;
+					
+					dsShootHitNum = 0;
+					dsShootAttempNum = 0;
+					dsFreeThrowAttemptNum = 0;
+					dsTurnOverNum = 0;
+					dsOffenReboundNum = 0;
+					dsDefenReboundNum = 0;
 				}
 			}
-
+			
 			offenEfficiency = (double) score / offenRound * 100; // 进攻效率
 			defenEfficiency = (double) dsScore / dsOffenRound * 100; // 防守效率
 			offenReboundEfficiency = (double) offenReboundNum
-					/ (offenReboundNum + dsDefenReboundNum); // 进攻篮板效率
+					/ (offenReboundNum + dsDefenReboundNumAll); // 进攻篮板效率
 			defenReboundEfficiency = (double) defenReboundNum
-					/ (defenReboundNum + dsOffenReboundNum); // 防守篮板效率
+					/ (defenReboundNum + dsOffenReboundNumAll); // 防守篮板效率
 			stealEfficiency = (double) stealNum / dsOffenRound * 100; // 抢断效率
 			assistEfficiency = (double) assistNum / offenRound * 100; // 助攻率
-
+			
 			if (season.equals("all")) {
 				// 需要的是场均数据，要除以比赛场数
+				offenRound =offenRound/(double) matchesNum;
 				shootHitNum = shootHitNum / (double) matchesNum;
 				shootAttemptNum = shootAttemptNum / (double) matchesNum;
 				threeHitNum = threeHitNum / (double) matchesNum;
@@ -781,8 +791,7 @@ public class NewTeam {
 				turnOverNum = turnOverNum / (double) matchesNum;
 				foulNum = foulNum / (double) matchesNum;
 				score = score / (double) matchesNum;
-				offenRound=offenRound/ (double) matchesNum;
-				
+
 				if (testSeason.equals("12-13") && isBad) {
 					abLocation = "NOH";
 				}
@@ -791,7 +800,6 @@ public class NewTeam {
 				abLocation = "NOH";
 				isSeason = true;
 			}
-
 			// DecimalFormat dec = new DecimalFormat("0.000");
 			// TeamVO teamVO = new TeamVO(teamName, abLocation, location,
 			// conference, partition, homeCourt, setUpTime, matchesNum,
@@ -821,6 +829,7 @@ public class NewTeam {
 			// Double.parseDouble(dec.format(defenReboundEfficiency)),
 			// Double.parseDouble(dec.format(stealEfficiency)),
 			// Double.parseDouble(dec.format(assistEfficiency)));
+			
 			TeamVO teamVO = new TeamVO(teamName, abLocation, location,
 					conference, partition, homeCourt, setUpTime, matchesNum,
 					shootHitNum, shootAttemptNum, threeHitNum, threeAttemptNum,
