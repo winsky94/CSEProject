@@ -1273,10 +1273,7 @@ public class NewPlayer  {
 		Collections.sort(playersToday, new SequenceOfPlayer(column, "desc"));
 
 		int count = 0;
-		for (PlayerVO vo : playersToday) {
-			if(vo.getPlayedGames()==0)
-				continue;
-			
+		for (PlayerVO vo : playersToday) {			
 			result.add(vo);
 			count++;
 			if (count >= num)
@@ -1508,9 +1505,20 @@ public class NewPlayer  {
 	public static void main(String[] args) {
 		long start = System.currentTimeMillis();
 		NewPlayer player = new NewPlayer();
-		ArrayList<PlayerVO> vos=player.getPlayerAverageInfo();
-		for(PlayerVO vv:vos){
+//		ArrayList<String> string1=new ArrayList<String>();
+//		ArrayList<String> string2=new ArrayList<String>();
+//		string1.add("stealRate");
+//		string2.add("asc");
+//		ArrayList<PlayerVO> vos=player.getOrderedPlayersByAverage(string1, string2, 5);
+//		for(PlayerVO vv:vos){
+//			System.out.println(vv.getName());
+//			System.out.println(vv.getStealRate());
+//		}
+		
+		ArrayList<PlayerVO> players=player.getDayHotPlayer("assistNum",5);
+		for(PlayerVO vv:players){
 			System.out.println(vv.getName());
+			System.out.println(vv.getAssistNum());
 		}
 		
 	//	PlayerVO vo = player.getPlayerAverageInfo("Kevin Durant");
