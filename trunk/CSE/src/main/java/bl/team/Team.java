@@ -732,7 +732,7 @@ public class Team implements TeamBLService {
 					freeThrowHitRate = (double) freeThrowHitNum
 							/ freeThrowAttemptNum;// 罚球命中率
 					winRate = (double) winNum / matchesNum; // 胜率
-					// 进攻回合
+					// 进攻回合——每场的进攻回合累加
 					double temp = perShootAttemptNum
 							+ 0.4
 							* perFreeThrowAttemptNum
