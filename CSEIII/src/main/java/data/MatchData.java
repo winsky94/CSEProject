@@ -345,6 +345,137 @@ public class MatchData implements MatchDataService {
 		return matches;
 	}
 
+	public ArrayList<RecordVO> getPlayerRecord(String season,String name){
+		String query = "select * from matches where";
+		ArrayList<MatchVO> matches = new ArrayList<MatchVO>();
+
+		int flag = 0;
+
+		if (!season.equals("all")) {
+			if (flag == 1)
+				query = query + " and season like '%" + season + "%'";
+			else {
+				query = query + " season like '%" + season + "%'";
+				flag = 1;
+			}
+		}
+
+		if (!date.equals("all")) {
+			if (flag == 1)
+				query = query + " and date like '%" + date + "%'";
+			else {
+				query = query + " date like '%" + date + "%'";
+				flag = 1;
+			}
+		}
+
+		if (!homeTeam.equals("all")) {
+			if (flag == 1)
+				query = query + " and homeTeam like '%" + homeTeam + "%'";
+			else {
+				query = query + " homeTeam like '%" + homeTeam + "%'";
+				flag = 1;
+			}
+		}
+
+		if (!visitingTeam.equals("all")) {
+			if (flag == 1)
+				query = query + " and visitingTeam like '%" + visitingTeam
+						+ "%'";
+			else {
+				query = query + " visitingTeam like '%" + visitingTeam + "%'";
+				flag = 1;
+			}
+		}
+
+		if (season.equals("all") && date.equals("all")
+				&& homeTeam.equals("all") && visitingTeam.equals("all")) {
+			query = "select * from matches";
+		}
+
+		try {
+			connection = SqlManager.getConnection();
+			Statement sql = connection.createStatement();
+			ResultSet rs = sql.executeQuery(query);
+			int matchID = 0;
+			String myseason = "";
+			String mydate = "";
+			String type = "";
+			String myvisingTeam = "";
+			String myhomeTeam = "";
+			int visitingScore = 0;
+			int homeScore = 0;
+			ArrayList<String> detailScores;
+			ArrayList<RecordVO> records;
+			MatchVO matchVO;
+
+			while (rs.next()) {
+				matchID = rs.getInt("matchID");
+				myseason = rs.getString("season");
+				mydate = rs.getString("date");
+				type = rs.getString("type");
+				myvisingTeam = rs.getString("visitingTeam");
+				myhomeTeam = rs.getString("homeTeam");
+				visitingScore = rs.getInt("visitingScore");
+				homeScore = rs.getInt("homeScore");
+				Statement sql2 = connection.createStatement();
+				ResultSet rs1 = sql2
+						.executeQuery("select score from detailscores where matchID="
+								+ matchID);
+				detailScores = new ArrayList<String>();
+				while (rs1.next()) {
+					detailScores.add(rs1.getString("score"));
+				}
+				rs1.close();
+				sql2.close();
+				Statement sql3 = connection.createStatement();
+				ResultSet rs2 = sql3
+						.executeQuery("select * from records where matchID="
+								+ matchID);
+				records = new ArrayList<RecordVO>();
+				RecordVO vo;
+				while (rs2.next()) {
+					vo = new RecordVO(rs2.getString("team"),
+							rs2.getString("playerName"),
+							rs2.getString("position"),
+							rs2.getString("presentTime"),
+							rs2.getInt("shootHitNum"),
+							rs2.getInt("shootAttemptNum"),
+							rs2.getDouble("shootHitRate"),
+							rs2.getInt("threeHitNum"),
+							rs2.getInt("threeAttemptNum"),
+							rs2.getDouble("threeHitRate"),
+							rs2.getInt("freeThrowHitNum"),
+							rs2.getInt("freeThrowAttemptNum"),
+							rs2.getDouble("freeThrowHitRate"),
+							rs2.getInt("offenReboundNum"),
+							rs2.getInt("defenReboundNum"),
+							rs2.getInt("reboundNum"), rs2.getInt("assistNum"),
+							rs2.getInt("stealNum"), rs2.getInt("blockNum"),
+							rs2.getInt("turnOverNum"), rs2.getInt("foulNum"),
+							rs2.getInt("score"));
+					records.add(vo);
+				}
+				rs2.close();
+				sql3.close();
+				matchVO = new MatchVO(matchID, myseason, mydate, type,
+						myvisingTeam, myhomeTeam, visitingScore, homeScore,
+						detailScores, records);
+				matches.add(matchVO);
+			}
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			closeMySql();
+		}
+
+		return matches;
+	}
+	
 	public MatchVO readFromMatchFile(String fileName) {
 		MatchVO matchPO;
 		String season;// 赛季
@@ -417,13 +548,13 @@ public class MatchData implements MatchDataService {
 					presentTime = line[2];// 在场时间
 					shootHitNum = Integer.parseInt(line[3]);// 投篮命中数
 					shootAttemptNum = Integer.parseInt(line[4]);// 投篮出手数
-					shootHitRate = Integer.parseInt(line[5]);
+					shootHitRate = Double.parseDouble(line[5]);
 					threeHitNum = Integer.parseInt(line[6]);// 三分命中数
 					threeAttemptNum = Integer.parseInt(line[7]);// 三分出手数
-					threeHitRate = Integer.parseInt(line[8]);
+					threeHitRate = Double.parseDouble(line[8]);
 					freeThrowHitNum = Integer.parseInt(line[9]);// 罚球命中数
 					freeThrowAttemptNum = Integer.parseInt(line[10]);// 罚球出手数
-					freeThrowHitRate = Integer.parseInt(line[11]);
+					freeThrowHitRate = Double.parseDouble(line[11]);
 					offenReboundNum = Integer.parseInt(line[12]);// 进攻（前场）篮板数
 					defenReboundNum = Integer.parseInt(line[13]);// 防守（后场）篮板数
 					reboundNum = Integer.parseInt(line[14]);// 总篮板数
