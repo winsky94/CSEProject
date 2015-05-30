@@ -25,6 +25,7 @@ public class RecordVO {
 	private int score;// 个人得分
 	private String season;// 赛季
 	private String date;// 日期
+	private int matchID;//所对应的matchID
 
 	public RecordVO(String team, String playerName, String position,
 			String presentTime, int shootHitNum, int shootAttemptNum,
@@ -56,6 +57,43 @@ public class RecordVO {
 		this.turnOverNum = turnOverNum;
 		this.foulNum = foulNum;
 		this.score = score;
+	}
+	
+	public RecordVO(int matchID,String team, String playerName, String position,
+			String presentTime, int shootHitNum, int shootAttemptNum,
+			double shootHitRate, int threeHitNum, int threeAttemptNum,
+			double threeHitRate, int freeThrowHitNum, int freeThrowAttemptNum,
+			double freeThrowHitRate, int offenReboundNum, int defenReboundNum,
+			int reboundNum, int assistNum, int stealNum, int blockNum,
+			int turnOverNum, int foulNum, int score) {
+		super();
+		this.matchID=matchID;
+		this.team = team;
+		this.playerName = playerName;
+		this.position = position;
+		this.presentTime = presentTime;
+		this.shootHitNum = shootHitNum;
+		this.shootAttemptNum = shootAttemptNum;
+		this.shootHitRate = shootHitRate;
+		this.threeHitNum = threeHitNum;
+		this.threeAttemptNum = threeAttemptNum;
+		this.threeHitRate = threeHitRate;
+		this.freeThrowHitNum = freeThrowHitNum;
+		this.freeThrowAttemptNum = freeThrowAttemptNum;
+		this.freeThrowHitRate = freeThrowHitRate;
+		this.offenReboundNum = offenReboundNum;
+		this.defenReboundNum = defenReboundNum;
+		this.reboundNum = reboundNum;
+		this.assistNum = assistNum;
+		this.stealNum = stealNum;
+		this.blockNum = blockNum;
+		this.turnOverNum = turnOverNum;
+		this.foulNum = foulNum;
+		this.score = score;
+	}
+	
+	public int getMatchID(){
+		return matchID;
 	}
 
 	public String getTeam() {
