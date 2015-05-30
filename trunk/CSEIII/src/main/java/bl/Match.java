@@ -36,10 +36,10 @@ public class Match implements MatchBLService {
 		return result;
 	}
 
-	public ArrayList<MatchVO> getMatchesByTeam(String name) {
+	public ArrayList<MatchVO> getMatchesByTeam(String season,String name) {
 		// TODO 自动生成的方法存根
 		ArrayList<MatchVO> result=new ArrayList<MatchVO>();
-		result=matchData.getMatchesByTeam(name);
+		result=matchData.getMatchesByTeam(season,name);
 		return result;
 	}
 
