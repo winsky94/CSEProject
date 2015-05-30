@@ -6,6 +6,7 @@ public class MatchVO {
 	private int matchID;
 	private String season;// 赛季
 	private String date;// 时间
+	private String type;// 比赛类型
 	private String visitingTeam;// 对阵队伍
 	private String homeTeam;
 	private ArrayList<String> detailScores;// 各节比分
@@ -42,10 +43,11 @@ public class MatchVO {
 	private int homeFoulNum = 0;// 犯规数
 	private int homeScore = 0;// 得分
 
-	public MatchVO(String season, String date, String visitingTeam,
-			String homeTeam, int partNum) {
+	public MatchVO(String season, String date, String type,
+			String visitingTeam, String homeTeam, int partNum) {
 		this.season = season;
 		this.date = date;
+		this.type = type;
 		this.visitingTeam = visitingTeam;
 		this.homeTeam = homeTeam;
 		if (partNum == 4) {
@@ -55,27 +57,30 @@ public class MatchVO {
 		}
 	}
 
-	public MatchVO(String season, String date, String visitingTeam,
-			String homeTeam) {
+	public MatchVO(String season, String date, String type,
+			String visitingTeam, String homeTeam) {
 		this.season = season;
 		this.date = date;
+		this.type = type;
 		this.visitingTeam = visitingTeam;
 		this.homeTeam = homeTeam;
 	}
 
-	public MatchVO(String season, String date, String visitingTeam,
-			String homeTeam, int visitingScore, int homeScore,
-			ArrayList<String> detailScores, ArrayList<RecordVO> records) {
+	public MatchVO(String season, String date, String type,
+			String visitingTeam, String homeTeam, int visitingScore,
+			int homeScore, ArrayList<String> detailScores,
+			ArrayList<RecordVO> records) {
 		super();
 		this.season = season;
 		this.date = date;
+		this.type = type;
 		this.visitingTeam = visitingTeam;
 		this.homeTeam = homeTeam;
 		this.visitingScore = visitingScore;
 		this.homeScore = homeScore;
 		this.detailScores = detailScores;
 		this.records = records;
-		int partNum=detailScores.size();
+		int partNum = detailScores.size();
 		if (partNum == 4) {
 			matchTime = 48;
 		} else {
@@ -83,19 +88,23 @@ public class MatchVO {
 		}
 	}
 
-	public MatchVO(int id,String season, String date, String visitingTeam,
-			String homeTeam, int visitingScore, int homeScore,
-			ArrayList<String> detailScores, ArrayList<RecordVO> records) {
-		this(season, date, visitingTeam, homeTeam, visitingScore, homeScore, detailScores, records);
-		this.matchID=id;
+	public MatchVO(int id, String season, String date, String type,
+			String visitingTeam, String homeTeam, int visitingScore,
+			int homeScore, ArrayList<String> detailScores,
+			ArrayList<RecordVO> records) {
+		this(season, date, type, visitingTeam, homeTeam, visitingScore,
+				homeScore, detailScores, records);
+		this.matchID = id;
 	}
-	
-	public MatchVO(String season, String date, String visitingTeam,
-			String homeTeam, int visitingScore, int homeScore, int partNum,
-			ArrayList<String> detailScores, ArrayList<RecordVO> records) {
+
+	public MatchVO(String season, String date, String type,
+			String visitingTeam, String homeTeam, int visitingScore,
+			int homeScore, int partNum, ArrayList<String> detailScores,
+			ArrayList<RecordVO> records) {
 		super();
 		this.season = season;
 		this.date = date;
+		this.type = type;
 		this.visitingTeam = visitingTeam;
 		this.homeTeam = homeTeam;
 		this.visitingScore = visitingScore;
@@ -109,16 +118,20 @@ public class MatchVO {
 		this.records = records;
 	}
 
-	public int getMatchID(){
+	public int getMatchID() {
 		return matchID;
 	}
-	
+
 	public String getSeason() {
 		return season;
 	}
 
 	public String getDate() {
 		return date;
+	}
+
+	public String getType() {
+		return type;
 	}
 
 	public String getVisitingTeam() {
