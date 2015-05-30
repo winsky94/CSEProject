@@ -24,22 +24,23 @@ public class Match implements MatchBLService {
 	public ArrayList<String> getAllSeasons() {
 		// TODO 自动生成的方法存根
 		ArrayList<String> result = new ArrayList<String>();
-		result=matchData.getAllSeasons();
+		result = matchData.getAllSeasons();
 		return result;
 	}
 
-	public ArrayList<MatchVO> getMatchData(String season, String date,
-			String homeTeam, String visitingTeam) {
+	public ArrayList<MatchVO> getMatchData(String season, String type,
+			String date, String homeTeam, String visitingTeam) {
 		// TODO 自动生成的方法存根
-		ArrayList<MatchVO> result=new ArrayList<MatchVO>();
-		result=matchData.getMatchData(season, date, homeTeam, visitingTeam);
+		ArrayList<MatchVO> result = new ArrayList<MatchVO>();
+		result = matchData.getMatchData(season, type, date, homeTeam,
+				visitingTeam);
 		return result;
 	}
 
-	public ArrayList<MatchVO> getMatchesByTeam(String season,String name) {
+	public ArrayList<MatchVO> getMatchesByTeam(String season, String name) {
 		// TODO 自动生成的方法存根
-		ArrayList<MatchVO> result=new ArrayList<MatchVO>();
-		result=matchData.getMatchesByTeam(season,name);
+		ArrayList<MatchVO> result = new ArrayList<MatchVO>();
+		result = matchData.getMatchesByTeam(season, name);
 		return result;
 	}
 
