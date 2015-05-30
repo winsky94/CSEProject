@@ -43,19 +43,6 @@ public class MatchVO {
 	private int homeFoulNum = 0;// 犯规数
 	private int homeScore = 0;// 得分
 
-	public MatchVO(String season, String date, String type,
-			String visitingTeam, String homeTeam, int partNum) {
-		this.season = season;
-		this.date = date;
-		this.type = type;
-		this.visitingTeam = visitingTeam;
-		this.homeTeam = homeTeam;
-		if (partNum == 4) {
-			matchTime = 48 * 60;
-		} else {
-			matchTime = (48 + (partNum - 4) * 5) * 60;
-		}
-	}
 
 	public MatchVO(String season, String date, String type,
 			String visitingTeam, String homeTeam) {
@@ -82,9 +69,9 @@ public class MatchVO {
 		this.records = records;
 		int partNum = detailScores.size();
 		if (partNum == 4) {
-			matchTime = 48;
+			matchTime = 48*60;
 		} else {
-			matchTime = (48 + (partNum - 4) * 5);
+			matchTime = (48 + (partNum - 4) * 5)*60;
 		}
 	}
 
@@ -97,26 +84,6 @@ public class MatchVO {
 		this.matchID = id;
 	}
 
-	public MatchVO(int id,String season, String date, String type,
-			String visitingTeam, String homeTeam, int visitingScore,
-			int homeScore, int partNum, ArrayList<String> detailScores,
-			ArrayList<RecordVO> records) {
-		super();
-		this.season = season;
-		this.date = date;
-		this.type = type;
-		this.visitingTeam = visitingTeam;
-		this.homeTeam = homeTeam;
-		this.visitingScore = visitingScore;
-		this.homeScore = homeScore;
-		if (partNum == 4) {
-			matchTime = 48 * 60;
-		} else {
-			matchTime = (48 + (partNum - 4) * 5) * 60;
-		}
-		this.detailScores = detailScores;
-		this.records = records;
-	}
 
 	public int getMatchID() {
 		return matchID;
