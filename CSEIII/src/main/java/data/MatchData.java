@@ -34,9 +34,10 @@ public class MatchData implements MatchDataService {
 
 	public static void main(String[] args) {
 		MatchData matchData = new MatchData();
-//		 matchData.exportToSql();
+		// matchData.exportToSql();
 		System.out.println("MatchData.main()");
-		ArrayList<MatchVO> result = matchData.getMatchData("12-13", "Playoff", "all", "all", "all");
+		ArrayList<MatchVO> result = matchData.getMatchData("12-13", "Playoff",
+				"all", "all", "all");
 		System.out.println(result.size());
 	}
 
@@ -62,7 +63,7 @@ public class MatchData implements MatchDataService {
 		return result;
 	}
 
-	public ArrayList<MatchVO> getMatchesBySeason(String season) {
+	public ArrayList<MatchVO> getMatchesBySeason(String season, String type) {
 		// TODO 自动生成的方法存根
 		ArrayList<MatchVO> result = new ArrayList<MatchVO>();
 		try {
@@ -70,11 +71,15 @@ public class MatchData implements MatchDataService {
 			sql = connection.createStatement();
 			String query = "select * from matches where season='" + season
 					+ "'";
+			if (!type.equals("all")) {
+				query = "select * from matches where season='" + season
+						+ "' and type='" + type + "'";
+			}
 			resultSet = sql.executeQuery(query);
 			while (resultSet.next()) {
 				int matchID = resultSet.getInt("matchID");
 				String date = resultSet.getString("date");
-				String type = resultSet.getString("type");
+				String currentType = resultSet.getString("type");
 				String visitingTeam = resultSet.getString("visitingTeam");
 				String homeTeam = resultSet.getString("homeTeam");
 				int visitingScore = resultSet.getInt("visitingScore");
@@ -122,9 +127,9 @@ public class MatchData implements MatchDataService {
 				rs2.close();
 				sql2.close();
 
-				MatchVO matchVO = new MatchVO(season, date, type, visitingTeam,
-						homeTeam, visitingScore, homeScore, detailScores,
-						records);
+				MatchVO matchVO = new MatchVO(season, date, currentType,
+						visitingTeam, homeTeam, visitingScore, homeScore,
+						detailScores, records);
 				result.add(matchVO);
 			}
 		} catch (Exception e) {
@@ -136,7 +141,8 @@ public class MatchData implements MatchDataService {
 		return result;
 	}
 
-	public ArrayList<MatchVO> getMatchesByTeam(String season, String name) {
+	public ArrayList<MatchVO> getMatchesByTeam(String season, String type,
+			String name) {
 		// TODO 自动生成的方法存根
 		ArrayList<MatchVO> result = new ArrayList<MatchVO>();
 		try {
@@ -144,19 +150,32 @@ public class MatchData implements MatchDataService {
 			sql = connection.createStatement();
 			String query = "";
 			if (season.equals("all")) {
-				query = "select * from matches where homeTeam like '%" + name
-						+ "%' or visitingTeam like '%" + name + "%'";
+				if (type.equals("all")) {
+					query = "select * from matches where homeTeam like '%"
+							+ name + "%' or visitingTeam like '%" + name + "%'";
+				} else {
+					query = "select * from matches where type ='" + type
+							+ "' and (homeTeam like '%" + name
+							+ "%' or visitingTeam like '%" + name + "%')";
+				}
 			} else {
-				query = "select * from matches where season='" + season
-						+ "' and (homeTeam like '%" + name
-						+ "%' or visitingTeam like '%" + name + "%')";
+				if (type.equals("all")) {
+					query = "select * from matches where season='" + season
+							+ "' and (homeTeam like '%" + name
+							+ "%' or visitingTeam like '%" + name + "%')";
+				} else {
+					query = "select * from matches where season='" + season
+							+ "' and type='" + type + "' and (homeTeam like '%"
+							+ name + "%' or visitingTeam like '%" + name
+							+ "%')";
+				}
 			}
 			resultSet = sql.executeQuery(query);
 			while (resultSet.next()) {
 				int matchID = resultSet.getInt("matchID");
 				String currentSeason = resultSet.getString("season");
 				String date = resultSet.getString("date");
-				String type = resultSet.getString("type");
+				String currentType = resultSet.getString("type");
 				String visitingTeam = resultSet.getString("visitingTeam");
 				String homeTeam = resultSet.getString("homeTeam");
 				int visitingScore = resultSet.getInt("visitingScore");
@@ -204,7 +223,7 @@ public class MatchData implements MatchDataService {
 				rs2.close();
 				sql2.close();
 
-				MatchVO matchVO = new MatchVO(currentSeason, date, type,
+				MatchVO matchVO = new MatchVO(currentSeason, date, currentType,
 						visitingTeam, homeTeam, visitingScore, homeScore,
 						detailScores, records);
 				result.add(matchVO);
@@ -234,12 +253,12 @@ public class MatchData implements MatchDataService {
 				flag = 1;
 			}
 		}
-		
+
 		if (!type.equals("all")) {
 			if (flag == 1)
-				query = query + " and type ='"+type+"'";
+				query = query + " and type ='" + type + "'";
 			else {
-				query = query + " type ='"+type+"'";
+				query = query + " type ='" + type + "'";
 				flag = 1;
 			}
 		}
@@ -358,63 +377,6 @@ public class MatchData implements MatchDataService {
 		}
 
 		return matches;
-	}
-
-	public ArrayList<RecordVO> getPlayerRecord(String season, String name) {
-		String query = "select * from records where";
-		ArrayList<RecordVO> records = new ArrayList<RecordVO>();
-
-		int flag = 0;
-
-		if (!season.equals("all")) {
-			query = query + " season ='" + season + "'";
-			flag = 1;
-		}
-
-		if (name.contains("'"))
-			name.replace("'", "''");
-		if (flag == 1)
-			query = query + " and playerName ='" + name + "'";
-		else {
-			query = query + " playerName='" + name + "'";
-			flag = 1;
-		}
-
-		try {
-			connection = SqlManager.getConnection();
-			Statement sql = connection.createStatement();
-			ResultSet rs = sql.executeQuery(query);
-
-			RecordVO vo;
-			while (rs.next()) {
-				vo = new RecordVO(rs.getInt("matchID"), rs.getString("team"),
-						rs.getString("playerName"), rs.getString("position"),
-						rs.getString("presentTime"), rs.getInt("shootHitNum"),
-						rs.getInt("shootAttemptNum"),
-						rs.getDouble("shootHitRate"), rs.getInt("threeHitNum"),
-						rs.getInt("threeAttemptNum"),
-						rs.getDouble("threeHitRate"),
-						rs.getInt("freeThrowHitNum"),
-						rs.getInt("freeThrowAttemptNum"),
-						rs.getDouble("freeThrowHitRate"),
-						rs.getInt("offenReboundNum"),
-						rs.getInt("defenReboundNum"), rs.getInt("reboundNum"),
-						rs.getInt("assistNum"), rs.getInt("stealNum"),
-						rs.getInt("blockNum"), rs.getInt("turnOverNum"),
-						rs.getInt("foulNum"), rs.getInt("score"));
-				records.add(vo);
-			}
-			rs.close();
-			sql.close();
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		return records;
 	}
 
 	public MatchVO readFromMatchFile(String fileName) {
