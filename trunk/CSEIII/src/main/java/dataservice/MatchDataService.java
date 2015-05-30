@@ -30,24 +30,25 @@ public interface MatchDataService {
 	 *            球队名（缩写）
 	 * @return 比赛列表
 	 */
-	public ArrayList<MatchVO> getMatchesByTeam(String season,String name);
-	
+	public ArrayList<MatchVO> getMatchesByTeam(String season, String name);
+
 	/**
 	 * 
-	 * @param season 
-	 *         赛季
+	 * @param season
+	 *            赛季
 	 * @param name
-	 *         名字
+	 *            名字
 	 * @return
 	 */
-    public ArrayList<RecordVO> getPlayerRecord(String season,String name);
-    
+	public ArrayList<RecordVO> getPlayerRecord(String season, String name);
 
 	/**
 	 * 得到比赛数据
 	 * 
 	 * @param season
 	 *            赛季
+	 * @param type
+	 *            比赛类型
 	 * @param date
 	 *            日期
 	 * @param homeTeam
@@ -56,7 +57,7 @@ public interface MatchDataService {
 	 *            客队（缩写）
 	 * @return 符合条件的比赛列表
 	 */
-	public ArrayList<MatchVO> getMatchData(String season, String date,
-			String homeTeam, String visitingTeam);
+	public ArrayList<MatchVO> getMatchData(String season, String type,
+			String date, String homeTeam, String visitingTeam);
 
 }
