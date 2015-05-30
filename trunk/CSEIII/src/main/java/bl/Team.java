@@ -40,7 +40,7 @@ public class Team implements TeamBLService {
 	public Team() {
 		teamData = new TeamData();
 		match = new Match();
-		matchList = match.getMatchData("all", "all", "all", "all");
+		matchList = match.getMatchData("all", "all","all", "all", "all");
 		matches = changeMatchListToMap(matchList);
 		teamBaseList = getTeamBaseInfo();
 		teamsBaseInfo = changeListToMap(teamBaseList);
