@@ -17,6 +17,8 @@ public interface MatchBLService {
 	 * 
 	 * @param season
 	 *            赛季
+	 * @param type
+	 *            比赛类型
 	 * @param date
 	 *            日期
 	 * @param homeTeam
@@ -25,8 +27,8 @@ public interface MatchBLService {
 	 *            客队
 	 * @return 符合条件的比赛列表
 	 */
-	public ArrayList<MatchVO> getMatchData(String season, String date,
-			String homeTeam, String visitingTeam);
+	public ArrayList<MatchVO> getMatchData(String season, String type,
+			String date, String homeTeam, String visitingTeam);
 
 	/**
 	 * 根据球队名得到该球队参加过的所有比赛
