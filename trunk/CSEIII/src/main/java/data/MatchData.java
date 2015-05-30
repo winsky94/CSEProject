@@ -34,10 +34,11 @@ public class MatchData implements MatchDataService {
 
 	public static void main(String[] args) {
 		MatchData matchData = new MatchData();
-		// matchDataReader.exportToSql();
-		System.out.println("MatchData.main()");
-		ArrayList<MatchVO> result = matchData.getMatchesByTeam("CHA");
-		System.out.println(result.size());
+		matchData.exportToSql();
+//		System.out.println("MatchData.main()");
+//		ArrayList<MatchVO> result = matchData.getMatchData("all", "all",
+//				"all", "all");
+//		System.out.println(result.size());
 	}
 
 	public ArrayList<String> getAllSeasons() {
@@ -254,6 +255,11 @@ public class MatchData implements MatchDataService {
 				query = query + " visitingTeam like '%" + visitingTeam + "%'";
 				flag = 1;
 			}
+		}
+
+		if (season.equals("all") && date.equals("all")
+				&& homeTeam.equals("all") && visitingTeam.equals("all")) {
+			query = "select * from matches";
 		}
 
 		try {
