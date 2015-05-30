@@ -3,6 +3,7 @@ package dataservice;
 import java.util.ArrayList;
 
 import vo.MatchVO;
+import vo.RecordVO;
 
 public interface MatchDataService {
 
@@ -29,7 +30,18 @@ public interface MatchDataService {
 	 *            球队名（缩写）
 	 * @return 比赛列表
 	 */
-	public ArrayList<MatchVO> getMatchesByTeam(String name);
+	public ArrayList<MatchVO> getMatchesByTeam(String season,String name);
+	
+	/**
+	 * 
+	 * @param season 
+	 *         赛季
+	 * @param name
+	 *         名字
+	 * @return
+	 */
+    public ArrayList<RecordVO> getPlayerRecord(String season,String name);
+    
 
 	/**
 	 * 得到比赛数据
