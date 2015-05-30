@@ -1,10 +1,5 @@
 package bl;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -13,7 +8,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.jar.Attributes.Name;
 
 import javax.swing.ImageIcon;
 
@@ -31,6 +25,8 @@ public class Player  {
 	Map<String, PlayerVO> players = new HashMap<String, PlayerVO>(32);
 	Map<String, TeamVO> teams;
 	Map<Integer, MatchVO> matches = new HashMap<Integer, MatchVO>(1024);
+	ArrayList<PlayerVO> playersAverage;
+	boolean isCalculateAverage=false;
 	
     public Player(){
     	PlayerDataService player=new PlayerData();
@@ -606,6 +602,11 @@ public class Player  {
 
 	public ArrayList<PlayerVO> getPlayerAverageInfo() {
 
+		if(isCalculateAverage==true){
+			Collections.sort(playersAverage, new SequenceOfPlayer());
+			return playersAverage;
+		}
+		
 		Map<String, PlayerVO> theSeasonPlayers=new HashMap<String, PlayerVO>(32);
 		ArrayList<PlayerVO> result=new ArrayList<PlayerVO>();
 		ArrayList<PlayerVO> buffer;
@@ -692,6 +693,8 @@ public class Player  {
 			result.add(newPlayer);
 		}
 		
+		playersAverage=result;
+		isCalculateAverage=true;
 		return result;
 	}
 
@@ -1139,7 +1142,6 @@ public class Player  {
 		}
 		return result;
 	}
-	
 	
 
 	private int convertMinuteToSecond(String s) {
