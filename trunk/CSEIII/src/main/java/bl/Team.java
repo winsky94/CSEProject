@@ -23,7 +23,8 @@ public class Team implements TeamBLService {
 	private ArrayList<TeamVO> teamBaseList = new ArrayList<TeamVO>();
 	private Map<String, TeamVO> teamsBaseInfo = new LinkedHashMap<String, TeamVO>();
 	private ArrayList<MatchVO> matchList = new ArrayList<MatchVO>();
-	private Map<String, Map<String, MatchVO>> matches= new LinkedHashMap<String, Map<String, MatchVO>>();;
+	private Map<String, Map<String, MatchVO>> matches = new LinkedHashMap<String, Map<String, MatchVO>>();
+	private Map<String, Map<String, MatchVO>> allMatch = new LinkedHashMap<String, Map<String, MatchVO>>();;
 	private MatchBLService match;
 	private Boolean isSeason = false;
 	private Map<String, TeamVO> teamAverageInfo = new LinkedHashMap<String, TeamVO>();
@@ -40,8 +41,9 @@ public class Team implements TeamBLService {
 	public Team() {
 		teamData = new TeamData();
 		match = new Match();
-		matchList = match.getMatchData("all", "all","all", "all", "all");
+		matchList = match.getMatchData("all", "all", "all", "all", "all");
 		matches = changeMatchListToMap(matchList);
+		allMatch = matches;
 		teamBaseList = getTeamBaseInfo();
 		teamsBaseInfo = changeListToMap(teamBaseList);
 	}
@@ -51,7 +53,7 @@ public class Team implements TeamBLService {
 		return teamBaseList;
 	}
 
-	public ArrayList<TeamVO> getTeamSeasonInfo(String season) {
+	public ArrayList<TeamVO> getTeamSeasonInfo(String season, String type) {
 		// TODO 自动生成的方法存根
 		ArrayList<TeamVO> result = new ArrayList<TeamVO>();
 		Iterator<Entry<String, TeamVO>> iter = teamsBaseInfo.entrySet()
@@ -61,7 +63,7 @@ public class Team implements TeamBLService {
 					.next();
 			TeamVO vo = (TeamVO) entry.getValue();
 
-			TeamVO teamVO = calculateTeamInfo(vo, season);
+			TeamVO teamVO = calculateTeamInfo(vo, season, type);
 			if (teamVO != null) {
 				result.add(teamVO);
 			}
@@ -69,9 +71,9 @@ public class Team implements TeamBLService {
 		return result;
 	}
 
-	public ArrayList<TeamVO> getTeamAverageInfo() {
+	public ArrayList<TeamVO> getTeamAverageInfo(String type) {
 		// TODO 自动生成的方法存根
-		calculateTeamAverageInfo();
+		calculateTeamAverageInfo(type);
 		ArrayList<TeamVO> result = changeMapToList(teamAverageInfo);
 		return result;
 	}
@@ -83,7 +85,8 @@ public class Team implements TeamBLService {
 		return result;
 	}
 
-	public ArrayList<TeamVO> getTeamSeasonInfo(String season, String name) {
+	public ArrayList<TeamVO> getTeamSeasonInfo(String season, String type,
+			String name) {
 		// TODO 自动生成的方法存根
 		ArrayList<TeamVO> result = new ArrayList<TeamVO>();
 		Iterator<Entry<String, TeamVO>> iter = teamsBaseInfo.entrySet()
@@ -111,7 +114,7 @@ public class Team implements TeamBLService {
 				continue;
 			}
 
-			TeamVO teamVO = calculateTeamInfo(vo, season);
+			TeamVO teamVO = calculateTeamInfo(vo, season, type);
 			if (teamVO != null) {
 				result.add(teamVO);
 			}
@@ -119,7 +122,7 @@ public class Team implements TeamBLService {
 		return result;
 	}
 
-	public ArrayList<TeamVO> getTeamAverageInfo(String name) {
+	public ArrayList<TeamVO> getTeamAverageInfo(String type, String name) {
 		// TODO 自动生成的方法存根
 		ArrayList<TeamVO> result = new ArrayList<TeamVO>();
 		Iterator<Entry<String, TeamVO>> iter = teamsBaseInfo.entrySet()
@@ -146,7 +149,7 @@ public class Team implements TeamBLService {
 				// 当前球队不是我要的球队，就跳过他不进行计算
 				continue;
 			}
-			TeamVO teamVO = calculateTeamInfo(vo, "all");
+			TeamVO teamVO = calculateTeamInfo(vo, "all", type);
 			if (teamVO != null) {
 				result.add(teamVO);
 			}
@@ -155,12 +158,12 @@ public class Team implements TeamBLService {
 	}
 
 	public ArrayList<TeamVO> getOrderedTeamsBySeason(String season,
-			String condition, String order, int num) {
+			String type, String condition, String order, int num) {
 		// TODO 自动生成的方法存根
 		if (num < 0) {
 			num = 30;
 		}
-		ArrayList<TeamVO> teams = getTeamSeasonInfo(season);
+		ArrayList<TeamVO> teams = getTeamSeasonInfo(season, type);
 		// 未明确写明排序方式时默认是升序
 		if (order == null || order.equals("null")) {
 			order = "asc";
@@ -173,13 +176,13 @@ public class Team implements TeamBLService {
 		return result;
 	}
 
-	public ArrayList<TeamVO> getOrderedTeamsByAverage(String condition,
-			String order, int num) {
+	public ArrayList<TeamVO> getOrderedTeamsByAverage(String type,
+			String condition, String order, int num) {
 		// TODO 自动生成的方法存根
 		if (num < 0) {
 			num = 30;
 		}
-		ArrayList<TeamVO> teams = getTeamAverageInfo();
+		ArrayList<TeamVO> teams = getTeamAverageInfo(type);
 		// 未明确写明排序方式时默认是升序
 		if (order == null || order.equals("null")) {
 			order = "asc";
@@ -223,7 +226,7 @@ public class Team implements TeamBLService {
 			num = 30;
 		}
 		ArrayList<TeamVO> result = new ArrayList<TeamVO>();
-		ArrayList<TeamVO> teamSeasonInfo = getTeamAverageInfo();
+		ArrayList<TeamVO> teamSeasonInfo = getTeamAverageInfo("all");
 		Collections.sort(teamSeasonInfo, new SequenceOfTeam(column, "desc"));
 
 		for (int i = 0; i < num; i++) {
@@ -273,7 +276,7 @@ public class Team implements TeamBLService {
 		}
 	}
 
-	private TeamVO calculateTeamInfo(TeamVO vo, String season) {
+	private TeamVO calculateTeamInfo(TeamVO vo, String season, String type) {
 		String teamName = vo.getTeamName();
 		String team = vo.getAbLocation();
 		String location = vo.getLocation();
@@ -339,7 +342,7 @@ public class Team implements TeamBLService {
 			int flag = 0;
 
 			// ====================================
-			matches = changeMatchListToMap(matchList);
+			matches = allMatch;
 
 			Iterator<Entry<String, Map<String, MatchVO>>> iter = matches
 					.entrySet().iterator();
@@ -365,9 +368,10 @@ public class Team implements TeamBLService {
 			}
 		} else {
 			// ====================================
-			matches = changeMatchListToMap(matchList);
+			matches = allMatch;
 
 			allMatches = matches.get(season);
+
 		}
 		if (allMatches != null) {
 			Iterator<Entry<String, MatchVO>> allMatchIter = allMatches
@@ -376,6 +380,13 @@ public class Team implements TeamBLService {
 				Map.Entry<String, MatchVO> matchEntry = (Map.Entry<String, MatchVO>) allMatchIter
 						.next();
 				MatchVO matchVO = (MatchVO) matchEntry.getValue();
+				// 筛选比赛类型
+				String currentType = matchVO.getType();
+				if (!type.equals("all")) {
+					if (!currentType.equals(type)) {
+						continue;
+					}
+				}
 				testSeason = matchVO.getSeason();
 				int homeScore = matchVO.getHomeScore();
 				int visitingScore = matchVO.getVisitingScore();
@@ -582,7 +593,7 @@ public class Team implements TeamBLService {
 	 * 
 	 * @return
 	 */
-	private void calculateTeamAverageInfo() {
+	private void calculateTeamAverageInfo(String type) {
 		// TODO 自动生成的方法存根
 		Iterator<Entry<String, TeamVO>> iter = teamsBaseInfo.entrySet()
 				.iterator();
@@ -591,7 +602,7 @@ public class Team implements TeamBLService {
 					.next();
 			TeamVO vo = (TeamVO) entry.getValue();
 			String abLocation = vo.getAbLocation();
-			TeamVO teamVO = calculateTeamInfo(vo, "all");
+			TeamVO teamVO = calculateTeamInfo(vo, "all", type);
 			if (teamVO != null) {
 				if (isSeason && abLocation.equals("NOP")) {
 					abLocation = "NOH";
