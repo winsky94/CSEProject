@@ -97,7 +97,7 @@ public class MatchVO {
 		this.matchID = id;
 	}
 
-	public MatchVO(String season, String date, String type,
+	public MatchVO(int id,String season, String date, String type,
 			String visitingTeam, String homeTeam, int visitingScore,
 			int homeScore, int partNum, ArrayList<String> detailScores,
 			ArrayList<RecordVO> records) {
