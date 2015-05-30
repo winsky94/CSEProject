@@ -74,6 +74,7 @@ public class MatchData implements MatchDataService {
 			while (resultSet.next()) {
 				int matchID = resultSet.getInt("matchID");
 				String date = resultSet.getString("date");
+				String type = resultSet.getString("type");
 				String visitingTeam = resultSet.getString("visitingTeam");
 				String homeTeam = resultSet.getString("homeTeam");
 				int visitingScore = resultSet.getInt("visitingScore");
@@ -103,10 +104,13 @@ public class MatchData implements MatchDataService {
 							rs2.getString("presentTime"),
 							rs2.getInt("shootHitNum"),
 							rs2.getInt("shootAttemptNum"),
+							rs2.getDouble("shootHitRate"),
 							rs2.getInt("threeHitNum"),
 							rs2.getInt("threeAttemptNum"),
+							rs2.getDouble("threeHitRate"),
 							rs2.getInt("freeThrowHitNum"),
 							rs2.getInt("freeThrowAttemptNum"),
+							rs2.getDouble("freeThrowHitRate"),
 							rs2.getInt("offenReboundNum"),
 							rs2.getInt("defenReboundNum"),
 							rs2.getInt("reboundNum"), rs2.getInt("assistNum"),
@@ -118,7 +122,7 @@ public class MatchData implements MatchDataService {
 				rs2.close();
 				sql2.close();
 
-				MatchVO matchVO = new MatchVO(season, date, visitingTeam,
+				MatchVO matchVO = new MatchVO(season, date, type, visitingTeam,
 						homeTeam, visitingScore, homeScore, detailScores,
 						records);
 				result.add(matchVO);
@@ -145,6 +149,7 @@ public class MatchData implements MatchDataService {
 				int matchID = resultSet.getInt("matchID");
 				String season = resultSet.getString("season");
 				String date = resultSet.getString("date");
+				String type=resultSet.getString("type");
 				String visitingTeam = resultSet.getString("visitingTeam");
 				String homeTeam = resultSet.getString("homeTeam");
 				int visitingScore = resultSet.getInt("visitingScore");
@@ -174,10 +179,13 @@ public class MatchData implements MatchDataService {
 							rs2.getString("presentTime"),
 							rs2.getInt("shootHitNum"),
 							rs2.getInt("shootAttemptNum"),
+							rs2.getDouble("shootHitRate"),
 							rs2.getInt("threeHitNum"),
 							rs2.getInt("threeAttemptNum"),
+							rs2.getDouble("threeHitRate"),
 							rs2.getInt("freeThrowHitNum"),
 							rs2.getInt("freeThrowAttemptNum"),
+							rs2.getDouble("freeThrowHitRate"),
 							rs2.getInt("offenReboundNum"),
 							rs2.getInt("defenReboundNum"),
 							rs2.getInt("reboundNum"), rs2.getInt("assistNum"),
@@ -189,7 +197,7 @@ public class MatchData implements MatchDataService {
 				rs2.close();
 				sql2.close();
 
-				MatchVO matchVO = new MatchVO(season, date, visitingTeam,
+				MatchVO matchVO = new MatchVO(season, date, type, visitingTeam,
 						homeTeam, visitingScore, homeScore, detailScores,
 						records);
 				result.add(matchVO);
@@ -215,6 +223,7 @@ public class MatchData implements MatchDataService {
 		String date = null;// 比赛日期
 		String teams = null;// 对阵队伍
 		String score = null;// 比分
+		String type = null; // 比赛类型
 
 		ArrayList<String> detailScores = new ArrayList<String>();// 各节比分
 		ArrayList<RecordVO> records = new ArrayList<RecordVO>();// 球员比分数据记录
@@ -236,6 +245,7 @@ public class MatchData implements MatchDataService {
 			date = fisrtContent[0];
 			teams = fisrtContent[1];
 			score = fisrtContent[2];
+			type = fisrtContent[3];
 
 			temp = br.readLine();
 			String[] scoresData = temp.split(";");
@@ -249,10 +259,13 @@ public class MatchData implements MatchDataService {
 			String presentTime = null;// 在场时间
 			int shootHitNum = 0;// 投篮命中数
 			int shootAttemptNum = 0;// 投篮出手数
+			double shootHitRate = 0;// 投篮命中率
 			int threeHitNum = 0;// 三分命中数
 			int threeAttemptNum = 0;// 三分出手数
+			double threeHitRate = 0;// 三分命中率
 			int freeThrowHitNum = 0;// 罚球命中数
 			int freeThrowAttemptNum = 0;// 罚球出手数
+			double freeThrowHitRate = 0;// 罚球命中率
 			int offenReboundNum = 0;// 进攻（前场）篮板数
 			int defenReboundNum = 0;// 防守（后场）篮板数
 			int reboundNum = 0;// 总篮板数
@@ -273,38 +286,67 @@ public class MatchData implements MatchDataService {
 					String[] line = temp.split(";");
 					playerName = line[0];
 					position = line[1];
-					presentTime = DirtyDataManager.checkPresentTime(fileName,
-							team, playerName, line[2]);// 在场时间
+					presentTime = line[2];// 在场时间
 					shootHitNum = Integer.parseInt(line[3]);// 投篮命中数
-					shootAttemptNum = DirtyDataManager.checkShootAndHitNum(
-							fileName, Integer.parseInt(line[4]), shootHitNum);// 投篮出手数
-					threeHitNum = Integer.parseInt(line[5]);// 三分命中数
-					threeAttemptNum = DirtyDataManager.checkShootAndHitNum(
-							fileName, Integer.parseInt(line[6]), threeHitNum);// 三分出手数
-					freeThrowHitNum = Integer.parseInt(line[7]);// 罚球命中数
-					freeThrowAttemptNum = DirtyDataManager.checkShootAndHitNum(
-							fileName, Integer.parseInt(line[8]),
-							freeThrowHitNum);// 罚球出手数
-					offenReboundNum = Integer.parseInt(line[9]);// 进攻（前场）篮板数
-					defenReboundNum = Integer.parseInt(line[10]);// 防守（后场）篮板数
-					reboundNum = DirtyDataManager.checkReboundNum(fileName,
-							offenReboundNum, defenReboundNum,
-							Integer.parseInt(line[11]));// 总篮板数
-					assistNum = Integer.parseInt(line[12]);// 助攻数
-					stealNum = Integer.parseInt(line[13]);// 抢断数
-					blockNum = Integer.parseInt(line[14]);// 盖帽数
-					turnOverNum = Integer.parseInt(line[15]);// 失误数
-					foulNum = Integer.parseInt(line[16]);// 犯规数
-					personScore = DirtyDataManager.checkPersonScore(fileName,
-							line[17], temp);// 个人得分
+					shootAttemptNum = Integer.parseInt(line[4]);// 投篮出手数
+					shootHitRate = Integer.parseInt(line[5]);
+					threeHitNum = Integer.parseInt(line[6]);// 三分命中数
+					threeAttemptNum = Integer.parseInt(line[7]);// 三分出手数
+					threeHitRate = Integer.parseInt(line[8]);
+					freeThrowHitNum = Integer.parseInt(line[9]);// 罚球命中数
+					freeThrowAttemptNum = Integer.parseInt(line[10]);// 罚球出手数
+					freeThrowHitRate = Integer.parseInt(line[11]);
+					offenReboundNum = Integer.parseInt(line[12]);// 进攻（前场）篮板数
+					defenReboundNum = Integer.parseInt(line[13]);// 防守（后场）篮板数
+					reboundNum = Integer.parseInt(line[14]);// 总篮板数
+					assistNum = Integer.parseInt(line[15]);// 助攻数
+					stealNum = Integer.parseInt(line[16]);// 抢断数
+					blockNum = Integer.parseInt(line[17]);// 盖帽数
+					turnOverNum = Integer.parseInt(line[18]);// 失误数
+					foulNum = Integer.parseInt(line[19]);// 犯规数
+					personScore = Integer.parseInt(line[20]);// 个人得分
+					// String[] line = temp.split(";");
+					// playerName = line[0];
+					// position = line[1];
+					// presentTime = DirtyDataManager.checkPresentTime(fileName,
+					// team, playerName, line[2]);// 在场时间
+					// shootHitNum = Integer.parseInt(line[3]);// 投篮命中数
+					// shootAttemptNum = DirtyDataManager.checkShootAndHitNum(
+					// fileName, Integer.parseInt(line[4]), shootHitNum);//
+					// 投篮出手数
+					// shootHitRate = Integer.parseInt(line[5]);
+					// threeHitNum = Integer.parseInt(line[6]);// 三分命中数
+					// threeAttemptNum = DirtyDataManager.checkShootAndHitNum(
+					// fileName, Integer.parseInt(line[7]), threeHitNum);//
+					// 三分出手数
+					// threeHitRate =Integer.parseInt(line[8]);
+					// freeThrowHitNum = Integer.parseInt(line[9]);// 罚球命中数
+					// freeThrowAttemptNum =
+					// DirtyDataManager.checkShootAndHitNum(
+					// fileName, Integer.parseInt(line[10]),
+					// freeThrowHitNum);// 罚球出手数
+					// freeThrowHitRate=Integer.parseInt(line[11]);
+					// offenReboundNum = Integer.parseInt(line[12]);// 进攻（前场）篮板数
+					// defenReboundNum = Integer.parseInt(line[13]);// 防守（后场）篮板数
+					// reboundNum = DirtyDataManager.checkReboundNum(fileName,
+					// offenReboundNum, defenReboundNum,
+					// Integer.parseInt(line[14]));// 总篮板数
+					// assistNum = Integer.parseInt(line[15]);// 助攻数
+					// stealNum = Integer.parseInt(line[16]);// 抢断数
+					// blockNum = Integer.parseInt(line[17]);// 盖帽数
+					// turnOverNum = Integer.parseInt(line[18]);// 失误数
+					// foulNum = Integer.parseInt(line[19]);// 犯规数
+					// personScore = DirtyDataManager.checkPersonScore(fileName,
+					// line[20], temp);// 个人得分
 
 					isComplete = true;
 				}
 				if (isComplete) {
 					RecordVO recordPO = new RecordVO(team, playerName,
 							position, presentTime, shootHitNum,
-							shootAttemptNum, threeHitNum, threeAttemptNum,
-							freeThrowHitNum, freeThrowAttemptNum,
+							shootAttemptNum, shootHitRate, threeHitNum,
+							threeAttemptNum, threeHitRate, freeThrowHitNum,
+							freeThrowAttemptNum, freeThrowHitRate,
 							offenReboundNum, defenReboundNum, reboundNum,
 							assistNum, stealNum, blockNum, turnOverNum,
 							foulNum, personScore);
@@ -328,8 +370,8 @@ public class MatchData implements MatchDataService {
 		int visitingScore = Integer.parseInt(s[0]);
 		int homeScore = Integer.parseInt(s[1]);
 
-		matchPO = new MatchVO(count, season, date, visitingTeam, homeTeam,
-				visitingScore, homeScore, detailScores, records);
+		matchPO = new MatchVO(count, season, date, type, visitingTeam,
+				homeTeam, visitingScore, homeScore, detailScores, records);
 		count++;
 		return matchPO;
 	}
@@ -367,6 +409,7 @@ public class MatchData implements MatchDataService {
 			sql.execute("create table matches(matchID int not null auto_increment,"
 					+ "season varchar(20) not null default 'null',"
 					+ "date varchar(20) not null default 'null',"
+					+ "type varchar(20) not null default 'null',"
 					+ "visitingTeam varchar(20) not null default 'null',"
 					+ "visitingScore int not null default 0,"
 					+ "homeTeam varchar(20) not null default 'null',"
@@ -386,15 +429,19 @@ public class MatchData implements MatchDataService {
 					+ "team varchar(20) not null default 'null',"
 					+ "season varchar(20) not null default 'null',"
 					+ "date varchar(20) not null default 'null',"
+					+ "type varchar(20) not null default 'null',"
 					+ "playerName varchar(40) not null default 'null',"
 					+ "presentTime varchar(20) not null default 'null',"
 					+ "position varchar(20) not null default 'null',"
 					+ "shootHitNum int not null default 0,"
 					+ "shootAttemptNum int not null default 0,"
+					+ "shootHitRate double not null default 0,"
 					+ "threeHitNum int not null default 0,"
 					+ "threeAttemptNum int not null default 0,"
+					+ "threeHitRate double not null default 0,"
 					+ "freeThrowHitNum int not null default 0,"
 					+ "freeThrowAttemptNum int not null default 0,"
+					+ "freeThrowHitRate double not null default 0,"
 					+ "offenReboundNum int not null default 0,"
 					+ "defenReboundNum int not null default 0,"
 					+ "reboundNum int not null default 0,"
@@ -414,41 +461,42 @@ public class MatchData implements MatchDataService {
 
 			sql.close();
 			PreparedStatement matchesStatement = con
-					.prepareStatement("INSERT INTO matches VALUES(?,?,?,?,?,?,?,?)");
+					.prepareStatement("INSERT INTO matches VALUES(?,?,?,?,?,?,?,?,?)");
 			PreparedStatement detailScoreStatement = con
 					.prepareStatement("INSERT INTO detailScores VALUES(?, ?,?,?)");
 			PreparedStatement recordsStatement = con
-					.prepareStatement("INSERT INTO records VALUES(?, ?, ?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+					.prepareStatement("INSERT INTO records VALUES(?, ?, ?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
 
-			for (MatchVO matchPO : matches) {
+			for (MatchVO matchVO : matches) {
 				// 向matches表中插入数据
-				String visitingTeam = matchPO.getVisitingTeam();
-				String homeTeam = matchPO.getHomeTeam();
-				int visitingScore = matchPO.getVisitingScore();
-				int homeScore = matchPO.getHomeScore();
-				int parts = matchPO.getDetailScores().size();
+				String visitingTeam = matchVO.getVisitingTeam();
+				String homeTeam = matchVO.getHomeTeam();
+				int visitingScore = matchVO.getVisitingScore();
+				int homeScore = matchVO.getHomeScore();
+				int parts = matchVO.getDetailScores().size();
 				if (parts <= 4) {
 					time = 48;
 				} else {
 					time = 48 + (parts - 4) * 5;
 				}
 				time = time * 60;
-				matchesStatement.setInt(1, matchPO.getMatchID());
-				matchesStatement.setString(2, matchPO.getSeason());
-				matchesStatement.setString(3, matchPO.getDate());
-				matchesStatement.setString(4, visitingTeam);
-				matchesStatement.setInt(5, visitingScore);
-				matchesStatement.setString(6, homeTeam);
-				matchesStatement.setInt(7, homeScore);
-				matchesStatement.setInt(8, time);
+				matchesStatement.setInt(1, matchVO.getMatchID());
+				matchesStatement.setString(2, matchVO.getSeason());
+				matchesStatement.setString(3, matchVO.getDate());
+				matchesStatement.setString(4, matchVO.getType());
+				matchesStatement.setString(5, visitingTeam);
+				matchesStatement.setInt(6, visitingScore);
+				matchesStatement.setString(7, homeTeam);
+				matchesStatement.setInt(8, homeScore);
+				matchesStatement.setInt(9, time);
 				matchesStatement.addBatch();
 
 				// 向detailScores表中插入数据
-				ArrayList<String> detailScore = matchPO.getDetailScores();
+				ArrayList<String> detailScore = matchVO.getDetailScores();
 				int partIndex = 1;
 				for (String s : detailScore) {
 					detailScoreStatement.setInt(1, scoreIndex);
-					detailScoreStatement.setInt(2, matchPO.getMatchID());
+					detailScoreStatement.setInt(2, matchVO.getMatchID());
 					detailScoreStatement.setInt(3, partIndex);
 					detailScoreStatement.setString(4, s);
 					detailScoreStatement.addBatch();
@@ -457,33 +505,36 @@ public class MatchData implements MatchDataService {
 				}
 
 				// 向records表中插入数据
-				ArrayList<RecordVO> records = matchPO.getRecords();
+				ArrayList<RecordVO> records = matchVO.getRecords();
 				for (RecordVO recordPO : records) {
 					recordsStatement.setInt(1, recordIndex);
-					recordsStatement.setInt(2, matchPO.getMatchID());
+					recordsStatement.setInt(2, matchVO.getMatchID());
 					recordsStatement.setString(3, recordPO.getTeam());
-					recordsStatement.setString(4, matchPO.getSeason());
-					recordsStatement.setString(5, matchPO.getDate());
-
-					recordsStatement.setString(6, recordPO.getPlayerName());
-					recordsStatement.setString(7, recordPO.getPresentTime());
-					recordsStatement.setString(8, recordPO.getPosition());
-					recordsStatement.setInt(9, recordPO.getShootHitNum());
-					recordsStatement.setInt(10, recordPO.getShootAttemptNum());
-					recordsStatement.setInt(11, recordPO.getThreeHitNum());
-					recordsStatement.setInt(12, recordPO.getThreeAttemptNum());
-					recordsStatement.setInt(13, recordPO.getFreeThrowHitNum());
-					recordsStatement.setInt(14,
+					recordsStatement.setString(4, matchVO.getSeason());
+					recordsStatement.setString(5, matchVO.getDate());
+					recordsStatement.setString(6, matchVO.getType());
+					recordsStatement.setString(7, recordPO.getPlayerName());
+					recordsStatement.setString(8, recordPO.getPresentTime());
+					recordsStatement.setString(9, recordPO.getPosition());
+					recordsStatement.setInt(10, recordPO.getShootHitNum());
+					recordsStatement.setInt(11, recordPO.getShootAttemptNum());
+					recordsStatement.setDouble(12, recordPO.getShootHitRate());
+					recordsStatement.setInt(13, recordPO.getThreeHitNum());
+					recordsStatement.setInt(14, recordPO.getThreeAttemptNum());
+					recordsStatement.setDouble(15, recordPO.getThreeHitRate());
+					recordsStatement.setInt(16, recordPO.getFreeThrowHitNum());
+					recordsStatement.setInt(17,
 							recordPO.getFreeThrowAttemptNum());
-					recordsStatement.setInt(15, recordPO.getOffenReboundNum());
-					recordsStatement.setInt(16, recordPO.getDefenReboundNum());
-					recordsStatement.setInt(17, recordPO.getReboundNum());
-					recordsStatement.setInt(18, recordPO.getAssistNum());
-					recordsStatement.setInt(19, recordPO.getStealNum());
-					recordsStatement.setInt(20, recordPO.getBlockNum());
-					recordsStatement.setInt(21, recordPO.getTurnOverNum());
-					recordsStatement.setInt(22, recordPO.getFoulNum());
-					recordsStatement.setInt(23, recordPO.getScore());
+					recordsStatement.setDouble(18, recordPO.getFreeThrowHitRate());
+					recordsStatement.setInt(19, recordPO.getOffenReboundNum());
+					recordsStatement.setInt(20, recordPO.getDefenReboundNum());
+					recordsStatement.setInt(21, recordPO.getReboundNum());
+					recordsStatement.setInt(22, recordPO.getAssistNum());
+					recordsStatement.setInt(23, recordPO.getStealNum());
+					recordsStatement.setInt(24, recordPO.getBlockNum());
+					recordsStatement.setInt(25, recordPO.getTurnOverNum());
+					recordsStatement.setInt(26, recordPO.getFoulNum());
+					recordsStatement.setInt(27, recordPO.getScore());
 					recordsStatement.addBatch();
 					recordIndex++;
 				}
