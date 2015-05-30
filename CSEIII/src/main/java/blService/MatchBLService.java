@@ -40,6 +40,6 @@ public interface MatchBLService {
 	 *            球队名（缩写）
 	 * @return 比赛列表
 	 */
-	public ArrayList<MatchVO> getMatchesByTeam(String season, String name);// 可以模糊
+	public ArrayList<MatchVO> getMatchesByTeam(String season,String size, String name);// 可以模糊
 
 }
