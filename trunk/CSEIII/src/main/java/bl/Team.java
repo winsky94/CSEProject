@@ -38,6 +38,57 @@ public class Team implements TeamBLService {
 			"OKC", "NOP", "POR", "BOS", "BKN", "NYK", "PHI", "TOR", "CHI",
 			"CLE", "DET", "IND", "MIL", "ATL", "CHA", "MIA", "ORL", "WAS" };
 
+	public static void main(String[] args) {
+		System.out.println("Team.main()");
+		ArrayList<TeamVO> result = new ArrayList<TeamVO>();
+		TeamBLService team = new Team();
+		// result = team.getTeamBaseInfo();
+		// result = team.getTeamAverageInfo("all");
+		// result = team.getTeamAverageInfo("Playoff", "NOP");
+		// result=team.getTeamSeasonInfo("12-13", "Team");
+		// result=team.getTeamSeasonInfo("12-13", "Playoff", "NOP");
+		// result=team.getOrderedTeamsByAverage( "all", "score", "desc", 5);
+		result = team.getSeasonHotTeam("12-13", "score", 5);
+		System.out.println("结果大小：" + result.size());
+
+		for (TeamVO vo : result) {
+			System.out.println(vo.getAbLocation() + " " + vo.getScore());
+			// System.out.println(vo.getAbLocation());
+			// System.out.println("winRate：" + vo.getWinRate());
+			// System.out.println("shootHitNum：" + vo.getShootHitNum());
+			// System.out.println("shootAttemptNum：" + vo.getShootAttemptNum());
+			// System.out.println("threeHitNum：" + vo.getThreeHitNum());
+			// System.out.println("threeAttemptNum：" + vo.getThreeAttemptNum());
+			// System.out.println("freeThrowHitNum：" + vo.getFreeThrowHitNum());
+			// System.out.println("freeThrowAttemptNum："
+			// + vo.getFreeThrowAttemptNum());
+			// System.out.println("offenReboundNum：" + vo.getOffenReboundNum());
+			// System.out.println("defenReboundNum：" + vo.getDefenReboundNum());
+			// System.out.println("reboundNum：" + vo.getReboundNum());
+			// System.out.println("assistNum：" + vo.getAssistNum());
+			// System.out.println("stealNum：" + vo.getStealNum());
+			// System.out.println("blockNum：" + vo.getBlockNum());
+			// System.out.println("turnOverNum：" + vo.getTurnOverNum());
+			// System.out.println("foulNum：" + vo.getFoulNum());
+			// System.out.println("score：" + vo.getScore());
+			// System.out.println("shootHitRate:" + vo.getShootHitRate());
+			// System.out.println("threeHitRate:" + vo.getThreeHitRate());
+			// System.out.println("freeThrowHitRate:" +
+			// vo.getFreeThrowHitRate());
+			// System.out.println("offenRound:" + vo.getOffenRound());
+			// System.out.println("offenEfficiency:" + vo.getOffenEfficiency());
+			// System.out.println("defenEfficiency:" + vo.getDefenEfficiency());
+			// System.out.println("offenReboundEfficiency:"
+			// + vo.getOffenReboundEfficiency());
+			// System.out.println("defenReboundEfficiency:"
+			// + vo.getDefenReboundEfficiency());
+			// System.out.println("stealEfficiency:" + vo.getStealEfficiency());
+			// System.out.println("assistRate:" + vo.getAssistRate());
+			System.out.println("----------------------------------");
+
+		}
+	}
+
 	public Team() {
 		teamData = new TeamData();
 		match = new Match();
@@ -50,7 +101,9 @@ public class Team implements TeamBLService {
 
 	public ArrayList<TeamVO> getTeamBaseInfo() {
 		// TODO 自动生成的方法存根
-		return teamBaseList;
+		ArrayList<TeamVO> result = new ArrayList<TeamVO>();
+		result = teamData.getTeamBaseInfo();
+		return result;
 	}
 
 	public ArrayList<TeamVO> getTeamSeasonInfo(String season, String type) {
@@ -287,6 +340,7 @@ public class Team implements TeamBLService {
 		int setUpTime = vo.getSetUpTime();
 
 		String testSeason = "";
+		boolean isCalculate = false;// 标记是否有参加过比赛，防止有球队没有参加这种类型的比赛但是仍对其检索
 
 		int matchesNum = 0; // 比赛场数
 		int winNum = 0;
@@ -354,6 +408,7 @@ public class Team implements TeamBLService {
 				} else {
 					Map<String, MatchVO> map = new HashMap<String, MatchVO>();
 					map = entry.getValue();
+
 					Iterator<Entry<String, MatchVO>> matchIterator = map
 							.entrySet().iterator();
 					while (matchIterator.hasNext()) {
@@ -369,10 +424,9 @@ public class Team implements TeamBLService {
 		} else {
 			// ====================================
 			matches = allMatch;
-
 			allMatches = matches.get(season);
-
 		}
+
 		if (allMatches != null) {
 			Iterator<Entry<String, MatchVO>> allMatchIter = allMatches
 					.entrySet().iterator();
@@ -421,6 +475,7 @@ public class Team implements TeamBLService {
 					}
 				}
 				if (isHomeTeam || isVisitingTeam) {
+					isCalculate = true;
 					int perShootAttemptNum = 0;
 					int perFreeThrowAttemptNum = 0;
 					int perOffenReboundNum = 0;
@@ -430,7 +485,14 @@ public class Team implements TeamBLService {
 
 					ArrayList<RecordVO> records = matchVO.getRecords();
 					for (RecordVO recordVO : records) {
-						if (recordVO.getTeam().equals(team)) {
+						boolean isRecord = false;
+						if (team.equals("NOP") || team.equals("NOH")) {
+							isRecord = recordVO.getTeam().equals("NOP")
+									|| recordVO.getTeam().equals("NOH");
+						} else {
+							isRecord = recordVO.getTeam().equals(team);
+						}
+						if (isRecord) {
 							shootHitNum += recordVO.getShootHitNum(); // 投篮命中数
 							shootAttemptNum += recordVO.getShootAttemptNum(); // 投篮出手次数
 							threeHitNum += recordVO.getThreeHitNum(); // 三分命中数
@@ -505,37 +567,39 @@ public class Team implements TeamBLService {
 					dsDefenReboundNum = 0;
 				}
 			}
+			if (isCalculate) {
+				offenEfficiency = (double) score / offenRound * 100; // 进攻效率
+				defenEfficiency = (double) dsScore / dsOffenRound * 100; // 防守效率
+				offenReboundEfficiency = (double) offenReboundNum
+						/ (offenReboundNum + dsDefenReboundNumAll); // 进攻篮板效率
+				defenReboundEfficiency = (double) defenReboundNum
+						/ (defenReboundNum + dsOffenReboundNumAll); // 防守篮板效率
+				stealEfficiency = (double) stealNum / dsOffenRound * 100; // 抢断效率
+				assistEfficiency = (double) assistNum / offenRound * 100; // 助攻率
 
-			offenEfficiency = (double) score / offenRound * 100; // 进攻效率
-			defenEfficiency = (double) dsScore / dsOffenRound * 100; // 防守效率
-			offenReboundEfficiency = (double) offenReboundNum
-					/ (offenReboundNum + dsDefenReboundNumAll); // 进攻篮板效率
-			defenReboundEfficiency = (double) defenReboundNum
-					/ (defenReboundNum + dsOffenReboundNumAll); // 防守篮板效率
-			stealEfficiency = (double) stealNum / dsOffenRound * 100; // 抢断效率
-			assistEfficiency = (double) assistNum / offenRound * 100; // 助攻率
+				if (season.equals("all")) {
+					// 需要的是场均数据，要除以比赛场数
+					offenRound = offenRound / (double) matchesNum;
+					shootHitNum = shootHitNum / (double) matchesNum;
+					shootAttemptNum = shootAttemptNum / (double) matchesNum;
+					threeHitNum = threeHitNum / (double) matchesNum;
+					threeAttemptNum = threeAttemptNum / (double) matchesNum;
+					freeThrowHitNum = freeThrowHitNum / (double) matchesNum;
+					freeThrowAttemptNum = freeThrowAttemptNum
+							/ (double) matchesNum;
+					offenReboundNum = offenReboundNum / (double) matchesNum;
+					defenReboundNum = defenReboundNum / (double) matchesNum;
+					reboundNum = reboundNum / (double) matchesNum;
+					assistNum = assistNum / (double) matchesNum;
+					stealNum = stealNum / (double) matchesNum;
+					blockNum = blockNum / (double) matchesNum;
+					turnOverNum = turnOverNum / (double) matchesNum;
+					foulNum = foulNum / (double) matchesNum;
+					score = score / (double) matchesNum;
 
-			if (season.equals("all")) {
-				// 需要的是场均数据，要除以比赛场数
-				offenRound = offenRound / (double) matchesNum;
-				shootHitNum = shootHitNum / (double) matchesNum;
-				shootAttemptNum = shootAttemptNum / (double) matchesNum;
-				threeHitNum = threeHitNum / (double) matchesNum;
-				threeAttemptNum = threeAttemptNum / (double) matchesNum;
-				freeThrowHitNum = freeThrowHitNum / (double) matchesNum;
-				freeThrowAttemptNum = freeThrowAttemptNum / (double) matchesNum;
-				offenReboundNum = offenReboundNum / (double) matchesNum;
-				defenReboundNum = defenReboundNum / (double) matchesNum;
-				reboundNum = reboundNum / (double) matchesNum;
-				assistNum = assistNum / (double) matchesNum;
-				stealNum = stealNum / (double) matchesNum;
-				blockNum = blockNum / (double) matchesNum;
-				turnOverNum = turnOverNum / (double) matchesNum;
-				foulNum = foulNum / (double) matchesNum;
-				score = score / (double) matchesNum;
-
-				if (testSeason.equals("12-13") && isBad) {
-					abLocation = "NOH";
+					if (testSeason.equals("12-13") && isBad) {
+						abLocation = "NOH";
+					}
 				}
 			}
 			if (season.equals("12-13") && abLocation.equals("NOP")) {
@@ -629,11 +693,11 @@ public class Team implements TeamBLService {
 			String key = vo.getSeason() + "_" + vo.getDate() + "_"
 					+ vo.getVisitingTeam() + "-" + vo.getHomeTeam();
 			String season = vo.getSeason();
-			Map<String, MatchVO> test = matches.get(season);
+			Map<String, MatchVO> test = matchesMap.get(season);
 			if (test == null) {
 				Map<String, MatchVO> map = new HashMap<String, MatchVO>();
 				map.put(key, vo);
-				matches.put(season, map);
+				matchesMap.put(season, map);
 			} else {
 				test.put(key, vo);
 			}
