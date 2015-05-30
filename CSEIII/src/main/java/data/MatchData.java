@@ -34,10 +34,10 @@ public class MatchData implements MatchDataService {
 
 	public static void main(String[] args) {
 		MatchData matchData = new MatchData();
-//		matchData.exportToSql();
-		 System.out.println("MatchData.main()");
-		 ArrayList<MatchVO> result = matchData.getMatchesByTeam("14-15", "CHI");
-		 System.out.println(result.size());
+		// matchData.exportToSql();
+		System.out.println("MatchData.main()");
+		ArrayList<MatchVO> result = matchData.getMatchData("14-15", "Playoff", "all", "all", "all");
+		System.out.println(result.size());
 	}
 
 	public ArrayList<String> getAllSeasons() {
@@ -148,8 +148,8 @@ public class MatchData implements MatchDataService {
 						+ "%' or visitingTeam like '%" + name + "%'";
 			} else {
 				query = "select * from matches where season='" + season
-						+ "' and (homeTeam like '%" + name + "%' or visitingTeam like '%"
-						+ name + "%')";
+						+ "' and (homeTeam like '%" + name
+						+ "%' or visitingTeam like '%" + name + "%')";
 			}
 			resultSet = sql.executeQuery(query);
 			while (resultSet.next()) {
@@ -218,8 +218,8 @@ public class MatchData implements MatchDataService {
 		return result;
 	}
 
-	public ArrayList<MatchVO> getMatchData(String season, String date,
-			String homeTeam, String visitingTeam) {
+	public ArrayList<MatchVO> getMatchData(String season, String type,
+			String date, String homeTeam, String visitingTeam) {
 		// TODO 自动生成的方法存根
 		String query = "select * from matches where";
 		ArrayList<MatchVO> matches = new ArrayList<MatchVO>();
@@ -231,6 +231,15 @@ public class MatchData implements MatchDataService {
 				query = query + " and season like '%" + season + "%'";
 			else {
 				query = query + " season like '%" + season + "%'";
+				flag = 1;
+			}
+		}
+		
+		if (!type.equals("all")) {
+			if (flag == 1)
+				query = query + " and type ='"+type+"'";
+			else {
+				query = query + " type ='"+type+"'";
 				flag = 1;
 			}
 		}
@@ -275,7 +284,7 @@ public class MatchData implements MatchDataService {
 			int matchID = 0;
 			String myseason = "";
 			String mydate = "";
-			String type = "";
+			String currentType = "";
 			String myvisingTeam = "";
 			String myhomeTeam = "";
 			int visitingScore = 0;
@@ -288,7 +297,7 @@ public class MatchData implements MatchDataService {
 				matchID = rs.getInt("matchID");
 				myseason = rs.getString("season");
 				mydate = rs.getString("date");
-				type = rs.getString("type");
+				currentType = rs.getString("type");
 				myvisingTeam = rs.getString("visitingTeam");
 				myhomeTeam = rs.getString("homeTeam");
 				visitingScore = rs.getInt("visitingScore");
@@ -333,7 +342,7 @@ public class MatchData implements MatchDataService {
 				}
 				rs2.close();
 				sql3.close();
-				matchVO = new MatchVO(matchID, myseason, mydate, type,
+				matchVO = new MatchVO(matchID, myseason, mydate, currentType,
 						myvisingTeam, myhomeTeam, visitingScore, homeScore,
 						detailScores, records);
 				matches.add(matchVO);
