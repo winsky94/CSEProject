@@ -13,7 +13,7 @@ public interface MatchBLService {
 	public ArrayList<String> getAllSeasons();
 
 	/**
-	 * 得到比赛数据
+	 * 得到比赛数据，当各个参数值均为all的时候将获得全部的比赛数据
 	 * 
 	 * @param season
 	 *            赛季
@@ -31,9 +31,13 @@ public interface MatchBLService {
 	/**
 	 * 根据球队名得到该球队参加过的所有比赛
 	 * 
+	 * @param season
+	 *            赛季，如果是全部比赛就是all
+	 * 
 	 * @param name
 	 *            球队名（缩写）
 	 * @return 比赛列表
 	 */
-	public ArrayList<MatchVO> getMatchesByTeam(String name);// 可以模糊
+	public ArrayList<MatchVO> getMatchesByTeam(String season, String name);// 可以模糊
+
 }
