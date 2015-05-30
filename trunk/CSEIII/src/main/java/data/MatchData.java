@@ -346,134 +346,67 @@ public class MatchData implements MatchDataService {
 	}
 
 	public ArrayList<RecordVO> getPlayerRecord(String season,String name){
-		String query = "select * from matches where";
-		ArrayList<MatchVO> matches = new ArrayList<MatchVO>();
+		String query = "select * from records where";
+		ArrayList<RecordVO> records=new ArrayList<RecordVO>();
 
-		int flag = 0;
-
+		int flag=0;
+		
 		if (!season.equals("all")) {
-			if (flag == 1)
-				query = query + " and season like '%" + season + "%'";
-			else {
-				query = query + " season like '%" + season + "%'";
+				query = query + " season ='" + season + "'";
 				flag = 1;
-			}
 		}
 
-		if (!date.equals("all")) {
+		if(name.contains("'"))
+			name.replace("'", "''");
 			if (flag == 1)
-				query = query + " and date like '%" + date + "%'";
+				query = query + " and playerName ='" + name + "'";
 			else {
-				query = query + " date like '%" + date + "%'";
+				query = query + " playerName='" + name + "'";
 				flag = 1;
 			}
-		}
 
-		if (!homeTeam.equals("all")) {
-			if (flag == 1)
-				query = query + " and homeTeam like '%" + homeTeam + "%'";
-			else {
-				query = query + " homeTeam like '%" + homeTeam + "%'";
-				flag = 1;
-			}
-		}
-
-		if (!visitingTeam.equals("all")) {
-			if (flag == 1)
-				query = query + " and visitingTeam like '%" + visitingTeam
-						+ "%'";
-			else {
-				query = query + " visitingTeam like '%" + visitingTeam + "%'";
-				flag = 1;
-			}
-		}
-
-		if (season.equals("all") && date.equals("all")
-				&& homeTeam.equals("all") && visitingTeam.equals("all")) {
-			query = "select * from matches";
-		}
+	
 
 		try {
 			connection = SqlManager.getConnection();
 			Statement sql = connection.createStatement();
 			ResultSet rs = sql.executeQuery(query);
 			int matchID = 0;
-			String myseason = "";
-			String mydate = "";
-			String type = "";
-			String myvisingTeam = "";
-			String myhomeTeam = "";
-			int visitingScore = 0;
-			int homeScore = 0;
-			ArrayList<String> detailScores;
-			ArrayList<RecordVO> records;
-			MatchVO matchVO;
-
-			while (rs.next()) {
-				matchID = rs.getInt("matchID");
-				myseason = rs.getString("season");
-				mydate = rs.getString("date");
-				type = rs.getString("type");
-				myvisingTeam = rs.getString("visitingTeam");
-				myhomeTeam = rs.getString("homeTeam");
-				visitingScore = rs.getInt("visitingScore");
-				homeScore = rs.getInt("homeScore");
-				Statement sql2 = connection.createStatement();
-				ResultSet rs1 = sql2
-						.executeQuery("select score from detailscores where matchID="
-								+ matchID);
-				detailScores = new ArrayList<String>();
-				while (rs1.next()) {
-					detailScores.add(rs1.getString("score"));
-				}
-				rs1.close();
-				sql2.close();
-				Statement sql3 = connection.createStatement();
-				ResultSet rs2 = sql3
-						.executeQuery("select * from records where matchID="
-								+ matchID);
-				records = new ArrayList<RecordVO>();
-				RecordVO vo;
-				while (rs2.next()) {
-					vo = new RecordVO(rs2.getString("team"),
-							rs2.getString("playerName"),
-							rs2.getString("position"),
-							rs2.getString("presentTime"),
-							rs2.getInt("shootHitNum"),
-							rs2.getInt("shootAttemptNum"),
-							rs2.getDouble("shootHitRate"),
-							rs2.getInt("threeHitNum"),
-							rs2.getInt("threeAttemptNum"),
-							rs2.getDouble("threeHitRate"),
-							rs2.getInt("freeThrowHitNum"),
-							rs2.getInt("freeThrowAttemptNum"),
-							rs2.getDouble("freeThrowHitRate"),
-							rs2.getInt("offenReboundNum"),
-							rs2.getInt("defenReboundNum"),
-							rs2.getInt("reboundNum"), rs2.getInt("assistNum"),
-							rs2.getInt("stealNum"), rs2.getInt("blockNum"),
-							rs2.getInt("turnOverNum"), rs2.getInt("foulNum"),
-							rs2.getInt("score"));
+			
+			RecordVO vo;
+            while (rs.next()) {
+					        vo = new RecordVO(rs.getInt("matchID"),rs.getString("team"),
+							rs.getString("playerName"),
+							rs.getString("position"),
+							rs.getString("presentTime"),
+							rs.getInt("shootHitNum"),
+							rs.getInt("shootAttemptNum"),
+							rs.getDouble("shootHitRate"),
+							rs.getInt("threeHitNum"),
+							rs.getInt("threeAttemptNum"),
+							rs.getDouble("threeHitRate"),
+							rs.getInt("freeThrowHitNum"),
+							rs.getInt("freeThrowAttemptNum"),
+							rs.getDouble("freeThrowHitRate"),
+							rs.getInt("offenReboundNum"),
+							rs.getInt("defenReboundNum"),
+							rs.getInt("reboundNum"), rs.getInt("assistNum"),
+							rs.getInt("stealNum"), rs.getInt("blockNum"),
+							rs.getInt("turnOverNum"), rs.getInt("foulNum"),
+							rs.getInt("score"));
 					records.add(vo);
 				}
-				rs2.close();
-				sql3.close();
-				matchVO = new MatchVO(matchID, myseason, mydate, type,
-						myvisingTeam, myhomeTeam, visitingScore, homeScore,
-						detailScores, records);
-				matches.add(matchVO);
-			}
+				rs.close();
+				sql.close();
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} finally {
-			closeMySql();
-		}
+		} 
 
-		return matches;
+		return records;
 	}
 	
 	public MatchVO readFromMatchFile(String fileName) {
