@@ -38,13 +38,33 @@ public class PlayerData implements PlayerDataService{
 	Map<Integer, MatchVO> matches = new HashMap<Integer, MatchVO>(1024);
 	Map<String, ArrayList<MatchVO>> allSeasonMatches = new HashMap<String, ArrayList<MatchVO>>();
 	static int count=1;
-	boolean isReadSql=false;
-	Map<String, PlayerVO> playersForBL = new HashMap<String, PlayerVO>(32);
+	boolean isReadSqlActive=false;
+	boolean isReadSqlHistoric=false;
+	Map<String, PlayerVO> playersActiveForBL = new HashMap<String, PlayerVO>(32);
+	Map<String, PlayerVO> playersHistoricForBL = new HashMap<String, PlayerVO>(32);
 	
-	private void baseInfoInit() {
+	private void baseInfoInitActive() {
 		try {
-			FileList fl = new FileList("src/data/players/info");
+			FileList fl = new FileList("src/data/players/info/active");
 			ArrayList<String> names = fl.getList();
+			players.clear();
+			for (String name : names) {
+				readBaseInfoFromFile(name);
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+	
+	private void baseInfoInitHistoric() {
+		try {
+			FileList fl = new FileList("src/data/players/info/historic");
+			ArrayList<String> names = fl.getList();
+			players.clear();
 			for (String name : names) {
 				readBaseInfoFromFile(name);
 			}
@@ -81,10 +101,12 @@ public class PlayerData implements PlayerDataService{
 			String temp = null;
 			temp = br.readLine();
 			while (temp != null) {
-				if (temp.contains("│")) {
-					String[] it = temp.split("│");
-					String[] nit = it[1].split("║");
-					content[i++] = nit[0].trim();
+				String[] nit=temp.split(":");
+				if(nit.length==1){
+					content[i++] = "";
+				}
+				else{
+					content[i++] = nit[1].trim();
 				}
 				temp = br.readLine();
 			}
@@ -98,14 +120,24 @@ public class PlayerData implements PlayerDataService{
 		number = content[1];
 		position = content[2];
 		height = content[3];
-		weight = Integer.parseInt(content[4]);
-		birth = content[5];
-		age = Integer.parseInt(content[6]);
-		if(!content[7].equals("R")){
-			exp = Integer.parseInt(content[7]);
+		if(content[4].equals("")){
+			weight=0;
 		}
 		else{
-			exp = 0;
+			weight = Integer.parseInt(content[4]);
+		}
+		birth = content[5];
+		if(content[6].equals("")){
+			age=0;
+		}
+		else{
+			age = Integer.parseInt(content[6]);
+		}
+		if(content[7].equals("")){
+			exp=0;
+		}
+		else {
+			exp = Integer.parseInt(content[7]);
 		}
 		school = content[8];
 		player = new PlayerVO(name, number, position, height, weight, birth,
@@ -114,21 +146,50 @@ public class PlayerData implements PlayerDataService{
 	}
 
 	public void exportToSql() {
-        baseInfoInit();
 		try {
+			baseInfoInitActive();
 			Connection con = SqlManager.getConnection();
 			con.setAutoCommit(false);
 			Statement sql = con.createStatement();
-			sql.execute("drop table if exists players");
-			sql.execute("create table players(playerID int not null auto_increment,name varchar(40) not null default 'null',"
+			sql.execute("drop table if exists playersActive");
+			sql.execute("create table playersActive(playerID int not null auto_increment,name varchar(40) not null default 'null',"
+					+ "number varchar(40) not null default 'null',position varchar(20) not null default 'null',"
+					+ "height varchar(20) not null default 'null',weight int not null default 0,"
+					+ "birth varchar(20) not null default 'null',age int not null default 0,exp int not null default 0,"
+					+ "school varchar(40)not null default 'null',primary key(playerID));");
+			PreparedStatement statement = con
+					.prepareStatement("INSERT INTO playersActive VALUES(?, ?,?,?,?,?,?,?,?,?)");
+			int count = 1;
+			
+			for(PlayerVO player:players) {
+					
+				statement.setInt(1, count++);
+				statement.setString(2, player.getName());
+				statement.setString(3, player.getNumber());
+				statement.setString(4, player.getPosition());
+				statement.setString(5, player.getHeight());
+				statement.setInt(6, player.getWeight());
+				statement.setString(7, player.getBirth());
+				statement.setInt(8, player.getAge());
+				statement.setInt(9, player.getExp());
+				statement.setString(10, player.getSchool());
+				statement.addBatch();
+
+				System.out.println(count - 1);
+			}
+			statement.executeBatch();
+			con.commit();
+			
+			baseInfoInitHistoric();
+			sql.execute("drop table if exists playersHistoric");
+			sql.execute("create table playersHistoric(playerID int not null auto_increment,name varchar(40) not null default 'null',"
 					+ "number varchar(40) not null default 'null',position varchar(20) not null default 'null',"
 					+ "height varchar(20) not null default 'null',weight int not null default 0,"
 					+ "birth varchar(20) not null default 'null',age int not null default 0,exp int not null default 0,"
 					+ "school varchar(40)not null default 'null',primary key(playerID));");
 			sql.close();
-			PreparedStatement statement = con
-					.prepareStatement("INSERT INTO players VALUES(?, ?,?,?,?,?,?,?,?,?)");
-			int count = 1;
+			statement = con.prepareStatement("INSERT INTO playersHistoric VALUES(?, ?,?,?,?,?,?,?,?,?)");
+			count = 1;
 			
 			for(PlayerVO player:players) {
 					
@@ -160,16 +221,16 @@ public class PlayerData implements PlayerDataService{
 	}
 
 
-	public Map<String, PlayerVO> getPlayerBaseInfo() {
+	public Map<String, PlayerVO> getPlayerActiveBaseInfo() {
 		
-		if(isReadSql==true)
-			return playersForBL;
+		if(isReadSqlActive==true)
+			return playersActiveForBL;
 		
 		Connection con;
 		try {
 			con = SqlManager.getConnection();
 			Statement sql = con.createStatement();
-			String query = "select * from players ";
+			String query = "select * from playersactive ";
 			ResultSet resultSet = sql.executeQuery(query);
 			PlayerVO player;
 			
@@ -196,7 +257,7 @@ public class PlayerData implements PlayerDataService{
 	            
 			    player = new PlayerVO(name, number, position, height, weight, birth,
 							age, exp, school);
-                playersForBL.put(name, player);
+                playersActiveForBL.put(name, player);
 			}
 			resultSet.close();
 			sql.close();
@@ -207,13 +268,64 @@ public class PlayerData implements PlayerDataService{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		isReadSql=true;
-		return playersForBL;
+		isReadSqlActive=true;
+		return playersActiveForBL;
+	}
+	
+	public Map<String, PlayerVO> getPlayerHistoricBaseInfo() {
+		
+		if(isReadSqlHistoric==true)
+			return playersHistoricForBL;
+		
+		Connection con;
+		try {
+			con = SqlManager.getConnection();
+			Statement sql = con.createStatement();
+			String query = "select * from playersactive ";
+			ResultSet resultSet = sql.executeQuery(query);
+			PlayerVO player;
+			
+			while(resultSet.next()){
+				String name;
+				String number;
+				String position;
+				String height;
+				int weight;
+				String birth;
+				int age;
+				int exp;
+				String school;
+				
+				name = resultSet.getString("name");
+				number=resultSet.getString("number");
+				position=resultSet.getString("position");
+				height=resultSet.getString("height");
+				weight=resultSet.getInt("weight");
+				birth=resultSet.getString("birth");
+				age=resultSet.getInt("age");
+				exp=resultSet.getInt("exp");
+				school=resultSet.getString("school");
+	            
+			    player = new PlayerVO(name, number, position, height, weight, birth,
+							age, exp, school);
+                playersHistoricForBL.put(name, player);
+			}
+			resultSet.close();
+			sql.close();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		isReadSqlHistoric=true;
+		return playersHistoricForBL;
 	}
 
 	public PlayerVO getPlayerBaseInfo(String name) {
-		if(isReadSql==true)
-			return playersForBL.get(name);
+		if(isReadSqlHistoric==true)
+			return playersHistoricForBL.get(name);
 		
 		PlayerVO player=new PlayerVO();
 		Connection con;
@@ -222,7 +334,7 @@ public class PlayerData implements PlayerDataService{
 			Statement sql = con.createStatement();
 			if(name.contains("'"))
 				name.replace("'", "''");
-			String query = "select * from players where name='"+name+"' limit 1";
+			String query = "select * from playershistoric where name='"+name+"' limit 1";
 			ResultSet resultSet = sql.executeQuery(query);
 			
 			resultSet.next();
@@ -270,7 +382,7 @@ public class PlayerData implements PlayerDataService{
 			Statement sql = con.createStatement();
 			if(name.contains("'"))
 				name.replace("'", "''");
-			String query = "select * from players where name like'%"+name+"%'";
+			String query = "select * from playershistoric where name like'%"+name+"%'";
 			ResultSet resultSet = sql.executeQuery(query);
 			PlayerVO player;
 			while(resultSet.next()){
@@ -313,7 +425,7 @@ public class PlayerData implements PlayerDataService{
 	public static void main(String[] args) {
 		PlayerData playerDataReader = new PlayerData();
 		playerDataReader.exportToSql();
-		playerDataReader.getPlayerBaseInfo();
-		playerDataReader.getPlayerBaseInfoForVague("a");
+//		playerDataReader.getPlayerBaseInfo();
+//		playerDataReader.getPlayerBaseInfoForVague("a");
 	}
 }

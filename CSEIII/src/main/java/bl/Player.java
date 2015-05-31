@@ -23,7 +23,8 @@ import vo.TeamVO;
 
 public class Player implements PlayerBLService{
 
-	Map<String, PlayerVO> players = new HashMap<String, PlayerVO>(32);
+	Map<String, PlayerVO> playersActive = new HashMap<String, PlayerVO>(32);
+	Map<String, PlayerVO> playersHistoric = new HashMap<String, PlayerVO>(256);
 	Map<String, TeamVO> teams;
 	Map<Integer, MatchVO> matches = new HashMap<Integer, MatchVO>(1024);
 	ArrayList<PlayerVO> playersAveragePreceding;
@@ -50,14 +51,26 @@ public class Player implements PlayerBLService{
     
     public Player(){
     	PlayerDataService player=new PlayerData();
-    	players=player.getPlayerBaseInfo();
+    	playersActive=player.getPlayerActiveBaseInfo();
+    	playersHistoric=player.getPlayerHistoricBaseInfo();
     	teams=Team.getTeamsPartition();
     }
     
     
-    public ArrayList<PlayerVO> getPlayerBaseInfo(){
+    public ArrayList<PlayerVO> getPlayerActiveBaseInfo(){
     	ArrayList<PlayerVO> pp=new ArrayList<PlayerVO>();
-    	Iterator<Entry<String, PlayerVO>> iter = players.entrySet().iterator();
+    	Iterator<Entry<String, PlayerVO>> iter = playersActive.entrySet().iterator();
+		while (iter.hasNext()) {
+			Map.Entry entry = (Map.Entry) iter.next();
+			PlayerVO p = (PlayerVO) entry.getValue();
+			pp.add(p);
+		}
+		return pp;	
+    }
+    
+    public ArrayList<PlayerVO> getPlayerHistoricBaseInfo(){
+    	ArrayList<PlayerVO> pp=new ArrayList<PlayerVO>();
+    	Iterator<Entry<String, PlayerVO>> iter = playersHistoric.entrySet().iterator();
 		while (iter.hasNext()) {
 			Map.Entry entry = (Map.Entry) iter.next();
 			PlayerVO p = (PlayerVO) entry.getValue();
@@ -68,7 +81,7 @@ public class Player implements PlayerBLService{
     
     public ArrayList<PlayerVO> getPlayerBaseInfo(String name){
     	ArrayList<PlayerVO> pp=new ArrayList<PlayerVO>();
-    	Iterator<Entry<String, PlayerVO>> iter = players.entrySet().iterator();
+    	Iterator<Entry<String, PlayerVO>> iter = playersHistoric.entrySet().iterator();
 		while (iter.hasNext()) {
 			Map.Entry entry = (Map.Entry) iter.next();
 			PlayerVO p = (PlayerVO) entry.getValue();
@@ -443,7 +456,11 @@ public class Player implements PlayerBLService{
 			personScore = record.getScore();// 个人得分
 			PlayerVO thisPlayer=theSeasonPlayers.get(playerName);
 			if(thisPlayer==null){
-			   PlayerVO pp= players.get(playerName);
+				PlayerVO pp;
+				if(season.equals("14-15"))
+			       pp=playersActive.get(playerName);
+				else 
+				   pp=playersHistoric.get(playerName);			
 			   if(pp!=null){
 			      thisPlayer =new PlayerVO(pp.getName(), pp.getNumber(), pp.getPosition(), pp.getHeight(), pp.getWeight(), pp.getBirth(), pp.getAge(), pp.getExp(), pp.getSchool());
                   theSeasonPlayers.put(playerName, thisPlayer);
@@ -1036,7 +1053,11 @@ public class Player implements PlayerBLService{
 			for (RecordVO record : match.getRecords()) {
 				team = record.getTeam();
 				playerName = record.getPlayerName();
-				PlayerVO thisPlayer = players.get(playerName);
+				PlayerVO thisPlayer;
+				if(match.getSeason().equals("14-15"))
+				   thisPlayer = playersActive.get(playerName);
+				else
+				   thisPlayer =playersHistoric.get(playerName);
 				PlayerVO player=new PlayerVO();
 				if (thisPlayer != null){
 					player = new PlayerVO(thisPlayer.getName(),
@@ -1163,7 +1184,7 @@ public class Player implements PlayerBLService{
 
 	public ArrayList<PlayerVO> getPlayersByInitialName(char character) {
 		ArrayList<PlayerVO> result = new ArrayList<PlayerVO>();
-		ArrayList<PlayerVO> thePlayers = getPlayerBaseInfo();
+		ArrayList<PlayerVO> thePlayers = getPlayerHistoricBaseInfo();
 		for (PlayerVO vo : thePlayers) {
 			String[] name=vo.getName().split(" ");
 			int size=name.length;

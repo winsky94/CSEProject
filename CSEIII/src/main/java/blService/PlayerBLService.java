@@ -9,11 +9,18 @@ import vo.PlayerVO;
 
 public interface PlayerBLService {
 	/**
-	 * 获得球员列表
+	 * 获得当季活跃球员列表
 	 * 
 	 * @return 球员最基本信息的列表
 	 */
-	public ArrayList<PlayerVO> getPlayerBaseInfo();
+	public ArrayList<PlayerVO> getPlayerActiveBaseInfo();
+	
+	/**
+	 * 获得历史上所有球员列表(包括当季)
+	 * 
+	 * @return 球员最基本信息的列表
+	 */
+	public ArrayList<PlayerVO> getPlayerHistoricBaseInfo();
 
 	/**
 	 * 模糊查找球员的基本信息
