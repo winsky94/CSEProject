@@ -491,7 +491,6 @@ public class Player implements PlayerBLService{
 
 			if (thisPlayer.getMostRecentMatch() == null) {
 				thisPlayer.setOwingTeam(team);				
-				System.out.println(date+" "+visitingTeam+" "+homeTeam);
 				TeamVO teamVO = teams.get(team);
 				if (teamVO == null) {
 					teamVO = teams.get("NOP");
@@ -1407,10 +1406,15 @@ public class Player implements PlayerBLService{
 		// result=team.getOrderedTeamsByAverage( "all", "score", "desc", 5);
 		
 //		ArrayList<PlayerVO> players=player.getPlayerBaseInfo();
-		ArrayList<PlayerVO> players=player.getPlayerSeasonInfo("12-13", "Team");
+//		ArrayList<PlayerVO> players=player.getPlayerSeasonInfo("12-13", "Playoff");
+//		ArrayList<PlayerVO> players=player.getPlayerAverageInfo("Team");
+//		ArrayList<PlayerVO> players=player.selectPlayersBySeason("12-13", "Team", "all", "all", "score", "desc", 5);
+//		ArrayList<PlayerVO> players=player.selectPlayersByAverage("Team", "all", "all", "score", "desc", 5);
+//		ArrayList<PlayerVO> players=player.getOrderedPlayersBySeason("12-13", "Team", "score", "asc", 5);
+		ArrayList<PlayerVO> players=player.getOrderedPlayersByAverage( "Team", "score", "desc", 5);
 		for(PlayerVO vv:players){
 			System.out.println(vv.getName());
-			System.out.println(vv.getAssistNum());
+			System.out.println(vv.getScore());
 		}
 		
 	//	PlayerVO vo = player.getPlayerAverageInfo("Kevin Durant");

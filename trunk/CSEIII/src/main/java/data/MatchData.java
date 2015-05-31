@@ -34,7 +34,7 @@ public class MatchData implements MatchDataService {
 
 	public static void main(String[] args) {
 		MatchData matchData = new MatchData();
-		// matchData.exportToSql();
+		matchData.exportToSql();
 		System.out.println("MatchData.main()");
 		ArrayList<MatchVO> result = matchData.getMatchData("12-13", "Playoff",
 				"all", "all", "all");
