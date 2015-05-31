@@ -21,40 +21,15 @@ public interface PlayerBLService {
 	 * @param 赛季
 	 * @return
 	 */
-	public ArrayList<PlayerVO> getPlayerSeasonInfo(String season);
+	public ArrayList<PlayerVO> getPlayerSeasonInfo(String season,String type);
 
 	/**
 	 * 得到球员的场均技术统计数据
 	 * 
 	 * @return
 	 */
-	public ArrayList<PlayerVO> getPlayerAverageInfo();
+	public ArrayList<PlayerVO> getPlayerAverageInfo(String type);
 
-	/**
-	 * 模糊查询某球员的基础信息
-	 * 
-	 * @param name
-	 *            球员名称
-	 * @return
-	 */
-	public ArrayList<PlayerVO> getPlayerBaseInfo(String name);
-	public ArrayList<PlayerVO> getPlayerBaseInfoSeason(String season,String name);
-	/**
-	 * 根据赛季和球员名称返回球员这个赛季的总的技术数据
-	 * 
-	 * @param season
-	 * @param name
-	 * @return
-	 */
-	public PlayerVO getPlayerSeasonInfo(String season, String name);
-
-	/**
-	 * 根据赛季和球员名称返回球员场均技术数据
-	 * 
-	 * @param name
-	 * @return
-	 */
-	public PlayerVO getPlayerAverageInfo(String name);
 
 	/**
 	 * 根据某一项技术分析项，将球员按某个赛季的该项数据进行升降序排序
@@ -71,7 +46,7 @@ public interface PlayerBLService {
 	 * @return 按照所给条件排好序的球队列表
 	 */
 	public ArrayList<PlayerVO> getOrderedPlayersBySeason(String season,
-			String condition, String order, int num);
+			String type,String condition, String order, int num);
 
 	/**
 	 * 根据某一项技术分析项，将球员按场均该项数据进行升降序排序
@@ -85,7 +60,7 @@ public interface PlayerBLService {
 	 * 
 	 * @return 按照所给条件排好序的球员列表
 	 */
-	public ArrayList<PlayerVO> getOrderedPlayersByAverage(String condition,
+	public ArrayList<PlayerVO> getOrderedPlayersByAverage(String type,String condition,
 			String order, int num);
 
 	/**
@@ -105,8 +80,8 @@ public interface PlayerBLService {
 	 *            需要的数据条数
 	 * @return 符合条件的球员列表
 	 */
-	public ArrayList<PlayerVO> selectPlayersBySeason(String season,
-			String position, String union, AgeEnum ageClass, String column,
+	public ArrayList<PlayerVO> selectPlayersBySeason(String season,String type,
+			String position, String union, String column,
 			String order, int num);
 
 	/**
@@ -124,8 +99,8 @@ public interface PlayerBLService {
 	 *            需要的数据条数
 	 * @return 符合条件的球员列表
 	 */
-	public ArrayList<PlayerVO> selectPlayersByAverage(String position,
-			String union, AgeEnum ageClass, String column, String order, int num);
+	public ArrayList<PlayerVO> selectPlayersByAverage(String type,String position,
+			String union, String column, String order, int num);
 
 	/**
 	 * 获得球员的大头照
@@ -161,7 +136,7 @@ public interface PlayerBLService {
 	 *            进行球员排序的时候的球员属性值
 	 * @return 符合条件的球员列表
 	 */
-	public ArrayList<PlayerVO> getSeasonHotPlayer(String season, String column,
+	public ArrayList<PlayerVO> getSeasonHotPlayer(String season,String type, String column,
 			int num);
 
 	/**
@@ -171,7 +146,7 @@ public interface PlayerBLService {
 	 *            进行球员排序的时候的球员属性值
 	 * @return 符合条件的球员列表
 	 */
-	public ArrayList<PlayerVO> getBestImprovedPlayer(String column, int num);
+	public ArrayList<PlayerVO> getBestImprovedPlayer(String type,String column, int num);
 
 	/**
 	 * 根据首字母得到球员
@@ -187,10 +162,10 @@ public interface PlayerBLService {
 	 * @param minute找出出场时间大于等于该分钟的球员
 	 * @return
 	 */
-	public ArrayList<PlayerVO> selectPlayersUptheTimeAverage(String position,
-			String union, AgeEnum ageClass, String column, String order,int minute,int num);
-	public ArrayList<PlayerVO> selectPlayersUptheTimeSeason(String season,String position,
-			String union, AgeEnum ageClass, String column, String order,int minute,int num);
+	public ArrayList<PlayerVO> selectPlayersUptheTimeAverage(String type,String position,
+			String union,String column, String order,int minute,int num);
+	public ArrayList<PlayerVO> selectPlayersUptheTimeSeason(String season,String type,String position,
+			String union,String column, String order,int minute,int num);
 	/**
 	 * 获得该球员最近5场比赛的数据
 	 * 

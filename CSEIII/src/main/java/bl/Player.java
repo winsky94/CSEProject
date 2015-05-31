@@ -12,6 +12,7 @@ import java.util.Map.Entry;
 import javax.swing.ImageIcon;
 
 import blService.MatchBLService;
+import blService.PlayerBLService;
 import data.PlayerData;
 import dataservice.PlayerDataService;
 import vo.LittleRecordVO;
@@ -20,14 +21,33 @@ import vo.PlayerVO;
 import vo.RecordVO;
 import vo.TeamVO;
 
-public class Player  {
+public class Player implements PlayerBLService{
 
 	Map<String, PlayerVO> players = new HashMap<String, PlayerVO>(32);
 	Map<String, TeamVO> teams;
 	Map<Integer, MatchVO> matches = new HashMap<Integer, MatchVO>(1024);
-	ArrayList<PlayerVO> playersAverage;
-	boolean isCalculateAverage=false;
+	ArrayList<PlayerVO> playersAveragePreceding;
+	ArrayList<PlayerVO> playersAverageRegular;
+	ArrayList<PlayerVO> playersAveragePlayoff;
+	boolean isCalculateAveragePreceding=false;
+	boolean isCalculateAverageRegular=false;
+	boolean isCalculateAveragePlayoff=false;
 	
+	private static String[] player_CH = new String[] { "全部", "前锋", "中锋",
+		"后卫","前锋-中锋","中锋-后卫","前锋-后卫", "得分", "篮板数", "助攻数", "得分/篮板/助攻(1:1:1)", 
+		"投篮命中率", "盖帽数", "抢断数", "罚球命中率", "犯规数", "失误数",
+		"在场时间", "效率", "两双", "西部球队", "东部球队", 
+		 "真实命中率", "GmSc效率值", "投篮效率", "篮板率", "进攻篮板数",
+		 "防守篮板数", "进攻篮板率", "防守篮板率", "助攻率", "抢断率", 
+		 "盖帽率", "失误率", "使用率"};
+    private static String[] player_EN = new String[] { "all", "F", "C",
+		"G", "F-C","C-G","F-G","score", "reboundNum", "assistNum", "score_rebound_assist", 
+		"shootHitRate", "blockNum", "stealNum", "freeThrowHitRate", "foulNum", "turnOverNum",
+		"presentTime", "efficiency", "doubleDoubleNum", "W", "E",
+		"trueHitRate","GmScEfficiencyValue","shootEfficiency","reboundRate","offenReboundNum",
+		"defenReboundNum","offenReboundRate","defenReboundRate","assistRate","stealRate",
+		"blockRate","turnOverRate","usageRate"};
+    
     public Player(){
     	PlayerDataService player=new PlayerData();
     	players=player.getPlayerBaseInfo();
@@ -50,6 +70,11 @@ public class Player  {
         MatchBLService match=new Match();
         return match.getMatchData("all","all","all", "all", "all");
 	}
+    
+    private ArrayList<MatchVO> getTypeMatches(String type){
+    	MatchBLService match=new Match();
+        return match.getMatchData("all",type,"all", "all", "all");
+    }
 
 	private ArrayList<MatchVO> getSeasonMatches(String season,String type) {
           MatchBLService match=new Match();
@@ -67,12 +92,12 @@ public class Player  {
 			getPlayerMatchInfo(theSeasonPlayers,match);
 		}
 
-	    result=calculatePlayerSeason(theSeasonPlayers);
+	    result=calculatePlayer(theSeasonPlayers);
 	    Collections.sort(result, new SequenceOfPlayer());
         return result;
 	}
 
-    private ArrayList<PlayerVO> calculatePlayerSeason(Map<String, PlayerVO> playersSeason){
+    private ArrayList<PlayerVO> calculatePlayer(Map<String, PlayerVO> playersSeason){
 	  ArrayList<PlayerVO> result=new ArrayList<PlayerVO>();
 	  Iterator<Entry<String, PlayerVO>> iter = playersSeason.entrySet().iterator();
 		while (iter.hasNext()) {
@@ -600,23 +625,46 @@ public class Player  {
 		}
 	}
 
-	public ArrayList<PlayerVO> getPlayerAverageInfo() {
+	public ArrayList<PlayerVO> getPlayerAverageInfo(String type) {
 
-		if(isCalculateAverage==true){
-			Collections.sort(playersAverage, new SequenceOfPlayer());
-			return playersAverage;
+		int matchType=0;
+		//季前matchType:1
+		//常规matchType:2
+		//季后matchType:3
+		
+		if(type.equals("Team")){
+			matchType=2;
+			if(isCalculateAverageRegular==true){
+				Collections.sort(playersAverageRegular, new SequenceOfPlayer());
+				return playersAverageRegular;
+			}
 		}
+		else if(type.equals("Playoff")){
+			matchType=3;
+			if(isCalculateAveragePlayoff==true){
+				Collections.sort(playersAveragePlayoff, new SequenceOfPlayer());
+				return playersAveragePlayoff;
+			}
+		}
+		else{
+			matchType=1;
+			if(isCalculateAveragePreceding==true){
+				Collections.sort(playersAveragePreceding, new SequenceOfPlayer());
+				return playersAveragePreceding;
+			}
+		}
+		
 		
 		Map<String, PlayerVO> theSeasonPlayers=new HashMap<String, PlayerVO>(32);
 		ArrayList<PlayerVO> result=new ArrayList<PlayerVO>();
 		ArrayList<PlayerVO> buffer;
 		matches.clear();
-				
-		for (MatchVO match : getAllMatches()) {
+			
+		for (MatchVO match : getTypeMatches(type)) {
 			getPlayerMatchInfo(theSeasonPlayers,match);
 		}
 
-	    buffer=calculatePlayerSeason(theSeasonPlayers);
+	    buffer=calculatePlayer(theSeasonPlayers);
 	    Collections.sort(buffer, new SequenceOfPlayer());
        
 		for(PlayerVO playerSeason:buffer){
@@ -693,8 +741,18 @@ public class Player  {
 			result.add(newPlayer);
 		}
 		
-		playersAverage=result;
-		isCalculateAverage=true;
+		if(matchType==1){
+			playersAveragePreceding=result;
+			isCalculateAveragePreceding=true;
+		}
+		else if(matchType==2){
+			playersAverageRegular=result;
+			isCalculateAverageRegular=true;
+		}
+		else{
+			playersAveragePlayoff=result;
+			isCalculateAveragePlayoff=true;
+		}
 		return result;
 	}
 
@@ -702,6 +760,7 @@ public class Player  {
 			String condition, String order, int num) {
 		ArrayList<PlayerVO> result = new ArrayList<PlayerVO>();
 		ArrayList<PlayerVO> allPlayers = getPlayerSeasonInfo(season,type);
+//		condition=changePlayerCHToEN(condition);
 		Collections.sort(allPlayers, new SequenceOfPlayer(condition, order));
 		int count = 0;
 		for (PlayerVO vo : allPlayers) {
@@ -716,10 +775,11 @@ public class Player  {
 		return result;
 	}
 
-	public ArrayList<PlayerVO> getOrderedPlayersByAverage(String condition,
+	public ArrayList<PlayerVO> getOrderedPlayersByAverage(String type,String condition,
 			String order, int num) {
 		ArrayList<PlayerVO> result = new ArrayList<PlayerVO>();
-		ArrayList<PlayerVO> allPlayers = getPlayerAverageInfo();
+		ArrayList<PlayerVO> allPlayers = getPlayerAverageInfo(type);
+//		condition=changePlayerCHToEN(condition);
 		Collections.sort(allPlayers, new SequenceOfPlayer(condition, order));
 		int count = 0;
 		for (PlayerVO vo : allPlayers) {
@@ -737,6 +797,9 @@ public class Player  {
 	private ArrayList<PlayerVO> selectPlayers(ArrayList<PlayerVO> thePlayers,
 			String position, String union, String column,
 			String order, int num) {
+//		position = changePlayerCHToEN(position);
+//		union = changePlayerCHToEN(union);
+//		column = changePlayerCHToEN(column);
 		ArrayList<PlayerVO> result = new ArrayList<PlayerVO>();
 		String[] positions=position.split("-");
 		int size=position.length();
@@ -801,10 +864,10 @@ public class Player  {
 				order, num);
 	}
 
-	public ArrayList<PlayerVO> selectPlayersByAverage(String position,
+	public ArrayList<PlayerVO> selectPlayersByAverage(String type,String position,
 			String union, String column, String order, int num) {
 		ArrayList<PlayerVO> result=new ArrayList<PlayerVO>();
-		ArrayList<PlayerVO> thePlayers = getPlayerAverageInfo();
+		ArrayList<PlayerVO> thePlayers = getPlayerAverageInfo(type);
 		for(PlayerVO vo:thePlayers){
 			result.add(vo);
 		}
@@ -849,8 +912,8 @@ public class Player  {
 		String[] buffer = getToday().split("_");
 		String season = buffer[0];
 		String date = buffer[1];
-		MatchBLService matches=new Match();
-		result=matches.getMatchData(season, "all", date, "all", "all");
+		MatchBLService theMatch=new Match();
+		result=theMatch.getMatchData(season, "all", date, "all", "all");
 		if(result.size()!=0){
 			return result;
 		}
@@ -1046,11 +1109,11 @@ public class Player  {
 		return result;
 	}
 
-	public ArrayList<PlayerVO> getSeasonHotPlayer(String season, String column,
+	public ArrayList<PlayerVO> getSeasonHotPlayer(String season,String type,String column,
 			int num) {
 
 		ArrayList<PlayerVO> result = new ArrayList<PlayerVO>();
-		ArrayList<PlayerVO> thePlayers = getPlayerAverageInfo();
+		ArrayList<PlayerVO> thePlayers = getPlayerAverageInfo(type);
 
 		Collections.sort(thePlayers, new SequenceOfPlayer(column, "desc"));
 		int count = 0;
@@ -1067,9 +1130,9 @@ public class Player  {
 		return result;
 	}
 
-	public ArrayList<PlayerVO> getBestImprovedPlayer(String column, int num) {
+	public ArrayList<PlayerVO> getBestImprovedPlayer(String type,String column, int num) {
 		ArrayList<PlayerVO> result = new ArrayList<PlayerVO>();
-		ArrayList<PlayerVO> thePlayers = getPlayerAverageInfo();
+		ArrayList<PlayerVO> thePlayers = getPlayerAverageInfo(type);
 
 		Collections.sort(thePlayers, new SequenceOfPlayer(column, "desc"));
 		int count = 0;
@@ -1134,7 +1197,8 @@ public class Player  {
 
 	public ArrayList<PlayerVO> getPlayersByTeam(String teamAbLocation) {
 		ArrayList<PlayerVO> result = new ArrayList<PlayerVO>();
-		ArrayList<PlayerVO> thePlayers = getPlayerAverageInfo();
+		ArrayList<PlayerVO> thePlayers = getPlayerAverageInfo("Team");
+//		teamAbLocation=changePlayerCHToEN(teamAbLocation);
 		for (PlayerVO vo : thePlayers) {
 			if (vo.getOwingTeam().equals(teamAbLocation))
 				result.add(vo);
@@ -1174,7 +1238,88 @@ public class Player  {
 		}
 		return result;
 	}
+	
+	/**
+	 * 将球员数据中文名转为相应的英文缩写
+	 * 
+	 * @param 球员中文名
+	 * @return 英文缩写
+	 */
+	public static String changePlayerCHToEN(String CH) {
+		int index = -1;
+		for (int i = 0; i < player_CH.length; i++) {
+			if (player_CH[i].equals(CH)) {
+				index = i;
+			}
+		}
+		if (index != -1) {
+			return player_EN[index];
+		} else {
+			return CH;
+		}
+	}
+	
+	/**
+	 * 将球员数据英文缩写转为相应的中文名
+	 * 
+	 * @param EN
+	 *            球员数据英文名
+	 * @return 中文名
+	 */
+	public static String changePlayerENToCH(String EN) {
+		int index = -1;
+		for (int i = 0; i < player_CH.length; i++) {
+			if (player_EN[i].equals(EN)) {
+				index = i;
+			}
+		}
+		if (index != -1) {
+			return player_CH[index];
+		} else {
+			return EN;
+		}
+	}
 
+	public ArrayList<PlayerVO> selectPlayersUptheTimeAverage(String type,String position,
+			String union, String column, String order,int minute,int num) {
+		ArrayList<PlayerVO> result = new ArrayList<PlayerVO>();
+		ArrayList<PlayerVO> thePlayers = getPlayerAverageInfo(type);
+		if(minute>0){
+           int second=minute*60;
+		   for (PlayerVO vo : thePlayers) {
+			 if (vo.getPresentTime()>=second)
+				  result.add(vo);
+		     }
+		}
+		else{
+			 for (PlayerVO vo : thePlayers) 
+					  result.add(vo);			     
+		}
+	
+		result=selectPlayers(result, position, union, column, order, num);
+		return result;
+	}
+	
+	public ArrayList<PlayerVO> selectPlayersUptheTimeSeason(String season,String type,String position,
+			String union, String column, String order,int minute,int num) {
+		ArrayList<PlayerVO> result = new ArrayList<PlayerVO>();
+		ArrayList<PlayerVO> thePlayers = getPlayerSeasonInfo(season,type);
+		if(minute>0){
+           int second=minute*60;
+		   for (PlayerVO vo : thePlayers) {
+			  if (vo.getPresentTime()>=second)
+				  result.add(vo);
+		    }
+		}
+		else{
+			for (PlayerVO vo : thePlayers) {
+					  result.add(vo);
+			    }   
+		}
+		
+	    result=selectPlayers(result, position, union, column, order, num);
+		return result;
+	}
 
 	/**
 //	 * 向match中增加比赛信息
@@ -1240,17 +1385,14 @@ public class Player  {
 	public static void main(String[] args) {
 		long start = System.currentTimeMillis();
 		Player player = new Player();
-//		ArrayList<String> string1=new ArrayList<String>();
-//		ArrayList<String> string2=new ArrayList<String>();
-//		string1.add("stealRate");
-//		string2.add("asc");
-//		ArrayList<PlayerVO> vos=player.getOrderedPlayersByAverage(string1, string2, 5);
-//		for(PlayerVO vv:vos){
-//			System.out.println(vv.getName());
-//			System.out.println(vv.getStealRate());
-//		}
+		// result = team.getTeamBaseInfo();
+		// result = team.getTeamAverageInfo("all");
+		// result = team.getTeamAverageInfo("Playoff", "NOP");
+		// result=team.getTeamSeasonInfo("12-13", "Team");
+		// result=team.getTeamSeasonInfo("12-13", "Playoff", "NOP");
+		// result=team.getOrderedTeamsByAverage( "all", "score", "desc", 5);
 		
-		ArrayList<PlayerVO> players=player.getDayHotPlayer("assistNum",5);
+		ArrayList<PlayerVO> players=player.getPlayerBaseInfo();
 		for(PlayerVO vv:players){
 			System.out.println(vv.getName());
 			System.out.println(vv.getAssistNum());
