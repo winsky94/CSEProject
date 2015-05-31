@@ -1,0 +1,9 @@
+Name:Mark Davis
+Number:
+Position:F
+Height:6-6
+Weight:195
+Birth:1963-06-08
+Age:51
+Exp:0
+School:Old Dominion

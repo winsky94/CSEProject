@@ -1,0 +1,9 @@
+Name:Jerald Honeycutt
+Number:25
+Position:F
+Height:6-9
+Weight:254
+Birth:1974-10-20
+Age:40
+Exp:1
+School:Tulane

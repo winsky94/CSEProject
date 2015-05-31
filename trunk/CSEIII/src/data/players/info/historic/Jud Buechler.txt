@@ -1,0 +1,9 @@
+Name:Jud Buechler
+Number:30
+Position:G
+Height:6-6
+Weight:228
+Birth:1968-06-19
+Age:46
+Exp:11
+School:Arizona

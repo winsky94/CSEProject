@@ -1,0 +1,9 @@
+Name:Shawn Respert
+Number:
+Position:
+Height:
+Weight:
+Birth:1972-02-06
+Age:43
+Exp:0
+School:Michigan State

@@ -1,0 +1,9 @@
+Name:Roger MasonJr.
+Number:
+Position:
+Height:
+Weight:
+Birth:1980-09-10
+Age:34
+Exp:0
+School:Virginia

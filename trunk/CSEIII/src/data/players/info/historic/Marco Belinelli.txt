@@ -1,0 +1,9 @@
+Name:Marco Belinelli
+Number:3
+Position:F
+Height:6-5
+Weight:210
+Birth:1986-03-25
+Age:29
+Exp:7
+School:Bologna

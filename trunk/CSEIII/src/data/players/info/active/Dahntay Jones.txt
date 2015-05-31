@@ -1,0 +1,9 @@
+Name:Dahntay Jones
+Number:31
+Position:G
+Height:6-6
+Weight:225
+Birth:1980-12-27
+Age:34
+Exp:10
+School:Duke

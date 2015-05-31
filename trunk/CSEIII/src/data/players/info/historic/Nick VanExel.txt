@@ -1,0 +1,9 @@
+Name:Nick VanExel
+Number:31
+Position:G
+Height:6-1
+Weight:190
+Birth:1971-11-27
+Age:43
+Exp:12
+School:Cincinnati

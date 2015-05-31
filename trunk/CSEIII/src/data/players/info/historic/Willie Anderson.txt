@@ -1,0 +1,9 @@
+Name:Willie Anderson
+Number:35
+Position:G
+Height:6-8
+Weight:200
+Birth:1967-01-08
+Age:48
+Exp:7
+School:Georgia

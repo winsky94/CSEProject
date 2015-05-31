@@ -1,0 +1,9 @@
+Name:Mario Elie
+Number:17
+Position:G
+Height:6-5
+Weight:225
+Birth:1963-11-26
+Age:51
+Exp:10
+School:American International

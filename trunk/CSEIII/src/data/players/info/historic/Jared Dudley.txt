@@ -1,0 +1,9 @@
+Name:Jared Dudley
+Number:9
+Position:F
+Height:6-7
+Weight:225
+Birth:1985-07-10
+Age:29
+Exp:7
+School:Boston College

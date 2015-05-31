@@ -1,0 +1,9 @@
+Name:DoubleD Davis
+Number:42
+Position:F
+Height:6-8
+Weight:220
+Birth:1949-10-11
+Age:65
+Exp:4
+School:Houston

@@ -1,0 +1,9 @@
+Name:Adonis Thomas
+Number:7
+Position:G
+Height:6-7
+Weight:240
+Birth:1993-03-25
+Age:22
+Exp:0
+School:Memphis

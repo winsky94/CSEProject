@@ -1,0 +1,9 @@
+Name:Eric Washington
+Number:14
+Position:F
+Height:6-4
+Weight:190
+Birth:1974-03-24
+Age:41
+Exp:1
+School:Alabama

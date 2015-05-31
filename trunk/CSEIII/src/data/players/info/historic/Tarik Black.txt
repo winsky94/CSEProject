@@ -1,0 +1,9 @@
+Name:Tarik Black
+Number:28
+Position:C
+Height:6-11
+Weight:257
+Birth:1991-11-22
+Age:23
+Exp:0
+School:Kansas

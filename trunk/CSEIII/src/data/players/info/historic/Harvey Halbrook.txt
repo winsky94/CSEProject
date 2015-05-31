@@ -1,0 +1,9 @@
+Name:Harvey Halbrook
+Number:11
+Position:C
+Height:7-3
+Weight:235
+Birth:1933-01-30
+Age:82
+Exp:1
+School:Oregon State

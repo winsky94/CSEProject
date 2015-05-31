@@ -1,0 +1,9 @@
+Name:Yakhouba Diawara
+Number:9
+Position:F
+Height:6-7
+Weight:225
+Birth:1982-08-29
+Age:32
+Exp:3
+School:Pepperdine

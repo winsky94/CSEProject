@@ -1,0 +1,9 @@
+Name:Ron Mercer
+Number:
+Position:
+Height:
+Weight:
+Birth:1976-05-18
+Age:39
+Exp:0
+School:Kentucky

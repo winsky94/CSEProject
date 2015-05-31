@@ -1,0 +1,9 @@
+Name:Keith Askins
+Number:2
+Position:F
+Height:6-8
+Weight:215
+Birth:1967-12-15
+Age:47
+Exp:8
+School:Alabama

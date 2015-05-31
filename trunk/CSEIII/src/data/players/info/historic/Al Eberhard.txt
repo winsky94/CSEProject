@@ -1,0 +1,9 @@
+Name:Al Eberhard
+Number:44
+Position:F
+Height:6-6
+Weight:225
+Birth:1952-05-10
+Age:63
+Exp:3
+School:Missouri

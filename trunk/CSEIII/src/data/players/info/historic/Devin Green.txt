@@ -1,0 +1,9 @@
+Name:Devin Green
+Number:
+Position:
+Height:
+Weight:
+Birth:1982-10-25
+Age:32
+Exp:0
+School:Hampton

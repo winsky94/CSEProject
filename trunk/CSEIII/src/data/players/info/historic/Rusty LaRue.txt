@@ -1,0 +1,9 @@
+Name:Rusty LaRue
+Number:
+Position:
+Height:
+Weight:
+Birth:1973-12-10
+Age:41
+Exp:0
+School:Wake Forest

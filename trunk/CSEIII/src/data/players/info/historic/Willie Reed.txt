@@ -1,0 +1,9 @@
+Name:Willie Reed
+Number:58
+Position:F
+Height:6-10
+Weight:220
+Birth:1990-05-16
+Age:25
+Exp:0
+School:Saint Louis

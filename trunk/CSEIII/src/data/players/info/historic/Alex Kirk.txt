@@ -1,0 +1,9 @@
+Name:Alex Kirk
+Number:
+Position:
+Height:
+Weight:
+Birth:1991-11-14
+Age:23
+Exp:0
+School:New Mexico
