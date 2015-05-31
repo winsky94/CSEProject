@@ -16,6 +16,12 @@ public interface PlayerBLService {
 	public ArrayList<PlayerVO> getPlayerBaseInfo();
 
 	/**
+	 * 模糊查找球员的基本信息
+	 * @param name
+	 * @return 球员的基本信息列表
+	 */
+	public ArrayList<PlayerVO> getPlayerBaseInfo(String name);
+	/**
 	 * 得到球员的某个赛季的技术统计数据
 	 * 
 	 * @param 赛季
