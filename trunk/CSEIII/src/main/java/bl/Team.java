@@ -98,6 +98,32 @@ public class Team implements TeamBLService {
 		teamBaseList = getTeamBaseInfo();
 		teamsBaseInfo = changeListToMap(teamBaseList);
 	}
+	
+	/**
+	 * 为球员服务的map
+	 * 
+	 */
+	public static Map<String, TeamVO> getTeamsPartition() {
+		// TODO 自动生成的方法存根
+		String abLocation;
+		String conference;
+		String partition;
+
+		TeamDataService teamData = new TeamData();
+		ArrayList<TeamVO> result = teamData.getTeamBaseInfo();
+		Map<String, TeamVO> teams = new HashMap<String, TeamVO>();
+		TeamVO team;
+		
+		for (TeamVO vo : result) {
+			abLocation = vo.getAbLocation();
+			conference = vo.getConference();// 东西部
+			partition = vo.getPartition();
+
+			team = new TeamVO(abLocation, conference, partition);
+			teams.put(abLocation, team);
+		}
+		return teams;
+	}
 
 	public ArrayList<TeamVO> getTeamBaseInfo() {
 		// TODO 自动生成的方法存根

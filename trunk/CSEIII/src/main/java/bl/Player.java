@@ -13,6 +13,7 @@ import javax.swing.ImageIcon;
 
 import blService.MatchBLService;
 import blService.PlayerBLService;
+import blService.TeamBLService;
 import data.PlayerData;
 import dataservice.PlayerDataService;
 import vo.LittleRecordVO;
@@ -51,6 +52,7 @@ public class Player implements PlayerBLService{
     public Player(){
     	PlayerDataService player=new PlayerData();
     	players=player.getPlayerBaseInfo();
+    	teams=Team.getTeamsPartition();
     }
     
     
@@ -62,8 +64,19 @@ public class Player implements PlayerBLService{
 			PlayerVO p = (PlayerVO) entry.getValue();
 			pp.add(p);
 		}
-		return pp;
-		
+		return pp;	
+    }
+    
+    public ArrayList<PlayerVO> getPlayerBaseInfo(String name){
+    	ArrayList<PlayerVO> pp=new ArrayList<PlayerVO>();
+    	Iterator<Entry<String, PlayerVO>> iter = players.entrySet().iterator();
+		while (iter.hasNext()) {
+			Map.Entry entry = (Map.Entry) iter.next();
+			PlayerVO p = (PlayerVO) entry.getValue();
+			if(p.getName().contains(name))
+			    pp.add(p);
+		}
+		return pp;	
     }
     
     private ArrayList<MatchVO> getAllMatches() {
@@ -477,7 +490,8 @@ public class Player implements PlayerBLService{
 				thisPlayer.addGameStartingNum();
 
 			if (thisPlayer.getMostRecentMatch() == null) {
-				thisPlayer.setOwingTeam(team);
+				thisPlayer.setOwingTeam(team);				
+				System.out.println(date+" "+visitingTeam+" "+homeTeam);
 				TeamVO teamVO = teams.get(team);
 				if (teamVO == null) {
 					teamVO = teams.get("NOP");
@@ -1392,7 +1406,8 @@ public class Player implements PlayerBLService{
 		// result=team.getTeamSeasonInfo("12-13", "Playoff", "NOP");
 		// result=team.getOrderedTeamsByAverage( "all", "score", "desc", 5);
 		
-		ArrayList<PlayerVO> players=player.getPlayerBaseInfo();
+//		ArrayList<PlayerVO> players=player.getPlayerBaseInfo();
+		ArrayList<PlayerVO> players=player.getPlayerSeasonInfo("12-13", "Team");
 		for(PlayerVO vv:players){
 			System.out.println(vv.getName());
 			System.out.println(vv.getAssistNum());
