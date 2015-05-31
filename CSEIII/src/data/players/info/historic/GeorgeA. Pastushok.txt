@@ -1,0 +1,9 @@
+Name:GeorgeA. Pastushok
+Number:
+Position:
+Height:
+Weight:
+Birth:1905-04-06
+Age:110
+Exp:0
+School:St. John

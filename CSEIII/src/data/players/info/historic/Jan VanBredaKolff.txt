@@ -1,0 +1,9 @@
+Name:Jan VanBredaKolff
+Number:22
+Position:F
+Height:6-7
+Weight:195
+Birth:1951-12-16
+Age:63
+Exp:6
+School:Vanderbilt

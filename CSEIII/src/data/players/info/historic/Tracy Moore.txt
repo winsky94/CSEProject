@@ -1,0 +1,9 @@
+Name:Tracy Moore
+Number:
+Position:
+Height:
+Weight:
+Birth:1965-12-28
+Age:49
+Exp:0
+School:Tulsa

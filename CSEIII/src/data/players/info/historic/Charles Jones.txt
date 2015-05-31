@@ -1,0 +1,9 @@
+Name:Charles Jones
+Number:
+Position:F
+Height:6-8
+Weight:215
+Birth:1962-01-12
+Age:53
+Exp:3
+School:Louisville

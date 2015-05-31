@@ -1,0 +1,9 @@
+Name:GeorgeH. BonSalle
+Number:33
+Position:F
+Height:6-8
+Weight:220
+Birth:1935-07-01
+Age:79
+Exp:0
+School:Illinois

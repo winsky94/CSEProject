@@ -1,0 +1,9 @@
+Name:Andre Iguodala
+Number:9
+Position:G
+Height:6-6
+Weight:215
+Birth:1984-01-28
+Age:31
+Exp:10
+School:Arizona

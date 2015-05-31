@@ -1,0 +1,9 @@
+Name:Glen RiceJr.
+Number:
+Position:
+Height:
+Weight:
+Birth:1991-01-01
+Age:24
+Exp:0
+School:Georgia Tech

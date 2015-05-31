@@ -1,0 +1,9 @@
+Name:Loy Vaught
+Number:35
+Position:F
+Height:6-9
+Weight:240
+Birth:1968-02-27
+Age:47
+Exp:10
+School:Michigan

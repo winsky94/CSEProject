@@ -1,0 +1,9 @@
+Name:PJ Tucker
+Number:17
+Position:F
+Height:6-6
+Weight:224
+Birth:1985-05-05
+Age:30
+Exp:3
+School:Texas

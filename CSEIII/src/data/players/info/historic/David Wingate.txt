@@ -1,0 +1,9 @@
+Name:David Wingate
+Number:25
+Position:G
+Height:6-5
+Weight:187
+Birth:1963-12-15
+Age:51
+Exp:14
+School:Georgetown

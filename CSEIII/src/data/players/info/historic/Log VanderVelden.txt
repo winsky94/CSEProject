@@ -1,0 +1,9 @@
+Name:Log VanderVelden
+Number:25
+Position:F
+Height:6-8
+Weight:215
+Birth:1971-04-03
+Age:44
+Exp:0
+School:Green Bay

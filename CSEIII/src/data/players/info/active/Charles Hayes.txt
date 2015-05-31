@@ -1,0 +1,9 @@
+Name:Charles Hayes
+Number:44
+Position:C
+Height:6-6
+Weight:240
+Birth:1983-06-11
+Age:31
+Exp:9
+School:Kentucky

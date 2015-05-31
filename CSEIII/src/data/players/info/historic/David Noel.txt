@@ -1,0 +1,9 @@
+Name:David Noel
+Number:34
+Position:F
+Height:6-6
+Weight:230
+Birth:1984-02-27
+Age:31
+Exp:0
+School:North Carolina

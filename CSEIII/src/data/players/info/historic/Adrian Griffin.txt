@@ -1,0 +1,9 @@
+Name:Adrian Griffin
+Number:44
+Position:G
+Height:6-5
+Weight:230
+Birth:1974-07-04
+Age:40
+Exp:8
+School:Seton Hall

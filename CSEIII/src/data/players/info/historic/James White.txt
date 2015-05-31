@@ -1,0 +1,9 @@
+Name:James White
+Number:4
+Position:G
+Height:6-7
+Weight:215
+Birth:1982-10-21
+Age:32
+Exp:2
+School:Cincinnati

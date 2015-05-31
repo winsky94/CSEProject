@@ -1,0 +1,9 @@
+Name:Felipe Lopez
+Number:13
+Position:G
+Height:6-5
+Weight:195
+Birth:1974-12-19
+Age:40
+Exp:4
+School:St. John

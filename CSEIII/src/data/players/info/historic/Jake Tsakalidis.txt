@@ -1,0 +1,9 @@
+Name:Jake Tsakalidis
+Number:25
+Position:C
+Height:7-2
+Weight:290
+Birth:1979-06-10
+Age:35
+Exp:6
+School:Greece

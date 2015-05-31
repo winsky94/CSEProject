@@ -1,0 +1,9 @@
+Name:CharlesR. Jones
+Number:2
+Position:G
+Height:6-3
+Weight:180
+Birth:1975-07-17
+Age:39
+Exp:1
+School:Long Island-Brooklyn

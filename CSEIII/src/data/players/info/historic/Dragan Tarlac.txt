@@ -1,0 +1,9 @@
+Name:Dragan Tarlac
+Number:12
+Position:C
+Height:6-11
+Weight:270
+Birth:1973-05-09
+Age:42
+Exp:0
+School:Croatia

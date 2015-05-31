@@ -1,0 +1,9 @@
+Name:Steven Smith
+Number:
+Position:
+Height:
+Weight:
+Birth:1983-04-12
+Age:32
+Exp:0
+School:La Salle

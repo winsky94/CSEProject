@@ -1,0 +1,9 @@
+Name:John Amaechi
+Number:13
+Position:F
+Height:6-10
+Weight:270
+Birth:1970-11-26
+Age:44
+Exp:4
+School:Penn State

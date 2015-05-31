@@ -1,0 +1,9 @@
+Name:Chris Wilcox
+Number:44
+Position:F
+Height:6-10
+Weight:235
+Birth:1982-09-03
+Age:32
+Exp:10
+School:Maryland

@@ -1,0 +1,9 @@
+Name:Vince Carter
+Number:15
+Position:G
+Height:6-6
+Weight:220
+Birth:1977-01-26
+Age:38
+Exp:16
+School:North Carolina

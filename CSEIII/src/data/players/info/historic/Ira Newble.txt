@@ -1,0 +1,9 @@
+Name:Ira Newble
+Number:14
+Position:G
+Height:6-7
+Weight:220
+Birth:1975-01-20
+Age:40
+Exp:7
+School:Miami 

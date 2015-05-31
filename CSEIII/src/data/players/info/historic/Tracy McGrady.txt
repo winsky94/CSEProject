@@ -1,0 +1,9 @@
+Name:Tracy McGrady
+Number:1
+Position:G
+Height:6-8
+Weight:225
+Birth:1979-05-24
+Age:36
+Exp:15
+School:Mount Zion Christian Academy 
