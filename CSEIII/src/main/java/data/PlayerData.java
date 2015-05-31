@@ -425,7 +425,9 @@ public class PlayerData implements PlayerDataService{
 	public static void main(String[] args) {
 		PlayerData playerDataReader = new PlayerData();
 		playerDataReader.exportToSql();
-//		playerDataReader.getPlayerBaseInfo();
-//		playerDataReader.getPlayerBaseInfoForVague("a");
+		playerDataReader.getPlayerActiveBaseInfo();
+		playerDataReader.getPlayerHistoricBaseInfo();
+		playerDataReader.getPlayerBaseInfo("Aaron Brooks");
+		playerDataReader.getPlayerBaseInfoForVague("a");
 	}
 }
