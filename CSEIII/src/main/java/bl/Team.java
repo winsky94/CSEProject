@@ -48,7 +48,7 @@ public class Team implements TeamBLService {
 		// result=team.getTeamSeasonInfo("12-13", "Team");
 		// result=team.getTeamSeasonInfo("12-13", "Playoff", "NOP");
 		// result=team.getOrderedTeamsByAverage( "all", "score", "desc", 5);
-		result = team.getSeasonHotTeam("12-13", "score", 5);
+		result = team.getSeasonHotTeam("12-13","Playoff", "score", 5);
 		System.out.println("结果大小：" + result.size());
 
 		for (TeamVO vo : result) {
@@ -298,14 +298,14 @@ public class Team implements TeamBLService {
 		return result;
 	}
 
-	public ArrayList<TeamVO> getSeasonHotTeam(String season, String column,
+	public ArrayList<TeamVO> getSeasonHotTeam(String season, String type,String column,
 			int num) {
 		// TODO 自动生成的方法存根
 		if (num < 0) {
 			num = 30;
 		}
 		ArrayList<TeamVO> result = new ArrayList<TeamVO>();
-		ArrayList<TeamVO> teamSeasonInfo = getTeamAverageInfo("all");
+		ArrayList<TeamVO> teamSeasonInfo = getTeamAverageInfo(type);
 		Collections.sort(teamSeasonInfo, new SequenceOfTeam(column, "desc"));
 
 		for (int i = 0; i < num; i++) {
