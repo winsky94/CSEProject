@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.event.FocusAdapter;
@@ -37,8 +36,7 @@ import newui.tables.PlayerTableModel;
 import newui.tables.RowHeaderTable;
 import newui.tables.TableSorter;
 import vo.PlayerVO;
-import blservice.AgeEnum;
-import blservice.PlayerBLService;
+import blService.PlayerBLService;
 
 public class PlayerRankPanel extends FatherPanel implements MouseListener,
 		ItemListener {
@@ -160,7 +158,7 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener,
 		seasonBox.addItemListener(this);
 		f2.add(seasonBox);
 		//
-		String[] seasonTypeBoxText = { "全部","常规赛","季前赛","季后赛 "};
+		String[] seasonTypeBoxText = { "全部", "常规赛", "季前赛", "季后赛 " };
 		seasonTypeBox = new MyComboBox(seasonTypeBoxText);
 		f2.add(seasonTypeBox);
 		f2.add(new JLabel("       "));

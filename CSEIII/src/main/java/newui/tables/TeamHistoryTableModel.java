@@ -4,8 +4,8 @@ import java.util.ArrayList;
 
 import newui.Service;
 import vo.PlayerVO;
-import bl.player.Player;
-import blservice.PlayerBLService;
+import bl.Player;
+import blService.PlayerBLService;
 
 public class TeamHistoryTableModel extends MyTableModel {
 	/**

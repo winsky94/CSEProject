@@ -9,7 +9,7 @@ import javax.swing.JTable;
 import newui.Service;
 import newui.playerui.BaseInfoPlayerThread;
 import vo.PlayerVO;
-import blservice.PlayerBLService;
+import blService.PlayerBLService;
 
 public class PlayerBaseInfoTableModel extends MyTableModel {
 

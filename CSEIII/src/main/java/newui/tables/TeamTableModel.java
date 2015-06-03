@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import newui.Service;
 import vo.TeamVO;
-import blservice.TeamBLService;
+import blService.TeamBLService;
 
 public class TeamTableModel extends MyTableModel {
 	/**

@@ -27,7 +27,7 @@ import newui.tables.HotTableModel;
 import newui.tables.MyTableCellRenderer;
 import newui.teamui.TeamDetailPanel;
 import vo.PlayerVO;
-import blservice.PlayerBLService;
+import blService.PlayerBLService;
 
 public class ProgressPanel extends HotFatherPanel implements MouseListener {
 	private static final long serialVersionUID = 1L;
@@ -48,7 +48,7 @@ public class ProgressPanel extends HotFatherPanel implements MouseListener {
 	DecimalFormat dec = new DecimalFormat("0.00");
 
 	public ProgressPanel() {
-	
+
 		player = Service.player;
 		GridBagLayout bl = new GridBagLayout();
 		GridBagConstraints bc = new GridBagConstraints();
@@ -57,9 +57,10 @@ public class ProgressPanel extends HotFatherPanel implements MouseListener {
 		// -------bestPnl--------------
 		bestHead = new JLabel();
 		bestHead.setToolTipText("点击查看球员详情");
-		bestHead.addMouseListener(new MouseAdapter(){
-			public void mouseClicked(MouseEvent e){
-				MainFrame.getInstance().setContentPanel(new PlayerDetailPanel(bestName.getText()));
+		bestHead.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				MainFrame.getInstance().setContentPanel(
+						new PlayerDetailPanel(bestName.getText()));
 			}
 		});
 		// 有需要就加上bestHead.setPreferredSize(new Dimension(width, height));
@@ -105,10 +106,11 @@ public class ProgressPanel extends HotFatherPanel implements MouseListener {
 		bl.setConstraints(bestTeamIcon, bc);
 		bestPnl.add(bestTeamIcon);
 		bestTeamIcon.setToolTipText("点击查看球队详情");
-		bestTeamIcon.addMouseListener(new MouseAdapter(){
-			public void mouseClicked(MouseEvent e){
+		bestTeamIcon.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
 				MainFrame.getInstance().setContentPanel(
-						new TeamDetailPanel(positionAndTeamName.getText().split("/")[1]));
+						new TeamDetailPanel(positionAndTeamName.getText()
+								.split("/")[1]));
 			}
 		});
 		bestHead.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -139,17 +141,18 @@ public class ProgressPanel extends HotFatherPanel implements MouseListener {
 		table.setFont(new Font("微软雅黑", 0, 12));
 		table.getTableHeader().setFont(new Font("微软雅黑", 0, 14));
 		table.getTableHeader().setForeground(Color.white);
-		table.getTableHeader().setBackground(Style.FOCUS_BLUE);		DefaultTableCellRenderer tcr = new MyTableCellRenderer();
+		table.getTableHeader().setBackground(Style.FOCUS_BLUE);
+		DefaultTableCellRenderer tcr = new MyTableCellRenderer();
 		table.getColumn(table.getColumnName(0)).setCellRenderer(tcr);
 		for (int i = 2; i < table.getColumnCount(); i++) {
 			table.getColumn(table.getColumnName(i)).setCellRenderer(tcr);
 		}
 
 		jsp.getViewport().add(table);
-		thr=new HotThread(this,"recentFiveMatchesScoreUpRate");
+		thr = new HotThread(this, "recentFiveMatchesScoreUpRate");
 		Refresh("recentFiveMatchesScoreUpRate");
 		thr.startThread();
-		
+
 	}
 
 	public void Refresh(String sort) {
@@ -165,28 +168,33 @@ public class ProgressPanel extends HotFatherPanel implements MouseListener {
 			// data.setText(topOne.getScore()+"");
 			bestTeamIcon.setIcon(new ImageIcon("image/teamIcon/teamsPng150/"
 					+ topOne.getOwingTeam() + ".png"));
-			
-			if (currentBtn == scoreBtn){
-				data.setText(topOne.getScore() + "/"
-						+ dec.format(topOne.getRecentFiveMatchesScoreUpRate() * 100) + "%");
-			}
-			else if (currentBtn == reboundBtn)
-				data.setText(topOne.getReboundNum() + "/"
+
+			if (currentBtn == scoreBtn) {
+				data.setText(topOne.getScore()
+						+ "/"
+						+ dec.format(topOne.getRecentFiveMatchesScoreUpRate() * 100)
+						+ "%");
+			} else if (currentBtn == reboundBtn)
+				data.setText(topOne.getReboundNum()
+						+ "/"
 						+ dec.format(topOne.getRecentFiveMatchesReboundUpRate() * 100)
 						+ "%");
 			else
-				data.setText(topOne.getAssistNum() + "/"
-						+ dec.format(topOne.getRecentFiveMatchesAssistUpRate() * 100) + "%");
+				data.setText(topOne.getAssistNum()
+						+ "/"
+						+ dec.format(topOne.getRecentFiveMatchesAssistUpRate() * 100)
+						+ "%");
 			model.Refresh(vlist);
 			table.revalidate();
 			jsp.getViewport().remove(table);
 			table = new JTable(model);
-			table.addMouseListener(new MouseAdapter(){
-				public void mouseClicked(MouseEvent e){
-					if(e.getClickCount()==2){
-						int row=table.getSelectedRow();
-						String name=table.getValueAt(row,2).toString();
-						MainFrame.getInstance().setContentPanel(new PlayerDetailPanel(name));
+			table.addMouseListener(new MouseAdapter() {
+				public void mouseClicked(MouseEvent e) {
+					if (e.getClickCount() == 2) {
+						int row = table.getSelectedRow();
+						String name = table.getValueAt(row, 2).toString();
+						MainFrame.getInstance().setContentPanel(
+								new PlayerDetailPanel(name));
 					}
 				}
 			});
@@ -212,28 +220,31 @@ public class ProgressPanel extends HotFatherPanel implements MouseListener {
 		currentBtn.setBackground(Style.HOT_PURPLE);
 		BottomButton m = (BottomButton) e.getSource();
 		PlayerVO v = vlist.get(0);
-		if(thr!=null)
+		if (thr != null)
 			thr.stopThead();
 		if (m == scoreBtn) {
 			head[5] = "场均得分";
 			currentBtn = scoreBtn;
 			Refresh("recentFiveMatchesScoreUpRate");
-			thr=new HotThread(ProgressPanel.this,"recentFiveMatchesScoreUpRate");
-			
+			thr = new HotThread(ProgressPanel.this,
+					"recentFiveMatchesScoreUpRate");
+
 			// data.setText(v.getScore()+"/"+v.getRecentFiveMatchesScoreUpRate()*100+"%");
 		} else if (m == reboundBtn) {
 			head[5] = "场均篮板";
 			currentBtn = reboundBtn;
 			Refresh("recentFiveMatchesReboundUpRate");
-			thr=new HotThread(ProgressPanel.this,"recentFiveMatchesReboundUpRate");
-		
+			thr = new HotThread(ProgressPanel.this,
+					"recentFiveMatchesReboundUpRate");
+
 			// data.setText(v.getReboundNum()+"/"+v.getRecentFiveMatchesReboundUpRate()*100+"%");
 		} else {
 			head[5] = "场均助攻";
 			currentBtn = assistBtn;
 			Refresh("recentFiveMatchesAssistUpRate");
-			thr=new HotThread(ProgressPanel.this,"recentFiveMatchesAssistUpRate");
-			
+			thr = new HotThread(ProgressPanel.this,
+					"recentFiveMatchesAssistUpRate");
+
 			// data.setText(v.getAssistNum()+"/"+v.getRecentFiveMatchesAssistUpRate()*100+"%");
 		}
 
@@ -300,14 +311,17 @@ public class ProgressPanel extends HotFatherPanel implements MouseListener {
 				line.add(v.getPosition());
 				if (currentBtn == scoreBtn) {
 					line.add(v.getScore());
-					
-					line.add(dec.format(v.getRecentFiveMatchesScoreUpRate() * 100) + "%");
+
+					line.add(dec.format(v.getRecentFiveMatchesScoreUpRate() * 100)
+							+ "%");
 				} else if (currentBtn == reboundBtn) {
 					line.add(v.getReboundNum());
-					line.add(dec.format(v.getRecentFiveMatchesReboundUpRate() * 100) + "%");
+					line.add(dec.format(v.getRecentFiveMatchesReboundUpRate() * 100)
+							+ "%");
 				} else {
 					line.add(v.getAssistNum());
-					line.add(dec.format(v.getRecentFiveMatchesAssistUpRate() * 100) + "%");
+					line.add(dec.format(v.getRecentFiveMatchesAssistUpRate() * 100)
+							+ "%");
 				}
 				content.add(line);
 			}

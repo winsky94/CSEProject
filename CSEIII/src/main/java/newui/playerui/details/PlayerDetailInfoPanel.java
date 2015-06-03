@@ -1,6 +1,5 @@
 package newui.playerui.details;
 
-import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.FlowLayout;
 import java.awt.Font;
@@ -22,8 +21,8 @@ import newui.mainui.MainFrame;
 import newui.teamui.TeamDetailPanel;
 import newui.teamui.details.TeamDetailRecentPanel;
 import vo.PlayerVO;
-import bl.team.Team;
-import blservice.PlayerBLService;
+import bl.Team;
+import blService.PlayerBLService;
 
 public class PlayerDetailInfoPanel extends JPanel {
 
@@ -38,11 +37,11 @@ public class PlayerDetailInfoPanel extends JPanel {
 
 	public PlayerDetailInfoPanel(PlayerVO vo) {
 
-		this.vo=vo;
+		this.vo = vo;
 
 		// -----------------
-		//pservice = new Player();
-		pservice =Service.player;
+		// pservice = new Player();
+		pservice = Service.player;
 		GridBagLayout gbl = new GridBagLayout();
 		GridBagConstraints gbc = new GridBagConstraints();
 		gbc.fill = GridBagConstraints.BOTH;
@@ -78,30 +77,32 @@ public class PlayerDetailInfoPanel extends JPanel {
 				+ vo.getOwingTeam() + ".png"));
 		teamIcon.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		teamIcon.addMouseListener(new MouseListener() {
-			
+
 			public void mouseReleased(MouseEvent e) {
 				// TODO Auto-generated method stub
-				
+
 			}
-			
+
 			public void mousePressed(MouseEvent e) {
 				// TODO Auto-generated method stub
-				
+
 			}
-			
+
 			public void mouseExited(MouseEvent e) {
 				// TODO Auto-generated method stub
-				
+
 			}
-			
+
 			public void mouseEntered(MouseEvent e) {
 				// TODO Auto-generated method stub
-				
+
 			}
-			
+
 			public void mouseClicked(MouseEvent e) {
-				MainFrame.getInstance().setContentPanel(new TeamDetailPanel(PlayerDetailInfoPanel.this.vo.getOwingTeam()));
-				
+				MainFrame.getInstance().setContentPanel(
+						new TeamDetailPanel(PlayerDetailInfoPanel.this.vo
+								.getOwingTeam()));
+
 			}
 		});
 		headPnl.add(teamIcon);
@@ -114,8 +115,9 @@ public class PlayerDetailInfoPanel extends JPanel {
 		gbl.setConstraints(infoPnl, gbc);
 		add(infoPnl);
 		// ------------------
-		infoPnl.setLayout(new GridLayout(5,2));
-		MyLabel teamLbl=new MyLabel("所属球队："+Team.changeTeamNameENToCH(vo.getOwingTeam()));
+		infoPnl.setLayout(new GridLayout(5, 2));
+		MyLabel teamLbl = new MyLabel("所属球队："
+				+ Team.changeTeamNameENToCH(vo.getOwingTeam()));
 		infoPnl.add(teamLbl);
 		MyLabel numLbl = new MyLabel("球衣号码：" + vo.getNumber());
 		infoPnl.add(numLbl);
@@ -138,26 +140,28 @@ public class PlayerDetailInfoPanel extends JPanel {
 		 * 注意：加监听时把下一行的注释解除，传入其所属的球队 删除下面的recentPnl=new JPanel();
 		 */
 
-		double p1=System.currentTimeMillis();
-		recentPnl = new TeamDetailRecentPanel(vo.getName(),vo.getOwingTeam());
-		double p2=System.currentTimeMillis();
-		System.out.println("playerRecent:"+(p2-p1));
-		//recentPnl=new JPanel();
+		double p1 = System.currentTimeMillis();
+		recentPnl = new TeamDetailRecentPanel(vo.getName(), vo.getOwingTeam());
+		double p2 = System.currentTimeMillis();
+		System.out.println("playerRecent:" + (p2 - p1));
+		// recentPnl=new JPanel();
 
 		gbc.gridy = 8;
 		gbc.gridheight = 2;
 		gbc.weighty = 2;
 		gbl.setConstraints(recentPnl, gbc);
 		add(recentPnl);
-		double post=System.currentTimeMillis();
-		
+		double post = System.currentTimeMillis();
+
 	}
+
 	protected void paintComponent(Graphics g) {
 		ImageIcon icon = new ImageIcon("image/detailBack.png");
 		Image img = icon.getImage();
-		g.drawImage(img, 0, 0, icon.getIconWidth(),
-				icon.getIconHeight(), icon.getImageObserver());
+		g.drawImage(img, 0, 0, icon.getIconWidth(), icon.getIconHeight(),
+				icon.getImageObserver());
 	}
+
 	class MyLabel extends JLabel {
 
 		/**
@@ -168,7 +172,7 @@ public class PlayerDetailInfoPanel extends JPanel {
 		public MyLabel(String t) {
 			super(t);
 			setForeground(Style.FOCUS_GREY);
-			setFont(new Font("华文细黑",Font.PLAIN,20));
+			setFont(new Font("华文细黑", Font.PLAIN, 20));
 		}
 
 	}

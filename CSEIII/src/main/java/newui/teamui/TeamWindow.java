@@ -6,8 +6,6 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
-import java.awt.Point;
-import java.awt.Window;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -17,10 +15,10 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JWindow;
 
-import bl.team.Team;
 import newui.Style;
 import newui.UIhelper;
 import newui.mainui.MainFrame;
+import bl.Team;
 
 public class TeamWindow extends JWindow implements MouseListener {
 
@@ -35,29 +33,30 @@ public class TeamWindow extends JWindow implements MouseListener {
 	int height = screenHeight * 40 / 100;
 	JPanel pnl, westPnl, eastPnl;
 
-	private TeamWindow(final int x,final  int y) {
+	private TeamWindow(final int x, final int y) {
 		super(MainFrame.getInstance());
 		pnl = new JPanel();
 		add(pnl);
 		setBounds(x - 55, y, width, height);
 		setVisible(true);
-	//	addMouseListener(this);
+		// addMouseListener(this);
 		pnl.setLayout(new GridLayout(1, 2));
 		westPnl = new PartitionPanel(0);
 		pnl.add(westPnl);
 		eastPnl = new PartitionPanel(1);
 		pnl.add(eastPnl);
-		
-		pnl.addMouseListener(new MouseAdapter(){
-			public void mouseEntered(MouseEvent e){
+
+		pnl.addMouseListener(new MouseAdapter() {
+			public void mouseEntered(MouseEvent e) {
 				TeamWindow.this.setVisible(true);
 			}
-			public void mouseExited(MouseEvent e){
-			double x=	westPnl.getLocationOnScreen().getX();
-			double y=westPnl.getLocationOnScreen().getY();
-			int X=e.getXOnScreen();
-			int Y=e.getYOnScreen();
-				if((x<=X&&X<=x+width&&y<=Y&&Y<=(y+height)))
+
+			public void mouseExited(MouseEvent e) {
+				double x = westPnl.getLocationOnScreen().getX();
+				double y = westPnl.getLocationOnScreen().getY();
+				int X = e.getXOnScreen();
+				int Y = e.getYOnScreen();
+				if ((x <= X && X <= x + width && y <= Y && Y <= (y + height)))
 					;
 				else
 					TeamWindow.this.setVisible(false);
@@ -65,7 +64,6 @@ public class TeamWindow extends JWindow implements MouseListener {
 		});
 
 	}
-	
 
 	public static TeamWindow getInstance(int x, int y) {
 		if (instance == null)
@@ -78,7 +76,8 @@ public class TeamWindow extends JWindow implements MouseListener {
 		if (e.getSource().getClass() == MyButton.class) {
 			MyButton btn = (MyButton) e.getSource();
 			MainFrame.getInstance().setContentPanel(
-					new TeamDetailPanel(Team.changeTeamNameCHToEN(btn.getText())));
+					new TeamDetailPanel(
+							Team.changeTeamNameCHToEN(btn.getText())));
 			setVisible(false);
 		}
 	}
@@ -94,16 +93,16 @@ public class TeamWindow extends JWindow implements MouseListener {
 	}
 
 	public void mouseEntered(MouseEvent e) {
-		
+
 		if (e.getSource().getClass() == MyButton.class) {
-		//	setVisible(true);
+			// setVisible(true);
 			MyButton btn = (MyButton) e.getSource();
 			btn.setForeground(Style.FOCUS_BLUE);
 		}
 	}
 
 	public void mouseExited(MouseEvent e) {
-		
+
 		if (e.getSource().getClass() == MyButton.class) {
 			MyButton btn = (MyButton) e.getSource();
 			btn.setForeground(Color.black);
@@ -257,7 +256,7 @@ public class TeamWindow extends JWindow implements MouseListener {
 			gbc.gridy = 6;
 			gbl.setConstraints(btn35, gbc);
 			add(btn35);
-			
+
 		}
 
 	}
@@ -275,7 +274,7 @@ public class TeamWindow extends JWindow implements MouseListener {
 					+ ".png"), JLabel.LEFT);
 			setFont(font);
 			addMouseListener(TeamWindow.this);
-				
+
 			setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		}
 

@@ -15,8 +15,8 @@ import javax.swing.JPanel;
 import newui.Service;
 import newui.Style;
 import vo.TeamVO;
-import bl.team.Team;
-import blservice.TeamBLService;
+import bl.Team;
+import blService.TeamBLService;
 
 public class TeamDetailInfoPanel extends JPanel {
 
