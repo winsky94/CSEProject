@@ -142,7 +142,7 @@ public class Team implements TeamBLService {
 					.next();
 			TeamVO vo = (TeamVO) entry.getValue();
 
-			TeamVO teamVO = calculateTeamInfo(vo, season, type);
+			TeamVO teamVO = calculateTeamInfo(vo, season, Match.changeTypeCHToEN(type));
 			if (teamVO != null) {
 				result.add(teamVO);
 			}
@@ -152,7 +152,7 @@ public class Team implements TeamBLService {
 
 	public ArrayList<TeamVO> getTeamAverageInfo(String type) {
 		// TODO 自动生成的方法存根
-		calculateTeamAverageInfo(type);
+		calculateTeamAverageInfo(Match.changeTypeCHToEN(type));
 		ArrayList<TeamVO> result = changeMapToList(teamAverageInfo);
 		return result;
 	}
@@ -193,7 +193,7 @@ public class Team implements TeamBLService {
 				continue;
 			}
 
-			TeamVO teamVO = calculateTeamInfo(vo, season, type);
+			TeamVO teamVO = calculateTeamInfo(vo, season, Match.changeTypeCHToEN(type));
 			if (teamVO != null) {
 				result.add(teamVO);
 			}
@@ -228,7 +228,7 @@ public class Team implements TeamBLService {
 				// 当前球队不是我要的球队，就跳过他不进行计算
 				continue;
 			}
-			TeamVO teamVO = calculateTeamInfo(vo, "all", type);
+			TeamVO teamVO = calculateTeamInfo(vo, "all", Match.changeTypeCHToEN(type));
 			if (teamVO != null) {
 				result.add(teamVO);
 			}
@@ -242,7 +242,7 @@ public class Team implements TeamBLService {
 		if (num < 0) {
 			num = 30;
 		}
-		ArrayList<TeamVO> teams = getTeamSeasonInfo(season, type);
+		ArrayList<TeamVO> teams = getTeamSeasonInfo(season, Match.changeTypeCHToEN(type));
 		// 未明确写明排序方式时默认是升序
 		if (order == null || order.equals("null")) {
 			order = "asc";
@@ -261,7 +261,7 @@ public class Team implements TeamBLService {
 		if (num < 0) {
 			num = 30;
 		}
-		ArrayList<TeamVO> teams = getTeamAverageInfo(type);
+		ArrayList<TeamVO> teams = getTeamAverageInfo(Match.changeTypeCHToEN(type));
 		// 未明确写明排序方式时默认是升序
 		if (order == null || order.equals("null")) {
 			order = "asc";
@@ -305,7 +305,7 @@ public class Team implements TeamBLService {
 			num = 30;
 		}
 		ArrayList<TeamVO> result = new ArrayList<TeamVO>();
-		ArrayList<TeamVO> teamSeasonInfo = getTeamAverageInfo(type);
+		ArrayList<TeamVO> teamSeasonInfo = getTeamAverageInfo(Match.changeTypeCHToEN(type));
 		Collections.sort(teamSeasonInfo, new SequenceOfTeam(column, "desc"));
 
 		for (int i = 0; i < num; i++) {
@@ -692,7 +692,7 @@ public class Team implements TeamBLService {
 					.next();
 			TeamVO vo = (TeamVO) entry.getValue();
 			String abLocation = vo.getAbLocation();
-			TeamVO teamVO = calculateTeamInfo(vo, "all", type);
+			TeamVO teamVO = calculateTeamInfo(vo, "all", Match.changeTypeCHToEN(type));
 			if (teamVO != null) {
 				if (isSeason && abLocation.equals("NOP")) {
 					abLocation = "NOH";
