@@ -96,29 +96,24 @@ public class PlayerStatsPanel extends JPanel {
 		typeLbl.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		typeLbl.addMouseListener(new MouseListener() {
 
-			@Override
 			public void mouseReleased(MouseEvent e) {
 				// TODO Auto-generated method stub
 
 			}
 
-			@Override
 			public void mousePressed(MouseEvent e) {
 				// TODO Auto-generated method stub
 
 			}
 
-			@Override
 			public void mouseExited(MouseEvent e) {
 				typeLbl.setForeground(Style.DEEP_BLUE);
 			}
 
-			@Override
 			public void mouseEntered(MouseEvent e) {
 				typeLbl.setForeground(Style.FOCUS_BLUE);
 			}
 
-			@Override
 			public void mouseClicked(MouseEvent e) {
 				if (isCurrent) {
 					typeLbl.setText("查看最近数据");

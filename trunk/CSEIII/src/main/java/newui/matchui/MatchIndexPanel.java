@@ -62,7 +62,7 @@ public class MatchIndexPanel extends FatherPanel {
 		funcPnl.add(seasonLbl);
 		seasonBox = new MyComboBox(seasonText);
 		funcPnl.add(seasonBox);
-		String[] seasonTypeText = { "全部", "常规赛", "季前赛", "季后赛" };
+		String[] seasonTypeText = { "全部", "季前赛", "常规赛", "季后赛" };
 		seasonTypeBox = new MyComboBox(seasonTypeText);
 		funcPnl.add(seasonTypeBox);
 		funcPnl.add(new JLabel("       "));
@@ -184,7 +184,7 @@ public class MatchIndexPanel extends FatherPanel {
 
 	public void searchRefresh(String h, String v, String date) {
 		String season = seasonBox.getSelectedItem().toString();
-		ArrayList<MatchVO> mlist = mservice.getMatchData(season, date, h, v);
+		ArrayList<MatchVO> mlist = mservice.getMatchData(season,(String)seasonTypeBox.getSelectedItem(), date, h, v);
 		// ArrayList<MatchCard> matchCardList = new ArrayList<MatchCard>();
 
 		JPanel BIGPNL = new JPanel();
