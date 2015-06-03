@@ -1,6 +1,6 @@
 Name:Aron Baynes
 Number:16
-Position:C
+Position:C-F
 Height:6-10
 Weight:260
 Birth:1986-12-09

@@ -1,6 +1,6 @@
 Name:Tyler Zeller
 Number:44
-Position:C
+Position:C-F
 Height:7-0
 Weight:253
 Birth:1990-01-17

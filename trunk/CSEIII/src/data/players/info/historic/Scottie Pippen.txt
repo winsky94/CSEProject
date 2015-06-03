@@ -1,6 +1,6 @@
 Name:Scottie Pippen
 Number:33
-Position:F
+Position:F-G
 Height:6-8
 Weight:228
 Birth:1965-09-25

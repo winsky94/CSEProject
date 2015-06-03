@@ -1,6 +1,6 @@
 Name:Nerlens Noel
 Number:4
-Position:C
+Position:C-F
 Height:6-11
 Weight:228
 Birth:1994-04-10

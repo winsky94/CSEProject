@@ -1,6 +1,6 @@
 Name:Pero Antic
 Number:6
-Position:F
+Position:F-C
 Height:6-11
 Weight:260
 Birth:1982-07-29

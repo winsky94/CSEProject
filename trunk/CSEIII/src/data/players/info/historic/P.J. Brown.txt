@@ -1,6 +1,6 @@
 Name:P.J. Brown
 Number:93
-Position:F
+Position:F-C
 Height:6-11
 Weight:239
 Birth:1969-10-14

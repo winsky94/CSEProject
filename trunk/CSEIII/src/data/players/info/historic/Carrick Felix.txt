@@ -1,6 +1,6 @@
 Name:Carrick Felix
 Number:30
-Position:G
+Position:G-F
 Height:6-6
 Weight:201
 Birth:1990-08-17

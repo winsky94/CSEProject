@@ -1,6 +1,6 @@
 Name:Boris Diaw
 Number:33
-Position:C
+Position:C-F
 Height:6-8
 Weight:250
 Birth:1982-04-16

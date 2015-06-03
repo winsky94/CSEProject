@@ -1,6 +1,6 @@
 Name:Robert Traylor
 Number:32
-Position:F
+Position:F-C
 Height:6-8
 Weight:284
 Birth:1977-02-01

@@ -1,6 +1,6 @@
 Name:John Salley
 Number:16
-Position:C
+Position:C-F
 Height:6-11
 Weight:255
 Birth:1964-05-16

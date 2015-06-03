@@ -1,6 +1,6 @@
 Name:Michael Ruffin
 Number:51
-Position:F
+Position:F-C
 Height:6-8
 Weight:248
 Birth:1977-01-21

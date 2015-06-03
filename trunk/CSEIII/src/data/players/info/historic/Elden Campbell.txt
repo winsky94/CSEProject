@@ -1,6 +1,6 @@
 Name:Elden Campbell
 Number:41
-Position:C
+Position:C-F
 Height:7-0
 Weight:279
 Birth:1968-07-23

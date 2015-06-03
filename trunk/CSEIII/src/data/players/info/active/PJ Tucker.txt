@@ -1,6 +1,6 @@
 Name:PJ Tucker
 Number:17
-Position:F
+Position:F-G
 Height:6-6
 Weight:224
 Birth:1985-05-05

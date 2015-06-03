@@ -1,6 +1,6 @@
 Name:Oscar Torres
 Number:18
-Position:G
+Position:G-F
 Height:6-6
 Weight:210
 Birth:1976-12-18

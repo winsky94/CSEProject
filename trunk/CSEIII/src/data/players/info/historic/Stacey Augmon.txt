@@ -1,6 +1,6 @@
 Name:Stacey Augmon
 Number:2
-Position:F
+Position:F-G
 Height:6-8
 Weight:213
 Birth:1968-08-01

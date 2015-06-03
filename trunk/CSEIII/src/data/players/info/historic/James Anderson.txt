@@ -1,6 +1,6 @@
 Name:James Anderson
 Number:9
-Position:G
+Position:G-F
 Height:6-6
 Weight:210
 Birth:1989-03-25

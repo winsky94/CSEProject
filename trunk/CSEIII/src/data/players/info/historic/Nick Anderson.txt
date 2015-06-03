@@ -1,6 +1,6 @@
 Name:Nick Anderson
 Number:5
-Position:F
+Position:F-G
 Height:6-6
 Weight:228
 Birth:1968-01-20

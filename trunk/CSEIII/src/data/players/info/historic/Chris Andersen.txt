@@ -1,6 +1,6 @@
 Name:Chris Andersen
 Number:11
-Position:F
+Position:F-C
 Height:6-10
 Weight:245
 Birth:1978-07-07

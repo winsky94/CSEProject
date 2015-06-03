@@ -1,6 +1,6 @@
 Name:Kevin Garnett
 Number:21
-Position:F
+Position:F-C
 Height:6-11
 Weight:253
 Birth:1976-05-19

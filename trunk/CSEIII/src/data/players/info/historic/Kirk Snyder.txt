@@ -1,6 +1,6 @@
 Name:Kirk Snyder
 Number:30
-Position:F
+Position:F-G
 Height:6-6
 Weight:225
 Birth:1983-06-05

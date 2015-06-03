@@ -1,6 +1,6 @@
 Name:Zoran Dragic
 Number:12
-Position:G
+Position:G-F
 Height:6-5
 Weight:200
 Birth:1989-06-22

@@ -1,6 +1,6 @@
 Name:Andray Blatche
 Number:0
-Position:C
+Position:C-F
 Height:6-11
 Weight:260
 Birth:1986-08-22

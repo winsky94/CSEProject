@@ -1,6 +1,6 @@
 Name:Pat Burke
 Number:11
-Position:C
+Position:C-F
 Height:6-11
 Weight:250
 Birth:1973-12-14

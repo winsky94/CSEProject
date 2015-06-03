@@ -1,6 +1,6 @@
 Name:Harold Ellis
 Number:3
-Position:F
+Position:F-G
 Height:6-5
 Weight:220
 Birth:1970-10-07

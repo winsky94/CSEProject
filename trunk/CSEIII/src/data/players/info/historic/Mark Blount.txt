@@ -1,6 +1,6 @@
 Name:Mark Blount
 Number:15
-Position:C
+Position:C-F
 Height:7-0
 Weight:250
 Birth:1975-11-30

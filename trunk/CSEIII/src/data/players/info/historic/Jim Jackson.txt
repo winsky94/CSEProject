@@ -1,6 +1,6 @@
 Name:Jim Jackson
 Number:24
-Position:F
+Position:F-G
 Height:6-6
 Weight:220
 Birth:1970-10-14

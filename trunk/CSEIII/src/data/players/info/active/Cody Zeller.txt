@@ -1,6 +1,6 @@
 Name:Cody Zeller
 Number:40
-Position:F
+Position:F-C
 Height:7-0
 Weight:240
 Birth:1992-10-05

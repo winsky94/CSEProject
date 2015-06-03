@@ -1,6 +1,6 @@
 Name:Al Horford
 Number:15
-Position:C
+Position:C-F
 Height:6-10
 Weight:250
 Birth:1986-06-03

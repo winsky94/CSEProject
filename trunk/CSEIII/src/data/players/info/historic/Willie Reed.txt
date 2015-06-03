@@ -1,6 +1,6 @@
 Name:Willie Reed
 Number:58
-Position:F
+Position:F-C
 Height:6-10
 Weight:220
 Birth:1990-05-16

@@ -1,6 +1,6 @@
 Name:Loren Meyer
 Number:34
-Position:C
+Position:C-F
 Height:6-10
 Weight:260
 Birth:1972-12-30

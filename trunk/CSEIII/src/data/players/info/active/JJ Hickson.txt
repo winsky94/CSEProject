@@ -1,6 +1,6 @@
 Name:JJ Hickson
 Number:7
-Position:F
+Position:F-C
 Height:6-9
 Weight:242
 Birth:1988-09-04

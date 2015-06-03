@@ -1,6 +1,6 @@
 Name:Keon Clark
 Number:13
-Position:C
+Position:C-F
 Height:6-11
 Weight:221
 Birth:1975-04-16

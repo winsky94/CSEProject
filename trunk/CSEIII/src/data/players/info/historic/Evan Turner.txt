@@ -1,6 +1,6 @@
 Name:Evan Turner
 Number:11
-Position:G
+Position:G-F
 Height:6-7
 Weight:220
 Birth:1988-10-27

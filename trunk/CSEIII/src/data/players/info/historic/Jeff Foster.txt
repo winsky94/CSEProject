@@ -1,6 +1,6 @@
 Name:Jeff Foster
 Number:10
-Position:F
+Position:F-C
 Height:6-11
 Weight:250
 Birth:1977-01-16

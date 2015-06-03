@@ -1,6 +1,6 @@
 Name:Donatas Motiejunas
 Number:20
-Position:F
+Position:F-C
 Height:7-0
 Weight:255
 Birth:1990-09-20

@@ -1,6 +1,6 @@
 Name:Pau Gasol
 Number:16
-Position:F
+Position:F-C
 Height:7-0
 Weight:250
 Birth:1980-07-06

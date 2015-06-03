@@ -1,6 +1,6 @@
 Name:Brad Miller
 Number:52
-Position:C
+Position:C-F
 Height:7-0
 Weight:261
 Birth:1976-04-12

@@ -1,6 +1,6 @@
 Name:Danny Fortson
 Number:21
-Position:C
+Position:C-F
 Height:6-8
 Weight:260
 Birth:1976-03-27

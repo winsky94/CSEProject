@@ -1,6 +1,6 @@
 Name:Bison Dele
 Number:8
-Position:C
+Position:C-F
 Height:6-11
 Weight:260
 Birth:1969-04-06

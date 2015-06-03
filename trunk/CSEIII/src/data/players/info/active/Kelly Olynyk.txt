@@ -1,6 +1,6 @@
 Name:Kelly Olynyk
 Number:41
-Position:C
+Position:C-F
 Height:7-0
 Weight:238
 Birth:1991-04-19

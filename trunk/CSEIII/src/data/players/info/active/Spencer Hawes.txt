@@ -1,6 +1,6 @@
 Name:Spencer Hawes
 Number:10
-Position:F
+Position:F-C
 Height:7-1
 Weight:245
 Birth:1988-04-28

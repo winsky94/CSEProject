@@ -1,9 +1,9 @@
 Name:Charles Jones
-Number:
-Position:F
-Height:6-8
+Number:27
+Position:F-C
+Height:6-9
 Weight:215
-Birth:1962-01-12
-Age:53
-Exp:3
-School:Louisville
+Birth:1957-04-03
+Age:58
+Exp:14
+School:Albany State 

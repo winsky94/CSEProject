@@ -1,6 +1,6 @@
 Name:Robert Horry
 Number:25
-Position:F
+Position:F-C
 Height:6-10
 Weight:240
 Birth:1970-08-25

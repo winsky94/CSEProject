@@ -1,6 +1,6 @@
 Name:Awvee Storey
 Number:20
-Position:F
+Position:F-G
 Height:6-6
 Weight:225
 Birth:1977-04-18

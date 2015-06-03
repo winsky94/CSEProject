@@ -1,6 +1,6 @@
 Name:Brandon Rush
 Number:4
-Position:G
+Position:G-F
 Height:6-6
 Weight:220
 Birth:1985-07-07

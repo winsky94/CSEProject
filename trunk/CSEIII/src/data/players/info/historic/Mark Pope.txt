@@ -1,6 +1,6 @@
 Name:Mark Pope
 Number:41
-Position:C
+Position:C-F
 Height:6-10
 Weight:235
 Birth:1972-09-11

@@ -1,6 +1,6 @@
 Name:Shayne Whittington
 Number:42
-Position:F
+Position:F-C
 Height:6-11
 Weight:250
 Birth:1991-03-27

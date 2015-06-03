@@ -1,6 +1,6 @@
 Name:DeJuan Blair
 Number:45
-Position:C
+Position:C-F
 Height:6-7
 Weight:270
 Birth:1989-04-22

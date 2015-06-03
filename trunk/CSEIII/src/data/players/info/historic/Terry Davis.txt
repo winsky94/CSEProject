@@ -1,6 +1,6 @@
 Name:Terry Davis
 Number:54
-Position:C
+Position:C-F
 Height:6-10
 Weight:270
 Birth:1967-06-17
