@@ -98,12 +98,12 @@ public class Player implements PlayerBLService{
     
     private ArrayList<MatchVO> getTypeMatches(String type){
     	MatchBLService match=new Match();
-        return match.getMatchData("all",type,"all", "all", "all");
+        return match.getMatchData("all",Match.changeTypeCHToEN(type),"all", "all", "all");
     }
 
 	private ArrayList<MatchVO> getSeasonMatches(String season,String type) {
           MatchBLService match=new Match();
-          return match.getMatchData(season,type,"all", "all", "all");
+          return match.getMatchData(season,Match.changeTypeCHToEN(type),"all", "all", "all");
 	}
 
 	
@@ -113,7 +113,7 @@ public class Player implements PlayerBLService{
 		ArrayList<PlayerVO> result;
 		matches.clear();
 		
-		for (MatchVO match : getSeasonMatches(season,type)) {
+		for (MatchVO match : getSeasonMatches(season,Match.changeTypeCHToEN(type))) {
 			getPlayerMatchInfo(theSeasonPlayers,match);
 		}
 
@@ -788,7 +788,7 @@ public class Player implements PlayerBLService{
 	public ArrayList<PlayerVO> getOrderedPlayersBySeason(String season,String type,
 			String condition, String order, int num) {
 		ArrayList<PlayerVO> result = new ArrayList<PlayerVO>();
-		ArrayList<PlayerVO> allPlayers = getPlayerSeasonInfo(season,type);
+		ArrayList<PlayerVO> allPlayers = getPlayerSeasonInfo(season,Match.changeTypeCHToEN(type));
 //		condition=changePlayerCHToEN(condition);
 		Collections.sort(allPlayers, new SequenceOfPlayer(condition, order));
 		int count = 0;
@@ -807,7 +807,7 @@ public class Player implements PlayerBLService{
 	public ArrayList<PlayerVO> getOrderedPlayersByAverage(String type,String condition,
 			String order, int num) {
 		ArrayList<PlayerVO> result = new ArrayList<PlayerVO>();
-		ArrayList<PlayerVO> allPlayers = getPlayerAverageInfo(type);
+		ArrayList<PlayerVO> allPlayers = getPlayerAverageInfo(Match.changeTypeCHToEN(type));
 //		condition=changePlayerCHToEN(condition);
 		Collections.sort(allPlayers, new SequenceOfPlayer(condition, order));
 		int count = 0;
@@ -885,7 +885,7 @@ public class Player implements PlayerBLService{
 			String position, String union, String column,
 			String order, int num) {
 		ArrayList<PlayerVO> result=new ArrayList<PlayerVO>();
-		ArrayList<PlayerVO> thePlayers = getPlayerSeasonInfo(season,type);
+		ArrayList<PlayerVO> thePlayers = getPlayerSeasonInfo(season,Match.changeTypeCHToEN(type));
 		for(PlayerVO vo:thePlayers){
 			result.add(vo);
 		}
@@ -896,7 +896,7 @@ public class Player implements PlayerBLService{
 	public ArrayList<PlayerVO> selectPlayersByAverage(String type,String position,
 			String union, String column, String order, int num) {
 		ArrayList<PlayerVO> result=new ArrayList<PlayerVO>();
-		ArrayList<PlayerVO> thePlayers = getPlayerAverageInfo(type);
+		ArrayList<PlayerVO> thePlayers = getPlayerAverageInfo(Match.changeTypeCHToEN(type));
 		for(PlayerVO vo:thePlayers){
 			result.add(vo);
 		}
@@ -1165,7 +1165,7 @@ public class Player implements PlayerBLService{
 
 	public ArrayList<PlayerVO> getBestImprovedPlayer(String type,String column, int num) {
 		ArrayList<PlayerVO> result = new ArrayList<PlayerVO>();
-		ArrayList<PlayerVO> thePlayers = getPlayerAverageInfo(type);
+		ArrayList<PlayerVO> thePlayers = getPlayerAverageInfo(Match.changeTypeCHToEN(type));
 
 		Collections.sort(thePlayers, new SequenceOfPlayer(column, "desc"));
 		int count = 0;
@@ -1316,7 +1316,7 @@ public class Player implements PlayerBLService{
 	public ArrayList<PlayerVO> selectPlayersUptheTimeAverage(String type,String position,
 			String union, String column, String order,int minute,int num) {
 		ArrayList<PlayerVO> result = new ArrayList<PlayerVO>();
-		ArrayList<PlayerVO> thePlayers = getPlayerAverageInfo(type);
+		ArrayList<PlayerVO> thePlayers = getPlayerAverageInfo(Match.changeTypeCHToEN(type));
 		if(minute>0){
            int second=minute*60;
 		   for (PlayerVO vo : thePlayers) {
@@ -1336,7 +1336,7 @@ public class Player implements PlayerBLService{
 	public ArrayList<PlayerVO> selectPlayersUptheTimeSeason(String season,String type,String position,
 			String union, String column, String order,int minute,int num) {
 		ArrayList<PlayerVO> result = new ArrayList<PlayerVO>();
-		ArrayList<PlayerVO> thePlayers = getPlayerSeasonInfo(season,type);
+		ArrayList<PlayerVO> thePlayers = getPlayerSeasonInfo(season,Match.changeTypeCHToEN(type));
 		if(minute>0){
            int second=minute*60;
 		   for (PlayerVO vo : thePlayers) {
