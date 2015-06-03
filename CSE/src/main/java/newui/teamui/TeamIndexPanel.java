@@ -39,7 +39,7 @@ public class TeamIndexPanel extends FatherPanel implements MouseListener {
 	TeamTableModel ttm;
 	//
 	JLabel refreshLbl, fieldLbl;
-	JComboBox<String> seasonBox, typeBox;
+	JComboBox<String> seasonBox,seasonTypeBox, typeBox;
 	Font font = new Font("微软雅黑", Font.PLAIN, 13);
 	boolean isHighInfo = false;
 	int clicktime = 0;// 升序 降序 恢复
@@ -68,6 +68,10 @@ public class TeamIndexPanel extends FatherPanel implements MouseListener {
 		seasonBox = new MyComboBox(seasonBoxText);
 		// seasonBox.addItemListener(this);
 		funcPnl.add(seasonBox);
+		//------seasonType------
+		String[] seasonTypeBoxText={"全部","常规赛","季前赛","季后赛"};
+		seasonTypeBox=new MyComboBox(seasonTypeBoxText);
+		funcPnl.add(seasonTypeBox);
 		funcPnl.add(new JLabel("       "));
 		// ----DataType---------
 		JLabel typeLbl = new MyJLabel("数据类型：");

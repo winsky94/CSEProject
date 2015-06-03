@@ -36,7 +36,7 @@ public class PlayerDetailHistoryPanel extends JPanel {
 	// --------------
 	Font font = new Font("微软雅黑", Font.PLAIN, 15);
 	JPanel funcPnl;
-	MyBox seasonBox;
+	MyBox seasonBox,seasonTypeBox;
 	PlayerVO vo;
 
 	public PlayerDetailHistoryPanel(PlayerVO vo) {
@@ -64,6 +64,9 @@ public class PlayerDetailHistoryPanel extends JPanel {
 		String[] seasonText = { "13-14" };// 这是什么
 		seasonBox = new MyBox(seasonText);
 		funcPnl.add(seasonBox);
+		String[] seasonTypeText = { "全部","常规赛","季前赛","季后赛" };// 这是什么
+		seasonTypeBox = new MyBox(seasonTypeText);
+		funcPnl.add(seasonTypeBox);
 		// ----------------------
 		phtm = new PlayerHistoryTableModel();
 		table = new JTable(phtm);
@@ -118,6 +121,7 @@ public class PlayerDetailHistoryPanel extends JPanel {
 		public MyLabel(String text) {
 			super(text);
 			setFont(font);
+			setForeground(Style.DEEP_BLUE);
 		}
 	}
 }

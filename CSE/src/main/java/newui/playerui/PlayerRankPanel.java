@@ -58,9 +58,9 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener,
 	JLabel refreshLbl, filterLbl, modeLbl, fieldLbl, timeLbl;
 	JTextField timeField;
 	JComboBox<String> locationBox, partitionBox, filterRankBox, seasonBox,
-			typeBox;
+			seasonTypeBox, typeBox;
 	Font font = new Font("微软雅黑", Font.PLAIN, 13);
-	String[] locationText = { "全部", "前锋", "中锋", "后卫", "前锋-中锋",  "前锋-后卫" };
+	String[] locationText = { "全部", "前锋", "中锋", "后卫", "前锋-中锋", "前锋-后卫" };
 	String[] partitionText = { "全部", "西部球队", "东部球队" };
 	String[] filterRankText = { "得分", "篮板数", "助攻数", "得分/篮板/助攻", "投篮命中率", "盖帽数",
 			"抢断数", "罚球命中率", "犯规数", "失误数", "在场时间", "效率", "两双" };
@@ -71,7 +71,8 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener,
 	MyTableCellRenderer tcr;
 	highlisten listen;
 	TableSorter ts;
-	int lastTime=0;
+	int lastTime = 0;
+
 	public PlayerRankPanel() {
 		ptm = new PlayerTableModel(0);
 		player = Service.player;
@@ -123,23 +124,23 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener,
 		f1.add(timeLbl);
 		timeField = new JTextField(5);
 		f1.add(timeField);
-		timeField.addFocusListener(new FocusAdapter(){
-			public void focusLost(FocusEvent e){
-				String text=timeField.getText();
-				int t=-1;
-				try{
-					 t=Integer.parseInt(text);
-				}catch(Exception ex){
-					//不处理
+		timeField.addFocusListener(new FocusAdapter() {
+			public void focusLost(FocusEvent e) {
+				String text = timeField.getText();
+				int t = -1;
+				try {
+					t = Integer.parseInt(text);
+				} catch (Exception ex) {
+					// 不处理
 				}
-				if(t!=lastTime)
+				if (t != lastTime)
 					Filter();
 			}
 		});
-		
-		timeField.addKeyListener(new KeyAdapter(){
-			public void keyPressed(KeyEvent e){
-				if(e.getKeyCode()==KeyEvent.VK_ENTER){
+
+		timeField.addKeyListener(new KeyAdapter() {
+			public void keyPressed(KeyEvent e) {
+				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
 					Filter();
 				}
 			}
@@ -158,6 +159,10 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener,
 		seasonBox = new MyComboBox(seasonBoxText);
 		seasonBox.addItemListener(this);
 		f2.add(seasonBox);
+		//
+		String[] seasonTypeBoxText = { "全部","常规赛","季前赛","季后赛 "};
+		seasonTypeBox = new MyComboBox(seasonTypeBoxText);
+		f2.add(seasonTypeBox);
 		f2.add(new JLabel("       "));
 		// ----DataType---------
 		JLabel typeLbl = new MyJLabel("数据类型：");
@@ -250,14 +255,11 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener,
 		public MyComboBox(String[] text) {
 			super(text);
 			setFont(font);
-			
-			
+
 			this.setForeground(Color.white);
 			this.setBackground(Style.BACK_GREY);
-		
-			
+
 		}
-	
 
 	}
 
@@ -367,34 +369,34 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener,
 
 	public void itemStateChanged(ItemEvent e) {
 		if (e.getStateChange() == ItemEvent.SELECTED) {
-			if(e.getSource()==typeBox){
-			String season = seasonBox.getSelectedItem().toString();
-			ArrayList<PlayerVO> vlist;
-			String s = (String) typeBox.getSelectedItem();
-			if (s.equals("赛季"))
-				vlist = player.getPlayerSeasonInfo(season);
-			else
-				vlist = player.getPlayerAverageInfo();
-			// vlist.size()==0显示没有符合条件的球员
-			if (vlist != null) {
-				if (isHighInfo)
-					ptm.refreshHigh(vlist);
+			if (e.getSource() == typeBox) {
+				String season = seasonBox.getSelectedItem().toString();
+				ArrayList<PlayerVO> vlist;
+				String s = (String) typeBox.getSelectedItem();
+				if (s.equals("赛季"))
+					vlist = player.getPlayerSeasonInfo(season);
 				else
-					ptm.refreshBase(vlist);
+					vlist = player.getPlayerAverageInfo();
+				// vlist.size()==0显示没有符合条件的球员
+				if (vlist != null) {
+					if (isHighInfo)
+						ptm.refreshHigh(vlist);
+					else
+						ptm.refreshBase(vlist);
 
-			}
-			tcr.setHighlightColumn(-1);
-			ts.cancelSorting();
-			table.revalidate();
-			table.repaint();
-			titleBar.setSeason(season);
-			titleBar.setAveOrAll(s);
-			}else if(e.getSource()==locationBox||e.getSource()==partitionBox
-					||e.getSource()==filterRankBox){
+				}
+				tcr.setHighlightColumn(-1);
+				ts.cancelSorting();
+				table.revalidate();
+				table.repaint();
+				titleBar.setSeason(season);
+				titleBar.setAveOrAll(s);
+			} else if (e.getSource() == locationBox
+					|| e.getSource() == partitionBox
+					|| e.getSource() == filterRankBox) {
 				Filter();
 			}
-					
-			
+
 		}
 	}
 
@@ -439,64 +441,64 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener,
 
 		}
 	}
-	
-	public void Filter(){
-		int time=0;
-		if (timeField.getText() != null||!(timeField.getText().equals(""))||timeField.getText()!="") {
-			
-			try{
-			   time = Integer.parseInt(timeField.getText());
-			}catch(NumberFormatException nfe){
-				time=0;
+
+	public void Filter() {
+		int time = 0;
+		if (timeField.getText() != null || !(timeField.getText().equals(""))
+				|| timeField.getText() != "") {
+
+			try {
+				time = Integer.parseInt(timeField.getText());
+			} catch (NumberFormatException nfe) {
+				time = 0;
 			}
 		}
-		lastTime=time;
-			// 执行筛选
-			String season = seasonBox.getSelectedItem().toString();
-			String position = locationBox.getSelectedItem().toString();
-			String union = partitionBox.getSelectedItem().toString();
-			String sort = filterRankBox.getSelectedItem().toString();
-			ArrayList<PlayerVO> vlist;
-			String type = typeBox.getSelectedItem().toString();
-			if (type.equals("赛季"))
-				vlist = player.selectPlayersUptheTimeSeason(season, position,
-						union, AgeEnum.ALL, sort, "desc",time, 50);
+		lastTime = time;
+		// 执行筛选
+		String season = seasonBox.getSelectedItem().toString();
+		String position = locationBox.getSelectedItem().toString();
+		String union = partitionBox.getSelectedItem().toString();
+		String sort = filterRankBox.getSelectedItem().toString();
+		ArrayList<PlayerVO> vlist;
+		String type = typeBox.getSelectedItem().toString();
+		if (type.equals("赛季"))
+			vlist = player.selectPlayersUptheTimeSeason(season, position,
+					union, AgeEnum.ALL, sort, "desc", time, 50);
+		else
+			vlist = player.selectPlayersUptheTimeAverage(position, union,
+					AgeEnum.ALL, sort, "desc", time, 50);
+		// vlist.size()==0显示没有符合条件的球
+		if (ptm.headmodel != 0) {
+			if (isHighInfo == false)
+				ptm = new PlayerTableModel(0);
 			else
-				vlist = player.selectPlayersUptheTimeAverage(position, union,
-						AgeEnum.ALL, sort, "desc",time, 50);
-			// vlist.size()==0显示没有符合条件的球
-			if (ptm.headmodel != 0) {
-				if (isHighInfo == false)
-					ptm = new PlayerTableModel(0);
-				else
-					ptm = new PlayerTableModel(1);
-				jsp.remove(table);
-				table = new JTable(ptm);
+				ptm = new PlayerTableModel(1);
+			jsp.remove(table);
+			table = new JTable(ptm);
 
-				ts = new TableSorter(table.getModel(),
-						table.getTableHeader());
-				table.setModel(ts);
+			ts = new TableSorter(table.getModel(), table.getTableHeader());
+			table.setModel(ts);
 
-				// table.addMouseListener(this);
-				jsp.getViewport().add(table);
+			// table.addMouseListener(this);
+			jsp.getViewport().add(table);
 
-			}
-			if (vlist != null) {
-				if (isHighInfo == false)
-					ptm.refreshBase(vlist);
-				else
-					ptm.refreshHigh(vlist);
-			}
-			table.revalidate();
+		}
+		if (vlist != null) {
+			if (isHighInfo == false)
+				ptm.refreshBase(vlist);
+			else
+				ptm.refreshHigh(vlist);
+		}
+		table.revalidate();
 
-			table.repaint();
+		table.repaint();
 
-			int col = ptm.findColumn(sort);
+		int col = ptm.findColumn(sort);
 
-			lastcolumn = col;
-			clicktime = 0;
-			CellRender();
-			tcr.setHighlightColumn(col);
+		lastcolumn = col;
+		clicktime = 0;
+		CellRender();
+		tcr.setHighlightColumn(col);
 	}
 
 }
