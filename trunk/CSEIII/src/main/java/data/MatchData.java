@@ -35,10 +35,11 @@ public class MatchData implements MatchDataService {
 	public static void main(String[] args) {
 		MatchData matchData = new MatchData();
 		matchData.exportToSql();
-		System.out.println("MatchData.main()");
-		ArrayList<MatchVO> result = matchData.getMatchData("12-13", "Playoff",
-				"all", "all", "all");
-		System.out.println(result.size());
+		// System.out.println("MatchData.main()");
+		// ArrayList<MatchVO> result = matchData.getMatchData("12-13",
+		// "Playoff",
+		// "all", "all", "all");
+		// System.out.println(result.size());
 	}
 
 	public ArrayList<String> getAllSeasons() {
@@ -380,7 +381,12 @@ public class MatchData implements MatchDataService {
 	}
 
 	public MatchVO readFromMatchFile(String fileName) {
-		MatchVO matchPO;
+		MatchVO matchVO = null;
+		//筛选数据缺失的文件
+//		if(fileName.contains("la")||fileName.contains("lh")||fileName.contains("lv")){
+//			System.out.println(fileName.split("matches")[1].substring(1));
+//			return matchVO;
+//		}
 		String season;// 赛季
 		String date = null;// 比赛日期
 		String teams = null;// 对阵队伍
@@ -513,7 +519,7 @@ public class MatchData implements MatchDataService {
 							assistNum, stealNum, blockNum, turnOverNum,
 							foulNum, personScore);
 					records.add(recordPO);
-					// System.out.println(playerName);
+//					 System.out.println(playerName);
 					isComplete = false;
 				}
 				temp = br.readLine();
@@ -532,10 +538,10 @@ public class MatchData implements MatchDataService {
 		int visitingScore = Integer.parseInt(s[0]);
 		int homeScore = Integer.parseInt(s[1]);
 
-		matchPO = new MatchVO(count, season, date, type, visitingTeam,
+		matchVO = new MatchVO(count, season, date, type, visitingTeam,
 				homeTeam, visitingScore, homeScore, detailScores, records);
 		count++;
-		return matchPO;
+		return matchVO;
 	}
 
 	public ArrayList<MatchVO> getMatchesListFromFile() {
