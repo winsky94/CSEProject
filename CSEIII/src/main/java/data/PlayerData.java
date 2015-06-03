@@ -12,18 +12,14 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
-import java.util.Map.Entry;
 
-import dataservice.PlayerDataService;
 import vo.MatchVO;
 import vo.PlayerVO;
-import vo.RecordVO;
 import vo.TeamVO;
 import SQLHelper.FileList;
 import SQLHelper.SqlManager;
-
+import dataservice.PlayerDataService;
 
 /**
  * 
@@ -31,18 +27,19 @@ import SQLHelper.SqlManager;
  * 
  *
  */
-public class PlayerData implements PlayerDataService{
-	
-	ArrayList <PlayerVO> players = new ArrayList<PlayerVO>();
+public class PlayerData implements PlayerDataService {
+
+	ArrayList<PlayerVO> players = new ArrayList<PlayerVO>();
 	Map<String, TeamVO> teams;
 	Map<Integer, MatchVO> matches = new HashMap<Integer, MatchVO>(1024);
 	Map<String, ArrayList<MatchVO>> allSeasonMatches = new HashMap<String, ArrayList<MatchVO>>();
-	static int count=1;
-	boolean isReadSqlActive=false;
-	boolean isReadSqlHistoric=false;
+	static int count = 1;
+	boolean isReadSqlActive = false;
+	boolean isReadSqlHistoric = false;
 	Map<String, PlayerVO> playersActiveForBL = new HashMap<String, PlayerVO>(32);
-	Map<String, PlayerVO> playersHistoricForBL = new HashMap<String, PlayerVO>(32);
-	
+	Map<String, PlayerVO> playersHistoricForBL = new HashMap<String, PlayerVO>(
+			32);
+
 	private void baseInfoInitActive() {
 		try {
 			FileList fl = new FileList("src/data/players/info/active");
@@ -59,7 +56,7 @@ public class PlayerData implements PlayerDataService{
 		}
 
 	}
-	
+
 	private void baseInfoInitHistoric() {
 		try {
 			FileList fl = new FileList("src/data/players/info/historic");
@@ -76,7 +73,7 @@ public class PlayerData implements PlayerDataService{
 		}
 
 	}
-	
+
 	private void readBaseInfoFromFile(String fileName) {
 		PlayerVO player;
 		String name;
@@ -101,11 +98,10 @@ public class PlayerData implements PlayerDataService{
 			String temp = null;
 			temp = br.readLine();
 			while (temp != null) {
-				String[] nit=temp.split(":");
-				if(nit.length==1){
+				String[] nit = temp.split(":");
+				if (nit.length == 1) {
 					content[i++] = "";
-				}
-				else{
+				} else {
 					content[i++] = nit[1].trim();
 				}
 				temp = br.readLine();
@@ -120,23 +116,20 @@ public class PlayerData implements PlayerDataService{
 		number = content[1];
 		position = content[2];
 		height = content[3];
-		if(content[4].equals("")){
-			weight=0;
-		}
-		else{
+		if (content[4].equals("")) {
+			weight = 0;
+		} else {
 			weight = Integer.parseInt(content[4]);
 		}
 		birth = content[5];
-		if(content[6].equals("")){
-			age=0;
-		}
-		else{
+		if (content[6].equals("")) {
+			age = 0;
+		} else {
 			age = Integer.parseInt(content[6]);
 		}
-		if(content[7].equals("")){
-			exp=0;
-		}
-		else {
+		if (content[7].equals("")) {
+			exp = 0;
+		} else {
 			exp = Integer.parseInt(content[7]);
 		}
 		school = content[8];
@@ -160,9 +153,9 @@ public class PlayerData implements PlayerDataService{
 			PreparedStatement statement = con
 					.prepareStatement("INSERT INTO playersActive VALUES(?, ?,?,?,?,?,?,?,?,?)");
 			int count = 1;
-			
-			for(PlayerVO player:players) {
-					
+
+			for (PlayerVO player : players) {
+
 				statement.setInt(1, count++);
 				statement.setString(2, player.getName());
 				statement.setString(3, player.getNumber());
@@ -179,7 +172,7 @@ public class PlayerData implements PlayerDataService{
 			}
 			statement.executeBatch();
 			con.commit();
-			
+
 			baseInfoInitHistoric();
 			sql.execute("drop table if exists playersHistoric");
 			sql.execute("create table playersHistoric(playerID int not null auto_increment,name varchar(40) not null default 'null',"
@@ -188,11 +181,12 @@ public class PlayerData implements PlayerDataService{
 					+ "birth varchar(20) not null default 'null',age int not null default 0,exp int not null default 0,"
 					+ "school varchar(40)not null default 'null',primary key(playerID));");
 			sql.close();
-			statement = con.prepareStatement("INSERT INTO playersHistoric VALUES(?, ?,?,?,?,?,?,?,?,?)");
+			statement = con
+					.prepareStatement("INSERT INTO playersHistoric VALUES(?, ?,?,?,?,?,?,?,?,?)");
 			count = 1;
-			
-			for(PlayerVO player:players) {
-					
+
+			for (PlayerVO player : players) {
+
 				statement.setInt(1, count++);
 				statement.setString(2, player.getName());
 				statement.setString(3, player.getNumber());
@@ -220,12 +214,11 @@ public class PlayerData implements PlayerDataService{
 
 	}
 
-
 	public Map<String, PlayerVO> getPlayerActiveBaseInfo() {
-		
-		if(isReadSqlActive==true)
+
+		if (isReadSqlActive == true)
 			return playersActiveForBL;
-		
+
 		Connection con;
 		try {
 			con = SqlManager.getConnection();
@@ -233,8 +226,8 @@ public class PlayerData implements PlayerDataService{
 			String query = "select * from playersactive ";
 			ResultSet resultSet = sql.executeQuery(query);
 			PlayerVO player;
-			
-			while(resultSet.next()){
+
+			while (resultSet.next()) {
 				String name;
 				String number;
 				String position;
@@ -244,20 +237,20 @@ public class PlayerData implements PlayerDataService{
 				int age;
 				int exp;
 				String school;
-				
+
 				name = resultSet.getString("name");
-				number=resultSet.getString("number");
-				position=resultSet.getString("position");
-				height=resultSet.getString("height");
-				weight=resultSet.getInt("weight");
-				birth=resultSet.getString("birth");
-				age=resultSet.getInt("age");
-				exp=resultSet.getInt("exp");
-				school=resultSet.getString("school");
-	            
-			    player = new PlayerVO(name, number, position, height, weight, birth,
-							age, exp, school);
-                playersActiveForBL.put(name, player);
+				number = resultSet.getString("number");
+				position = resultSet.getString("position");
+				height = resultSet.getString("height");
+				weight = resultSet.getInt("weight");
+				birth = resultSet.getString("birth");
+				age = resultSet.getInt("age");
+				exp = resultSet.getInt("exp");
+				school = resultSet.getString("school");
+
+				player = new PlayerVO(name, number, position, height, weight,
+						birth, age, exp, school);
+				playersActiveForBL.put(name, player);
 			}
 			resultSet.close();
 			sql.close();
@@ -268,15 +261,15 @@ public class PlayerData implements PlayerDataService{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		isReadSqlActive=true;
+		isReadSqlActive = true;
 		return playersActiveForBL;
 	}
-	
+
 	public Map<String, PlayerVO> getPlayerHistoricBaseInfo() {
-		
-		if(isReadSqlHistoric==true)
+
+		if (isReadSqlHistoric == true)
 			return playersHistoricForBL;
-		
+
 		Connection con;
 		try {
 			con = SqlManager.getConnection();
@@ -284,8 +277,8 @@ public class PlayerData implements PlayerDataService{
 			String query = "select * from playersactive ";
 			ResultSet resultSet = sql.executeQuery(query);
 			PlayerVO player;
-			
-			while(resultSet.next()){
+
+			while (resultSet.next()) {
 				String name;
 				String number;
 				String position;
@@ -295,20 +288,20 @@ public class PlayerData implements PlayerDataService{
 				int age;
 				int exp;
 				String school;
-				
+
 				name = resultSet.getString("name");
-				number=resultSet.getString("number");
-				position=resultSet.getString("position");
-				height=resultSet.getString("height");
-				weight=resultSet.getInt("weight");
-				birth=resultSet.getString("birth");
-				age=resultSet.getInt("age");
-				exp=resultSet.getInt("exp");
-				school=resultSet.getString("school");
-	            
-			    player = new PlayerVO(name, number, position, height, weight, birth,
-							age, exp, school);
-                playersHistoricForBL.put(name, player);
+				number = resultSet.getString("number");
+				position = resultSet.getString("position");
+				height = resultSet.getString("height");
+				weight = resultSet.getInt("weight");
+				birth = resultSet.getString("birth");
+				age = resultSet.getInt("age");
+				exp = resultSet.getInt("exp");
+				school = resultSet.getString("school");
+
+				player = new PlayerVO(name, number, position, height, weight,
+						birth, age, exp, school);
+				playersHistoricForBL.put(name, player);
 			}
 			resultSet.close();
 			sql.close();
@@ -319,47 +312,48 @@ public class PlayerData implements PlayerDataService{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		isReadSqlHistoric=true;
+		isReadSqlHistoric = true;
 		return playersHistoricForBL;
 	}
 
 	public PlayerVO getPlayerBaseInfo(String name) {
-		if(isReadSqlHistoric==true)
+		if (isReadSqlHistoric == true)
 			return playersHistoricForBL.get(name);
-		
-		PlayerVO player=new PlayerVO();
+
+		PlayerVO player = new PlayerVO();
 		Connection con;
 		try {
 			con = SqlManager.getConnection();
 			Statement sql = con.createStatement();
-			if(name.contains("'"))
+			if (name.contains("'"))
 				name.replace("'", "''");
-			String query = "select * from playershistoric where name='"+name+"' limit 1";
+			String query = "select * from playershistoric where name='" + name
+					+ "' limit 1";
 			ResultSet resultSet = sql.executeQuery(query);
-			
+
 			resultSet.next();
-			    String thename;
-				String number;
-				String position;
-				String height;
-				int weight;
-				String birth;
-				int age;
-				int exp;
-				String school;
-				
-				thename = resultSet.getString("name");
-				number=resultSet.getString("number");
-				position=resultSet.getString("position");
-				height=resultSet.getString("height");
-				weight=resultSet.getInt("weight");
-				birth=resultSet.getString("birth");
-				age=resultSet.getInt("age");
-				exp=resultSet.getInt("exp");
-				school=resultSet.getString("school");
-	            
-			    player = new PlayerVO(thename, number, position, height, weight, birth,
-							age, exp, school);
+			String thename;
+			String number;
+			String position;
+			String height;
+			int weight;
+			String birth;
+			int age;
+			int exp;
+			String school;
+
+			thename = resultSet.getString("name");
+			number = resultSet.getString("number");
+			position = resultSet.getString("position");
+			height = resultSet.getString("height");
+			weight = resultSet.getInt("weight");
+			birth = resultSet.getString("birth");
+			age = resultSet.getInt("age");
+			exp = resultSet.getInt("exp");
+			school = resultSet.getString("school");
+
+			player = new PlayerVO(thename, number, position, height, weight,
+					birth, age, exp, school);
 			resultSet.close();
 			sql.close();
 		} catch (ClassNotFoundException e) {
@@ -371,22 +365,22 @@ public class PlayerData implements PlayerDataService{
 		}
 		return player;
 	}
-	
 
 	public ArrayList<PlayerVO> getPlayerBaseInfoForVague(String name) {
-        
-		ArrayList<PlayerVO> pArrayList=new ArrayList<PlayerVO>();
+
+		ArrayList<PlayerVO> pArrayList = new ArrayList<PlayerVO>();
 		Connection con;
 		try {
 			con = SqlManager.getConnection();
 			Statement sql = con.createStatement();
-			if(name.contains("'"))
+			if (name.contains("'"))
 				name.replace("'", "''");
-			String query = "select * from playershistoric where name like'%"+name+"%'";
+			String query = "select * from playershistoric where name like'%"
+					+ name + "%'";
 			ResultSet resultSet = sql.executeQuery(query);
 			PlayerVO player;
-			while(resultSet.next()){
-			    String thename;
+			while (resultSet.next()) {
+				String thename;
 				String number;
 				String position;
 				String height;
@@ -395,20 +389,20 @@ public class PlayerData implements PlayerDataService{
 				int age;
 				int exp;
 				String school;
-				
+
 				thename = resultSet.getString("name");
-				number=resultSet.getString("number");
-				position=resultSet.getString("position");
-				height=resultSet.getString("height");
-				weight=resultSet.getInt("weight");
-				birth=resultSet.getString("birth");
-				age=resultSet.getInt("age");
-				exp=resultSet.getInt("exp");
-				school=resultSet.getString("school");
-	            
-			    player = new PlayerVO(thename, number, position, height, weight, birth,
-							age, exp, school);
-			    pArrayList.add(player);
+				number = resultSet.getString("number");
+				position = resultSet.getString("position");
+				height = resultSet.getString("height");
+				weight = resultSet.getInt("weight");
+				birth = resultSet.getString("birth");
+				age = resultSet.getInt("age");
+				exp = resultSet.getInt("exp");
+				school = resultSet.getString("school");
+
+				player = new PlayerVO(thename, number, position, height,
+						weight, birth, age, exp, school);
+				pArrayList.add(player);
 			}
 			resultSet.close();
 			sql.close();
@@ -421,7 +415,7 @@ public class PlayerData implements PlayerDataService{
 		}
 		return pArrayList;
 	}
-	
+
 	public static void main(String[] args) {
 		PlayerData playerDataReader = new PlayerData();
 		playerDataReader.exportToSql();
