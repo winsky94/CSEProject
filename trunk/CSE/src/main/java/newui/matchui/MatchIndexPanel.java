@@ -37,7 +37,7 @@ public class MatchIndexPanel extends FatherPanel {
 	private static final long serialVersionUID = 1L;
 	JScrollPane jsp;
 	JPanel funcPnl;
-	MyComboBox seasonBox, homeBox, visitingBox;
+	MyComboBox seasonBox,seasonTypeBox, homeBox, visitingBox;
 	//
 	JPanel showPanel;
 	JCheckBox fullSeasonBox;
@@ -66,6 +66,9 @@ public class MatchIndexPanel extends FatherPanel {
 		funcPnl.add(seasonLbl);
 		seasonBox = new MyComboBox(seasonText);
 		funcPnl.add(seasonBox);
+		String[] seasonTypeText={"全部","常规赛","季前赛","季后赛"};
+		seasonTypeBox=new MyComboBox(seasonTypeText);
+		funcPnl.add(seasonTypeBox);
 		funcPnl.add(new JLabel("       "));
 		// ----是否全季-----------
 		fullSeasonBox = new JCheckBox("全季");

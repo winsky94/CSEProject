@@ -179,10 +179,11 @@ public class MainFrame extends JFrame{
 	
 	
 	public static void main(String[] args) {
+		MainFrame.getInstance().setVisible(true);;
 	//欢迎动画
 		/*InitialThread thread=new InitialThread();
 		thread.startThread();*/
-		final AnimeFrame p=new AnimeFrame();
+	/*	final AnimeFrame p=new AnimeFrame();
 		final boolean stop=false;
 		final InitialThread thread=new InitialThread(p);
 		thread.startThread();
@@ -210,7 +211,7 @@ public class MainFrame extends JFrame{
 					}, 1100);
 								
 				}
-		},3200);
+		},3200);*/
 		
 		
 	//	ImageIcon icon=new ImageIcon("image/backup.gif");

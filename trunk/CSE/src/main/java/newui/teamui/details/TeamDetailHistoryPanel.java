@@ -33,7 +33,7 @@ public class TeamDetailHistoryPanel extends JPanel {
 	TeamHistoryTableModel thtm;
 	JScrollPane jsp;
 	JPanel funcPnl;
-	MyBox seasonBox;
+	MyBox seasonBox,seasonTypeBox;
 	MyBox typeBox;
 	Font font = new Font("微软雅黑", Font.PLAIN, 15);
 
@@ -61,6 +61,10 @@ public class TeamDetailHistoryPanel extends JPanel {
 		String[] seasonText = { "13-14" };
 		seasonBox = new MyBox(seasonText);
 		funcPnl.add(seasonBox);
+		//
+		String[] seasonTypeBoxText={"全部","常规赛","季前赛","季后赛"};
+		seasonTypeBox=new MyBox(seasonTypeBoxText);
+		funcPnl.add(seasonTypeBox);
 		//
 		funcPnl.add(new JLabel("              "));
 		//

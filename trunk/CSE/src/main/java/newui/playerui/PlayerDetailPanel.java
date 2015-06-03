@@ -15,6 +15,8 @@ import newui.Style;
 import newui.UIhelper;
 import newui.playerui.details.PlayerDetailHistoryPanel;
 import newui.playerui.details.PlayerDetailInfoPanel;
+import newui.playerui.details.PlayerPKPanel;
+import newui.playerui.details.PlayerStatsPanel;
 import vo.PlayerVO;
 import blservice.PlayerBLService;
 
@@ -80,6 +82,12 @@ public class PlayerDetailPanel extends FatherPanel{
 		tab.addTab("过往数据",new PlayerDetailHistoryPanel(vo));
 		double post=System.currentTimeMillis();
 		System.out.println("detailhistory:"+(post-pp));
+		/**
+		 * 2015.5.30
+		 * 新增图表分析标签页
+		 */
+		tab.addTab("图表分析", new PlayerStatsPanel(name));
+		tab.addTab("球员对比", new PlayerPKPanel(name));
 	}
 	
 }
