@@ -4,15 +4,15 @@ import java.util.ArrayList;
 
 import newui.Service;
 import vo.PlayerVO;
-import bl.player.Player;
-import blservice.PlayerBLService;
+import bl.Player;
+import blService.PlayerBLService;
 
 public class PlayerTableModel extends MyTableModel {
 
 	/**
 	 * 表格球员信息列表模式model
 	 */
-	PlayerBLService player =Service.player;
+	PlayerBLService player = Service.player;
 	private static final long serialVersionUID = 1L;
 	ArrayList<ArrayList<Object>> content = new ArrayList<ArrayList<Object>>();
 	static String[] head;
@@ -53,13 +53,14 @@ public class PlayerTableModel extends MyTableModel {
 	}
 
 	@Override
-	public int findColumn(String sort){
-		int a=-1;
-		for(int i=0;i<head.length;i++)
-			if(head[i].contains(sort))
+	public int findColumn(String sort) {
+		int a = -1;
+		for (int i = 0; i < head.length; i++)
+			if (head[i].contains(sort))
 				return i;
 		return a;
 	}
+
 	public Object getValueAt(int rowIndex, int columnIndex) {
 		// TODO Auto-generated method stub
 		return content.get(rowIndex).get(columnIndex);
@@ -95,7 +96,7 @@ public class PlayerTableModel extends MyTableModel {
 			else
 				refreshHigh(result);
 
-		}else
+		} else
 			content.clear();
 
 		/*
@@ -182,8 +183,7 @@ public class PlayerTableModel extends MyTableModel {
 				refreshBase(v);
 			else
 				refreshHigh(v);
-		}
-		else {
+		} else {
 			content.clear();
 		}
 

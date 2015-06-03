@@ -2,9 +2,7 @@ package newui.matchui;
 
 import java.awt.Color;
 import java.awt.Cursor;
-import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -21,11 +19,9 @@ import javax.swing.JScrollPane;
 import newui.FatherPanel;
 import newui.Service;
 import newui.Style;
-import newui.UIhelper;
 import vo.MatchVO;
-import bl.match.Match;
-import bl.team.Team;
-import blservice.MatchBLService;
+import bl.Team;
+import blService.MatchBLService;
 
 import com.toedter.calendar.JDateChooser;
 
@@ -37,7 +33,7 @@ public class MatchIndexPanel extends FatherPanel {
 	private static final long serialVersionUID = 1L;
 	JScrollPane jsp;
 	JPanel funcPnl;
-	MyComboBox seasonBox,seasonTypeBox, homeBox, visitingBox;
+	MyComboBox seasonBox, seasonTypeBox, homeBox, visitingBox;
 	//
 	JPanel showPanel;
 	JCheckBox fullSeasonBox;
@@ -66,8 +62,8 @@ public class MatchIndexPanel extends FatherPanel {
 		funcPnl.add(seasonLbl);
 		seasonBox = new MyComboBox(seasonText);
 		funcPnl.add(seasonBox);
-		String[] seasonTypeText={"全部","常规赛","季前赛","季后赛"};
-		seasonTypeBox=new MyComboBox(seasonTypeText);
+		String[] seasonTypeText = { "全部", "常规赛", "季前赛", "季后赛" };
+		seasonTypeBox = new MyComboBox(seasonTypeText);
 		funcPnl.add(seasonTypeBox);
 		funcPnl.add(new JLabel("       "));
 		// ----是否全季-----------
@@ -154,12 +150,12 @@ public class MatchIndexPanel extends FatherPanel {
 		});
 		funcPnl.add(searchBtn);
 		//
-		gbc.insets=new Insets(0, 2, 1, 2);
+		gbc.insets = new Insets(0, 2, 1, 2);
 		jsp = new JScrollPane();
 		// jsp.setLayout(new ScrollPaneLayout());
 		gbc.gridy = 2;
 		gbc.gridheight = 10;
-		gbc.weighty =10;
+		gbc.weighty = 10;
 		gbl.setConstraints(jsp, gbc);
 		add(jsp);
 		searchRefresh("全部", "全部", "01-01");
@@ -189,26 +185,26 @@ public class MatchIndexPanel extends FatherPanel {
 	public void searchRefresh(String h, String v, String date) {
 		String season = seasonBox.getSelectedItem().toString();
 		ArrayList<MatchVO> mlist = mservice.getMatchData(season, date, h, v);
-		//ArrayList<MatchCard> matchCardList = new ArrayList<MatchCard>();
-		
+		// ArrayList<MatchCard> matchCardList = new ArrayList<MatchCard>();
 
 		JPanel BIGPNL = new JPanel();
-	//	BIGPNL.setLayout();
-		/*int row = mlist.size() / 2;
-		if (mlist.size() % 2 != 0)
-			row += 1;
-		
-		BIGPNL.setLayout(new GridLayout(row, 2));
-		
-		int heightOfBIGPNL = 170 * row;// 这里一定要设置为180-200之间的值，代表每个卡片的高度，乘以卡片数量之后是整个BIGPNL的高度
-		int screenWidth = UIhelper.getScreenWidth();
-
-		int width = screenWidth * 85/ 100;
-		
-
-		BIGPNL.setPreferredSize(new Dimension(width, heightOfBIGPNL));*/
+		// BIGPNL.setLayout();
+		/*
+		 * int row = mlist.size() / 2; if (mlist.size() % 2 != 0) row += 1;
+		 * 
+		 * BIGPNL.setLayout(new GridLayout(row, 2));
+		 * 
+		 * int heightOfBIGPNL = 170 * row;//
+		 * 这里一定要设置为180-200之间的值，代表每个卡片的高度，乘以卡片数量之后是整个BIGPNL的高度 int screenWidth =
+		 * UIhelper.getScreenWidth();
+		 * 
+		 * int width = screenWidth * 85/ 100;
+		 * 
+		 * 
+		 * BIGPNL.setPreferredSize(new Dimension(width, heightOfBIGPNL));
+		 */
 		jsp.getViewport().add(BIGPNL);
-		MatchCardThread th=new MatchCardThread(mlist,BIGPNL,jsp);
+		MatchCardThread th = new MatchCardThread(mlist, BIGPNL, jsp);
 		th.start();
 	}
 }

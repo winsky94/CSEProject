@@ -24,8 +24,8 @@ import newui.tables.TeamBaseInfoTableModel;
 import newui.teamui.TeamDetailPanel;
 import vo.PlayerVO;
 import vo.TeamVO;
-import blservice.PlayerBLService;
-import blservice.TeamBLService;
+import blService.PlayerBLService;
+import blService.TeamBLService;
 
 public class SearchResultPanel extends FatherPanel implements MouseListener {
 	/**
@@ -157,7 +157,8 @@ public class SearchResultPanel extends FatherPanel implements MouseListener {
 				table.setSelectionBackground(new Color(225, 255, 255));// 设置选择行的颜色——淡蓝色
 				table.setFont(new Font("微软雅黑", 0, 12));
 				table.getTableHeader().setFont(new Font("微软雅黑", 0, 14));
-//				table.getTableHeader().setBackground(new Color(211, 211, 211));
+				// table.getTableHeader().setBackground(new Color(211, 211,
+				// 211));
 				DefaultTableCellRenderer tcr = new MyTableCellRenderer();
 				for (int i = 1; i < table.getColumnCount(); i++) {
 					table.getColumn(table.getColumnName(i))
@@ -165,7 +166,7 @@ public class SearchResultPanel extends FatherPanel implements MouseListener {
 				}
 				table.getTableHeader().setForeground(Color.white);
 				table.getTableHeader().setBackground(Style.FOCUS_BLUE);
-				
+
 				table.removeMouseListener(tmouse);
 				table.addMouseListener(pmouse);
 				titleBar.setCurrentTableModel(ptm);

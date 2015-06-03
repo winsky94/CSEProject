@@ -31,8 +31,8 @@ import newui.teamui.TeamIndexPanel;
 import newui.teamui.TeamWindow;
 import vo.PlayerVO;
 import vo.TeamVO;
-import blservice.PlayerBLService;
-import blservice.TeamBLService;
+import blService.PlayerBLService;
+import blService.TeamBLService;
 
 public class TitleBar extends JPanel implements MouseListener {
 	/**

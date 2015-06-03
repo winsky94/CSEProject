@@ -15,8 +15,8 @@ import javax.swing.JPanel;
 import newui.Service;
 import newui.matchui.TinyCard;
 import vo.MatchVO;
-import blservice.PlayerBLService;
-import blservice.TeamBLService;
+import blService.PlayerBLService;
+import blService.TeamBLService;
 
 public class TeamDetailRecentPanel extends JPanel {
 

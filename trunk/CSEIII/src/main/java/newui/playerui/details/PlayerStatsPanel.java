@@ -32,8 +32,8 @@ import org.jfree.data.category.DefaultCategoryDataset;
 
 import vo.MatchVO;
 import vo.RecordVO;
-import bl.player.Player;
-import blservice.PlayerBLService;
+import bl.Player;
+import blService.PlayerBLService;
 
 public class PlayerStatsPanel extends JPanel {
 
@@ -181,19 +181,19 @@ public class PlayerStatsPanel extends JPanel {
 					RecordVO r = record.get(i);
 					dataset.addValue(r.getScore(), name, date[i]);
 				}
-				return makeChart("最近得分", "日期","得分", dataset);
+				return makeChart("最近得分", "日期", "得分", dataset);
 			} else if (item.equals("篮板")) {
 				for (int i = 0; i < size; i++) {
 					RecordVO r = record.get(i);
 					dataset.addValue(r.getReboundNum(), name, date[i]);
 				}
-				return makeChart("最近篮板", "日期","篮板数", dataset);
+				return makeChart("最近篮板", "日期", "篮板数", dataset);
 			} else if (item.equals("助攻")) {
 				for (int i = 0; i < size; i++) {
 					RecordVO r = record.get(i);
 					dataset.addValue(r.getAssistNum(), name, date[i]);
 				}
-				return makeChart("最近助攻", "日期","助攻数", dataset);
+				return makeChart("最近助攻", "日期", "助攻数", dataset);
 			} else if (item.equals("三分%")) {
 				for (int i = 0; i < size; i++) {
 					RecordVO r = record.get(i);
@@ -203,7 +203,7 @@ public class PlayerStatsPanel extends JPanel {
 								/ (r.getThreeAttemptNum() + 0.0);
 					dataset.addValue(rate, name, date[i]);
 				}
-				return makeChart("最近三分%", "日期","三分%", dataset);
+				return makeChart("最近三分%", "日期", "三分%", dataset);
 			} else if (item.equals("罚球%")) {
 				for (int i = 0; i < size; i++) {
 					RecordVO r = record.get(i);

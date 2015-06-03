@@ -24,12 +24,12 @@ import newui.tables.HotTableModel;
 import newui.tables.MyTableCellRenderer;
 import newui.teamui.TeamDetailPanel;
 import vo.TeamVO;
-import bl.team.Team;
-import blservice.TeamBLService;
+import bl.Team;
+import blService.TeamBLService;
 
 public class HotTeamPanel extends HotFatherPanel implements MouseListener {
 	private static final long serialVersionUID = 1L;
-	JLabel teamIcon, unionLbl, teamNameLbl,abbrNameLbl, data;
+	JLabel teamIcon, unionLbl, teamNameLbl, abbrNameLbl, data;
 	// --剩余四人的表格---------
 	/**
 	 * 需要新的表格及TableModel jsp已经在HotFatherPanel里建好了，这里只要table和tableModel
@@ -46,7 +46,7 @@ public class HotTeamPanel extends HotFatherPanel implements MouseListener {
 	ArrayList<TeamVO> vlist;
 
 	public HotTeamPanel() {
-	
+
 		team = Service.team;
 		GridBagLayout bl = new GridBagLayout();
 		GridBagConstraints bc = new GridBagConstraints();
@@ -161,7 +161,7 @@ public class HotTeamPanel extends HotFatherPanel implements MouseListener {
 			table.getColumn(table.getColumnName(i)).setCellRenderer(tcr);
 		}
 		jsp.getViewport().add(table);
-		thr=new HotThread(this,"score");
+		thr = new HotThread(this, "score");
 		Refresh("sort");
 		thr.startThread();
 
@@ -184,21 +184,21 @@ public class HotTeamPanel extends HotFatherPanel implements MouseListener {
 				unionLbl.setText("东部联盟");
 			else
 				unionLbl.setText("西部联盟");
-			if(sort.equals("score")){
+			if (sort.equals("score")) {
 				data.setText(topOne.getScore() + "");
-			}else if(sort.equals("reboundNum")){
+			} else if (sort.equals("reboundNum")) {
 				data.setText(topOne.getReboundNum() + "");
-			}else if(sort.equals("assistNum")){
+			} else if (sort.equals("assistNum")) {
 				data.setText(topOne.getAssistNum() + "");
-			}else if(sort.equals("blockNum")){
+			} else if (sort.equals("blockNum")) {
 				data.setText(topOne.getBlockNum() + "");
-			}else if(sort.equals("stealNum")){
+			} else if (sort.equals("stealNum")) {
 				data.setText(topOne.getStealNum() + "");
-			}else if(sort.equals("threeHitRate")){
+			} else if (sort.equals("threeHitRate")) {
 				data.setText(topOne.getThreeHitRate() + "");
-			}else if(sort.equals("shootHitRate")){
+			} else if (sort.equals("shootHitRate")) {
 				data.setText(topOne.getShootHitRate() + "");
-			}else {
+			} else {
 				data.setText(topOne.getFreeThrowHitRate() + "");
 			}
 			model.Refresh(vlist);
@@ -226,7 +226,7 @@ public class HotTeamPanel extends HotFatherPanel implements MouseListener {
 				table.getColumn(table.getColumnName(i)).setCellRenderer(tcr);
 			}
 			jsp.getViewport().add(table);
-			
+
 			jsp.repaint();
 		}
 	}
@@ -235,57 +235,56 @@ public class HotTeamPanel extends HotFatherPanel implements MouseListener {
 		// TODO Auto-generated method stub
 		currentBtn.setBackground(Style.HOT_BLUE);
 		BottomButton m = (BottomButton) e.getSource();
-		if(thr!=null)
+		if (thr != null)
 			thr.stopThead();
 		if (m == scoreBtn) {
 			head[5] = "场均得分";
 			currentBtn = scoreBtn;
 			Refresh("score");
-			thr=new HotThread(HotTeamPanel.this,"score");
-		
-			
+			thr = new HotThread(HotTeamPanel.this, "score");
+
 		} else if (m == reboundBtn) {
 			head[5] = "场均篮板";
 			currentBtn = reboundBtn;
 			Refresh("reboundNum");
-			thr=new HotThread(HotTeamPanel.this,"reboundNum");
-		
+			thr = new HotThread(HotTeamPanel.this, "reboundNum");
+
 		} else if (m == assistBtn) {
 			head[5] = "场均助攻";
 			currentBtn = assistBtn;
 			Refresh("assistNum");
-			thr=new HotThread(HotTeamPanel.this,"assistNum");
-			
+			thr = new HotThread(HotTeamPanel.this, "assistNum");
+
 		} else if (m == blockBtn) {
 			head[5] = "场均盖帽";
 			currentBtn = blockBtn;
 			Refresh("blockNum");
-			thr=new HotThread(HotTeamPanel.this,"blockNum");
-		
+			thr = new HotThread(HotTeamPanel.this, "blockNum");
+
 		} else if (m == stealBtn) {
 			head[5] = "场均抢断";
 			currentBtn = stealBtn;
 			Refresh("stealNum");
-			thr=new HotThread(HotTeamPanel.this,"stealNum");
-			
+			thr = new HotThread(HotTeamPanel.this, "stealNum");
+
 		} else if (m == threeRateBtn) {
 			head[5] = "三分命中率";
 			currentBtn = threeRateBtn;
 			Refresh("threeHitRate");
-			thr=new HotThread(HotTeamPanel.this,"threeHitRate");
-			
+			thr = new HotThread(HotTeamPanel.this, "threeHitRate");
+
 		} else if (m == shootRateBtn) {
 			head[5] = "投篮命中率";
 			currentBtn = shootRateBtn;
 			Refresh("shootHitRate");
-			thr=new HotThread(HotTeamPanel.this,"shootHitRate");
-			
+			thr = new HotThread(HotTeamPanel.this, "shootHitRate");
+
 		} else {
 			head[5] = "罚球命中率";
 			currentBtn = freeRateBtn;
 			Refresh("freeThrowHitRate");
-			thr=new HotThread(HotTeamPanel.this,"freeThrowHitRate");
-			
+			thr = new HotThread(HotTeamPanel.this, "freeThrowHitRate");
+
 		}
 		currentBtn.setBackground(Style.HOT_BLUEFOCUS);
 		thr.startThread();
@@ -363,7 +362,5 @@ public class HotTeamPanel extends HotFatherPanel implements MouseListener {
 
 		}
 	}
-	
-	
 
 }

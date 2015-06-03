@@ -15,13 +15,12 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import bl.team.Team;
-import blservice.TeamBLService;
-import vo.MatchVO;
 import newui.Service;
 import newui.Style;
 import newui.mainui.MainFrame;
 import newui.teamui.TeamDetailPanel;
+import vo.MatchVO;
+import blService.TeamBLService;
 
 public class MatchCard extends JPanel implements MouseListener {
 
@@ -33,12 +32,13 @@ public class MatchCard extends JPanel implements MouseListener {
 			visitingNameLbl, homeScoreLbl, visitingScoreLbl;
 	JPanel topPnl, detailScoresPnl;
 	private TeamBLService team;
-	private boolean isHomeHigh=true;
+	private boolean isHomeHigh = true;
 	private MatchVO vo;
-//显示单场比赛信息
+
+	// 显示单场比赛信息
 	public MatchCard(MatchVO vo) {
-		this.vo=vo;
-		team=Service.team;
+		this.vo = vo;
+		team = Service.team;
 		GridBagLayout gbl = new GridBagLayout();
 		GridBagConstraints gbc = new GridBagConstraints();
 		gbc.fill = GridBagConstraints.BOTH;
@@ -56,8 +56,8 @@ public class MatchCard extends JPanel implements MouseListener {
 		gbl.setConstraints(topPnl, gbc);
 		add(topPnl);
 		// ---内容 of topPnl:date,detail-----------
-		//是否需要带上年份
-		dateLbl = new JLabel("日期："+vo.getDate());
+		// 是否需要带上年份
+		dateLbl = new JLabel("日期：" + vo.getDate());
 		dateLbl.setFont(new Font("微软雅黑", Font.PLAIN, 12));
 		dateLbl.setForeground(Color.white);
 		topPnl.add(dateLbl);
@@ -69,14 +69,14 @@ public class MatchCard extends JPanel implements MouseListener {
 		detailLbl.addMouseListener(this);
 		topPnl.add(detailLbl);
 		// --homeicon---------------
-		//ImageIcon t=team.getTeamImage(vo.getHomeTeam());
-		ImageIcon t=new ImageIcon("image/teamIcon/teamsPng150/"+vo.getHomeTeam()+".png");
-		//t.setImage(t.getImage().getScaledInstance(150, 150,0));
-		
-		homeIcon = new JLabel(
-				t);
+		// ImageIcon t=team.getTeamImage(vo.getHomeTeam());
+		ImageIcon t = new ImageIcon("image/teamIcon/teamsPng150/"
+				+ vo.getHomeTeam() + ".png");
+		// t.setImage(t.getImage().getScaledInstance(150, 150,0));
+
+		homeIcon = new JLabel(t);
 		homeIcon.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		//是否需要ToolTipText
+		// 是否需要ToolTipText
 		homeIcon.setToolTipText("点击查看球队详情");
 		homeIcon.addMouseListener(this);
 		gbc.gridx = 0;
@@ -98,9 +98,9 @@ public class MatchCard extends JPanel implements MouseListener {
 		gbl.setConstraints(homeNameLbl, gbc);
 		add(homeNameLbl);
 		// --homeScore---------------
-		if(vo.getVisitingScore()>vo.getHomeScore())
-			isHomeHigh=false;
-		homeScoreLbl = new JLabel(vo.getHomeScore()+"");
+		if (vo.getVisitingScore() > vo.getHomeScore())
+			isHomeHigh = false;
+		homeScoreLbl = new JLabel(vo.getHomeScore() + "");
 		homeScoreLbl.setFont(new Font("微软雅黑", Font.BOLD, 22));
 		homeScoreLbl.setForeground(Style.BACK_GREY);
 		gbc.gridy = 2;
@@ -117,9 +117,10 @@ public class MatchCard extends JPanel implements MouseListener {
 		gbl.setConstraints(detailScoresPnl, gbc);
 		add(detailScoresPnl);
 		// --visitingIcon---------------
-		//ImageIcon v=team.getTeamImage(vo.getVisitingTeam());
-		ImageIcon v=new ImageIcon("image/teamIcon/teamsPng150/"+vo.getVisitingTeam()+".png");
-		//v.setImage(v.getImage().getScaledInstance(150, 150,0));
+		// ImageIcon v=team.getTeamImage(vo.getVisitingTeam());
+		ImageIcon v = new ImageIcon("image/teamIcon/teamsPng150/"
+				+ vo.getVisitingTeam() + ".png");
+		// v.setImage(v.getImage().getScaledInstance(150, 150,0));
 		visitingIcon = new JLabel(v);
 		visitingIcon.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		visitingIcon.setToolTipText("点击查看球队详情");
@@ -127,7 +128,7 @@ public class MatchCard extends JPanel implements MouseListener {
 		gbc.gridx = 4;
 		gbc.weightx = 20;
 		gbc.weighty = 50;
-		
+
 		gbl.setConstraints(visitingIcon, gbc);
 		add(visitingIcon);
 		// --visitingName---------------
@@ -141,13 +142,12 @@ public class MatchCard extends JPanel implements MouseListener {
 		gbl.setConstraints(visitingNameLbl, gbc);
 		add(visitingNameLbl);
 		// --visitingScore---------------
-		visitingScoreLbl = new JLabel(vo.getVisitingScore()+"");
+		visitingScoreLbl = new JLabel(vo.getVisitingScore() + "");
 		visitingScoreLbl.setFont(new Font("微软雅黑", Font.BOLD, 22));
-		if(isHomeHigh){
+		if (isHomeHigh) {
 			homeScoreLbl.setForeground(Style.WINNER_RED);
 			visitingScoreLbl.setForeground(Style.BACK_GREY);
-		}
-		else
+		} else
 			visitingScoreLbl.setForeground(Style.WINNER_RED);
 		gbc.gridy = 2;
 		gbl.setConstraints(visitingScoreLbl, gbc);
@@ -157,27 +157,27 @@ public class MatchCard extends JPanel implements MouseListener {
 	public JPanel getDetailScoresPanel(MatchVO vo) {
 		JPanel result = new JPanel();
 		result.setBackground(Color.white);
-		//根据ArrayList.size()节数确定这个panel分几行 
-		ArrayList<String> detail=vo.getDetailScores();
-		int rowNum=detail.size();
-		result.setLayout(new GridLayout(rowNum,1));
-		//JLabel pointLbl=new JLabel(detail.get(0));
-	//	pointLbl.setFont(new Font("微软雅黑",Font.PLAIN,14));
-		//pointLbl.setForeground(Style.BACK_GREY);
-		//result.add(pointLbl);
-		for(int i=0;i<rowNum;i++)
+		// 根据ArrayList.size()节数确定这个panel分几行
+		ArrayList<String> detail = vo.getDetailScores();
+		int rowNum = detail.size();
+		result.setLayout(new GridLayout(rowNum, 1));
+		// JLabel pointLbl=new JLabel(detail.get(0));
+		// pointLbl.setFont(new Font("微软雅黑",Font.PLAIN,14));
+		// pointLbl.setForeground(Style.BACK_GREY);
+		// result.add(pointLbl);
+		for (int i = 0; i < rowNum; i++)
 			result.add(new JLabel(detail.get(i)));
-	
+
 		return result;
 	}
 
 	public void mouseClicked(MouseEvent e) {
 		if (e.getSource() == detailLbl)// 注意，这里应当传一个比赛的特征值过去
 			MainFrame.getInstance().setContentPanel(new MatchDetailPanel(vo));
-		else{
-			String name=vo.getVisitingTeam();
-			if(e.getSource()==homeIcon)
-				name=vo.getHomeTeam();
+		else {
+			String name = vo.getVisitingTeam();
+			if (e.getSource() == homeIcon)
+				name = vo.getHomeTeam();
 			MainFrame.getInstance().setContentPanel(new TeamDetailPanel(name));
 		}
 	}
@@ -193,7 +193,7 @@ public class MatchCard extends JPanel implements MouseListener {
 	}
 
 	public void mouseEntered(MouseEvent e) {
-		if (e.getSource() == detailLbl)   
+		if (e.getSource() == detailLbl)
 			detailLbl.setForeground(Style.FOCUS_BLUE);
 
 	}
@@ -208,7 +208,7 @@ public class MatchCard extends JPanel implements MouseListener {
 		f.setBounds(5, 5, 800, 170);
 		f.setVisible(true);
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	//	f.add(new MatchCard());
+		// f.add(new MatchCard());
 		f.repaint();
 	}
 }

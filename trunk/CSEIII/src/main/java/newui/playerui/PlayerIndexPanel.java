@@ -4,8 +4,6 @@ import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.FlowLayout;
 import java.awt.Font;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
@@ -22,20 +20,15 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 
-
-
-
-
-import bl.team.Team;
-
 import newui.FatherPanel;
 import newui.Style;
 import newui.TableModel;
 import newui.mainui.MainFrame;
 import newui.tables.MyTableCellRenderer;
 import newui.tables.PlayerBaseInfoTableModel;
+import bl.Team;
 
-public class PlayerIndexPanel  extends FatherPanel implements MouseListener {
+public class PlayerIndexPanel extends FatherPanel implements MouseListener {
 	/**
 	 * 
 	 */
@@ -56,10 +49,10 @@ public class PlayerIndexPanel  extends FatherPanel implements MouseListener {
 	// ---------------
 	ArrayList<MyCharacter> characterLblList = new ArrayList<MyCharacter>(26);
 	JComboBox<String> teamBox;
-	MyCharacter currentLbl=null;
-	
+	MyCharacter currentLbl = null;
+
 	public PlayerIndexPanel() {
-	
+
 		super();
 
 		// ------funcPnl--------
@@ -78,8 +71,7 @@ public class PlayerIndexPanel  extends FatherPanel implements MouseListener {
 			characterLblList.add(temp);
 			funcPnl.add(characterLblList.get(i));
 		}
-	
-			
+
 		// ----按球队查看---------
 		funcPnl.add(new JLabel("       "));
 		teamBox = new JComboBox<String>(teams);
@@ -87,7 +79,7 @@ public class PlayerIndexPanel  extends FatherPanel implements MouseListener {
 		teamBox.setForeground(Color.white);
 		teamBox.setFont(new Font("微软雅黑", Font.PLAIN, 12));
 		teamBox.setMaximumRowCount(20);
-		
+
 		funcPnl.add(teamBox);
 		// -----刷新--------------
 		refreshLbl = new MyLabel("刷新", new ImageIcon("image/refreshWhite.png"));
@@ -104,18 +96,17 @@ public class PlayerIndexPanel  extends FatherPanel implements MouseListener {
 		table.setFont(new Font("微软雅黑", 0, 12));
 		table.getTableHeader().setFont(new Font("微软雅黑", 0, 14));
 		table.getTableHeader().setForeground(Color.white);
-		table.getTableHeader().setBackground(Style.FOCUS_BLUE);		
+		table.getTableHeader().setBackground(Style.FOCUS_BLUE);
 		DefaultTableCellRenderer tcr = new MyTableCellRenderer(
-				/*pitm.getImgList()*/);
+		/* pitm.getImgList() */);
 		for (int i = 1; i < table.getColumnCount(); i++) {
 			table.getColumn(table.getColumnName(i)).setCellRenderer(tcr);
 		}
-		
-		
+
 		titleBar.setCurrentTableModel(pitm);
 		titleBar.setModelEnum(TableModel.PLAYERBASEINFO);
 		titleBar.setTable(table);
-		gbc.insets=new Insets(0, 2, 1, 2);
+		gbc.insets = new Insets(0, 2, 1, 2);
 		jsp = new JScrollPane(table);
 
 		JLabel jb = new JLabel();
@@ -126,10 +117,10 @@ public class PlayerIndexPanel  extends FatherPanel implements MouseListener {
 		jsp.setCorner(JScrollPane.UPPER_RIGHT_CORNER, jb);
 		// 刷新
 		pitm.setCurrentTable(table);
-		
+
 		pitm.Refresh();
 		table.revalidate();
-		
+
 		// 设置表头颜色
 		table.getTableHeader().setBackground(new Color(158, 158, 158));
 		table.addMouseListener(this);
@@ -143,25 +134,23 @@ public class PlayerIndexPanel  extends FatherPanel implements MouseListener {
 
 			public void itemStateChanged(ItemEvent e) {
 				// TODO Auto-generated method stub
-				String teamName = Team.changeTeamNameCHToEN(teamBox.getSelectedItem().toString());
+				String teamName = Team.changeTeamNameCHToEN(teamBox
+						.getSelectedItem().toString());
 				pitm.findByTeam(teamName);
 				table.revalidate();
 				// table.repaint();
-				if(currentLbl!=null){
+				if (currentLbl != null) {
 					currentLbl.setOpaque(false);
 					currentLbl.setBackground(Style.BACK_GREY);
 					currentLbl.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
 				}
-				currentLbl=null;
+				currentLbl = null;
 
 			}
 
 		});
-		
+
 	}
-	
-	
-	
 
 	class MyCharacter extends JLabel {
 
@@ -200,7 +189,7 @@ public class PlayerIndexPanel  extends FatherPanel implements MouseListener {
 		if (e.getSource() == modeLbl)
 			MainFrame.getInstance().setContentPanel(new PlayerRankPanel());
 		if (e.getSource() instanceof MyCharacter) {
-			if(currentLbl!=null){
+			if (currentLbl != null) {
 				currentLbl.setOpaque(false);
 				currentLbl.setBackground(Style.BACK_GREY);
 				currentLbl.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
@@ -214,31 +203,30 @@ public class PlayerIndexPanel  extends FatherPanel implements MouseListener {
 			lbl.setOpaque(true);
 			lbl.setBackground(Style.FOCUS_GREY);
 			lbl.setCursor(new Cursor(Cursor.HAND_CURSOR));
-			currentLbl=lbl;
+			currentLbl = lbl;
 		}
 		if (e.getSource() == refreshLbl) {
 			pitm.Refresh();
 			table.revalidate();
-			if(currentLbl!=null){
+			if (currentLbl != null) {
 				currentLbl.setOpaque(false);
 				currentLbl.setBackground(Style.BACK_GREY);
 				currentLbl.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
 			}
-			currentLbl=null;
+			currentLbl = null;
 
 		}
-		if(e.getSource()==table){
-			if(e.getClickCount()==2){
-				int row=table.getSelectedRow();
-				String pname=table.getValueAt(row, 1).toString();
-				double pre=System.currentTimeMillis();
-				MainFrame.getInstance().setContentPanel(new PlayerDetailPanel(pname
-						));
-				double post=System.currentTimeMillis();
-				System.out.println("playerindexto详情:"+(post-pre));
+		if (e.getSource() == table) {
+			if (e.getClickCount() == 2) {
+				int row = table.getSelectedRow();
+				String pname = table.getValueAt(row, 1).toString();
+				double pre = System.currentTimeMillis();
+				MainFrame.getInstance().setContentPanel(
+						new PlayerDetailPanel(pname));
+				double post = System.currentTimeMillis();
+				System.out.println("playerindexto详情:" + (post - pre));
 			}
 		}
-		
 
 	}
 
@@ -274,10 +262,10 @@ public class PlayerIndexPanel  extends FatherPanel implements MouseListener {
 	public void mouseExited(MouseEvent e) {
 		if (e.getSource().getClass() == MyCharacter.class) {
 			MyCharacter lbl = (MyCharacter) e.getSource();
-			if(lbl!=currentLbl){
-			lbl.setOpaque(false);
-			lbl.setBackground(Style.BACK_GREY);
-			lbl.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+			if (lbl != currentLbl) {
+				lbl.setOpaque(false);
+				lbl.setBackground(Style.BACK_GREY);
+				lbl.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
 			}
 		}
 		if (e.getSource() == refreshLbl) {

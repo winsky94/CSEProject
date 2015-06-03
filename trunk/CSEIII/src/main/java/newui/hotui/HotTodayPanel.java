@@ -26,8 +26,7 @@ import newui.tables.HotTableModel;
 import newui.tables.MyTableCellRenderer;
 import newui.teamui.TeamDetailPanel;
 import vo.PlayerVO;
-import bl.player.Player;
-import blservice.PlayerBLService;
+import blService.PlayerBLService;
 
 public class HotTodayPanel extends HotFatherPanel implements MouseListener {
 	private static final long serialVersionUID = 1L;
@@ -62,9 +61,10 @@ public class HotTodayPanel extends HotFatherPanel implements MouseListener {
 		bestHead.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		// 有需要就加上bestHead.setPreferredSize(new Dimension(width, height));
 		bestHead.setToolTipText("点击查看球员详情");
-		bestHead.addMouseListener(new MouseAdapter(){
-			public void mouseClicked(MouseEvent e){
-				MainFrame.getInstance().setContentPanel(new PlayerDetailPanel(bestName.getText()));
+		bestHead.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				MainFrame.getInstance().setContentPanel(
+						new PlayerDetailPanel(bestName.getText()));
 			}
 		});
 		bc.gridx = 0;
@@ -109,10 +109,11 @@ public class HotTodayPanel extends HotFatherPanel implements MouseListener {
 		bl.setConstraints(bestTeamIcon, bc);
 		bestPnl.add(bestTeamIcon);
 		bestTeamIcon.setToolTipText("点击查看球队详情");
-		bestTeamIcon.addMouseListener(new MouseAdapter(){
-			public void mouseClicked(MouseEvent e){
+		bestTeamIcon.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
 				MainFrame.getInstance().setContentPanel(
-						new TeamDetailPanel(positionAndTeamName.getText().split("/")[1]));
+						new TeamDetailPanel(positionAndTeamName.getText()
+								.split("/")[1]));
 			}
 		});
 		bestTeamIcon.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -153,16 +154,16 @@ public class HotTodayPanel extends HotFatherPanel implements MouseListener {
 		table.setFont(new Font("微软雅黑", 0, 12));
 		table.getTableHeader().setFont(new Font("微软雅黑", 0, 14));
 		table.getTableHeader().setForeground(Color.white);
-		table.getTableHeader().setBackground(Style.FOCUS_BLUE);		DefaultTableCellRenderer tcr = new MyTableCellRenderer();
+		table.getTableHeader().setBackground(Style.FOCUS_BLUE);
+		DefaultTableCellRenderer tcr = new MyTableCellRenderer();
 		for (int i = 0; i < table.getColumnCount(); i++) {
 			table.getColumn(table.getColumnName(i)).setCellRenderer(tcr);
 		}
 
 		jsp.getViewport().add(table);
-		thr=new HotThread(this,"score");
+		thr = new HotThread(this, "score");
 		Refresh("score");
 		thr.startThread();
-		
 
 	}
 
@@ -180,15 +181,15 @@ public class HotTodayPanel extends HotFatherPanel implements MouseListener {
 			data.setText(topOne.getScore() + "");
 			bestTeamIcon.setIcon(new ImageIcon("image/teamIcon/teamsPng150/"
 					+ topOne.getOwingTeam() + ".png"));
-			if(sort.equals("score")){
+			if (sort.equals("score")) {
 				data.setText(topOne.getScore() + "");
-			}else if(sort.equals("reboundNum")){
+			} else if (sort.equals("reboundNum")) {
 				data.setText(topOne.getReboundNum() + "");
-			}else if(sort.equals("assistNum")){
+			} else if (sort.equals("assistNum")) {
 				data.setText(topOne.getAssistNum() + "");
-			}else if(sort.equals("blockNum")){
+			} else if (sort.equals("blockNum")) {
 				data.setText(topOne.getBlockNum() + "");
-			}else{
+			} else {
 				data.setText(topOne.getStealNum() + "");
 			}
 
@@ -196,12 +197,13 @@ public class HotTodayPanel extends HotFatherPanel implements MouseListener {
 			table.revalidate();
 			jsp.getViewport().remove(table);
 			table = new JTable(model);
-			table.addMouseListener(new MouseAdapter(){
-				public void mouseClicked(MouseEvent e){
-					if(e.getClickCount()==2){
-						int row=table.getSelectedRow();
-						String name=table.getValueAt(row,2).toString();
-						MainFrame.getInstance().setContentPanel(new PlayerDetailPanel(name));
+			table.addMouseListener(new MouseAdapter() {
+				public void mouseClicked(MouseEvent e) {
+					if (e.getClickCount() == 2) {
+						int row = table.getSelectedRow();
+						String name = table.getValueAt(row, 2).toString();
+						MainFrame.getInstance().setContentPanel(
+								new PlayerDetailPanel(name));
 					}
 				}
 			});
@@ -215,12 +217,10 @@ public class HotTodayPanel extends HotFatherPanel implements MouseListener {
 			for (int i = 2; i < table.getColumnCount(); i++) {
 				table.getColumn(table.getColumnName(i)).setCellRenderer(tcr);
 			}
-			
+
 			jsp.getViewport().add(table);
-		
-			
+
 			jsp.repaint();
-		
 
 		}
 
@@ -230,42 +230,37 @@ public class HotTodayPanel extends HotFatherPanel implements MouseListener {
 		// TODO Auto-generated method stub
 		BottomButton m = (BottomButton) e.getSource();
 		currentBtn.setBackground(Style.HOT_YELLOW);
-		if(thr!=null)
+		if (thr != null)
 			thr.stopThead();
 		if (m == scoreBtn) {
 			head[5] = "得分";
 			currentBtn = scoreBtn;
 			Refresh("score");
-			thr=new HotThread(HotTodayPanel.this,"score");
-			
-			
+			thr = new HotThread(HotTodayPanel.this, "score");
+
 		} else if (m == reboundBtn) {
 			head[5] = "篮板";
 			currentBtn = reboundBtn;
 			Refresh("reboundNum");
-			thr=new HotThread(HotTodayPanel.this,"reboundNum");
+			thr = new HotThread(HotTodayPanel.this, "reboundNum");
 
 		} else if (m == assistBtn) {
 			head[5] = "助攻";
 			currentBtn = assistBtn;
 			Refresh("assistNum");
-			thr=new HotThread(HotTodayPanel.this,"assistNum");
+			thr = new HotThread(HotTodayPanel.this, "assistNum");
 
 		} else if (m == blockBtn) {
 			head[5] = "盖帽";
 			currentBtn = blockBtn;
 			Refresh("blockNum");
-			thr=new HotThread(HotTodayPanel.this,"blockNum");
-			
-		
+			thr = new HotThread(HotTodayPanel.this, "blockNum");
 
 		} else {
 			head[5] = "抢断";
 			currentBtn = stealBtn;
 			Refresh("stealNum");
-			thr=new HotThread(HotTodayPanel.this,"stealNum");
-		
-
+			thr = new HotThread(HotTodayPanel.this, "stealNum");
 
 		}
 		currentBtn.setBackground(Style.HOT_YELLOWFOCUS);

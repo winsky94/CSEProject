@@ -18,9 +18,9 @@ import newui.playerui.details.PlayerDetailInfoPanel;
 import newui.playerui.details.PlayerPKPanel;
 import newui.playerui.details.PlayerStatsPanel;
 import vo.PlayerVO;
-import blservice.PlayerBLService;
+import blService.PlayerBLService;
 
-public class PlayerDetailPanel extends FatherPanel{
+public class PlayerDetailPanel extends FatherPanel {
 
 	/**
 	 * 
@@ -31,63 +31,68 @@ public class PlayerDetailPanel extends FatherPanel{
 	JTabbedPane tab;
 	PlayerBLService pservice;
 	PlayerVO vo;
-	public PlayerDetailPanel(String pname){
-		isDetail=true;
-		pservice=Service.player;// is this? 
-		//pservice=p;
-		vo=pservice.getPlayerBaseInfo(pname).get(0);
-		
-		name=pname;
-		//----------------
-		//ImageIcon icon=pservice.getPlayerActionImage(pname);
-		//设置icon大小
+
+	public PlayerDetailPanel(String pname) {
+		isDetail = true;
+		pservice = Service.player;// is this?
+		// pservice=p;
+		vo = pservice.getPlayerBaseInfo(pname).get(0);
+
+		name = pname;
+		// ----------------
+		// ImageIcon icon=pservice.getPlayerActionImage(pname);
+		// 设置icon大小
 		int screenWidth = UIhelper.getScreenWidth();
-		int screenHeight=UIhelper.getScreenHeight();
-		int width=screenWidth*90/100;
-		int height=screenHeight*95/100;
-		
-		
-		//icon.setImage(icon.getImage().getScaledInstance(width*1/3, height*7/8, Image.SCALE_DEFAULT));
-		String actionIconName=name;
-		File file=new File("image/player/action/"+actionIconName+".png");
-		
-		if(!file.exists())
-			actionIconName="unknown";
-		ImageIcon i=new ImageIcon("image/player/action/"+actionIconName+".png");
-		i.setImage(i.getImage().getScaledInstance(300, 478,Image.SCALE_SMOOTH ));
-		
-		actionPicLbl=new JLabel(i/*new ImageIcon("image/player/action/"+name+".png")*/);
-		gbc.gridx=0;
-		gbc.gridy=1;
-		gbc.gridwidth=1;
-		gbc.gridheight=10;
-		gbc.weightx=0.1;
-		gbc.weighty=100;
+		int screenHeight = UIhelper.getScreenHeight();
+		int width = screenWidth * 90 / 100;
+		int height = screenHeight * 95 / 100;
+
+		// icon.setImage(icon.getImage().getScaledInstance(width*1/3,
+		// height*7/8, Image.SCALE_DEFAULT));
+		String actionIconName = name;
+		File file = new File("image/player/action/" + actionIconName + ".png");
+
+		if (!file.exists())
+			actionIconName = "unknown";
+		ImageIcon i = new ImageIcon("image/player/action/" + actionIconName
+				+ ".png");
+		i.setImage(i.getImage().getScaledInstance(300, 478, Image.SCALE_SMOOTH));
+
+		actionPicLbl = new JLabel(i/*
+									 * new
+									 * ImageIcon("image/player/action/"+name+
+									 * ".png")
+									 */);
+		gbc.gridx = 0;
+		gbc.gridy = 1;
+		gbc.gridwidth = 1;
+		gbc.gridheight = 10;
+		gbc.weightx = 0.1;
+		gbc.weighty = 100;
 		gbl.setConstraints(actionPicLbl, gbc);
 		add(actionPicLbl);
-		//----------------
-		tab=new JTabbedPane();
-		gbc.gridx=1;
-		gbc.gridwidth=9;
-		gbc.weightx=500;
+		// ----------------
+		tab = new JTabbedPane();
+		gbc.gridx = 1;
+		gbc.gridwidth = 9;
+		gbc.weightx = 500;
 		gbl.setConstraints(tab, gbc);
 		add(tab);
-		tab.setFont(new Font("微软雅黑",Font.PLAIN,15));
+		tab.setFont(new Font("微软雅黑", Font.PLAIN, 15));
 		tab.setBackground(Color.white);
 		tab.setForeground(Style.DEEP_BLUE);
-		double pre=System.currentTimeMillis();
+		double pre = System.currentTimeMillis();
 		tab.addTab("基本信息", new PlayerDetailInfoPanel(vo));
-		double pp=System.currentTimeMillis();
-		System.out.println("detaibaseinfo:"+(pp-pre));
-		tab.addTab("过往数据",new PlayerDetailHistoryPanel(vo));
-		double post=System.currentTimeMillis();
-		System.out.println("detailhistory:"+(post-pp));
+		double pp = System.currentTimeMillis();
+		System.out.println("detaibaseinfo:" + (pp - pre));
+		tab.addTab("过往数据", new PlayerDetailHistoryPanel(vo));
+		double post = System.currentTimeMillis();
+		System.out.println("detailhistory:" + (post - pp));
 		/**
-		 * 2015.5.30
-		 * 新增图表分析标签页
+		 * 2015.5.30 新增图表分析标签页
 		 */
 		tab.addTab("图表分析", new PlayerStatsPanel(name));
 		tab.addTab("球员对比", new PlayerPKPanel(name));
 	}
-	
+
 }
