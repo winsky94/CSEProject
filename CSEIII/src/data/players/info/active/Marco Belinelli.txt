@@ -1,6 +1,6 @@
 Name:Marco Belinelli
 Number:3
-Position:F
+Position:F-G
 Height:6-5
 Weight:210
 Birth:1986-03-25

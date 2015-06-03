@@ -1,6 +1,6 @@
 Name:Bismack Biyombo
 Number:8
-Position:C
+Position:C-F
 Height:6-9
 Weight:245
 Birth:1992-08-28

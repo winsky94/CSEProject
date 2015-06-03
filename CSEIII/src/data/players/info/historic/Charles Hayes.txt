@@ -1,6 +1,6 @@
 Name:Charles Hayes
 Number:44
-Position:C
+Position:C-F
 Height:6-6
 Weight:240
 Birth:1983-06-11

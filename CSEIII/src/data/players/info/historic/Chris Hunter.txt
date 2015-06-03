@@ -1,6 +1,6 @@
 Name:Chris Hunter
 Number:31
-Position:C
+Position:C-F
 Height:6-11
 Weight:240
 Birth:1984-07-09

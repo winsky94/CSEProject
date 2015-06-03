@@ -1,6 +1,6 @@
 Name:Dragan Tarlac
 Number:12
-Position:C
+Position:C-F
 Height:6-11
 Weight:270
 Birth:1973-05-09

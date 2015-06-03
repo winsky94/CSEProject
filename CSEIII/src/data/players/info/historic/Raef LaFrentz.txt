@@ -1,6 +1,6 @@
 Name:Raef LaFrentz
 Number:9
-Position:C
+Position:C-F
 Height:6-11
 Weight:240
 Birth:1976-05-29

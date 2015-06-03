@@ -1,6 +1,6 @@
 Name:Geert Hammink
 Number:43
-Position:F
+Position:F-C
 Height:7-0
 Weight:262
 Birth:1969-04-12

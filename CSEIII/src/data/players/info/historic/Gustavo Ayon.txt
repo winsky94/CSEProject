@@ -1,6 +1,6 @@
 Name:Gustavo Ayon
 Number:14
-Position:F
+Position:F-C
 Height:6-10
 Weight:250
 Birth:1985-04-01

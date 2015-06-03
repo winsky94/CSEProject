@@ -1,6 +1,6 @@
 Name:Oleksiy Pecherov
 Number:4
-Position:F
+Position:F-C
 Height:7-0
 Weight:234
 Birth:1985-12-08

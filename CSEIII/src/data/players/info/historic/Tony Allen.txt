@@ -1,6 +1,6 @@
 Name:Tony Allen
 Number:9
-Position:F
+Position:F-G
 Height:6-4
 Weight:213
 Birth:1982-01-11

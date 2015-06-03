@@ -1,6 +1,6 @@
 Name:Earl Barron
 Number:30
-Position:F
+Position:F-C
 Height:7-0
 Weight:250
 Birth:1981-08-14

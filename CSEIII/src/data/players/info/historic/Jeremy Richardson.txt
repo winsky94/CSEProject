@@ -1,6 +1,6 @@
 Name:Jeremy Richardson
 Number:32
-Position:G
+Position:G-F
 Height:6-7
 Weight:195
 Birth:1984-03-01

@@ -1,6 +1,6 @@
 Name:Sam Perkins
 Number:14
-Position:C
+Position:C-F
 Height:6-9
 Weight:260
 Birth:1961-06-14

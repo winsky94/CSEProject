@@ -1,9 +1,9 @@
 Name:Steven Smith
-Number:
-Position:
-Height:
-Weight:
-Birth:1983-04-12
-Age:32
-Exp:0
-School:La Salle
+Number:8
+Position:G-F
+Height:6-8
+Weight:221
+Birth:1969-03-31
+Age:46
+Exp:13
+School:Michigan State

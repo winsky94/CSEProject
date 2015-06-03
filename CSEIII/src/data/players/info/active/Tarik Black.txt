@@ -1,6 +1,6 @@
 Name:Tarik Black
 Number:28
-Position:C
+Position:C-F
 Height:6-11
 Weight:257
 Birth:1991-11-22

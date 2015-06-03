@@ -1,6 +1,6 @@
 Name:Travis Hansen
 Number:6
-Position:G
+Position:G-F
 Height:6-6
 Weight:205
 Birth:1978-04-15

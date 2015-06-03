@@ -1,6 +1,6 @@
 Name:Anthony Davis
 Number:23
-Position:F
+Position:F-C
 Height:6-10
 Weight:220
 Birth:1993-03-11

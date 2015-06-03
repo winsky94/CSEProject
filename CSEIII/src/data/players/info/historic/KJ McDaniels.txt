@@ -1,6 +1,6 @@
 Name:KJ McDaniels
 Number:32
-Position:G
+Position:G-F
 Height:6-6
 Weight:205
 Birth:1993-02-09

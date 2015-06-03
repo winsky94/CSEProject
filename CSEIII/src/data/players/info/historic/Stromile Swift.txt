@@ -1,6 +1,6 @@
 Name:Stromile Swift
 Number:4
-Position:F
+Position:F-C
 Height:6-10
 Weight:220
 Birth:1979-11-21

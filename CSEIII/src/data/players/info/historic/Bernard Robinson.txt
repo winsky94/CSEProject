@@ -1,6 +1,6 @@
 Name:Bernard Robinson
 Number:22
-Position:G
+Position:G-F
 Height:6-6
 Weight:210
 Birth:1980-12-26

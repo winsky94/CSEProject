@@ -1,6 +1,6 @@
 Name:Thabo Sefolosha
 Number:25
-Position:F
+Position:F-G
 Height:6-7
 Weight:222
 Birth:1984-05-02

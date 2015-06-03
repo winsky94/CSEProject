@@ -1,6 +1,6 @@
 Name:Shawn Marion
 Number:31
-Position:G
+Position:G-F
 Height:6-7
 Weight:228
 Birth:1978-05-07

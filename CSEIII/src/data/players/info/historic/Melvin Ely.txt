@@ -1,6 +1,6 @@
 Name:Melvin Ely
 Number:4
-Position:C
+Position:C-F
 Height:6-10
 Weight:260
 Birth:1978-05-02

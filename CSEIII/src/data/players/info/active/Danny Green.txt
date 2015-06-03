@@ -1,6 +1,6 @@
 Name:Danny Green
 Number:14
-Position:G
+Position:G-F
 Height:6-6
 Weight:215
 Birth:1987-06-22

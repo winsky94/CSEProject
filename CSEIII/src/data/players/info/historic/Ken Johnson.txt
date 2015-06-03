@@ -1,9 +1,9 @@
 Name:Ken Johnson
-Number:00
-Position:F
-Height:6-8
+Number:54
+Position:C-F
+Height:6-10
 Weight:240
-Birth:1962-11-07
-Age:52
+Birth:1978-02-01
+Age:37
 Exp:0
-School:Michigan State
+School:Ohio State

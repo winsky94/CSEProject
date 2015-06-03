@@ -1,6 +1,6 @@
 Name:Sergey Karasev
 Number:10
-Position:G
+Position:G-F
 Height:6-7
 Weight:208
 Birth:1993-10-26

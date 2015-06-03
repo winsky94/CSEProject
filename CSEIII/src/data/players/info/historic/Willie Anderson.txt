@@ -1,6 +1,6 @@
 Name:Willie Anderson
 Number:35
-Position:G
+Position:G-F
 Height:6-8
 Weight:200
 Birth:1967-01-08

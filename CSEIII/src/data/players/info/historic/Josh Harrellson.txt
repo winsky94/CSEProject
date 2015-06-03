@@ -1,6 +1,6 @@
 Name:Josh Harrellson
 Number:55
-Position:F
+Position:F-C
 Height:6-10
 Weight:275
 Birth:1989-02-12

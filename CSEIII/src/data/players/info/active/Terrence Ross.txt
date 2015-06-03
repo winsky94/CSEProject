@@ -1,6 +1,6 @@
 Name:Terrence Ross
 Number:31
-Position:F
+Position:F-G
 Height:6-7
 Weight:195
 Birth:1991-02-05

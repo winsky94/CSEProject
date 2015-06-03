@@ -1,6 +1,6 @@
 Name:Jason Smith
 Number:14
-Position:F
+Position:F-C
 Height:7-0
 Weight:245
 Birth:1986-03-02

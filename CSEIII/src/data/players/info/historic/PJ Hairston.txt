@@ -1,6 +1,6 @@
 Name:PJ Hairston
 Number:19
-Position:G
+Position:G-F
 Height:6-6
 Weight:230
 Birth:1992-12-24

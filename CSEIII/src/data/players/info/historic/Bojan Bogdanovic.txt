@@ -1,6 +1,6 @@
 Name:Bojan Bogdanovic
 Number:44
-Position:G
+Position:G-F
 Height:6-8
 Weight:216
 Birth:1989-04-18

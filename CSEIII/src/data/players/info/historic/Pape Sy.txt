@@ -1,6 +1,6 @@
 Name:Pape Sy
 Number:19
-Position:F
+Position:F-G
 Height:6-7
 Weight:225
 Birth:1988-04-05

@@ -1,6 +1,6 @@
 Name:Joel Freeland
 Number:19
-Position:C
+Position:C-F
 Height:6-10
 Weight:225
 Birth:1987-02-07

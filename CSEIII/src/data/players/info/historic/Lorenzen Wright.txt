@@ -1,6 +1,6 @@
 Name:Lorenzen Wright
 Number:55
-Position:F
+Position:F-C
 Height:6-11
 Weight:255
 Birth:1975-11-04

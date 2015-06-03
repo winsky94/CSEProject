@@ -1,6 +1,6 @@
 Name:David Noel
 Number:34
-Position:F
+Position:F-G
 Height:6-6
 Weight:230
 Birth:1984-02-27

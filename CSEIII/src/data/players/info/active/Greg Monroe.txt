@@ -1,6 +1,6 @@
 Name:Greg Monroe
 Number:10
-Position:F
+Position:F-C
 Height:6-11
 Weight:250
 Birth:1990-06-04

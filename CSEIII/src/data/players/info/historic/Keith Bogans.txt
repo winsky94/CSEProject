@@ -1,6 +1,6 @@
 Name:Keith Bogans
 Number:4
-Position:G
+Position:G-F
 Height:6-5
 Weight:215
 Birth:1980-05-12

@@ -1,6 +1,6 @@
 Name:JaKarr Sampson
 Number:9
-Position:G
+Position:G-F
 Height:6-9
 Weight:214
 Birth:1993-03-20

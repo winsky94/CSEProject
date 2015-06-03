@@ -1,6 +1,6 @@
 Name:Justin Harper
 Number:32
-Position:F
+Position:F-C
 Height:6-10
 Weight:225
 Birth:1989-08-30

@@ -1,6 +1,6 @@
 Name:Matt Bonner
 Number:15
-Position:C
+Position:C-F
 Height:6-10
 Weight:235
 Birth:1980-04-05
