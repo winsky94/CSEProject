@@ -23,6 +23,8 @@ public class PlayerIdData implements PlayerIdDataService{
 	public PlayerIdData(){
 		try {
 			con = SqlManager.getConnection();
+			closeSqlThread thread=new closeSqlThread();
+			thread.run();
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -140,7 +142,7 @@ public class PlayerIdData implements PlayerIdDataService{
 		long end2 = System.currentTimeMillis();
 		System.out.println("运行时间：" + (end2 - end1) + "毫秒");// 应该是end - start
 		try {
-			Thread.sleep(3000);
+			Thread.sleep(4000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -177,7 +179,7 @@ public class PlayerIdData implements PlayerIdDataService{
 				}
 				
 				
-				sleep(2000); //暂停，每一秒输出一次
+				sleep(10000); //暂停，每一秒输出一次
 				
 		    }catch (InterruptedException e) {
 		    	e.printStackTrace();			  
