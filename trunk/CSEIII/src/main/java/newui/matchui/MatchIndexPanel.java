@@ -20,6 +20,7 @@ import newui.FatherPanel;
 import newui.Service;
 import newui.Style;
 import vo.MatchVO;
+import bl.Match;
 import bl.Team;
 import blService.MatchBLService;
 
@@ -41,7 +42,8 @@ public class MatchIndexPanel extends FatherPanel {
 	JLabel searchBtn;
 	MatchBLService mservice;
 	// 暂无赛季选择的bl层方法
-	String[] seasonText = { "13-14" };
+	MatchBLService match=new Match();
+	String[] seasonText = (String[]) match.getAllSeasons().toArray();
 	String[] teamArr = { "全部", "掘金", "森林狼", "雷霆", "开拓者", "爵士", "勇士", "快船",
 			"湖人", "太阳", "国王", "小牛", "火箭", "灰熊", "鹈鹕", "马刺", "凯尔特人", "篮网",
 			"尼克斯", "76人", "猛龙", "公牛", "骑士", "活塞", "步行者", "雄鹿", "老鹰", "黄蜂",

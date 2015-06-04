@@ -22,6 +22,7 @@ import newui.hotui.HotThread;
 import newui.hotui.ProgressPanel;
 import vo.PlayerVO;
 import vo.TeamVO;
+import bl.Match;
 import blService.PlayerBLService;
 import blService.TeamBLService;
 
@@ -46,10 +47,12 @@ public class IndexPanel extends FatherPanel implements MouseListener {
 
 		// -----获得热点球员们---------
 		PlayerVO dayP = player.getDayHotPlayer("score", 1).get(0);
-		PlayerVO seasonP = player.getSeasonHotPlayer("13-14", "score", 1)
-				.get(0);
-		TeamVO t = team.getSeasonHotTeam("13-14", "score", 1).get(0);
-		PlayerVO proP = player.getBestImprovedPlayer(
+		String season = Match.getCurrentSeason();
+		String seasonType = Match.getCurrentSeasonType();
+		PlayerVO seasonP = player.getSeasonHotPlayer(season, seasonType,
+				"score", 1).get(0);
+		TeamVO t = team.getSeasonHotTeam(season, seasonType, "score", 1).get(0);
+		PlayerVO proP = player.getBestImprovedPlayer(seasonType,
 				"recentFiveMatchesScoreUpRate", 1).get(0);
 		//
 		dname = dayP.getName();
@@ -202,10 +205,12 @@ public class IndexPanel extends FatherPanel implements MouseListener {
 	public void Refresh() {
 
 		PlayerVO dayP = player.getDayHotPlayer("score", 1).get(0);
-		PlayerVO seasonP = player.getSeasonHotPlayer("13-14", "score", 1)
-				.get(0);
-		TeamVO t = team.getSeasonHotTeam("13-14", "score", 1).get(0);
-		PlayerVO proP = player.getBestImprovedPlayer(
+		String season = Match.getCurrentSeason();
+		String seasonType = Match.getCurrentSeasonType();
+		PlayerVO seasonP = player.getSeasonHotPlayer(season, seasonType,
+				"score", 1).get(0);
+		TeamVO t = team.getSeasonHotTeam(season, seasonType, "score", 1).get(0);
+		PlayerVO proP = player.getBestImprovedPlayer(seasonType,
 				"recentFiveMatchesScoreUpRate", 1).get(0);
 		String d = dayP.getName();
 		String s = seasonP.getName();

@@ -33,7 +33,7 @@ public class TeamDetailHistoryPanel extends JPanel {
 	TeamHistoryTableModel thtm;
 	JScrollPane jsp;
 	JPanel funcPnl;
-	MyBox seasonBox,seasonTypeBox;
+	MyBox seasonBox, seasonTypeBox;
 	MyBox typeBox;
 	Font font = new Font("微软雅黑", Font.PLAIN, 15);
 
@@ -62,8 +62,8 @@ public class TeamDetailHistoryPanel extends JPanel {
 		seasonBox = new MyBox(seasonText);
 		funcPnl.add(seasonBox);
 		//
-		String[] seasonTypeBoxText={"全部","常规赛","季前赛","季后赛"};
-		seasonTypeBox=new MyBox(seasonTypeBoxText);
+		String[] seasonTypeBoxText = { "全部", "常规赛", "季前赛", "季后赛" };
+		seasonTypeBox = new MyBox(seasonTypeBoxText);
 		funcPnl.add(seasonTypeBox);
 		//
 		funcPnl.add(new JLabel("              "));
@@ -106,7 +106,8 @@ public class TeamDetailHistoryPanel extends JPanel {
 				if (typeBox.getSelectedItem().toString().equals("场均")) {
 					thtm.RefreshAverage();
 				} else {
-					thtm.RefreshSeason(seasonBox.getSelectedItem().toString());
+					thtm.RefreshSeason(seasonBox.getSelectedItem().toString(),
+							(String) seasonTypeBox.getSelectedItem());
 				}
 				table.revalidate();
 				jsp.repaint();

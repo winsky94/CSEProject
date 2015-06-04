@@ -27,6 +27,7 @@ import newui.tables.HotTableModel;
 import newui.tables.MyTableCellRenderer;
 import newui.teamui.TeamDetailPanel;
 import vo.PlayerVO;
+import bl.Match;
 import blService.PlayerBLService;
 
 public class ProgressPanel extends HotFatherPanel implements MouseListener {
@@ -156,7 +157,8 @@ public class ProgressPanel extends HotFatherPanel implements MouseListener {
 	}
 
 	public void Refresh(String sort) {
-		vlist = player.getBestImprovedPlayer(sort, 5);
+		String seasonType=Match.getCurrentSeasonType();
+		vlist = player.getBestImprovedPlayer(seasonType,sort, 5);
 		if (vlist != null && vlist.size() != 0) {
 			model.setHead(head);
 			PlayerVO topOne = vlist.get(0);

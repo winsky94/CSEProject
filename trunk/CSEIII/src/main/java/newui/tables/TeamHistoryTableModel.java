@@ -55,10 +55,10 @@ public class TeamHistoryTableModel extends MyTableModel {
 		this.tname = teamName;
 	}
 
-	public void RefreshSeason(String season) {
+	public void RefreshSeason(String season, String seasonType) {
 		ArrayList<PlayerVO> vo = new ArrayList<PlayerVO>();
 		for (PlayerVO v : teamMember) {
-			vo.add(player.getPlayerSeasonInfo(season, v.getName()));
+			vo.add(player.getPlayerSeasonInfo(season, seasonType, v.getName()));
 		}
 		Refresh(vo, tname);
 	}

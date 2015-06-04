@@ -87,7 +87,7 @@ public class PlayerBaseInfoTableModel extends MyTableModel {
 	}
 
 	public void Refresh() {
-		ArrayList<PlayerVO> playerlist = player.getPlayerBaseInfo();
+		ArrayList<PlayerVO> playerlist = player.getPlayerActiveBaseInfo();
 		if (playerlist == null || playerlist.size() == 0) {
 			// 显示没有符合消息的数据
 			content.clear();
