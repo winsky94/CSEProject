@@ -115,21 +115,6 @@ public interface PlayerBLService {
 	public ArrayList<PlayerVO> selectPlayersByAverage(String type,String position,
 			String union, String column, String order, int num);
 
-	/**
-	 * 获得球员的大头照
-	 * 
-	 * @param name球员名
-	 * @return
-	 */
-	public ImageIcon getPlayerPortraitImage(String name);
-
-	/**
-	 * 获得球员的全身照
-	 * 
-	 * @param name球员名
-	 * @return 符合条件的球员列表
-	 */
-	public ImageIcon getPlayerActionImage(String name);
 
 	/**
 	 * 得到今日热点球员
