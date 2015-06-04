@@ -15,8 +15,9 @@ import java.util.ArrayList;
 import vo.LiveMatchDetailVO;
 import SQLHelper.FileList;
 import SQLHelper.SqlManager;
+import dataservice.LiveTxtDataService;
 
-public class LiveTxtData {
+public class LiveTxtData implements LiveTxtDataService {
 	private Connection connection = null;
 	private Statement sql = null;
 	private ResultSet resultSet = null;
@@ -24,10 +25,37 @@ public class LiveTxtData {
 
 	public static void main(String[] args) {
 		LiveTxtData liveTxtData = new LiveTxtData();
-		// liveTxtData
-		// .readFromFiles("C:\\Users\\Administrator\\Desktop\\CSEProject\\trunk\\CSEIII\\src\\data\\matchLive\\14-15_01-01_CHA-HOU");
 		liveTxtData.exportToSql();
+//		System.out.println(liveTxtData.getLiveTxt("14-15", "01-01", "CHA-HOU").size());
 
+	}
+
+	public ArrayList<LiveMatchDetailVO> getLiveTxt(String season, String date,
+			String teams) {
+		// TODO 自动生成的方法存根
+		ArrayList<LiveMatchDetailVO> result = new ArrayList<LiveMatchDetailVO>();
+		try {
+			connection = SqlManager.getConnection();
+			sql = connection.createStatement();
+			String query = "select * from matchLive where season ='" + season
+					+ "' and date ='" + date + "' and teams ='" + teams + "'";
+			resultSet = sql.executeQuery(query);
+			while (resultSet.next()) {
+				int partNum = resultSet.getInt("partNum");
+				int part = resultSet.getInt("part");
+				String content = resultSet.getString("content");
+				LiveMatchDetailVO vo = new LiveMatchDetailVO(season, date,
+						teams, part, partNum, content);
+				result.add(vo);
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		} finally {
+			closeMySql();
+		}
+
+		return result;
 	}
 
 	/**
@@ -191,4 +219,5 @@ public class LiveTxtData {
 			e.printStackTrace();
 		}
 	}
+
 }
