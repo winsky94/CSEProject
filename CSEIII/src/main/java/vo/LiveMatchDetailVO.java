@@ -2,20 +2,24 @@ package vo;
 
 /**
  * 比赛直播的VO
+ * 
  * @author Administrator
  *
  */
 public class LiveMatchDetailVO {
-	private String season;
-	private String date;
-	private String teams;
-	private String content;
+	private String season;// 赛季
+	private String date;// 日期
+	private String teams;// 对阵队伍 客队-主队
+	private int partNum;// 比赛节数
+	private String content;// 直播的详细内容
 
 	public LiveMatchDetailVO(String season, String date, String teams,
-			String content) {
+			int partNum, String content) {
+		super();
 		this.season = season;
 		this.date = date;
 		this.teams = teams;
+		this.partNum = partNum;
 		this.content = content;
 	}
 
@@ -29,6 +33,10 @@ public class LiveMatchDetailVO {
 
 	public String getTeams() {
 		return teams;
+	}
+
+	public int getPartNum() {
+		return partNum;
 	}
 
 	public String getContent() {
@@ -45,6 +53,10 @@ public class LiveMatchDetailVO {
 
 	public void setTeams(String teams) {
 		this.teams = teams;
+	}
+
+	public void setPartNum(int partNum) {
+		this.partNum = partNum;
 	}
 
 	public void setContent(String content) {
