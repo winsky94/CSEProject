@@ -76,12 +76,12 @@ public class TeamTableModel extends MyTableModel {
 		headmodel = model;
 	}
 
-	public void Refresh(String model) {
+	public void Refresh(String season, String seasonType, String model) {
 		ArrayList<TeamVO> teamvo;
 		if (model.equals("赛季"))
-			teamvo = team.getTeamSeasonInfo("13-14");
+			teamvo = team.getTeamSeasonInfo(season, seasonType);
 		else {
-			teamvo = team.getTeamAverageInfo();
+			teamvo = team.getTeamAverageInfo(seasonType);
 
 		}
 		if (teamvo != null && teamvo.size() != 0) {

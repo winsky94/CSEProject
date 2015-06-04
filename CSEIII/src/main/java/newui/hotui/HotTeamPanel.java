@@ -24,6 +24,7 @@ import newui.tables.HotTableModel;
 import newui.tables.MyTableCellRenderer;
 import newui.teamui.TeamDetailPanel;
 import vo.TeamVO;
+import bl.Match;
 import bl.Team;
 import blService.TeamBLService;
 
@@ -169,7 +170,9 @@ public class HotTeamPanel extends HotFatherPanel implements MouseListener {
 
 	public void Refresh(String sort) {
 		// 目前只有一个赛季
-		vlist = team.getSeasonHotTeam("13-14", sort, 5);
+		String season=Match.getCurrentSeason();
+		String seasonType=Match.getCurrentSeasonType();
+		vlist = team.getSeasonHotTeam(season,seasonType, sort, 5);
 		if (vlist != null && vlist.size() != 0) {
 			model.setHead(head);
 			TeamVO topOne = vlist.get(0);

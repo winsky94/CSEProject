@@ -84,12 +84,12 @@ public class PlayerTableModel extends MyTableModel {
 		headmodel = model;
 	}
 
-	public void Refresh(String model) {
+	public void Refresh(String season, String seasonType, String model) {
 		ArrayList<PlayerVO> result;
 		if (model.equals("赛季"))
-			result = player.getPlayerSeasonInfo("13-14");
+			result = player.getPlayerSeasonInfo(season, seasonType);
 		else
-			result = player.getPlayerAverageInfo();
+			result = player.getPlayerAverageInfo(seasonType);
 		if (result != null && result.size() != 0) {
 			if (headmodel == 0)
 				refreshBase(result);

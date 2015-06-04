@@ -36,6 +36,8 @@ import newui.tables.PlayerTableModel;
 import newui.tables.RowHeaderTable;
 import newui.tables.TableSorter;
 import vo.PlayerVO;
+import bl.Match;
+import blService.MatchBLService;
 import blService.PlayerBLService;
 
 public class PlayerRankPanel extends FatherPanel implements MouseListener,
@@ -152,14 +154,16 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener,
 		// -----season----------
 		JLabel seasonBoxLbl = new MyJLabel("赛季：");
 		f2.add(seasonBoxLbl);
-		// 暂无获取赛季的bl方法
-		String[] seasonBoxText = { "13-14" };
+
+		MatchBLService match = new Match();
+		String[] seasonBoxText = (String[]) match.getAllSeasons().toArray();
 		seasonBox = new MyComboBox(seasonBoxText);
 		seasonBox.addItemListener(this);
 		f2.add(seasonBox);
 		//
 		String[] seasonTypeBoxText = { "全部", "常规赛", "季前赛", "季后赛 " };
 		seasonTypeBox = new MyComboBox(seasonTypeBoxText);
+		seasonTypeBox.addItemListener(this);
 		f2.add(seasonTypeBox);
 		f2.add(new JLabel("       "));
 		// ----DataType---------
@@ -207,7 +211,9 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener,
 		gbl.setConstraints(jsp, gbc);
 		add(jsp);
 
-		ptm.Refresh(typeBox.getSelectedItem().toString());
+		ptm.Refresh((String) seasonBox.getSelectedItem(),
+				(String) seasonTypeBox.getSelectedItem(),
+				(String) typeBox.getSelectedItem());
 		CellRender();
 
 		JLabel jb = new JLabel();
@@ -299,7 +305,8 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener,
 
 			}
 			filterRankBox.addItemListener(this);
-			ptm.Refresh(type);
+			ptm.Refresh((String) seasonBox.getSelectedItem(),
+					(String) seasonTypeBox.getSelectedItem(), type);
 
 			table.revalidate();
 			table.repaint();
@@ -314,7 +321,9 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener,
 			CellRender();
 
 		} else if (e.getSource() == refreshLbl) {
-			ptm.Refresh(typeBox.getSelectedItem().toString());
+			ptm.Refresh((String) seasonBox.getSelectedItem(),
+					(String) seasonTypeBox.getSelectedItem(),
+					(String) typeBox.getSelectedItem());
 			table.revalidate();
 			table.repaint();
 			tcr.setHighlightColumn(-1);
@@ -367,14 +376,16 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener,
 
 	public void itemStateChanged(ItemEvent e) {
 		if (e.getStateChange() == ItemEvent.SELECTED) {
-			if (e.getSource() == typeBox) {
+			if (e.getSource() == typeBox || e.getSource() == seasonBox
+					|| e.getSource() == seasonTypeBox) {
 				String season = seasonBox.getSelectedItem().toString();
+				String seasontype = (String) seasonTypeBox.getSelectedItem();
 				ArrayList<PlayerVO> vlist;
 				String s = (String) typeBox.getSelectedItem();
 				if (s.equals("赛季"))
-					vlist = player.getPlayerSeasonInfo(season);
+					vlist = player.getPlayerSeasonInfo(season, seasontype);
 				else
-					vlist = player.getPlayerAverageInfo();
+					vlist = player.getPlayerAverageInfo(seasontype);
 				// vlist.size()==0显示没有符合条件的球员
 				if (vlist != null) {
 					if (isHighInfo)
@@ -460,11 +471,13 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener,
 		ArrayList<PlayerVO> vlist;
 		String type = typeBox.getSelectedItem().toString();
 		if (type.equals("赛季"))
-			vlist = player.selectPlayersUptheTimeSeason(season, position,
-					union, AgeEnum.ALL, sort, "desc", time, 50);
+			vlist = player.selectPlayersUptheTimeSeason(season,
+					(String) seasonTypeBox.getSelectedItem(), position, union,
+					sort, "desc", time, 50);
 		else
-			vlist = player.selectPlayersUptheTimeAverage(position, union,
-					AgeEnum.ALL, sort, "desc", time, 50);
+			vlist = player.selectPlayersUptheTimeAverage(
+					(String) seasonTypeBox.getSelectedItem(), position, union,
+					sort, "desc", time, 50);
 		// vlist.size()==0显示没有符合条件的球
 		if (ptm.headmodel != 0) {
 			if (isHighInfo == false)
@@ -498,5 +511,4 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener,
 		CellRender();
 		tcr.setHighlightColumn(col);
 	}
-
 }

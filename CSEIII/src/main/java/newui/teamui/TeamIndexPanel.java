@@ -18,6 +18,9 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
+import data.MatchData;
+import bl.Match;
+import blService.MatchBLService;
 import newui.FatherPanel;
 import newui.Style;
 import newui.TableModel;
@@ -39,19 +42,19 @@ public class TeamIndexPanel extends FatherPanel implements MouseListener {
 	TeamTableModel ttm;
 	//
 	JLabel refreshLbl, fieldLbl;
-	JComboBox<String> seasonBox,seasonTypeBox, typeBox;
+	JComboBox<String> seasonBox, seasonTypeBox, typeBox;
 	Font font = new Font("微软雅黑", Font.PLAIN, 13);
 	boolean isHighInfo = false;
 	int clicktime = 0;// 升序 降序 恢复
 	int lastcolumn = -1;
 	MyTableCellRenderer tcr;
 	highlisten listen;
-	
-	TableSorter ts ;
-	
+
+	TableSorter ts;
+
 	public TeamIndexPanel() {
 		super();
-		listen=new highlisten();
+		listen = new highlisten();
 		// ------funcPnl--------
 		funcPnl = new JPanel();
 		funcPnl.setBackground(Style.BACK_GREY);
@@ -64,13 +67,14 @@ public class TeamIndexPanel extends FatherPanel implements MouseListener {
 		JLabel seasonBoxLbl = new MyJLabel("赛季：");
 		funcPnl.add(seasonBoxLbl);
 		// 暂时没有bl方法
-		String[] seasonBoxText = { "13-14" };
+		MatchBLService match=new Match();
+		String[] seasonBoxText = (String[]) match.getAllSeasons().toArray();
 		seasonBox = new MyComboBox(seasonBoxText);
-		// seasonBox.addItemListener(this);
 		funcPnl.add(seasonBox);
-		//------seasonType------
-		String[] seasonTypeBoxText={"全部","常规赛","季前赛","季后赛"};
-		seasonTypeBox=new MyComboBox(seasonTypeBoxText);
+		// ------seasonType------
+		String[] seasonTypeBoxText = { "全部", "常规赛", "季前赛", "季后赛" };
+		seasonTypeBox = new MyComboBox(seasonTypeBoxText);
+		
 		funcPnl.add(seasonTypeBox);
 		funcPnl.add(new JLabel("       "));
 		// ----DataType---------
@@ -95,11 +99,9 @@ public class TeamIndexPanel extends FatherPanel implements MouseListener {
 		ttm = new TeamTableModel(0);
 		// table = new MySortableTable(ttm, 1);
 		table = new JTable(ttm);
-		ts = new TableSorter(table.getModel(),
-				table.getTableHeader());
+		ts = new TableSorter(table.getModel(), table.getTableHeader());
 		table.setModel(ts);
 
-		
 		table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
 
 		table.setShowGrid(false);
@@ -120,7 +122,10 @@ public class TeamIndexPanel extends FatherPanel implements MouseListener {
 		add(jsp);
 
 		// ====初始化数据=====
-		ttm.Refresh(typeBox.getSelectedItem().toString());
+		String type = typeBox.getSelectedItem().toString();
+		String season = seasonBox.getSelectedItem().toString();
+		String seasonType = seasonTypeBox.getSelectedItem().toString();
+		ttm.Refresh(season, seasonType, type);
 		table.revalidate();
 		table.repaint();
 		CellRender();
@@ -137,12 +142,39 @@ public class TeamIndexPanel extends FatherPanel implements MouseListener {
 		titleBar.setSeason(seasonBox.getSelectedItem().toString());
 		titleBar.setAveOrAll(typeBox.getSelectedItem().toString());
 
+		seasonBox.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				// TODO Auto-generated method stub
+				String type = typeBox.getSelectedItem().toString();
+				String season = seasonBox.getSelectedItem().toString();
+				String seasonType = seasonTypeBox.getSelectedItem().toString();
+				ttm.Refresh(season, seasonType, type);
+				table.revalidate();
+				table.repaint();
+
+			}
+
+		});
+		seasonTypeBox.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				// TODO Auto-generated method stub
+				String type = typeBox.getSelectedItem().toString();
+				String season = seasonBox.getSelectedItem().toString();
+				String seasonType = seasonTypeBox.getSelectedItem().toString();
+				ttm.Refresh(season, seasonType, type);
+				table.revalidate();
+				table.repaint();
+
+			}
+		});
 		typeBox.addItemListener(new ItemListener() {
 
 			public void itemStateChanged(ItemEvent e) {
 				// TODO Auto-generated method stub
 				String type = typeBox.getSelectedItem().toString();
-				ttm.Refresh(type);
+				String season = seasonBox.getSelectedItem().toString();
+				String seasonType = seasonTypeBox.getSelectedItem().toString();
+				ttm.Refresh(season, seasonType, type);
 				table.revalidate();
 				table.repaint();
 
@@ -150,21 +182,23 @@ public class TeamIndexPanel extends FatherPanel implements MouseListener {
 
 		});
 
-
 	}
 
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
 
 		if (e.getSource() == refreshLbl) {
-			ttm.Refresh(typeBox.getSelectedItem().toString());
+			String type = typeBox.getSelectedItem().toString();
+			String season = seasonBox.getSelectedItem().toString();
+			String seasonType = seasonTypeBox.getSelectedItem().toString();
+			ttm.Refresh(season, seasonType, type);
 			table.revalidate();
 			table.repaint();
 			tcr.setHighlightColumn(-1);
 			ts.cancelSorting();
-			lastcolumn=-1;
-			
-			clicktime=0;
+			lastcolumn = -1;
+
+			clicktime = 0;
 		}
 
 		else if (e.getSource() == table) {
@@ -174,8 +208,9 @@ public class TeamIndexPanel extends FatherPanel implements MouseListener {
 				MainFrame.getInstance().setContentPanel(
 						new TeamDetailPanel(tname));
 			}
-		}
-		else if (e.getSource() == fieldLbl) {
+		} else if (e.getSource() == fieldLbl) {
+			String season = seasonBox.getSelectedItem().toString();
+			String seasonType = seasonTypeBox.getSelectedItem().toString();
 			String type = typeBox.getSelectedItem().toString();
 			if (isHighInfo) {
 				// 监听,切换到基础数据表格
@@ -190,17 +225,17 @@ public class TeamIndexPanel extends FatherPanel implements MouseListener {
 				ttm = new TeamTableModel(1);
 
 			}
-			ttm.Refresh(type);
+
+			ttm.Refresh(season, seasonType, type);
 			table.revalidate();
 			table.repaint();
 			;
 			jsp.remove(table);
 			table = new JTable(ttm);
-			ts = new TableSorter(table.getModel(),
-					table.getTableHeader());
+			ts = new TableSorter(table.getModel(), table.getTableHeader());
 			table.setModel(ts);
 
-//			table.getTableHeader().addMouseListener(listen);
+			// table.getTableHeader().addMouseListener(listen);
 			titleBar.setCurrentTableModel(ttm);
 
 			jsp.getViewport().add(table);
@@ -289,27 +324,26 @@ public class TeamIndexPanel extends FatherPanel implements MouseListener {
 		table.getTableHeader().addMouseListener(listen);
 		table.addMouseListener(this);
 
-
 	}
-	
-	class highlisten extends MouseAdapter{
-		public void mouseClicked(MouseEvent e){
-			int col=table.getTableHeader().columnAtPoint(e.getPoint());
-			if(lastcolumn==-1||lastcolumn!=col){
-				lastcolumn=col;
-				clicktime=1;
+
+	class highlisten extends MouseAdapter {
+		public void mouseClicked(MouseEvent e) {
+			int col = table.getTableHeader().columnAtPoint(e.getPoint());
+			if (lastcolumn == -1 || lastcolumn != col) {
+				lastcolumn = col;
+				clicktime = 1;
 				tcr.setHighlightColumn(col);
-				
-			}else {
+
+			} else {
 				clicktime++;
-				if(clicktime==3){	
+				if (clicktime == 3) {
 					tcr.setHighlightColumn(-1);
-					lastcolumn=-1;
-					clicktime=0;
+					lastcolumn = -1;
+					clicktime = 0;
 				}
-		
+
 			}
-			
+
 		}
 	}
 }
