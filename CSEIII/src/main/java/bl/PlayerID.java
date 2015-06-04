@@ -10,7 +10,7 @@ public class PlayerID implements PlayerIdBLService{
 		return playerIDData.getPlayerName(playerID);
 	}
 
-	public static void main(String[] args[]){
+	public static void main(String[] args){
 		long start = System.currentTimeMillis();
 		PlayerID playerDataReader = new PlayerID();
 		System.out.println(playerDataReader.getPlayerName(76001));
