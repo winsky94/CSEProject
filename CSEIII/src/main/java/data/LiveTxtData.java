@@ -94,6 +94,7 @@ public class LiveTxtData implements LiveTxtDataService {
 				if (isPart) {
 					part = Integer.parseInt(temp);
 					isPart = false;
+					temp = br.readLine();
 					continue;
 				}
 				content = temp;
