@@ -7,7 +7,7 @@ import blService.LiveTxtBLService;
 
 public class LiveTxt implements LiveTxtBLService{
 
-	public ArrayList<LiveMatchDetailVO> getLiveTxt(String season, String data,
+	public ArrayList<LiveMatchDetailVO> getLiveTxt(String season, String date,
 			String teams) {
 		// TODO Auto-generated method stub
 		return null;
