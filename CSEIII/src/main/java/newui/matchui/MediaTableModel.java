@@ -115,6 +115,7 @@ public class MediaTableModel  extends MyTableModel {
 
 	public void clearAll(){
 		rowData.clear();
+		names.clear();
 	}
 	
 	public void refresh(ArrayList<LiveMatchDetailVO> vos){
@@ -160,4 +161,45 @@ public class MediaTableModel  extends MyTableModel {
 		}
 		playerID.closeSql();
 	}
+	
+	public void add(ArrayList<String> ss){
+		playerID.openSql();
+	 for(String s:ss){
+        String content=s;
+		String[] buffer=content.split(",");
+		ArrayList<Object> a=new ArrayList<Object>();
+			
+		if(buffer[0].equals("0"))
+			a.add("");
+		else 
+			a.add(buffer[0]);
+			
+		a.add(buffer[1]);
+			
+		if(buffer[0].equals("0")&&buffer[2].equals("0")){
+			a.add("");
+			names.add("");
+		}
+		else{
+			int id=Integer.parseInt(buffer[2]);
+			if(id==0){
+				a.add("");
+				names.add("");
+			}
+			else{
+				String name=playerID.getPlayerName(id);
+				names.add(name);
+				ImageIcon image=Player.getPlayerPortraitImage(name);
+				a.add(image);
+			}
+		}
+			
+		a.add(buffer[3]);
+			
+		rowData.add(a);
+	 }	
+		playerID.closeSql();
+	}
+	
+	
 }
