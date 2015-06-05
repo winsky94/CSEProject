@@ -29,7 +29,7 @@ public class MatchCard extends JPanel implements MouseListener {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	JLabel dateLbl, detailLbl, homeIcon, visitingIcon, homeNameLbl,
+	JLabel dateLbl, detailLbl,liveLbl,  homeIcon, visitingIcon, homeNameLbl,
 			visitingNameLbl, homeScoreLbl, visitingScoreLbl;
 	JPanel topPnl, detailScoresPnl;
 	private TeamBLService team;
@@ -68,6 +68,14 @@ public class MatchCard extends JPanel implements MouseListener {
 		detailLbl.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		detailLbl.addMouseListener(this);
 		topPnl.add(detailLbl);
+		
+		//-----文字直播---监听不完善  实际使用需根据比赛类型 决定直播类型
+		liveLbl=new JLabel("文字直播");
+		liveLbl.setFont(new Font("微软雅黑", Font.PLAIN, 12));
+		liveLbl.setForeground(Color.white);
+		liveLbl.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		liveLbl.addMouseListener(this);
+		topPnl.add(liveLbl);
 		// --homeicon---------------
 		//ImageIcon t=team.getTeamImage(vo.getHomeTeam());
 		ImageIcon t=new ImageIcon("image/teamIcon/teamsPng150/"+vo.getHomeTeam()+".png");
