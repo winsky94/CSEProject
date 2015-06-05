@@ -1,5 +1,7 @@
 package bl;
 
+import java.awt.Image;
+import java.io.File;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -904,13 +906,22 @@ public class Player implements PlayerBLService{
 				order, num);
 	}
 
-	public ImageIcon getPlayerPortraitImage(String name) {
-		ImageIcon imageIcon = new ImageIcon("image/player/portrait/" + name
+	public static ImageIcon getPlayerPortraitImage(String name) {
+		ImageIcon imageIcon;
+		File file=new File("src/data/players/portrait/" + name+ ".png");    
+		if(!file.exists()){
+			imageIcon=new ImageIcon("src/data/players/portrait/None.png");
+			imageIcon.setImage(imageIcon.getImage().getScaledInstance(60, 50,Image.SCALE_SMOOTH ));
+		}
+		else{
+			imageIcon = new ImageIcon("src/data/players/portrait/" + name
 				+ ".png");
+			imageIcon.setImage(imageIcon.getImage().getScaledInstance(60, 50,Image.SCALE_SMOOTH ));
+		}
 		return imageIcon;
 	}
 
-	public ImageIcon getPlayerActionImage(String name) {
+	public static ImageIcon getPlayerActionImage(String name) {
 		ImageIcon imageIcon = new ImageIcon("image/player/action/" + name
 				+ ".png");
 		return imageIcon;
