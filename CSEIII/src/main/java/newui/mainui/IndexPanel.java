@@ -205,8 +205,7 @@ public class IndexPanel extends FatherPanel implements MouseListener {
 	public void Refresh() {
 
 		PlayerVO dayP = player.getDayHotPlayer("score", 1).get(0);
-		String season = Match.getCurrentSeason();
-		String seasonType = Match.getCurrentSeasonType();
+		String season="14-15";
 		PlayerVO seasonP = player.getSeasonHotPlayer(season, seasonType,
 				"score", 1).get(0);
 		TeamVO t = team.getSeasonHotTeam(season, seasonType, "score", 1).get(0);

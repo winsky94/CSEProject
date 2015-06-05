@@ -1,7 +1,7 @@
 package bl;
 
 import java.util.ArrayList;
-import java.util.Map;
+import java.util.Collections;
 
 import vo.MatchVO;
 import blService.MatchBLService;
@@ -10,14 +10,14 @@ import dataservice.MatchDataService;
 
 public class Match implements MatchBLService {
 	private MatchDataService matchData;
-	Map<String, String> matchSchedule;
 
 	public static void main(String[] args) {
 		MatchBLService match = new Match();
-		ArrayList<String> result = new ArrayList<String>();
-		result = match.getAllSeasons();
-		System.out.println(result.get(0));
-
+//		ArrayList<String> result = new ArrayList<String>();
+//		result = match.getAllSeasons();
+//		System.out.println(result.get(0));
+//		System.out.println(match.getLastMatchType());
+		match.getMatchData("all", "all", "all", "all", "all");
 	}
 
 	public Match() {
@@ -76,6 +76,19 @@ public class Match implements MatchBLService {
 	//
 	// return result;
 	// }
+
+	public String getLastMatchType() {
+		String result = "Playoff";
+		ArrayList<MatchVO> matches = new ArrayList<MatchVO>();
+		System.out.println("af");
+		matches = getMatchData("all", "all", "all", "all", "all");
+		System.out.println("asdf");
+		Collections.sort(matches, new SequenceOfMatch());
+		System.out.println("sdf");
+		MatchVO vo = matches.get(0);
+		result = vo.getType();
+		return result;
+	}
 
 	public ArrayList<MatchVO> getMatchData(String season, String type,
 			String date, String homeTeam, String visitingTeam) {

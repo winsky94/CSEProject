@@ -42,4 +42,9 @@ public interface MatchBLService {
 	 */
 	public ArrayList<MatchVO> getMatchesByTeam(String season,String size, String name);// 可以模糊
 
+	/**
+	 * 得到数据库记录的最后一场比赛的比赛类型
+	 * @return 最后一场比赛的比赛类型
+	 */
+	public String getLastMatchType();
 }
