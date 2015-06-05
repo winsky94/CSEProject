@@ -207,12 +207,16 @@ public class MatchCard extends JPanel implements MouseListener {
 	public void mouseEntered(MouseEvent e) {
 		if (e.getSource() == detailLbl)
 			detailLbl.setForeground(Style.FOCUS_BLUE);
+		else if(e.getSource()==liveLbl)
+			liveLbl.setForeground(Style.FOCUS_BLUE);
 
 	}
 
 	public void mouseExited(MouseEvent e) {
 		if (e.getSource() == detailLbl)
 			detailLbl.setForeground(Color.white);
+		else if(e.getSource()==liveLbl)
+			liveLbl.setForeground(Color.white);
 	}
 
 	public static void main(String[] args) {
