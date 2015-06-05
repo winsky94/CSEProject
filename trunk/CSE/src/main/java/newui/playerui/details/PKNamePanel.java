@@ -139,12 +139,6 @@ public class PKNamePanel extends JPanel implements MouseListener {
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		if(e.getSource().getClass()==NameLabel.class){
-			NameLabel temp=(NameLabel)e.getSource();
-			PlayerChooser pc=new PlayerChooser(temp);
-			temp.setText(temp.getVO().getName());
-			
-		}
 		if(e.getSource()==aLbl){
 			PlayerChooser pc=new PlayerChooser(aLbl);
 			aLbl.setText(aLbl.getVO().getName());
@@ -152,7 +146,7 @@ public class PKNamePanel extends JPanel implements MouseListener {
 			aImg.setImage(aImg.getImage().getScaledInstance(168,135,Image.SCALE_SMOOTH ));
 			aImgLbl.setIcon(aImg);
 			aTeamLbl.setText(aLbl.getVO().getPosition()+"/"+aLbl.getVO().getOwingTeam());
-			aInfoPnl.revalidate();
+			aInfoPnl.repaint();
 			PKNamePanel.this.revalidate();
 			
 		}
