@@ -1,6 +1,7 @@
 package bl;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import vo.MatchVO;
 import blService.MatchBLService;
@@ -8,13 +9,15 @@ import data.MatchData;
 import dataservice.MatchDataService;
 
 public class Match implements MatchBLService {
-	MatchDataService matchData;
+	private MatchDataService matchData;
+	Map<String, String> matchSchedule;
 
 	public static void main(String[] args) {
 		MatchBLService match = new Match();
 		ArrayList<String> result = new ArrayList<String>();
 		result = match.getAllSeasons();
 		System.out.println(result.get(0));
+
 	}
 
 	public Match() {
@@ -28,12 +31,58 @@ public class Match implements MatchBLService {
 		return result;
 	}
 
+	// /**
+	// * 根据当前日期得到当前处于哪个赛季
+	// *
+	// * @return 赛季 形如：14-15
+	// */
+	// public static String getCurrentSeason() {
+	// SimpleDateFormat df = new SimpleDateFormat("yyyy MM dd EEEE");// 设置日期格式
+	// String date = df.format(new Date());// new Date()为获取当前系统时间
+	// String[] dateDetail = date.split(" ");
+	// int year = Integer.parseInt(dateDetail[0]);
+	// int month = Integer.parseInt(dateDetail[1]);
+	//
+	// if (month > 6) {
+	// return String.valueOf(year).substring(2) + "-"
+	// + String.valueOf(year + 1).substring(2);
+	// } else {
+	// return String.valueOf(year - 1).substring(2) + "-"
+	// + String.valueOf(year).substring(2);
+	// }
+	//
+	// }
+	//
+	// public static String getCurrentSeasonType() {
+	// String result = "";
+	// SimpleDateFormat df = new SimpleDateFormat("yyyy MM dd EEEE");// 设置日期格式
+	// String date = df.format(new Date());// new Date()为获取当前系统时间
+	// String[] dateDetail = date.split(" ");
+	// int month = Integer.parseInt(dateDetail[1]);
+	// int day = Integer.parseInt(dateDetail[2]);
+	// String weekDay = dateDetail[3];
+	//
+	// if (month > 10 || month < 5) {
+	// result = "Team";
+	// } else if (month == 6) {
+	// result = "Playoff";
+	// } else if (month == 10) {
+	//
+	// } else if (month == 5) {
+	//
+	// } else {
+	//
+	// }
+	//
+	// return result;
+	// }
+
 	public ArrayList<MatchVO> getMatchData(String season, String type,
 			String date, String homeTeam, String visitingTeam) {
 		// TODO 自动生成的方法存根
 		ArrayList<MatchVO> result = new ArrayList<MatchVO>();
-		result = matchData.getMatchData(season, Match.changeTypeCHToEN(type), date, homeTeam,
-				visitingTeam);
+		result = matchData.getMatchData(season, Match.changeTypeCHToEN(type),
+				date, homeTeam, visitingTeam);
 		return result;
 	}
 
@@ -41,13 +90,16 @@ public class Match implements MatchBLService {
 			String name) {
 		// TODO 自动生成的方法存根
 		ArrayList<MatchVO> result = new ArrayList<MatchVO>();
-		result = matchData.getMatchesByTeam(season, Match.changeTypeCHToEN(type), name);
+		result = matchData.getMatchesByTeam(season,
+				Match.changeTypeCHToEN(type), name);
 		return result;
 	}
 
 	/**
 	 * 将比赛类型的中文转为英文
-	 * @param CH 比赛类型的中文
+	 * 
+	 * @param CH
+	 *            比赛类型的中文
 	 * @return 对应的英文
 	 */
 	public static String changeTypeCHToEN(String CH) {
