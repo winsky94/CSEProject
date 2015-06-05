@@ -27,6 +27,8 @@ import javax.swing.JTextField;
 import newui.Style;
 import newui.UIhelper;
 import newui.VOLabel;
+import newui.playerui.details.PKNamePanel;
+import newui.playerui.details.PlayerPKPanel;
 import vo.PlayerVO;
 import bl.player.Player;
 import blservice.PlayerBLService;
@@ -41,8 +43,10 @@ public class PlayerChooser extends JDialog {
 	JButton exitBtn;
 	JScrollPane jsp;
 	PlayerBLService p;
-	VOLabel owner;
-	public PlayerChooser(VOLabel o) {
+	PlayerPKPanel owner;
+	boolean isA;
+	public PlayerChooser(PlayerPKPanel o,boolean bool) {
+		isA=bool;
 		owner=o;
 		p = new Player();
 		int screenWidth = UIhelper.getScreenWidth();
@@ -118,9 +122,6 @@ public class PlayerChooser extends JDialog {
 	}
 
 	// --------------------------------------------------
-	public static void main(String[] args) {
-		new PlayerChooser(new VOLabel(null, null));
-	}
 
 	class ResultLabel extends VOLabel {
 		private static final long serialVersionUID = 1L;
@@ -143,7 +144,23 @@ public class PlayerChooser extends JDialog {
 		@Override
 		public void mouseClicked(MouseEvent e) {
 			ResultLabel temp = (ResultLabel) e.getSource();
-			owner.setVO(temp.getVO());
+			if(isA){
+				owner.namePnl.aLbl.setText(temp.getVO().getName());
+				owner.namePnl.aLbl.setVO(temp.getVO());
+				ImageIcon i=new ImageIcon("image/player/portrait/"+temp.getVO().getName()+".png");
+				i.setImage(i.getImage().getScaledInstance(168,135,Image.SCALE_SMOOTH ));
+				owner.namePnl.aImgLbl.setIcon(i);
+				owner.namePnl.aTeamLbl.setText(temp.getVO().getPosition()+"/"+temp.getVO().getOwingTeam());
+			}
+			else{
+				owner.namePnl.bLbl.setText(temp.getVO().getName());
+				owner.namePnl.bLbl.setVO(temp.getVO());
+				ImageIcon i=new ImageIcon("image/player/portrait/"+temp.getVO().getName()+".png");
+				i.setImage(i.getImage().getScaledInstance(168,135,Image.SCALE_SMOOTH ));
+				owner.namePnl.bImgLbl.setIcon(i);
+				owner.namePnl.bTeamLbl.setText(temp.getVO().getPosition()+"/"+temp.getVO().getOwingTeam());
+			}
+			
 			PlayerChooser.this.dispose();
 		}
 
