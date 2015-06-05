@@ -1475,6 +1475,17 @@ public class Player implements PlayerBLService{
 //		ArrayList<PlayerVO> players=player.selectPlayersByAverage("Team", "all", "all", "score", "desc", 5);
 //		ArrayList<PlayerVO> players=player.getOrderedPlayersBySeason("12-13", "Team", "score", "asc", 5);
 		ArrayList<PlayerVO> players=player.getOrderedPlayersByAverage( "Team", "score", "desc", 5);
+		long end1= System.currentTimeMillis();
+		System.out.println("运行时间：" + (end1 - start) + "毫秒");// 应该是end - start
+		ArrayList<PlayerVO> players2=player.getOrderedPlayersByAverage( "Preseason", "score", "desc", 5);
+		long end2 = System.currentTimeMillis();
+		System.out.println("运行时间：" + (end2 - end1) + "毫秒");// 应该是end - start
+		ArrayList<PlayerVO> players3=player.getOrderedPlayersByAverage( "Playoff", "score", "desc", 5);
+		long end3 = System.currentTimeMillis();
+		System.out.println("运行时间：" + (end3 - end2) + "毫秒");// 应该是end - start
+		ArrayList<PlayerVO> player4=player.getOrderedPlayersByAverage( "Team", "score", "desc", 5);
+		long end4 = System.currentTimeMillis();
+		System.out.println("运行时间：" + (end4 - end3) + "毫秒");// 应该是end - start
 		for(PlayerVO vv:players){
 			System.out.println(vv.getName());
 			System.out.println(vv.getScore());
