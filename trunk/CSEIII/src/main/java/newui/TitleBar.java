@@ -52,6 +52,7 @@ public class TitleBar extends JPanel implements MouseListener {
 	private String aveOrAll;
 	private JTable table;
 	private int test = 0;
+	private String seasonType;
 
 	public TitleBar() {
 		setBackground(Style.DEEP_BLUE);
@@ -229,6 +230,10 @@ public class TitleBar extends JPanel implements MouseListener {
 
 	}
 
+	public void setSeasonType(String seasonType){
+		this.seasonType=seasonType;
+	}
+	
 	public void setCurrentTableModel(MyTableModel model) {
 		this.tablemodel = model;
 	}
@@ -275,9 +280,9 @@ public class TitleBar extends JPanel implements MouseListener {
 				p = Service.player;
 
 				if (aveOrAll.equals("场均"))
-					result = p.getPlayerBaseInfo(scontent);
+					result = p.getPlayerAverageInfo(seasonType, scontent);
 				else
-					result = p.getPlayerBaseInfoSeason(season, scontent);
+					result = p.getPlayerSeasonInfo(season, seasonType, scontent);
 				tablemodel.SearchRefresh(result);
 				table.revalidate();
 				table.repaint();

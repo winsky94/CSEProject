@@ -226,6 +226,7 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener,
 		jsp.setRowHeaderView(new RowHeaderTable(table, 30));
 		titleBar.setSeason(seasonBox.getSelectedItem().toString());
 		titleBar.setAveOrAll(typeBox.getSelectedItem().toString());
+		titleBar.setSeasonType(seasonTypeBox.getSelectedItem().toString());
 
 	}
 
