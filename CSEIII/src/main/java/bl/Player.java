@@ -798,6 +798,17 @@ public class Player implements PlayerBLService{
 		}
 		return result;
 	}
+	
+	public PlayerVO getPlayerAverageInfo(String type,String name){
+		ArrayList<PlayerVO> vos=getPlayerAverageInfo(type);
+		PlayerVO vo=new PlayerVO();
+		for(int i=0;i<vos.size();i++){
+			vo=vos.get(i);
+			if(vos.get(i).getName().equals(name))
+				return vo;
+		}
+		return vo;
+	}
 
 	public ArrayList<PlayerVO> getOrderedPlayersBySeason(String season,String type,
 			String condition, String order, int num) {
