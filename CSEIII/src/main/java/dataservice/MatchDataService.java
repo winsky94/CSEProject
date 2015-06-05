@@ -49,5 +49,4 @@ public interface MatchDataService {
 	 */
 	public ArrayList<MatchVO> getMatchData(String season, String type,
 			String date, String homeTeam, String visitingTeam);
-
 }
