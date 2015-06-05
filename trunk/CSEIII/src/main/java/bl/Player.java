@@ -124,16 +124,24 @@ public class Player implements PlayerBLService{
         return result;
 	}
 	
-	public PlayerVO getPlayerSeasonInfo(String season,String type,String name){
+	public ArrayList<PlayerVO> getPlayerSeasonInfo(String season,String type,String name){
 		Map<String, PlayerVO> theSeasonPlayers=new HashMap<String, PlayerVO>(32);
+		ArrayList<PlayerVO> result=new ArrayList<PlayerVO>();
+		ArrayList<PlayerVO> buffer;
 		matches.clear();
 		
 		for (MatchVO match : getSeasonMatches(season,Match.changeTypeCHToEN(type))) {
 			getPlayerMatchInfo(theSeasonPlayers,match);
 		}
 
-	    calculatePlayer(theSeasonPlayers);
-	    return theSeasonPlayers.get(name);
+		buffer=calculatePlayer(theSeasonPlayers);
+		
+		for(int i=0;i<buffer.size();i++){
+			PlayerVO vo=buffer.get(i);
+			if(vo.getName().contains(name))
+				result.add(vo);
+		}
+	    return result;
 	}
 
     private ArrayList<PlayerVO> calculatePlayer(Map<String, PlayerVO> playersSeason){
@@ -799,15 +807,16 @@ public class Player implements PlayerBLService{
 		return result;
 	}
 	
-	public PlayerVO getPlayerAverageInfo(String type,String name){
+	public ArrayList<PlayerVO> getPlayerAverageInfo(String type,String name){
 		ArrayList<PlayerVO> vos=getPlayerAverageInfo(type);
+		ArrayList<PlayerVO> result=new ArrayList<PlayerVO>();
 		PlayerVO vo=new PlayerVO();
 		for(int i=0;i<vos.size();i++){
 			vo=vos.get(i);
-			if(vos.get(i).getName().equals(name))
-				return vo;
+			if(vo.getName().equals(name))
+				result.add(vo);
 		}
-		return vo;
+		return result;
 	}
 
 	public ArrayList<PlayerVO> getOrderedPlayersBySeason(String season,String type,
