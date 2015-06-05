@@ -43,7 +43,7 @@ public interface PlayerBLService {
 	 * @param name
 	 * @return
 	 */
-	public PlayerVO getPlayerSeasonInfo(String season,String type,String name);
+	public ArrayList<PlayerVO> getPlayerSeasonInfo(String season,String type,String name);
 
 	/**
 	 * 得到球员的场均技术统计数据
@@ -52,7 +52,7 @@ public interface PlayerBLService {
 	 */
 	public ArrayList<PlayerVO> getPlayerAverageInfo(String type);
 
-	public PlayerVO getPlayerAverageInfo(String type,String name);
+	public ArrayList<PlayerVO> getPlayerAverageInfo(String type,String name);
 
 	/**
 	 * 根据某一项技术分析项，将球员按某个赛季的该项数据进行升降序排序
