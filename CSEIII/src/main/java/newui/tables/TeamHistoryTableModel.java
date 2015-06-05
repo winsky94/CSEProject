@@ -34,6 +34,7 @@ public class TeamHistoryTableModel extends MyTableModel {
 		return head.length;
 	}
 
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public Class getColumnClass(int column) {
 		return content.get(0).get(column).getClass();
 	}
@@ -58,15 +59,15 @@ public class TeamHistoryTableModel extends MyTableModel {
 	public void RefreshSeason(String season, String seasonType) {
 		ArrayList<PlayerVO> vo = new ArrayList<PlayerVO>();
 		for (PlayerVO v : teamMember) {
-			vo.add(player.getPlayerSeasonInfo(season, seasonType, v.getName()));
+			vo.add(player.getPlayerSeasonInfo(season, seasonType, v.getName()).get(0));
 		}
 		Refresh(vo, tname);
 	}
 
-	public void RefreshAverage() {
+	public void RefreshAverage(String seasonType) {
 		ArrayList<PlayerVO> vo = new ArrayList<PlayerVO>();
 		for (PlayerVO v : teamMember) {
-			vo.add(player.getPlayerAverageInfo(v.getName()));
+			vo.add(player.getPlayerAverageInfo(seasonType, v.getName()).get(0));
 		}
 		Refresh(vo, tname);
 	}

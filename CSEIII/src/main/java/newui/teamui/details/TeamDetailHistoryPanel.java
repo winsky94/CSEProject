@@ -104,7 +104,8 @@ public class TeamDetailHistoryPanel extends JPanel {
 			public void itemStateChanged(ItemEvent e) {
 				// TODO Auto-generated method stub
 				if (typeBox.getSelectedItem().toString().equals("场均")) {
-					thtm.RefreshAverage();
+					thtm.RefreshAverage((String) seasonTypeBox
+							.getSelectedItem());
 				} else {
 					thtm.RefreshSeason(seasonBox.getSelectedItem().toString(),
 							(String) seasonTypeBox.getSelectedItem());
