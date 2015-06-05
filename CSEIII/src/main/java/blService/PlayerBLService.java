@@ -35,6 +35,15 @@ public interface PlayerBLService {
 	 * @return
 	 */
 	public ArrayList<PlayerVO> getPlayerSeasonInfo(String season,String type);
+	
+	/**
+	 * 得到某个球员的某个赛季的技术统计数据
+	 * @param season
+	 * @param type
+	 * @param name
+	 * @return
+	 */
+	public PlayerVO getPlayerSeasonInfo(String season,String type,String name);
 
 	/**
 	 * 得到球员的场均技术统计数据
