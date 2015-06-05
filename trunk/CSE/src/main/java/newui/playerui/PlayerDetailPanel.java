@@ -12,7 +12,6 @@ import javax.swing.JTabbedPane;
 import newui.FatherPanel;
 import newui.Service;
 import newui.Style;
-import newui.UIhelper;
 import newui.playerui.details.PlayerDetailHistoryPanel;
 import newui.playerui.details.PlayerDetailInfoPanel;
 import newui.playerui.details.PlayerPKPanel;
@@ -38,13 +37,7 @@ public class PlayerDetailPanel extends FatherPanel{
 		vo=pservice.getPlayerBaseInfo(pname).get(0);
 		
 		name=pname;
-		//----------------
-		//ImageIcon icon=pservice.getPlayerActionImage(pname);
-		//设置icon大小
-		int screenWidth = UIhelper.getScreenWidth();
-		int screenHeight=UIhelper.getScreenHeight();
-		int width=screenWidth*90/100;
-		int height=screenHeight*95/100;
+		
 		
 		
 		//icon.setImage(icon.getImage().getScaledInstance(width*1/3, height*7/8, Image.SCALE_DEFAULT));
@@ -87,7 +80,7 @@ public class PlayerDetailPanel extends FatherPanel{
 		 * 新增图表分析标签页
 		 */
 		tab.addTab("图表分析", new PlayerStatsPanel(name));
-		tab.addTab("球员对比", new PlayerPKPanel(name));
+		tab.addTab("球员对比", new PlayerPKPanel(vo));
 	}
 	
 }
