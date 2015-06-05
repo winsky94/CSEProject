@@ -25,7 +25,6 @@ import newui.tables.HotTableModel;
 import newui.tables.MyTableCellRenderer;
 import newui.teamui.TeamDetailPanel;
 import vo.TeamVO;
-import bl.Match;
 import bl.Team;
 import blService.TeamBLService;
 
@@ -40,10 +39,10 @@ public class HotTeamPanel extends HotFatherPanel implements MouseListener {
 	// ------bottomBar-----
 	BottomButton scoreBtn, reboundBtn, assistBtn, blockBtn, stealBtn,
 			threeRateBtn, shootRateBtn, freeRateBtn, currentBtn;
-	//---------------------
+	// ---------------------
 	JPanel seasonPnl;
-	JComboBox<String> seasonBox,seasonTypeBox;
-	//---------------------
+	JComboBox<String> seasonBox, seasonTypeBox;
+	// ---------------------
 	String[] head = { "排名", "", "球队名称", "球队缩写", "所属联盟", "场均得分" };
 	JTable table;
 	HotTeamModel model;
@@ -57,33 +56,33 @@ public class HotTeamPanel extends HotFatherPanel implements MouseListener {
 		GridBagConstraints bc = new GridBagConstraints();
 		bc.fill = GridBagConstraints.BOTH;
 		bestPnl.setLayout(bl);
-		//-------seasonPnl-------------
-		seasonPnl=new JPanel();
+		// -------seasonPnl-------------
+		seasonPnl = new JPanel();
 		seasonPnl.setBackground(Color.white);
-		gbc.gridx=0;
-		gbc.gridy=0;
-		gbc.gridwidth=10;
-		gbc.gridheight=1;
-		gbc.weightx=10;
-		gbc.weighty=0.1;
+		gbc.gridx = 0;
+		gbc.gridy = 0;
+		gbc.gridwidth = 10;
+		gbc.gridheight = 1;
+		gbc.weightx = 10;
+		gbc.weighty = 0.1;
 		gbl.setConstraints(seasonPnl, gbc);
 		add(seasonPnl);
-		//---seasonBox-----
-		JLabel seasonLbl=new JLabel("赛季");
-		seasonLbl.setFont(new Font("微软雅黑",Font.PLAIN,15));
+		// ---seasonBox-----
+		JLabel seasonLbl = new JLabel("赛季");
+		seasonLbl.setFont(new Font("微软雅黑", Font.PLAIN, 15));
 		seasonLbl.setForeground(Style.DEEP_BLUE);
 		seasonPnl.add(seasonLbl);
 		//
-		seasonBox=new JComboBox<String>();
+		seasonBox = new JComboBox<String>();
 		seasonBox.setBackground(Color.white);
-		seasonBox.setFont(new Font("微软雅黑",Font.PLAIN,15));
+		seasonBox.setFont(new Font("微软雅黑", Font.PLAIN, 15));
 		seasonBox.setForeground(Style.DEEP_BLUE);
 		seasonPnl.add(seasonBox);
-		//----seasonTypeBox------
-		String[] seasonType={"全部","常规赛","季前赛","季后赛"};
-		seasonTypeBox=new JComboBox<String>(seasonType);
+		// ----seasonTypeBox------
+		String[] seasonType = { "全部", "常规赛", "季前赛", "季后赛" };
+		seasonTypeBox = new JComboBox<String>(seasonType);
 		seasonTypeBox.setBackground(Color.white);
-		seasonTypeBox.setFont(new Font("微软雅黑",Font.PLAIN,15));
+		seasonTypeBox.setFont(new Font("微软雅黑", Font.PLAIN, 15));
 		seasonTypeBox.setForeground(Style.DEEP_BLUE);
 		seasonPnl.add(seasonTypeBox);
 		// -------bestPnl--------------
@@ -202,10 +201,9 @@ public class HotTeamPanel extends HotFatherPanel implements MouseListener {
 	}
 
 	public void Refresh(String sort) {
-		// 目前只有一个赛季
-		String season=Match.getCurrentSeason();
-		String seasonType=Match.getCurrentSeasonType();
-		vlist = team.getSeasonHotTeam(season,seasonType, sort, 5);
+		// 目前写死了是14-15
+		vlist = team.getSeasonHotTeam("14-15",
+				(String) seasonTypeBox.getSelectedItem(), sort, 5);
 		if (vlist != null && vlist.size() != 0) {
 			model.setHead(head);
 			TeamVO topOne = vlist.get(0);
