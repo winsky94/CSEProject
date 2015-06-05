@@ -43,12 +43,11 @@ public class HistoryLiveTextPanel extends JPanel implements ActionListener,Mouse
 	private static final long serialVersionUID = 1L;
 	JTable jt;
     MediaTableModel mtm;
-    JPanel head,head1,head2,content,bottom;
-    JLabel headTxt,timeNow,headPic1,headPic2;
+    JPanel head,head1,head2,content;
+    JLabel headTxt,headPic1,headPic2;
     ArrayList<JButton> jies=new ArrayList<JButton>();
     ArrayList<Boolean> isJies=new ArrayList<Boolean>();
     JScrollPane jsp;
-    Timer t;
     
     LiveTxtBLService liveTexts;
     ArrayList<ArrayList<LiveMatchDetailVO>> matches=new ArrayList<ArrayList<LiveMatchDetailVO>>();
@@ -174,17 +173,10 @@ public class HistoryLiveTextPanel extends JPanel implements ActionListener,Mouse
         jt.setFont(new Font("微软雅黑", Font.PLAIN, 15));
         jt.setRowHeight(50);//设置行高
     	jsp=new JScrollPane(jt);
-    	bottom=new JPanel();
-    	bottom.setBackground(Color.darkGray);
-    	t=new Timer(1000,this);//每隔一秒触发ActionEvent事件
-		t.start();//启动计时器
-		timeNow=new JLabel(Calendar.getInstance().getTime().toLocaleString());
-		timeNow.setForeground(Color.white);
-		bottom.add(timeNow);
+
     	setLayout(new BorderLayout());
     	add(head,BorderLayout.NORTH);
     	add(jsp);
-    	add(bottom,BorderLayout.SOUTH);
     }
     
  private  void getMatches(String season,String date,String teams){
@@ -239,7 +231,6 @@ public class HistoryLiveTextPanel extends JPanel implements ActionListener,Mouse
 			}
 		}
 		
-		this.timeNow.setText(Calendar.getInstance().getTime().toLocaleString());
 	}
 
 	public void mouseClicked(MouseEvent e) {
