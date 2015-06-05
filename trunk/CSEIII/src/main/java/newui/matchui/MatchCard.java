@@ -28,7 +28,7 @@ public class MatchCard extends JPanel implements MouseListener {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	JLabel dateLbl, detailLbl, homeIcon, visitingIcon, homeNameLbl,
+	JLabel dateLbl, detailLbl,liveLbl, homeIcon, visitingIcon, homeNameLbl,
 			visitingNameLbl, homeScoreLbl, visitingScoreLbl;
 	JPanel topPnl, detailScoresPnl;
 	private TeamBLService team;
@@ -68,6 +68,14 @@ public class MatchCard extends JPanel implements MouseListener {
 		detailLbl.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		detailLbl.addMouseListener(this);
 		topPnl.add(detailLbl);
+		//-----文字直播---监听不完善  实际使用需根据比赛类型 决定直播类型
+		liveLbl=new JLabel("文字直播");
+		liveLbl.setFont(new Font("微软雅黑", Font.PLAIN, 12));
+		liveLbl.setForeground(Color.white);
+		liveLbl.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		liveLbl.addMouseListener(this);
+		topPnl.add(liveLbl);
+		
 		// --homeicon---------------
 		// ImageIcon t=team.getTeamImage(vo.getHomeTeam());
 		ImageIcon t = new ImageIcon("image/teamIcon/teamsPng150/"
@@ -174,6 +182,10 @@ public class MatchCard extends JPanel implements MouseListener {
 	public void mouseClicked(MouseEvent e) {
 		if (e.getSource() == detailLbl)// 注意，这里应当传一个比赛的特征值过去
 			MainFrame.getInstance().setContentPanel(new MatchDetailPanel(vo));
+		else if(e.getSource()==liveLbl){
+			//需判断是否该比赛已结束
+			MainFrame.getInstance().setContentPanel(new LiveDetailPanel(vo,0));
+		}
 		else {
 			String name = vo.getVisitingTeam();
 			if (e.getSource() == homeIcon)
