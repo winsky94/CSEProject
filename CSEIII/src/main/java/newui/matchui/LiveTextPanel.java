@@ -92,7 +92,11 @@ public class LiveTextPanel extends JPanel implements ActionListener,MouseListene
     	isJies.add(false);
     	JButton jie;
     	for(int i=1;i<=partNum;i++){
-    	  jie=new JButton("第"+i+"节");
+    		if(i<=4)
+    	       jie=new JButton("第"+i+"节");
+    		else {
+			   jie=new JButton("加时"+(i-4));
+			}
     	  jie.setSize(20,20);
     	  jie.setFont(new Font("黑体",Font.PLAIN,20));
     	  jie.setForeground(Color.white);
@@ -167,7 +171,7 @@ public class LiveTextPanel extends JPanel implements ActionListener,MouseListene
         render2.setHorizontalAlignment(SwingConstants.LEFT);
         jt.getColumnModel().getColumn(3).setCellRenderer(render2);
         
-        jt.setFont(new Font("楷体", Font.PLAIN, 15));
+        jt.setFont(new Font("微软雅黑", Font.PLAIN, 15));
         jt.setRowHeight(50);//设置行高
     	jsp=new JScrollPane(jt);
     	bottom=new JPanel();
