@@ -36,7 +36,7 @@ import bl.LiveTxt;
 import blService.LiveTxtBLService;
 import vo.LiveMatchDetailVO;
 
-public class LiveTextPanel extends JPanel implements ActionListener,MouseListener{
+public class HistoryLiveTextPanel extends JPanel implements ActionListener,MouseListener{
     /**
 	 * 
 	 */
@@ -54,7 +54,7 @@ public class LiveTextPanel extends JPanel implements ActionListener,MouseListene
     ArrayList<ArrayList<LiveMatchDetailVO>> matches=new ArrayList<ArrayList<LiveMatchDetailVO>>();
     int partNum;
     
-    public LiveTextPanel(ImageIcon img1,ImageIcon img2,String team1,String team2,String season,String date,String teams){
+    public HistoryLiveTextPanel(ImageIcon img1,ImageIcon img2,String team1,String team2,String season,String date,String teams){
     	getMatches(season, date, teams);
     	for(int i=0;i<jies.size();i++){
     		if(i==1)
@@ -205,7 +205,7 @@ public class LiveTextPanel extends JPanel implements ActionListener,MouseListene
 		JFrame jFrame=new JFrame();
 		ImageIcon img1=new ImageIcon("ATL.png");
 		ImageIcon img2=new ImageIcon("BKN.png");		
-		LiveTextPanel mPanel=new LiveTextPanel(img1,img2,"ATL","BKN","14-15","03-25","MIA-MIL");
+		HistoryLiveTextPanel mPanel=new HistoryLiveTextPanel(img1,img2,"ATL","BKN","14-15","03-25","MIA-MIL");
 		jFrame.getContentPane().add(mPanel);
 		jFrame.setLocation(150, 50);
 		jFrame.setSize(1000,600);
