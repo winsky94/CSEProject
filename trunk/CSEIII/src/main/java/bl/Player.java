@@ -123,6 +123,18 @@ public class Player implements PlayerBLService{
 	    Collections.sort(result, new SequenceOfPlayer());
         return result;
 	}
+	
+	public PlayerVO getPlayerSeasonInfo(String season,String type,String name){
+		Map<String, PlayerVO> theSeasonPlayers=new HashMap<String, PlayerVO>(32);
+		matches.clear();
+		
+		for (MatchVO match : getSeasonMatches(season,Match.changeTypeCHToEN(type))) {
+			getPlayerMatchInfo(theSeasonPlayers,match);
+		}
+
+	    calculatePlayer(theSeasonPlayers);
+	    return theSeasonPlayers.get(name);
+	}
 
     private ArrayList<PlayerVO> calculatePlayer(Map<String, PlayerVO> playersSeason){
 	  ArrayList<PlayerVO> result=new ArrayList<PlayerVO>();
