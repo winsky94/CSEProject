@@ -13,6 +13,7 @@ import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTable;
@@ -47,7 +48,11 @@ public class HotSeasonPanel extends HotFatherPanel implements MouseListener {
 	BottomButton currentBtn;
 	JTable table;
 	HotSeasonModel model;
+	// ---------------------
+	JPanel seasonPnl;
+	JComboBox<String> seasonBox, seasonTypeBox;
 
+	// ---------------------
 	public HotSeasonPanel() {
 
 		player = Service.player;
@@ -55,6 +60,35 @@ public class HotSeasonPanel extends HotFatherPanel implements MouseListener {
 		GridBagConstraints bc = new GridBagConstraints();
 		bc.fill = GridBagConstraints.BOTH;
 		bestPnl.setLayout(bl);
+		// -------seasonPnl-------------
+		seasonPnl = new JPanel();
+		seasonPnl.setBackground(Color.white);
+		gbc.gridx = 0;
+		gbc.gridy = 0;
+		gbc.gridwidth = 10;
+		gbc.gridheight = 1;
+		gbc.weightx = 10;
+		gbc.weighty = 0.1;
+		gbl.setConstraints(seasonPnl, gbc);
+		add(seasonPnl);
+		// ---seasonBox-----
+		JLabel seasonLbl = new JLabel("赛季");
+		seasonLbl.setFont(new Font("微软雅黑", Font.PLAIN, 15));
+		seasonLbl.setForeground(Style.DEEP_BLUE);
+		seasonPnl.add(seasonLbl);
+		//
+		seasonBox = new JComboBox<String>();
+		seasonBox.setBackground(Color.white);
+		seasonBox.setFont(new Font("微软雅黑", Font.PLAIN, 15));
+		seasonBox.setForeground(Style.DEEP_BLUE);
+		seasonPnl.add(seasonBox);
+		// ----seasonTypeBox------
+		String[] seasonType = { "全部", "常规赛", "季前赛", "季后赛" };
+		seasonTypeBox = new JComboBox<String>(seasonType);
+		seasonTypeBox.setBackground(Color.white);
+		seasonTypeBox.setFont(new Font("微软雅黑", Font.PLAIN, 15));
+		seasonTypeBox.setForeground(Style.DEEP_BLUE);
+		seasonPnl.add(seasonTypeBox);
 		// -------bestPnl--------------
 		bestHead = new JLabel();
 		// 有需要就加上bestHead.setPreferredSize(new Dimension(width, height));

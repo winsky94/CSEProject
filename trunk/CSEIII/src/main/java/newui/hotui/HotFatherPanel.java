@@ -30,7 +30,7 @@ public class HotFatherPanel extends JPanel{
 		bestPnl=new JPanel();
 		bestPnl.setBackground(Color.white);
 		gbc.gridx=0;
-		gbc.gridy=0;
+		gbc.gridy=1;
 		gbc.gridwidth=10;
 		gbc.gridheight=3;
 		gbc.weightx=10;
@@ -40,14 +40,14 @@ public class HotFatherPanel extends JPanel{
 		//----------------------
 		gbc.insets=new Insets(0, 2, 1, 2);
 		jsp=new JScrollPane();
-		gbc.gridy=3;
+		gbc.gridy=4;
 		gbc.gridheight=5;
 		gbc.weighty=5;
 		gbl.setConstraints(jsp, gbc);
 		add(jsp);
 		//----------------------
 		bottomBar=new JPanel();
-		gbc.gridy=8;
+		gbc.gridy=9;
 		gbc.gridheight=1;
 		gbc.weighty=1;
 		gbl.setConstraints(bottomBar, gbc);
