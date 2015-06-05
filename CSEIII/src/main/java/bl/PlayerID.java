@@ -9,6 +9,14 @@ public class PlayerID implements PlayerIdBLService{
 	public String getPlayerName(int playerID) {
 		return playerIDData.getPlayerName(playerID);
 	}
+	
+	public void openSql() {
+		playerIDData.openSql();
+	}
+
+	public void closeSql() {
+		playerIDData.closeSql();
+	}
 
 	public static void main(String[] args){
 		long start = System.currentTimeMillis();
@@ -29,4 +37,5 @@ public class PlayerID implements PlayerIdBLService{
 		long end3 = System.currentTimeMillis();
 		System.out.println("运行时间：" + (end3 - end2-3000) + "毫秒");// 应该是end - start
 	}
+
 }
