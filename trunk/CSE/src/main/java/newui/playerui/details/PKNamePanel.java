@@ -29,11 +29,12 @@ public class PKNamePanel extends JPanel implements MouseListener {
 	 */
 	private static final long serialVersionUID = 1L;
 	JPanel aInfoPnl, bInfoPnl;
-	JLabel aImgLbl, bImgLbl, vsLbl;
-	JLabel aTeamLbl, bTeamLbl;
-	VOLabel aLbl, bLbl;
-	ImageIcon aImg,bImg;
-	public PKNamePanel(PlayerVO defaultVO) {
+	public JLabel aImgLbl, bImgLbl, vsLbl;
+	public JLabel aTeamLbl, bTeamLbl;
+	public VOLabel aLbl, bLbl;
+	PlayerPKPanel father;
+	public PKNamePanel(PlayerPKPanel f) {
+		father=f;
 		setBackground(Color.white);
 		// -----------------------------
 		GridBagLayout gbl = new GridBagLayout();
@@ -88,9 +89,9 @@ public class PKNamePanel extends JPanel implements MouseListener {
 		gbl.setConstraints(bInfoPnl, gbc);
 		add(bInfoPnl);
 		//-----infoPnl------------------------
-		aLbl=new NameLabel(defaultVO.getName(),defaultVO);
+		aLbl=new NameLabel(father.defaultVO.getName(),father.defaultVO);
 		aInfoPnl.add(aLbl);
-		aTeamLbl=new MyLabel(defaultVO.getPosition()+"/"+defaultVO.getOwingTeam());
+		aTeamLbl=new MyLabel(father.defaultVO.getPosition()+"/"+father.defaultVO.getOwingTeam());
 		aInfoPnl.add(aTeamLbl);
 		//----------
 		bLbl=new NameLabel("点击选择球员",null);
@@ -98,11 +99,11 @@ public class PKNamePanel extends JPanel implements MouseListener {
 		bTeamLbl=new MyLabel("?/?");
 		bInfoPnl.add(bTeamLbl);
 		//----imgLbl---------------------------
-		aImg=new ImageIcon("image/player/portrait/"+defaultVO.getName()+".png");
+		ImageIcon aImg=new ImageIcon("image/player/portrait/"+father.defaultVO.getName()+".png");
 		aImg.setImage(aImg.getImage().getScaledInstance(168,135,Image.SCALE_SMOOTH ));
 		aImgLbl.setIcon(aImg);
 		//
-		bImg=new ImageIcon("image/player/portrait/null.png");
+		ImageIcon bImg=new ImageIcon("image/player/portrait/null.png");
 		bImg.setImage(bImg.getImage().getScaledInstance(168,135,Image.SCALE_SMOOTH ));
 		bImgLbl.setIcon(bImg);
 		//--------------------------------------
@@ -140,24 +141,10 @@ public class PKNamePanel extends JPanel implements MouseListener {
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		if(e.getSource()==aLbl){
-			PlayerChooser pc=new PlayerChooser(aLbl);
-			aLbl.setText(aLbl.getVO().getName());
-			aImg=new ImageIcon("image/player/portrait/"+aLbl.getVO().getName()+".png");
-			aImg.setImage(aImg.getImage().getScaledInstance(168,135,Image.SCALE_SMOOTH ));
-			aImgLbl.setIcon(aImg);
-			aTeamLbl.setText(aLbl.getVO().getPosition()+"/"+aLbl.getVO().getOwingTeam());
-			aInfoPnl.repaint();
-			PKNamePanel.this.revalidate();
-			
+			PlayerChooser pc=new PlayerChooser(father,true);
 		}
 		else if(e.getSource()==bLbl){
-			PlayerChooser pc=new PlayerChooser(bLbl);
-			bLbl.setText(bLbl.getVO().getName());
-			bImg=new ImageIcon("image/player/portrait/"+bLbl.getVO().getName()+".png");
-			bImg.setImage(bImg.getImage().getScaledInstance(168,135,Image.SCALE_SMOOTH ));
-			bImgLbl.setIcon(bImg);
-			bTeamLbl.setText(bLbl.getVO().getPosition()+"/"+bLbl.getVO().getOwingTeam());
-			PKNamePanel.this.revalidate();
+			PlayerChooser pc=new PlayerChooser(father,false);
 		}
 		else if(e.getSource().getClass()==MyLabel.class){
 			MyLabel temp=(MyLabel)e.getSource();

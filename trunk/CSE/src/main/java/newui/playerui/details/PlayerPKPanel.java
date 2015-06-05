@@ -16,19 +16,20 @@ public class PlayerPKPanel extends JPanel{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	String nameA,nameB;
 	//-----------------------
-	JPanel namePnl,chartPnl,statsPnl;
-	public PlayerPKPanel(PlayerVO defaultVO){
-		nameA=defaultVO.getName();
-		nameB="";
+	public PKNamePanel namePnl;
+	public ChartPanel chartPnl;
+	public JPanel statsPnl;
+	PlayerVO defaultVO;
+	public PlayerPKPanel(PlayerVO d){
+		defaultVO=d;
 		//------------------------------
 		GridBagLayout gbl=new GridBagLayout();
 		GridBagConstraints gbc=new GridBagConstraints();
 		gbc.fill=GridBagConstraints.BOTH;
 		setLayout(gbl);
 		//----------大区划分---------------
-		namePnl=new PKNamePanel(defaultVO);
+		namePnl=new PKNamePanel(this);
 		gbc.gridx=0;
 		gbc.gridy=0;
 		gbc.gridwidth=10;
