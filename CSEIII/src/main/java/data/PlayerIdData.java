@@ -20,11 +20,9 @@ public class PlayerIdData implements PlayerIdDataService{
 	ArrayList<PlayerMatch> players=new ArrayList<PlayerMatch>();
 	Connection con;
 	
-	public PlayerIdData(){
+	public void openSql(){
 		try {
-			con = SqlManager.getConnection();
-			closeSqlThread thread=new closeSqlThread();
-			thread.run();
+			con=SqlManager.getConnection();
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -33,7 +31,16 @@ public class PlayerIdData implements PlayerIdDataService{
 			e.printStackTrace();
 		}
 	}
-		
+	
+	public void closeSql(){
+		try {
+			con.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+			
 	private void readInfoFromIDFile() {
 		int id;
 		String name;
@@ -45,7 +52,6 @@ public class PlayerIdData implements PlayerIdDataService{
 			}
 			BufferedReader br = new BufferedReader(new InputStreamReader(
 					new FileInputStream(file), "UTF-8"));
-			int i = 0;
 			String temp = null;
 			temp = br.readLine();
 			while (temp != null) {
@@ -103,10 +109,7 @@ public class PlayerIdData implements PlayerIdDataService{
 		
 		String name="";
 		try {
-			if(con.isClosed()){
-				con=SqlManager.getConnection();
-			}
-			
+							
 			Statement sql = con.createStatement();
 			
 			String query = "select * from playersid where playerID="+PlayerID+" limit 1";
@@ -120,16 +123,12 @@ public class PlayerIdData implements PlayerIdDataService{
 			sql.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
+			System.out.println(PlayerID);
 			e.printStackTrace();
 		}
 		return name;
 	}
-	
 
-	
 	
 	public static void main(String[] args) {
 		long start = System.currentTimeMillis();
@@ -171,23 +170,4 @@ public class PlayerIdData implements PlayerIdDataService{
 				
 	}
 	
-	class closeSqlThread extends Thread{
-		public void run(){
-			try {
-				if(!con.isClosed()){
-					con.close();
-				}
-				
-				
-				sleep(10000); //暂停，每一秒输出一次
-				
-		    }catch (InterruptedException e) {
-		    	e.printStackTrace();			  
-			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-		    }
-			
-		}
-	}
 }
