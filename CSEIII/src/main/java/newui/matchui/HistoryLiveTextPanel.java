@@ -54,8 +54,8 @@ public class HistoryLiveTextPanel extends JPanel implements ActionListener,Mouse
     ArrayList<ArrayList<LiveMatchDetailVO>> matches=new ArrayList<ArrayList<LiveMatchDetailVO>>();
     int partNum;
     
-    public HistoryLiveTextPanel(ImageIcon img1,ImageIcon img2,String team1,String team2,String season,String date,String teams){
-    	getMatches(season, date, teams);
+    public HistoryLiveTextPanel(String team1,String team2,String season,String date){
+    	getMatches(season, date, team1+"-"+team2);
     	for(int i=0;i<jies.size();i++){
     		if(i==1)
     			isJies.add(true);
@@ -70,9 +70,9 @@ public class HistoryLiveTextPanel extends JPanel implements ActionListener,Mouse
     	headTxt.setSize(20,20);
     	headTxt.setFont(new Font("宋体",Font.PLAIN,30));
     	headTxt.setForeground(Color.white);
-    	headPic1= new JLabel(new ImageIcon("ATL.png"));
+    	headPic1= new JLabel(new ImageIcon("src/data/teamsPng70/"+team1+".png"));
     	headPic1.setPreferredSize(new Dimension(60,60));
-    	headPic2=new JLabel(new ImageIcon("BKN.png"));
+    	headPic2=new JLabel(new ImageIcon("src/data/teamsPng70/"+team2+".png"));
     	headPic2.setPreferredSize(new Dimension(60, 60));
     	head1.setBackground(Style.DEEP_BLUE);
     	head1.add(headPic1);
@@ -202,10 +202,8 @@ public class HistoryLiveTextPanel extends JPanel implements ActionListener,Mouse
     
     public static void main (String[] args) {
     	long start = System.currentTimeMillis();
-		JFrame jFrame=new JFrame();
-		ImageIcon img1=new ImageIcon("ATL.png");
-		ImageIcon img2=new ImageIcon("BKN.png");		
-		HistoryLiveTextPanel mPanel=new HistoryLiveTextPanel(img1,img2,"ATL","BKN","14-15","03-25","MIA-MIL");
+		JFrame jFrame=new JFrame();		
+		HistoryLiveTextPanel mPanel=new HistoryLiveTextPanel("MIA","MIL","14-15","03-25");
 		jFrame.getContentPane().add(mPanel);
 		jFrame.setLocation(150, 50);
 		jFrame.setSize(1000,600);
