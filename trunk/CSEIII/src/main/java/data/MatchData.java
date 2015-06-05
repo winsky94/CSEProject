@@ -295,7 +295,7 @@ public class MatchData implements MatchDataService {
 				&& homeTeam.equals("all") && visitingTeam.equals("all")) {
 			query = "select * from matches";
 		}
-System.out.println(query);
+int test=1;
 		try {
 			connection = SqlManager.getConnection();
 			sql = connection.createStatement();
@@ -365,6 +365,7 @@ System.out.println(query);
 						myvisingTeam, myhomeTeam, visitingScore, homeScore,
 						detailScores, records);
 				matches.add(matchVO);
+				System.out.println(test++);
 			}
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
