@@ -52,6 +52,7 @@ public interface PlayerBLService {
 	 */
 	public ArrayList<PlayerVO> getPlayerAverageInfo(String type);
 
+	public PlayerVO getPlayerAverageInfo(String type,String name);
 
 	/**
 	 * 根据某一项技术分析项，将球员按某个赛季的该项数据进行升降序排序
