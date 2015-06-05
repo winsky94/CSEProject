@@ -34,11 +34,11 @@ public class MatchData implements MatchDataService {
 
 	public static void main(String[] args) {
 		MatchData matchData = new MatchData();
-//		matchData.exportToSql();
+		matchData.exportToSql();
 		System.out.println("MatchData.main()");
-		ArrayList<MatchVO> result = matchData.getMatchData("all", "Team",
-				"all", "all", "all");
-		System.out.println(result.size());
+//		ArrayList<MatchVO> result = matchData.getMatchData("all", "Team",
+//				"all", "all", "all");
+//		System.out.println(result.size());
 	}
 
 	public ArrayList<String> getAllSeasons() {
