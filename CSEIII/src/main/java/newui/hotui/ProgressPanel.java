@@ -14,6 +14,7 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTable;
@@ -28,6 +29,7 @@ import newui.tables.MyTableCellRenderer;
 import newui.teamui.TeamDetailPanel;
 import vo.PlayerVO;
 import bl.Match;
+import blService.MatchBLService;
 import blService.PlayerBLService;
 
 public class ProgressPanel extends HotFatherPanel implements MouseListener {
@@ -47,6 +49,8 @@ public class ProgressPanel extends HotFatherPanel implements MouseListener {
 	ArrayList<PlayerVO> vlist;
 	String[] head = { "排名", "", "球员名称", "所属球队", "位置", "场均得分", "提升率" };
 	DecimalFormat dec = new DecimalFormat("0.00");
+	JPanel seasonPnl;
+	JComboBox<String> seasonBox, seasonTypeBox;
 
 	public ProgressPanel() {
 
@@ -55,6 +59,38 @@ public class ProgressPanel extends HotFatherPanel implements MouseListener {
 		GridBagConstraints bc = new GridBagConstraints();
 		bc.fill = GridBagConstraints.BOTH;
 		bestPnl.setLayout(bl);
+		// -------seasonPnl-------------
+		seasonPnl = new JPanel();
+		seasonPnl.setBackground(Color.white);
+		gbc.gridx = 0;
+		gbc.gridy = 0;
+		gbc.gridwidth = 10;
+		gbc.gridheight = 1;
+		gbc.weightx = 10;
+		gbc.weighty = 0.1;
+		gbl.setConstraints(seasonPnl, gbc);
+		add(seasonPnl);
+		// ---seasonBox-----
+		JLabel seasonLbl = new JLabel("赛季");
+		seasonLbl.setFont(new Font("微软雅黑", Font.PLAIN, 15));
+		seasonLbl.setForeground(Style.DEEP_BLUE);
+		seasonPnl.add(seasonLbl);
+		//
+		MatchBLService match = new Match();
+		String[] season = (String[]) match.getAllSeasons().toArray();
+		seasonBox = new JComboBox<String>(season);
+		seasonBox.setBackground(Color.white);
+		seasonBox.setFont(new Font("微软雅黑", Font.PLAIN, 15));
+		seasonBox.setForeground(Style.DEEP_BLUE);
+		seasonPnl.add(seasonBox);
+		// ----seasonTypeBox------
+		String[] seasonType = { "全部", "常规赛", "季前赛", "季后赛" };
+		seasonTypeBox = new JComboBox<String>(seasonType);
+		seasonTypeBox.setBackground(Color.white);
+		seasonTypeBox.setFont(new Font("微软雅黑", Font.PLAIN, 15));
+		seasonTypeBox.setForeground(Style.DEEP_BLUE);
+		seasonPnl.add(seasonTypeBox);
+
 		// -------bestPnl--------------
 		bestHead = new JLabel();
 		bestHead.setToolTipText("点击查看球员详情");
@@ -157,7 +193,8 @@ public class ProgressPanel extends HotFatherPanel implements MouseListener {
 	}
 
 	public void Refresh(String sort) {
-		vlist = player.getBestImprovedPlayer(seasonType,sort, 5);
+		String seasonType = (String) seasonTypeBox.getSelectedItem();
+		vlist = player.getBestImprovedPlayer(seasonType, sort, 5);
 		if (vlist != null && vlist.size() != 0) {
 			model.setHead(head);
 			PlayerVO topOne = vlist.get(0);
