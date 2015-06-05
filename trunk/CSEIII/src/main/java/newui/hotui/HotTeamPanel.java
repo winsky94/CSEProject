@@ -25,7 +25,9 @@ import newui.tables.HotTableModel;
 import newui.tables.MyTableCellRenderer;
 import newui.teamui.TeamDetailPanel;
 import vo.TeamVO;
+import bl.Match;
 import bl.Team;
+import blService.MatchBLService;
 import blService.TeamBLService;
 
 public class HotTeamPanel extends HotFatherPanel implements MouseListener {
@@ -73,7 +75,9 @@ public class HotTeamPanel extends HotFatherPanel implements MouseListener {
 		seasonLbl.setForeground(Style.DEEP_BLUE);
 		seasonPnl.add(seasonLbl);
 		//
-		seasonBox = new JComboBox<String>();
+		MatchBLService match = new Match();
+		String[] season = (String[]) match.getAllSeasons().toArray();
+		seasonBox = new JComboBox<String>(season);
 		seasonBox.setBackground(Color.white);
 		seasonBox.setFont(new Font("微软雅黑", Font.PLAIN, 15));
 		seasonBox.setForeground(Style.DEEP_BLUE);
@@ -202,7 +206,7 @@ public class HotTeamPanel extends HotFatherPanel implements MouseListener {
 
 	public void Refresh(String sort) {
 		// 目前写死了是14-15
-		vlist = team.getSeasonHotTeam("14-15",
+		vlist = team.getSeasonHotTeam((String) seasonBox.getSelectedItem(),
 				(String) seasonTypeBox.getSelectedItem(), sort, 5);
 		if (vlist != null && vlist.size() != 0) {
 			model.setHead(head);
