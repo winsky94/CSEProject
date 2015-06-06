@@ -336,6 +336,7 @@ public class Team implements TeamBLService {
 		for (int i = 0; i < teamsName_CH.length; i++) {
 			if (teamsName_CH[i].equals(CH)) {
 				index = i;
+				break;
 			}
 		}
 		if (index != -1) {
@@ -357,6 +358,7 @@ public class Team implements TeamBLService {
 		for (int i = 0; i < teamsName_CH.length; i++) {
 			if (teamsName_EN[i].equals(EN)) {
 				index = i;
+				break;
 			}
 		}
 		if (index != -1) {
