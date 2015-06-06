@@ -188,7 +188,8 @@ public class MatchIndexPanel extends FatherPanel {
 
 	public void searchRefresh(String h, String v, String date) {
 		String season = seasonBox.getSelectedItem().toString();
-		ArrayList<MatchVO> mlist = mservice.getMatchData(season,(String)seasonTypeBox.getSelectedItem(), date, h, v);
+		String seasonType=(String)seasonTypeBox.getSelectedItem();
+		ArrayList<MatchVO> mlist = mservice.getMatchData(season,seasonType, date, Team.changeTeamNameCHToEN(h), Team.changeTeamNameCHToEN(v));
 		// ArrayList<MatchCard> matchCardList = new ArrayList<MatchCard>();
 
 		JPanel BIGPNL = new JPanel();
