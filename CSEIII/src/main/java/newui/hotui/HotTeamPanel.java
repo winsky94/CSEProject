@@ -76,7 +76,10 @@ public class HotTeamPanel extends HotFatherPanel implements MouseListener {
 		seasonPnl.add(seasonLbl);
 		//
 		MatchBLService match = new Match();
-		String[] season = (String[]) match.getAllSeasons().toArray();
+		ArrayList<String> allSeason=new ArrayList<String>();
+		allSeason=match.getAllSeasons();
+		int size=allSeason.size();
+		String[] season = (String[]) allSeason.toArray(new String[size]);
 		seasonBox = new JComboBox<String>(season);
 		seasonBox.setBackground(Color.white);
 		seasonBox.setFont(new Font("微软雅黑", Font.PLAIN, 15));
