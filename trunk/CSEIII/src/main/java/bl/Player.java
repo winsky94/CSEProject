@@ -29,12 +29,14 @@ public class Player implements PlayerBLService{
 	Map<String, PlayerVO> playersHistoric = new HashMap<String, PlayerVO>(256);
 	Map<String, TeamVO> teams;
 	Map<Integer, MatchVO> matches = new HashMap<Integer, MatchVO>(1024);
+	ArrayList<MatchVO> allMatches;
 	ArrayList<PlayerVO> playersAveragePreceding;
 	ArrayList<PlayerVO> playersAverageRegular;
 	ArrayList<PlayerVO> playersAveragePlayoff;
 	boolean isCalculateAveragePreceding=false;
 	boolean isCalculateAverageRegular=false;
 	boolean isCalculateAveragePlayoff=false;
+	boolean isGetAllMatches=false;
 	
 	private static String[] player_CH = new String[] { "全部", "前锋", "中锋",
 		"后卫","前锋-中锋","中锋-后卫","前锋-后卫", "得分", "篮板数", "助攻数", "得分/篮板/助攻(1:1:1)", 
@@ -94,8 +96,15 @@ public class Player implements PlayerBLService{
     }
     
     private ArrayList<MatchVO> getAllMatches() {
-        MatchBLService match=new Match();
-        return match.getMatchData("all","all","all", "all", "all");
+    	if(isGetAllMatches==true)
+    		return allMatches;
+    	else{
+    		isGetAllMatches=true;
+    		MatchBLService match=new Match();
+    		allMatches=match.getMatchData("all","all","all", "all", "all");
+    		return allMatches;
+    	}
+        
 	}
     
     private ArrayList<MatchVO> getTypeMatches(String type){
