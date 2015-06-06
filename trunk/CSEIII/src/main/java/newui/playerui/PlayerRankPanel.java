@@ -36,7 +36,6 @@ import newui.tables.PlayerTableModel;
 import newui.tables.RowHeaderTable;
 import newui.tables.TableSorter;
 import vo.PlayerVO;
-import bl.Match;
 import blService.MatchBLService;
 import blService.PlayerBLService;
 
@@ -155,7 +154,7 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener,
 		JLabel seasonBoxLbl = new MyJLabel("赛季：");
 		f2.add(seasonBoxLbl);
 
-		MatchBLService match = new Match();
+		MatchBLService match = Service.match;
 		ArrayList<String> seasons=match.getAllSeasons();
 		int size=seasons.size();
 		String[] seasonBoxText = (String[]) match.getAllSeasons().toArray(new String[size]);

@@ -24,6 +24,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
+import newui.Service;
 import newui.Style;
 import newui.UIhelper;
 import newui.VOLabel;
@@ -47,7 +48,7 @@ public class PlayerChooser extends JDialog {
 	public PlayerChooser(PlayerPKPanel o,boolean bool) {
 		isA=bool;
 		owner=o;
-		p = new Player();
+		p = Service.player;
 		int screenWidth = UIhelper.getScreenWidth();
 		int screenHeight = UIhelper.getScreenHeight();
 		setBounds((screenWidth - 550) / 2, (screenHeight - 400) / 2, 550, 400);

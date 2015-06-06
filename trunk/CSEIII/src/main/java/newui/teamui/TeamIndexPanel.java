@@ -23,6 +23,7 @@ import data.MatchData;
 import bl.Match;
 import blService.MatchBLService;
 import newui.FatherPanel;
+import newui.Service;
 import newui.Style;
 import newui.TableModel;
 import newui.mainui.MainFrame;
@@ -68,7 +69,7 @@ public class TeamIndexPanel extends FatherPanel implements MouseListener {
 		JLabel seasonBoxLbl = new MyJLabel("赛季：");
 		funcPnl.add(seasonBoxLbl);
 		// 暂时没有bl方法
-		MatchBLService match=new Match();
+		MatchBLService match=Service.match;
 		ArrayList<String> seasons=match.getAllSeasons();
 		int size=seasons.size();
 		String[] seasonBoxText = (String[]) match.getAllSeasons().toArray(new String[size]);

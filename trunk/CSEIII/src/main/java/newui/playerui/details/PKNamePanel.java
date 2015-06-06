@@ -107,6 +107,7 @@ public class PKNamePanel extends JPanel implements MouseListener {
 		bImg.setImage(bImg.getImage().getScaledInstance(168,135,Image.SCALE_SMOOTH ));
 		bImgLbl.setIcon(bImg);
 		//--------------------------------------
+		
 	}
 	
 	PlayerVO getAvo(){
