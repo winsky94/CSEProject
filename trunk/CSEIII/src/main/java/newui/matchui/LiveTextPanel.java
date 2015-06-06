@@ -52,6 +52,9 @@ public class LiveTextPanel extends JPanel implements ActionListener,MouseListene
     int partNum;
     boolean isBegin=false;
 	ArrayList<LiveMatchDetailVO> bus=new ArrayList<LiveMatchDetailVO>();
+	String season;
+	String date;
+	String teams;
     
     public LiveTextPanel(String team1,String team2,String season,String date){
     	partNum=1;
@@ -161,6 +164,12 @@ public class LiveTextPanel extends JPanel implements ActionListener,MouseListene
     	add(bottom,BorderLayout.SOUTH);
     }
     
+ public void initLiveData(String season,String date,String teams){
+	 this.season=season;
+	 this.date=date;
+	 this.teams=teams;
+ }
+ 
  public void refresh(ArrayList<String> data,int line){	   
 	    if(isBegin==false){
 	    	matches.add(new ArrayList<LiveMatchDetailVO>());

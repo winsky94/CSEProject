@@ -328,7 +328,7 @@ public class HotTeamPanel extends HotFatherPanel implements MouseListener {
 
 		}
 		currentBtn.setBackground(Style.HOT_BLUEFOCUS);
-		thr.startThread();
+//		thr.startThread();
 	}
 
 	public void mousePressed(MouseEvent e) {
