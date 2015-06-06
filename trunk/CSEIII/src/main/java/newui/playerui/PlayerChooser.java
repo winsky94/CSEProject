@@ -193,7 +193,9 @@ public class PlayerChooser extends JDialog {
 		public void keyTyped(KeyEvent e) {
 			ArrayList<PlayerVO> searchResult = p.getPlayerBaseInfo(jtf
 					.getText());
-			refreshJsp(searchResult);
+			//refreshJsp(searchResult);
+			RefreshThread thre=new RefreshThread(searchResult);
+			thre.start();
 		}
 
 		@Override
@@ -208,5 +210,16 @@ public class PlayerChooser extends JDialog {
 
 		}
 
+	}
+	class RefreshThread extends Thread{
+		ArrayList<PlayerVO> searchResult;
+		public RefreshThread(ArrayList<PlayerVO> arr){
+			searchResult=arr;
+		}
+		public void run(){
+			refreshJsp(searchResult);
+		}
+		
+		
 	}
 }
