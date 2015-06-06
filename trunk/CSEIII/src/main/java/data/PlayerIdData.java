@@ -133,6 +133,7 @@ public class PlayerIdData implements PlayerIdDataService{
 	public static void main(String[] args) {
 		long start = System.currentTimeMillis();
 		PlayerIdData playerDataReader = new PlayerIdData();
+		playerDataReader.openSql();
 		playerDataReader.exportToSql();
 		System.out.println(playerDataReader.getPlayerName(76001));
 		long end1 = System.currentTimeMillis();
@@ -149,6 +150,7 @@ public class PlayerIdData implements PlayerIdDataService{
 		System.out.println(playerDataReader.getPlayerName(51));
 		long end3 = System.currentTimeMillis();
 		System.out.println("运行时间：" + (end3 - end2-3000) + "毫秒");// 应该是end - start
+		playerDataReader.closeSql();
 	}
 	
 	class PlayerMatch{
