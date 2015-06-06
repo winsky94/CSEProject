@@ -5,8 +5,10 @@ import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.File;
 import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
@@ -86,9 +88,16 @@ public class TeamDetailPanel extends FatherPanel {
 		playerPnl.setOpaque(false);
 		playerPnl.setLayout(new GridLayout(players.size(), 1));
 		for (int i = 0; i < players.size(); i++) {
-			JLabel temp = new MyLabel(players.get(i).getName(), new ImageIcon(
-					"image/player/player46/" + players.get(i).getName()
-							+ ".png"), JLabel.LEFT);
+			ImageIcon icon;
+			File file=new File("src/data/players/portrait/"+ players.get(i).getName()+".png");
+			if(!file.exists())
+			     icon=new ImageIcon("src/data/players/portrait/None.png");
+			else
+				icon=new ImageIcon("src/data/players/portrait/"+ players.get(i).getName()+".png");
+			icon.setImage(icon.getImage().getScaledInstance(
+					58, 46
+				, Image.SCALE_DEFAULT));
+			JLabel temp = new MyLabel(players.get(i).getName(), icon, JLabel.LEFT);
 			playerPortraits.add(temp);
 			playerPnl.add(playerPortraits.get(i));
 		}
