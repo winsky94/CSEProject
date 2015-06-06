@@ -98,8 +98,8 @@ public interface TeamBLService {
 	 * 
 	 * @return 按照所给条件排好序的球队列表
 	 */
-	public ArrayList<TeamVO> getOrderedTeamsByAverage(String type,String condition,
-			String order, int num);
+	public ArrayList<TeamVO> getOrderedTeamsByAverage(String type,
+			String condition, String order, int num);
 
 	/**
 	 * 根据球队缩写得到球队队徽
@@ -115,9 +115,11 @@ public interface TeamBLService {
 	 * 
 	 * @param teamName
 	 *            球队缩写 完全匹配
-	 * @return 近期五场比赛的列表
+	 * @param num
+	 *            比赛数量
+	 * @return 近期num场比赛的列表
 	 */
-	public ArrayList<MatchVO> getRecentMatches(String teamName);
+	public ArrayList<MatchVO> getRecentMatches(String teamName, int num);
 
 	/**
 	 * 根据球队名称查找其过往比赛
@@ -135,7 +137,7 @@ public interface TeamBLService {
 	 *            筛选条件
 	 * @return 返回到 目前为止所有参加过比赛的球队中筛选出前 5 名球队（按照 降序排列进行筛选）
 	 */
-	public ArrayList<TeamVO> getSeasonHotTeam(String season,String type, String column,
-			int num);
+	public ArrayList<TeamVO> getSeasonHotTeam(String season, String type,
+			String column, int num);
 
 }
