@@ -1285,6 +1285,9 @@ public class Player implements PlayerBLService{
 	
 
 	private int convertMinuteToSecond(String s) {
+		if(!s.contains(":")){
+			return 0;
+		}
 		String[] temp = s.split(":");
 		int minute = Integer.parseInt(temp[0]);
 		int second = Integer.parseInt(temp[1]);
