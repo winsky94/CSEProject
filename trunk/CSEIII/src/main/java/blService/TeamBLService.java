@@ -100,16 +100,7 @@ public interface TeamBLService {
 	 */
 	public ArrayList<TeamVO> getOrderedTeamsByAverage(String type,
 			String condition, String order, int num);
-
-	/**
-	 * 根据球队缩写得到球队队徽
-	 * 
-	 * @param name
-	 *            球队缩写
-	 * @return 该球队队徽
-	 */
-	public ImageIcon getTeamImage(String name);
-
+	
 	/**
 	 * 根据球队名称查找该球队近期比赛
 	 * 

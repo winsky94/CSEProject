@@ -29,14 +29,15 @@ public class Team implements TeamBLService {
 	private Boolean isSeason = false;
 	private Map<String, TeamVO> teamAverageInfo = new LinkedHashMap<String, TeamVO>();
 
-	private static String[] teamsName_CH = new String[] { "全部","太阳", "马刺", "国王",
-			"火箭", "湖人", "掘金", "森林狼", "小牛", "快船", "爵士", "勇士", "灰熊", "雷霆", "鹈鹕",
-			"开拓者", "凯尔特人", "篮网", "尼克斯", "76人", "猛龙", "公牛", "骑士", "活塞", "步行者",
-			"雄鹿", "老鹰", "黄蜂", "热火", "魔术", "奇才" };
-	private static String[] teamsName_EN = new String[] { "all","PHX", "SAS", "SAC",
-			"HOU", "LAL", "DEN", "MIN", "DAL", "LAC", "UTA", "GSW", "MEM",
-			"OKC", "NOP", "POR", "BOS", "BKN", "NYK", "PHI", "TOR", "CHI",
-			"CLE", "DET", "IND", "MIL", "ATL", "CHA", "MIA", "ORL", "WAS" };
+	private static String[] teamsName_CH = new String[] { "全部", "太阳", "马刺",
+			"国王", "火箭", "湖人", "掘金", "森林狼", "小牛", "快船", "爵士", "勇士", "灰熊", "雷霆",
+			"鹈鹕", "开拓者", "凯尔特人", "篮网", "尼克斯", "76人", "猛龙", "公牛", "骑士", "活塞",
+			"步行者", "雄鹿", "老鹰", "黄蜂", "热火", "魔术", "奇才" };
+	private static String[] teamsName_EN = new String[] { "all", "PHX", "SAS",
+			"SAC", "HOU", "LAL", "DEN", "MIN", "DAL", "LAC", "UTA", "GSW",
+			"MEM", "OKC", "NOP", "POR", "BOS", "BKN", "NYK", "PHI", "TOR",
+			"CHI", "CLE", "DET", "IND", "MIL", "ATL", "CHA", "MIA", "ORL",
+			"WAS" };
 
 	public static void main(String[] args) {
 		System.out.println("Team.main()");
@@ -279,13 +280,23 @@ public class Team implements TeamBLService {
 		return result;
 	}
 
-	public ImageIcon getTeamImage(String name) {
+	/**
+	 * 根据球队缩写得到球队队徽
+	 * 
+	 * @param name
+	 *            球队缩写
+	 * @return 该球队队徽
+	 */
+	public static ImageIcon getTeamImage(String name) {
 		// TODO 自动生成的方法存根
 		ImageIcon imageIcon = null;
 		if (name.equals("NOH")) {
 			imageIcon = new ImageIcon("src/data/teamsPng/" + "NOP" + ".png");
+		} else if (name.equals("NJN")) {
+			imageIcon = new ImageIcon("src/data/teamsPng/" + "BKN" + ".png");
+		} else {
+			imageIcon = new ImageIcon("src/data/teamsPng/" + name + ".png");
 		}
-		imageIcon = new ImageIcon("src/data/teamsPng/" + name + ".png");
 		return imageIcon;
 	}
 
