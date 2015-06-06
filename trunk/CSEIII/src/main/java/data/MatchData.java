@@ -42,6 +42,9 @@ public class MatchData implements MatchDataService {
 		ArrayList<MatchVO> result = matchData.getMatchData("all", "all", "all",
 				"all", "all");
 		System.out.println(result.size());
+//		ArrayList<String> season=new ArrayList<String>();
+//		season=matchData.getAllSeasons();
+//		System.out.println(season.get(0));
 	}
 
 	public ArrayList<String> getAllSeasons() {
@@ -50,7 +53,7 @@ public class MatchData implements MatchDataService {
 		try {
 			connection = SqlManager.getConnection();
 			sql = connection.createStatement();
-			String query = "select season from matches group by season";
+			String query = "select season from matches group by season order by season desc";
 			resultSet = sql.executeQuery(query);
 			while (resultSet.next()) {
 				String season = resultSet.getString("season");
