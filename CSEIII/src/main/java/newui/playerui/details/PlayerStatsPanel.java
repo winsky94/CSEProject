@@ -16,6 +16,7 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import newui.Service;
 import newui.Style;
 
 import org.jfree.chart.ChartFactory;
@@ -32,7 +33,6 @@ import org.jfree.data.category.DefaultCategoryDataset;
 
 import vo.MatchVO;
 import vo.RecordVO;
-import bl.Player;
 import blService.PlayerBLService;
 
 public class PlayerStatsPanel extends JPanel {
@@ -57,7 +57,7 @@ public class PlayerStatsPanel extends JPanel {
 
 	//
 	public PlayerStatsPanel(String pname) {
-		player = new Player();
+		player =Service.player;
 		name = pname;
 		isCurrent = true;
 		GridBagLayout gbl = new GridBagLayout();

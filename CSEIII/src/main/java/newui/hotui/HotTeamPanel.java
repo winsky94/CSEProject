@@ -75,7 +75,7 @@ public class HotTeamPanel extends HotFatherPanel implements MouseListener {
 		seasonLbl.setForeground(Style.DEEP_BLUE);
 		seasonPnl.add(seasonLbl);
 		//
-		MatchBLService match = new Match();
+		MatchBLService match =Service.match;
 		ArrayList<String> allSeason=new ArrayList<String>();
 		allSeason=match.getAllSeasons();
 		int size=allSeason.size();
