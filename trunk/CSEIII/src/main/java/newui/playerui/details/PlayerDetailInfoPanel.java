@@ -99,9 +99,8 @@ public class PlayerDetailInfoPanel extends JPanel {
 			}
 
 			public void mouseClicked(MouseEvent e) {
-				MainFrame.getInstance().setContentPanel(
-						new TeamDetailPanel(PlayerDetailInfoPanel.this.vo
-								.getOwingTeam()));
+				MainFrame.setContentPanel(new TeamDetailPanel(
+						PlayerDetailInfoPanel.this.vo.getOwingTeam()));
 
 			}
 		});

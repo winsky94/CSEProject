@@ -159,7 +159,9 @@ public class PlayerChooser extends JDialog {
 				owner.namePnl.bImgLbl.setIcon(i);
 				owner.namePnl.bTeamLbl.setText(temp.getVO().getPosition()+"/"+temp.getVO().getOwingTeam());
 			}
-			
+			owner.paintChart();
+			owner.repaint();
+			owner.revalidate();
 			PlayerChooser.this.dispose();
 		}
 
