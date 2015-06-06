@@ -1,7 +1,9 @@
 package bl;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 
 import vo.MatchVO;
 import blService.MatchBLService;
@@ -13,10 +15,10 @@ public class Match implements MatchBLService {
 
 	public static void main(String[] args) {
 		MatchBLService match = new Match();
-//		ArrayList<String> result = new ArrayList<String>();
-//		result = match.getAllSeasons();
-//		System.out.println(result.get(0));
-//		System.out.println(match.getLastMatchType());
+		// ArrayList<String> result = new ArrayList<String>();
+		// result = match.getAllSeasons();
+		// System.out.println(result.get(0));
+		// System.out.println(match.getLastMatchType());
 		match.getMatchData("all", "all", "all", "all", "all");
 	}
 
@@ -31,28 +33,28 @@ public class Match implements MatchBLService {
 		return result;
 	}
 
-	// /**
-	// * 根据当前日期得到当前处于哪个赛季
-	// *
-	// * @return 赛季 形如：14-15
-	// */
-	// public static String getCurrentSeason() {
-	// SimpleDateFormat df = new SimpleDateFormat("yyyy MM dd EEEE");// 设置日期格式
-	// String date = df.format(new Date());// new Date()为获取当前系统时间
-	// String[] dateDetail = date.split(" ");
-	// int year = Integer.parseInt(dateDetail[0]);
-	// int month = Integer.parseInt(dateDetail[1]);
-	//
-	// if (month > 6) {
-	// return String.valueOf(year).substring(2) + "-"
-	// + String.valueOf(year + 1).substring(2);
-	// } else {
-	// return String.valueOf(year - 1).substring(2) + "-"
-	// + String.valueOf(year).substring(2);
-	// }
-	//
-	// }
-	//
+	/**
+	 * 根据当前日期得到当前处于哪个赛季
+	 *
+	 * @return 赛季 形如：14-15
+	 */
+	public static String getCurrentSeason() {
+		SimpleDateFormat df = new SimpleDateFormat("yyyy MM dd EEEE");// 设置日期格式
+		String date = df.format(new Date());// new Date()为获取当前系统时间
+		String[] dateDetail = date.split(" ");
+		int year = Integer.parseInt(dateDetail[0]);
+		int month = Integer.parseInt(dateDetail[1]);
+
+		if (month > 6) {
+			return String.valueOf(year).substring(2) + "-"
+					+ String.valueOf(year + 1).substring(2);
+		} else {
+			return String.valueOf(year - 1).substring(2) + "-"
+					+ String.valueOf(year).substring(2);
+		}
+
+	}
+
 	// public static String getCurrentSeasonType() {
 	// String result = "";
 	// SimpleDateFormat df = new SimpleDateFormat("yyyy MM dd EEEE");// 设置日期格式
