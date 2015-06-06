@@ -135,7 +135,7 @@ public class MatchIndexPanel extends FatherPanel {
 			public void mouseClicked(MouseEvent e) {
 				// TODO Auto-generated method stub
 				// 按条件搜索比赛啦
-				String date = "全部";
+				String date = "all";
 				if (jdc.isEnabled()) {
 
 					SimpleDateFormat fmt = new SimpleDateFormat("yyyyMM-dd");
