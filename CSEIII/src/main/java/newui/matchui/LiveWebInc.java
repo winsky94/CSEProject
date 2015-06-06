@@ -16,7 +16,7 @@ public class LiveWebInc {
 	 * */
 	//ƥ���ַ�ʾ��
 	String rexz="[\\u4E00-\\u9FA5]";
-	String liveRex="(\\[([\\u4E00-\\u9FA5]|[\\w \\.-])+( [\\d]+-[\\d]+)?\\])?([\\w:�� \\(\\)����\\.-]|[\\u4E00-\\u9FA5])*\"(,\"displayPlayerId\":\"[\\d]+\")?,\"gameClock\":\"[\\d]{2}:[\\d]{2}(.\\d)?";
+	String liveRex="(\\[([\\u4E00-\\u9FA5]|[\\w \\.-])+( [\\d]+-[\\d]+)?\\])?([\\w:： \\（\\） \\(\\)\\.-]|[\\u4E00-\\u9FA5])*\"(,\"displayPlayerId\":\"[\\d]+\")?,\"gameClock\":\"[\\d]{2}:[\\d]{2}(.\\d)?";
 	String url="http://china.nba.com/wap/static/data/scores/gamedaystatus_2015-05-16.json";
 	String lurl="http://china.nba.com/wap/static/data/game/playbyplay_0041400315_1.json";
 	String gameRex="[\\d]{10}\",\"status\":\"[\\d]";
