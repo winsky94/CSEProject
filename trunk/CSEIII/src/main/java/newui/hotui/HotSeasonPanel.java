@@ -217,7 +217,7 @@ public class HotSeasonPanel extends HotFatherPanel implements MouseListener {
 		jsp.getViewport().add(table);
 		thr = new HotThread(this, "score");
 		Refresh("score");
-		thr.startThread();
+//		thr.startThread();
 
 	}
 
@@ -229,8 +229,7 @@ public class HotSeasonPanel extends HotFatherPanel implements MouseListener {
 		if (vlist != null && vlist.size() != 0) {
 			model.setHead(head);
 			PlayerVO topOne = vlist.get(0);
-			bestHead.setIcon(new ImageIcon("image/player/portrait/"
-					+ topOne.getName() + ".png"));
+			bestHead.setIcon(new ImageIcon("src/data/players/portrait/"+ topOne.getName()+".png"));
 			bestName.setText(topOne.getName());
 			positionAndTeamName.setText(topOne.getPosition() + "/"
 					+ topOne.getOwingTeam());
@@ -389,8 +388,7 @@ public class HotSeasonPanel extends HotFatherPanel implements MouseListener {
 				ArrayList<Object> line = new ArrayList<Object>();
 				line.add(num);
 				num++;
-				ImageIcon tou = new ImageIcon("image/player/portrait/"
-						+ v.getName() + ".png");
+				ImageIcon tou = new ImageIcon("src/data/players/portrait/"+ v.getName()+".png");
 				// 设置宽高
 				ImageIcon icon = new ImageIcon(
 						tou.getImage()

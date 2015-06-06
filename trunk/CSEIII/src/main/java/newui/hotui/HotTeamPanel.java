@@ -203,7 +203,7 @@ public class HotTeamPanel extends HotFatherPanel implements MouseListener {
 		jsp.getViewport().add(table);
 		thr = new HotThread(this, "score");
 		Refresh("sort");
-		thr.startThread();
+//		thr.startThread();
 
 	}
 
