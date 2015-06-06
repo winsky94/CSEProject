@@ -22,7 +22,9 @@ import newui.teamui.TeamDetailPanel;
 import newui.teamui.details.TeamDetailRecentPanel;
 import vo.PlayerVO;
 import bl.Team;
+import bl.Player;
 import blService.PlayerBLService;
+
 
 public class PlayerDetailInfoPanel extends JPanel {
 
@@ -62,9 +64,9 @@ public class PlayerDetailInfoPanel extends JPanel {
 		fl.setHgap(20);
 		headPnl.setLayout(fl);
 		// ------------------
-		// ImageIcon icon=pservice.getPlayerPortraitImage(vo.getName());
-		ImageIcon icon = new ImageIcon("image/player/portrait/" + vo.getName()
-				+ ".png");
+		ImageIcon icon=Player.getPlayerPortraitImage(vo.getName());
+//		ImageIcon icon = new ImageIcon("image/player/portrait/" + vo.getName()
+//				+ ".png");
 		JLabel portraitLbl = new JLabel(icon);
 		headPnl.add(portraitLbl);
 		JLabel nameLbl = new JLabel(vo.getName());
