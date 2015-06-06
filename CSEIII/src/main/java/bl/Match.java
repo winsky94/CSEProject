@@ -12,6 +12,8 @@ import dataservice.MatchDataService;
 
 public class Match implements MatchBLService {
 	private MatchDataService matchData;
+	private ArrayList<MatchVO> allMatches = new ArrayList<MatchVO>();
+	private boolean isMatchesInit = false;
 
 	public static void main(String[] args) {
 		MatchBLService match = new Match();
@@ -24,6 +26,11 @@ public class Match implements MatchBLService {
 
 	public Match() {
 		matchData = new MatchData();
+	}
+
+	public void initAllMatches() {
+		allMatches = getMatchData("all", "all", "all", "all", "all");
+		isMatchesInit = true;
 	}
 
 	public ArrayList<String> getAllSeasons() {
@@ -96,6 +103,12 @@ public class Match implements MatchBLService {
 			String date, String homeTeam, String visitingTeam) {
 		// TODO 自动生成的方法存根
 		ArrayList<MatchVO> result = new ArrayList<MatchVO>();
+		if (season.equals("all") && type.equals("all") && date.equals("all")
+				&& homeTeam.equals("all") && visitingTeam.equals("all")) {
+			if(isMatchesInit){
+				return allMatches;
+			}
+		}
 		result = matchData.getMatchData(season, Match.changeTypeCHToEN(type),
 				date, homeTeam, visitingTeam);
 		return result;
