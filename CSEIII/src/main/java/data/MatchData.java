@@ -369,7 +369,7 @@ int test=1;
 						myvisingTeam, myhomeTeam, visitingScore, homeScore,
 						detailScores, records);
 				matches.add(matchVO);
-//				System.out.println(test++);
+				System.out.println(test++);
 			}
 			sql2.close();
 			sql3.close();

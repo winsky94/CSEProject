@@ -139,9 +139,10 @@ public class PlayerStatsPanel extends JPanel {
 		gbc.weighty = 10;
 		gbl.setConstraints(bottomPnl, gbc);
 		add(bottomPnl);
-		// ---绘图---------------
-		chartPnl = new ChartPanel(createChart(
-				(String) itemBox.getSelectedItem(), isCurrent));
+//		// ---绘图---------------
+//		chartPnl = new ChartPanel(createChart(
+//				(String) itemBox.getSelectedItem(), isCurrent));
+		chartPnl = new ChartPanel(null);
 		bottomPnl.add(chartPnl);
 		// ---数据-----------------
 		infoPnl = new JPanel();
