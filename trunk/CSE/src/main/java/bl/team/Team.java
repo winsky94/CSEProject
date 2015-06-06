@@ -56,10 +56,10 @@ public class Team implements TeamBLService {
 		// result = team.getTeamSeasonInfo(season);
 		// result = team.getTeamAverageInfo();
 		// result = team.getSeasonHotTeam(season, "score", 4);
-		// result = team.getTeamSeasonInfo(season, "NOP");
+		 result = team.getTeamSeasonInfo(season, "NOP");
 		// result = team.getSeasonHotTeam(season, "blockNum", 5);
 		// result=team.getTeamBaseInfo("p");
-		result = team.getTeamAverageInfo("NYK");
+//		result = team.getTeamAverageInfo("NYK");
 		// result = team.getTeamAverageInfo("NOH");
 		// result = team.getRecentMatches("ATL");
 		// result=team.getMatches("ATL");
