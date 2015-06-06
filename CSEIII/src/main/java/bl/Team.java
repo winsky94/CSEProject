@@ -26,7 +26,8 @@ public class Team implements TeamBLService {
 	private Map<String, Map<String, MatchVO>> matches = new LinkedHashMap<String, Map<String, MatchVO>>();
 	private Map<String, Map<String, MatchVO>> allMatch = new LinkedHashMap<String, Map<String, MatchVO>>();;
 	private MatchBLService match;
-	private Boolean isSeason = false;
+	private Boolean isNOPSeason = false;
+	private boolean isBKNSeason = false;
 	private Map<String, TeamVO> teamAverageInfo = new LinkedHashMap<String, TeamVO>();
 
 	private static String[] teamsName_CH = new String[] { "全部", "太阳", "马刺",
@@ -47,44 +48,44 @@ public class Team implements TeamBLService {
 		// result = team.getTeamAverageInfo("all");
 		// result = team.getTeamAverageInfo("Playoff", "NOP");
 		// result=team.getTeamSeasonInfo("12-13", "Team");
-		// result=team.getTeamSeasonInfo("12-13", "Playoff", "NOP");
+		 result=team.getTeamSeasonInfo("10-11", "Team", "NJN");
 		// result=team.getOrderedTeamsByAverage( "all", "score", "desc", 5);
-		result = team.getSeasonHotTeam("12-13", "Playoff", "score", 5);
+//		result = team.getSeasonHotTeam("12-13", "Playoff", "score", 5);
 		System.out.println("结果大小：" + result.size());
 
 		for (TeamVO vo : result) {
-			System.out.println(vo.getAbLocation() + " " + vo.getScore());
-			// System.out.println(vo.getAbLocation());
-			// System.out.println("winRate：" + vo.getWinRate());
-			// System.out.println("shootHitNum：" + vo.getShootHitNum());
-			// System.out.println("shootAttemptNum：" + vo.getShootAttemptNum());
-			// System.out.println("threeHitNum：" + vo.getThreeHitNum());
-			// System.out.println("threeAttemptNum：" + vo.getThreeAttemptNum());
-			// System.out.println("freeThrowHitNum：" + vo.getFreeThrowHitNum());
-			// System.out.println("freeThrowAttemptNum："
-			// + vo.getFreeThrowAttemptNum());
-			// System.out.println("offenReboundNum：" + vo.getOffenReboundNum());
-			// System.out.println("defenReboundNum：" + vo.getDefenReboundNum());
-			// System.out.println("reboundNum：" + vo.getReboundNum());
-			// System.out.println("assistNum：" + vo.getAssistNum());
-			// System.out.println("stealNum：" + vo.getStealNum());
-			// System.out.println("blockNum：" + vo.getBlockNum());
-			// System.out.println("turnOverNum：" + vo.getTurnOverNum());
-			// System.out.println("foulNum：" + vo.getFoulNum());
-			// System.out.println("score：" + vo.getScore());
-			// System.out.println("shootHitRate:" + vo.getShootHitRate());
-			// System.out.println("threeHitRate:" + vo.getThreeHitRate());
-			// System.out.println("freeThrowHitRate:" +
-			// vo.getFreeThrowHitRate());
-			// System.out.println("offenRound:" + vo.getOffenRound());
-			// System.out.println("offenEfficiency:" + vo.getOffenEfficiency());
-			// System.out.println("defenEfficiency:" + vo.getDefenEfficiency());
-			// System.out.println("offenReboundEfficiency:"
-			// + vo.getOffenReboundEfficiency());
-			// System.out.println("defenReboundEfficiency:"
-			// + vo.getDefenReboundEfficiency());
-			// System.out.println("stealEfficiency:" + vo.getStealEfficiency());
-			// System.out.println("assistRate:" + vo.getAssistRate());
+//			System.out.println(vo.getAbLocation() + " " + vo.getScore());
+			 System.out.println(vo.getAbLocation());
+			 System.out.println("winRate：" + vo.getWinRate());
+			 System.out.println("shootHitNum：" + vo.getShootHitNum());
+			 System.out.println("shootAttemptNum：" + vo.getShootAttemptNum());
+			 System.out.println("threeHitNum：" + vo.getThreeHitNum());
+			 System.out.println("threeAttemptNum：" + vo.getThreeAttemptNum());
+			 System.out.println("freeThrowHitNum：" + vo.getFreeThrowHitNum());
+			 System.out.println("freeThrowAttemptNum："
+			 + vo.getFreeThrowAttemptNum());
+			 System.out.println("offenReboundNum：" + vo.getOffenReboundNum());
+			 System.out.println("defenReboundNum：" + vo.getDefenReboundNum());
+			 System.out.println("reboundNum：" + vo.getReboundNum());
+			 System.out.println("assistNum：" + vo.getAssistNum());
+			 System.out.println("stealNum：" + vo.getStealNum());
+			 System.out.println("blockNum：" + vo.getBlockNum());
+			 System.out.println("turnOverNum：" + vo.getTurnOverNum());
+			 System.out.println("foulNum：" + vo.getFoulNum());
+			 System.out.println("score：" + vo.getScore());
+			 System.out.println("shootHitRate:" + vo.getShootHitRate());
+			 System.out.println("threeHitRate:" + vo.getThreeHitRate());
+			 System.out.println("freeThrowHitRate:" +
+			 vo.getFreeThrowHitRate());
+			 System.out.println("offenRound:" + vo.getOffenRound());
+			 System.out.println("offenEfficiency:" + vo.getOffenEfficiency());
+			 System.out.println("defenEfficiency:" + vo.getDefenEfficiency());
+			 System.out.println("offenReboundEfficiency:"
+			 + vo.getOffenReboundEfficiency());
+			 System.out.println("defenReboundEfficiency:"
+			 + vo.getDefenReboundEfficiency());
+			 System.out.println("stealEfficiency:" + vo.getStealEfficiency());
+			 System.out.println("assistRate:" + vo.getAssistRate());
 			System.out.println("----------------------------------");
 
 		}
@@ -180,14 +181,19 @@ public class Team implements TeamBLService {
 			String teamName = vo.getTeamName();
 			String team = vo.getAbLocation();
 
-			boolean flag = false;
 			if (name.equals("NOP") || name.equals("NOH")) {
 				name = teamsBaseInfo.get("NOP").getTeamName();
 				if (name == null) {
 					name = teamsBaseInfo.get("NOH").getTeamName();
 				}
+			}else if (name.equals("NJN") || name.equals("BKN")) {
+				name = teamsBaseInfo.get("BKN").getTeamName();
+				if (name == null) {
+					name = teamsBaseInfo.get("NJN").getTeamName();
+				}
 			}
 			name = name.toLowerCase();
+			boolean flag = false;
 			flag = teamName.toLowerCase().contains(name)
 					|| team.toLowerCase().contains(name);
 			if (!flag) {
@@ -221,6 +227,11 @@ public class Team implements TeamBLService {
 				name = teamsBaseInfo.get("NOP").getTeamName();
 				if (name == null) {
 					name = teamsBaseInfo.get("NOH").getTeamName();
+				}
+			}else if (name.equals("NJN") || name.equals("BKN")) {
+				name = teamsBaseInfo.get("BKN").getTeamName();
+				if (name == null) {
+					name = teamsBaseInfo.get("NJN").getTeamName();
 				}
 			}
 
@@ -436,7 +447,7 @@ public class Team implements TeamBLService {
 
 		Map<String, MatchVO> allMatches = new HashMap<String, MatchVO>();
 
-		if (team.equals("NOP")) {
+		if (team.equals("NOP")||team.equals("BKN")) {
 			isBad = true;
 		}
 
@@ -505,6 +516,11 @@ public class Team implements TeamBLService {
 							|| homeTeam.equals("NOH");
 					isVisitingTeam = visitingTeam.equals("NOP")
 							|| visitingTeam.equals("NOH");
+				}else if (team.equals("BKN") || team.equals("NJN")) {
+					isHomeTeam = homeTeam.equals("BKN")
+							|| homeTeam.equals("NJN");
+					isVisitingTeam = visitingTeam.equals("BKN")
+							|| visitingTeam.equals("NJN");
 				} else {
 					isHomeTeam = homeTeam.equals(team);
 					isVisitingTeam = visitingTeam.equals(team);
@@ -539,6 +555,9 @@ public class Team implements TeamBLService {
 						if (team.equals("NOP") || team.equals("NOH")) {
 							isRecord = recordVO.getTeam().equals("NOP")
 									|| recordVO.getTeam().equals("NOH");
+						} if (team.equals("BKN") || team.equals("NJN")) {
+							isRecord = recordVO.getTeam().equals("BKN")
+									|| recordVO.getTeam().equals("NJN");
 						} else {
 							isRecord = recordVO.getTeam().equals(team);
 						}
@@ -652,10 +671,26 @@ public class Team implements TeamBLService {
 					}
 				}
 			}
-			if (season.equals("12-13") && abLocation.equals("NOP")) {
-				abLocation = "NOH";
-				isSeason = true;
+			boolean flagNOP=false;
+			int flagNOPInt=season.compareTo("12-13");
+			if(flagNOPInt<=0){
+				flagNOP=true;
 			}
+			if (flagNOP && abLocation.equals("NOP")) {
+				abLocation = "NOH";
+				isNOPSeason = true;
+			}
+			
+			boolean flagBKN=false;
+			int flagBKNInt=season.compareTo("11-12");
+			if(flagBKNInt<=0){
+				flagBKN=true;
+			}
+			if (flagBKN && abLocation.equals("BKN")) {
+				abLocation = "NJN";
+				isBKNSeason = true;
+			}
+			
 			// DecimalFormat dec = new DecimalFormat("0.000");
 			// TeamVO teamVO = new TeamVO(teamName, abLocation, location,
 			// conference, partition, homeCourt, setUpTime, matchesNum,
@@ -719,8 +754,10 @@ public class Team implements TeamBLService {
 			TeamVO teamVO = calculateTeamInfo(vo, "all",
 					Match.changeTypeCHToEN(type));
 			if (teamVO != null) {
-				if (isSeason && abLocation.equals("NOP")) {
+				if (isNOPSeason && abLocation.equals("NOP")) {
 					abLocation = "NOH";
+				}else if (isBKNSeason&& abLocation.equals("BKN")) {
+					abLocation = "NJN";
 				}
 				teamAverageInfo.put(abLocation, teamVO);
 			}
