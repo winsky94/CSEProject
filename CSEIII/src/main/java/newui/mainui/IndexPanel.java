@@ -41,24 +41,23 @@ public class IndexPanel extends FatherPanel implements MouseListener {
 	public IndexPanel() {
 		removeAll();
 
-		player = Service.player;
 		team = Service.team;
+		player = Service.player;
+		TeamBLService team2 = Service.team;
+		team2.getClass();
 
 		// -----获得热点球员们---------
 		PlayerVO dayP = null;
 		// String season = Match.getCurrentSeason();
 		// String seasonType = Match.getCurrentSeasonType();
-		PlayerVO seasonP = player.getSeasonHotPlayer("14-15", "Playoff",
-				"score", 1).get(0);
+		PlayerVO seasonP = player.getSeasonHotPlayer("14-15", "Playoff","score", 1).get(0);
 		TeamVO t = team.getSeasonHotTeam("14-15", "Playoff", "score", 1).get(0);
-		PlayerVO proP = player.getBestImprovedPlayer("Playoff",
-				"recentFiveMatchesScoreUpRate", 1).get(0);
+		PlayerVO proP = player.getBestImprovedPlayer("Playoff","recentFiveMatchesScoreUpRate", 1).get(0);
 		//
 		dname = "Kobe Bryant";
 		sname = seasonP.getName();
 		tname = t.getTeamName();
-		tPlayername = player.getPlayersByTeam(t.getAbLocation()).get(1)
-				.getName();
+		tPlayername = player.getPlayersByTeam(t.getAbLocation()).get(1).getName();
 		pname = proP.getName();
 		// ----------------------------
 		GridBagLayout gbl = new GridBagLayout();
