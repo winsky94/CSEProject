@@ -263,7 +263,7 @@ public class HotTodayPanel extends HotFatherPanel implements MouseListener {
 
 		}
 		currentBtn.setBackground(Style.HOT_YELLOWFOCUS);
-		thr.startThread();
+//		thr.startThread();
 
 	}
 

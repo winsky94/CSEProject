@@ -191,7 +191,7 @@ public class ProgressPanel extends HotFatherPanel implements MouseListener {
 		jsp.getViewport().add(table);
 		thr = new HotThread(this, "recentFiveMatchesScoreUpRate");
 		Refresh("recentFiveMatchesScoreUpRate");
-		thr.startThread();
+//		thr.startThread();
 
 	}
 
@@ -289,7 +289,7 @@ public class ProgressPanel extends HotFatherPanel implements MouseListener {
 		}
 
 		currentBtn.setBackground(Style.HOT_PURPLEFOCUS);
-		thr.startThread();
+//		thr.startThread();
 	}
 
 	public void mousePressed(MouseEvent e) {

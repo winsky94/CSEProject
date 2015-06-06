@@ -345,7 +345,7 @@ public class HotSeasonPanel extends HotFatherPanel implements MouseListener {
 		}
 		currentBtn.setBackground(Style.HOT_REDFOCUS);
 		// 需等待四s 再开启
-		thr.startThread();
+//		thr.startThread();
 	}
 
 	public void mousePressed(MouseEvent e) {
