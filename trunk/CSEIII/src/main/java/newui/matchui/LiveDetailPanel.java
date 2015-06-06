@@ -22,7 +22,9 @@ public class LiveDetailPanel extends FatherPanel{
 		String date=v.getDate();
 		String season=v.getSeason();
 		history=new HistoryLiveTextPanel(vteam,htem,season,date);
+		gbc.gridy=5;
 		gbc.gridheight = 7;
+		gbc.weighty=7;
 		gbl.setConstraints(history, gbc);
 		add(history);
 	}

@@ -74,7 +74,7 @@ public class HistoryLiveTextPanel extends JPanel implements ActionListener,Mouse
 			   jie=new JButton("加时"+(i-4));
 			}
     	  jie.setSize(20,20);
-    	  jie.setFont(new Font("黑体",Font.PLAIN,20));
+    	  jie.setFont(new Font("微软雅黑",Font.PLAIN,20));
     	  jie.setForeground(Color.white);
     	  if(i==1){
     	      jie.setBackground(Color.darkGray);
