@@ -23,6 +23,7 @@ public class LiveWebThread extends Thread{
 //	private LiveStringAccept ac;
 	private LiveTextPanel ac;
 	Pattern p;Matcher m;
+	private boolean islasts=false;
 	public LiveWebThread(LiveWebInc c,String id,LiveTextPanel s) {
 		super();
 		this.c = c;
@@ -43,13 +44,17 @@ public class LiveWebThread extends Thread{
 			if(n>0){
 				ArrayList<String> res=new ArrayList<String>();
 				for(int i=0;i<n;i++){
-					if(line>=4){
+					res.add(s.get(i));
+					if(line>=4&&(!islasts)){
 						m=p.matcher(s.get(i));
-						while(m.find())
+						while(m.find()){
 							lastscore=m.group();
+							islasts=true;
+						}
+						
 					}
 						
-					res.add(s.get(i));
+				
 				}
 					//ac.getString(s.get(i));
 				ac.refresh(res, line);
@@ -59,11 +64,13 @@ public class LiveWebThread extends Thread{
 			System.out.println(s.size());
 			if(s.size()>0)
 				if(s.get(0).contains("00:00.0"))
-					{line+=1;size=0;}
+					{line+=1;size=0;islasts=false;}
 			if(line>4){
 				String[] ss=lastscore.split("-");
 				if(!ss[0].equals(ss[1]))
 					this.stop=true;
+				else
+					islasts=false;
 			}
 			try {
 				//System.out.println("我到这里啦");
