@@ -14,8 +14,8 @@ public class LiveWebThread extends Thread{
 	private int size=0;
 	private int line=1;
 //	private LiveStringAccept ac;
-	private MyPanel2 ac;
-	public LiveWebThread(LiveWebInc c,String id,MyPanel2 s) {
+	private LiveTextPanel ac;
+	public LiveWebThread(LiveWebInc c,String id,LiveTextPanel s) {
 		super();
 		this.c = c;
 		this.gameid=id;
@@ -80,7 +80,7 @@ public class LiveWebThread extends Thread{
 		for(ArrayList<String> line:IdAndStatus){
 			if(line.get(1).equals("3")){
 				JFrame jFrame=new JFrame();	
-				MyPanel2 mPanel=new MyPanel2("ATL","BKN","14-15","03-25");
+				LiveTextPanel mPanel=new LiveTextPanel("ATL","BKN","14-15","03-25");
 				jFrame.getContentPane().add(mPanel);
 				jFrame.setLocation(150, 50);
 				jFrame.setSize(1000,600);
