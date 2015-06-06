@@ -52,7 +52,7 @@ public class PlayerPKPanel extends JPanel{
 		add(statsPnl);
 		
 	}
-	JFreeChart paintChart(){
+	public JFreeChart paintChart(){
 		return null;
 	}
 }

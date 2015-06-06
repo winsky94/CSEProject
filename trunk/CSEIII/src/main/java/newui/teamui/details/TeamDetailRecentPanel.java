@@ -13,6 +13,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import newui.Service;
+import newui.Style;
 import newui.matchui.TinyCard;
 import vo.MatchVO;
 import blService.PlayerBLService;
@@ -37,21 +38,26 @@ public class TeamDetailRecentPanel extends JPanel {
 		titleLbl.setForeground(Color.white);
 		add(titleLbl, BorderLayout.NORTH);
 		pp = Service.player;
-		matches = pp.getRecentMatches(pName, 5);
-		// -------------------
+		// -----------
 		cardPnl = new JPanel();
 		cardPnl.setOpaque(false);
 		add(cardPnl, BorderLayout.CENTER);
-		cardPnl.setLayout(new GridLayout(1, 5));
-		double pre = System.currentTimeMillis();
-		cardPnl.add(new TinyCard(matches.get(0), tName));
-		cardPnl.add(new TinyCard(matches.get(1), tName));
-		cardPnl.add(new TinyCard(matches.get(2), tName));
-		cardPnl.add(new TinyCard(matches.get(3), tName));
-		cardPnl.add(new TinyCard(matches.get(4), tName));
-		double post = System.currentTimeMillis();
-		System.out.println("FiveTinyCard:" + (post - pre));
-
+		// -----------
+		matches = pp.getRecentMatches(pName, 5);
+		int matchNum = matches.size();
+		if (matchNum == 0) {
+			JLabel noMatchLbl = new JLabel("最近没有进行比赛。");
+			noMatchLbl.setFont(new Font("华文细黑", Font.PLAIN, 18));
+			noMatchLbl.setForeground(Style.DEEP_BLUE);
+			cardPnl.add(noMatchLbl);
+		} else {
+			cardPnl.setLayout(new GridLayout(1, matchNum));
+			// double pre = System.currentTimeMillis();
+			for (int i = 0; i < matchNum; i++)
+				cardPnl.add(new TinyCard(matches.get(i), tName));
+			// double post = System.currentTimeMillis();
+			// System.out.println("FiveTinyCard:" + (post - pre));
+		}
 	}
 
 	public TeamDetailRecentPanel(String abbrName) {

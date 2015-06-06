@@ -45,7 +45,7 @@ public class IndexPanel extends FatherPanel implements MouseListener {
 		team = Service.team;
 
 		// -----获得热点球员们---------
-		PlayerVO dayP = player.getDayHotPlayer("score", 1).get(0);
+		PlayerVO dayP = null;
 		// String season = Match.getCurrentSeason();
 		// String seasonType = Match.getCurrentSeasonType();
 		PlayerVO seasonP = player.getSeasonHotPlayer("14-15", "Playoff",
@@ -54,7 +54,7 @@ public class IndexPanel extends FatherPanel implements MouseListener {
 		PlayerVO proP = player.getBestImprovedPlayer("Playoff",
 				"recentFiveMatchesScoreUpRate", 1).get(0);
 		//
-		dname = dayP.getName();
+		dname = "Kobe Bryant";
 		sname = seasonP.getName();
 		tname = t.getTeamName();
 		tPlayername = player.getPlayersByTeam(t.getAbLocation()).get(1)

@@ -149,6 +149,7 @@ public class PlayerChooser extends JDialog {
 				i.setImage(i.getImage().getScaledInstance(168,135,Image.SCALE_SMOOTH ));
 				owner.namePnl.aImgLbl.setIcon(i);
 				owner.namePnl.aTeamLbl.setText(temp.getVO().getPosition()+"/"+temp.getVO().getOwingTeam());
+			
 			}
 			else{
 				owner.namePnl.bLbl.setText(temp.getVO().getName());
