@@ -193,6 +193,7 @@ public class MatchIndexPanel extends FatherPanel {
 		// ArrayList<MatchCard> matchCardList = new ArrayList<MatchCard>();
 
 		JPanel BIGPNL = new JPanel();
+		BIGPNL.setBackground(Color.red);
 		// BIGPNL.setLayout();
 		/*
 		 * int row = mlist.size() / 2; if (mlist.size() % 2 != 0) row += 1;
