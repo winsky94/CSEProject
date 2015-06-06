@@ -67,7 +67,7 @@ public class TeamDetailRecentPanel extends JPanel {
 		titleLbl.setForeground(Color.white);
 		add(titleLbl, BorderLayout.NORTH);
 		team = Service.team;
-		matches = team.getRecentMatches(abbrName);
+		matches = team.getRecentMatches(abbrName,5);
 		// -------------------
 		cardPnl = new JPanel();
 		cardPnl.setOpaque(false);
