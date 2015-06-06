@@ -29,11 +29,11 @@ public class Team implements TeamBLService {
 	private Boolean isSeason = false;
 	private Map<String, TeamVO> teamAverageInfo = new LinkedHashMap<String, TeamVO>();
 
-	private static String[] teamsName_CH = new String[] { "太阳", "马刺", "国王",
+	private static String[] teamsName_CH = new String[] { "全部","太阳", "马刺", "国王",
 			"火箭", "湖人", "掘金", "森林狼", "小牛", "快船", "爵士", "勇士", "灰熊", "雷霆", "鹈鹕",
 			"开拓者", "凯尔特人", "篮网", "尼克斯", "76人", "猛龙", "公牛", "骑士", "活塞", "步行者",
 			"雄鹿", "老鹰", "黄蜂", "热火", "魔术", "奇才" };
-	private static String[] teamsName_EN = new String[] { "PHX", "SAS", "SAC",
+	private static String[] teamsName_EN = new String[] { "all","PHX", "SAS", "SAC",
 			"HOU", "LAL", "DEN", "MIN", "DAL", "LAC", "UTA", "GSW", "MEM",
 			"OKC", "NOP", "POR", "BOS", "BKN", "NYK", "PHI", "TOR", "CHI",
 			"CLE", "DET", "IND", "MIL", "ATL", "CHA", "MIA", "ORL", "WAS" };
