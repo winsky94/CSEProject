@@ -156,7 +156,9 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener,
 		f2.add(seasonBoxLbl);
 
 		MatchBLService match = new Match();
-		String[] seasonBoxText = (String[]) match.getAllSeasons().toArray();
+		ArrayList<String> seasons=match.getAllSeasons();
+		int size=seasons.size();
+		String[] seasonBoxText = (String[]) match.getAllSeasons().toArray(new String[size]);
 		seasonBox = new MyComboBox(seasonBoxText);
 		seasonBox.addItemListener(this);
 		f2.add(seasonBox);

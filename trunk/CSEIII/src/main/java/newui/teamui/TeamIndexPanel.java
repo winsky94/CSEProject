@@ -9,6 +9,7 @@ import java.awt.event.ItemListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -68,7 +69,9 @@ public class TeamIndexPanel extends FatherPanel implements MouseListener {
 		funcPnl.add(seasonBoxLbl);
 		// 暂时没有bl方法
 		MatchBLService match=new Match();
-		String[] seasonBoxText = (String[]) match.getAllSeasons().toArray();
+		ArrayList<String> seasons=match.getAllSeasons();
+		int size=seasons.size();
+		String[] seasonBoxText = (String[]) match.getAllSeasons().toArray(new String[size]);
 		seasonBox = new MyComboBox(seasonBoxText);
 		funcPnl.add(seasonBox);
 		// ------seasonType------
