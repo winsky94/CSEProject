@@ -27,11 +27,10 @@ import javax.swing.JTextField;
 import newui.Style;
 import newui.UIhelper;
 import newui.VOLabel;
-import newui.playerui.details.PKNamePanel;
 import newui.playerui.details.PlayerPKPanel;
 import vo.PlayerVO;
-import bl.player.Player;
-import blservice.PlayerBLService;
+import bl.Player;
+import blService.PlayerBLService;
 
 public class PlayerChooser extends JDialog {
 
@@ -83,7 +82,6 @@ public class PlayerChooser extends JDialog {
 		exitBtn.setFont(new Font("微软雅黑", Font.PLAIN, 15));
 		exitBtn.setFocusPainted(false);
 		exitBtn.addActionListener(new ActionListener() {
-			@Override
 			public void actionPerformed(ActionEvent e) {
 				dispose();
 			}

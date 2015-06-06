@@ -92,7 +92,7 @@ public class PlayerDetailPanel extends FatherPanel {
 		 * 2015.5.30 新增图表分析标签页
 		 */
 		tab.addTab("图表分析", new PlayerStatsPanel(name));
-		tab.addTab("球员对比", new PlayerPKPanel(name));
+		tab.addTab("球员对比", new PlayerPKPanel(vo));
 	}
 
 }
