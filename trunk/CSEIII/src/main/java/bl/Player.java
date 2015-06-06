@@ -1198,7 +1198,7 @@ public class Player implements PlayerBLService{
 			int num) {
 
 		ArrayList<PlayerVO> result = new ArrayList<PlayerVO>();
-		ArrayList<PlayerVO> thePlayers = getPlayerAverageInfo(type);
+		ArrayList<PlayerVO> thePlayers = getPlayerSeasonInfo(season,type);
 
 		Collections.sort(thePlayers, new SequenceOfPlayer(column, "desc"));
 		int count = 0;
