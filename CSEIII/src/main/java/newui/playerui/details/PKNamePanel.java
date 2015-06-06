@@ -138,7 +138,7 @@ public class PKNamePanel extends JPanel implements MouseListener {
 		}
 	}
 
-	@Override
+
 	public void mouseClicked(MouseEvent e) {
 		if(e.getSource()==aLbl){
 			PlayerChooser pc=new PlayerChooser(father,true);
@@ -155,19 +155,18 @@ public class PKNamePanel extends JPanel implements MouseListener {
 		}
 	}
 
-	@Override
+
 	public void mousePressed(MouseEvent e) {
 		// TODO Auto-generated method stub
 
 	}
 
-	@Override
+
 	public void mouseReleased(MouseEvent e) {
 		// TODO Auto-generated method stub
 
 	}
 
-	@Override
 	public void mouseEntered(MouseEvent e) {
 		if(e.getSource().getClass()==NameLabel.class){
 			NameLabel temp=(NameLabel)e.getSource();
@@ -180,7 +179,6 @@ public class PKNamePanel extends JPanel implements MouseListener {
 
 	}
 
-	@Override
 	public void mouseExited(MouseEvent e) {
 		if(e.getSource().getClass()==NameLabel.class){
 			NameLabel temp=(NameLabel)e.getSource();
