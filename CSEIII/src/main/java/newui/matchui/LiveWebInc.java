@@ -107,7 +107,11 @@ public class LiveWebInc {
 			}
 		}
 	}
-	
+	public void setTeam(String vid,String hid,String vteam,String hteam){
+		this.visid=vid;this.homeid=hid;
+		this.visteam=vteam;this.hometeam=hteam;
+		
+	}
 	
 	//����gameId,gamestatus
 	public ArrayList<ArrayList<String>>  getGameStatus(String date){
