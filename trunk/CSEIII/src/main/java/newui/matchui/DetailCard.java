@@ -6,6 +6,7 @@ import java.awt.Graphics;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.Insets;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -68,8 +69,9 @@ public class DetailCard extends JPanel implements MouseListener {
 		gbl.setConstraints(homeScore, gbc);
 		add(homeScore);
 		// -----homeIcon---------
-		homeIcon = new JLabel(new ImageIcon("image/teamIcon/teamsPng90/"
-				+ v.getHomeTeam() + ".png"));
+		ImageIcon homeIco=Team.getTeamImage(v.getHomeTeam());
+		homeIco.setImage(homeIco.getImage().getScaledInstance(90, 90, Image.SCALE_SMOOTH));
+		homeIcon = new JLabel(homeIco);
 		gbc.gridx = 3;
 		gbc.gridwidth = 2;
 		gbc.weightx = 2;
@@ -87,8 +89,9 @@ public class DetailCard extends JPanel implements MouseListener {
 		gbl.setConstraints(vs, gbc);
 		add(vs);
 		// -----visitingIcon---------
-		visitingIcon = new JLabel(new ImageIcon("image/teamIcon/teamsPng90/"
-				+ v.getVisitingTeam() + ".png"));
+		ImageIcon visitingIco=Team.getTeamImage(v.getVisitingTeam());
+		visitingIco.setImage(visitingIco.getImage().getScaledInstance(90, 90, Image.SCALE_SMOOTH));
+		visitingIcon = new JLabel(visitingIco);
 		gbc.gridx = 6;
 		gbc.gridwidth = 2;
 		gbc.weightx = 2;

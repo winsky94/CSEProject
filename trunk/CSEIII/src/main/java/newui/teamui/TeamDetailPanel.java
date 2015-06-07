@@ -55,9 +55,9 @@ public class TeamDetailPanel extends FatherPanel {
 		abbrName = teamName;
 		nameCH = Team.changeTeamNameENToCH(teamName);
 		// ----------------------
-		// ImageIcon icon=team.getTeamImage(abbrName);
-		nameLbl = new JLabel(new ImageIcon("image/teamIcon/teamsPng150/"
-				+ abbrName + ".png"));
+		ImageIcon icon=Team.getTeamImage(abbrName);
+		icon.setImage(icon.getImage().getScaledInstance(150, 150, Image.SCALE_SMOOTH));
+		nameLbl = new JLabel(icon);
 		gbc.gridx = 0;
 		gbc.gridy = 1;
 		gbc.gridwidth = 2;
@@ -88,16 +88,16 @@ public class TeamDetailPanel extends FatherPanel {
 		playerPnl.setOpaque(false);
 		playerPnl.setLayout(new GridLayout(players.size(), 1));
 		for (int i = 0; i < players.size(); i++) {
-			ImageIcon icon;
+			ImageIcon playerIcon;
 			File file=new File("src/data/players/portrait/"+ players.get(i).getName()+".png");
 			if(!file.exists())
-			     icon=new ImageIcon("src/data/players/portrait/None.png");
+			     playerIcon=new ImageIcon("src/data/players/portrait/None.png");
 			else
-				icon=new ImageIcon("src/data/players/portrait/"+ players.get(i).getName()+".png");
-			icon.setImage(icon.getImage().getScaledInstance(
+				playerIcon=new ImageIcon("src/data/players/portrait/"+ players.get(i).getName()+".png");
+			playerIcon.setImage(playerIcon.getImage().getScaledInstance(
 					58, 46
 				, Image.SCALE_DEFAULT));
-			JLabel temp = new MyLabel(players.get(i).getName(), icon, JLabel.LEFT);
+			JLabel temp = new MyLabel(players.get(i).getName(), playerIcon, JLabel.LEFT);
 			playerPortraits.add(temp);
 			playerPnl.add(playerPortraits.get(i));
 		}
