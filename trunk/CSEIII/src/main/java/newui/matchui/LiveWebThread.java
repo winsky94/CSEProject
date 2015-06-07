@@ -100,6 +100,11 @@ public class LiveWebThread extends Thread{
 		int day=c.get(Calendar.DATE);
 		LiveWebInc live=new LiveWebInc();
 		//String date=month+"%2F"+day+"%2F"+year;
+		String season="14-15";//need to change if real use
+		String m=month+"";String d=day+"";
+		if(m.length()==1) m="0"+m;
+		if(d.length()==1) d="0"+m;
+			
 		String date="06%2F04%2F2015";
 		ArrayList<ArrayList<String>> IdAndStatus=live.getGameStatus(date);
 		if(IdAndStatus.size()==0)
@@ -116,6 +121,8 @@ public class LiveWebThread extends Thread{
 				LiveWebInc cc=new LiveWebInc();
 				String s=line.get(2).split("/")[1];
 				cc.setTeam(line.get(4),line.get(3), s.substring(0, 3), s.substring(3, 6));
+				//give the panel info to save
+				mPanel.initLiveData(season,m+"-"+d, s.substring(0, 3)+"-"+ s.substring(3, 6));
 				LiveWebThread th=new LiveWebThread(cc,line.get(0),mPanel);
 				th.startThread();
 			}
