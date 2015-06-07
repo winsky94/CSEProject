@@ -6,6 +6,7 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -214,8 +215,9 @@ public class HotTeamPanel extends HotFatherPanel implements MouseListener {
 		if (vlist != null && vlist.size() != 0) {
 			model.setHead(head);
 			TeamVO topOne = vlist.get(0);
-			teamIcon.setIcon(new ImageIcon("image/teamIcon/teamsPng150/"
-					+ topOne.getAbLocation() + ".png"));
+			ImageIcon bestTeamIco = Team.getTeamImage(topOne.getTeamName());
+			bestTeamIco.setImage(bestTeamIco.getImage().getScaledInstance(150, 150, Image.SCALE_SMOOTH));
+			teamIcon.setIcon(bestTeamIco);
 			teamNameLbl.setText(Team.changeTeamNameENToCH(topOne
 					.getAbLocation()));
 			abbrNameLbl.setText(topOne.getAbLocation());
@@ -371,11 +373,10 @@ public class HotTeamPanel extends HotFatherPanel implements MouseListener {
 				ArrayList<Object> line = new ArrayList<Object>();
 				line.add(num);
 				num++;
-				ImageIcon icon = new ImageIcon("image/teamIcon/teamsPng90/"
-						+ v.getAbLocation() + ".png");
+				ImageIcon bestTeamIco = Team.getTeamImage(v.getAbLocation());
 				// 设置宽高
 
-				line.add(icon);
+				line.add(bestTeamIco);
 				line.add(Team.changeTeamNameENToCH(v.getAbLocation()));
 				line.add(v.getAbLocation());
 				if (v.getConference().equals("E"))

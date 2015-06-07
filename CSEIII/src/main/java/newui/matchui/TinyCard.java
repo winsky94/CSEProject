@@ -4,6 +4,7 @@ import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Image;
 import java.awt.Insets;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -16,6 +17,7 @@ import newui.Service;
 import newui.Style;
 import newui.mainui.MainFrame;
 import vo.MatchVO;
+import bl.Team;
 import blService.TeamBLService;
 
 public class TinyCard extends JPanel {
@@ -40,15 +42,16 @@ public class TinyCard extends JPanel {
 		ImageIcon imgicon;
 		String name;
 
-		if (tName.equals(vo.getHomeTeam()))
-			// imgicon=team.getTeamImage(vo.getVisitingTeam());
+		if (tName.equals(vo.getHomeTeam())){
+			imgicon=Team.getTeamImage(vo.getVisitingTeam());
 			name = vo.getVisitingTeam();
-		else
-			// imgicon=team.getTeamImage(tName);
+		}
+		else{
+			imgicon=Team.getTeamImage(vo.getHomeTeam());
 			name = vo.getHomeTeam();
-		// imgicon.setImage(imgicon.getImage().getScaledInstance(90,
-		// 90,Image.SCALE_DEFAULT ));
-		imgicon = new ImageIcon("image/teamIcon/teamsPng90/" + name + ".png");
+		}
+		 imgicon.setImage(imgicon.getImage().getScaledInstance(90,
+		 90,Image.SCALE_SMOOTH ));
 		JLabel icon = new JLabel(imgicon);
 		gbc.gridx = 0;
 		gbc.gridy = 0;

@@ -6,6 +6,7 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
@@ -20,6 +21,7 @@ import newui.Style;
 import newui.mainui.MainFrame;
 import newui.teamui.TeamDetailPanel;
 import vo.MatchVO;
+import bl.Team;
 import blService.TeamBLService;
 
 public class MatchCard extends JPanel implements MouseListener {
@@ -77,11 +79,8 @@ public class MatchCard extends JPanel implements MouseListener {
 		topPnl.add(liveLbl);
 		
 		// --homeicon---------------
-		// ImageIcon t=team.getTeamImage(vo.getHomeTeam());
-		ImageIcon t = new ImageIcon("image/teamIcon/teamsPng150/"
-				+ vo.getHomeTeam() + ".png");
-		// t.setImage(t.getImage().getScaledInstance(150, 150,0));
-
+		ImageIcon t=Team.getTeamImage(vo.getHomeTeam());
+		t.setImage(t.getImage().getScaledInstance(150, 150, Image.SCALE_SMOOTH));
 		homeIcon = new JLabel(t);
 		homeIcon.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		// 是否需要ToolTipText
@@ -125,10 +124,8 @@ public class MatchCard extends JPanel implements MouseListener {
 		gbl.setConstraints(detailScoresPnl, gbc);
 		add(detailScoresPnl);
 		// --visitingIcon---------------
-		// ImageIcon v=team.getTeamImage(vo.getVisitingTeam());
-		ImageIcon v = new ImageIcon("image/teamIcon/teamsPng150/"
-				+ vo.getVisitingTeam() + ".png");
-		// v.setImage(v.getImage().getScaledInstance(150, 150,0));
+		ImageIcon v=Team.getTeamImage(vo.getVisitingTeam());
+		v.setImage(v.getImage().getScaledInstance(150, 150, Image.SCALE_SMOOTH));
 		visitingIcon = new JLabel(v);
 		visitingIcon.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		visitingIcon.setToolTipText("点击查看球队详情");

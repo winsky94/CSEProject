@@ -6,6 +6,7 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -270,8 +271,10 @@ public class TeamWindow extends JWindow implements MouseListener {
 		Font font = new Font("微软雅黑", Font.PLAIN, 13);
 
 		public MyButton(String name) {
-			super(name, new ImageIcon("image/teamIcon/teamsPng35/" + name
-					+ ".png"), JLabel.LEFT);
+			super(name,JLabel.LEFT);
+			ImageIcon i=Team.getTeamImage(name);
+			i.setImage(i.getImage().getScaledInstance(35,35, Image.SCALE_SMOOTH));
+			setIcon(i);
 			setFont(font);
 			addMouseListener(TeamWindow.this);
 

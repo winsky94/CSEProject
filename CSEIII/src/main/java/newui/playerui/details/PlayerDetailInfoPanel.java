@@ -65,8 +65,8 @@ public class PlayerDetailInfoPanel extends JPanel {
 		headPnl.setLayout(fl);
 		// ------------------
 		ImageIcon icon=Player.getPlayerPortraitImage(vo.getName());
-//		ImageIcon icon = new ImageIcon("image/player/portrait/" + vo.getName()
-//				+ ".png");
+		icon.setImage(icon.getImage().getScaledInstance(230, 185, Image.SCALE_SMOOTH));
+
 		JLabel portraitLbl = new JLabel(icon);
 		headPnl.add(portraitLbl);
 		JLabel nameLbl = new JLabel(vo.getName());
@@ -75,8 +75,10 @@ public class PlayerDetailInfoPanel extends JPanel {
 		headPnl.add(new JLabel("             "));
 		headPnl.add(new JLabel("             "));
 		headPnl.add(new JLabel("             "));
-		teamIcon = new JLabel(new ImageIcon("image/teamIcon/teamsPng150/"
-				+ vo.getOwingTeam() + ".png"));
+		ImageIcon teamIco=Player.getPlayerPortraitImage(vo.getOwingTeam());
+		teamIco.setImage(teamIco.getImage().getScaledInstance(150, 150, Image.SCALE_SMOOTH));
+
+		teamIcon = new JLabel(teamIco);
 		teamIcon.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		teamIcon.addMouseListener(new MouseListener() {
 

@@ -28,6 +28,7 @@ import newui.tables.MyTableCellRenderer;
 import newui.teamui.TeamDetailPanel;
 import vo.PlayerVO;
 import bl.Match;
+import bl.Team;
 import blService.MatchBLService;
 import blService.PlayerBLService;
 
@@ -234,8 +235,9 @@ public class HotSeasonPanel extends HotFatherPanel implements MouseListener {
 			positionAndTeamName.setText(topOne.getPosition() + "/"
 					+ topOne.getOwingTeam());
 			// data.setText(topOne.getScore()+"");
-			bestTeamIcon.setIcon(new ImageIcon("image/teamIcon/teamsPng150/"
-					+ topOne.getOwingTeam() + ".png"));
+			ImageIcon bestTeamIco = Team.getTeamImage(topOne.getOwingTeam());
+			bestTeamIco.setImage(bestTeamIco.getImage().getScaledInstance(150, 150, Image.SCALE_SMOOTH));
+			bestTeamIcon.setIcon(bestTeamIco);
 			if (sort.equals("score")) {
 				data.setText(topOne.getScore() + "");
 			} else if (sort.equals("reboundNum")) {
@@ -398,7 +400,7 @@ public class HotSeasonPanel extends HotFatherPanel implements MouseListener {
 								 * .getWidth()
 								 */100, 80
 								/* currentTable.getRowHeight(i) */,
-										Image.SCALE_DEFAULT));
+										Image.SCALE_SMOOTH));
 
 				line.add(icon);
 				line.add(v.getName());
