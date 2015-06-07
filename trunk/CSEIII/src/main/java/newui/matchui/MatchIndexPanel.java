@@ -162,7 +162,8 @@ public class MatchIndexPanel extends FatherPanel {
 		gbc.weighty = 10;
 		gbl.setConstraints(jsp, gbc);
 		add(jsp);
-		searchRefresh("全部", "全部", "01-01");
+	//	searchRefresh("全部", "全部", "01-01");
+		TodayMatchRefresh();
 	}
 
 	class MyComboBox extends JComboBox<String> {
@@ -183,6 +184,35 @@ public class MatchIndexPanel extends FatherPanel {
 			super(text);
 			setFont(font);
 			setForeground(Color.white);
+		}
+	}
+	public void TodayMatchRefresh(){
+		LiveWebInc c=new LiveWebInc();
+		ArrayList<ArrayList<String>> result=c.getGameStatus(c.getTodayEDate());
+		if(result.size()==0){
+			//today no game
+			// show no game or recent game tips
+		}else{
+			//only process ing game now
+			// other need to translate to matchvo if over
+			for(ArrayList<String> line:result){
+				String[] s=line.get(2).split("/");
+				if(line.get(1).equals("1")){
+					//no start
+					//String season, String date, String type,
+					//String visitingTeam, String homeTeam
+					MatchVO v=new MatchVO("14-15",s[0].substring(4, 6)+"-"
+							+s[0].substring(6,8),"Playoff",s[1].substring(0, 3),
+							s[1].substring(3, 6));
+				}else if(line.get(1).equals("2")){
+					//ing need to start thread
+					MatchVO v=new MatchVO("14-15",s[0].substring(4, 6)+"-"
+							+s[0].substring(6,8),"Playoff",s[1].substring(0, 3),
+							s[1].substring(3, 6));
+				}else if(line.get(1).equals("3")){
+					//over all can process from sql
+				}
+			}
 		}
 	}
 

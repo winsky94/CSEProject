@@ -36,7 +36,13 @@ public class MatchCard extends JPanel implements MouseListener {
 	private TeamBLService team;
 	private boolean isHomeHigh = true;
 	private MatchVO vo;
-
+	private boolean isLive=false;
+	public MatchCard(MatchVO vo,int status){
+		this(vo);
+		if(status==2){
+			isLive=true;
+		}
+	}
 	// 显示单场比赛信息
 	public MatchCard(MatchVO vo) {
 		this.vo = vo;
@@ -178,6 +184,7 @@ public class MatchCard extends JPanel implements MouseListener {
 
 	public void mouseClicked(MouseEvent e) {
 		if (e.getSource() == detailLbl)// 注意，这里应当传一个比赛的特征值过去
+			
 			MainFrame.getInstance().setContentPanel(new MatchDetailPanel(vo));
 		else if(e.getSource()==liveLbl){
 			//需判断是否该比赛已结束

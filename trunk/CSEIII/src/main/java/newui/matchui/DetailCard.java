@@ -32,7 +32,16 @@ public class DetailCard extends JPanel implements MouseListener {
 			vchNameLbl, vabbrNameLbl, visitingScore;
 	JPanel detailPnl;
 	boolean isHomeHigh = true;
-
+	int lastline=1;
+	ArrayList<String> vdet;
+	ArrayList<String> hdet ;
+	public DetailCard(MatchVO v,int status){
+		this(v);
+		if(status==3){
+			//over game
+			
+		}
+	}
 	public DetailCard(MatchVO v) {
 		GridBagLayout gbl = new GridBagLayout();
 		GridBagConstraints gbc = new GridBagConstraints();
@@ -160,8 +169,8 @@ public class DetailCard extends JPanel implements MouseListener {
 
 		if (detail == null)
 			System.out.println("detail wei null");
-		ArrayList<String> vdet = new ArrayList<String>();
-		ArrayList<String> hdet = new ArrayList<String>();
+		vdet = new ArrayList<String>();
+		 hdet = new ArrayList<String>();
 		for (int i = 0; i < detail.size(); i++) {
 			String[] s = detail.get(i).split("-");
 			vdet.add(s[0]);
@@ -186,6 +195,29 @@ public class DetailCard extends JPanel implements MouseListener {
 
 	}
 
+	public void RefershScore(String score,int line){
+		String[] s=score.split("-");
+		if(line==lastline){
+			vdet.set(line-1, s[0]);
+			hdet.set(line-1, s[1]);
+			
+		}else{
+			vdet.add(s[0]);
+			hdet.add(s[1]);
+			lastline=line;
+		}
+		//the best condition is only update change score
+		for (String ss : vdet) {
+			DetailLabel dl = new DetailLabel(ss);
+			dl.setHorizontalAlignment(JLabel.CENTER);
+			detailPnl.add(dl);
+		}
+		for (String ss : hdet) {
+			DetailLabel dl = new DetailLabel(ss);
+			dl.setHorizontalAlignment(JLabel.CENTER);
+			detailPnl.add(dl);
+		}
+	}
 	class DetailLabel extends JLabel {
 		private static final long serialVersionUID = 1L;
 

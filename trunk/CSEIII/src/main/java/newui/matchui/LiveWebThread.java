@@ -7,6 +7,8 @@ import java.util.regex.Pattern;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
+import vo.MatchVO;
+
 /*
  * use the last score to ...if game over
  * 
@@ -21,10 +23,10 @@ public class LiveWebThread extends Thread{
 	private String regex="[\\d]+-[\\d]+";//比分
 	private String lastscore;
 //	private LiveStringAccept ac;
-	private LiveTextPanel ac;
+	private MatchDetailPanel ac;
 	Pattern p;Matcher m;
 	private boolean islasts=false;
-	public LiveWebThread(LiveWebInc c,String id,LiveTextPanel s) {
+	public LiveWebThread(LiveWebInc c,String id,MatchDetailPanel s) {
 		super();
 		this.c = c;
 		this.gameid=id;
@@ -45,7 +47,7 @@ public class LiveWebThread extends Thread{
 				ArrayList<String> res=new ArrayList<String>();
 				for(int i=0;i<n;i++){
 					res.add(s.get(i));
-					if(line>=4&&(!islasts)){
+					if(/*line>=4&&(*/!islasts){
 						m=p.matcher(s.get(i));
 						while(m.find()){
 							lastscore=m.group();
@@ -57,7 +59,8 @@ public class LiveWebThread extends Thread{
 				
 				}
 					//ac.getString(s.get(i));
-				ac.refresh(res, line);
+				//ac.refresh(res, line);
+				ac.RefreshLiveAndScore(res, line, lastscore);
 				size=s.size();
 				
 			}
@@ -116,9 +119,15 @@ public class LiveWebThread extends Thread{
 				String s=line.get(2).split("/")[1];
 				JFrame jFrame=new JFrame();	
 				LiveTextPanel mPanel=new LiveTextPanel(s.substring(0, 3),s.substring(3, 6),"14-15",m+"-"+d);
-				jFrame.getContentPane().add(mPanel);
+				MatchVO v=new MatchVO("14-15",m+"-"+d,
+						"Playoff",s.substring(0, 3),
+						s.substring(3, 6));
+				MatchDetailPanel mm=new MatchDetailPanel(v);
+				//jFrame.getContentPane().add(mPanel);
+				jFrame.getContentPane().add(mm);
+				mm.setIsLive(true);
 				jFrame.setLocation(150, 50);
-				jFrame.setSize(1000,600);
+				jFrame.setSize(1000,800);
 				jFrame.setVisible(true);
 				jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 				LiveWebInc cc=new LiveWebInc();
@@ -127,7 +136,7 @@ public class LiveWebThread extends Thread{
 				//give the panel info to save
 				//need day Change;  make day change function available
 				mPanel.initLiveData(season,m+"-"+d, s.substring(0, 3)+"-"+ s.substring(3, 6));
-				LiveWebThread th=new LiveWebThread(cc,line.get(0),mPanel);
+				LiveWebThread th=new LiveWebThread(cc,line.get(0),mm);
 				th.startThread();
 			}
 		}

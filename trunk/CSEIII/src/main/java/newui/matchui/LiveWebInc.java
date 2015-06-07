@@ -3,6 +3,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import newui.WebSec;
 
@@ -258,4 +259,23 @@ public class LiveWebInc {
 		
 		return res;
 	}*/
+	
+	
+	public String getTodayEDate(){
+		Calendar c=Calendar.getInstance();
+		int year=c.get(Calendar.YEAR);
+		int month=c.get(Calendar.MONTH)+1;
+		int day=c.get(Calendar.DATE);
+		LiveWebInc live=new LiveWebInc();
+		//String date=month+"%2F"+day+"%2F"+year;
+		String season="14-15";//need to change if real use
+		String m=month+"";String d=day+"";String td=(day-1)+"";
+		if(m.length()==1) m="0"+m;
+		if(d.length()==1) {d="0"+d;}
+		if(td.length()==1) td="0"+td;//to eng nab need to min one day
+		//not complete day change
+			
+		String date=m+"%2F"+td+"%2F2015";
+		return date;
+	}
 }
