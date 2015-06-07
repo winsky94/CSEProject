@@ -300,9 +300,9 @@ public class TitleBar extends JPanel implements MouseListener {
 			case TEAMRANK:
 				t = Service.team;
 				if (aveOrAll.equals("场均"))
-					team = t.getTeamAverageInfo(scontent);
+					team = t.getTeamAverageInfo(seasonType,scontent);
 				else
-					team = t.getTeamSeasonInfo(season, scontent);
+					team = t.getTeamSeasonInfo(season,seasonType, scontent);
 				tablemodel.SearchRefresh(team);
 				table.revalidate();
 				table.repaint();

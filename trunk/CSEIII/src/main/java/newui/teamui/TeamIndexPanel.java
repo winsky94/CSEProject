@@ -144,6 +144,7 @@ public class TeamIndexPanel extends FatherPanel implements MouseListener {
 				20));
 		jsp.setCorner(JScrollPane.UPPER_RIGHT_CORNER, jb);
 		titleBar.setSeason(seasonBox.getSelectedItem().toString());
+		titleBar.setSeasonType(seasonTypeBox.getSelectedItem().toString());
 		titleBar.setAveOrAll(typeBox.getSelectedItem().toString());
 
 		seasonBox.addItemListener(new ItemListener() {
@@ -241,6 +242,8 @@ public class TeamIndexPanel extends FatherPanel implements MouseListener {
 
 			// table.getTableHeader().addMouseListener(listen);
 			titleBar.setCurrentTableModel(ttm);
+			titleBar.setSeason(season);
+			titleBar.setSeasonType(seasonType);
 
 			jsp.getViewport().add(table);
 			CellRender();
