@@ -952,12 +952,10 @@ public class Player implements PlayerBLService{
 		File file=new File("src/data/players/portrait/" + name+ ".png");    
 		if(!file.exists()){
 			imageIcon=new ImageIcon("src/data/players/portrait/None.png");
-			imageIcon.setImage(imageIcon.getImage().getScaledInstance(60, 50,Image.SCALE_SMOOTH ));
 		}
 		else{
 			imageIcon = new ImageIcon("src/data/players/portrait/" + name
 				+ ".png");
-			imageIcon.setImage(imageIcon.getImage().getScaledInstance(60, 50,Image.SCALE_SMOOTH ));
 		}
 		return imageIcon;
 	}

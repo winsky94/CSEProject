@@ -45,9 +45,10 @@ public class PlayerChooser extends JDialog {
 	PlayerBLService p;
 	PlayerPKPanel owner;
 	boolean isA;
-	public PlayerChooser(PlayerPKPanel o,boolean bool) {
-		isA=bool;
-		owner=o;
+
+	public PlayerChooser(PlayerPKPanel o, boolean bool) {
+		isA = bool;
+		owner = o;
 		p = Service.player;
 		int screenWidth = UIhelper.getScreenWidth();
 		int screenHeight = UIhelper.getScreenHeight();
@@ -116,7 +117,7 @@ public class PlayerChooser extends JDialog {
 			ResultLabel lbl = new ResultLabel(arr.get(i).getName(), arr.get(i));
 			resultPnl.add(lbl);
 		}
-		resultPnl.setPreferredSize(new Dimension(500,60*(size + 1) / 2));
+		resultPnl.setPreferredSize(new Dimension(500, 60 * (size + 1) / 2));
 		jsp.getViewport().add(resultPnl);
 	}
 
@@ -127,8 +128,7 @@ public class PlayerChooser extends JDialog {
 
 		ResultLabel(String name, PlayerVO p) {
 			super(name, p);
-			ImageIcon i = new ImageIcon("image/player/portrait/" + name
-					+ ".png");
+			ImageIcon i = Player.getPlayerPortraitImage(name);
 			i.setImage(i.getImage().getScaledInstance(75, 60,
 					Image.SCALE_SMOOTH));
 			setIcon(i);
@@ -143,22 +143,27 @@ public class PlayerChooser extends JDialog {
 		@Override
 		public void mouseClicked(MouseEvent e) {
 			ResultLabel temp = (ResultLabel) e.getSource();
-			if(isA){
+			if (isA) {
 				owner.namePnl.aLbl.setText(temp.getVO().getName());
 				owner.namePnl.aLbl.setVO(temp.getVO());
-				ImageIcon i=new ImageIcon("image/player/portrait/"+temp.getVO().getName()+".png");
-				i.setImage(i.getImage().getScaledInstance(168,135,Image.SCALE_SMOOTH ));
+				ImageIcon i = new ImageIcon("image/player/portrait/"
+						+ temp.getVO().getName() + ".png");
+				i.setImage(i.getImage().getScaledInstance(168, 135,
+						Image.SCALE_SMOOTH));
 				owner.namePnl.aImgLbl.setIcon(i);
-				owner.namePnl.aTeamLbl.setText(temp.getVO().getPosition()+"/"+temp.getVO().getOwingTeam());
-			
-			}
-			else{
+				owner.namePnl.aTeamLbl.setText(temp.getVO().getPosition() + "/"
+						+ temp.getVO().getOwingTeam());
+
+			} else {
 				owner.namePnl.bLbl.setText(temp.getVO().getName());
 				owner.namePnl.bLbl.setVO(temp.getVO());
-				ImageIcon i=new ImageIcon("image/player/portrait/"+temp.getVO().getName()+".png");
-				i.setImage(i.getImage().getScaledInstance(168,135,Image.SCALE_SMOOTH ));
+				ImageIcon i = new ImageIcon("image/player/portrait/"
+						+ temp.getVO().getName() + ".png");
+				i.setImage(i.getImage().getScaledInstance(168, 135,
+						Image.SCALE_SMOOTH));
 				owner.namePnl.bImgLbl.setIcon(i);
-				owner.namePnl.bTeamLbl.setText(temp.getVO().getPosition()+"/"+temp.getVO().getOwingTeam());
+				owner.namePnl.bTeamLbl.setText(temp.getVO().getPosition() + "/"
+						+ temp.getVO().getOwingTeam());
 			}
 			owner.paintChart();
 			owner.repaint();
@@ -168,7 +173,7 @@ public class PlayerChooser extends JDialog {
 
 		@Override
 		public void mousePressed(MouseEvent e) {
-			
+
 		}
 
 		@Override
@@ -197,8 +202,8 @@ public class PlayerChooser extends JDialog {
 		public void keyTyped(KeyEvent e) {
 			ArrayList<PlayerVO> searchResult = p.getPlayerBaseInfo(jtf
 					.getText());
-			//refreshJsp(searchResult);
-			RefreshThread thre=new RefreshThread(searchResult);
+			// refreshJsp(searchResult);
+			RefreshThread thre = new RefreshThread(searchResult);
 			thre.start();
 		}
 
@@ -215,15 +220,17 @@ public class PlayerChooser extends JDialog {
 		}
 
 	}
-	class RefreshThread extends Thread{
+
+	class RefreshThread extends Thread {
 		ArrayList<PlayerVO> searchResult;
-		public RefreshThread(ArrayList<PlayerVO> arr){
-			searchResult=arr;
+
+		public RefreshThread(ArrayList<PlayerVO> arr) {
+			searchResult = arr;
 		}
-		public void run(){
+
+		public void run() {
 			refreshJsp(searchResult);
 		}
-		
-		
+
 	}
 }
