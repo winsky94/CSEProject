@@ -101,19 +101,21 @@ public class LiveWebThread extends Thread{
 		LiveWebInc live=new LiveWebInc();
 		//String date=month+"%2F"+day+"%2F"+year;
 		String season="14-15";//need to change if real use
-		String m=month+"";String d=day+"";
+		String m=month+"";String d=day+"";String td=(day-1)+"";
 		if(m.length()==1) m="0"+m;
-		if(d.length()==1) d="0"+(d+1);
+		if(d.length()==1) {d="0"+d;}
+		if(td.length()==1) td="0"+td;//to eng nab need to min one day
+		//not complete day change
 			
-		String date="06%2F04%2F2015";
+		String date=m+"%2F"+td+"%2F2015";
 		ArrayList<ArrayList<String>> IdAndStatus=live.getGameStatus(date);
 		if(IdAndStatus.size()==0)
 			System.out.println("No game Today");
 		for(ArrayList<String> line:IdAndStatus){
-			if(line.get(1).equals("3")){
+			if(!line.get(1).equals("1")){
 				String s=line.get(2).split("/")[1];
 				JFrame jFrame=new JFrame();	
-				LiveTextPanel mPanel=new LiveTextPanel(s.substring(0, 3),s.substring(3, 6),"14-15","03-25");
+				LiveTextPanel mPanel=new LiveTextPanel(s.substring(0, 3),s.substring(3, 6),"14-15",m+"-"+d);
 				jFrame.getContentPane().add(mPanel);
 				jFrame.setLocation(150, 50);
 				jFrame.setSize(1000,600);
