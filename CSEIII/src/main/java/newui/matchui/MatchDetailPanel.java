@@ -37,11 +37,12 @@ public class MatchDetailPanel extends FatherPanel {
 	JScrollPane jsp;
 	JTable table;
 	MatchDetailModel model;
+	LiveTextPanel textpane;
 	boolean isHome = true;
 	ArrayList<RecordVO> Hrecord = new ArrayList<RecordVO>();
 	ArrayList<RecordVO> Vrecord = new ArrayList<RecordVO>();;
 	MatchVO vo;
-
+	boolean isLive=true;
 	public MatchDetailPanel(final MatchVO v) {
 		vo = v;
 		isDetail = true;
@@ -142,8 +143,14 @@ public class MatchDetailPanel extends FatherPanel {
 
 			public void mouseClicked(MouseEvent e) {
 				contentPnl.removeAll();
+				if(!isLive){
 				contentPnl.add(new HistoryLiveTextPanel(vo.getVisitingTeam(),
 						vo.getHomeTeam(), vo.getSeason(), vo.getDate()));
+				}else{
+					textpane=new LiveTextPanel(vo.getVisitingTeam(),
+							vo.getHomeTeam(), vo.getSeason(), vo.getDate()) ;
+					contentPnl.add(textpane);	
+				}
 				contentPnl.repaint();
 				contentPnl.revalidate();
 				
@@ -205,5 +212,17 @@ public class MatchDetailPanel extends FatherPanel {
 		model.Refresh(Hrecord);
 		table.revalidate();
 		contentPnl.add(jsp);
+	}
+	
+	
+	public void setIsLive(boolean t){
+		this.isLive=true;
+	}
+	
+	
+	public void RefreshLiveAndScore(ArrayList<String> info,int line,String score){
+		card.RefershScore(score, line);
+		textpane.refresh(info, line);
+		
 	}
 }
