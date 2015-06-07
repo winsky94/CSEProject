@@ -211,6 +211,8 @@ public class MatchIndexPanel extends FatherPanel {
 							s[1].substring(3, 6));
 				}else if(line.get(1).equals("3")){
 					//over all can process from sql
+					// or through web get the detai score
+					
 				}
 			}
 		}
