@@ -42,7 +42,7 @@ public class MatchDetailPanel extends FatherPanel {
 	ArrayList<RecordVO> Hrecord = new ArrayList<RecordVO>();
 	ArrayList<RecordVO> Vrecord = new ArrayList<RecordVO>();;
 	MatchVO vo;
-	boolean isLive=true;
+	boolean isLive=false;
 	public MatchDetailPanel(final MatchVO v) {
 		vo = v;
 		isDetail = true;
