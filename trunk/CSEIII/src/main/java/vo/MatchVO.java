@@ -52,7 +52,19 @@ public class MatchVO {
 		this.visitingTeam = visitingTeam;
 		this.homeTeam = homeTeam;
 	}
-
+	public MatchVO(String season, String date, String type,
+			String visitingTeam, String homeTeam, int visitingScore,
+			int homeScore, ArrayList<String> detailScores){
+		super();
+		this.season = season;
+		this.date = date;
+		this.type = type;
+		this.visitingTeam = visitingTeam;
+		this.homeTeam = homeTeam;
+		this.visitingScore = visitingScore;
+		this.homeScore = homeScore;
+		this.detailScores = detailScores;
+	}
 	public MatchVO(String season, String date, String type,
 			String visitingTeam, String homeTeam, int visitingScore,
 			int homeScore, ArrayList<String> detailScores,
@@ -74,7 +86,7 @@ public class MatchVO {
 			matchTime = (48 + (partNum - 4) * 5)*60;
 		}
 	}
-
+	
 	public MatchVO(int id, String season, String date, String type,
 			String visitingTeam, String homeTeam, int visitingScore,
 			int homeScore, ArrayList<String> detailScores,
