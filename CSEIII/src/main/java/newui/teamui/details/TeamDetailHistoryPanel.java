@@ -24,6 +24,7 @@ import newui.mainui.MainFrame;
 import newui.playerui.PlayerDetailPanel;
 import newui.tables.MyTableCellRenderer;
 import newui.tables.TeamHistoryTableModel;
+import bl.Match;
 
 public class TeamDetailHistoryPanel extends JPanel {
 
@@ -60,14 +61,14 @@ public class TeamDetailHistoryPanel extends JPanel {
 		MyLabel seasonLbl = new MyLabel("赛季：");
 		funcPnl.add(seasonLbl);
 		//
-		ArrayList<String> seasons=new ArrayList<String>();
-		seasons=Service.match.getAllSeasons();
-		int size=seasons.size();
-		String[] seasonText = (String[])seasons.toArray(new String[size]);
+		ArrayList<String> seasons = new ArrayList<String>();
+		seasons = Service.match.getAllSeasons();
+		int size = seasons.size();
+		String[] seasonText = (String[]) seasons.toArray(new String[size]);
 		seasonBox = new MyBox(seasonText);
 		funcPnl.add(seasonBox);
 		//
-		String[] seasonTypeBoxText = { "全部", "季前赛","常规赛",  "季后赛" };
+		String[] seasonTypeBoxText = { "全部", "季前赛", "常规赛", "季后赛" };
 		seasonTypeBox = new MyBox(seasonTypeBoxText);
 		funcPnl.add(seasonTypeBox);
 		//
@@ -104,7 +105,7 @@ public class TeamDetailHistoryPanel extends JPanel {
 		// 注意 bl层方法的参数是球队缩写 这个是咩
 		thtm.Refresh(abbrName);
 		table.revalidate();
-		
+
 		seasonBox.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent e) {
 				// TODO Auto-generated method stub
@@ -125,18 +126,20 @@ public class TeamDetailHistoryPanel extends JPanel {
 			public void itemStateChanged(ItemEvent e) {
 				// TODO Auto-generated method stub
 				if (typeBox.getSelectedItem().toString().equals("场均")) {
-					thtm.RefreshAverage((String) seasonTypeBox
-							.getSelectedItem());
+					thtm.RefreshAverage(Match
+							.changeTypeCHToEN((String) seasonTypeBox
+									.getSelectedItem()));
 				} else {
 					thtm.RefreshSeason(seasonBox.getSelectedItem().toString(),
-							(String) seasonTypeBox.getSelectedItem());
+							Match.changeTypeCHToEN((String) seasonTypeBox
+									.getSelectedItem()));
 				}
 				table.revalidate();
 				jsp.repaint();
 
 			}
 		});
-		
+
 		typeBox.addItemListener(new ItemListener() {
 
 			public void itemStateChanged(ItemEvent e) {
