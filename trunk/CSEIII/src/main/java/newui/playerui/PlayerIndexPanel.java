@@ -221,7 +221,7 @@ public class PlayerIndexPanel extends FatherPanel implements MouseListener {
 				int row = table.getSelectedRow();
 				String pname = table.getValueAt(row, 1).toString();
 				double pre = System.currentTimeMillis();
-				MainFrame.getInstance().setContentPanel(
+				MainFrame.setContentPanel(
 						new PlayerDetailPanel(pname));
 				double post = System.currentTimeMillis();
 				System.out.println("playerindexto详情:" + (post - pre));
