@@ -37,6 +37,7 @@ public class MatchCard extends JPanel implements MouseListener {
 	private boolean isHomeHigh = true;
 	private MatchVO vo;
 	private boolean isLive=false;
+	private ArrayList<String> line;
 	public MatchCard(MatchVO vo,int status){
 		this(vo);
 		if(status==2){
@@ -188,8 +189,17 @@ public class MatchCard extends JPanel implements MouseListener {
 			MatchDetailPanel p=new MatchDetailPanel(vo);
 			MainFrame.getInstance().setContentPanel(p);
 			p.setIsLive(isLive);
-			if(e.getSource()==liveLbl)
+			if(e.getSource()==liveLbl){
 				p.changeLive();
+				
+			}
+			if(isLive){
+				LiveWebInc cc=new LiveWebInc();
+				String s=line.get(2).split("/")[1];
+				cc.setTeam(line.get(4),line.get(3), s.substring(0, 3), s.substring(3, 6));
+				LiveWebThread th=new LiveWebThread(cc,line.get(0),p);
+				th.startThread();
+			}
 			
 		}
 		
@@ -236,5 +246,9 @@ public class MatchCard extends JPanel implements MouseListener {
 	}
 	public void setLive(boolean is){
 		this.isLive=is;
+	}
+	
+	public void setGameID(ArrayList<String> line){
+		this.line=line;
 	}
 }

@@ -196,8 +196,10 @@ public class MatchIndexPanel extends FatherPanel {
 			//only process ing game now
 			// other need to translate to matchvo if over
 			ArrayList<MatchVO> list=new ArrayList<MatchVO>();
+			//ArrayList<String> gameid=new ArrayList<String>();
 			int n=result.size();
 			for(ArrayList<String> line:result){
+			//	gameid.add(line.get(0));
 				String[] s=line.get(2).split("/");
 				if(line.get(1).equals("1")){
 					//no start
@@ -230,7 +232,7 @@ public class MatchIndexPanel extends FatherPanel {
 			JPanel BIGPNL = new JPanel();
 			BIGPNL.setBackground(Color.red);
 			jsp.getViewport().add(BIGPNL);
-			MatchCardThread th = new MatchCardThread(list, BIGPNL, jsp);
+			MatchCardThread th = new MatchCardThread(list, BIGPNL, jsp, result);
 			th.start();
 		}
 	}

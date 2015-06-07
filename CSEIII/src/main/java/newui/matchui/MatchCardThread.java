@@ -17,12 +17,21 @@ public class MatchCardThread extends Thread{
 	//private ArrayList<MatchCard> cardlist;
 	private JPanel p;
 	JScrollPane pp;
+	ArrayList<ArrayList<String>> line;
 	public MatchCardThread(ArrayList<MatchVO> matchlist,/*ArrayList<MatchCard> cardlist
 			,*/JPanel p,JScrollPane pp){
 		this.matchlist=matchlist;
 	//	this.cardlist=cardlist;
 		this.p=p;
 		this.pp=pp;
+	}
+	public MatchCardThread(ArrayList<MatchVO> matchlist,/*ArrayList<MatchCard> cardlist
+			,*/JPanel p,JScrollPane pp,ArrayList<ArrayList<String> >id){
+		this.matchlist=matchlist;
+	//	this.cardlist=cardlist;
+		this.p=p;
+		this.pp=pp;
+		this.line=id;
 	}
 	
 	
@@ -44,11 +53,13 @@ public class MatchCardThread extends Thread{
 	
 	
 		p.setPreferredSize(new Dimension(width, heightOfBIGPNL));
-		for (MatchVO m:matchlist) {
-			
+		for (int i=0;i<matchlist.size();i++) {
+			MatchVO m=matchlist.get(i);
 			MatchCard card1 = new MatchCard(m);
-			if(m.getDetailScores()==null)
+			if(m.getDetailScores()==null){
 				card1.setLive(true);
+				card1.setGameID(line.get(i));
+			}
 			p.add(card1);
 			pp.revalidate();
 			
