@@ -195,6 +195,8 @@ public class MatchIndexPanel extends FatherPanel {
 		}else{
 			//only process ing game now
 			// other need to translate to matchvo if over
+			ArrayList<MatchVO> list=new ArrayList<MatchVO>();
+			int n=result.size();
 			for(ArrayList<String> line:result){
 				String[] s=line.get(2).split("/");
 				if(line.get(1).equals("1")){
@@ -204,17 +206,32 @@ public class MatchIndexPanel extends FatherPanel {
 					MatchVO v=new MatchVO("14-15",s[0].substring(4, 6)+"-"
 							+s[0].substring(6,8),"Playoff",s[1].substring(0, 3),
 							s[1].substring(3, 6));
+					list.add(v);
 				}else if(line.get(1).equals("2")){
 					//ing need to start thread
 					MatchVO v=new MatchVO("14-15",s[0].substring(4, 6)+"-"
 							+s[0].substring(6,8),"Playoff",s[1].substring(0, 3),
 							s[1].substring(3, 6));
+					list.add(v);
 				}else if(line.get(1).equals("3")){
 					//over all can process from sql
 					// or through web get the detai score
+					ArrayList<String> detail=getDetailScore(line.get(0));
+					String[] ss=detail.get(0).split("-");
+					detail.remove(0);
+					MatchVO v=new MatchVO("14-15",s[0].substring(4, 6)+"-"
+							+s[0].substring(6,8),"Playoff",s[1].substring(0, 3),
+							s[1].substring(3, 6),Integer.parseInt(ss[0]),
+							Integer.parseInt(ss[1]),detail);
+					list.add(v);
 					
 				}
 			}
+			JPanel BIGPNL = new JPanel();
+			BIGPNL.setBackground(Color.red);
+			jsp.getViewport().add(BIGPNL);
+			MatchCardThread th = new MatchCardThread(list, BIGPNL, jsp);
+			th.start();
 		}
 	}
 
@@ -244,5 +261,30 @@ public class MatchIndexPanel extends FatherPanel {
 		jsp.getViewport().add(BIGPNL);
 		MatchCardThread th = new MatchCardThread(mlist, BIGPNL, jsp);
 		th.start();
+	}
+	
+	public ArrayList<String> getDetailScore(String gameid){
+	
+		ScoresWebInc inc=new ScoresWebInc();
+		ArrayList<String> sumList=inc.getScoreSummary(gameid);
+		ArrayList<String> descore=new ArrayList<String>();
+		if(sumList.size()!=0){
+		String[] vist=sumList.get(0).replace("\"", "").split(",");
+		String[] homt=sumList.get(1).replace("\"", "").split(",");
+		String vsteam=vist[0]+"-"+homt[0];
+		String vsscore=vist[18]+"-"+homt[18];
+		//���ж�
+		//String type="";
+		descore.add(vsscore);
+		for(int i=4;i<18;i++){
+			if(!(vist[i].equals("0")||vist[i].equals("null"))){
+				String scor=vist[i]+"-"+homt[i];
+				descore.add(scor);
+			}
+		}
+		
+		}
+		
+		return descore;
 	}
 }

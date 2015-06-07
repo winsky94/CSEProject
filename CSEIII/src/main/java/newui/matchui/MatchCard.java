@@ -170,6 +170,7 @@ public class MatchCard extends JPanel implements MouseListener {
 		result.setBackground(Color.white);
 		// 根据ArrayList.size()节数确定这个panel分几行
 		ArrayList<String> detail = vo.getDetailScores();
+		if(detail!=null){
 		int rowNum = detail.size();
 		result.setLayout(new GridLayout(rowNum, 1));
 		// JLabel pointLbl=new JLabel(detail.get(0));
@@ -178,18 +179,20 @@ public class MatchCard extends JPanel implements MouseListener {
 		// result.add(pointLbl);
 		for (int i = 0; i < rowNum; i++)
 			result.add(new JLabel(detail.get(i)));
-
+		}
 		return result;
 	}
 
 	public void mouseClicked(MouseEvent e) {
-		if (e.getSource() == detailLbl)// 注意，这里应当传一个比赛的特征值过去
+		if (e.getSource() == detailLbl||e.getSource()==liveLbl){// 注意，这里应当传一个比赛的特征值过去
+			MatchDetailPanel p=new MatchDetailPanel(vo);
+			MainFrame.getInstance().setContentPanel(p);
+			p.setIsLive(isLive);
+			if(e.getSource()==liveLbl)
+				p.changeLive();
 			
-			MainFrame.getInstance().setContentPanel(new MatchDetailPanel(vo));
-		else if(e.getSource()==liveLbl){
-			//需判断是否该比赛已结束
-			MainFrame.getInstance().setContentPanel(new LiveDetailPanel(vo,0));
 		}
+		
 		else {
 			String name = vo.getVisitingTeam();
 			if (e.getSource() == homeIcon)
@@ -230,5 +233,8 @@ public class MatchCard extends JPanel implements MouseListener {
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		// f.add(new MatchCard());
 		f.repaint();
+	}
+	public void setLive(boolean is){
+		this.isLive=is;
 	}
 }

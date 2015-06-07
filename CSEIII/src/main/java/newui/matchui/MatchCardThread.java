@@ -47,6 +47,8 @@ public class MatchCardThread extends Thread{
 		for (MatchVO m:matchlist) {
 			
 			MatchCard card1 = new MatchCard(m);
+			if(m.getDetailScores()==null)
+				card1.setLive(true);
 			p.add(card1);
 			pp.revalidate();
 			

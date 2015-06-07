@@ -142,17 +142,7 @@ public class MatchDetailPanel extends FatherPanel {
 			}
 
 			public void mouseClicked(MouseEvent e) {
-				contentPnl.removeAll();
-				if(!isLive){
-				contentPnl.add(new HistoryLiveTextPanel(vo.getVisitingTeam(),
-						vo.getHomeTeam(), vo.getSeason(), vo.getDate()));
-				}else{
-					textpane=new LiveTextPanel(vo.getVisitingTeam(),
-							vo.getHomeTeam(), vo.getSeason(), vo.getDate()) ;
-					contentPnl.add(textpane);	
-				}
-				contentPnl.repaint();
-				contentPnl.revalidate();
+				changeLive();
 				
 			}
 		});
@@ -213,7 +203,19 @@ public class MatchDetailPanel extends FatherPanel {
 		table.revalidate();
 		contentPnl.add(jsp);
 	}
-	
+	public void changeLive(){
+		contentPnl.removeAll();
+		if(!isLive){
+		contentPnl.add(new HistoryLiveTextPanel(vo.getVisitingTeam(),
+				vo.getHomeTeam(), vo.getSeason(), vo.getDate()));
+		}else{
+			textpane=new LiveTextPanel(vo.getVisitingTeam(),
+					vo.getHomeTeam(), vo.getSeason(), vo.getDate()) ;
+			contentPnl.add(textpane);	
+		}
+		contentPnl.repaint();
+		contentPnl.revalidate();
+	}
 	
 	public void setIsLive(boolean t){
 		this.isLive=true;
