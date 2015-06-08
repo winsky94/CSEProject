@@ -119,10 +119,10 @@ public class LiveWebThread extends Thread{
 			System.out.println("No game Today");
 		for(ArrayList<String> line:IdAndStatus){
 			System.out.println(line.get(1));
-			if(!line.get(1).equals("3")){
+			if(/*line.get(1).equals("3")*/true){
 				String s=line.get(2).split("/")[1];
 				JFrame jFrame=new JFrame();	
-				LiveTextPanel mPanel=new LiveTextPanel(s.substring(0, 3),s.substring(3, 6),"14-15",m+"-"+d);
+				//LiveTextPanel mPanel=new LiveTextPanel(s.substring(0, 3),s.substring(3, 6),"14-15",m+"-"+d);
 				MatchVO v=new MatchVO("14-15",m+"-"+d,
 						"Playoff",s.substring(0, 3),
 						s.substring(3, 6));
@@ -141,7 +141,7 @@ public class LiveWebThread extends Thread{
 				cc.setTeam(line.get(4),line.get(3), s.substring(0, 3), s.substring(3, 6));
 				//give the panel info to save
 				//need day Change;  make day change function available
-				mPanel.initLiveData(season,m+"-"+d, s.substring(0, 3)+"-"+ s.substring(3, 6));
+			//	mPanel.initLiveData(season,m+"-"+d, s.substring(0, 3)+"-"+ s.substring(3, 6));
 				mm.setIsLive(true);
 				LiveWebThread th=new LiveWebThread(cc,line.get(0),mm);
 				th.startThread();
