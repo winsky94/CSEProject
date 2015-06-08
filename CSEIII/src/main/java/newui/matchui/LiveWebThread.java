@@ -61,7 +61,10 @@ public class LiveWebThread extends Thread{
 					//ac.getString(s.get(i));
 				//ac.refresh(res, line);
 				ac.RefreshLiveAndScore(res, line, lastscore);
+				ac.revalidate();
+				ac.repaint();
 				size=s.size();
+				
 				
 			}
 			System.out.println(s.size());
@@ -77,7 +80,7 @@ public class LiveWebThread extends Thread{
 			}
 			try {
 				//System.out.println("我到这里啦");
-				this.sleep(5000);
+				this.sleep(3000);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -123,6 +126,7 @@ public class LiveWebThread extends Thread{
 				MatchVO v=new MatchVO("14-15",m+"-"+d,
 						"Playoff",s.substring(0, 3),
 						s.substring(3, 6));
+				System.out.println(s);
 				MatchDetailPanel mm=new MatchDetailPanel(v);
 				//jFrame.getContentPane().add(mPanel);
 				jFrame.getContentPane().add(mm);

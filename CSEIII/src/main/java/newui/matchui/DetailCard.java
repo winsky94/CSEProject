@@ -32,7 +32,7 @@ public class DetailCard extends JPanel implements MouseListener {
 			vchNameLbl, vabbrNameLbl, visitingScore;
 	JPanel detailPnl;
 	boolean isHomeHigh = true;
-	int lastline=1;
+	int lastline=0;
 	ArrayList<String> vdet;
 	ArrayList<String> hdet ;
 	public DetailCard(MatchVO v,int status){
@@ -221,6 +221,8 @@ public class DetailCard extends JPanel implements MouseListener {
 			dl.setHorizontalAlignment(JLabel.CENTER);
 			detailPnl.add(dl);
 		}
+		visitingScore.setText(s[0]);
+		homeScore.setText(s[1]);
 		detailPnl.repaint();
 		detailPnl.revalidate();
 	}
