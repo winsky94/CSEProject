@@ -1,5 +1,6 @@
 package newui.matchui;
 
+import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -33,7 +34,7 @@ public class DetailCard extends JPanel implements MouseListener {
 	JPanel detailPnl;
 	boolean isHomeHigh = true;
 	boolean isHomeEqual=false;
-	int lastline=0;
+	int lastline=-1;
 	int col=5;
 	String hometeam,visteam;
 	ArrayList<String> vdet;
@@ -53,44 +54,53 @@ public class DetailCard extends JPanel implements MouseListener {
 		setOpaque(false);
 
 		setLayout(gbl);
-		// ----homeNamePnl--------
+		// ----visitingNamePnl--------
 		if (v.getHomeScore() < v.getVisitingScore())
 			isHomeHigh = false;
-		homeNamePnl = new JPanel();
-		homeNamePnl.setLayout(new GridLayout(2, 1));
-		homeNamePnl.setOpaque(false);
+		else if(v.getHomeScore()>v.getVisitingScore())
+			isHomeHigh=true;
+		else 
+			isHomeEqual=true;
+		visitingNamePnl = new JPanel();
+		visitingNamePnl.setLayout(new GridLayout(2, 1));
+		visitingNamePnl.setOpaque(false);	
+	
 		gbc.gridx = 0;
 		gbc.gridy = 0;
 		gbc.gridwidth = 2;
 		gbc.gridheight = 1;
 		gbc.weightx = 2;
 		gbc.weighty = 1;
-		gbl.setConstraints(homeNamePnl, gbc);
-		add(homeNamePnl);
-		// -----hchNameLbl------
-		hchNameLbl = new CHNameLabel(Team.changeTeamNameENToCH(v.getHomeTeam()));
-		homeNamePnl.add(hchNameLbl);
+		gbl.setConstraints(visitingNamePnl, gbc);
+		add(visitingNamePnl);
+		
+		// -----vchNameLbl------
+		vchNameLbl = new CHNameLabel(Team.changeTeamNameENToCH(v
+						.getVisitingTeam()));
+		visitingNamePnl.add(vchNameLbl);
 		// ----habbrNameLbl-----
-		habbrNameLbl = new AbbrNameLabel(v.getHomeTeam());
-		homeNamePnl.add(habbrNameLbl);
+		vabbrNameLbl = new AbbrNameLabel(v.getVisitingTeam());
+		visitingNamePnl.add(vabbrNameLbl);
+		
 		// ------homeScore-------
-		homeScore = new ScoreLabel(v.getHomeScore() + "");
+		visitingScore = new ScoreLabel(v.getVisitingScore() + "");
+		
 		gbc.gridx = 2;
 		gbc.gridwidth = 1;
 		gbc.weightx = 1;
-		gbl.setConstraints(homeScore, gbc);
-		add(homeScore);
-		// -----homeIcon---------
-		ImageIcon homeIco=Team.getTeamImage(v.getHomeTeam());
-		homeIco.setImage(homeIco.getImage().getScaledInstance(90, 90, Image.SCALE_SMOOTH));
-		homeIcon = new JLabel(homeIco);
+		gbl.setConstraints(visitingScore, gbc);
+		add(visitingScore);
+		// -----vIcon---------
+		ImageIcon visitingIco=Team.getTeamImage(v.getVisitingTeam());
+		visitingIco.setImage(visitingIco.getImage().getScaledInstance(90, 90, Image.SCALE_SMOOTH));
+		visitingIcon = new JLabel(visitingIco);
 		gbc.gridx = 3;
 		gbc.gridwidth = 2;
 		gbc.weightx = 2;
-		gbl.setConstraints(homeIcon, gbc);
-		add(homeIcon);
-		homeIcon.addMouseListener(this);
-		homeIcon.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		gbl.setConstraints(visitingIcon, gbc);
+		add(visitingIcon);
+		visitingIcon.addMouseListener(this);
+		visitingIcon.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		// -----vs----------------
 		JLabel vs = new JLabel("  VS  ");
 		vs.setFont(new Font("微软雅黑", Font.BOLD, 22));
@@ -99,46 +109,46 @@ public class DetailCard extends JPanel implements MouseListener {
 		gbc.gridwidth = 1;
 		gbc.weightx = 1;
 		gbl.setConstraints(vs, gbc);
-		add(vs);
+	//	add(vs);
 		// -----visitingIcon---------
-		ImageIcon visitingIco=Team.getTeamImage(v.getVisitingTeam());
-		visitingIco.setImage(visitingIco.getImage().getScaledInstance(90, 90, Image.SCALE_SMOOTH));
-		visitingIcon = new JLabel(visitingIco);
+		ImageIcon homeIco=Team.getTeamImage(v.getHomeTeam());
+		homeIco.setImage(homeIco.getImage().getScaledInstance(90, 90, Image.SCALE_SMOOTH));
+		homeIcon = new JLabel(homeIco);	
 		gbc.gridx = 6;
 		gbc.gridwidth = 2;
 		gbc.weightx = 2;
-		gbl.setConstraints(visitingIcon, gbc);
-		add(visitingIcon);
-		visitingIcon.addMouseListener(this);
-		visitingIcon.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		// ------visitingScore-------
-		visitingScore = new ScoreLabel(v.getVisitingScore() + "");
+		gbl.setConstraints(homeIcon, gbc);
+		add(homeIcon);
+		homeIcon.addMouseListener(this);
+		homeIcon.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		// ------homeScoreScore-------
+		homeScore = new ScoreLabel(v.getHomeScore() + "");
 		gbc.gridx = 8;
 		gbc.gridwidth = 1;
 		gbc.weightx = 1;
-		gbl.setConstraints(visitingScore, gbc);
-		add(visitingScore);
+		gbl.setConstraints(homeScore, gbc);
+		add(homeScore);
 		if (isHomeHigh)
-			homeScore.setBackground(Style.WINNER_RED);
+			homeScore.setForeground(Style.WINNER_RED);
 		else
-			visitingScore.setBackground(Style.WINNER_RED);
-		// ----visitingNamePnl--------
-		visitingNamePnl = new JPanel();
-		visitingNamePnl.setLayout(new GridLayout(2, 1));
-		visitingNamePnl.setOpaque(false);
+			visitingScore.setForeground(Style.WINNER_RED);
+		// ----homeNamePnl--------
+		homeNamePnl = new JPanel();
+		homeNamePnl.setLayout(new GridLayout(2, 1));
+		homeNamePnl.setOpaque(false);
 		gbc.gridx = 9;
 		gbc.gridwidth = 2;
 		gbc.weightx = 2;
-		gbl.setConstraints(visitingNamePnl, gbc);
-		add(visitingNamePnl);
-		// -----vchNameLbl------
-		vchNameLbl = new CHNameLabel(Team.changeTeamNameENToCH(v
-				.getVisitingTeam()));
-		visitingNamePnl.add(vchNameLbl);
-		// ----habbrNameLbl-----
-		vabbrNameLbl = new AbbrNameLabel(v.getVisitingTeam());
-		visitingNamePnl.add(vabbrNameLbl);
-
+		gbl.setConstraints(homeNamePnl, gbc);
+		add(homeNamePnl);
+		// -----hchNameLbl------
+				hchNameLbl = new CHNameLabel(Team.changeTeamNameENToCH(v.getHomeTeam()));
+				homeNamePnl.add(hchNameLbl);
+				// ----habbrNameLbl-----
+				habbrNameLbl = new AbbrNameLabel(v.getHomeTeam());
+				homeNamePnl.add(habbrNameLbl);
+	
+		
 		// ----------detailPanel-------
 		detailPnl = new JPanel();
 		detailPnl.setBorder(BorderFactory.createLineBorder(Style.DEEP_BLUE));
@@ -153,7 +163,7 @@ public class DetailCard extends JPanel implements MouseListener {
 		add(detailPnl);
 		// ------------
 		ArrayList<String> detail = v.getDetailScores();
-		int col=0;
+		
 		if(detail!=null)
 			col=detail.size()+1;
 		//int col = detail.size() + 1;
@@ -176,39 +186,52 @@ public class DetailCard extends JPanel implements MouseListener {
 		if (detail == null)
 			System.out.println("detail wei null");
 		vdet = new ArrayList<String>();
-		 hdet = new ArrayList<String>();
+		hdet = new ArrayList<String>();
+		if(detail!=null){
 		for (int i = 0; i < col-1; i++) {
 			String[] s = detail.get(i).split("-");
 			vdet.add(s[0]);
 			hdet.add(s[1]);
-		}
-		if(detail==null){
-			for(int i=0;i<5;i++){
+		}}else
+		{
+			
+			for(int i=0;i<col-1;i++){
 				vdet.add("-");
 				hdet.add("-");
 			}
+			
 		}
 		visteam=v.getVisitingTeam();
 		hometeam=v.getHomeTeam();
 		DetailLabel detailLabel1 = new DetailLabel(v.getVisitingTeam());
 		detailLabel1.setHorizontalAlignment(JLabel.CENTER);
 		detailPnl.add(detailLabel1);
-		for (String s : vdet) {
+		for (int i=0;i<vdet.size();i++) {
+			String s=vdet.get(i);
 			DetailLabel dl = new DetailLabel(s);
+			if(!s.equals("-"))
+				if(Integer.parseInt(s)>Integer.parseInt(hdet.get(i)))
+					dl.setForeground(Style.WINNER_RED);
+		
 			dl.setHorizontalAlignment(JLabel.CENTER);
 			detailPnl.add(dl);
 		}
 		DetailLabel detailLabel2 = new DetailLabel(v.getHomeTeam());
 		detailLabel2.setHorizontalAlignment(JLabel.CENTER);
 		detailPnl.add(detailLabel2);
-		for (String s : hdet) {
+		for (int i=0;i<hdet.size();i++) {
+			String s=hdet.get(i);
 			DetailLabel dl = new DetailLabel(s);
+			if(!s.equals("-"))
+				if(Integer.parseInt(s)>Integer.parseInt(vdet.get(i)))
+					dl.setForeground(Style.WINNER_RED);
 			dl.setHorizontalAlignment(JLabel.CENTER);
 			detailPnl.add(dl);
 		}
-
+		
 	}
 	public void RefershScore(String score,int line){
+		if(score!=""){
 		detailPnl.removeAll();
 		int vs=0,hs=0;
 		if(line>1){
@@ -219,24 +242,26 @@ public class DetailCard extends JPanel implements MouseListener {
 		}
 		}		
 		String[] s=score.split("-");
-		if(lastline>1){
+		if(line>1){
+			if(line<=vdet.size()){
 			vdet.set(line-1, ""+(Integer.parseInt(s[0])-vs));
 			hdet.set(line-1,""+(Integer.parseInt( s[1])-hs));}
 			else{
+				vdet.add( ""+(Integer.parseInt(s[0])-vs));
+				hdet.add(""+(Integer.parseInt( s[1])-hs));
+				col=vdet.size()+1;
+			}
+		}
+		else{
 				vdet.set(line-1,s[0]);
 				hdet.set(line-1, s[1]);
-			}
-		if(line==lastline){
-			
-		
-			
-		}else{
-			
-			//vdet.add(""+(Integer.parseInt(s[0])-vs));
-			//hdet.add(""+(Integer.parseInt(s[1])-hs));
-			lastline=line;
 		}
-
+		lastline=line-1;
+	/*	if(line==lastline){
+		}else{
+			lastline=line;
+		}*/
+	
 		if(Integer.parseInt(s[0])>Integer.parseInt(s[1])){
 			isHomeHigh=false;
 			isHomeEqual=false;}
@@ -251,6 +276,7 @@ public class DetailCard extends JPanel implements MouseListener {
 		homeScore.setText(s[1]);
 		detailPnl.repaint();
 		detailPnl.revalidate();
+		}
 	}
 	
 	public void RefreshDetail(){
@@ -279,27 +305,42 @@ public class DetailCard extends JPanel implements MouseListener {
 		DetailLabel detailLabel1 = new DetailLabel(visteam);
 		detailLabel1.setHorizontalAlignment(JLabel.CENTER);
 		detailPnl.add(detailLabel1);
-		for (String s : vdet) {
+		for (int i=0;i<vdet.size();i++) {
+			String s=vdet.get(i);
 			DetailLabel dl = new DetailLabel(s);
+			if(i<=lastline){
+				if(Integer.parseInt(s)>Integer.parseInt(hdet.get(i)))
+					dl.setForeground(Style.WINNER_RED);
+			}
 			dl.setHorizontalAlignment(JLabel.CENTER);
 			detailPnl.add(dl);
 		}
 		DetailLabel detailLabel2 = new DetailLabel(hometeam);
 		detailLabel2.setHorizontalAlignment(JLabel.CENTER);
 		detailPnl.add(detailLabel2);
-		for (String s : hdet) {
+		for (int i=0;i<hdet.size();i++) {
+			String s=hdet.get(i);
 			DetailLabel dl = new DetailLabel(s);
+			if(i<=lastline){
+				if(Integer.parseInt(s)>Integer.parseInt(vdet.get(i)))
+					dl.setForeground(Style.WINNER_RED);
+			}
 			dl.setHorizontalAlignment(JLabel.CENTER);
 			detailPnl.add(dl);
 		}
 		if(isHomeEqual){
-			homeScore.setBackground(Style.BACK_GREY);
-			visitingScore.setBackground(Style.BACK_GREY);
+			System.out.println("I'm here");
+			homeScore.setForeground(Style.BACK_GREY);
+			visitingScore.setForeground(Style.BACK_GREY);
 		}else{
-		if (isHomeHigh)
-			homeScore.setBackground(Style.WINNER_RED);
-		else
-			visitingScore.setBackground(Style.WINNER_RED);}
+		if (isHomeHigh){
+			homeScore.setForeground(Style.WINNER_RED);
+			visitingScore.setForeground(Style.BACK_GREY);
+		}
+		else{
+			visitingScore.setForeground(Style.WINNER_RED);
+		homeScore.setForeground(Style.BACK_GREY);	}
+		}
 	}
 	class DetailLabel extends JLabel {
 		private static final long serialVersionUID = 1L;

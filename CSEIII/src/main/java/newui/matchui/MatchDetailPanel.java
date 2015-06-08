@@ -210,11 +210,15 @@ public class MatchDetailPanel extends FatherPanel {
 		contentPnl.add(new HistoryLiveTextPanel(vo.getVisitingTeam(),
 				vo.getHomeTeam(), vo.getSeason(), vo.getDate()));
 		}else{
+			if(textpane==null){
 			textpane=new LiveTextPanel(vo.getVisitingTeam(),
 					vo.getHomeTeam(), vo.getSeason(), vo.getDate()) ;
-			contentPnl.add(textpane);	
 			textpane.initLiveData(vo.getSeason(), vo.getDate(), 
 					vo.getVisitingTeam()+"-"+vo.getHomeTeam());
+			
+			}
+			contentPnl.add(textpane);	
+			
 		}
 		contentPnl.repaint();
 		contentPnl.revalidate();
