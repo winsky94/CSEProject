@@ -196,6 +196,7 @@ public class DetailCard extends JPanel implements MouseListener {
 	}
 
 	public void RefershScore(String score,int line){
+		detailPnl.removeAll();
 		String[] s=score.split("-");
 		if(line==lastline){
 			vdet.set(line-1, s[0]);
@@ -217,6 +218,8 @@ public class DetailCard extends JPanel implements MouseListener {
 			dl.setHorizontalAlignment(JLabel.CENTER);
 			detailPnl.add(dl);
 		}
+		detailPnl.repaint();
+		detailPnl.revalidate();
 	}
 	class DetailLabel extends JLabel {
 		private static final long serialVersionUID = 1L;

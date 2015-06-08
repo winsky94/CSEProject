@@ -136,6 +136,7 @@ public class LiveWebThread extends Thread{
 				//give the panel info to save
 				//need day Change;  make day change function available
 				mPanel.initLiveData(season,m+"-"+d, s.substring(0, 3)+"-"+ s.substring(3, 6));
+				mm.setIsLive(true);
 				LiveWebThread th=new LiveWebThread(cc,line.get(0),mm);
 				th.startThread();
 			}
