@@ -41,8 +41,8 @@ public class LiveTextPanel extends JPanel implements ActionListener,MouseListene
 	private static final long serialVersionUID = 1L;
 	JTable jt;
     MediaTableModel mtm;
-    JPanel head,head1,head2,bottom;
-    JLabel headTxt,timeNow,headPic1,headPic2;
+    JPanel head,head2,bottom;
+    JLabel timeNow;
     ArrayList<JButton> jies=new ArrayList<JButton>();
     ArrayList<Boolean> isJies=new ArrayList<Boolean>();
     JScrollPane jsp;
@@ -67,25 +67,7 @@ public class LiveTextPanel extends JPanel implements ActionListener,MouseListene
     	head=new JPanel();
     	head.setLayout(new BorderLayout());
     	
-    	head1=new JPanel();
-    	headTxt=new JLabel(team1+"-"+team2);
-    	headTxt.setSize(20,20);
-    	headTxt.setFont(new Font("宋体",Font.PLAIN,30));
-    	headTxt.setForeground(Color.white);
-    	headPic1= new JLabel(new ImageIcon("src/data/teamsPng70/"+team1+".png"));
-    	headPic1.setPreferredSize(new Dimension(60,60));
-    	headPic2=new JLabel(new ImageIcon("src/data/teamsPng70/"+team2+".png"));
-    	headPic2.setPreferredSize(new Dimension(60, 60));
-    	head1.setBackground(Style.DEEP_BLUE);
-    	head1.add(headPic1);
-    	JPanel buffer1=new JPanel();
-    	buffer1.setBackground(Style.DEEP_BLUE);
-    	head1.add(buffer1);
-    	head1.add(headTxt);
-    	JPanel buffer2=new JPanel();
-    	buffer2.setBackground(Style.DEEP_BLUE);
-    	head1.add(buffer2);
-    	head1.add(headPic2);
+
     	
     	head2=new JPanel();
     	head2.setLayout(new FlowLayout());
@@ -96,8 +78,7 @@ public class LiveTextPanel extends JPanel implements ActionListener,MouseListene
     	for(int i=1;i<jies.size();i++)
     	  head2.add(jies.get(i));
     	     	
-    	head.add(head1);
-    	head.add(head2,BorderLayout.SOUTH);
+    	head.add(head2);
     	LiveMatchDetailVO vo=new LiveMatchDetailVO("null", "null", "null", 0, 0, "0,00:00,0,本场比赛尚未开始，请耐心等待");
     	bus.add(vo);
 	    mtm=new MediaTableModel(bus);

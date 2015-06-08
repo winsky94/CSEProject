@@ -150,7 +150,10 @@ public class DetailCard extends JPanel implements MouseListener {
 		add(detailPnl);
 		// ------------
 		ArrayList<String> detail = v.getDetailScores();
-		int col = detail.size() + 1;
+		int col=0;
+		if(detail!=null)
+			col=detail.size()+1;
+		//int col = detail.size() + 1;
 		GridLayout gridLayout = new GridLayout(3, col);
 		detailPnl.setLayout(gridLayout);
 		// detailPnl.add(new JLabel());
@@ -171,7 +174,7 @@ public class DetailCard extends JPanel implements MouseListener {
 			System.out.println("detail wei null");
 		vdet = new ArrayList<String>();
 		 hdet = new ArrayList<String>();
-		for (int i = 0; i < detail.size(); i++) {
+		for (int i = 0; i < col-1; i++) {
 			String[] s = detail.get(i).split("-");
 			vdet.add(s[0]);
 			hdet.add(s[1]);

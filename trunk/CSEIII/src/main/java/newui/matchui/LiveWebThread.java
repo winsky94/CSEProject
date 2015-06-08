@@ -115,7 +115,8 @@ public class LiveWebThread extends Thread{
 		if(IdAndStatus.size()==0)
 			System.out.println("No game Today");
 		for(ArrayList<String> line:IdAndStatus){
-			if(!line.get(1).equals("1")){
+			System.out.println(line.get(1));
+			if(!line.get(1).equals("3")){
 				String s=line.get(2).split("/")[1];
 				JFrame jFrame=new JFrame();	
 				LiveTextPanel mPanel=new LiveTextPanel(s.substring(0, 3),s.substring(3, 6),"14-15",m+"-"+d);
@@ -126,6 +127,7 @@ public class LiveWebThread extends Thread{
 				//jFrame.getContentPane().add(mPanel);
 				jFrame.getContentPane().add(mm);
 				mm.setIsLive(true);
+				mm.changeLive();
 				jFrame.setLocation(150, 50);
 				jFrame.setSize(1000,800);
 				jFrame.setVisible(true);
