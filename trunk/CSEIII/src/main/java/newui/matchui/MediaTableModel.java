@@ -1,5 +1,6 @@
 package newui.matchui;
 
+import java.awt.Image;
 import java.util.ArrayList;
 import java.util.Vector;
 
@@ -59,6 +60,9 @@ public class MediaTableModel  extends MyTableModel {
 				    String name=playerID.getPlayerName(id);
 				    names.add(name);
 				    ImageIcon image=Player.getPlayerPortraitImage(name);
+				    image.setImage(image.getImage().getScaledInstance(
+							60, 50
+						, Image.SCALE_DEFAULT));
 				    a.add(image);
 				}
 			}
@@ -124,6 +128,7 @@ public class MediaTableModel  extends MyTableModel {
 		
         String content;
 		playerID.openSql();
+		ArrayList<ArrayList<Object>> bu=new ArrayList<ArrayList<Object>>();
 		for(LiveMatchDetailVO vo:vos){
 			content=vo.getContent();
 			String[] buffer=content.split(",");
@@ -150,20 +155,30 @@ public class MediaTableModel  extends MyTableModel {
 				    String name=playerID.getPlayerName(id);
 				    names.add(name);
 				    ImageIcon image=Player.getPlayerPortraitImage(name);
+				    image.setImage(image.getImage().getScaledInstance(
+							60, 50
+						, Image.SCALE_DEFAULT));
 				    a.add(image);
 				}
 			}
 			
 			a.add(buffer[3]);
 			
-			rowData.add(a);
+			bu.add(a);
 			
+		}
+		
+		for(int i=bu.size()-1;i>=0;i--){
+			ArrayList<Object> a=bu.get(i);
+			rowData.add(0,a);		
 		}
 		playerID.closeSql();
 	}
 	
 	public void add(ArrayList<String> ss){
 		playerID.openSql();
+		ArrayList<ArrayList<Object>> bu=new ArrayList<ArrayList<Object>>();
+		ArrayList<String> namebu=new ArrayList<String>();
 	 for(String s:ss){
         String content=s;
 		String[] buffer=content.split(",");
@@ -178,26 +193,34 @@ public class MediaTableModel  extends MyTableModel {
 			
 		if(buffer[0].equals("0")&&buffer[2].equals("0")){
 			a.add("");
-			names.add("");
+			namebu.add("");
 		}
 		else{
 			int id=Integer.parseInt(buffer[2]);
 			if(id==0){
 				a.add("");
-				names.add("");
+				namebu.add("");
 			}
 			else{
 				String name=playerID.getPlayerName(id);
-				names.add(name);
+				namebu.add(name);
 				ImageIcon image=Player.getPlayerPortraitImage(name);
+				image.setImage(image.getImage().getScaledInstance(
+						60, 50
+					, Image.SCALE_DEFAULT));
 				a.add(image);
 			}
 		}
 			
 		a.add(buffer[3]);
 			
-		rowData.add(a);
-	 }	
+		bu.add(a);
+	 }
+	 for(int i=bu.size()-1;i>=0;i--){
+			ArrayList<Object> a=bu.get(i);
+			rowData.add(0,a);
+			names.add(0,namebu.get(i));
+     }
 		playerID.closeSql();
 	}
 	

@@ -158,8 +158,10 @@ public class LiveTextPanel extends JPanel implements ActionListener,MouseListene
 	    	mtm.clearAll();
 	    	mtm.add(data);
 	    	jt.revalidate();
-	    	for(String s:data)
-	    	  matches.get(1).add(new LiveMatchDetailVO("null", "null", "null", partNum, partNum, s));
+	    	for(int i=data.size()-1;i>=0;i--){
+	    	   String s=data.get(i);
+	    	   matches.get(1).add(0,new LiveMatchDetailVO("null", "null", "null", partNum, partNum, s));
+	    	}
 	    	isBegin=true;
 	    }
 	    else{
@@ -171,9 +173,11 @@ public class LiveTextPanel extends JPanel implements ActionListener,MouseListene
 	    		mtm.clearAll();
 	    	}
 	    	
-	    	for(String s:data)
-		    	  matches.get(partNum).add(new LiveMatchDetailVO("null", "null", "null", partNum, partNum, s));
-	        mtm.add(data);
+	    	for(int i=data.size()-1;i>=0;i--){
+	    		String s=data.get(i);
+		    	matches.get(partNum).add(0,new LiveMatchDetailVO("null", "null", "null", partNum, partNum, s));
+	    	}
+		    mtm.add(data);
 	        jt.revalidate();
 	        jt.repaint();
 	    }
