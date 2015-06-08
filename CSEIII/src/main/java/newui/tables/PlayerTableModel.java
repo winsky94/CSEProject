@@ -133,19 +133,19 @@ public class PlayerTableModel extends MyTableModel {
 			line.add(vo.getPlayedGames());
 			line.add(vo.getGameStartingNum());
 			line.add(Player.changeSecondToTime(vo.getPresentTime()));
-			line.add(MyUIDataFormater.formatTo3(vo.getReboundNum()));
-			line.add(MyUIDataFormater.formatTo3(vo.getAssistNum()));
-			line.add(MyUIDataFormater.formatTo3(vo.getBlockNum()));
-			line.add(MyUIDataFormater.formatTo3(vo.getStealNum()));
-			line.add(MyUIDataFormater.formatTo3(vo.getFoulNum()));
-			line.add(MyUIDataFormater.formatTo3(vo.getTurnOverNum()));
-			line.add(MyUIDataFormater.formatTo3(vo.getEfficiency()));
-			line.add(MyUIDataFormater.formatTo3(vo.getScore()));
+			line.add(MyUIDataFormater.formatTo1(vo.getReboundNum()));
+			line.add(MyUIDataFormater.formatTo1(vo.getAssistNum()));
+			line.add(MyUIDataFormater.formatTo1(vo.getBlockNum()));
+			line.add(MyUIDataFormater.formatTo1(vo.getStealNum()));
+			line.add(MyUIDataFormater.formatTo1(vo.getFoulNum()));
+			line.add(MyUIDataFormater.formatTo1(vo.getTurnOverNum()));
+			line.add(MyUIDataFormater.formatTo1(vo.getEfficiency()));
+			line.add(MyUIDataFormater.formatTo1(vo.getScore()));
 			line.add(MyUIDataFormater.formatTo3(vo.getShootHitRate()));
 			line.add(MyUIDataFormater.formatTo3(vo.getThreeHitRate()));
 			line.add(MyUIDataFormater.formatTo3(vo.getFreeThrowHitRate()));
-			line.add(MyUIDataFormater.formatTo3(vo.getDoubleDoubleNum()));
-			line.add(MyUIDataFormater.formatTo3(vo.getScore_rebound_assist()));
+			line.add(MyUIDataFormater.formatTo1(vo.getDoubleDoubleNum()));
+			line.add(MyUIDataFormater.formatTo1(vo.getScore_rebound_assist()));
 			content.add(line);
 
 		}
@@ -160,18 +160,18 @@ public class PlayerTableModel extends MyTableModel {
 			line.add(vo.getName());
 			line.add(vo.getOwingTeam());
 			line.add(MyUIDataFormater.formatTo3(vo.getTrueHitRate()));
-			line.add(MyUIDataFormater.formatTo3(vo.getGmScEfficiencyValue()));
+			line.add(MyUIDataFormater.formatTo1(vo.getGmScEfficiencyValue()));
 			line.add(MyUIDataFormater.formatTo3(vo.getShootHitEfficiency()));
-			line.add(MyUIDataFormater.formatTo3(vo.getReboundRate()));
-			line.add(MyUIDataFormater.formatTo3(vo.getOffenReboundNum()));
-			line.add(MyUIDataFormater.formatTo3(vo.getDefenReboundNum()));
-			line.add(MyUIDataFormater.formatTo3(vo.getOffenReboundRate()));
-			line.add(MyUIDataFormater.formatTo3(vo.getDefenReboundRate()));
-			line.add(MyUIDataFormater.formatTo3(vo.getAssistRate()));
-			line.add(MyUIDataFormater.formatTo3(vo.getStealRate()));
-			line.add(MyUIDataFormater.formatTo3(vo.getBlockRate()));
-			line.add(MyUIDataFormater.formatTo3(vo.getTurnOverRate()));
-			line.add(MyUIDataFormater.formatTo3(vo.getUsageRate()));
+			line.add(MyUIDataFormater.formatTo1(vo.getReboundRate()));
+			line.add(MyUIDataFormater.formatTo1(vo.getOffenReboundNum()));
+			line.add(MyUIDataFormater.formatTo1(vo.getDefenReboundNum()));
+			line.add(MyUIDataFormater.formatTo1(vo.getOffenReboundRate()));
+			line.add(MyUIDataFormater.formatTo1(vo.getDefenReboundRate()));
+			line.add(MyUIDataFormater.formatTo1(vo.getAssistRate()));
+			line.add(MyUIDataFormater.formatTo1(vo.getStealRate()));
+			line.add(MyUIDataFormater.formatTo1(vo.getBlockRate()));
+			line.add(MyUIDataFormater.formatTo1(vo.getTurnOverRate()));
+			line.add(MyUIDataFormater.formatTo1(vo.getUsageRate()));
 			content.add(line);
 		}
 
