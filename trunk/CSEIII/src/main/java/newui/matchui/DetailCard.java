@@ -109,7 +109,7 @@ public class DetailCard extends JPanel implements MouseListener {
 		gbc.gridwidth = 1;
 		gbc.weightx = 1;
 		gbl.setConstraints(vs, gbc);
-	//	add(vs);
+		add(vs);
 		// -----visitingIcon---------
 		ImageIcon homeIco=Team.getTeamImage(v.getHomeTeam());
 		homeIco.setImage(homeIco.getImage().getScaledInstance(90, 90, Image.SCALE_SMOOTH));
@@ -176,7 +176,10 @@ public class DetailCard extends JPanel implements MouseListener {
 		temp1.setHorizontalAlignment(JLabel.CENTER);
 		detailPnl.add(temp1);
 		for (int i = 1; i < col; i++) {
-			JLabel temp = new DetailLabel(String.valueOf(i));
+			String s=""+i;
+			if(i>4)
+				s="加时"+(i-4);
+			JLabel temp = new DetailLabel(s);
 			temp.setFont(new Font("微软雅黑", Font.BOLD, 18));
 			temp.setForeground(Style.FOCUS_GREY);
 			temp.setHorizontalAlignment(JLabel.CENTER);
@@ -286,7 +289,10 @@ public class DetailCard extends JPanel implements MouseListener {
 		temp1.setHorizontalAlignment(JLabel.CENTER);
 		detailPnl.add(temp1);
 		for (int i = 1; i < col; i++) {
-			JLabel temp = new DetailLabel(String.valueOf(i));
+			String s=""+i;
+			if(i>4)
+				s="加时"+(i-4);
+			JLabel temp = new DetailLabel(s);
 			temp.setFont(new Font("微软雅黑", Font.BOLD, 18));
 			temp.setForeground(Style.FOCUS_GREY);
 			temp.setHorizontalAlignment(JLabel.CENTER);
