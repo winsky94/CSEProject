@@ -220,7 +220,11 @@ public class Player implements PlayerBLService{
 
 //			DecimalFormat dec = new DecimalFormat("0.00");
 
-			shootHitRate = allshootHitNum / allshootAttemptNum;
+			if(allshootAttemptNum!=0){
+				shootHitRate = allshootHitNum / allshootAttemptNum;
+			}else {
+				shootHitRate=0;
+			}
 //			shootHitRate = Double.parseDouble(dec.format(shootHitRate));
 			if (allthreeAttemptNum != 0) {
 				threeHitRate = allthreeHitNum / allthreeAttemptNum;
