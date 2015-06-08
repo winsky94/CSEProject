@@ -122,23 +122,23 @@ public class TeamHistoryTableModel extends MyTableModel {
 			threeHitRate += p.getThreeHitRate();
 			line.add(MyUIDataFormater.formatTo3(p.getFreeThrowHitRate()));
 			freeHitRate += p.getFreeThrowHitRate();
-			line.add(MyUIDataFormater.formatTo3(p.getOffenReboundNum()));
+			line.add(MyUIDataFormater.formatTo1(p.getOffenReboundNum()));
 			offendNum += p.getOffenReboundNum();
-			line.add(MyUIDataFormater.formatTo3(p.getDefenReboundNum()));
+			line.add(MyUIDataFormater.formatTo1(p.getDefenReboundNum()));
 			defendNum += p.getDefenReboundNum();
-			line.add(MyUIDataFormater.formatTo3(p.getReboundNum()));
+			line.add(MyUIDataFormater.formatTo1(p.getReboundNum()));
 			reboundNum += p.getReboundNum();
-			line.add(MyUIDataFormater.formatTo3(p.getAssistNum()));
+			line.add(MyUIDataFormater.formatTo1(p.getAssistNum()));
 			assistNum += p.getAssistNum();
-			line.add(MyUIDataFormater.formatTo3(p.getStealNum()));
+			line.add(MyUIDataFormater.formatTo1(p.getStealNum()));
 			stealNum += p.getStealNum();
-			line.add(MyUIDataFormater.formatTo3(p.getBlockNum()));
+			line.add(MyUIDataFormater.formatTo1(p.getBlockNum()));
 			blockNum += p.getBlockNum();
-			line.add(MyUIDataFormater.formatTo3(p.getTurnOverNum()));
+			line.add(MyUIDataFormater.formatTo1(p.getTurnOverNum()));
 			turnOverNum += p.getTurnOverNum();
-			line.add(MyUIDataFormater.formatTo3(p.getFoulNum()));
+			line.add(MyUIDataFormater.formatTo1(p.getFoulNum()));
 			foulNum += p.getFoulNum();
-			line.add(p.getScore());
+			line.add(MyUIDataFormater.formatTo1(p.getScore()));
 			score += p.getScore();
 			content.add(line);
 		}
@@ -150,15 +150,15 @@ public class TeamHistoryTableModel extends MyTableModel {
 		last.add(MyUIDataFormater.formatTo3(shootHitRate / n));
 		last.add(MyUIDataFormater.formatTo3(threeHitRate / n));
 		last.add(MyUIDataFormater.formatTo3(freeHitRate / n));
-		last.add(offendNum);
-		last.add(defendNum);
-		last.add(reboundNum);
-		last.add(assistNum);
-		last.add(stealNum);
-		last.add(blockNum);
-		last.add(turnOverNum);
-		last.add(foulNum);
-		last.add(score);
+		last.add(MyUIDataFormater.formatTo1(offendNum));
+		last.add(MyUIDataFormater.formatTo1(defendNum));
+		last.add(MyUIDataFormater.formatTo1(reboundNum));
+		last.add(MyUIDataFormater.formatTo1(assistNum));
+		last.add(MyUIDataFormater.formatTo1(stealNum));
+		last.add(MyUIDataFormater.formatTo1(blockNum));
+		last.add(MyUIDataFormater.formatTo1(turnOverNum));
+		last.add(MyUIDataFormater.formatTo1(foulNum));
+		last.add(MyUIDataFormater.formatTo1(score));
 		content.add(last);
 
 	}
