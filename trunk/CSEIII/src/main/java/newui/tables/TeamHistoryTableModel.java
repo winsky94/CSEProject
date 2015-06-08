@@ -57,18 +57,36 @@ public class TeamHistoryTableModel extends MyTableModel {
 		this.tname = teamName;
 	}
 
+	// 当这个球员这个赛季不在该球队效力时，直接将其从teamMember中除去
+	// teamMember得到的是所有曾在该球队打过比赛的球员姓名
 	public void RefreshSeason(String season, String seasonType) {
 		ArrayList<PlayerVO> vo = new ArrayList<PlayerVO>();
-		for (PlayerVO v : teamMember) {
-			vo.add(player.getPlayerSeasonInfo(season, seasonType, v.getName()).get(0));
+		for (int i = 0; i < teamMember.size(); i++) {
+			PlayerVO v = teamMember.get(i);
+			ArrayList<PlayerVO> playerVO = player.getPlayerSeasonInfo(season,
+					seasonType, v.getName());
+			if (playerVO == null || playerVO.size() == 0) {
+				teamMember.remove(i);
+				i--;
+			} else {
+				vo.add(playerVO.get(0));
+			}
 		}
 		Refresh(vo, tname);
 	}
 
 	public void RefreshAverage(String seasonType) {
 		ArrayList<PlayerVO> vo = new ArrayList<PlayerVO>();
-		for (PlayerVO v : teamMember) {
-			vo.add(player.getPlayerAverageInfo(seasonType, v.getName()).get(0));
+		for (int i = 0; i < teamMember.size(); i++) {
+			PlayerVO v = teamMember.get(i);
+			ArrayList<PlayerVO> playerVO = player.getPlayerAverageInfo(
+					seasonType, v.getName());
+			if (playerVO == null || playerVO.size() == 0) {
+				teamMember.remove(i);
+				i--;
+			} else {
+				vo.add(playerVO.get(0));
+			}
 		}
 		Refresh(vo, tname);
 	}
@@ -129,9 +147,9 @@ public class TeamHistoryTableModel extends MyTableModel {
 		last.add(present / n);
 		last.add("-");
 		last.add("-");
-		last.add(shootHitRate / n);
-		last.add(threeHitRate / n);
-		last.add(freeHitRate / n);
+		last.add(MyUIDataFormater.formatTo3(shootHitRate / n));
+		last.add(MyUIDataFormater.formatTo3(threeHitRate / n));
+		last.add(MyUIDataFormater.formatTo3(freeHitRate / n));
 		last.add(offendNum);
 		last.add(defendNum);
 		last.add(reboundNum);
