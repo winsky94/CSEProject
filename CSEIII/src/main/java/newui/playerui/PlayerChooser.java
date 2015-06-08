@@ -140,7 +140,6 @@ public class PlayerChooser extends JDialog {
 
 	class ResultLblListener implements MouseListener {
 
-		@Override
 		public void mouseClicked(MouseEvent e) {
 			ResultLabel temp = (ResultLabel) e.getSource();
 			if (isA) {
@@ -171,24 +170,20 @@ public class PlayerChooser extends JDialog {
 			PlayerChooser.this.dispose();
 		}
 
-		@Override
 		public void mousePressed(MouseEvent e) {
 
 		}
 
-		@Override
 		public void mouseReleased(MouseEvent e) {
 			// TODO Auto-generated method stub
 
 		}
 
-		@Override
 		public void mouseEntered(MouseEvent e) {
 			ResultLabel temp = (ResultLabel) e.getSource();
 			temp.setForeground(Style.FOCUS_BLUE);
 		}
 
-		@Override
 		public void mouseExited(MouseEvent e) {
 			ResultLabel temp = (ResultLabel) e.getSource();
 			temp.setForeground(Style.DEEP_BLUE);
@@ -198,7 +193,6 @@ public class PlayerChooser extends JDialog {
 
 	class jtfListener implements KeyListener {
 
-		@Override
 		public void keyTyped(KeyEvent e) {
 			ArrayList<PlayerVO> searchResult = p.getPlayerBaseInfo(jtf
 					.getText());
@@ -207,13 +201,11 @@ public class PlayerChooser extends JDialog {
 			thre.start();
 		}
 
-		@Override
 		public void keyPressed(KeyEvent e) {
 			// TODO Auto-generated method stub
 
 		}
 
-		@Override
 		public void keyReleased(KeyEvent e) {
 			// TODO Auto-generated method stub
 
