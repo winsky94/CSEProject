@@ -32,7 +32,10 @@ public class DetailCard extends JPanel implements MouseListener {
 			vchNameLbl, vabbrNameLbl, visitingScore;
 	JPanel detailPnl;
 	boolean isHomeHigh = true;
+	boolean isHomeEqual=false;
 	int lastline=0;
+	int col=5;
+	String hometeam,visteam;
 	ArrayList<String> vdet;
 	ArrayList<String> hdet ;
 	public DetailCard(MatchVO v,int status){
@@ -179,6 +182,14 @@ public class DetailCard extends JPanel implements MouseListener {
 			vdet.add(s[0]);
 			hdet.add(s[1]);
 		}
+		if(detail==null){
+			for(int i=0;i<5;i++){
+				vdet.add("-");
+				hdet.add("-");
+			}
+		}
+		visteam=v.getVisitingTeam();
+		hometeam=v.getHomeTeam();
 		DetailLabel detailLabel1 = new DetailLabel(v.getVisitingTeam());
 		detailLabel1.setHorizontalAlignment(JLabel.CENTER);
 		detailPnl.add(detailLabel1);
@@ -197,34 +208,98 @@ public class DetailCard extends JPanel implements MouseListener {
 		}
 
 	}
-
 	public void RefershScore(String score,int line){
 		detailPnl.removeAll();
+		int vs=0,hs=0;
+		if(line>1){
+		for(int i=0;i<line-1;i++){
+			vs+=Integer.parseInt(vdet.get(i));
+			hs+=Integer.parseInt(hdet.get(i));
+		
+		}
+		}		
 		String[] s=score.split("-");
+		if(lastline>1){
+			vdet.set(line-1, ""+(Integer.parseInt(s[0])-vs));
+			hdet.set(line-1,""+(Integer.parseInt( s[1])-hs));}
+			else{
+				vdet.set(line-1,s[0]);
+				hdet.set(line-1, s[1]);
+			}
 		if(line==lastline){
-			vdet.set(line-1, s[0]);
-			hdet.set(line-1, s[1]);
+			
+		
 			
 		}else{
-			vdet.add(s[0]);
-			hdet.add(s[1]);
+			
+			//vdet.add(""+(Integer.parseInt(s[0])-vs));
+			//hdet.add(""+(Integer.parseInt(s[1])-hs));
 			lastline=line;
 		}
-		//the best condition is only update change score
-		for (String ss : vdet) {
-			DetailLabel dl = new DetailLabel(ss);
-			dl.setHorizontalAlignment(JLabel.CENTER);
-			detailPnl.add(dl);
+
+		if(Integer.parseInt(s[0])>Integer.parseInt(s[1])){
+			isHomeHigh=false;
+			isHomeEqual=false;}
+		else if(Integer.parseInt(s[0])<Integer.parseInt(s[1])) {
+			isHomeHigh=true;
+			isHomeEqual=false;
+		}else{
+			isHomeEqual=true;
 		}
-		for (String ss : hdet) {
-			DetailLabel dl = new DetailLabel(ss);
-			dl.setHorizontalAlignment(JLabel.CENTER);
-			detailPnl.add(dl);
-		}
+		RefreshDetail();
 		visitingScore.setText(s[0]);
 		homeScore.setText(s[1]);
 		detailPnl.repaint();
 		detailPnl.revalidate();
+	}
+	
+	public void RefreshDetail(){
+		JLabel temp1 = new DetailLabel("各节比分");
+		temp1.setFont(new Font("微软雅黑", Font.BOLD, 18));
+		temp1.setForeground(Style.FOCUS_GREY);
+		temp1.setHorizontalAlignment(JLabel.CENTER);
+		detailPnl.add(temp1);
+		for (int i = 1; i < col; i++) {
+			JLabel temp = new DetailLabel(String.valueOf(i));
+			temp.setFont(new Font("微软雅黑", Font.BOLD, 18));
+			temp.setForeground(Style.FOCUS_GREY);
+			temp.setHorizontalAlignment(JLabel.CENTER);
+			detailPnl.add(temp);
+		}
+
+	/*	if (detail == null)
+			System.out.println("detail wei null");
+		vdet = new ArrayList<String>();
+		 hdet = new ArrayList<String>();
+		for (int i = 0; i < col-1; i++) {
+			String[] s = detail.get(i).split("-");
+			vdet.add(s[0]);
+			hdet.add(s[1]);
+		}*/
+		DetailLabel detailLabel1 = new DetailLabel(visteam);
+		detailLabel1.setHorizontalAlignment(JLabel.CENTER);
+		detailPnl.add(detailLabel1);
+		for (String s : vdet) {
+			DetailLabel dl = new DetailLabel(s);
+			dl.setHorizontalAlignment(JLabel.CENTER);
+			detailPnl.add(dl);
+		}
+		DetailLabel detailLabel2 = new DetailLabel(hometeam);
+		detailLabel2.setHorizontalAlignment(JLabel.CENTER);
+		detailPnl.add(detailLabel2);
+		for (String s : hdet) {
+			DetailLabel dl = new DetailLabel(s);
+			dl.setHorizontalAlignment(JLabel.CENTER);
+			detailPnl.add(dl);
+		}
+		if(isHomeEqual){
+			homeScore.setBackground(Style.BACK_GREY);
+			visitingScore.setBackground(Style.BACK_GREY);
+		}else{
+		if (isHomeHigh)
+			homeScore.setBackground(Style.WINNER_RED);
+		else
+			visitingScore.setBackground(Style.WINNER_RED);}
 	}
 	class DetailLabel extends JLabel {
 		private static final long serialVersionUID = 1L;
