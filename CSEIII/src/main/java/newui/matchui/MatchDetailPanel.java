@@ -193,12 +193,13 @@ public class MatchDetailPanel extends FatherPanel {
 		jsp.getViewport().setBackground(Color.white);
 		model.setTime(v.getMatchTime());
 		ArrayList<RecordVO> vv = v.getRecords();
+		if(vv!=null){
 		for (RecordVO r : vv) {
 			if (r.getTeam().equals(v.getHomeTeam()))
 				Hrecord.add(r);
 			else
 				Vrecord.add(r);
-		}
+		}}
 		model.Refresh(Hrecord);
 		table.revalidate();
 		contentPnl.add(jsp);
