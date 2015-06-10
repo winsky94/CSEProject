@@ -85,7 +85,8 @@ public class PlayerData implements PlayerDataService {
 		int age;
 		int exp;
 		String school;
-		String[] content = new String[9];
+		String owingTeam;
+		String[] content = new String[10];
 		try {
 			File file = new File(fileName);
 			if (!file.exists()) {
@@ -133,8 +134,9 @@ public class PlayerData implements PlayerDataService {
 			exp = Integer.parseInt(content[7]);
 		}
 		school = content[8];
+		owingTeam=content[9];
 		player = new PlayerVO(name, number, position, height, weight, birth,
-				age, exp, school);
+				age, exp, school,owingTeam);
 		players.add(player);
 	}
 
@@ -149,9 +151,10 @@ public class PlayerData implements PlayerDataService {
 					+ "number varchar(40) not null default 'null',position varchar(20) not null default 'null',"
 					+ "height varchar(20) not null default 'null',weight int not null default 0,"
 					+ "birth varchar(20) not null default 'null',age int not null default 0,exp int not null default 0,"
-					+ "school varchar(40)not null default 'null',primary key(playerID));");
+					+ "school varchar(40) not null default 'null',owingTeam varchar(20) not null default 'null',"
+					+ "primary key(playerID));");
 			PreparedStatement statement = con
-					.prepareStatement("INSERT INTO playersActive VALUES(?, ?,?,?,?,?,?,?,?,?)");
+					.prepareStatement("INSERT INTO playersActive VALUES(?, ?,?,?,?,?,?,?,?,?,?)");
 			int count = 1;
 
 			for (PlayerVO player : players) {
@@ -166,6 +169,7 @@ public class PlayerData implements PlayerDataService {
 				statement.setInt(8, player.getAge());
 				statement.setInt(9, player.getExp());
 				statement.setString(10, player.getSchool());
+				statement.setString(11, player.getOwingTeam());
 				statement.addBatch();
 
 				System.out.println(count - 1);
@@ -179,10 +183,11 @@ public class PlayerData implements PlayerDataService {
 					+ "number varchar(40) not null default 'null',position varchar(20) not null default 'null',"
 					+ "height varchar(20) not null default 'null',weight int not null default 0,"
 					+ "birth varchar(20) not null default 'null',age int not null default 0,exp int not null default 0,"
-					+ "school varchar(40)not null default 'null',primary key(playerID));");
+					+ "school varchar(40)not null default 'null',owingTeam varchar(20) not null default 'null',"
+					+ "primary key(playerID));");
 			sql.close();
 			statement = con
-					.prepareStatement("INSERT INTO playersHistoric VALUES(?, ?,?,?,?,?,?,?,?,?)");
+					.prepareStatement("INSERT INTO playersHistoric VALUES(?, ?,?,?,?,?,?,?,?,?,?)");
 			count = 1;
 
 			for (PlayerVO player : players) {
@@ -197,6 +202,7 @@ public class PlayerData implements PlayerDataService {
 				statement.setInt(8, player.getAge());
 				statement.setInt(9, player.getExp());
 				statement.setString(10, player.getSchool());
+				statement.setString(11, player.getOwingTeam());
 				statement.addBatch();
 
 				System.out.println(count - 1);
@@ -237,7 +243,8 @@ public class PlayerData implements PlayerDataService {
 				int age;
 				int exp;
 				String school;
-
+                String owingTeam;
+				
 				name = resultSet.getString("name");
 				number = resultSet.getString("number");
 				position = resultSet.getString("position");
@@ -247,9 +254,10 @@ public class PlayerData implements PlayerDataService {
 				age = resultSet.getInt("age");
 				exp = resultSet.getInt("exp");
 				school = resultSet.getString("school");
+				owingTeam=resultSet.getString("owingTeam");
 
 				player = new PlayerVO(name, number, position, height, weight,
-						birth, age, exp, school);
+						birth, age, exp, school,owingTeam);
 				playersActiveForBL.put(name, player);
 			}
 			resultSet.close();
@@ -288,6 +296,7 @@ public class PlayerData implements PlayerDataService {
 				int age;
 				int exp;
 				String school;
+				String owingTeam;
 
 				name = resultSet.getString("name");
 				number = resultSet.getString("number");
@@ -298,9 +307,10 @@ public class PlayerData implements PlayerDataService {
 				age = resultSet.getInt("age");
 				exp = resultSet.getInt("exp");
 				school = resultSet.getString("school");
+				owingTeam=resultSet.getString("owingTeam");
 
 				player = new PlayerVO(name, number, position, height, weight,
-						birth, age, exp, school);
+						birth, age, exp, school,owingTeam);
 				playersHistoricForBL.put(name, player);
 			}
 			resultSet.close();
@@ -341,6 +351,7 @@ public class PlayerData implements PlayerDataService {
 			int age;
 			int exp;
 			String school;
+			String owingTeam;
 
 			thename = resultSet.getString("name");
 			number = resultSet.getString("number");
@@ -351,9 +362,10 @@ public class PlayerData implements PlayerDataService {
 			age = resultSet.getInt("age");
 			exp = resultSet.getInt("exp");
 			school = resultSet.getString("school");
+			owingTeam=resultSet.getString("owingTeam");
 
 			player = new PlayerVO(thename, number, position, height, weight,
-					birth, age, exp, school);
+					birth, age, exp, school,owingTeam);
 			resultSet.close();
 			sql.close();
 		} catch (ClassNotFoundException e) {
@@ -389,6 +401,7 @@ public class PlayerData implements PlayerDataService {
 				int age;
 				int exp;
 				String school;
+				String owingTeam;
 
 				thename = resultSet.getString("name");
 				number = resultSet.getString("number");
@@ -399,9 +412,10 @@ public class PlayerData implements PlayerDataService {
 				age = resultSet.getInt("age");
 				exp = resultSet.getInt("exp");
 				school = resultSet.getString("school");
+				owingTeam=resultSet.getString("owingTeam");
 
 				player = new PlayerVO(thename, number, position, height,
-						weight, birth, age, exp, school);
+						weight, birth, age, exp, school,owingTeam);
 				pArrayList.add(player);
 			}
 			resultSet.close();
