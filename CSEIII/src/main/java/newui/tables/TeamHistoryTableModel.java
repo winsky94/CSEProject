@@ -13,7 +13,7 @@ public class TeamHistoryTableModel extends MyTableModel {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	static String[] head = { "球员", "出场", "首发", "时间", "投篮", "三分", "罚球", "前篮板",
+	static String[] head = { "球员", "出场", "首发", "时间", "投篮%", "三分%", "罚球%", "前篮板",
 			"后篮板", "总篮板", "助攻", "抢断", "盖帽", "失误", "犯规", "得分" };
 	PlayerBLService player;
 	public ArrayList<PlayerVO> teamMember;
@@ -116,11 +116,11 @@ public class TeamHistoryTableModel extends MyTableModel {
 			present += p.getPlayedGames();
 			line.add(p.getGameStartingNum());
 			line.add(Player.changeSecondToTime(p.getPresentTime()));
-			line.add(MyUIDataFormater.formatTo3(p.getShootHitRate()));
+			line.add(MyUIDataFormater.formatTo1(p.getShootHitRate()*100));
 			shootHitRate += p.getShootHitRate();
-			line.add(MyUIDataFormater.formatTo3(p.getThreeHitRate()));
+			line.add(MyUIDataFormater.formatTo1(p.getThreeHitRate()*100));
 			threeHitRate += p.getThreeHitRate();
-			line.add(MyUIDataFormater.formatTo3(p.getFreeThrowHitRate()));
+			line.add(MyUIDataFormater.formatTo1(p.getFreeThrowHitRate()*100));
 			freeHitRate += p.getFreeThrowHitRate();
 			line.add(MyUIDataFormater.formatTo1(p.getOffenReboundNum()));
 			offendNum += p.getOffenReboundNum();
@@ -144,12 +144,21 @@ public class TeamHistoryTableModel extends MyTableModel {
 		}
 
 		last.add(tname + "全队");
-		last.add(present / n);
-		last.add("-");
-		last.add("-");
-		last.add(MyUIDataFormater.formatTo3(shootHitRate / n));
-		last.add(MyUIDataFormater.formatTo3(threeHitRate / n));
-		last.add(MyUIDataFormater.formatTo3(freeHitRate / n));
+		if (n == 0) {
+			last.add(0);
+			last.add("-");
+			last.add("-");
+			last.add(0.0);// 投篮命中率
+			last.add(0.0);// 三分命中率
+			last.add(0.0);// 罚球命中率
+		} else {
+			last.add(present / n);
+			last.add("-");
+			last.add("-");
+			last.add(MyUIDataFormater.formatTo3(shootHitRate / n));
+			last.add(MyUIDataFormater.formatTo3(threeHitRate / n));
+			last.add(MyUIDataFormater.formatTo3(freeHitRate / n));
+		}
 		last.add(MyUIDataFormater.formatTo1(offendNum));
 		last.add(MyUIDataFormater.formatTo1(defendNum));
 		last.add(MyUIDataFormater.formatTo1(reboundNum));

@@ -23,10 +23,10 @@ public class TeamTableModel extends MyTableModel {
 	// "防守篮板数", "篮板数", "进攻篮板效率", "防守篮板效率", "进攻回合", "进攻效率", "防守效率", "助攻数",
 	// "助攻率", "抢断数", "抢断效率", "盖帽数", "失误数", "犯规数", "比赛得分", "胜率" };
 
-	String[] headbase = { "球队名称", "简称", "比赛场数", "投篮命中率", "三分命中率", "罚球命中率",
+	String[] headbase = { "球队名称", "简称", "比赛场数", "投篮命中率%", "三分命中率%", "罚球命中率%",
 			"进攻篮板数", "防守篮板数", "篮板数", "助攻数", "抢断数", "盖帽数", "失误数", "犯规数", "比赛得分" };
 	String[] headhigh = { "球队名称", "简称", "进攻篮板效率", "防守篮板效率", "进攻回合", "进攻效率",
-			"防守效率", "助攻率", "抢断效率", "胜率" };
+			"防守效率", "助攻率", "抢断效率", "胜率%" };
 
 	public TeamTableModel(int model) {
 		if (model == 0) {
@@ -149,9 +149,9 @@ public class TeamTableModel extends MyTableModel {
 			line.add(vo.getTeamName());
 			line.add(vo.getAbLocation());
 			line.add(vo.getMatchesNum());
-			line.add(MyUIDataFormater.formatTo3(vo.getShootHitRate()));
-			line.add(MyUIDataFormater.formatTo3(vo.getThreeHitRate()));
-			line.add(MyUIDataFormater.formatTo3(vo.getFreeThrowHitRate()));
+			line.add(MyUIDataFormater.formatTo1(vo.getShootHitRate()*100));
+			line.add(MyUIDataFormater.formatTo1(vo.getThreeHitRate()*100));
+			line.add(MyUIDataFormater.formatTo1(vo.getFreeThrowHitRate()*100));
 			line.add(MyUIDataFormater.formatTo1(vo.getOffenReboundNum()));
 			line.add(MyUIDataFormater.formatTo1(vo.getDefenReboundNum()));
 			line.add(MyUIDataFormater.formatTo1(vo.getReboundNum()));
@@ -180,7 +180,7 @@ public class TeamTableModel extends MyTableModel {
 			line.add(MyUIDataFormater.formatTo1(vo.getDefenEfficiency()));
 			line.add(MyUIDataFormater.formatTo1(vo.getAssistRate()));
 			line.add(MyUIDataFormater.formatTo1(vo.getStealEfficiency()));
-			line.add(MyUIDataFormater.formatTo3(vo.getWinRate()));
+			line.add(MyUIDataFormater.formatTo1(vo.getWinRate()*100));
 			content.add(line);
 		}
 	}
