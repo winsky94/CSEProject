@@ -61,12 +61,13 @@ public class TeamHistoryTableModel extends MyTableModel {
 	// teamMember得到的是所有曾在该球队打过比赛的球员姓名
 	public void RefreshSeason(String season, String seasonType) {
 		ArrayList<PlayerVO> vo = new ArrayList<PlayerVO>();
-		for (int i = 0; i < teamMember.size(); i++) {
-			PlayerVO v = teamMember.get(i);
+		ArrayList<PlayerVO> teamMember1=clone(teamMember);
+		for (int i = 0; i < teamMember1.size(); i++) {
+			PlayerVO v = teamMember1.get(i);
 			ArrayList<PlayerVO> playerVO = player.getPlayerSeasonInfo(season,
 					seasonType, v.getName());
 			if (playerVO == null || playerVO.size() == 0) {
-				teamMember.remove(i);
+				teamMember1.remove(i);
 				i--;
 			} else {
 				vo.add(playerVO.get(0));
@@ -77,12 +78,13 @@ public class TeamHistoryTableModel extends MyTableModel {
 
 	public void RefreshAverage(String seasonType) {
 		ArrayList<PlayerVO> vo = new ArrayList<PlayerVO>();
-		for (int i = 0; i < teamMember.size(); i++) {
-			PlayerVO v = teamMember.get(i);
+		ArrayList<PlayerVO> teamMember1=clone(teamMember);
+		for (int i = 0; i < teamMember1.size(); i++) {
+			PlayerVO v = teamMember1.get(i);
 			ArrayList<PlayerVO> playerVO = player.getPlayerAverageInfo(
 					seasonType, v.getName());
 			if (playerVO == null || playerVO.size() == 0) {
-				teamMember.remove(i);
+				teamMember1.remove(i);
 				i--;
 			} else {
 				vo.add(playerVO.get(0));
@@ -91,6 +93,59 @@ public class TeamHistoryTableModel extends MyTableModel {
 		Refresh(vo, tname);
 	}
 
+	public ArrayList<PlayerVO> clone(ArrayList<PlayerVO> teamMember){
+		ArrayList<PlayerVO> result=new ArrayList<PlayerVO>();
+		for(PlayerVO playerSeason:teamMember){
+			int playedGames = playerSeason.getPlayedGames();
+			PlayerVO newPlayer;
+			newPlayer = new PlayerVO(playerSeason.getName(),
+						playerSeason.getNumber(), playerSeason.getPosition(),
+						playerSeason.getHeight(), playerSeason.getWeight(),
+						playerSeason.getBirth(), playerSeason.getAge(),
+						playerSeason.getExp(), playerSeason.getSchool(),
+						playerSeason.getOwingTeam(), playerSeason.getLeague(),
+						playedGames, playerSeason.getGameStartingNum(),
+						playerSeason.getReboundNum() ,
+						playerSeason.getAssistNum() ,
+						playerSeason.getPresentTime() ,
+						playerSeason.getShootHitNum(),
+						playerSeason.getShootAttemptNum(),
+						playerSeason.getShootHitRate(),
+						playerSeason.getThreeHitNum(),
+						playerSeason.getThreeAttemptNum(),
+						playerSeason.getThreeHitRate(), 
+						playerSeason.getFreeThrowHitNum(), 
+						playerSeason.getFreeThrowAttemptNum(),
+						playerSeason.getFreeThrowHitRate(),
+						playerSeason.getOffenReboundNum(),
+						playerSeason.getDefenReboundNum(),
+						playerSeason.getStealNum(),
+						playerSeason.getBlockNum(),
+						playerSeason.getTurnOverNum(),
+						playerSeason.getFoulNum(),
+						playerSeason.getScore(),
+						playerSeason.getEfficiency(),
+						playerSeason.getRecentFiveMatchesScoreUpRate(),
+						playerSeason.getRecentFiveMatchesReboundUpRate(),
+						playerSeason.getRecentFiveMatchesAssistUpRate(),
+						playerSeason.getGmScEfficiencyValue(),
+						playerSeason.getTrueHitRate(),
+						playerSeason.getShootHitEfficiency(),
+						playerSeason.getReboundRate(),
+						playerSeason.getOffenReboundRate(),
+						playerSeason.getDefenReboundRate(),
+						playerSeason.getAssistRate(),
+						playerSeason.getStealRate(),
+						playerSeason.getBlockRate(),
+						playerSeason.getTurnOverRate(),
+						playerSeason.getUsageRate(),
+						playerSeason.getScore_rebound_assist(), 
+						playerSeason.getDoubleDoubleNum());
+			result.add(newPlayer);
+		}
+		return result;
+	}
+	
 	public void Refresh(ArrayList<PlayerVO> pp, String tname) {
 		content.clear();
 		// 据图 率以后的都是累加 之前的都是平均 首发为"-" 时间为"0" 不理解 为啥不平均一下呢
