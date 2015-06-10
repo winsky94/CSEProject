@@ -215,7 +215,7 @@ public class HotTeamPanel extends HotFatherPanel implements MouseListener {
 		if (vlist != null && vlist.size() != 0) {
 			model.setHead(head);
 			TeamVO topOne = vlist.get(0);
-			ImageIcon bestTeamIco = Team.getTeamImage(topOne.getTeamName());
+			ImageIcon bestTeamIco = Team.getTeamImage(topOne.getAbLocation());
 			bestTeamIco.setImage(bestTeamIco.getImage().getScaledInstance(150, 150, Image.SCALE_SMOOTH));
 			teamIcon.setIcon(bestTeamIco);
 			teamNameLbl.setText(Team.changeTeamNameENToCH(topOne
