@@ -240,6 +240,8 @@ public class MatchIndexPanel extends FatherPanel {
 	public void searchRefresh(String h, String v, String date) {
 		String season = seasonBox.getSelectedItem().toString();
 		String seasonType=(String)seasonTypeBox.getSelectedItem();
+		if(seasonType.equals("全部"))
+			seasonType="all";
 		ArrayList<MatchVO> mlist = mservice.getMatchData(season,seasonType, date, Team.changeTeamNameCHToEN(h), Team.changeTeamNameCHToEN(v));
 		// ArrayList<MatchCard> matchCardList = new ArrayList<MatchCard>();
 
