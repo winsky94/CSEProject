@@ -122,6 +122,60 @@ public class PlayerVO {
 		
 	}
 	
+	public PlayerVO( String name, String number, String position,
+			String height, int weight, String birth, int age, int exp,
+			String school,String owingTeam) {
+		this.name = name;
+		this.number = number;
+		this.position = position;
+		this.height = height;
+		this.weight = weight;
+		this.birth = birth;
+		this.age = age;
+		this.exp = exp;
+		this.school = school;
+		this.owingTeam = owingTeam;
+		this.league="";
+		this.playedGames = 0;
+		this.gameStartingNum = 0;
+		this.reboundNum = 0;
+		this.assistNum = 0;
+		this.presentTime = 0;
+		this.shootHitNum=0;
+		this.shootAttemptNum=0;
+		this.shootHitRate = 0;
+		this.threeHitNum=0;
+		this.threeAttemptNum=0;
+		this.threeHitRate = 0;
+		this.freeThrowHitNum=0;
+		this.freeThrowAttemptNum=0;
+		this.freeThrowHitRate =0;
+		this.offenReboundNum =0;
+		this.defenReboundNum = 0;
+		this.stealNum = 0;
+		this.blockNum = 0;
+		this.turnOverNum = 0;
+		this.foulNum = 0;
+		this.score = 0;
+		this.efficiency = 0;
+		this.recentFiveMatchesReboundUpRate = 0;
+		this.recentFiveMatchesScoreUpRate = 0;
+		this.recentFiveMatchesAssistUpRate=0;
+		GmScEfficiencyValue = 0;
+		this.trueHitRate = 0;
+		this.shootEfficiency = 0;
+		this.reboundRate = 0;
+		this.offenReboundRate = 0;
+		this.defenReboundRate = 0;
+		this.assistRate = 0;
+		this.stealRate = 0;
+		this.blockRate = 0;
+		this.turnOverRate = 0;
+		this.usageRate = 0;
+		this.score_rebound_assist = 0;
+		this.doubleDoubleNum = 0;
+	}
+	
 	public PlayerVO(String name, String owingTeam,String league, int playedGames,
 			int gameStartingNum, double reboundNum, double assistNum,
 			double presentTime, double shootHitNum,double shootAttemptNum,double shootHitRate,
