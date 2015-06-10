@@ -7,3 +7,4 @@ Birth:1974-03-24
 Age:41
 Exp:1
 School:Alabama
+OwingTeam:DEN

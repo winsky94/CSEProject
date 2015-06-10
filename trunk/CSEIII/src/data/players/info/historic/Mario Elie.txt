@@ -7,3 +7,4 @@ Birth:1963-11-26
 Age:51
 Exp:10
 School:American International
+OwingTeam:PHX

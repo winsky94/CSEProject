@@ -7,3 +7,4 @@ Birth:1943-03-19
 Age:72
 Exp:4
 School:Wichita State
+OwingTeam:BUF

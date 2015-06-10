@@ -7,3 +7,4 @@ Birth:1949-04-11
 Age:66
 Exp:0
 School:Central Michigan
+OwingTeam:DET

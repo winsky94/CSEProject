@@ -7,3 +7,4 @@ Birth:1980-06-13
 Age:34
 Exp:5
 School:Tulane
+OwingTeam:CHI

@@ -7,3 +7,4 @@ Birth:1981-09-10
 Age:33
 Exp:0
 School:Duke
+OwingTeam:CHI

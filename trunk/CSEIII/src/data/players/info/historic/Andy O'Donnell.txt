@@ -7,3 +7,4 @@ Birth:1925-03-10
 Age:90
 Exp:0
 School:Loyola-Maryland
+OwingTeam:BAL

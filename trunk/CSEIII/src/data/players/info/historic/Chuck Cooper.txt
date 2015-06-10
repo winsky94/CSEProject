@@ -7,3 +7,4 @@ Birth:1926-09-29
 Age:88
 Exp:5
 School:Duquesne
+OwingTeam:FTW

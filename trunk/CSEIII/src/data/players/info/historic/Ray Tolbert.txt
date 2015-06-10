@@ -7,3 +7,4 @@ Birth:1958-09-10
 Age:56
 Exp:4
 School:Indiana
+OwingTeam:ATL

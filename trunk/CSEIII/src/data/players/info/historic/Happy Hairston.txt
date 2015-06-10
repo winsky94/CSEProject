@@ -7,3 +7,4 @@ Birth:1942-05-31
 Age:73
 Exp:10
 School:New York University
+OwingTeam:LAL

@@ -7,3 +7,4 @@ Birth:1958-05-22
 Age:57
 Exp:0
 School:North Carolina-Charlotte
+OwingTeam:DAL

@@ -7,3 +7,4 @@ Birth:1991-06-21
 Age:23
 Exp:2
 School:San Diego HS
+OwingTeam:NYK

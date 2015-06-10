@@ -7,3 +7,4 @@ Birth:1918-03-20
 Age:97
 Exp:5
 School:Appalachian State
+OwingTeam:BAL

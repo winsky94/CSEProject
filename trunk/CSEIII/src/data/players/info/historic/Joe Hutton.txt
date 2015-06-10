@@ -7,3 +7,4 @@ Birth:1928-10-06
 Age:86
 Exp:1
 School:Hamline
+OwingTeam:MNL

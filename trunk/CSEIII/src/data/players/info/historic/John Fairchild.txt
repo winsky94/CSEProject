@@ -7,3 +7,4 @@ Birth:1943-04-28
 Age:72
 Exp:0
 School:Brigham Young
+OwingTeam:LAL

@@ -7,3 +7,4 @@ Birth:1946-05-01
 Age:69
 Exp:0
 School:Saint Louis
+OwingTeam:BLT

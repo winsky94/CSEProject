@@ -7,3 +7,4 @@ Birth:1945-03-29
 Age:70
 Exp:12
 School:Southern Illinois
+OwingTeam:CLE

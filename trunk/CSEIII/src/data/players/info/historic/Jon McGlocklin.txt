@@ -7,3 +7,4 @@ Birth:1943-06-10
 Age:71
 Exp:10
 School:Indiana
+OwingTeam:MIL

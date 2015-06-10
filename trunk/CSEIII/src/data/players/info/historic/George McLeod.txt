@@ -7,3 +7,4 @@ Birth:1931-01-03
 Age:84
 Exp:0
 School:Texas Christian
+OwingTeam:BAL

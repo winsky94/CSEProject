@@ -7,3 +7,4 @@ Birth:1940-08-22
 Age:74
 Exp:0
 School:Texas-Pan American
+OwingTeam:SFW

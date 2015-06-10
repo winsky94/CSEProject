@@ -7,3 +7,4 @@ Birth:1959-05-15
 Age:56
 Exp:5
 School:Duke
+OwingTeam:CHI

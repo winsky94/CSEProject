@@ -7,3 +7,4 @@ Birth:1942-02-14
 Age:73
 Exp:9
 School:Villanova
+OwingTeam:DET

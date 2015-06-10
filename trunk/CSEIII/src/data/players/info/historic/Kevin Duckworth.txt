@@ -7,3 +7,4 @@ Birth:1964-04-01
 Age:51
 Exp:11
 School:Eastern Illinois
+OwingTeam:LAC

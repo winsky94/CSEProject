@@ -7,3 +7,4 @@ Birth:1954-09-15
 Age:60
 Exp:2
 School:Long Beach State
+OwingTeam:CHI

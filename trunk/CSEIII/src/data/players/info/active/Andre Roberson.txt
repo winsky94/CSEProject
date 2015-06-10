@@ -7,3 +7,4 @@ Birth:1991-12-04
 Age:23
 Exp:1
 School:Colorado
+OwingTeam:OKC

@@ -7,3 +7,4 @@ Birth:1932-10-29
 Age:82
 Exp:5
 School:Minnesota
+OwingTeam:NYK

@@ -7,3 +7,4 @@ Birth:1992-08-11
 Age:22
 Exp:0
 School:Providence
+OwingTeam:UTA

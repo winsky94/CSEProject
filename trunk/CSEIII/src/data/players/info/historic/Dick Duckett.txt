@@ -7,3 +7,4 @@ Birth:1933-03-25
 Age:82
 Exp:0
 School:St. John
+OwingTeam:CIN

@@ -7,3 +7,4 @@ Birth:1980-09-19
 Age:34
 Exp:1
 School:St. Bonaventure
+OwingTeam:GSW

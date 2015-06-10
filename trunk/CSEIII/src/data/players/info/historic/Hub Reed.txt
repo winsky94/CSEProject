@@ -7,3 +7,4 @@ Birth:1936-10-04
 Age:78
 Exp:6
 School:Oklahoma City
+OwingTeam:DET

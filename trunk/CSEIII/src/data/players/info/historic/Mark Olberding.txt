@@ -7,3 +7,4 @@ Birth:1956-04-21
 Age:59
 Exp:10
 School:Minnesota
+OwingTeam:SAC

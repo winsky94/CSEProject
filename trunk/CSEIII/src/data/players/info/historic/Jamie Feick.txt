@@ -7,3 +7,4 @@ Birth:1974-07-03
 Age:40
 Exp:5
 School:Michigan State
+OwingTeam:NJN

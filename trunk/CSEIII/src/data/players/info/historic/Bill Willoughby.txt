@@ -7,3 +7,4 @@ Birth:1957-05-20
 Age:58
 Exp:7
 School:
+OwingTeam:NJN

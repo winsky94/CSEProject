@@ -7,3 +7,4 @@ Birth:1970-12-15
 Age:44
 Exp:6
 School:Ohio State
+OwingTeam:CHI

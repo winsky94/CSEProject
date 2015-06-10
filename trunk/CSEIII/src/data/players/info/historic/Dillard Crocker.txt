@@ -7,3 +7,4 @@ Birth:1925-01-19
 Age:90
 Exp:3
 School:Western Michigan
+OwingTeam:MIH

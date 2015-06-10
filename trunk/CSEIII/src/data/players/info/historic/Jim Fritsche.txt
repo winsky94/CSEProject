@@ -7,3 +7,4 @@ Birth:1931-12-10
 Age:83
 Exp:1
 School:Hamline
+OwingTeam:FTW

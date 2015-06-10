@@ -7,3 +7,4 @@ Birth:1931-01-06
 Age:84
 Exp:3
 School:Western Kentucky
+OwingTeam:CIN

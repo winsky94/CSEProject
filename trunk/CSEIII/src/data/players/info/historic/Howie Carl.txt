@@ -7,3 +7,4 @@ Birth:1938-06-07
 Age:76
 Exp:0
 School:DePaul
+OwingTeam:CHP

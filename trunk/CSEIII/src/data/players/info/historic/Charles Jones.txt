@@ -7,3 +7,4 @@ Birth:1957-04-03
 Age:58
 Exp:14
 School:Albany State 
+OwingTeam:WAS

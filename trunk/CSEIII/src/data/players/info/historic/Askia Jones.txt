@@ -7,3 +7,4 @@ Birth:1971-12-03
 Age:43
 Exp:0
 School:Kansas State
+OwingTeam:MIN

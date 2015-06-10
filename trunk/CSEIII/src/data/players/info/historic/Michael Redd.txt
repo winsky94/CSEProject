@@ -7,3 +7,4 @@ Birth:1979-08-24
 Age:35
 Exp:11
 School:Ohio State
+OwingTeam:PHX

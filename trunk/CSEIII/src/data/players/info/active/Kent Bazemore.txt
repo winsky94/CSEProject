@@ -7,3 +7,4 @@ Birth:1989-07-01
 Age:25
 Exp:2
 School:Old Dominion
+OwingTeam:ATL

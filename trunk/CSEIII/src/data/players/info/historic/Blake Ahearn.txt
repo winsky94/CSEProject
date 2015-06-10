@@ -7,3 +7,4 @@ Birth:1984-05-27
 Age:31
 Exp:2
 School:Missouri State
+OwingTeam:UTA

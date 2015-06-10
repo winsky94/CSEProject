@@ -7,3 +7,4 @@ Birth:1934-09-16
 Age:80
 Exp:13
 School:Seattle
+OwingTeam:LAL

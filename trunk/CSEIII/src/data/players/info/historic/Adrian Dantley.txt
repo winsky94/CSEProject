@@ -7,3 +7,4 @@ Birth:1955-02-26
 Age:60
 Exp:14
 School:Notre Dame
+OwingTeam:MIL

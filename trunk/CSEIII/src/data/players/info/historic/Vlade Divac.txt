@@ -7,3 +7,4 @@ Birth:1968-02-03
 Age:47
 Exp:15
 School:Serbia
+OwingTeam:LAL

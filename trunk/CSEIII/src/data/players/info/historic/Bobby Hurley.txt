@@ -7,3 +7,4 @@ Birth:1971-06-28
 Age:43
 Exp:4
 School:Duke
+OwingTeam:VAN

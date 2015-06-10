@@ -7,3 +7,4 @@ Birth:1942-06-25
 Age:72
 Exp:9
 School:Grambling
+OwingTeam:NYK

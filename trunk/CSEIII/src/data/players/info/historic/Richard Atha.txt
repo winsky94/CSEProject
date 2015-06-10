@@ -7,3 +7,4 @@ Birth:1931-09-21
 Age:83
 Exp:1
 School:Indiana State
+OwingTeam:DET

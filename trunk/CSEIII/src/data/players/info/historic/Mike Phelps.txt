@@ -7,3 +7,4 @@ Birth:1961-10-03
 Age:53
 Exp:2
 School:Alcorn State
+OwingTeam:LAC

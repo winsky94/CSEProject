@@ -7,3 +7,4 @@ Birth:1978-05-08
 Age:37
 Exp:6
 School:Hofstra
+OwingTeam:ATL

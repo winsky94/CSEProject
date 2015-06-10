@@ -7,3 +7,4 @@ Birth:1986-01-27
 Age:29
 Exp:7
 School:Paris
+OwingTeam:ATL

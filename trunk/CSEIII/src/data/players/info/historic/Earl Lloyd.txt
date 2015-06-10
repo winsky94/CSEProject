@@ -7,3 +7,4 @@ Birth:1928-04-03
 Age:87
 Exp:8
 School:West Virginia State
+OwingTeam:DET

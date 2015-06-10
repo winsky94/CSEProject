@@ -7,3 +7,4 @@ Birth:1981-04-01
 Age:34
 Exp:0
 School:Greece
+OwingTeam:MEM

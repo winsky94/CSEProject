@@ -7,3 +7,4 @@ Birth:1921-07-18
 Age:93
 Exp:0
 School:Bradley
+OwingTeam:BAL

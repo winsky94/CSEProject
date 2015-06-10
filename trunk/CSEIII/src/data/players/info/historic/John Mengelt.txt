@@ -7,3 +7,4 @@ Birth:1949-10-16
 Age:65
 Exp:9
 School:Auburn
+OwingTeam:GOS

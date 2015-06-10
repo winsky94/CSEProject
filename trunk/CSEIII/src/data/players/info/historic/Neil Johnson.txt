@@ -7,3 +7,4 @@ Birth:1943-04-17
 Age:72
 Exp:3
 School:Creighton
+OwingTeam:PHX

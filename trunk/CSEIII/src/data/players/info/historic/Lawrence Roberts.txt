@@ -7,3 +7,4 @@ Birth:1982-10-20
 Age:32
 Exp:1
 School:Mississippi State
+OwingTeam:MEM

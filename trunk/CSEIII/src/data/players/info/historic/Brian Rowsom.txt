@@ -7,3 +7,4 @@ Birth:1965-10-23
 Age:49
 Exp:2
 School:North Carolina-Wilmington
+OwingTeam:CHH

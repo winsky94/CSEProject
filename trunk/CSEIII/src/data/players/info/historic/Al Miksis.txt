@@ -7,3 +7,4 @@ Birth:1928-02-02
 Age:87
 Exp:0
 School:Western Illinois
+OwingTeam:WAT

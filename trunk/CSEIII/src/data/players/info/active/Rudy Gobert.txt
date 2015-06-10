@@ -7,3 +7,4 @@ Birth:1992-06-26
 Age:22
 Exp:1
 School:France
+OwingTeam:UTA

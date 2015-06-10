@@ -7,3 +7,4 @@ Birth:1990-05-16
 Age:25
 Exp:1
 School:
+OwingTeam:GSW

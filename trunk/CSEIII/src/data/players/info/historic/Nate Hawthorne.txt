@@ -7,3 +7,4 @@ Birth:1951-01-19
 Age:64
 Exp:2
 School:Southern Illinois
+OwingTeam:PHX

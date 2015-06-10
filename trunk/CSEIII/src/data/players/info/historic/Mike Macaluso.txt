@@ -7,3 +7,4 @@ Birth:1951-07-20
 Age:63
 Exp:0
 School:Canisius
+OwingTeam:BUF

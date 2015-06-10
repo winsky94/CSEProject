@@ -7,3 +7,4 @@ Birth:1983-07-25
 Age:31
 Exp:6
 School:Kraljevo
+OwingTeam:BOS

@@ -7,3 +7,4 @@ Birth:1958-10-05
 Age:56
 Exp:2
 School:Louisiana-Monroe
+OwingTeam:KCK

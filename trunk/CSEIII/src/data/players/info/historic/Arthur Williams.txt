@@ -7,3 +7,4 @@ Birth:1939-09-29
 Age:75
 Exp:6
 School:Cal State-Poly Pomona
+OwingTeam:BOS

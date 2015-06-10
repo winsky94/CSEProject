@@ -7,3 +7,4 @@ Birth:1948-09-10
 Age:66
 Exp:13
 School:St. Bonaventure
+OwingTeam:MIL

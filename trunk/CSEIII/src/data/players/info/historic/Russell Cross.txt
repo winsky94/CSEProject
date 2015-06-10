@@ -7,3 +7,4 @@ Birth:1961-09-05
 Age:53
 Exp:0
 School:Purdue
+OwingTeam:GOS

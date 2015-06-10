@@ -7,3 +7,4 @@ Birth:1922-10-13
 Age:92
 Exp:7
 School:Xavier 
+OwingTeam:DET

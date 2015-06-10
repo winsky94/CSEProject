@@ -7,3 +7,4 @@ Birth:1938-10-22
 Age:76
 Exp:1
 School:Saint Joseph
+OwingTeam:LAL

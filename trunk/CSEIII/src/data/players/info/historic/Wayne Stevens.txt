@@ -7,3 +7,4 @@ Birth:1936-06-19
 Age:78
 Exp:0
 School:Cincinnati
+OwingTeam:CIN

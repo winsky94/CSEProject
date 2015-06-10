@@ -7,3 +7,4 @@ Birth:1968-07-23
 Age:46
 Exp:16
 School:Oregon State
+OwingTeam:MIA

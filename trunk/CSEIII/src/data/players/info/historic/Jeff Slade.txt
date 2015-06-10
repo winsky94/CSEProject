@@ -7,3 +7,4 @@ Birth:1941-03-01
 Age:74
 Exp:0
 School:Kenyon
+OwingTeam:CHZ

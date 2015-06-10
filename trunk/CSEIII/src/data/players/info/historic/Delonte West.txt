@@ -7,3 +7,4 @@ Birth:1983-07-26
 Age:31
 Exp:7
 School:Saint Joseph
+OwingTeam:DAL

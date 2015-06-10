@@ -7,3 +7,4 @@ Birth:1976-06-24
 Age:38
 Exp:3
 School:Saint Vincent
+OwingTeam:MIL

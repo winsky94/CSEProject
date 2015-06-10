@@ -7,3 +7,4 @@ Birth:1940-02-19
 Age:75
 Exp:4
 School:Southern Illinois
+OwingTeam:DET

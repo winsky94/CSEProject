@@ -7,3 +7,4 @@ Birth:1952-06-09
 Age:62
 Exp:8
 School:Pittsburgh
+OwingTeam:KCK

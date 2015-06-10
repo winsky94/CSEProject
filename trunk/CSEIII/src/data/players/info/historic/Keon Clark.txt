@@ -7,3 +7,4 @@ Birth:1975-04-16
 Age:40
 Exp:5
 School:Nevada-Las Vegas
+OwingTeam:PHX

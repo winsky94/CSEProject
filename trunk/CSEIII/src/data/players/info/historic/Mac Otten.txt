@@ -7,3 +7,4 @@ Birth:1925-12-16
 Age:89
 Exp:0
 School:Bowling Green
+OwingTeam:BOM

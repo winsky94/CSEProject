@@ -7,3 +7,4 @@ Birth:1959-06-13
 Age:55
 Exp:8
 School:North Carolina State
+OwingTeam:SAN

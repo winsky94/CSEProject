@@ -7,3 +7,4 @@ Birth:1947-01-12
 Age:68
 Exp:1
 School:Duke
+OwingTeam:SEA

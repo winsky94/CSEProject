@@ -7,3 +7,4 @@ Birth:1978-03-18
 Age:37
 Exp:1
 School:Mali
+OwingTeam:LAL

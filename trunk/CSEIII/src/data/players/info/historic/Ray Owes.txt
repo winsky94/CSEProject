@@ -7,3 +7,4 @@ Birth:1972-12-12
 Age:42
 Exp:0
 School:Arizona
+OwingTeam:GSW

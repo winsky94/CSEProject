@@ -7,3 +7,4 @@ Birth:1950-01-18
 Age:65
 Exp:4
 School:Kansas
+OwingTeam:NOJ

@@ -7,3 +7,4 @@ Birth:1943-02-28
 Age:72
 Exp:2
 School:Kentucky
+OwingTeam:SEA

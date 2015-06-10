@@ -7,3 +7,4 @@ Birth:1970-09-09
 Age:44
 Exp:0
 School:Middle Tennessee State
+OwingTeam:PHL

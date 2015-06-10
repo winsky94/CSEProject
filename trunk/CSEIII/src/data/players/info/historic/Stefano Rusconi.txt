@@ -7,3 +7,4 @@ Birth:1968-02-10
 Age:47
 Exp:0
 School:Italy
+OwingTeam:PHX

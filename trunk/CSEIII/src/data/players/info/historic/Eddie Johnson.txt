@@ -7,3 +7,4 @@ Birth:1955-02-24
 Age:60
 Exp:9
 School:Auburn
+OwingTeam:SEA

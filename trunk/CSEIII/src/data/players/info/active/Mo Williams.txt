@@ -7,3 +7,4 @@ Birth:1982-12-19
 Age:32
 Exp:11
 School:Alabama
+OwingTeam:CHA

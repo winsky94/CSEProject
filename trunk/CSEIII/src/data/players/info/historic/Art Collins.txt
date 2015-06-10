@@ -7,3 +7,4 @@ Birth:1954-04-14
 Age:61
 Exp:0
 School:St. Thomas 
+OwingTeam:ATL

@@ -7,3 +7,4 @@ Birth:1973-04-17
 Age:42
 Exp:15
 School:Wyoming
+OwingTeam:LAL

@@ -7,3 +7,4 @@ Birth:1953-10-04
 Age:61
 Exp:6
 School:Central Michigan
+OwingTeam:ATL

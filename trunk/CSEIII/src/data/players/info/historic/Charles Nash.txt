@@ -7,3 +7,4 @@ Birth:1942-07-24
 Age:72
 Exp:0
 School:Kentucky
+OwingTeam:SFW

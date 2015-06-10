@@ -7,3 +7,4 @@ Birth:1944-05-11
 Age:71
 Exp:3
 School:Grambling
+OwingTeam:PHX

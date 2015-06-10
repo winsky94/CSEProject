@@ -7,3 +7,4 @@ Birth:1920-04-12
 Age:95
 Exp:0
 School:Sam Houston State
+OwingTeam:AND

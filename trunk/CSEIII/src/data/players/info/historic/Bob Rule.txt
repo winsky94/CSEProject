@@ -7,3 +7,4 @@ Birth:1944-06-29
 Age:70
 Exp:7
 School:Colorado State
+OwingTeam:MIL

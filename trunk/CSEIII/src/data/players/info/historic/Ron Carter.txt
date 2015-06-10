@@ -7,3 +7,4 @@ Birth:1956-08-31
 Age:58
 Exp:1
 School:Virginia Military Institute
+OwingTeam:IND

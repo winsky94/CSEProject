@@ -7,3 +7,4 @@ Birth:1984-10-10
 Age:30
 Exp:8
 School:California-Los Angeles
+OwingTeam:SAC

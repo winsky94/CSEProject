@@ -7,3 +7,4 @@ Birth:1985-05-05
 Age:30
 Exp:3
 School:Texas
+OwingTeam:PHX

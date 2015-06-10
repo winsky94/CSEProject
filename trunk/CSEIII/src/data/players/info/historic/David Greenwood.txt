@@ -7,3 +7,4 @@ Birth:1957-05-27
 Age:58
 Exp:11
 School:California-Los Angeles
+OwingTeam:SAN

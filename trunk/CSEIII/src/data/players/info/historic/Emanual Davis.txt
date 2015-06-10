@@ -7,3 +7,4 @@ Birth:1968-08-27
 Age:46
 Exp:5
 School:Delaware State
+OwingTeam:ATL

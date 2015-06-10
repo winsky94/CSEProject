@@ -7,3 +7,4 @@ Birth:1926-09-24
 Age:88
 Exp:1
 School:San Francisco
+OwingTeam:BAL

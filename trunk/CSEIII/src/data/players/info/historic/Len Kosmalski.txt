@@ -7,3 +7,4 @@ Birth:1951-11-29
 Age:63
 Exp:1
 School:Tennessee
+OwingTeam:KCK

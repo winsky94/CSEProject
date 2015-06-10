@@ -7,3 +7,4 @@ Birth:1937-07-22
 Age:77
 Exp:0
 School:Iowa
+OwingTeam:SFW

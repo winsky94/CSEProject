@@ -7,3 +7,4 @@ Birth:1982-08-09
 Age:32
 Exp:7
 School:Nevada-Las Vegas
+OwingTeam:DET

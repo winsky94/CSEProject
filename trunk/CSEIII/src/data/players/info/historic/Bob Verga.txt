@@ -7,3 +7,4 @@ Birth:1945-09-07
 Age:69
 Exp:0
 School:Duke
+OwingTeam:POR

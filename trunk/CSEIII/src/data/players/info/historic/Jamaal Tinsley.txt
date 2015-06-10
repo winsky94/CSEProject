@@ -7,3 +7,4 @@ Birth:1978-02-28
 Age:37
 Exp:0
 School:Iowa State
+OwingTeam:

@@ -7,3 +7,4 @@ Birth:1978-02-14
 Age:37
 Exp:13
 School:Connecticut
+OwingTeam:CHI

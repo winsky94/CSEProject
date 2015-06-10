@@ -7,3 +7,4 @@ Birth:1920-08-14
 Age:94
 Exp:0
 School:Temple
+OwingTeam:PIT

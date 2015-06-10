@@ -7,3 +7,4 @@ Birth:1915-07-30
 Age:99
 Exp:0
 School:Duquesne
+OwingTeam:PIT

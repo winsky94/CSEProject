@@ -7,3 +7,4 @@ Birth:1969-06-25
 Age:45
 Exp:1
 School:Southern California
+OwingTeam:PHX

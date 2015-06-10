@@ -7,3 +7,4 @@ Birth:1971-05-01
 Age:44
 Exp:0
 School:Liberty
+OwingTeam:SAN

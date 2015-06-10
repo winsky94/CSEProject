@@ -7,3 +7,4 @@ Birth:1964-05-28
 Age:51
 Exp:11
 School:Nevada-Las Vegas
+OwingTeam:UTA

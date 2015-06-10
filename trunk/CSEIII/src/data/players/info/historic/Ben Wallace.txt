@@ -7,3 +7,4 @@ Birth:1974-09-10
 Age:40
 Exp:15
 School:Virginia Union
+OwingTeam:DET

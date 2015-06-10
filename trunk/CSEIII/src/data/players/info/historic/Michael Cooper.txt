@@ -7,3 +7,4 @@ Birth:1956-04-15
 Age:59
 Exp:11
 School:New Mexico
+OwingTeam:LAL

@@ -7,3 +7,4 @@ Birth:1953-12-30
 Age:61
 Exp:0
 School:Kent State
+OwingTeam:DET

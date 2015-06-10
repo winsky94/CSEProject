@@ -7,3 +7,4 @@ Birth:1930-04-09
 Age:85
 Exp:0
 School:Northwestern State
+OwingTeam:MIH

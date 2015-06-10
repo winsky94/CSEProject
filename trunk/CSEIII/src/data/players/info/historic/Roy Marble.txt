@@ -7,3 +7,4 @@ Birth:1966-12-13
 Age:48
 Exp:1
 School:Iowa
+OwingTeam:DEN

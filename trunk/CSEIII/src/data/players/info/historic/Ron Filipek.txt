@@ -7,3 +7,4 @@ Birth:1944-02-05
 Age:71
 Exp:0
 School:Tennessee Tech
+OwingTeam:PHL

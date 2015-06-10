@@ -7,3 +7,4 @@ Birth:1967-06-15
 Age:47
 Exp:1
 School:North Carolina-Charlotte
+OwingTeam:IND

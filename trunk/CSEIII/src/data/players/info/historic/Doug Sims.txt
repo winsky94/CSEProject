@@ -7,3 +7,4 @@ Birth:1943-06-29
 Age:71
 Exp:0
 School:Kent State
+OwingTeam:CIN

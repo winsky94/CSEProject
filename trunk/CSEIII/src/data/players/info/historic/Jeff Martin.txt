@@ -7,3 +7,4 @@ Birth:1967-01-14
 Age:48
 Exp:1
 School:Murray State
+OwingTeam:LAC

@@ -7,3 +7,4 @@ Birth:1937-08-24
 Age:77
 Exp:0
 School:Michigan State
+OwingTeam:NYK

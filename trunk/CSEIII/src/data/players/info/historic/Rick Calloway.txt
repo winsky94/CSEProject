@@ -7,3 +7,4 @@ Birth:1966-10-12
 Age:48
 Exp:0
 School:Kansas
+OwingTeam:SAC

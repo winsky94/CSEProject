@@ -7,3 +7,4 @@ Birth:1945-08-12
 Age:69
 Exp:0
 School:North Carolina State
+OwingTeam:PHX

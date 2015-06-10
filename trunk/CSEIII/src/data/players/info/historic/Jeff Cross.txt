@@ -7,3 +7,4 @@ Birth:1961-09-01
 Age:53
 Exp:0
 School:Maine
+OwingTeam:LAC

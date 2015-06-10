@@ -7,3 +7,4 @@ Birth:1935-11-30
 Age:79
 Exp:1
 School:Morehead State
+OwingTeam:MNL

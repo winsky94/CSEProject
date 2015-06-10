@@ -7,3 +7,4 @@ Birth:1992-01-29
 Age:23
 Exp:0
 School:Oklahoma State
+OwingTeam:BKN

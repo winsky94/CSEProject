@@ -7,3 +7,4 @@ Birth:1944-10-22
 Age:70
 Exp:6
 School:Virginia Tech
+OwingTeam:PHX

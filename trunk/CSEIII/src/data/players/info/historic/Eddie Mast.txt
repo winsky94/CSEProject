@@ -7,3 +7,4 @@ Birth:1948-10-03
 Age:66
 Exp:2
 School:Temple
+OwingTeam:ATL

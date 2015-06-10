@@ -7,3 +7,4 @@ Birth:1970-10-15
 Age:44
 Exp:2
 School:Michigan State
+OwingTeam:MIL

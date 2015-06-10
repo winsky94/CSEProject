@@ -7,3 +7,4 @@ Birth:1935-03-28
 Age:80
 Exp:1
 School:Hofstra
+OwingTeam:DET

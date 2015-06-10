@@ -7,3 +7,4 @@ Birth:1967-01-29
 Age:48
 Exp:6
 School:Oklahoma
+OwingTeam:DAL

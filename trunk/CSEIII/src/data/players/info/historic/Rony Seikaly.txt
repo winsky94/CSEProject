@@ -7,3 +7,4 @@ Birth:1965-05-10
 Age:50
 Exp:10
 School:Syracuse
+OwingTeam:NJN

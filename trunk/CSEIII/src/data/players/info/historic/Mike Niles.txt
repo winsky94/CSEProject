@@ -7,3 +7,4 @@ Birth:1955-03-31
 Age:60
 Exp:0
 School:Cal State-Fullerton
+OwingTeam:PHX

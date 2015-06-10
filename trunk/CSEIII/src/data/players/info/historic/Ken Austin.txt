@@ -7,3 +7,4 @@ Birth:1961-07-15
 Age:53
 Exp:0
 School:Rice
+OwingTeam:DET

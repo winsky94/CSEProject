@@ -7,3 +7,4 @@ Birth:1989-02-24
 Age:26
 Exp:6
 School:Ohio State
+OwingTeam:MEM

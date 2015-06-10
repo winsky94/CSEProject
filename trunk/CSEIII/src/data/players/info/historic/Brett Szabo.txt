@@ -7,3 +7,4 @@ Birth:1968-02-01
 Age:47
 Exp:0
 School:Augustana 
+OwingTeam:BOS

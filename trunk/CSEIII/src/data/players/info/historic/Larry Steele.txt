@@ -7,3 +7,4 @@ Birth:1949-05-05
 Age:66
 Exp:8
 School:Kentucky
+OwingTeam:POR

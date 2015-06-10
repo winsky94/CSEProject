@@ -7,3 +7,4 @@ Birth:1924-03-09
 Age:91
 Exp:0
 School:Northwestern
+OwingTeam:CHS

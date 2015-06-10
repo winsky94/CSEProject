@@ -7,3 +7,4 @@ Birth:1959-02-26
 Age:56
 Exp:12
 School:Kansas State
+OwingTeam:NYK

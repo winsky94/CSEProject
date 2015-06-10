@@ -7,3 +7,4 @@ Birth:1970-08-27
 Age:44
 Exp:7
 School:Wyoming
+OwingTeam:MIN

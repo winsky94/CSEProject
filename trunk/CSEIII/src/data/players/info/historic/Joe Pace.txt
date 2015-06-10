@@ -7,3 +7,4 @@ Birth:1953-12-18
 Age:61
 Exp:1
 School:Coppin State
+OwingTeam:WAS

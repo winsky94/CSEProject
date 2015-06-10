@@ -7,3 +7,4 @@ Birth:1930-11-18
 Age:84
 Exp:1
 School:Illinois
+OwingTeam:STL

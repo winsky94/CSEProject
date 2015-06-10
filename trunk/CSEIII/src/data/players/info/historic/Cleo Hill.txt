@@ -7,3 +7,4 @@ Birth:1938-05-24
 Age:77
 Exp:0
 School:Winston-Salem State
+OwingTeam:STL

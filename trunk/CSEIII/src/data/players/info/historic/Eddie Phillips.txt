@@ -7,3 +7,4 @@ Birth:1961-09-29
 Age:53
 Exp:0
 School:Alabama
+OwingTeam:NJN

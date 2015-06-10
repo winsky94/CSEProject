@@ -7,3 +7,4 @@ Birth:1978-07-21
 Age:36
 Exp:0
 School:Idaho
+OwingTeam:

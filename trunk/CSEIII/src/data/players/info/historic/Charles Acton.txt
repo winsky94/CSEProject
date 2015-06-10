@@ -7,3 +7,4 @@ Birth:1942-01-11
 Age:73
 Exp:0
 School:Hillsdale
+OwingTeam:SDR

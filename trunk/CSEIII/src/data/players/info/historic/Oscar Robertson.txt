@@ -7,3 +7,4 @@ Birth:1938-11-24
 Age:76
 Exp:13
 School:Cincinnati
+OwingTeam:MIL

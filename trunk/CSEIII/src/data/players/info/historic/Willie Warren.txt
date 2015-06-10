@@ -7,3 +7,4 @@ Birth:1989-10-22
 Age:25
 Exp:0
 School:Oklahoma
+OwingTeam:LAC

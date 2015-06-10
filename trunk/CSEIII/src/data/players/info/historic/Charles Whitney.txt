@@ -7,3 +7,4 @@ Birth:1957-06-22
 Age:57
 Exp:1
 School:North Carolina State
+OwingTeam:KCK

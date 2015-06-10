@@ -7,3 +7,4 @@ Birth:1988-02-24
 Age:27
 Exp:3
 School:Pointe-a-Pitre
+OwingTeam:DAL

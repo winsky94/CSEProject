@@ -7,3 +7,4 @@ Birth:1973-05-10
 Age:42
 Exp:8
 School:Georgetown
+OwingTeam:NYK

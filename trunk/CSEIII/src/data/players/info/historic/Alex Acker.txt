@@ -7,3 +7,4 @@ Birth:1983-01-21
 Age:32
 Exp:1
 School:Pepperdine
+OwingTeam:LAC

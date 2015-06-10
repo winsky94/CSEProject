@@ -7,3 +7,4 @@ Birth:1962-01-04
 Age:53
 Exp:1
 School:Eastern Michigan
+OwingTeam:CHI

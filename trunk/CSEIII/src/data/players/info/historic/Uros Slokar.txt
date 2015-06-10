@@ -7,3 +7,4 @@ Birth:1983-05-14
 Age:32
 Exp:0
 School:Italy
+OwingTeam:TOR

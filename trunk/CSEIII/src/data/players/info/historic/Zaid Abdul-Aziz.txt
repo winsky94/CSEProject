@@ -7,3 +7,4 @@ Birth:1946-04-07
 Age:69
 Exp:9
 School:Iowa State
+OwingTeam:BOS

@@ -7,3 +7,4 @@ Birth:1952-08-31
 Age:62
 Exp:0
 School:Michigan
+OwingTeam:DET

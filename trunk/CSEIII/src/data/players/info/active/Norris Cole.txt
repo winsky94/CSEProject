@@ -7,3 +7,4 @@ Birth:1988-10-13
 Age:26
 Exp:3
 School:Cleveland State
+OwingTeam:NOP

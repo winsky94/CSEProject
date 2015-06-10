@@ -7,3 +7,4 @@ Birth:1944-05-04
 Age:71
 Exp:0
 School:Army
+OwingTeam:BUF

@@ -7,3 +7,4 @@ Birth:1993-06-01
 Age:22
 Exp:0
 School:Louisiana State
+OwingTeam:MIL

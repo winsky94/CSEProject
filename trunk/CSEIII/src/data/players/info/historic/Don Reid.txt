@@ -7,3 +7,4 @@ Birth:1973-12-30
 Age:41
 Exp:7
 School:Georgetown
+OwingTeam:DET

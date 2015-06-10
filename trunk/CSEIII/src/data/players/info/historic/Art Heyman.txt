@@ -7,3 +7,4 @@ Birth:1941-06-24
 Age:73
 Exp:2
 School:Duke
+OwingTeam:PHL

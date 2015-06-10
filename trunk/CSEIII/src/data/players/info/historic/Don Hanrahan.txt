@@ -7,3 +7,4 @@ Birth:1929-02-06
 Age:86
 Exp:0
 School:Loyola-Chicago
+OwingTeam:INO

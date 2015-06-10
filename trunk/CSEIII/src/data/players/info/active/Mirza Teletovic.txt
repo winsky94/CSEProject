@@ -7,3 +7,4 @@ Birth:1985-09-17
 Age:29
 Exp:2
 School:Bosnia
+OwingTeam:BKN

@@ -7,3 +7,4 @@ Birth:1985-06-01
 Age:29
 Exp:6
 School:Creighton
+OwingTeam:DET

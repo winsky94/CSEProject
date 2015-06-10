@@ -7,3 +7,4 @@ Birth:1964-02-25
 Age:51
 Exp:0
 School:Louisiana State
+OwingTeam:POR

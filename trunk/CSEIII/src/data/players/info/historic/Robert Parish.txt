@@ -7,3 +7,4 @@ Birth:1953-08-30
 Age:61
 Exp:20
 School:Centenary 
+OwingTeam:CHI

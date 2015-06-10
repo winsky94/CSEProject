@@ -7,3 +7,4 @@ Birth:1982-10-02
 Age:32
 Exp:13
 School:Dominquez H.S
+OwingTeam:DAL

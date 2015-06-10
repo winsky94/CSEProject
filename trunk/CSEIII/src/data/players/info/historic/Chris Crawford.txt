@@ -7,3 +7,4 @@ Birth:1975-05-13
 Age:40
 Exp:6
 School:Marquette
+OwingTeam:ATL

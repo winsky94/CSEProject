@@ -7,3 +7,4 @@ Birth:1967-01-27
 Age:48
 Exp:1
 School:Vanderbilt
+OwingTeam:MIL

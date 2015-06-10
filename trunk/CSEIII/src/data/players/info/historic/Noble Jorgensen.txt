@@ -7,3 +7,4 @@ Birth:1925-05-18
 Age:90
 Exp:4
 School:Iowa
+OwingTeam:SYR

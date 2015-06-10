@@ -7,3 +7,4 @@ Birth:1964-10-24
 Age:50
 Exp:2
 School:Purdue
+OwingTeam:SAC

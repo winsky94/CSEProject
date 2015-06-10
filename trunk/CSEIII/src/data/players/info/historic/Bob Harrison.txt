@@ -7,3 +7,4 @@ Birth:1927-08-12
 Age:87
 Exp:8
 School:Michigan
+OwingTeam:SYR

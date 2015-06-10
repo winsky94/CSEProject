@@ -7,3 +7,4 @@ Birth:1942-10-17
 Age:72
 Exp:0
 School:Oregon
+OwingTeam:POR

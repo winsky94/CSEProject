@@ -7,3 +7,4 @@ Birth:1950-07-20
 Age:64
 Exp:6
 School:Illinois
+OwingTeam:SDC

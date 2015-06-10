@@ -7,3 +7,4 @@ Birth:1933-04-11
 Age:82
 Exp:4
 School:Missouri
+OwingTeam:CIN

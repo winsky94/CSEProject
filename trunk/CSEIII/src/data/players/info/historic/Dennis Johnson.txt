@@ -7,3 +7,4 @@ Birth:1954-09-18
 Age:60
 Exp:13
 School:Pepperdine
+OwingTeam:BOS

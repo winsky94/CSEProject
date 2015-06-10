@@ -7,3 +7,4 @@ Birth:1923-09-18
 Age:91
 Exp:0
 School:DePauw
+OwingTeam:MNL

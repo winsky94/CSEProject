@@ -7,3 +7,4 @@ Birth:1981-10-04
 Age:33
 Exp:0
 School:Fresno State
+OwingTeam:SEA

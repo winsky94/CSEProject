@@ -7,3 +7,4 @@ Birth:1956-10-02
 Age:58
 Exp:0
 School:Augustana 
+OwingTeam:DEN

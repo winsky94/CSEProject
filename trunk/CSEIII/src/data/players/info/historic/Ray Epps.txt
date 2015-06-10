@@ -7,3 +7,4 @@ Birth:1956-08-20
 Age:58
 Exp:0
 School:Norfolk State
+OwingTeam:GOS

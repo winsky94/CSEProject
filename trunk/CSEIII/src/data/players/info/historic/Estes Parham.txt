@@ -7,3 +7,4 @@ Birth:1921-12-27
 Age:93
 Exp:2
 School:Texas Wesleyan
+OwingTeam:PHW

@@ -7,3 +7,4 @@ Birth:1984-09-18
 Age:30
 Exp:10
 School:Starkville HS 
+OwingTeam:SAC

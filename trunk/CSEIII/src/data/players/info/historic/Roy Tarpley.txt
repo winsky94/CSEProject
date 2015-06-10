@@ -7,3 +7,4 @@ Birth:1964-11-28
 Age:50
 Exp:5
 School:Michigan
+OwingTeam:DAL

@@ -7,3 +7,4 @@ Birth:1924-02-26
 Age:91
 Exp:2
 School:Eastern Kentucky
+OwingTeam:NYK

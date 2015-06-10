@@ -7,3 +7,4 @@ Birth:1991-12-10
 Age:23
 Exp:2
 School:Syracuse
+OwingTeam:OKC

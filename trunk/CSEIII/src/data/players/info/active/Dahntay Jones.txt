@@ -7,3 +7,4 @@ Birth:1980-12-27
 Age:34
 Exp:10
 School:Duke
+OwingTeam:LAC

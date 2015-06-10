@@ -7,3 +7,4 @@ Birth:1970-12-21
 Age:44
 Exp:0
 School:Auburn
+OwingTeam:PHX

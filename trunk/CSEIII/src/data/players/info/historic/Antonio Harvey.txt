@@ -7,3 +7,4 @@ Birth:1970-07-06
 Age:44
 Exp:7
 School:Pfeiffer
+OwingTeam:ATL

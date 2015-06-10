@@ -7,3 +7,4 @@ Birth:1987-07-11
 Age:27
 Exp:4
 School:Syracuse
+OwingTeam:LAL

@@ -7,3 +7,4 @@ Birth:1950-05-27
 Age:65
 Exp:0
 School:Bethel 
+OwingTeam:PHX

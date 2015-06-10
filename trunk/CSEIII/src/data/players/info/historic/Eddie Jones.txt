@@ -7,3 +7,4 @@ Birth:1971-10-20
 Age:43
 Exp:13
 School:Temple
+OwingTeam:DAL

@@ -7,3 +7,4 @@ Birth:1951-09-11
 Age:63
 Exp:1
 School:Mississippi
+OwingTeam:IND

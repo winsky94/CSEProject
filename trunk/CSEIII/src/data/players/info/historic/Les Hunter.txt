@@ -7,3 +7,4 @@ Birth:1942-08-16
 Age:72
 Exp:0
 School:Loyola-Chicago
+OwingTeam:BLT

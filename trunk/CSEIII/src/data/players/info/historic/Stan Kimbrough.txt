@@ -7,3 +7,4 @@ Birth:1966-04-24
 Age:49
 Exp:1
 School:Xavier
+OwingTeam:SAC

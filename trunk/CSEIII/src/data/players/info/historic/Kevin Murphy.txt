@@ -7,3 +7,4 @@ Birth:1990-03-06
 Age:25
 Exp:0
 School:Tennessee Tech
+OwingTeam:UTA

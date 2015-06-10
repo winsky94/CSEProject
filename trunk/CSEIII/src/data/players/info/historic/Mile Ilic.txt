@@ -7,3 +7,4 @@ Birth:1984-06-02
 Age:30
 Exp:0
 School:Serbia
+OwingTeam:NJN

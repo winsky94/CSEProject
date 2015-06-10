@@ -7,3 +7,4 @@ Birth:1954-01-20
 Age:61
 Exp:6
 School:Western Michigan
+OwingTeam:SAN

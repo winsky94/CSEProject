@@ -7,3 +7,4 @@ Birth:1932-07-16
 Age:82
 Exp:0
 School:Utah
+OwingTeam:NYK

@@ -7,3 +7,4 @@ Birth:1950-11-19
 Age:64
 Exp:0
 School:Kentucky
+OwingTeam:ATL

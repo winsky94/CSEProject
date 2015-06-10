@@ -7,3 +7,4 @@ Birth:1979-07-29
 Age:35
 Exp:7
 School:Shaw
+OwingTeam:CHI

@@ -7,3 +7,4 @@ Birth:1946-11-24
 Age:68
 Exp:1
 School:New Mexico State
+OwingTeam:CHI

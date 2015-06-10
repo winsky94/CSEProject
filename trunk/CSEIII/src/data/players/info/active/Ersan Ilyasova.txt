@@ -7,3 +7,4 @@ Birth:1987-05-15
 Age:28
 Exp:6
 School:Eskisehir
+OwingTeam:MIL

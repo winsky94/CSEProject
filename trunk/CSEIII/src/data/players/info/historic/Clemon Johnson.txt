@@ -7,3 +7,4 @@ Birth:1956-09-12
 Age:58
 Exp:9
 School:Florida A
+OwingTeam:SEA

@@ -7,3 +7,4 @@ Birth:1948-08-12
 Age:66
 Exp:6
 School:Jackson State
+OwingTeam:LAL

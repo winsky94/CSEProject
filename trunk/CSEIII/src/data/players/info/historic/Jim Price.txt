@@ -7,3 +7,4 @@ Birth:1949-11-27
 Age:65
 Exp:6
 School:Louisville
+OwingTeam:LAL

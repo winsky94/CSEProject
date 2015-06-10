@@ -7,3 +7,4 @@ Birth:1923-05-01
 Age:92
 Exp:6
 School:Louisiana State
+OwingTeam:FTW

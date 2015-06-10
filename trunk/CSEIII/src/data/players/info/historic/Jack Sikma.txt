@@ -7,3 +7,4 @@ Birth:1955-11-14
 Age:59
 Exp:13
 School:Illinois Wesleyan
+OwingTeam:MIL

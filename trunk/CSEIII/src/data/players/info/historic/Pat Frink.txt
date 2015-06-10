@@ -7,3 +7,4 @@ Birth:1945-02-18
 Age:70
 Exp:0
 School:Colorado
+OwingTeam:CIN

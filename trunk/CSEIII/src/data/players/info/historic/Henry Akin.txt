@@ -7,3 +7,4 @@ Birth:1944-07-31
 Age:70
 Exp:1
 School:Morehead State
+OwingTeam:SEA

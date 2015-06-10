@@ -7,3 +7,4 @@ Birth:1946-04-29
 Age:69
 Exp:1
 School:Maryland-Eastern Shore
+OwingTeam:SEA

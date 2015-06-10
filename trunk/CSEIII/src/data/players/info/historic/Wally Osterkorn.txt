@@ -7,3 +7,4 @@ Birth:1928-07-06
 Age:86
 Exp:3
 School:Illinois
+OwingTeam:SYR

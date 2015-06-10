@@ -7,3 +7,4 @@ Birth:1951-02-12
 Age:64
 Exp:0
 School:Villanova
+OwingTeam:ATL

@@ -7,3 +7,4 @@ Birth:1984-06-26
 Age:30
 Exp:9
 School:Illinois
+OwingTeam:BKN

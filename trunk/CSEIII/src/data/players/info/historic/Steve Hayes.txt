@@ -7,3 +7,4 @@ Birth:1955-08-02
 Age:59
 Exp:4
 School:Idaho State
+OwingTeam:UTH

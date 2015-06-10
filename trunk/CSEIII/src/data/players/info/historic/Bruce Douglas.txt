@@ -7,3 +7,4 @@ Birth:1964-04-09
 Age:51
 Exp:0
 School:Illinois
+OwingTeam:SAC

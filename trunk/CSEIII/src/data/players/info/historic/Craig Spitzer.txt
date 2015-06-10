@@ -7,3 +7,4 @@ Birth:1945-12-18
 Age:69
 Exp:0
 School:Tulane
+OwingTeam:CHI

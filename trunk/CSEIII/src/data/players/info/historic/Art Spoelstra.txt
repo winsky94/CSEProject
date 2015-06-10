@@ -7,3 +7,4 @@ Birth:1932-09-11
 Age:82
 Exp:3
 School:Western Kentucky
+OwingTeam:MNL

@@ -7,3 +7,4 @@ Birth:1982-02-09
 Age:33
 Exp:10
 School:Saint Joseph
+OwingTeam:DEN

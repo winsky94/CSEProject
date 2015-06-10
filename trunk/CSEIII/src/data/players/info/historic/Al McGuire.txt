@@ -7,3 +7,4 @@ Birth:1928-09-07
 Age:86
 Exp:3
 School:St. John
+OwingTeam:BAL

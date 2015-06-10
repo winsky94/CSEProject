@@ -7,3 +7,4 @@ Birth:1956-06-22
 Age:58
 Exp:2
 School:Winston-Salem State
+OwingTeam:WAS

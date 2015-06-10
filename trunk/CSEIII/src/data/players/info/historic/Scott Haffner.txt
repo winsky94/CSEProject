@@ -7,3 +7,4 @@ Birth:1966-02-02
 Age:49
 Exp:1
 School:Evansville
+OwingTeam:CHH

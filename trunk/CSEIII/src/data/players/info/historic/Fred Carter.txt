@@ -7,3 +7,4 @@ Birth:1945-02-14
 Age:70
 Exp:7
 School:Mount St. Mary
+OwingTeam:MIL

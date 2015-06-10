@@ -7,3 +7,4 @@ Birth:1939-05-22
 Age:76
 Exp:8
 School:Ohio State
+OwingTeam:ATL

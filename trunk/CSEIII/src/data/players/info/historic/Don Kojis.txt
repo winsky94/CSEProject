@@ -7,3 +7,4 @@ Birth:1939-07-15
 Age:75
 Exp:11
 School:Marquette
+OwingTeam:KCK

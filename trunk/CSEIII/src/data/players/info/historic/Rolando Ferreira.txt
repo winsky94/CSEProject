@@ -7,3 +7,4 @@ Birth:1964-05-24
 Age:51
 Exp:0
 School:Houston
+OwingTeam:POR

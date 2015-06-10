@@ -7,3 +7,4 @@ Birth:1967-07-17
 Age:47
 Exp:3
 School:Kansas
+OwingTeam:WAS

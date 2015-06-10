@@ -7,3 +7,4 @@ Birth:1966-12-18
 Age:48
 Exp:0
 School:Tampa
+OwingTeam:POR

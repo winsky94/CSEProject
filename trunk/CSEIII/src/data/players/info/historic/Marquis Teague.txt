@@ -7,3 +7,4 @@ Birth:1993-02-28
 Age:22
 Exp:1
 School:Kentucky
+OwingTeam:BKN

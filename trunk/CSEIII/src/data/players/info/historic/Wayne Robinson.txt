@@ -7,3 +7,4 @@ Birth:1958-04-19
 Age:57
 Exp:0
 School:Virginia Tech
+OwingTeam:DET

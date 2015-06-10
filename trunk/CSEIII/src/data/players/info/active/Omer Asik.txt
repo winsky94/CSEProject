@@ -7,3 +7,4 @@ Birth:1986-07-04
 Age:28
 Exp:4
 School:Turkey
+OwingTeam:NOP

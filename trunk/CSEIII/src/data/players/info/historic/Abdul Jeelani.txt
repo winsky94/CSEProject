@@ -7,3 +7,4 @@ Birth:1954-02-10
 Age:61
 Exp:1
 School:Wisconsin-Parkside
+OwingTeam:DAL

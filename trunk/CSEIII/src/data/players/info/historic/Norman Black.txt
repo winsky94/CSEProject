@@ -7,3 +7,4 @@ Birth:1957-11-12
 Age:57
 Exp:0
 School:Saint Joseph
+OwingTeam:DET

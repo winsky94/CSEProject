@@ -7,3 +7,4 @@ Birth:1940-04-03
 Age:75
 Exp:0
 School:Stanford
+OwingTeam:SFW

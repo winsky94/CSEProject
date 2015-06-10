@@ -7,3 +7,4 @@ Birth:1961-08-05
 Age:53
 Exp:11
 School:Brigham Young
+OwingTeam:IND

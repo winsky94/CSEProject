@@ -7,3 +7,4 @@ Birth:1956-09-30
 Age:58
 Exp:10
 School:Marquette
+OwingTeam:SAN

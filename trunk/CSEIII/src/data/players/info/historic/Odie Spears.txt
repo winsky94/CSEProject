@@ -7,3 +7,4 @@ Birth:1925-06-26
 Age:89
 Exp:7
 School:Western Kentucky
+OwingTeam:STL

@@ -7,3 +7,4 @@ Birth:1966-04-09
 Age:49
 Exp:2
 School:Loyola-Marymount
+OwingTeam:NYK

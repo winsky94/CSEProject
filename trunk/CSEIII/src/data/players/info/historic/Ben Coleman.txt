@@ -7,3 +7,4 @@ Birth:1961-11-14
 Age:53
 Exp:4
 School:Maryland
+OwingTeam:DET

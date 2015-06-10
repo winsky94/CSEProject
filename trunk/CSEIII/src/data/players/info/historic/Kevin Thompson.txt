@@ -7,3 +7,4 @@ Birth:1971-02-07
 Age:44
 Exp:0
 School:North Carolina State
+OwingTeam:POR

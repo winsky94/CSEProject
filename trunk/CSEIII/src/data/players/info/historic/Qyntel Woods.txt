@@ -7,3 +7,4 @@ Birth:1981-02-16
 Age:34
 Exp:3
 School:Northeast Mississippi Community College
+OwingTeam:NYK

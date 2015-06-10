@@ -7,3 +7,4 @@ Birth:1974-07-18
 Age:40
 Exp:10
 School:Kentucky
+OwingTeam:CHA

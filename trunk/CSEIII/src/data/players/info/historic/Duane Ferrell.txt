@@ -7,3 +7,4 @@ Birth:1965-02-28
 Age:50
 Exp:10
 School:Georgia Tech
+OwingTeam:GSW

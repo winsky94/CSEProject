@@ -7,3 +7,4 @@ Birth:1940-05-07
 Age:75
 Exp:0
 School:Loyola-Chicago
+OwingTeam:NYK

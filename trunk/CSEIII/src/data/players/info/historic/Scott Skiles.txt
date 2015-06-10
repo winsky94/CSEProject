@@ -7,3 +7,4 @@ Birth:1964-03-05
 Age:51
 Exp:9
 School:Michigan State
+OwingTeam:PHL

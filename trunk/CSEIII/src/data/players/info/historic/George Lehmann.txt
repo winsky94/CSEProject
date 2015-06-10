@@ -7,3 +7,4 @@ Birth:1942-05-01
 Age:73
 Exp:1
 School:Campbell
+OwingTeam:ATL

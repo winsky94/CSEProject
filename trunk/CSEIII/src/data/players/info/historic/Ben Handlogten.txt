@@ -7,3 +7,4 @@ Birth:1973-11-16
 Age:41
 Exp:1
 School:Western Michigan
+OwingTeam:UTA

@@ -7,3 +7,4 @@ Birth:1954-03-14
 Age:61
 Exp:0
 School:Pittsburgh
+OwingTeam:CHI

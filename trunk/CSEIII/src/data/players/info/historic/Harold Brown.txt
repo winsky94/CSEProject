@@ -7,3 +7,4 @@ Birth:1923-10-02
 Age:91
 Exp:0
 School:Evansville
+OwingTeam:DEF

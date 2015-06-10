@@ -7,3 +7,4 @@ Birth:1951-09-02
 Age:63
 Exp:10
 School:Hardin-Simmons
+OwingTeam:LAC

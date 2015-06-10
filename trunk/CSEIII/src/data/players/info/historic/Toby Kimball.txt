@@ -7,3 +7,4 @@ Birth:1942-09-07
 Age:72
 Exp:8
 School:Connecticut
+OwingTeam:NOJ

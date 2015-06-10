@@ -7,3 +7,4 @@ Birth:1992-05-20
 Age:23
 Exp:3
 School:Kentucky
+OwingTeam:OKC

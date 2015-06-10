@@ -7,3 +7,4 @@ Birth:1967-09-09
 Age:47
 Exp:10
 School:Iowa
+OwingTeam:CHI

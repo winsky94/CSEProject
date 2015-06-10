@@ -7,3 +7,4 @@ Birth:1943-04-07
 Age:72
 Exp:9
 School:South Carolina
+OwingTeam:NYN

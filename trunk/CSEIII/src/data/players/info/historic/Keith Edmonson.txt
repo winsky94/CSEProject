@@ -7,3 +7,4 @@ Birth:1960-09-28
 Age:54
 Exp:1
 School:Purdue
+OwingTeam:DEN

@@ -7,3 +7,4 @@ Birth:1948-01-15
 Age:67
 Exp:1
 School:Grambling
+OwingTeam:BUF

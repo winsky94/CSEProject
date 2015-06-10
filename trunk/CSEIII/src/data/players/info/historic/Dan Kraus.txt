@@ -7,3 +7,4 @@ Birth:1923-02-13
 Age:92
 Exp:0
 School:Georgetown
+OwingTeam:BAL

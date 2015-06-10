@@ -7,3 +7,4 @@ Birth:1964-04-13
 Age:51
 Exp:0
 School:Washington
+OwingTeam:SAN

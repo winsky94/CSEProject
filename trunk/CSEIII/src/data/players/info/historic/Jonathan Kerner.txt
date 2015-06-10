@@ -7,3 +7,4 @@ Birth:1974-06-06
 Age:40
 Exp:1
 School:East Carolina
+OwingTeam:SEA

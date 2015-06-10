@@ -7,3 +7,4 @@ Birth:1920-11-28
 Age:94
 Exp:1
 School:
+OwingTeam:NYK

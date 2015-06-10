@@ -7,3 +7,4 @@ Birth:1960-03-13
 Age:55
 Exp:10
 School:Southern California
+OwingTeam:LAL

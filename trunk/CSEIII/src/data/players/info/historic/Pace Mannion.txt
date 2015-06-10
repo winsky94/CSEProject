@@ -7,3 +7,4 @@ Birth:1960-09-22
 Age:54
 Exp:5
 School:Utah
+OwingTeam:ATL

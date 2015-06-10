@@ -7,3 +7,4 @@ Birth:1952-12-19
 Age:62
 Exp:5
 School:Arizona State
+OwingTeam:DAL

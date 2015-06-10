@@ -7,3 +7,4 @@ Birth:1982-07-29
 Age:32
 Exp:1
 School:Macedonia
+OwingTeam:ATL

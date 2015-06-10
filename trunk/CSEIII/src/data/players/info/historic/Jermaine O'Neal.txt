@@ -7,3 +7,4 @@ Birth:1978-10-13
 Age:36
 Exp:17
 School:Eau Claire HS 
+OwingTeam:GSW

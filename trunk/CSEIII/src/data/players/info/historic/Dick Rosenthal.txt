@@ -7,3 +7,4 @@ Birth:1933-01-20
 Age:82
 Exp:1
 School:Notre Dame
+OwingTeam:FTW

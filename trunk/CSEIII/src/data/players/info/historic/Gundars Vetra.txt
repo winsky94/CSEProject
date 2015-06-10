@@ -7,3 +7,4 @@ Birth:1967-05-22
 Age:48
 Exp:0
 School:
+OwingTeam:MIN

@@ -7,3 +7,4 @@ Birth:1975-09-01
 Age:39
 Exp:10
 School:Rhode Island
+OwingTeam:NYK

@@ -7,3 +7,4 @@ Birth:1964-07-29
 Age:50
 Exp:0
 School:Jacksonville
+OwingTeam:POR

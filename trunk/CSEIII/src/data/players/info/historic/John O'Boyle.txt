@@ -7,3 +7,4 @@ Birth:1928-03-07
 Age:87
 Exp:0
 School:Colorado State
+OwingTeam:MIH

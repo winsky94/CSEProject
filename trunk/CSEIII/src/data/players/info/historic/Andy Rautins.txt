@@ -7,3 +7,4 @@ Birth:1986-11-02
 Age:28
 Exp:0
 School:Syracuse
+OwingTeam:NYK

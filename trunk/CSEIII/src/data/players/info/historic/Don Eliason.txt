@@ -7,3 +7,4 @@ Birth:1918-07-24
 Age:96
 Exp:0
 School:Hamline
+OwingTeam:BOS

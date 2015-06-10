@@ -7,3 +7,4 @@ Birth:1928-01-01
 Age:87
 Exp:2
 School:Georgetown
+OwingTeam:FTW

@@ -7,3 +7,4 @@ Birth:1944-04-08
 Age:71
 Exp:8
 School:Providence
+OwingTeam:KCK

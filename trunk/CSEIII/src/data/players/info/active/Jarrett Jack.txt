@@ -7,3 +7,4 @@ Birth:1983-10-28
 Age:31
 Exp:9
 School:Georgia Tech
+OwingTeam:BKN

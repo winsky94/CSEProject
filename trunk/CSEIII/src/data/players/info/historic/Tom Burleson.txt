@@ -7,3 +7,4 @@ Birth:1952-02-24
 Age:63
 Exp:6
 School:North Carolina State
+OwingTeam:ATL

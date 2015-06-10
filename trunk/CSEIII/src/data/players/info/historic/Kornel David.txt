@@ -7,3 +7,4 @@ Birth:1971-10-22
 Age:43
 Exp:2
 School:Budapest AEH
+OwingTeam:DET

@@ -7,3 +7,4 @@ Birth:1972-09-11
 Age:42
 Exp:5
 School:Kentucky
+OwingTeam:DEN

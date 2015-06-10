@@ -7,3 +7,4 @@ Birth:1970-02-22
 Age:45
 Exp:8
 School:Stanford
+OwingTeam:GSW

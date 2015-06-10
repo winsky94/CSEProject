@@ -7,3 +7,4 @@ Birth:1961-09-27
 Age:53
 Exp:0
 School:Kansas State
+OwingTeam:LAC

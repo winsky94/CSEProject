@@ -7,3 +7,4 @@ Birth:1951-04-01
 Age:64
 Exp:3
 School:Georgia
+OwingTeam:NJN

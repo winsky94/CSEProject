@@ -7,3 +7,4 @@ Birth:1949-07-03
 Age:65
 Exp:1
 School:Drake
+OwingTeam:PHL

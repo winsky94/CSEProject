@@ -7,3 +7,4 @@ Birth:1966-11-27
 Age:48
 Exp:5
 School:Indiana
+OwingTeam:GSW

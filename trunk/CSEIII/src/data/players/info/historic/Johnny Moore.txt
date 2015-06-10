@@ -7,3 +7,4 @@ Birth:1958-03-03
 Age:57
 Exp:8
 School:Texas
+OwingTeam:SAN

@@ -7,3 +7,4 @@ Birth:1944-05-02
 Age:71
 Exp:1
 School:Oklahoma City
+OwingTeam:SDR

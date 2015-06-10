@@ -7,3 +7,4 @@ Birth:1941-09-06
 Age:73
 Exp:3
 School:Boston College
+OwingTeam:CHI

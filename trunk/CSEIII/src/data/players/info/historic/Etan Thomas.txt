@@ -7,3 +7,4 @@ Birth:1978-04-01
 Age:37
 Exp:8
 School:Syracuse
+OwingTeam:ATL

@@ -7,3 +7,4 @@ Birth:1956-07-29
 Age:58
 Exp:3
 School:Detroit Mercy
+OwingTeam:GOS

@@ -7,3 +7,4 @@ Birth:1957-05-19
 Age:58
 Exp:13
 School:Notre Dame
+OwingTeam:DET

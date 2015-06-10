@@ -7,3 +7,4 @@ Birth:1928-08-15
 Age:86
 Exp:0
 School:Dayton
+OwingTeam:NYK

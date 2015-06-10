@@ -7,3 +7,4 @@ Birth:1964-08-03
 Age:50
 Exp:11
 School:North Carolina State
+OwingTeam:SEA

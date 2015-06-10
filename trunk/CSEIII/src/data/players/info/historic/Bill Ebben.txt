@@ -7,3 +7,4 @@ Birth:1935-10-07
 Age:79
 Exp:0
 School:Detroit Mercy
+OwingTeam:DET

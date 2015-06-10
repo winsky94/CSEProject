@@ -7,3 +7,4 @@ Birth:1983-02-15
 Age:32
 Exp:0
 School:North Carolina-Charlotte
+OwingTeam:CHI

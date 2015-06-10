@@ -7,3 +7,4 @@ Birth:1942-09-21
 Age:72
 Exp:0
 School:Saint Joseph
+OwingTeam:PHL

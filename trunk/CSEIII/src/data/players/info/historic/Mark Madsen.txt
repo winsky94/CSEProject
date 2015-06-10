@@ -7,3 +7,4 @@ Birth:1976-01-28
 Age:39
 Exp:8
 School:Stanford
+OwingTeam:MIN

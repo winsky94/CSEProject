@@ -7,3 +7,4 @@ Birth:1942-07-21
 Age:72
 Exp:5
 School:Davidson
+OwingTeam:LAL

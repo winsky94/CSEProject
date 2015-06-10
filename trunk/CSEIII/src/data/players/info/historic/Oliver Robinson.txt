@@ -7,3 +7,4 @@ Birth:1960-03-13
 Age:55
 Exp:0
 School:Alabama-Birmingham
+OwingTeam:SAN

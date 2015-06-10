@@ -7,3 +7,4 @@ Birth:1964-03-24
 Age:51
 Exp:4
 School:Nebraska-Kearney
+OwingTeam:BOS

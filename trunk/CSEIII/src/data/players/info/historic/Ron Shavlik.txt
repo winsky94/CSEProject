@@ -7,3 +7,4 @@ Birth:1933-12-04
 Age:81
 Exp:1
 School:North Carolina State
+OwingTeam:NYK

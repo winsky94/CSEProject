@@ -7,3 +7,4 @@ Birth:1981-01-03
 Age:34
 Exp:0
 School:Oklahoma State
+OwingTeam:

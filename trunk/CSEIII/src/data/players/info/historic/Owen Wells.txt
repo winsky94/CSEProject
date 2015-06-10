@@ -7,3 +7,4 @@ Birth:1950-12-09
 Age:64
 Exp:0
 School:Detroit Mercy
+OwingTeam:HOU

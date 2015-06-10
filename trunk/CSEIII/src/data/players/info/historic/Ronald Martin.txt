@@ -7,3 +7,4 @@ Birth:1939-04-11
 Age:76
 Exp:0
 School:St. Bonaventure
+OwingTeam:NYK

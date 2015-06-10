@@ -7,3 +7,4 @@ Birth:1940-11-30
 Age:74
 Exp:0
 School:Thomas More
+OwingTeam:CIN

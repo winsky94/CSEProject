@@ -7,3 +7,4 @@ Birth:1988-09-04
 Age:26
 Exp:6
 School:North Carolina State
+OwingTeam:DEN

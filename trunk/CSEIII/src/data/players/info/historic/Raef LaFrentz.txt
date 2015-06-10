@@ -7,3 +7,4 @@ Birth:1976-05-29
 Age:39
 Exp:10
 School:Kansas
+OwingTeam:POR

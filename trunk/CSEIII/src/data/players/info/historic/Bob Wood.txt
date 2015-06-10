@@ -7,3 +7,4 @@ Birth:1921-10-07
 Age:93
 Exp:0
 School:Northern Illinois
+OwingTeam:SHE

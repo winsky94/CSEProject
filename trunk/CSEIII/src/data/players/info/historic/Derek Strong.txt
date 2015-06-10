@@ -7,3 +7,4 @@ Birth:1968-02-09
 Age:47
 Exp:9
 School:Xavier
+OwingTeam:LAC

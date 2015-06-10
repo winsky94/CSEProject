@@ -7,3 +7,4 @@ Birth:1988-12-07
 Age:26
 Exp:1
 School:College of Charleston
+OwingTeam:LAL

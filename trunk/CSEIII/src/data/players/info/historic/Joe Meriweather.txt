@@ -7,3 +7,4 @@ Birth:1953-10-26
 Age:61
 Exp:9
 School:Southern Illinois
+OwingTeam:KCK

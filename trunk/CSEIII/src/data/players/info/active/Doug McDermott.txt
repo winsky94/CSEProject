@@ -7,3 +7,4 @@ Birth:1992-01-03
 Age:23
 Exp:0
 School:Creighton
+OwingTeam:CHI

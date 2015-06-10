@@ -7,3 +7,4 @@ Birth:1948-12-24
 Age:66
 Exp:4
 School:Southern California
+OwingTeam:SAN

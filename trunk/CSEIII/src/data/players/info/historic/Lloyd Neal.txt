@@ -7,3 +7,4 @@ Birth:1950-12-10
 Age:64
 Exp:6
 School:Tennessee State
+OwingTeam:POR

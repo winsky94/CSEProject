@@ -7,3 +7,4 @@ Birth:1923-12-14
 Age:91
 Exp:0
 School:Tulane
+OwingTeam:FTW

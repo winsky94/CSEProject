@@ -7,3 +7,4 @@ Birth:1988-10-04
 Age:26
 Exp:5
 School:Memphis
+OwingTeam:CHI

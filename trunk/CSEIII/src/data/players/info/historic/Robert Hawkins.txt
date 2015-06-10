@@ -7,3 +7,4 @@ Birth:1954-06-30
 Age:60
 Exp:3
 School:Illinois State
+OwingTeam:DET

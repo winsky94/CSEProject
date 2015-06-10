@@ -7,3 +7,4 @@ Birth:1963-01-24
 Age:52
 Exp:2
 School:Utah
+OwingTeam:DAL

@@ -7,3 +7,4 @@ Birth:1946-09-03
 Age:68
 Exp:0
 School:Acadia 
+OwingTeam:BLT

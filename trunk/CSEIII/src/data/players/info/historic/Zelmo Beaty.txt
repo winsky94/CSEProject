@@ -7,3 +7,4 @@ Birth:1939-10-25
 Age:75
 Exp:7
 School:Prairie View A
+OwingTeam:LAL

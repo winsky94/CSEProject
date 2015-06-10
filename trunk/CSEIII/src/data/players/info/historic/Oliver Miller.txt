@@ -7,3 +7,4 @@ Birth:1970-04-06
 Age:45
 Exp:8
 School:Arkansas
+OwingTeam:MIN

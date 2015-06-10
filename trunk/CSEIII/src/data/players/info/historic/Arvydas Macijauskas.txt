@@ -7,3 +7,4 @@ Birth:1980-01-19
 Age:35
 Exp:0
 School:Lithuania
+OwingTeam:NOK

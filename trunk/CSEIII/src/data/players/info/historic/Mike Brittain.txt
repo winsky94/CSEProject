@@ -7,3 +7,4 @@ Birth:1963-06-21
 Age:51
 Exp:1
 School:South Carolina
+OwingTeam:SAN

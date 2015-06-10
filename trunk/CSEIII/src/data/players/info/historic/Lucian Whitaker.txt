@@ -7,3 +7,4 @@ Birth:1930-08-29
 Age:84
 Exp:0
 School:Kentucky
+OwingTeam:BOS

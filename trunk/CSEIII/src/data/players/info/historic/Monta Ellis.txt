@@ -7,3 +7,4 @@ Birth:1985-10-26
 Age:29
 Exp:9
 School:Lanier HS 
+OwingTeam:DAL

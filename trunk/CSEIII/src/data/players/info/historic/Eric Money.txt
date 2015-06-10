@@ -7,3 +7,4 @@ Birth:1955-02-06
 Age:60
 Exp:5
 School:Arizona
+OwingTeam:DET

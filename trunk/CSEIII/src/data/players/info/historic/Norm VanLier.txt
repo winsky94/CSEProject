@@ -7,3 +7,4 @@ Birth:1947-04-01
 Age:68
 Exp:9
 School:Saint Francis 
+OwingTeam:MIL

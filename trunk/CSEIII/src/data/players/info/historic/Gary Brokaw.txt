@@ -7,3 +7,4 @@ Birth:1954-01-11
 Age:61
 Exp:3
 School:Notre Dame
+OwingTeam:BUF

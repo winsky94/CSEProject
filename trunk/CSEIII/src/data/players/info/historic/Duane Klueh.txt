@@ -7,3 +7,4 @@ Birth:1926-01-06
 Age:89
 Exp:1
 School:Indiana State
+OwingTeam:FTW

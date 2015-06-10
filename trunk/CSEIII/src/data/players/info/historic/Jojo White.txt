@@ -7,3 +7,4 @@ Birth:1946-11-16
 Age:68
 Exp:11
 School:Kansas
+OwingTeam:KCK

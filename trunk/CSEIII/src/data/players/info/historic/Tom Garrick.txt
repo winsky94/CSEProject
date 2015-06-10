@@ -7,3 +7,4 @@ Birth:1966-07-07
 Age:48
 Exp:3
 School:Rhode Island
+OwingTeam:DAL

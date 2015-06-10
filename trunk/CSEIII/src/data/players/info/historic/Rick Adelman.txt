@@ -7,3 +7,4 @@ Birth:1946-06-16
 Age:68
 Exp:6
 School:Loyola-Marymount
+OwingTeam:KCK

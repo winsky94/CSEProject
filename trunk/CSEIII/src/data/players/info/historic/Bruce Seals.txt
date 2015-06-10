@@ -7,3 +7,4 @@ Birth:1953-06-18
 Age:61
 Exp:2
 School:Xavier 
+OwingTeam:SEA
