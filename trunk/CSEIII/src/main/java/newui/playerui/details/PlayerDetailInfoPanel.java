@@ -75,7 +75,7 @@ public class PlayerDetailInfoPanel extends JPanel {
 		headPnl.add(new JLabel("             "));
 		headPnl.add(new JLabel("             "));
 		headPnl.add(new JLabel("             "));
-		ImageIcon teamIco=Player.getPlayerPortraitImage(vo.getOwingTeam());
+		ImageIcon teamIco=Team.getTeamImage(vo.getOwingTeam());
 		teamIco.setImage(teamIco.getImage().getScaledInstance(150, 150, Image.SCALE_SMOOTH));
 
 		teamIcon = new JLabel(teamIco);
