@@ -7,3 +7,4 @@ Birth:1923-08-27
 Age:91
 Exp:0
 School:Ohio State
+OwingTeam:SHE

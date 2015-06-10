@@ -7,3 +7,4 @@ Birth:1988-09-24
 Age:26
 Exp:0
 School:Missouri
+OwingTeam:DET

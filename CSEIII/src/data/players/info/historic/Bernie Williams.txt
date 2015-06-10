@@ -7,3 +7,4 @@ Birth:1945-12-30
 Age:69
 Exp:1
 School:La Salle
+OwingTeam:SDR

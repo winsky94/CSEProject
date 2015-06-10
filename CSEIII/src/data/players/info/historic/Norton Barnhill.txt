@@ -7,3 +7,4 @@ Birth:1953-07-15
 Age:61
 Exp:0
 School:Washington State
+OwingTeam:SEA

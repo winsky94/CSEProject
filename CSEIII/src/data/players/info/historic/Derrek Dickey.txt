@@ -7,3 +7,4 @@ Birth:1951-03-20
 Age:64
 Exp:4
 School:Cincinnati
+OwingTeam:CHI

@@ -7,3 +7,4 @@ Birth:1967-10-03
 Age:47
 Exp:0
 School:Eastern Illinois
+OwingTeam:NJN

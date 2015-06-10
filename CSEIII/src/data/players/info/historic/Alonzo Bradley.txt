@@ -7,3 +7,4 @@ Birth:1953-10-16
 Age:61
 Exp:2
 School:Texas Southern
+OwingTeam:HOU

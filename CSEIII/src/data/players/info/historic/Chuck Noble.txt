@@ -7,3 +7,4 @@ Birth:1931-07-24
 Age:83
 Exp:6
 School:Louisville
+OwingTeam:DET

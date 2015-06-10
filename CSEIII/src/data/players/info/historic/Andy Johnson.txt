@@ -7,3 +7,4 @@ Birth:1931-04-21
 Age:84
 Exp:3
 School:Portland
+OwingTeam:CHP

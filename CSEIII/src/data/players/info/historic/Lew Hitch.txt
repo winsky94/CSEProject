@@ -7,3 +7,4 @@ Birth:1929-07-16
 Age:85
 Exp:5
 School:Kansas State
+OwingTeam:PHW

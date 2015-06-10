@@ -7,3 +7,4 @@ Birth:1943-06-03
 Age:71
 Exp:8
 School:North Carolina
+OwingTeam:PHL

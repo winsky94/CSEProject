@@ -7,3 +7,4 @@ Birth:1961-04-07
 Age:54
 Exp:11
 School:North Carolina State
+OwingTeam:UTA

@@ -7,3 +7,4 @@ Birth:1948-11-06
 Age:66
 Exp:7
 School:New Mexico State
+OwingTeam:ATL

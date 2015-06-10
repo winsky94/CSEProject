@@ -7,3 +7,4 @@ Birth:1959-03-17
 Age:56
 Exp:13
 School:Brigham Young
+OwingTeam:PHX

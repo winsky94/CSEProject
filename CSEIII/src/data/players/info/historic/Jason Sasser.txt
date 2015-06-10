@@ -7,3 +7,4 @@ Birth:1974-01-13
 Age:41
 Exp:2
 School:Texas Tech
+OwingTeam:SAC

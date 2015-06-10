@@ -7,3 +7,4 @@ Birth:1982-07-05
 Age:32
 Exp:10
 School:Sempeter
+OwingTeam:MEM

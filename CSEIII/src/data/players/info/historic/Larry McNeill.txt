@@ -7,3 +7,4 @@ Birth:1951-01-31
 Age:64
 Exp:5
 School:Marquette
+OwingTeam:DET

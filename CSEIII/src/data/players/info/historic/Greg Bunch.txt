@@ -7,3 +7,4 @@ Birth:1956-05-15
 Age:59
 Exp:0
 School:Cal State-Fullerton
+OwingTeam:NYK

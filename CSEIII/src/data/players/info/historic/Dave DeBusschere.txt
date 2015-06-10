@@ -7,3 +7,4 @@ Birth:1940-10-16
 Age:74
 Exp:11
 School:Detroit Mercy
+OwingTeam:NYK

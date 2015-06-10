@@ -7,3 +7,4 @@ Birth:1969-05-01
 Age:46
 Exp:10
 School:Syracuse
+OwingTeam:POR

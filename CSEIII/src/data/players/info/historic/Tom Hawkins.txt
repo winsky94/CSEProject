@@ -7,3 +7,4 @@ Birth:1936-12-22
 Age:78
 Exp:9
 School:Notre Dame
+OwingTeam:LAL

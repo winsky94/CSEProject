@@ -7,3 +7,4 @@ Birth:1963-12-15
 Age:51
 Exp:14
 School:Georgetown
+OwingTeam:SEA

@@ -7,3 +7,4 @@ Birth:1922-08-22
 Age:92
 Exp:0
 School:Culver-Stockton
+OwingTeam:BOS

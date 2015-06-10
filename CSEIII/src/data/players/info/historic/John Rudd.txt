@@ -7,3 +7,4 @@ Birth:1955-08-07
 Age:59
 Exp:0
 School:McNeese State
+OwingTeam:NYK

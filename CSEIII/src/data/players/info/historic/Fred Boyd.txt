@@ -7,3 +7,4 @@ Birth:1950-06-13
 Age:64
 Exp:5
 School:Oregon State
+OwingTeam:NOJ

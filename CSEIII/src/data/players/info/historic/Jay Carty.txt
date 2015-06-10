@@ -7,3 +7,4 @@ Birth:1941-07-04
 Age:73
 Exp:0
 School:Oregon State
+OwingTeam:LAL

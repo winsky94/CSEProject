@@ -7,3 +7,4 @@ Birth:1974-08-14
 Age:40
 Exp:10
 School:South Florida
+OwingTeam:DET

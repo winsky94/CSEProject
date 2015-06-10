@@ -7,3 +7,4 @@ Birth:1964-08-17
 Age:50
 Exp:1
 School:DePaul
+OwingTeam:SAN

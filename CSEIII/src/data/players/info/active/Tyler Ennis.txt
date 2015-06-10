@@ -7,3 +7,4 @@ Birth:1994-08-24
 Age:20
 Exp:0
 School:Syracuse
+OwingTeam:MIL

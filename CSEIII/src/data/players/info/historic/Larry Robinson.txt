@@ -7,3 +7,4 @@ Birth:1968-01-11
 Age:47
 Exp:6
 School:Centenary 
+OwingTeam:NYK

@@ -7,3 +7,4 @@ Birth:1963-12-24
 Age:51
 Exp:4
 School:California-Irvine
+OwingTeam:GOS

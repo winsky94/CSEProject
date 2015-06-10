@@ -7,3 +7,4 @@ Birth:1944-10-19
 Age:70
 Exp:1
 School:Villanova
+OwingTeam:PHL

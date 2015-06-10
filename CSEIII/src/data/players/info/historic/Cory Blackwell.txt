@@ -7,3 +7,4 @@ Birth:1963-03-27
 Age:52
 Exp:0
 School:Wisconsin
+OwingTeam:SEA

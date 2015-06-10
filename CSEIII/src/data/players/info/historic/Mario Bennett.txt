@@ -7,3 +7,4 @@ Birth:1973-08-01
 Age:41
 Exp:4
 School:Arizona State
+OwingTeam:ATL

@@ -7,3 +7,4 @@ Birth:1952-05-19
 Age:63
 Exp:0
 School:Vanderbilt
+OwingTeam:DET

@@ -7,3 +7,4 @@ Birth:1976-11-20
 Age:38
 Exp:2
 School:Clemson
+OwingTeam:CLE

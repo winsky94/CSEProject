@@ -7,3 +7,4 @@ Birth:1961-10-03
 Age:53
 Exp:1
 School:Saint Mary
+OwingTeam:GOS

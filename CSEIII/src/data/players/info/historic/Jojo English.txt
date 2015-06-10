@@ -7,3 +7,4 @@ Birth:1970-02-04
 Age:45
 Exp:2
 School:South Carolina
+OwingTeam:CHI

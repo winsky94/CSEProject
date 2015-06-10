@@ -7,3 +7,4 @@ Birth:1946-07-26
 Age:68
 Exp:3
 School:Virginia Union
+OwingTeam:BLT

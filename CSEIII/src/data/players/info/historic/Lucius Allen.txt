@@ -7,3 +7,4 @@ Birth:1947-09-26
 Age:67
 Exp:9
 School:California-Los Angeles
+OwingTeam:KCK

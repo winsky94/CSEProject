@@ -7,3 +7,4 @@ Birth:1926-11-20
 Age:88
 Exp:1
 School:Bowling Green
+OwingTeam:MIH

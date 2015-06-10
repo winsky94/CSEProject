@@ -7,3 +7,4 @@ Birth:1943-07-28
 Age:71
 Exp:9
 School:Princeton
+OwingTeam:NYK

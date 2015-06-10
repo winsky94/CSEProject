@@ -7,3 +7,4 @@ Birth:1987-03-02
 Age:28
 Exp:4
 School:Kinna
+OwingTeam:BOS

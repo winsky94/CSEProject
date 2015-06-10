@@ -7,3 +7,4 @@ Birth:1928-11-02
 Age:86
 Exp:0
 School:St. Francis Brooklyn
+OwingTeam:BAL

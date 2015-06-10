@@ -7,3 +7,4 @@ Birth:1955-10-17
 Age:59
 Exp:8
 School:Stanford
+OwingTeam:SAC

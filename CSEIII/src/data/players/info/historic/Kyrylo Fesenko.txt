@@ -7,3 +7,4 @@ Birth:1986-12-24
 Age:28
 Exp:4
 School:Dnepropetrovsk
+OwingTeam:IND

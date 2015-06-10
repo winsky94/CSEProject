@@ -7,3 +7,4 @@ Birth:1955-04-18
 Age:60
 Exp:0
 School:Missouri
+OwingTeam:SAN

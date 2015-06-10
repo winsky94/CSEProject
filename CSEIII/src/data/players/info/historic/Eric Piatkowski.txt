@@ -7,3 +7,4 @@ Birth:1970-09-30
 Age:44
 Exp:13
 School:Nebraska
+OwingTeam:PHX

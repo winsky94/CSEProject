@@ -7,3 +7,4 @@ Birth:1994-12-06
 Age:20
 Exp:1
 School:Greece
+OwingTeam:MIL

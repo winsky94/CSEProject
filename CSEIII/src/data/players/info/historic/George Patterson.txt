@@ -7,3 +7,4 @@ Birth:1939-11-26
 Age:75
 Exp:0
 School:Toledo
+OwingTeam:DET

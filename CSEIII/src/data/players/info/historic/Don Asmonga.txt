@@ -7,3 +7,4 @@ Birth:1928-02-15
 Age:87
 Exp:0
 School:Alliance
+OwingTeam:BAL

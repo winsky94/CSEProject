@@ -7,3 +7,4 @@ Birth:1960-09-14
 Age:54
 Exp:0
 School:Auburn
+OwingTeam:SAN

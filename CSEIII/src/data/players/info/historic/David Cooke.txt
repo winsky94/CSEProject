@@ -7,3 +7,4 @@ Birth:1963-09-27
 Age:51
 Exp:0
 School:Saint Mary
+OwingTeam:SAC

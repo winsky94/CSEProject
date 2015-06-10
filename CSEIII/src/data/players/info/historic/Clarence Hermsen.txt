@@ -7,3 +7,4 @@ Birth:1923-03-12
 Age:92
 Exp:5
 School:Minnesota
+OwingTeam:INO

@@ -7,3 +7,4 @@ Birth:1939-08-17
 Age:75
 Exp:0
 School:Kansas State
+OwingTeam:BLT

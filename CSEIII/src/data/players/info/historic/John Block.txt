@@ -7,3 +7,4 @@ Birth:1944-04-16
 Age:71
 Exp:9
 School:Southern California
+OwingTeam:CHI

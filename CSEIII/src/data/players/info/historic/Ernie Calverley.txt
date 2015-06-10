@@ -7,3 +7,4 @@ Birth:1924-01-30
 Age:91
 Exp:2
 School:Rhode Island
+OwingTeam:PRO

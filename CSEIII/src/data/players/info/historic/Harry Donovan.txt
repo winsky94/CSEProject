@@ -7,3 +7,4 @@ Birth:1926-09-10
 Age:88
 Exp:0
 School:Muhlenberg
+OwingTeam:NYK

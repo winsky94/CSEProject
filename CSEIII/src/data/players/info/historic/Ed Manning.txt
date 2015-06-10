@@ -7,3 +7,4 @@ Birth:1944-01-02
 Age:71
 Exp:3
 School:Jackson State
+OwingTeam:POR

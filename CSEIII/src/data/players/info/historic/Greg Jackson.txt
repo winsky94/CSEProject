@@ -7,3 +7,4 @@ Birth:1952-08-02
 Age:62
 Exp:0
 School:Guilford
+OwingTeam:PHX

@@ -7,3 +7,4 @@ Birth:1951-07-18
 Age:63
 Exp:0
 School:Ohio State
+OwingTeam:SEA

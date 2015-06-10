@@ -7,3 +7,4 @@ Birth:1962-03-11
 Age:53
 Exp:0
 School:Lamar
+OwingTeam:WAS

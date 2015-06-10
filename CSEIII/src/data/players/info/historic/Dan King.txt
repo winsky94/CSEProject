@@ -7,3 +7,4 @@ Birth:1931-01-07
 Age:84
 Exp:0
 School:Western Kentucky
+OwingTeam:BAL

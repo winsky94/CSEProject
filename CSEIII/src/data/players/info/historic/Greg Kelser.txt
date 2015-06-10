@@ -7,3 +7,4 @@ Birth:1957-09-17
 Age:57
 Exp:5
 School:Michigan State
+OwingTeam:IND

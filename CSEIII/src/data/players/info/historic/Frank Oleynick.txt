@@ -7,3 +7,4 @@ Birth:1955-02-20
 Age:60
 Exp:1
 School:Seattle
+OwingTeam:SEA

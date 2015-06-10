@@ -7,3 +7,4 @@ Birth:1944-02-18
 Age:71
 Exp:5
 School:Akron
+OwingTeam:POR

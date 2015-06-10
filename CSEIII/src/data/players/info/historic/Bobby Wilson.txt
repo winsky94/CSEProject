@@ -7,3 +7,4 @@ Birth:1951-01-15
 Age:64
 Exp:3
 School:Wichita State
+OwingTeam:IND

@@ -7,3 +7,4 @@ Birth:1942-03-28
 Age:73
 Exp:10
 School:Evansville
+OwingTeam:CHI

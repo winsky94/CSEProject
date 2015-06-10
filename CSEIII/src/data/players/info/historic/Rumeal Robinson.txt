@@ -7,3 +7,4 @@ Birth:1966-11-13
 Age:48
 Exp:5
 School:Michigan
+OwingTeam:POR

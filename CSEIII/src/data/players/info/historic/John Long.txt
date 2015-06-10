@@ -7,3 +7,4 @@ Birth:1956-08-28
 Age:58
 Exp:13
 School:Detroit Mercy
+OwingTeam:TOR

@@ -7,3 +7,4 @@ Birth:1950-05-02
 Age:65
 Exp:7
 School:Utah State
+OwingTeam:GOS

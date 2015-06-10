@@ -7,3 +7,4 @@ Birth:1954-08-20
 Age:60
 Exp:9
 School:Indiana
+OwingTeam:IND

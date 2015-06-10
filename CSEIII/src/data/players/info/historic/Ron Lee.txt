@@ -7,3 +7,4 @@ Birth:1952-11-02
 Age:62
 Exp:5
 School:Oregon
+OwingTeam:DET

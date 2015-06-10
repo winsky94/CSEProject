@@ -7,3 +7,4 @@ Birth:1923-11-11
 Age:91
 Exp:0
 School:Marquette
+OwingTeam:PRO

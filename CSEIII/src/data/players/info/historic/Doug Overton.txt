@@ -7,3 +7,4 @@ Birth:1969-08-03
 Age:45
 Exp:10
 School:La Salle
+OwingTeam:LAC

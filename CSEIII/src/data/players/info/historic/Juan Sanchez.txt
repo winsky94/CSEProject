@@ -7,3 +7,4 @@ Birth:1977-05-08
 Age:38
 Exp:1
 School:Temple
+OwingTeam:DET

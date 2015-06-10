@@ -7,3 +7,4 @@ Birth:1960-11-17
 Age:54
 Exp:0
 School:Loyola-Chicago
+OwingTeam:NJN

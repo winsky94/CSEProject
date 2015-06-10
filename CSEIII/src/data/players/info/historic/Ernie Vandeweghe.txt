@@ -7,3 +7,4 @@ Birth:1928-09-12
 Age:86
 Exp:5
 School:Colgate
+OwingTeam:NYK

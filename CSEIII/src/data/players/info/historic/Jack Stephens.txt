@@ -7,3 +7,4 @@ Birth:1933-05-18
 Age:82
 Exp:0
 School:Notre Dame
+OwingTeam:STL

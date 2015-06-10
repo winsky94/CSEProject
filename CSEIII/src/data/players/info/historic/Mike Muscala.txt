@@ -7,3 +7,4 @@ Birth:1991-07-01
 Age:23
 Exp:1
 School:Bucknell
+OwingTeam:ATL

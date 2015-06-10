@@ -7,3 +7,4 @@ Birth:1960-07-02
 Age:54
 Exp:0
 School:Arkansas-Little Rock
+OwingTeam:PHL

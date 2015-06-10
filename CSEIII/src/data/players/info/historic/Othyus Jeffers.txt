@@ -7,3 +7,4 @@ Birth:1985-08-05
 Age:29
 Exp:2
 School:Robert Morris 
+OwingTeam:MIN

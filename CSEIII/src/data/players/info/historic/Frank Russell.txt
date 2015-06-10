@@ -7,3 +7,4 @@ Birth:1949-04-17
 Age:66
 Exp:0
 School:Detroit Mercy
+OwingTeam:CHI

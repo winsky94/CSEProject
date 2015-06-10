@@ -7,3 +7,4 @@ Birth:1940-01-14
 Age:75
 Exp:4
 School:Kansas
+OwingTeam:DET

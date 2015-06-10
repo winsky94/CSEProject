@@ -7,3 +7,4 @@ Birth:1962-12-04
 Age:52
 Exp:2
 School:Long Island-Brooklyn
+OwingTeam:NYK

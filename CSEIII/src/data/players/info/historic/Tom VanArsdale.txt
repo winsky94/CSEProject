@@ -7,3 +7,4 @@ Birth:1943-02-22
 Age:72
 Exp:11
 School:Indiana
+OwingTeam:PHX

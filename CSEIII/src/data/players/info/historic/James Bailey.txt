@@ -7,3 +7,4 @@ Birth:1957-05-21
 Age:58
 Exp:8
 School:Rutgers
+OwingTeam:PHX

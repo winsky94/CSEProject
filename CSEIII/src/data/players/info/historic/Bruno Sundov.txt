@@ -7,3 +7,4 @@ Birth:1980-02-10
 Age:35
 Exp:6
 School:Croatia
+OwingTeam:NYK

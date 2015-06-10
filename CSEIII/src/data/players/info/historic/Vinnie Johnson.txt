@@ -7,3 +7,4 @@ Birth:1956-09-01
 Age:58
 Exp:12
 School:Baylor
+OwingTeam:SAN

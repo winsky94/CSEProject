@@ -7,3 +7,4 @@ Birth:1990-04-24
 Age:25
 Exp:2
 School:Ostrava
+OwingTeam:DEN

@@ -7,3 +7,4 @@ Birth:1959-02-15
 Age:56
 Exp:5
 School:Fresno State
+OwingTeam:IND

@@ -7,3 +7,4 @@ Birth:1982-01-06
 Age:33
 Exp:10
 School:Arizona
+OwingTeam:MEM

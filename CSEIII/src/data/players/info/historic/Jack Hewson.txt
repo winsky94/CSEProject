@@ -7,3 +7,4 @@ Birth:1924-09-07
 Age:90
 Exp:0
 School:Temple
+OwingTeam:BOS

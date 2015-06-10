@@ -7,3 +7,4 @@ Birth:1961-02-03
 Age:54
 Exp:0
 School:Connecticut
+OwingTeam:IND

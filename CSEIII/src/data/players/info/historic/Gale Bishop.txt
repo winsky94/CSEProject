@@ -7,3 +7,4 @@ Birth:1922-06-04
 Age:92
 Exp:0
 School:Washington State
+OwingTeam:PHW

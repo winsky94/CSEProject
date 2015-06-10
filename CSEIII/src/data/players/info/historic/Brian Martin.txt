@@ -7,3 +7,4 @@ Birth:1962-08-18
 Age:52
 Exp:0
 School:Kansas
+OwingTeam:SEA

@@ -7,3 +7,4 @@ Birth:1953-11-01
 Age:61
 Exp:5
 School:San Francisco
+OwingTeam:NYK

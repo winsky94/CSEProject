@@ -7,3 +7,4 @@ Birth:1946-02-27
 Age:69
 Exp:0
 School:Davidson
+OwingTeam:PHX

@@ -7,3 +7,4 @@ Birth:1928-02-22
 Age:87
 Exp:4
 School:Holy Cross
+OwingTeam:BAL

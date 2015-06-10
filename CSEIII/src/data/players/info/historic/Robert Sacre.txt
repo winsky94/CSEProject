@@ -7,3 +7,4 @@ Birth:1989-06-06
 Age:25
 Exp:2
 School:Gonzaga
+OwingTeam:LAL

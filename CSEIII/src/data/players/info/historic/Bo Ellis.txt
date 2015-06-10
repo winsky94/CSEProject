@@ -7,3 +7,4 @@ Birth:1954-08-08
 Age:60
 Exp:2
 School:Marquette
+OwingTeam:DEN

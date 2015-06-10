@@ -7,3 +7,4 @@ Birth:1973-05-14
 Age:42
 Exp:10
 School:Minnesota
+OwingTeam:POR

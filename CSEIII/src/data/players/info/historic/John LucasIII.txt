@@ -7,3 +7,4 @@ Birth:1982-11-21
 Age:32
 Exp:6
 School:Oklahoma State
+OwingTeam:DET

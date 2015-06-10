@@ -7,3 +7,4 @@ Birth:1968-05-09
 Age:47
 Exp:6
 School:Alabama
+OwingTeam:UTA

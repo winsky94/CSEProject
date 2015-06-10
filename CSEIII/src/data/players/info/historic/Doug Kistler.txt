@@ -7,3 +7,4 @@ Birth:1938-03-21
 Age:77
 Exp:0
 School:Duke
+OwingTeam:NYK

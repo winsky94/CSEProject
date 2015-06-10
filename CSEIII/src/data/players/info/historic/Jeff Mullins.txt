@@ -7,3 +7,4 @@ Birth:1942-03-18
 Age:73
 Exp:11
 School:Duke
+OwingTeam:GOS

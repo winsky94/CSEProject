@@ -7,3 +7,4 @@ Birth:1949-02-18
 Age:66
 Exp:0
 School:Duke
+OwingTeam:ATL

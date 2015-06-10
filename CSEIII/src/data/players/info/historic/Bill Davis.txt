@@ -7,3 +7,4 @@ Birth:1921-10-03
 Age:93
 Exp:0
 School:Notre Dame
+OwingTeam:CHS

@@ -7,3 +7,4 @@ Birth:1980-09-13
 Age:34
 Exp:1
 School:Stanford
+OwingTeam:UTA

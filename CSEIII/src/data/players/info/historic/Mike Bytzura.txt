@@ -7,3 +7,4 @@ Birth:1922-06-18
 Age:92
 Exp:0
 School:Long Island-Brooklyn
+OwingTeam:PIT

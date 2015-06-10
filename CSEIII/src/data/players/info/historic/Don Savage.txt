@@ -7,3 +7,4 @@ Birth:1928-04-09
 Age:87
 Exp:1
 School:Le Moyne
+OwingTeam:SYR

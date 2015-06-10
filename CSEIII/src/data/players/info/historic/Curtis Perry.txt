@@ -7,3 +7,4 @@ Birth:1948-09-13
 Age:66
 Exp:7
 School:Missouri State
+OwingTeam:PHX

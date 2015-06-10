@@ -7,3 +7,4 @@ Birth:1964-05-16
 Age:51
 Exp:9
 School:Georgia Tech
+OwingTeam:LAL

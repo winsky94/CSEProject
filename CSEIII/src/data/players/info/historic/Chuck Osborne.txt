@@ -7,3 +7,4 @@ Birth:1939-01-21
 Age:76
 Exp:0
 School:Western Kentucky
+OwingTeam:SYR

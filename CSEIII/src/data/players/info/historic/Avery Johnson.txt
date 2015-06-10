@@ -7,3 +7,4 @@ Birth:1965-03-25
 Age:50
 Exp:15
 School:Southern
+OwingTeam:GSW

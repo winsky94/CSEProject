@@ -7,3 +7,4 @@ Birth:1988-10-23
 Age:26
 Exp:3
 School:Xavier
+OwingTeam:GSW

@@ -7,3 +7,4 @@ Birth:1931-08-06
 Age:83
 Exp:0
 School:DePaul
+OwingTeam:MNL

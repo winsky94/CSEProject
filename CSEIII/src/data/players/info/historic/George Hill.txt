@@ -7,3 +7,4 @@ Birth:1986-05-04
 Age:29
 Exp:6
 School:Indiana Purdue-Indianapolis
+OwingTeam:IND

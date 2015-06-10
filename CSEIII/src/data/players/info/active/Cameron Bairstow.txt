@@ -7,3 +7,4 @@ Birth:1990-12-07
 Age:24
 Exp:0
 School:New Mexico
+OwingTeam:CHI

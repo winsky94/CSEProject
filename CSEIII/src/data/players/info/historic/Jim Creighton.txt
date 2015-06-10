@@ -7,3 +7,4 @@ Birth:1950-04-18
 Age:65
 Exp:0
 School:Colorado
+OwingTeam:ATL

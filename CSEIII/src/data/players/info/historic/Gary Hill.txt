@@ -7,3 +7,4 @@ Birth:1941-10-07
 Age:73
 Exp:1
 School:Oklahoma City
+OwingTeam:BLT

@@ -7,3 +7,4 @@ Birth:1960-04-16
 Age:55
 Exp:3
 School:Tennessee-Chattanooga
+OwingTeam:SEA

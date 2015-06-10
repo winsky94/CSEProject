@@ -7,3 +7,4 @@ Birth:1957-10-12
 Age:57
 Exp:0
 School:DePaul
+OwingTeam:DEN

@@ -7,3 +7,4 @@ Birth:1946-09-11
 Age:68
 Exp:1
 School:Columbia
+OwingTeam:ATL

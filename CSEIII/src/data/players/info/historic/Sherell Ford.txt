@@ -7,3 +7,4 @@ Birth:1972-08-26
 Age:42
 Exp:0
 School:Illinois-Chicago
+OwingTeam:SEA

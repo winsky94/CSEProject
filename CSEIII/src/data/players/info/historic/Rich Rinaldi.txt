@@ -7,3 +7,4 @@ Birth:1949-08-03
 Age:65
 Exp:2
 School:Saint Peter
+OwingTeam:CAP

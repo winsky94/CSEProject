@@ -7,3 +7,4 @@ Birth:1955-09-14
 Age:59
 Exp:7
 School:Oral Roberts
+OwingTeam:PHX

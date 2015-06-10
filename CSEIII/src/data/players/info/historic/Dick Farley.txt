@@ -7,3 +7,4 @@ Birth:1932-04-13
 Age:83
 Exp:2
 School:Indiana
+OwingTeam:DET

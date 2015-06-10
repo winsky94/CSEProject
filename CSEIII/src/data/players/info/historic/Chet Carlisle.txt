@@ -7,3 +7,4 @@ Birth:1916-11-02
 Age:98
 Exp:0
 School:California
+OwingTeam:CHS

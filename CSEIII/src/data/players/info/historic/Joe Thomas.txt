@@ -7,3 +7,4 @@ Birth:1948-06-27
 Age:66
 Exp:0
 School:Marquette
+OwingTeam:PHX

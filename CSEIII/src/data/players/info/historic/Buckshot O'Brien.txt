@@ -7,3 +7,4 @@ Birth:1928-04-28
 Age:87
 Exp:1
 School:Butler
+OwingTeam:BAL

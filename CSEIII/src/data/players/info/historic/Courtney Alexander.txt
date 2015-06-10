@@ -7,3 +7,4 @@ Birth:1977-04-27
 Age:38
 Exp:3
 School:Fresno State
+OwingTeam:NOH

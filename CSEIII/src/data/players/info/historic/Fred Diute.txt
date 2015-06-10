@@ -7,3 +7,4 @@ Birth:1929-01-09
 Age:86
 Exp:0
 School:St. Bonaventure
+OwingTeam:MIH

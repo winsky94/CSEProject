@@ -7,3 +7,4 @@ Birth:1963-04-13
 Age:52
 Exp:1
 School:Santa Clara
+OwingTeam:PHX

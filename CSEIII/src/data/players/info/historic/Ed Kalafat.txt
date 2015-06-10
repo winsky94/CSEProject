@@ -7,3 +7,4 @@ Birth:1932-10-13
 Age:82
 Exp:2
 School:Minnesota
+OwingTeam:MNL

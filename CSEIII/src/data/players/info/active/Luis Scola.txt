@@ -7,3 +7,4 @@ Birth:1980-04-30
 Age:35
 Exp:7
 School:Buenos Aires
+OwingTeam:IND

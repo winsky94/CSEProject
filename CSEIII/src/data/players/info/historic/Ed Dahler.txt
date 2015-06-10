@@ -7,3 +7,4 @@ Birth:1926-01-31
 Age:89
 Exp:0
 School:Duquesne
+OwingTeam:PHW

@@ -7,3 +7,4 @@ Birth:1948-08-26
 Age:66
 Exp:2
 School:Eastern Michigan
+OwingTeam:DET

@@ -7,3 +7,4 @@ Birth:1951-12-16
 Age:63
 Exp:6
 School:Vanderbilt
+OwingTeam:NJN

@@ -7,3 +7,4 @@ Birth:1938-07-12
 Age:76
 Exp:8
 School:Portland
+OwingTeam:BLT

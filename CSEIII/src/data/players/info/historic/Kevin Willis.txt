@@ -7,3 +7,4 @@ Birth:1962-09-06
 Age:52
 Exp:20
 School:Michigan State
+OwingTeam:DAL

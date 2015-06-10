@@ -7,3 +7,4 @@ Birth:1968-06-08
 Age:46
 Exp:6
 School:Saint Louis
+OwingTeam:UTA

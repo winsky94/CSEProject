@@ -7,3 +7,4 @@ Birth:1943-07-12
 Age:71
 Exp:15
 School:Creighton
+OwingTeam:SEA

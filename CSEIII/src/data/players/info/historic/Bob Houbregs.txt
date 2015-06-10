@@ -7,3 +7,4 @@ Birth:1932-03-12
 Age:83
 Exp:4
 School:Washington
+OwingTeam:DET

@@ -7,3 +7,4 @@ Birth:1948-06-15
 Age:66
 Exp:0
 School:Georgia
+OwingTeam:ATL

@@ -7,3 +7,4 @@ Birth:1924-10-25
 Age:90
 Exp:1
 School:Alabama
+OwingTeam:INO

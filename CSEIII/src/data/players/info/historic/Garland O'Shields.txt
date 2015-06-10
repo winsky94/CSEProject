@@ -7,3 +7,4 @@ Birth:1921-05-23
 Age:94
 Exp:0
 School:Tennessee
+OwingTeam:CHS

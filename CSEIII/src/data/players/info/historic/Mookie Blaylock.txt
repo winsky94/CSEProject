@@ -7,3 +7,4 @@ Birth:1967-03-20
 Age:48
 Exp:0
 School:Oklahoma
+OwingTeam:

@@ -7,3 +7,4 @@ Birth:1968-06-19
 Age:46
 Exp:2
 School:Texas
+OwingTeam:ATL

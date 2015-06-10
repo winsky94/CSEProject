@@ -7,3 +7,4 @@ Birth:1963-06-03
 Age:51
 Exp:2
 School:Wisconsin
+OwingTeam:MIN

@@ -7,3 +7,4 @@ Birth:1969-05-19
 Age:46
 Exp:2
 School:Oklahoma State
+OwingTeam:PHL

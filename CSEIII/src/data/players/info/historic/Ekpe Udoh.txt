@@ -7,3 +7,4 @@ Birth:1987-05-20
 Age:28
 Exp:4
 School:Baylor
+OwingTeam:LAC

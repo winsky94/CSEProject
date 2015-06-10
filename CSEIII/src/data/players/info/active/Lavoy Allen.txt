@@ -7,3 +7,4 @@ Birth:1989-02-04
 Age:26
 Exp:3
 School:Temple
+OwingTeam:IND

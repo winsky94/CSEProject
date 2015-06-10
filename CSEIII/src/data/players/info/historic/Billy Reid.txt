@@ -7,3 +7,4 @@ Birth:1957-09-10
 Age:57
 Exp:0
 School:San Francisco
+OwingTeam:GOS

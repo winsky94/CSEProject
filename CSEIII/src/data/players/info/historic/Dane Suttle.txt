@@ -7,3 +7,4 @@ Birth:1961-08-09
 Age:53
 Exp:1
 School:Pepperdine
+OwingTeam:KCK

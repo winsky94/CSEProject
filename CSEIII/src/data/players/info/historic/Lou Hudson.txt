@@ -7,3 +7,4 @@ Birth:1944-07-11
 Age:70
 Exp:12
 School:Minnesota
+OwingTeam:LAL

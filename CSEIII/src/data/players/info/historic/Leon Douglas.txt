@@ -7,3 +7,4 @@ Birth:1954-08-26
 Age:60
 Exp:6
 School:Alabama
+OwingTeam:KCK

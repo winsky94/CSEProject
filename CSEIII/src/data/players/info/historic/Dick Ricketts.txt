@@ -7,3 +7,4 @@ Birth:1933-12-04
 Age:81
 Exp:2
 School:Duquesne
+OwingTeam:CIN

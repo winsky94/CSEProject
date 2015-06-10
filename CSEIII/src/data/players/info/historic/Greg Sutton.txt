@@ -7,3 +7,4 @@ Birth:1967-12-03
 Age:47
 Exp:2
 School:Oral Roberts
+OwingTeam:PHL

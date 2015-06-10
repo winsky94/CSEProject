@@ -7,3 +7,4 @@ Birth:1951-12-20
 Age:63
 Exp:1
 School:Miami 
+OwingTeam:PHX

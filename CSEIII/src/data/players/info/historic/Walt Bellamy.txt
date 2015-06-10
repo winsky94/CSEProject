@@ -7,3 +7,4 @@ Birth:1939-07-24
 Age:75
 Exp:13
 School:Indiana
+OwingTeam:NOJ

@@ -7,3 +7,4 @@ Birth:1980-01-27
 Age:35
 Exp:3
 School:Slovenia
+OwingTeam:MIL

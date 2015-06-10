@@ -7,3 +7,4 @@ Birth:1944-07-07
 Age:70
 Exp:10
 School:Oregon
+OwingTeam:PHL

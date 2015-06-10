@@ -7,3 +7,4 @@ Birth:1954-04-05
 Age:61
 Exp:0
 School:Arizona
+OwingTeam:SEA

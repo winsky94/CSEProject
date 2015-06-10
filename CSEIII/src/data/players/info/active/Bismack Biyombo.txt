@@ -7,3 +7,4 @@ Birth:1992-08-28
 Age:22
 Exp:3
 School:Lubumbashi
+OwingTeam:CHA

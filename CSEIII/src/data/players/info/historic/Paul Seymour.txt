@@ -7,3 +7,4 @@ Birth:1928-01-30
 Age:87
 Exp:11
 School:Toledo
+OwingTeam:SYR

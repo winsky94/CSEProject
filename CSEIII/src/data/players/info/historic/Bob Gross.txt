@@ -7,3 +7,4 @@ Birth:1953-08-03
 Age:61
 Exp:7
 School:Long Beach State
+OwingTeam:SDC

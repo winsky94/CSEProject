@@ -7,3 +7,4 @@ Birth:1962-06-24
 Age:52
 Exp:3
 School:Louisville
+OwingTeam:LAC

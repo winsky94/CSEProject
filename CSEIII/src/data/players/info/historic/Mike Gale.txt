@@ -7,3 +7,4 @@ Birth:1950-07-18
 Age:64
 Exp:5
 School:Elizabeth City State
+OwingTeam:GOS

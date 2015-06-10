@@ -7,3 +7,4 @@ Birth:1982-04-16
 Age:33
 Exp:11
 School:Cormeille-en-Parisis
+OwingTeam:SAS

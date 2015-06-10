@@ -7,3 +7,4 @@ Birth:1964-01-20
 Age:51
 Exp:14
 School:Miami 
+OwingTeam:LAL

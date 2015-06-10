@@ -7,3 +7,4 @@ Birth:1961-10-13
 Age:53
 Exp:15
 School:Illinois
+OwingTeam:LAL

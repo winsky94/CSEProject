@@ -7,3 +7,4 @@ Birth:1941-12-18
 Age:73
 Exp:7
 School:Colorado
+OwingTeam:DET

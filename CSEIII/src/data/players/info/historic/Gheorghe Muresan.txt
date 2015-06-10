@@ -7,3 +7,4 @@ Birth:1971-02-14
 Age:44
 Exp:6
 School:Romania
+OwingTeam:NJN

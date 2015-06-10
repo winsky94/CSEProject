@@ -7,3 +7,4 @@ Birth:1958-04-12
 Age:57
 Exp:1
 School:Ohio State
+OwingTeam:DET

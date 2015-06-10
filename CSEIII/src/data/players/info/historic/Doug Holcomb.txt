@@ -7,3 +7,4 @@ Birth:1925-02-09
 Age:90
 Exp:0
 School:Wisconsin
+OwingTeam:BAL

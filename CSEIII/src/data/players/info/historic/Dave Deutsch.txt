@@ -7,3 +7,4 @@ Birth:1945-05-13
 Age:70
 Exp:0
 School:Rochester 
+OwingTeam:NYK

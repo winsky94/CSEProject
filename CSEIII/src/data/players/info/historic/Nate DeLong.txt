@@ -7,3 +7,4 @@ Birth:1926-01-05
 Age:89
 Exp:0
 School:Wisconsin-River Falls
+OwingTeam:MIH

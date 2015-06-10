@@ -7,3 +7,4 @@ Birth:1964-07-31
 Age:50
 Exp:2
 School:Minnesota
+OwingTeam:DAL

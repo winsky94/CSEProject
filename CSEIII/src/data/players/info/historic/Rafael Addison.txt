@@ -7,3 +7,4 @@ Birth:1964-07-22
 Age:50
 Exp:5
 School:Syracuse
+OwingTeam:CHH

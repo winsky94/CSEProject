@@ -7,3 +7,4 @@ Birth:1939-04-18
 Age:76
 Exp:0
 School:North Carolina State
+OwingTeam:STL

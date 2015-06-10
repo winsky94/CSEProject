@@ -7,3 +7,4 @@ Birth:1976-09-16
 Age:38
 Exp:9
 School:Clemson
+OwingTeam:MEM

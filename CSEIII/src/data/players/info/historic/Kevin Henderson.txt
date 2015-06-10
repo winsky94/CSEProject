@@ -7,3 +7,4 @@ Birth:1964-03-22
 Age:51
 Exp:1
 School:Cal State-Fullerton
+OwingTeam:CLE

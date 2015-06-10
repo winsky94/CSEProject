@@ -7,3 +7,4 @@ Birth:1948-11-01
 Age:66
 Exp:0
 School:Maryland-Eastern Shore
+OwingTeam:SFW

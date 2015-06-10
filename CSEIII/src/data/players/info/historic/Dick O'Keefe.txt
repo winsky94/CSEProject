@@ -7,3 +7,4 @@ Birth:1923-09-29
 Age:91
 Exp:3
 School:Santa Clara
+OwingTeam:WAS

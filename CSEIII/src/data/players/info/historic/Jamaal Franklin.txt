@@ -7,3 +7,4 @@ Birth:1991-07-21
 Age:23
 Exp:1
 School:San Diego State
+OwingTeam:DEN

@@ -7,3 +7,4 @@ Birth:1981-07-16
 Age:33
 Exp:13
 School:Michigan State
+OwingTeam:MEM

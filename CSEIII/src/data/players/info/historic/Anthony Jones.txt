@@ -7,3 +7,4 @@ Birth:1962-09-13
 Age:52
 Exp:2
 School:Nevada-Las Vegas
+OwingTeam:DAL

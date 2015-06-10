@@ -7,3 +7,4 @@ Birth:1976-09-19
 Age:38
 Exp:11
 School:Florida International
+OwingTeam:UTA

@@ -7,3 +7,4 @@ Birth:1991-11-22
 Age:23
 Exp:0
 School:Kansas
+OwingTeam:LAL

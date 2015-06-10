@@ -7,3 +7,4 @@ Birth:1971-02-06
 Age:44
 Exp:7
 School:Tennessee State
+OwingTeam:IND

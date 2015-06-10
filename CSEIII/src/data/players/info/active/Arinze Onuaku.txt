@@ -7,3 +7,4 @@ Birth:1987-07-13
 Age:27
 Exp:1
 School:Syracuse
+OwingTeam:MIN

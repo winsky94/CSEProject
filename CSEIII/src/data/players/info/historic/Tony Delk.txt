@@ -7,3 +7,4 @@ Birth:1974-01-28
 Age:41
 Exp:9
 School:Kentucky
+OwingTeam:DET

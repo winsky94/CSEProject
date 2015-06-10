@@ -7,3 +7,4 @@ Birth:1938-03-11
 Age:77
 Exp:4
 School:Louisiana Tech
+OwingTeam:DET

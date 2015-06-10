@@ -7,3 +7,4 @@ Birth:1951-12-14
 Age:63
 Exp:6
 School:Missouri
+OwingTeam:UTH

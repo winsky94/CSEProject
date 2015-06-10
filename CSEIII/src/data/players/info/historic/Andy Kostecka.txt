@@ -7,3 +7,4 @@ Birth:1921-02-10
 Age:94
 Exp:0
 School:Georgetown
+OwingTeam:JET

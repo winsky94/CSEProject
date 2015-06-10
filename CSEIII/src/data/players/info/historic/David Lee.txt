@@ -7,3 +7,4 @@ Birth:1983-04-29
 Age:32
 Exp:9
 School:Florida
+OwingTeam:GSW

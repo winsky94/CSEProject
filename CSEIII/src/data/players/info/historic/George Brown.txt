@@ -7,3 +7,4 @@ Birth:1935-10-30
 Age:79
 Exp:0
 School:Wayne State 
+OwingTeam:MNL

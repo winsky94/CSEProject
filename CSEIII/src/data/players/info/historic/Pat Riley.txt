@@ -7,3 +7,4 @@ Birth:1945-03-20
 Age:70
 Exp:8
 School:Kentucky
+OwingTeam:LAL

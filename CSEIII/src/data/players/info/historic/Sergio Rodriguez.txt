@@ -7,3 +7,4 @@ Birth:1986-06-12
 Age:28
 Exp:3
 School:Tenerife
+OwingTeam:NYK

@@ -7,3 +7,4 @@ Birth:1971-08-10
 Age:43
 Exp:0
 School:Louisville
+OwingTeam:GOS

@@ -7,3 +7,4 @@ Birth:1948-06-21
 Age:66
 Exp:0
 School:Eastern New Mexico
+OwingTeam:CIN

@@ -7,3 +7,4 @@ Birth:1917-01-03
 Age:98
 Exp:3
 School:Wisconsin
+OwingTeam:SHE

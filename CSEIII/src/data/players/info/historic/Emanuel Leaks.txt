@@ -7,3 +7,4 @@ Birth:1945-11-27
 Age:69
 Exp:1
 School:Niagara
+OwingTeam:CAP

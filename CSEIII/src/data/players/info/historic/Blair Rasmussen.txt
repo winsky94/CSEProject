@@ -7,3 +7,4 @@ Birth:1962-11-13
 Age:52
 Exp:7
 School:Oregon
+OwingTeam:ATL

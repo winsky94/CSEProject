@@ -7,3 +7,4 @@ Birth:1929-07-05
 Age:85
 Exp:0
 School:Harvard
+OwingTeam:NYK

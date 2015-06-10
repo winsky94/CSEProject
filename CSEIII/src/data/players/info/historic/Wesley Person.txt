@@ -7,3 +7,4 @@ Birth:1971-03-28
 Age:44
 Exp:10
 School:Auburn
+OwingTeam:DEN

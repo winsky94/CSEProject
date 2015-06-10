@@ -7,3 +7,4 @@ Birth:1932-03-18
 Age:83
 Exp:3
 School:Memphis
+OwingTeam:CIN

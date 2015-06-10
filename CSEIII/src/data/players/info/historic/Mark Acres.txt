@@ -7,3 +7,4 @@ Birth:1962-11-15
 Age:52
 Exp:5
 School:Oral Roberts
+OwingTeam:WAS

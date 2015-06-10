@@ -7,3 +7,4 @@ Birth:1989-05-14
 Age:26
 Exp:3
 School:Wisconsin
+OwingTeam:MEM

@@ -7,3 +7,4 @@ Birth:1978-12-10
 Age:36
 Exp:6
 School:Belgrade
+OwingTeam:MEM

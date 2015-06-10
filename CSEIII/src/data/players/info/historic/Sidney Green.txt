@@ -7,3 +7,4 @@ Birth:1961-01-04
 Age:54
 Exp:9
 School:Nevada-Las Vegas
+OwingTeam:CHH

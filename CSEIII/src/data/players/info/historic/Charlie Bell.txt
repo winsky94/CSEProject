@@ -7,3 +7,4 @@ Birth:1979-03-12
 Age:36
 Exp:6
 School:Michigan State
+OwingTeam:GSW

@@ -7,3 +7,4 @@ Birth:1924-12-27
 Age:90
 Exp:1
 School:Rice
+OwingTeam:FTW

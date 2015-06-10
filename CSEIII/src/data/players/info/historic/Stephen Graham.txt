@@ -7,3 +7,4 @@ Birth:1982-06-11
 Age:32
 Exp:5
 School:Oklahoma State
+OwingTeam:NJN

@@ -7,3 +7,4 @@ Birth:1938-10-28
 Age:76
 Exp:4
 School:Wake Forest
+OwingTeam:NYK

@@ -7,3 +7,4 @@ Birth:1973-11-05
 Age:41
 Exp:0
 School:Florida State
+OwingTeam:LAC

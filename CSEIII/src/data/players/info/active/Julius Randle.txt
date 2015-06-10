@@ -7,3 +7,4 @@ Birth:1994-11-29
 Age:20
 Exp:0
 School:Kentucky
+OwingTeam:LAL

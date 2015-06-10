@@ -7,3 +7,4 @@ Birth:1966-01-14
 Age:49
 Exp:3
 School:Georgia Southern
+OwingTeam:ATL

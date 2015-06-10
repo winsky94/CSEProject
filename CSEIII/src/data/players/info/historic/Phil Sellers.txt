@@ -7,3 +7,4 @@ Birth:1953-11-20
 Age:61
 Exp:0
 School:Rutgers
+OwingTeam:DET

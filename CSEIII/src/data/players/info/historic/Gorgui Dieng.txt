@@ -7,3 +7,4 @@ Birth:1990-01-18
 Age:25
 Exp:1
 School:Louisville
+OwingTeam:MIN

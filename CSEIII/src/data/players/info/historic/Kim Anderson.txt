@@ -7,3 +7,4 @@ Birth:1955-05-12
 Age:60
 Exp:0
 School:Missouri
+OwingTeam:POR

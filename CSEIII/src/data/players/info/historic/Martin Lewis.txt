@@ -7,3 +7,4 @@ Birth:1975-04-28
 Age:40
 Exp:1
 School:Seward County Community College
+OwingTeam:TOR

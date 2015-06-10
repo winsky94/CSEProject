@@ -7,3 +7,4 @@ Birth:1964-09-11
 Age:50
 Exp:0
 School:Fairfield
+OwingTeam:BOS

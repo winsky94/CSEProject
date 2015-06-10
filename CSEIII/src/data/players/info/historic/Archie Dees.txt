@@ -7,3 +7,4 @@ Birth:1936-02-22
 Age:79
 Exp:3
 School:Indiana
+OwingTeam:CHP

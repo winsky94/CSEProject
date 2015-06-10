@@ -7,3 +7,4 @@ Birth:1981-08-14
 Age:33
 Exp:7
 School:Memphis
+OwingTeam:PHX

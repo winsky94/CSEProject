@@ -7,3 +7,4 @@ Birth:1992-11-18
 Age:22
 Exp:2
 School:Baylor
+OwingTeam:DET

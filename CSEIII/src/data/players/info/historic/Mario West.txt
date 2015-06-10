@@ -7,3 +7,4 @@ Birth:1984-06-19
 Age:30
 Exp:3
 School:Georgia Tech
+OwingTeam:NJN

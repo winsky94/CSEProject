@@ -7,3 +7,4 @@ Birth:1957-07-02
 Age:57
 Exp:11
 School:Jackson State
+OwingTeam:NJN

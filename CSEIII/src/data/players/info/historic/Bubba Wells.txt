@@ -7,3 +7,4 @@ Birth:1974-07-26
 Age:40
 Exp:0
 School:Austin Peay
+OwingTeam:DAL

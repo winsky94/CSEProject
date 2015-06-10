@@ -7,3 +7,4 @@ Birth:1966-07-26
 Age:48
 Exp:0
 School:Purdue
+OwingTeam:SAN

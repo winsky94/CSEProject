@@ -7,3 +7,4 @@ Birth:1955-12-20
 Age:59
 Exp:1
 School:Rutgers
+OwingTeam:NYK

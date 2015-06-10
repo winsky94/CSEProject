@@ -7,3 +7,4 @@ Birth:1935-02-17
 Age:80
 Exp:0
 School:Iona
+OwingTeam:NYK

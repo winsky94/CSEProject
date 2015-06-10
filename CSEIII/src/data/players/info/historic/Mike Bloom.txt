@@ -7,3 +7,4 @@ Birth:1915-01-14
 Age:100
 Exp:1
 School:Temple
+OwingTeam:MNL

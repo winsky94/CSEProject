@@ -7,3 +7,4 @@ Birth:1966-04-19
 Age:49
 Exp:4
 School:Southern Mississippi
+OwingTeam:MIL

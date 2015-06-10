@@ -7,3 +7,4 @@ Birth:1954-07-08
 Age:60
 Exp:1
 School:Grand Canyon
+OwingTeam:PHX

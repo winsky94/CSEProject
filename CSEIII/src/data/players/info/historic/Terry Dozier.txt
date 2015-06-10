@@ -7,3 +7,4 @@ Birth:1966-06-29
 Age:48
 Exp:0
 School:South Carolina
+OwingTeam:CHH

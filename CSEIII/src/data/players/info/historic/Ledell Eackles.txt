@@ -7,3 +7,4 @@ Birth:1966-11-24
 Age:48
 Exp:6
 School:New Orleans
+OwingTeam:WAS

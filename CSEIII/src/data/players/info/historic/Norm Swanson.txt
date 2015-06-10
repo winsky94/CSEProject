@@ -7,3 +7,4 @@ Birth:1930-10-04
 Age:84
 Exp:0
 School:Detroit Mercy
+OwingTeam:ROC

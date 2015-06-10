@@ -7,3 +7,4 @@ Birth:1986-08-31
 Age:28
 Exp:5
 School:Indiana
+OwingTeam:CHA

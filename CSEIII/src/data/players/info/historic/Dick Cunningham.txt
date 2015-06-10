@@ -7,3 +7,4 @@ Birth:1946-07-11
 Age:68
 Exp:6
 School:Murray State
+OwingTeam:MIL

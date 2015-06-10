@@ -7,3 +7,4 @@ Birth:1943-01-28
 Age:72
 Exp:0
 School:Georgia Tech
+OwingTeam:NYK

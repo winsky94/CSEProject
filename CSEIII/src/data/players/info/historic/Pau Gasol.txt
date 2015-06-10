@@ -7,3 +7,4 @@ Birth:1980-07-06
 Age:34
 Exp:13
 School:Barcelona
+OwingTeam:CHI

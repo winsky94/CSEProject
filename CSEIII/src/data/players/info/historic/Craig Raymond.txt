@@ -7,3 +7,4 @@ Birth:1945-04-05
 Age:70
 Exp:0
 School:Brigham Young
+OwingTeam:PHL

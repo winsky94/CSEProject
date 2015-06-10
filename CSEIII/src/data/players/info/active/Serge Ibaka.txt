@@ -7,3 +7,4 @@ Birth:1989-09-18
 Age:25
 Exp:5
 School:Brazzaville
+OwingTeam:OKC

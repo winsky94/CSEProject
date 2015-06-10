@@ -7,3 +7,4 @@ Birth:1971-10-31
 Age:43
 Exp:1
 School:Mississippi Valley State
+OwingTeam:PHL

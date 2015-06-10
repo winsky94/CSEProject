@@ -7,3 +7,4 @@ Birth:1980-11-02
 Age:34
 Exp:1
 School:Martin Luther King HS 
+OwingTeam:SEA

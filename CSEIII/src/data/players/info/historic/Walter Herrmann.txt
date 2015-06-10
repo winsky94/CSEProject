@@ -7,3 +7,4 @@ Birth:1979-06-26
 Age:35
 Exp:2
 School:Argentina
+OwingTeam:DET

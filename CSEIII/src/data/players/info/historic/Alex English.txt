@@ -7,3 +7,4 @@ Birth:1954-01-05
 Age:61
 Exp:14
 School:South Carolina
+OwingTeam:DAL

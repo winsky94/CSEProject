@@ -7,3 +7,4 @@ Birth:1929-07-19
 Age:85
 Exp:4
 School:King
+OwingTeam:SYR

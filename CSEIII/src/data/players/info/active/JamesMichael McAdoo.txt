@@ -7,3 +7,4 @@ Birth:1993-01-04
 Age:22
 Exp:0
 School:North Carolina
+OwingTeam:GSW

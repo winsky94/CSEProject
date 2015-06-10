@@ -7,3 +7,4 @@ Birth:1949-10-02
 Age:65
 Exp:0
 School:Nevada-Las Vegas
+OwingTeam:GOS

@@ -7,3 +7,4 @@ Birth:1992-06-07
 Age:22
 Exp:0
 School:Missouri
+OwingTeam:LAL

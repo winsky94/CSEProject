@@ -7,3 +7,4 @@ Birth:1954-09-30
 Age:60
 Exp:10
 School:Gardner-Webb
+OwingTeam:UTH

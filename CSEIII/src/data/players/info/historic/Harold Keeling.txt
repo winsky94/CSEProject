@@ -7,3 +7,4 @@ Birth:1963-09-18
 Age:51
 Exp:0
 School:Santa Clara
+OwingTeam:DAL

@@ -7,3 +7,4 @@ Birth:1947-11-15
 Age:67
 Exp:12
 School:Norfolk State
+OwingTeam:MIL

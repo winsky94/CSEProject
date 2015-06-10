@@ -7,3 +7,4 @@ Birth:1970-12-31
 Age:44
 Exp:0
 School:Long Beach State
+OwingTeam:

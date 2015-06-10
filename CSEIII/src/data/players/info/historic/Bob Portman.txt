@@ -7,3 +7,4 @@ Birth:1947-03-22
 Age:68
 Exp:3
 School:Creighton
+OwingTeam:GOS

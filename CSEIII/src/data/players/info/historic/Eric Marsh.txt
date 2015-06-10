@@ -7,3 +7,4 @@ Birth:1954-03-10
 Age:61
 Exp:0
 School:Manhattan
+OwingTeam:GOS

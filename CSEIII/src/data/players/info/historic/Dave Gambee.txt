@@ -7,3 +7,4 @@ Birth:1937-04-16
 Age:78
 Exp:11
 School:Oregon State
+OwingTeam:SFW

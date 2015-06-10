@@ -7,3 +7,4 @@ Birth:1956-04-25
 Age:59
 Exp:12
 School:DePaul
+OwingTeam:SEA

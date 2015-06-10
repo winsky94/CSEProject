@@ -7,3 +7,4 @@ Birth:1956-12-24
 Age:58
 Exp:1
 School:South Alabama
+OwingTeam:SAN

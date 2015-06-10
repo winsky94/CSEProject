@@ -7,3 +7,4 @@ Birth:1985-12-03
 Age:29
 Exp:3
 School:Bakersfield HS 
+OwingTeam:OKC

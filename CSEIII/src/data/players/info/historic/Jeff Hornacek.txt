@@ -7,3 +7,4 @@ Birth:1963-05-03
 Age:52
 Exp:13
 School:Iowa State
+OwingTeam:UTA

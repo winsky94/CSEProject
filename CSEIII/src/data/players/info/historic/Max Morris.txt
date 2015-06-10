@@ -7,3 +7,4 @@ Birth:1925-03-14
 Age:90
 Exp:0
 School:Northwestern
+OwingTeam:SHE

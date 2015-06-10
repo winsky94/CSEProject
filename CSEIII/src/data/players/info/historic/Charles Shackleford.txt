@@ -7,3 +7,4 @@ Birth:1966-04-22
 Age:49
 Exp:5
 School:North Carolina State
+OwingTeam:CHH

@@ -7,3 +7,4 @@ Birth:1942-05-09
 Age:73
 Exp:6
 School:Cincinnati
+OwingTeam:BUF

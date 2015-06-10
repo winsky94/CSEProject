@@ -7,3 +7,4 @@ Birth:1978-11-05
 Age:36
 Exp:1
 School:Iowa
+OwingTeam:GSW

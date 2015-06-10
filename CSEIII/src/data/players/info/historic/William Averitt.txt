@@ -7,3 +7,4 @@ Birth:1952-07-22
 Age:62
 Exp:1
 School:Pepperdine
+OwingTeam:BUF

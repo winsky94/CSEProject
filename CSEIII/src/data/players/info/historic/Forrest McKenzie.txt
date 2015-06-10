@@ -7,3 +7,4 @@ Birth:1963-02-16
 Age:52
 Exp:0
 School:Loyola-Marymount
+OwingTeam:SAN

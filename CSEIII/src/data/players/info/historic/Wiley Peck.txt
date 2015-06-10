@@ -7,3 +7,4 @@ Birth:1957-09-15
 Age:57
 Exp:0
 School:Mississippi State
+OwingTeam:SAN

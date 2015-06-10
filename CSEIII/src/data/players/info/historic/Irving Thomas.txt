@@ -7,3 +7,4 @@ Birth:1966-01-02
 Age:49
 Exp:0
 School:Florida State
+OwingTeam:LAL

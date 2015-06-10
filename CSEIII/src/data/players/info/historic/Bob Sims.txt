@@ -7,3 +7,4 @@ Birth:1938-10-09
 Age:76
 Exp:0
 School:Pepperdine
+OwingTeam:STL

@@ -7,3 +7,4 @@ Birth:1950-08-04
 Age:64
 Exp:13
 School:Albany State 
+OwingTeam:SAN

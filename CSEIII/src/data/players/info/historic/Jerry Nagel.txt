@@ -7,3 +7,4 @@ Birth:1928-05-18
 Age:87
 Exp:0
 School:Loyola-Chicago
+OwingTeam:FTW

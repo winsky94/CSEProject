@@ -7,3 +7,4 @@ Birth:1962-04-15
 Age:53
 Exp:1
 School:Norfolk State
+OwingTeam:SEA

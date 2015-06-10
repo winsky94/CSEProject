@@ -7,3 +7,4 @@ Birth:1967-06-17
 Age:47
 Exp:9
 School:Virginia Union
+OwingTeam:DEN

@@ -7,3 +7,4 @@ Birth:1941-07-09
 Age:73
 Exp:0
 School:South Dakota State
+OwingTeam:CIN

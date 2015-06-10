@@ -7,3 +7,4 @@ Birth:1945-11-18
 Age:69
 Exp:1
 School:Eastern Kentucky
+OwingTeam:BOS

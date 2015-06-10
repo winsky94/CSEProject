@@ -7,3 +7,4 @@ Birth:1946-12-20
 Age:68
 Exp:3
 School:Ohio State
+OwingTeam:BUF

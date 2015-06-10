@@ -7,3 +7,4 @@ Birth:1968-12-09
 Age:46
 Exp:9
 School:Oklahoma
+OwingTeam:SAC

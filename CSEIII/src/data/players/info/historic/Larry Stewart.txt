@@ -7,3 +7,4 @@ Birth:1968-09-21
 Age:46
 Exp:4
 School:Coppin State
+OwingTeam:SEA

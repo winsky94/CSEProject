@@ -7,3 +7,4 @@ Birth:1973-05-09
 Age:42
 Exp:0
 School:Croatia
+OwingTeam:CHI

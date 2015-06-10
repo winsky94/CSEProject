@@ -7,3 +7,4 @@ Birth:1980-07-03
 Age:34
 Exp:5
 School:Italy
+OwingTeam:NJN

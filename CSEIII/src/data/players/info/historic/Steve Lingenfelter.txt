@@ -7,3 +7,4 @@ Birth:1958-06-10
 Age:56
 Exp:1
 School:South Dakota State
+OwingTeam:SAN

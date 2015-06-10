@@ -7,3 +7,4 @@ Birth:1982-08-03
 Age:32
 Exp:0
 School:Russia
+OwingTeam:

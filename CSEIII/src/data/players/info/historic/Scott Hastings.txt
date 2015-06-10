@@ -7,3 +7,4 @@ Birth:1960-06-03
 Age:54
 Exp:10
 School:Arkansas
+OwingTeam:DEN

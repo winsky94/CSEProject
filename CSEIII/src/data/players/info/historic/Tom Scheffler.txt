@@ -7,3 +7,4 @@ Birth:1954-10-27
 Age:60
 Exp:0
 School:Purdue
+OwingTeam:POR

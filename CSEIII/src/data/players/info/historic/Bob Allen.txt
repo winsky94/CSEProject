@@ -7,3 +7,4 @@ Birth:1946-07-17
 Age:68
 Exp:0
 School:Marshall
+OwingTeam:SFW

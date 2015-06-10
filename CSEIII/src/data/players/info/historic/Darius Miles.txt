@@ -7,3 +7,4 @@ Birth:1981-10-09
 Age:33
 Exp:6
 School:East St. Louis HS 
+OwingTeam:MEM

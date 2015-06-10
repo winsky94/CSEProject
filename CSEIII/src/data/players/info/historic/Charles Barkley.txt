@@ -7,3 +7,4 @@ Birth:1963-02-20
 Age:52
 Exp:15
 School:Auburn
+OwingTeam:HOU

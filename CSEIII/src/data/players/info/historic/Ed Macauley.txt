@@ -7,3 +7,4 @@ Birth:1928-03-22
 Age:87
 Exp:9
 School:Saint Louis
+OwingTeam:STL

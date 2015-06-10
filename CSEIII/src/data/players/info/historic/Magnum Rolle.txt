@@ -7,3 +7,4 @@ Birth:1986-02-23
 Age:29
 Exp:0
 School:Louisiana Tech
+OwingTeam:ATL

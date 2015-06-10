@@ -7,3 +7,4 @@ Birth:1921-03-29
 Age:94
 Exp:0
 School:Long Island-Brooklyn
+OwingTeam:BAL

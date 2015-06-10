@@ -7,3 +7,4 @@ Birth:1966-12-02
 Age:48
 Exp:2
 School:Missouri
+OwingTeam:WAS

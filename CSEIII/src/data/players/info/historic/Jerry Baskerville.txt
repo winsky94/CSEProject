@@ -7,3 +7,4 @@ Birth:1951-11-10
 Age:63
 Exp:0
 School:Temple
+OwingTeam:PHL

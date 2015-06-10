@@ -7,3 +7,4 @@ Birth:1921-09-19
 Age:93
 Exp:0
 School:Western Kentucky
+OwingTeam:CHS

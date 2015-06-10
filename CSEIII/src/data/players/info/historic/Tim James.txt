@@ -7,3 +7,4 @@ Birth:1976-12-25
 Age:38
 Exp:3
 School:Miami 
+OwingTeam:NYK

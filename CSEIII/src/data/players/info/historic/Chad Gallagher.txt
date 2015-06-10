@@ -7,3 +7,4 @@ Birth:1969-05-30
 Age:46
 Exp:0
 School:Creighton
+OwingTeam:UTH

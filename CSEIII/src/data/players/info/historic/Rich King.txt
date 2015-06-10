@@ -7,3 +7,4 @@ Birth:1969-04-04
 Age:46
 Exp:3
 School:Nebraska
+OwingTeam:SEA

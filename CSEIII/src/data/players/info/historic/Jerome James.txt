@@ -7,3 +7,4 @@ Birth:1975-11-17
 Age:39
 Exp:8
 School:Florida A
+OwingTeam:CHI

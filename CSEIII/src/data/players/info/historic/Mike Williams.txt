@@ -7,3 +7,4 @@ Birth:1963-08-14
 Age:51
 Exp:0
 School:Bradley
+OwingTeam:ATL

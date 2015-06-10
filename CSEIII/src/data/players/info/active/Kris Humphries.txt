@@ -7,3 +7,4 @@ Birth:1985-02-06
 Age:30
 Exp:10
 School:Minnesota
+OwingTeam:WAS

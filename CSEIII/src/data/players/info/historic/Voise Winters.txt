@@ -7,3 +7,4 @@ Birth:1962-10-12
 Age:52
 Exp:0
 School:Bradley
+OwingTeam:PHL

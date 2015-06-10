@@ -7,3 +7,4 @@ Birth:1948-07-11
 Age:66
 Exp:5
 School:Long Beach State
+OwingTeam:DET

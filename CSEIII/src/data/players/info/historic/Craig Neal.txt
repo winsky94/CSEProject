@@ -7,3 +7,4 @@ Birth:1964-02-16
 Age:51
 Exp:1
 School:Georgia Tech
+OwingTeam:DEN

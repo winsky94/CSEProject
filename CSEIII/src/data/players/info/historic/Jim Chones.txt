@@ -7,3 +7,4 @@ Birth:1949-11-30
 Age:65
 Exp:7
 School:Marquette
+OwingTeam:WAS

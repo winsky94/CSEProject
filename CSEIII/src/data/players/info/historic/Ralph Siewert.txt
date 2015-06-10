@@ -7,3 +7,4 @@ Birth:1923-12-31
 Age:91
 Exp:0
 School:Dakota Wesleyan
+OwingTeam:HUS

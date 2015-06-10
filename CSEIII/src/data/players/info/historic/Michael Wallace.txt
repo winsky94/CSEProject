@@ -7,3 +7,4 @@ Birth:1918-07-12
 Age:96
 Exp:0
 School:Scranton
+OwingTeam:HUS

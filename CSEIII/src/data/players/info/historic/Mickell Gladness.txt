@@ -7,3 +7,4 @@ Birth:1986-07-26
 Age:28
 Exp:0
 School:Alabama A
+OwingTeam:GSW

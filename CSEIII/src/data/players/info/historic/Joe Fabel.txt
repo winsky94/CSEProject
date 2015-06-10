@@ -7,3 +7,4 @@ Birth:1913-09-04
 Age:101
 Exp:0
 School:Pittsburgh
+OwingTeam:PIT

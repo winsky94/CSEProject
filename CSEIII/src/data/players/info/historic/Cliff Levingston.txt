@@ -7,3 +7,4 @@ Birth:1961-01-04
 Age:54
 Exp:10
 School:Wichita State
+OwingTeam:DEN

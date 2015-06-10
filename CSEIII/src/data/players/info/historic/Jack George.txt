@@ -7,3 +7,4 @@ Birth:1928-11-13
 Age:86
 Exp:7
 School:La Salle
+OwingTeam:NYK

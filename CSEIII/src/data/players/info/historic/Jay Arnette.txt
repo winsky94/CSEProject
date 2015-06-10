@@ -7,3 +7,4 @@ Birth:1938-12-19
 Age:76
 Exp:2
 School:Texas
+OwingTeam:CIN

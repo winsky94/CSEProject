@@ -7,3 +7,4 @@ Birth:1923-06-28
 Age:91
 Exp:2
 School:Kansas
+OwingTeam:PRO

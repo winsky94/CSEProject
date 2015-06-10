@@ -7,3 +7,4 @@ Birth:1932-12-11
 Age:82
 Exp:2
 School:Duquesne
+OwingTeam:SYR

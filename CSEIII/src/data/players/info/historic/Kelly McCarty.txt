@@ -7,3 +7,4 @@ Birth:1975-08-24
 Age:39
 Exp:0
 School:Southern Mississippi
+OwingTeam:DEN

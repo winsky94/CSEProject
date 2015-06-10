@@ -7,3 +7,4 @@ Birth:1963-05-24
 Age:52
 Exp:13
 School:McNeese State
+OwingTeam:DET

@@ -7,3 +7,4 @@ Birth:1985-05-06
 Age:30
 Exp:9
 School:Wake Forest
+OwingTeam:LAC

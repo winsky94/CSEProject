@@ -7,3 +7,4 @@ Birth:1936-10-02
 Age:78
 Exp:9
 School:Cincinnati
+OwingTeam:PHL

@@ -7,3 +7,4 @@ Birth:1983-02-01
 Age:32
 Exp:10
 School:Western Carolina
+OwingTeam:MIN

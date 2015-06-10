@@ -7,3 +7,4 @@ Birth:1991-07-15
 Age:23
 Exp:1
 School:Virginia Commonwealth
+OwingTeam:CHA

@@ -7,3 +7,4 @@ Birth:1968-06-22
 Age:46
 Exp:13
 School:Fayetteville State
+OwingTeam:NJN

@@ -7,3 +7,4 @@ Birth:1953-05-26
 Age:62
 Exp:10
 School:Central Michigan
+OwingTeam:WAS

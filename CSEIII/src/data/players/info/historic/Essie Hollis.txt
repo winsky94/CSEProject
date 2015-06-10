@@ -7,3 +7,4 @@ Birth:1955-05-16
 Age:60
 Exp:0
 School:St. Bonaventure
+OwingTeam:DET

@@ -7,3 +7,4 @@ Birth:1955-11-30
 Age:59
 Exp:4
 School:San Diego State
+OwingTeam:PHX

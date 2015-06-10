@@ -7,3 +7,4 @@ Birth:1927-06-27
 Age:87
 Exp:0
 School:Cal State-Los Angeles
+OwingTeam:STL

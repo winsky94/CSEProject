@@ -7,3 +7,4 @@ Birth:1915-04-23
 Age:100
 Exp:2
 School:Loyola-Chicago
+OwingTeam:SYR

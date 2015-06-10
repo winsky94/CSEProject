@@ -7,3 +7,4 @@ Birth:1940-06-06
 Age:74
 Exp:2
 School:Southern California
+OwingTeam:SFW

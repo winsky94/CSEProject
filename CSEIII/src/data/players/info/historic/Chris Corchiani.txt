@@ -7,3 +7,4 @@ Birth:1968-03-28
 Age:47
 Exp:2
 School:North Carolina State
+OwingTeam:BOS

@@ -7,3 +7,4 @@ Birth:1986-01-01
 Age:29
 Exp:7
 School:Louisiana State
+OwingTeam:LAC

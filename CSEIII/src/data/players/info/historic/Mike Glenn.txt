@@ -7,3 +7,4 @@ Birth:1955-09-10
 Age:59
 Exp:9
 School:Southern Illinois
+OwingTeam:MIL

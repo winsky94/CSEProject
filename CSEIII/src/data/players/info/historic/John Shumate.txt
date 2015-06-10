@@ -7,3 +7,4 @@ Birth:1952-04-06
 Age:63
 Exp:4
 School:Notre Dame
+OwingTeam:SEA

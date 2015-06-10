@@ -7,3 +7,4 @@ Birth:1937-09-25
 Age:77
 Exp:0
 School:Bowling Green
+OwingTeam:STL

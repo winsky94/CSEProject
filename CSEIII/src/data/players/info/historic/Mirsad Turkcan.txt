@@ -7,3 +7,4 @@ Birth:1976-06-07
 Age:38
 Exp:0
 School:Turkey
+OwingTeam:MIL

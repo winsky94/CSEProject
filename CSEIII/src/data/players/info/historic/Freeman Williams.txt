@@ -7,3 +7,4 @@ Birth:1956-05-15
 Age:59
 Exp:5
 School:Portland State
+OwingTeam:WAS

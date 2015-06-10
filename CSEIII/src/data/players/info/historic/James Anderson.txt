@@ -7,3 +7,4 @@ Birth:1989-03-25
 Age:26
 Exp:3
 School:Oklahoma State
+OwingTeam:PHI

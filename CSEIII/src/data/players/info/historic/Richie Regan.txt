@@ -7,3 +7,4 @@ Birth:1930-11-30
 Age:84
 Exp:2
 School:Seton Hall
+OwingTeam:CIN

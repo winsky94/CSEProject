@@ -7,3 +7,4 @@ Birth:1952-10-05
 Age:62
 Exp:4
 School:Grambling
+OwingTeam:NOJ

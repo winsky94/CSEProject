@@ -7,3 +7,4 @@ Birth:1943-05-01
 Age:72
 Exp:10
 School:Ohio Wesleyan
+OwingTeam:POR

@@ -7,3 +7,4 @@ Birth:1982-10-06
 Age:32
 Exp:0
 School:Jacksonville State
+OwingTeam:DET

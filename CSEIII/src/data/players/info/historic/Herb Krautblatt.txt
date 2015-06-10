@@ -7,3 +7,4 @@ Birth:1926-11-19
 Age:88
 Exp:0
 School:Rider
+OwingTeam:BAL

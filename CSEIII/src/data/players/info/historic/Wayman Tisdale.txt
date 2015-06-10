@@ -7,3 +7,4 @@ Birth:1964-06-09
 Age:50
 Exp:11
 School:Oklahoma
+OwingTeam:PHX

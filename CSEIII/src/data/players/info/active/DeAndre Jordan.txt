@@ -7,3 +7,4 @@ Birth:1988-07-21
 Age:26
 Exp:6
 School:Texas A
+OwingTeam:LAC

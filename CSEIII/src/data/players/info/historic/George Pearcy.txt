@@ -7,3 +7,4 @@ Birth:1919-07-02
 Age:95
 Exp:0
 School:Indiana State
+OwingTeam:DEF

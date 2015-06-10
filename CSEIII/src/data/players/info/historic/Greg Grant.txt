@@ -7,3 +7,4 @@ Birth:1966-08-29
 Age:48
 Exp:5
 School:College of New Jersey
+OwingTeam:DEN

@@ -7,3 +7,4 @@ Birth:1953-07-27
 Age:61
 Exp:4
 School:Virginia
+OwingTeam:SAN

@@ -7,3 +7,4 @@ Birth:1967-11-04
 Age:47
 Exp:4
 School:Louisiana Tech
+OwingTeam:DAL
