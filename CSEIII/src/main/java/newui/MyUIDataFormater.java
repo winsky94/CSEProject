@@ -9,7 +9,7 @@ public class MyUIDataFormater {
 	}
 	
 	/**
-	 * 将传入的double型小数转为特定的位数并作为一个string返回
+	 * 将传入的double型小数转为整数并作为一个string返回
 	 * @param originalNum 原始的double型小数
 	 * @return
 	 */
@@ -19,7 +19,17 @@ public class MyUIDataFormater {
 	}
 	
 	/**
-	 * 将传入的double型小数转为特定的位数并作为一个string返回
+	 * 将传入的double型小数转为保留一位小数并作为一个string返回
+	 * @param originalNum 原始的double型小数
+	 * @return
+	 */
+	public static String formatTo1(double originalNum) {
+		DecimalFormat dec = new DecimalFormat("0.0");
+		return dec.format(originalNum);
+	}
+	
+	/**
+	 * 将传入的double型小数转为保留三位小数并作为一个string返回
 	 * @param originalNum 原始的double型小数
 	 * @return
 	 */
