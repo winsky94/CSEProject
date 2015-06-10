@@ -225,7 +225,7 @@ public class MatchDetailPanel extends FatherPanel {
 	}
 	
 	public void setIsLive(boolean t){
-		this.isLive=true;
+		this.isLive=t;
 	}
 	
 	
