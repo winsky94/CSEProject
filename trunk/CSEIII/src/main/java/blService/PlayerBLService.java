@@ -50,9 +50,9 @@ public interface PlayerBLService {
 	 * 
 	 * @return
 	 */
-	public ArrayList<PlayerVO> getPlayerAverageInfo(String type);
+	public ArrayList<PlayerVO> getPlayerAverageInfo(String season,String type);
 
-	public ArrayList<PlayerVO> getPlayerAverageInfo(String type,String name);
+	public ArrayList<PlayerVO> getPlayerAverageInfo(String season,String type,String name);
 
 	/**
 	 * 根据某一项技术分析项，将球员按某个赛季的该项数据进行升降序排序
@@ -83,7 +83,7 @@ public interface PlayerBLService {
 	 * 
 	 * @return 按照所给条件排好序的球员列表
 	 */
-	public ArrayList<PlayerVO> getOrderedPlayersByAverage(String type,String condition,
+	public ArrayList<PlayerVO> getOrderedPlayersByAverage(String season,String type,String condition,
 			String order, int num);
 
 	/**
@@ -122,7 +122,7 @@ public interface PlayerBLService {
 	 *            需要的数据条数
 	 * @return 符合条件的球员列表
 	 */
-	public ArrayList<PlayerVO> selectPlayersByAverage(String type,String position,
+	public ArrayList<PlayerVO> selectPlayersByAverage(String season,String type,String position,
 			String union, String column, String order, int num);
 
 
@@ -154,7 +154,7 @@ public interface PlayerBLService {
 	 *            进行球员排序的时候的球员属性值
 	 * @return 符合条件的球员列表
 	 */
-	public ArrayList<PlayerVO> getBestImprovedPlayer(String type,String column, int num);
+	public ArrayList<PlayerVO> getBestImprovedPlayer(String season,String type,String column, int num);
 
 	/**
 	 * 根据首字母得到球员
@@ -165,15 +165,6 @@ public interface PlayerBLService {
 	 */
 	public ArrayList<PlayerVO> getPlayersByInitialName(char character);
 
-	/**
-	 * 
-	 * @param minute找出出场时间大于等于该分钟的球员
-	 * @return
-	 */
-	public ArrayList<PlayerVO> selectPlayersUptheTimeAverage(String type,String position,
-			String union,String column, String order,int minute,int num);
-	public ArrayList<PlayerVO> selectPlayersUptheTimeSeason(String season,String type,String position,
-			String union,String column, String order,int minute,int num);
 	/**
 	 * 获得该球员最近5场比赛的数据
 	 * 
