@@ -21,8 +21,8 @@ import dataservice.MatchDataService;
 /**
  * 从文件中读取数据，用于将比赛数据读到数据库中 数据分为三个表存储
  * matches：存储比赛的编号、赛季、日期、主客队名称、比分等（主客队和相应的比分都分开存）
- * records：存储比赛的每个球员的比赛ID、所属球队名称以及一些基本的技术数据
- * detailscores：存储比赛的ID，每节的比分信息(考虑到加时赛，所以一节比分是一个元组)
+ * records：存储比赛的每个球员的比赛ID、所属球队名称以及一些基本的技术数据 detail
+ * Scores：存储比赛的ID，每节的比分信息(考虑到加时赛，所以一节比分是一个元组)
  */
 public class MatchData implements MatchDataService {
 	Connection connection = null;
@@ -36,15 +36,30 @@ public class MatchData implements MatchDataService {
 		MatchData matchData = new MatchData();
 		// matchData.exportToSql();
 		System.out.println("MatchData.main()");
+		matchData.addIndex("records");
 		// ArrayList<MatchVO> result = matchData.getMatchData("14-15",
 		// "Playoff",
 		// "all", "all", "all");
+		long start = System.currentTimeMillis();
 		ArrayList<MatchVO> result = matchData.getMatchData("all", "all", "all",
 				"all", "all");
-		System.out.println(result.size());
-//		ArrayList<String> season=new ArrayList<String>();
-//		season=matchData.getAllSeasons();
-//		System.out.println(season.get(0));
+		// System.out.println("---------------------------------");
+		// MatchVO matchVO=result.get(1);
+		// System.out.println(matchVO.getDate());
+		// System.out.println(matchVO.getVisitingTeam()+"-"+matchVO.getHomeTeam());
+		// System.out.println(matchVO.getRecords().get(0).getPlayerName()+" "+matchVO.getRecords().get(0).getPresentTime());
+		// System.out.println(matchVO.getRecords().get(1).getPlayerName()+" "+matchVO.getRecords().get(1).getPresentTime());
+		// System.out.println(matchVO.getRecords().get(2).getPlayerName()+" "+matchVO.getRecords().get(2).getPresentTime());
+		// System.out.println(matchVO.getRecords().get(3).getPlayerName()+" "+matchVO.getRecords().get(3).getPresentTime());
+		// System.out.println(matchVO.getRecords().get(4).getPlayerName()+" "+matchVO.getRecords().get(4).getPresentTime());
+		// System.out.println(matchVO.getRecords().get(5).getPlayerName()+" "+matchVO.getRecords().get(5).getPresentTime());
+		// System.out.println(matchVO.getRecords().get(6).getPlayerName()+" "+matchVO.getRecords().get(6).getPresentTime());
+		// System.out.println(matchVO.getRecords().get(7).getPlayerName()+" "+matchVO.getRecords().get(7).getPresentTime());
+		// ArrayList<String> season=new ArrayList<String>();
+		// season=matchData.getAllSeasons();
+		// System.out.println(season.get(0));
+		long end = System.currentTimeMillis();
+		System.out.println("运行时间：" + (end - start) + "毫秒");
 	}
 
 	public ArrayList<String> getAllSeasons() {
@@ -301,7 +316,7 @@ public class MatchData implements MatchDataService {
 				&& homeTeam.equals("all") && visitingTeam.equals("all")) {
 			query = "select * from matches";
 		}
-int test = 1;
+		int test = 1;
 		try {
 			connection = SqlManager.getConnection();
 			sql = connection.createStatement();
@@ -340,8 +355,13 @@ int test = 1;
 				rs1.close();
 
 				ResultSet rs2 = sql3
-						.executeQuery("select * from records where matchID="
+						.executeQuery("select team,playerName,position,presentTime,shootHitNum,shootAttemptNum,shootHitRate,"
+								+ "threeHitNum,threeAttemptNum,threeHitRate,freeThrowHitNum,freeThrowAttemptNum,freeThrowHitRate,offenReboundNum,defenReboundNum,"
+								+ "reboundNum,assistNum,stealNum,blockNum,turnOverNum,foulNum,score from records where matchID="
 								+ matchID);
+				// ResultSet rs2 = sql3
+				// .executeQuery("select * from records where matchID="
+				// + matchID);
 				records = new ArrayList<RecordVO>();
 				RecordVO vo;
 				while (rs2.next()) {
@@ -372,7 +392,7 @@ int test = 1;
 						myvisingTeam, myhomeTeam, visitingScore, homeScore,
 						detailScores, records);
 				matches.add(matchVO);
-				System.out.println(test++);
+				// System.out.println(test++);
 			}
 			sql2.close();
 			sql3.close();
@@ -558,7 +578,9 @@ int test = 1;
 		// TODO 自动生成的方法存根
 		ArrayList<MatchVO> matches = new ArrayList<MatchVO>();
 		try {
-			FileList fl = new FileList("src/data/matches");
+			// FileList fl = new FileList("src/data/matches");
+			FileList fl = new FileList("C:/Users/Administrator/Desktop/matches");
+
 			ArrayList<String> names = fl.getList();
 			for (String name : names) {
 				matches.add(readFromMatchFile(name));
@@ -571,6 +593,20 @@ int test = 1;
 			e.printStackTrace();
 		}
 		return matches;
+	}
+
+	private void addIndex(String tableName) {
+		try {
+			connection = SqlManager.getConnection();
+			sql = connection.createStatement();
+			String s = "create Index recordDetail on '" + tableName
+					+ "'(matchID)";
+			sql.execute(s);
+		} catch (Exception e) {
+			// TODO: handle exception
+		} finally {
+			closeMySql();
+		}
 	}
 
 	public void exportToSql() {
