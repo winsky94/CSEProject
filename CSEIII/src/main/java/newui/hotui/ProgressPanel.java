@@ -28,7 +28,6 @@ import newui.tables.HotTableModel;
 import newui.tables.MyTableCellRenderer;
 import newui.teamui.TeamDetailPanel;
 import vo.PlayerVO;
-import bl.Match;
 import bl.Team;
 import blService.MatchBLService;
 import blService.PlayerBLService;
@@ -77,10 +76,10 @@ public class ProgressPanel extends HotFatherPanel implements MouseListener {
 		seasonLbl.setForeground(Style.DEEP_BLUE);
 		seasonPnl.add(seasonLbl);
 		//
-		MatchBLService match =Service.match;
-		ArrayList<String> allSeason=new ArrayList<String>();
-		allSeason=match.getAllSeasons();
-		int size=allSeason.size();
+		MatchBLService match = Service.match;
+		ArrayList<String> allSeason = new ArrayList<String>();
+		allSeason = match.getAllSeasons();
+		int size = allSeason.size();
 		String[] season = (String[]) allSeason.toArray(new String[size]);
 		seasonBox = new JComboBox<String>(season);
 		seasonBox.setBackground(Color.white);
@@ -88,7 +87,7 @@ public class ProgressPanel extends HotFatherPanel implements MouseListener {
 		seasonBox.setForeground(Style.DEEP_BLUE);
 		seasonPnl.add(seasonBox);
 		// ----seasonTypeBox------
-		String[] seasonType = {  "季后赛 ","常规赛", "季前赛"  };
+		String[] seasonType = { "季后赛 ", "常规赛", "季前赛" };
 		seasonTypeBox = new JComboBox<String>(seasonType);
 		seasonTypeBox.setBackground(Color.white);
 		seasonTypeBox.setFont(new Font("微软雅黑", Font.PLAIN, 15));
@@ -192,25 +191,27 @@ public class ProgressPanel extends HotFatherPanel implements MouseListener {
 		jsp.getViewport().add(table);
 		thr = new HotThread(this, "recentFiveMatchesScoreUpRate");
 		Refresh("recentFiveMatchesScoreUpRate");
-//		thr.startThread();
+		// thr.startThread();
 
 	}
 
 	public void Refresh(String sort) {
+		String season = (String) seasonBox.getSelectedItem();
 		String seasonType = (String) seasonTypeBox.getSelectedItem();
-		vlist = player.getBestImprovedPlayer(seasonType, sort, 5);
+		vlist = player.getBestImprovedPlayer(season, seasonType, sort, 5);
 		if (vlist != null && vlist.size() != 0) {
 			model.setHead(head);
 			PlayerVO topOne = vlist.get(0);
-			bestHead.setIcon(new ImageIcon("src/data/players/portrait/"+ topOne.getName()+".png"));
+			bestHead.setIcon(new ImageIcon("src/data/players/portrait/"
+					+ topOne.getName() + ".png"));
 			bestName.setText(topOne.getName());
 			positionAndTeamName.setText(topOne.getPosition() + "/"
 					+ topOne.getOwingTeam());
 			// data.setText(topOne.getScore()+"");
 			ImageIcon bestTeamIco = Team.getTeamImage(topOne.getOwingTeam());
-			bestTeamIco.setImage(bestTeamIco.getImage().getScaledInstance(150, 150, Image.SCALE_SMOOTH));
+			bestTeamIco.setImage(bestTeamIco.getImage().getScaledInstance(150,
+					150, Image.SCALE_SMOOTH));
 			bestTeamIcon.setIcon(bestTeamIco);
-	
 
 			if (currentBtn == scoreBtn) {
 				data.setText(topOne.getScore()
@@ -292,7 +293,7 @@ public class ProgressPanel extends HotFatherPanel implements MouseListener {
 		}
 
 		currentBtn.setBackground(Style.HOT_PURPLEFOCUS);
-//		thr.startThread();
+		// thr.startThread();
 	}
 
 	public void mousePressed(MouseEvent e) {
@@ -335,17 +336,15 @@ public class ProgressPanel extends HotFatherPanel implements MouseListener {
 				ArrayList<Object> line = new ArrayList<Object>();
 				line.add(num);
 				num++;
-				ImageIcon tou = new ImageIcon("src/data/players/portrait/"+ v.getName()+".png");
+				ImageIcon tou = new ImageIcon("src/data/players/portrait/"
+						+ v.getName() + ".png");
 				// 设置宽高
-				ImageIcon icon = new ImageIcon(
-						tou.getImage()
-								.getScaledInstance(
-								/*
-								 * table.getColumn(table.getColumnName(0))
-								 * .getWidth()
-								 */100, 80
-								/* currentTable.getRowHeight(i) */,
-										Image.SCALE_SMOOTH));
+				ImageIcon icon = new ImageIcon(tou.getImage()
+						.getScaledInstance(
+						/*
+						 * table.getColumn(table.getColumnName(0)) .getWidth()
+						 */100, 80
+						/* currentTable.getRowHeight(i) */, Image.SCALE_SMOOTH));
 
 				line.add(icon);
 				line.add(v.getName());

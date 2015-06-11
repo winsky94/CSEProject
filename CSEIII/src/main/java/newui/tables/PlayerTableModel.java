@@ -22,7 +22,8 @@ public class PlayerTableModel extends MyTableModel {
 			"罚球命中率%", "两双", "得分/篮板/助攻" };
 	String[] headhigh = { "球员名称", "所属球队", "真实命中率%", "GmSc效率值", "投篮效率%", "篮板率%",
 
-	"进攻篮板数", "防守篮板数", "进攻篮板率%", "防守篮板率%", "助攻率%", "抢断率%", "盖帽率%", "失误率%", "使用率%" };
+	"进攻篮板数", "防守篮板数", "进攻篮板率%", "防守篮板率%", "助攻率%", "抢断率%", "盖帽率%", "失误率%",
+			"使用率%" };
 
 	public int headmodel;
 
@@ -90,7 +91,7 @@ public class PlayerTableModel extends MyTableModel {
 		if (model.equals("赛季"))
 			result = player.getPlayerSeasonInfo(season, seasonType);
 		else
-			result = player.getPlayerAverageInfo(seasonType);
+			result = player.getPlayerAverageInfo(season, seasonType);
 		if (result != null && result.size() != 0) {
 			if (headmodel == 0)
 				refreshBase(result);
@@ -141,9 +142,9 @@ public class PlayerTableModel extends MyTableModel {
 			line.add(MyUIDataFormater.formatTo1(vo.getTurnOverNum()));
 			line.add(MyUIDataFormater.formatTo1(vo.getEfficiency()));
 			line.add(MyUIDataFormater.formatTo1(vo.getScore()));
-			line.add(MyUIDataFormater.formatTo1(vo.getShootHitRate()*100));
-			line.add(MyUIDataFormater.formatTo1(vo.getThreeHitRate()*100));
-			line.add(MyUIDataFormater.formatTo1(vo.getFreeThrowHitRate()*100));
+			line.add(MyUIDataFormater.formatTo1(vo.getShootHitRate() * 100));
+			line.add(MyUIDataFormater.formatTo1(vo.getThreeHitRate() * 100));
+			line.add(MyUIDataFormater.formatTo1(vo.getFreeThrowHitRate() * 100));
 			line.add(MyUIDataFormater.formatTo1(vo.getDoubleDoubleNum()));
 			line.add(MyUIDataFormater.formatTo1(vo.getScore_rebound_assist()));
 			content.add(line);
@@ -159,19 +160,19 @@ public class PlayerTableModel extends MyTableModel {
 			ArrayList<Object> line = new ArrayList<Object>();
 			line.add(vo.getName());
 			line.add(vo.getOwingTeam());
-			line.add(MyUIDataFormater.formatTo1(vo.getTrueHitRate()*100));
+			line.add(MyUIDataFormater.formatTo1(vo.getTrueHitRate() * 100));
 			line.add(MyUIDataFormater.formatTo1(vo.getGmScEfficiencyValue()));
-			line.add(MyUIDataFormater.formatTo1(vo.getShootHitEfficiency()*100));
-			line.add(MyUIDataFormater.formatTo1(vo.getReboundRate()*100));
-			line.add(MyUIDataFormater.formatTo1(vo.getOffenReboundNum()*100));
-			line.add(MyUIDataFormater.formatTo1(vo.getDefenReboundNum()*100));
-			line.add(MyUIDataFormater.formatTo1(vo.getOffenReboundRate()*100));
-			line.add(MyUIDataFormater.formatTo1(vo.getDefenReboundRate()*100));
-			line.add(MyUIDataFormater.formatTo1(vo.getAssistRate()*100));
-			line.add(MyUIDataFormater.formatTo1(vo.getStealRate()*100));
-			line.add(MyUIDataFormater.formatTo1(vo.getBlockRate()*100));
-			line.add(MyUIDataFormater.formatTo1(vo.getTurnOverRate()*100));
-			line.add(MyUIDataFormater.formatTo1(vo.getUsageRate()*100));
+			line.add(MyUIDataFormater.formatTo1(vo.getShootHitEfficiency() * 100));
+			line.add(MyUIDataFormater.formatTo1(vo.getReboundRate() * 100));
+			line.add(MyUIDataFormater.formatTo1(vo.getOffenReboundNum() * 100));
+			line.add(MyUIDataFormater.formatTo1(vo.getDefenReboundNum() * 100));
+			line.add(MyUIDataFormater.formatTo1(vo.getOffenReboundRate() * 100));
+			line.add(MyUIDataFormater.formatTo1(vo.getDefenReboundRate() * 100));
+			line.add(MyUIDataFormater.formatTo1(vo.getAssistRate() * 100));
+			line.add(MyUIDataFormater.formatTo1(vo.getStealRate() * 100));
+			line.add(MyUIDataFormater.formatTo1(vo.getBlockRate() * 100));
+			line.add(MyUIDataFormater.formatTo1(vo.getTurnOverRate() * 100));
+			line.add(MyUIDataFormater.formatTo1(vo.getUsageRate() * 100));
 			content.add(line);
 		}
 

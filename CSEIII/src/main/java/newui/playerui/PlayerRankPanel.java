@@ -155,14 +155,15 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener,
 		f2.add(seasonBoxLbl);
 
 		MatchBLService match = Service.match;
-		ArrayList<String> seasons=match.getAllSeasons();
-		int size=seasons.size();
-		String[] seasonBoxText = (String[]) match.getAllSeasons().toArray(new String[size]);
+		ArrayList<String> seasons = match.getAllSeasons();
+		int size = seasons.size();
+		String[] seasonBoxText = (String[]) match.getAllSeasons().toArray(
+				new String[size]);
 		seasonBox = new MyComboBox(seasonBoxText);
 		seasonBox.addItemListener(this);
 		f2.add(seasonBox);
 		//
-		String[] seasonTypeBoxText = { "季后赛 ","常规赛", "季前赛" };
+		String[] seasonTypeBoxText = { "季后赛 ", "常规赛", "季前赛" };
 		seasonTypeBox = new MyComboBox(seasonTypeBoxText);
 		seasonTypeBox.addItemListener(this);
 		f2.add(seasonTypeBox);
@@ -387,7 +388,7 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener,
 				if (s.equals("赛季"))
 					vlist = player.getPlayerSeasonInfo(season, seasontype);
 				else
-					vlist = player.getPlayerAverageInfo(seasontype);
+					vlist = player.getPlayerAverageInfo(season, seasontype);
 				// vlist.size()==0显示没有符合条件的球员
 				if (vlist != null) {
 					if (isHighInfo)
