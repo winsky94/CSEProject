@@ -257,7 +257,7 @@ public class PlayerData  implements PlayerDataService{
 				ResultSet rs = sql.executeQuery(query);
 				while (rs.next()) {
 					player = new PlayerVO();
-					player.setName(rs.getString("playerName"));
+					player.setName(rs.getString("name"));
 					player.setOwingTeam(rs.getString("owingTeam"));
 					player.setLeague(rs.getString("league"));
 					player.setPlayedGames(rs.getInt("playedGames"));
@@ -326,7 +326,7 @@ public class PlayerData  implements PlayerDataService{
 				ResultSet rs = sql.executeQuery(query);
 				while (rs.next()) {
 					player = new PlayerVO();
-					player.setName(rs.getString("playerName"));
+					player.setName(rs.getString("name"));
 					player.setOwingTeam(rs.getString("owingTeam"));
 					player.setLeague(rs.getString("league"));
 					player.setPlayedGames(rs.getInt("playedGames"));
@@ -397,7 +397,7 @@ public class PlayerData  implements PlayerDataService{
 				ResultSet rs = sql.executeQuery(query);
 				while (rs.next()) {
 					player = new PlayerVO();
-					player.setName(rs.getString("playerName"));
+					player.setName(rs.getString("name"));
 					player.setOwingTeam(rs.getString("owingTeam"));
 					player.setLeague(rs.getString("league"));
 					player.setPlayedGames(rs.getInt("playedGames"));
@@ -466,7 +466,7 @@ public class PlayerData  implements PlayerDataService{
 			ResultSet rs = sql.executeQuery(query);
 			while (rs.next()) {
 				player = new PlayerVO();
-				player.setName(rs.getString("playerName"));
+				player.setName(rs.getString("name"));
 				player.setOwingTeam(rs.getString("owingTeam"));
 				player.setLeague(rs.getString("league"));
 				player.setPlayedGames(rs.getInt("playedGames"));
@@ -535,7 +535,7 @@ public class PlayerData  implements PlayerDataService{
 				ResultSet rs = sql.executeQuery(query);
 				while (rs.next()) {
 					player = new PlayerVO();
-					player.setName(rs.getString("playerName"));
+					player.setName(rs.getString("name"));
 					player.setOwingTeam(rs.getString("owingTeam"));
 					player.setLeague(rs.getString("league"));
 					player.setPlayedGames(rs.getInt("playedGames"));
@@ -604,7 +604,7 @@ public class PlayerData  implements PlayerDataService{
 				ResultSet rs = sql.executeQuery(query);
 				while (rs.next()) {
 					player = new PlayerVO();
-					player.setName(rs.getString("playerName"));
+					player.setName(rs.getString("name"));
 					player.setOwingTeam(rs.getString("owingTeam"));
 					player.setLeague(rs.getString("league"));
 					player.setPlayedGames(rs.getInt("playedGames"));
@@ -677,7 +677,7 @@ public class PlayerData  implements PlayerDataService{
 				ResultSet rs = sql.executeQuery(query);
 				while (rs.next()) {
 					player = new PlayerVO();
-					player.setName(rs.getString("playerName"));
+					player.setName(rs.getString("name"));
 					player.setOwingTeam(rs.getString("owingTeam"));
 					player.setLeague(rs.getString("league"));
 					player.setPlayedGames(rs.getInt("playedGames"));
@@ -747,7 +747,7 @@ public class PlayerData  implements PlayerDataService{
 				ResultSet rs = sql.executeQuery(query);
 				while (rs.next()) {
 					player = new PlayerVO();
-					player.setName(rs.getString("playerName"));
+					player.setName(rs.getString("name"));
 					player.setOwingTeam(rs.getString("owingTeam"));
 					player.setLeague(rs.getString("league"));
 					player.setPlayedGames(rs.getInt("playedGames"));
@@ -846,7 +846,7 @@ public class PlayerData  implements PlayerDataService{
 			boolean isFirst=true;
 				
 			
-			for (MatchVO match : getSeasonMatches(season, "all")) {
+			for (MatchVO match : getSeasonMatches(season, "Playoff")) {
 				String theMatchSeason=match.getSeason();
 				String theMatchDate=match.getDate();
 				
@@ -1138,10 +1138,17 @@ public class PlayerData  implements PlayerDataService{
 	
 
 	public static void main(String[] args) {
+		long start = System.currentTimeMillis();
 		PlayerData playerDataReader = new PlayerData();
 		playerDataReader.getPlayerActiveBaseInfo();
 		playerDataReader.getPlayerHistoricBaseInfo();
 		playerDataReader.getPlayerBaseInfo("Aaron Brooks");
 		playerDataReader.getPlayerBaseInfoForVague("a");
+		System.out.println(playerDataReader.getPlayerSeasonInfo("14-15", "Team").size());
+		System.out.println(playerDataReader.getPlayerAverageInfo("13-14", "Playoff").size());
+		System.out.println(playerDataReader.selectPlayersBySeason("12-13", "Preseason", "F", "E", "score", "desc", 5).size());
+		System.out.println(playerDataReader.getDayHotPlayer("score", 5).size());
+		long end = System.currentTimeMillis();
+		System.out.println("运行时间：" + (end - start) + "毫秒");// 应该是end - start
 	}
 }
