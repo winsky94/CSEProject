@@ -19,9 +19,6 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
-import data.MatchData;
-import bl.Match;
-import blService.MatchBLService;
 import newui.FatherPanel;
 import newui.Service;
 import newui.Style;
@@ -31,6 +28,7 @@ import newui.tables.MyTableCellRenderer;
 import newui.tables.RowHeaderTable;
 import newui.tables.TableSorter;
 import newui.tables.TeamTableModel;
+import blService.MatchBLService;
 
 public class TeamIndexPanel extends FatherPanel implements MouseListener {
 	/**
@@ -69,16 +67,17 @@ public class TeamIndexPanel extends FatherPanel implements MouseListener {
 		JLabel seasonBoxLbl = new MyJLabel("赛季：");
 		funcPnl.add(seasonBoxLbl);
 		// 暂时没有bl方法
-		MatchBLService match=Service.match;
-		ArrayList<String> seasons=match.getAllSeasons();
-		int size=seasons.size();
-		String[] seasonBoxText = (String[]) match.getAllSeasons().toArray(new String[size]);
+		MatchBLService match = Service.match;
+		ArrayList<String> seasons = match.getAllSeasons();
+		int size = seasons.size();
+		String[] seasonBoxText = (String[]) match.getAllSeasons().toArray(
+				new String[size]);
 		seasonBox = new MyComboBox(seasonBoxText);
 		funcPnl.add(seasonBox);
 		// ------seasonType------
-		String[] seasonTypeBoxText = { "全部", "常规赛", "季前赛", "季后赛" };
+		String[] seasonTypeBoxText = { "季后赛 ","常规赛",  "季前赛" };
 		seasonTypeBox = new MyComboBox(seasonTypeBoxText);
-		
+
 		funcPnl.add(seasonTypeBox);
 		funcPnl.add(new JLabel("       "));
 		// ----DataType---------
