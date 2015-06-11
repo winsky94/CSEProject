@@ -1,24 +1,22 @@
 package data;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
 import vo.MatchVO;
 import vo.PlayerVO;
+import vo.RecordVO;
 import vo.TeamVO;
-import SQLHelper.FileList;
 import SQLHelper.SqlManager;
+import dataservice.MatchDataService;
 import dataservice.PlayerDataService;
 
 /**
@@ -27,209 +25,27 @@ import dataservice.PlayerDataService;
  * 
  *
  */
-public class PlayerData implements PlayerDataService {
+public class PlayerData  implements PlayerDataService{
 
-	ArrayList<PlayerVO> players = new ArrayList<PlayerVO>();
-	Map<String, TeamVO> teams;
-	Map<Integer, MatchVO> matches = new HashMap<Integer, MatchVO>(1024);
-	Map<String, ArrayList<MatchVO>> allSeasonMatches = new HashMap<String, ArrayList<MatchVO>>();
-	static int count = 1;
 	boolean isReadSqlActive = false;
 	boolean isReadSqlHistoric = false;
-	Map<String, PlayerVO> playersActiveForBL = new HashMap<String, PlayerVO>(32);
-	Map<String, PlayerVO> playersHistoricForBL = new HashMap<String, PlayerVO>(
-			32);
+	boolean isGetPlayerToday=false;
+	ArrayList<PlayerVO> playersActive = new ArrayList<PlayerVO>();
+	ArrayList<PlayerVO> playersHistoric = new ArrayList<PlayerVO>();
+	ArrayList<PlayerVO> playersToday=new ArrayList<PlayerVO>();
+	Map<String, TeamVO> teams;
+	Map<Integer, MatchVO> matches = new HashMap<Integer, MatchVO>(1024);
 
-	private void baseInfoInitActive() {
-		try {
-			FileList fl = new FileList("src/data/players/info/active");
-			ArrayList<String> names = fl.getList();
-			players.clear();
-			for (String name : names) {
-				readBaseInfoFromFile(name);
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-	}
-
-	private void baseInfoInitHistoric() {
-		try {
-			FileList fl = new FileList("src/data/players/info/historic");
-			ArrayList<String> names = fl.getList();
-			players.clear();
-			for (String name : names) {
-				readBaseInfoFromFile(name);
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-	}
-
-	private void readBaseInfoFromFile(String fileName) {
-		PlayerVO player;
-		String name;
-		String number;
-		String position;
-		String height;
-		int weight;
-		String birth;
-		int age;
-		int exp;
-		String school;
-		String owingTeam;
-		String[] content = new String[10];
-		try {
-			File file = new File(fileName);
-			if (!file.exists()) {
-
-				file.createNewFile();
-			}
-			BufferedReader br = new BufferedReader(new InputStreamReader(
-					new FileInputStream(file), "UTF-8"));
-			int i = 0;
-			String temp = null;
-			temp = br.readLine();
-			while (temp != null) {
-				String[] nit = temp.split(":");
-				if (nit.length == 1) {
-					content[i++] = "";
-				} else {
-					content[i++] = nit[1].trim();
-				}
-				temp = br.readLine();
-			}
-
-			br.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
-		name = content[0];
-		number = content[1];
-		position = content[2];
-		height = content[3];
-		if (content[4].equals("")) {
-			weight = 0;
-		} else {
-			weight = Integer.parseInt(content[4]);
-		}
-		birth = content[5];
-		if (content[6].equals("")) {
-			age = 0;
-		} else {
-			age = Integer.parseInt(content[6]);
-		}
-		if (content[7].equals("")) {
-			exp = 0;
-		} else {
-			exp = Integer.parseInt(content[7]);
-		}
-		school = content[8];
-		owingTeam=content[9];
-		player = new PlayerVO(name, number, position, height, weight, birth,
-				age, exp, school,owingTeam);
-		players.add(player);
-	}
-
-	public void exportToSql() {
-		try {
-			baseInfoInitActive();
-			Connection con = SqlManager.getConnection();
-			con.setAutoCommit(false);
-			Statement sql = con.createStatement();
-			sql.execute("drop table if exists playersActive");
-			sql.execute("create table playersActive(playerID int not null auto_increment,name varchar(40) not null default 'null',"
-					+ "number varchar(40) not null default 'null',position varchar(20) not null default 'null',"
-					+ "height varchar(20) not null default 'null',weight int not null default 0,"
-					+ "birth varchar(20) not null default 'null',age int not null default 0,exp int not null default 0,"
-					+ "school varchar(40) not null default 'null',owingTeam varchar(20) not null default 'null',"
-					+ "primary key(playerID));");
-			PreparedStatement statement = con
-					.prepareStatement("INSERT INTO playersActive VALUES(?, ?,?,?,?,?,?,?,?,?,?)");
-			int count = 1;
-
-			for (PlayerVO player : players) {
-
-				statement.setInt(1, count++);
-				statement.setString(2, player.getName());
-				statement.setString(3, player.getNumber());
-				statement.setString(4, player.getPosition());
-				statement.setString(5, player.getHeight());
-				statement.setInt(6, player.getWeight());
-				statement.setString(7, player.getBirth());
-				statement.setInt(8, player.getAge());
-				statement.setInt(9, player.getExp());
-				statement.setString(10, player.getSchool());
-				statement.setString(11, player.getOwingTeam());
-				statement.addBatch();
-
-				System.out.println(count - 1);
-			}
-			statement.executeBatch();
-			con.commit();
-
-			baseInfoInitHistoric();
-			sql.execute("drop table if exists playersHistoric");
-			sql.execute("create table playersHistoric(playerID int not null auto_increment,name varchar(40) not null default 'null',"
-					+ "number varchar(40) not null default 'null',position varchar(20) not null default 'null',"
-					+ "height varchar(20) not null default 'null',weight int not null default 0,"
-					+ "birth varchar(20) not null default 'null',age int not null default 0,exp int not null default 0,"
-					+ "school varchar(40)not null default 'null',owingTeam varchar(20) not null default 'null',"
-					+ "primary key(playerID));");
-			sql.close();
-			statement = con
-					.prepareStatement("INSERT INTO playersHistoric VALUES(?, ?,?,?,?,?,?,?,?,?,?)");
-			count = 1;
-
-			for (PlayerVO player : players) {
-
-				statement.setInt(1, count++);
-				statement.setString(2, player.getName());
-				statement.setString(3, player.getNumber());
-				statement.setString(4, player.getPosition());
-				statement.setString(5, player.getHeight());
-				statement.setInt(6, player.getWeight());
-				statement.setString(7, player.getBirth());
-				statement.setInt(8, player.getAge());
-				statement.setInt(9, player.getExp());
-				statement.setString(10, player.getSchool());
-				statement.setString(11, player.getOwingTeam());
-				statement.addBatch();
-
-				System.out.println(count - 1);
-			}
-
-			statement.executeBatch();
-			con.commit();
-			statement.close();
-			con.close();
-		} catch (java.lang.ClassNotFoundException e) {
-			System.err.println("ClassNotFoundException:" + e.getMessage());
-		} catch (SQLException ex) {
-			System.err.println("SQLException:" + ex.getMessage());
-		}
-
-	}
-
-	public Map<String, PlayerVO> getPlayerActiveBaseInfo() {
+	public ArrayList<PlayerVO> getPlayerActiveBaseInfo() {
 
 		if (isReadSqlActive == true)
-			return playersActiveForBL;
+			return playersActive;
 
 		Connection con;
 		try {
 			con = SqlManager.getConnection();
 			Statement sql = con.createStatement();
-			String query = "select * from playersactive ";
+			String query = "select * from playersactive";
 			ResultSet resultSet = sql.executeQuery(query);
 			PlayerVO player;
 
@@ -258,7 +74,7 @@ public class PlayerData implements PlayerDataService {
 
 				player = new PlayerVO(name, number, position, height, weight,
 						birth, age, exp, school,owingTeam);
-				playersActiveForBL.put(name, player);
+				playersActive.add(player);
 			}
 			resultSet.close();
 			sql.close();
@@ -270,19 +86,19 @@ public class PlayerData implements PlayerDataService {
 			e.printStackTrace();
 		}
 		isReadSqlActive = true;
-		return playersActiveForBL;
+		return playersActive;
 	}
 
-	public Map<String, PlayerVO> getPlayerHistoricBaseInfo() {
+	public ArrayList<PlayerVO> getPlayerHistoricBaseInfo() {
 
 		if (isReadSqlHistoric == true)
-			return playersHistoricForBL;
+			return playersHistoric;
 
 		Connection con;
 		try {
 			con = SqlManager.getConnection();
 			Statement sql = con.createStatement();
-			String query = "select * from playersactive ";
+			String query = "select * from playershistoric";
 			ResultSet resultSet = sql.executeQuery(query);
 			PlayerVO player;
 
@@ -311,7 +127,7 @@ public class PlayerData implements PlayerDataService {
 
 				player = new PlayerVO(name, number, position, height, weight,
 						birth, age, exp, school,owingTeam);
-				playersHistoricForBL.put(name, player);
+				playersHistoric.add(player);
 			}
 			resultSet.close();
 			sql.close();
@@ -323,12 +139,10 @@ public class PlayerData implements PlayerDataService {
 			e.printStackTrace();
 		}
 		isReadSqlHistoric = true;
-		return playersHistoricForBL;
+		return playersHistoric;
 	}
 
 	public PlayerVO getPlayerBaseInfo(String name) {
-		if (isReadSqlHistoric == true)
-			return playersHistoricForBL.get(name);
 
 		PlayerVO player = new PlayerVO();
 		Connection con;
@@ -429,10 +243,902 @@ public class PlayerData implements PlayerDataService {
 		}
 		return pArrayList;
 	}
+		    
+		
+		public ArrayList<PlayerVO> getPlayerSeasonInfo(String season,String type){
+	     
+			ArrayList<PlayerVO> result = new ArrayList<PlayerVO>();
+			PlayerVO player;
+			String seasonbuffer=season.replace("-", "");
+			try {
+				Connection con = SqlManager.getConnection();
+				Statement sql = con.createStatement();
+				String query = "select * from "+seasonbuffer+"_"+type+"_"+"playerSeason";
+				ResultSet rs = sql.executeQuery(query);
+				while (rs.next()) {
+					player = new PlayerVO();
+					player.setName(rs.getString("playerName"));
+					player.setOwingTeam(rs.getString("owingTeam"));
+					player.setLeague(rs.getString("league"));
+					player.setPlayedGames(rs.getInt("playedGames"));
+					player.setGameStartingNum(rs.getInt("gameStartingNum"));
+					player.setReboundNum(rs.getDouble("reboundNum"));
+					player.setAssistNum(rs.getDouble("assistNum"));
+					player.setPresentTime(rs.getDouble("presentTime"));
+					player.setShootHitRate(rs.getDouble("shootHitRate"));
+					player.setThreeHitRate(rs.getDouble("threeHitRate"));
+					player.setFreeThrowHitRate(rs.getDouble("freeThrowHitRate"));
+					player.setOffenReboundNum(rs.getDouble("offenReboundNum"));
+					player.setDefenReboundNum(rs.getDouble("defenReboundNum"));
+					player.setStealNum(rs.getDouble("stealNum"));
+					player.setBlockNum(rs.getDouble("blockNum"));
+					player.setFoulNum(rs.getDouble("foulNum"));
+					player.setTurnOverNum(rs.getDouble("turnOverNum"));
+					player.setScore(rs.getDouble("score"));
+					player.setEfficiency(rs.getDouble("efficiency"));
+					player.setRecentFiveMatchesScoreUpRate(rs
+							.getDouble("recentFiveMatchesScoreUpRate"));
+					player.setRecentFiveMatchesReboundUpRate(rs
+							.getDouble("recentFiveMatchesReboundUpRate"));
+					player.setRecentFiveMatchesAssistUpRate(rs
+							.getDouble("recentFiveMatchesAssistUpRate"));
+					player.setGmScEfficiencyValue(rs
+							.getDouble("GmScEfficiencyValue"));
+					player.setTrueHitRate(rs.getDouble("trueHitRate"));
+					player.setShootEfficiency(rs.getDouble("shootEfficiency"));
+					player.setReboundRate(rs.getDouble("reboundRate"));
+					player.setOffenReboundRate(rs.getDouble("offenReboundRate"));
+					player.setDefenReboundRate(rs.getDouble("defenReboundRate"));
+					player.setAssistRate(rs.getDouble("assistRate"));
+					player.setStealRate(rs.getDouble("stealRate"));
+					player.setBlockRate(rs.getDouble("blockRate"));
+					player.setTurnOverRate(rs.getDouble("turnOverRate"));
+					player.setUsageRate(rs.getDouble("usageRate"));
+					player.setScore_rebound_assist(rs
+							.getDouble("score_rebound_assist"));
+					player.setDoubleDoubleNum(rs.getDouble("doubleDoubleNum"));
+					result.add(player);
+				}
+
+				rs.close();
+				con.close();
+				sql.close();
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+			return result;
+		}
+		
+		public ArrayList<PlayerVO> getPlayerSeasonInfo(String season,String type,String name){
+			ArrayList<PlayerVO> result = new ArrayList<PlayerVO>();
+			PlayerVO player;
+			String seasonbuffer=season.replace("-", "");
+			try {
+				Connection con = SqlManager.getConnection();
+				Statement sql = con.createStatement();
+				String query = "select * from "+seasonbuffer+"_"+type+"_"+"playerSeason where name "
+						+ "like'%"+ name + "%'";
+				ResultSet rs = sql.executeQuery(query);
+				while (rs.next()) {
+					player = new PlayerVO();
+					player.setName(rs.getString("playerName"));
+					player.setOwingTeam(rs.getString("owingTeam"));
+					player.setLeague(rs.getString("league"));
+					player.setPlayedGames(rs.getInt("playedGames"));
+					player.setGameStartingNum(rs.getInt("gameStartingNum"));
+					player.setReboundNum(rs.getDouble("reboundNum"));
+					player.setAssistNum(rs.getDouble("assistNum"));
+					player.setPresentTime(rs.getDouble("presentTime"));
+					player.setShootHitRate(rs.getDouble("shootHitRate"));
+					player.setThreeHitRate(rs.getDouble("threeHitRate"));
+					player.setFreeThrowHitRate(rs.getDouble("freeThrowHitRate"));
+					player.setOffenReboundNum(rs.getDouble("offenReboundNum"));
+					player.setDefenReboundNum(rs.getDouble("defenReboundNum"));
+					player.setStealNum(rs.getDouble("stealNum"));
+					player.setBlockNum(rs.getDouble("blockNum"));
+					player.setFoulNum(rs.getDouble("foulNum"));
+					player.setTurnOverNum(rs.getDouble("turnOverNum"));
+					player.setScore(rs.getDouble("score"));
+					player.setEfficiency(rs.getDouble("efficiency"));
+					player.setRecentFiveMatchesScoreUpRate(rs
+							.getDouble("recentFiveMatchesScoreUpRate"));
+					player.setRecentFiveMatchesReboundUpRate(rs
+							.getDouble("recentFiveMatchesReboundUpRate"));
+					player.setRecentFiveMatchesAssistUpRate(rs
+							.getDouble("recentFiveMatchesAssistUpRate"));
+					player.setGmScEfficiencyValue(rs
+							.getDouble("GmScEfficiencyValue"));
+					player.setTrueHitRate(rs.getDouble("trueHitRate"));
+					player.setShootEfficiency(rs.getDouble("shootEfficiency"));
+					player.setReboundRate(rs.getDouble("reboundRate"));
+					player.setOffenReboundRate(rs.getDouble("offenReboundRate"));
+					player.setDefenReboundRate(rs.getDouble("defenReboundRate"));
+					player.setAssistRate(rs.getDouble("assistRate"));
+					player.setStealRate(rs.getDouble("stealRate"));
+					player.setBlockRate(rs.getDouble("blockRate"));
+					player.setTurnOverRate(rs.getDouble("turnOverRate"));
+					player.setUsageRate(rs.getDouble("usageRate"));
+					player.setScore_rebound_assist(rs
+							.getDouble("score_rebound_assist"));
+					player.setDoubleDoubleNum(rs.getDouble("doubleDoubleNum"));
+					result.add(player);
+				}
+
+				rs.close();
+				con.close();
+				sql.close();
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+			return result;
+		}
+
+
+		public ArrayList<PlayerVO> getPlayerAverageInfo(String season,String type) {
+
+			
+			ArrayList<PlayerVO> result = new ArrayList<PlayerVO>();
+			PlayerVO player;
+			String seasonbuffer=season.replace("-", "");
+			try {
+				Connection con = SqlManager.getConnection();
+				Statement sql = con.createStatement();
+				String query = "select * from "+seasonbuffer+"_"+type+"_"+"playerAverage";
+				ResultSet rs = sql.executeQuery(query);
+				while (rs.next()) {
+					player = new PlayerVO();
+					player.setName(rs.getString("playerName"));
+					player.setOwingTeam(rs.getString("owingTeam"));
+					player.setLeague(rs.getString("league"));
+					player.setPlayedGames(rs.getInt("playedGames"));
+					player.setGameStartingNum(rs.getInt("gameStartingNum"));
+					player.setReboundNum(rs.getDouble("reboundNum"));
+					player.setAssistNum(rs.getDouble("assistNum"));
+					player.setPresentTime(rs.getDouble("presentTime"));
+					player.setShootHitRate(rs.getDouble("shootHitRate"));
+					player.setThreeHitRate(rs.getDouble("threeHitRate"));
+					player.setFreeThrowHitRate(rs.getDouble("freeThrowHitRate"));
+					player.setOffenReboundNum(rs.getDouble("offenReboundNum"));
+					player.setDefenReboundNum(rs.getDouble("defenReboundNum"));
+					player.setStealNum(rs.getDouble("stealNum"));
+					player.setBlockNum(rs.getDouble("blockNum"));
+					player.setFoulNum(rs.getDouble("foulNum"));
+					player.setTurnOverNum(rs.getDouble("turnOverNum"));
+					player.setScore(rs.getDouble("score"));
+					player.setEfficiency(rs.getDouble("efficiency"));
+					player.setRecentFiveMatchesScoreUpRate(rs
+							.getDouble("recentFiveMatchesScoreUpRate"));
+					player.setRecentFiveMatchesReboundUpRate(rs
+							.getDouble("recentFiveMatchesReboundUpRate"));
+					player.setRecentFiveMatchesAssistUpRate(rs
+							.getDouble("recentFiveMatchesAssistUpRate"));
+					player.setGmScEfficiencyValue(rs
+							.getDouble("GmScEfficiencyValue"));
+					player.setTrueHitRate(rs.getDouble("trueHitRate"));
+					player.setShootEfficiency(rs.getDouble("shootEfficiency"));
+					player.setReboundRate(rs.getDouble("reboundRate"));
+					player.setOffenReboundRate(rs.getDouble("offenReboundRate"));
+					player.setDefenReboundRate(rs.getDouble("defenReboundRate"));
+					player.setAssistRate(rs.getDouble("assistRate"));
+					player.setStealRate(rs.getDouble("stealRate"));
+					player.setBlockRate(rs.getDouble("blockRate"));
+					player.setTurnOverRate(rs.getDouble("turnOverRate"));
+					player.setUsageRate(rs.getDouble("usageRate"));
+					player.setScore_rebound_assist(rs
+							.getDouble("score_rebound_assist"));
+					player.setDoubleDoubleNum(rs.getDouble("doubleDoubleNum"));
+					result.add(player);
+				}
+
+				rs.close();
+				con.close();
+				sql.close();
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+			return result;
+		}
+		
+		public ArrayList<PlayerVO> getPlayerAverageInfo(String season,String type,String name){
+			ArrayList<PlayerVO> result = new ArrayList<PlayerVO>();
+		PlayerVO player;
+		String seasonbuffer=season.replace("-", "");
+		try {
+			Connection con = SqlManager.getConnection();
+			Statement sql = con.createStatement();
+			String query = "select * from "+seasonbuffer+"_"+type+"_"+"playerAverage where name "
+					+ "like'%"+ name + "%'";
+			ResultSet rs = sql.executeQuery(query);
+			while (rs.next()) {
+				player = new PlayerVO();
+				player.setName(rs.getString("playerName"));
+				player.setOwingTeam(rs.getString("owingTeam"));
+				player.setLeague(rs.getString("league"));
+				player.setPlayedGames(rs.getInt("playedGames"));
+				player.setGameStartingNum(rs.getInt("gameStartingNum"));
+				player.setReboundNum(rs.getDouble("reboundNum"));
+				player.setAssistNum(rs.getDouble("assistNum"));
+				player.setPresentTime(rs.getDouble("presentTime"));
+				player.setShootHitRate(rs.getDouble("shootHitRate"));
+				player.setThreeHitRate(rs.getDouble("threeHitRate"));
+				player.setFreeThrowHitRate(rs.getDouble("freeThrowHitRate"));
+				player.setOffenReboundNum(rs.getDouble("offenReboundNum"));
+				player.setDefenReboundNum(rs.getDouble("defenReboundNum"));
+				player.setStealNum(rs.getDouble("stealNum"));
+				player.setBlockNum(rs.getDouble("blockNum"));
+				player.setFoulNum(rs.getDouble("foulNum"));
+				player.setTurnOverNum(rs.getDouble("turnOverNum"));
+				player.setScore(rs.getDouble("score"));
+				player.setEfficiency(rs.getDouble("efficiency"));
+				player.setRecentFiveMatchesScoreUpRate(rs
+						.getDouble("recentFiveMatchesScoreUpRate"));
+				player.setRecentFiveMatchesReboundUpRate(rs
+						.getDouble("recentFiveMatchesReboundUpRate"));
+				player.setRecentFiveMatchesAssistUpRate(rs
+						.getDouble("recentFiveMatchesAssistUpRate"));
+				player.setGmScEfficiencyValue(rs
+						.getDouble("GmScEfficiencyValue"));
+				player.setTrueHitRate(rs.getDouble("trueHitRate"));
+				player.setShootEfficiency(rs.getDouble("shootEfficiency"));
+				player.setReboundRate(rs.getDouble("reboundRate"));
+				player.setOffenReboundRate(rs.getDouble("offenReboundRate"));
+				player.setDefenReboundRate(rs.getDouble("defenReboundRate"));
+				player.setAssistRate(rs.getDouble("assistRate"));
+				player.setStealRate(rs.getDouble("stealRate"));
+				player.setBlockRate(rs.getDouble("blockRate"));
+				player.setTurnOverRate(rs.getDouble("turnOverRate"));
+				player.setUsageRate(rs.getDouble("usageRate"));
+				player.setScore_rebound_assist(rs
+						.getDouble("score_rebound_assist"));
+				player.setDoubleDoubleNum(rs.getDouble("doubleDoubleNum"));
+				result.add(player);
+			}
+
+			rs.close();
+			con.close();
+			sql.close();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return result;
+		}
+
+		public ArrayList<PlayerVO> getOrderedPlayersBySeason(String season,String type,
+				String condition, String order, int num) {
+			ArrayList<PlayerVO> result = new ArrayList<PlayerVO>();
+			PlayerVO player;
+			String seasonbuffer=season.replace("-", "");
+			try {
+				Connection con = SqlManager.getConnection();
+				Statement sql = con.createStatement();
+				String query = "select * from "+seasonbuffer+"_"+type+"_"+"playerSeason order by "+condition+" "+order+" limit "+num;
+				ResultSet rs = sql.executeQuery(query);
+				while (rs.next()) {
+					player = new PlayerVO();
+					player.setName(rs.getString("playerName"));
+					player.setOwingTeam(rs.getString("owingTeam"));
+					player.setLeague(rs.getString("league"));
+					player.setPlayedGames(rs.getInt("playedGames"));
+					player.setGameStartingNum(rs.getInt("gameStartingNum"));
+					player.setReboundNum(rs.getDouble("reboundNum"));
+					player.setAssistNum(rs.getDouble("assistNum"));
+					player.setPresentTime(rs.getDouble("presentTime"));
+					player.setShootHitRate(rs.getDouble("shootHitRate"));
+					player.setThreeHitRate(rs.getDouble("threeHitRate"));
+					player.setFreeThrowHitRate(rs.getDouble("freeThrowHitRate"));
+					player.setOffenReboundNum(rs.getDouble("offenReboundNum"));
+					player.setDefenReboundNum(rs.getDouble("defenReboundNum"));
+					player.setStealNum(rs.getDouble("stealNum"));
+					player.setBlockNum(rs.getDouble("blockNum"));
+					player.setFoulNum(rs.getDouble("foulNum"));
+					player.setTurnOverNum(rs.getDouble("turnOverNum"));
+					player.setScore(rs.getDouble("score"));
+					player.setEfficiency(rs.getDouble("efficiency"));
+					player.setRecentFiveMatchesScoreUpRate(rs
+							.getDouble("recentFiveMatchesScoreUpRate"));
+					player.setRecentFiveMatchesReboundUpRate(rs
+							.getDouble("recentFiveMatchesReboundUpRate"));
+					player.setRecentFiveMatchesAssistUpRate(rs
+							.getDouble("recentFiveMatchesAssistUpRate"));
+					player.setGmScEfficiencyValue(rs
+							.getDouble("GmScEfficiencyValue"));
+					player.setTrueHitRate(rs.getDouble("trueHitRate"));
+					player.setShootEfficiency(rs.getDouble("shootEfficiency"));
+					player.setReboundRate(rs.getDouble("reboundRate"));
+					player.setOffenReboundRate(rs.getDouble("offenReboundRate"));
+					player.setDefenReboundRate(rs.getDouble("defenReboundRate"));
+					player.setAssistRate(rs.getDouble("assistRate"));
+					player.setStealRate(rs.getDouble("stealRate"));
+					player.setBlockRate(rs.getDouble("blockRate"));
+					player.setTurnOverRate(rs.getDouble("turnOverRate"));
+					player.setUsageRate(rs.getDouble("usageRate"));
+					player.setScore_rebound_assist(rs
+							.getDouble("score_rebound_assist"));
+					player.setDoubleDoubleNum(rs.getDouble("doubleDoubleNum"));
+					result.add(player);
+				}
+
+				rs.close();
+				con.close();
+				sql.close();
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+			return result; 
+		}
+
+		public ArrayList<PlayerVO> getOrderedPlayersByAverage(String season,String type,String condition,
+				String order, int num) {
+			ArrayList<PlayerVO> result = new ArrayList<PlayerVO>();
+			PlayerVO player;
+			String seasonbuffer=season.replace("-", "");
+			try {
+				Connection con = SqlManager.getConnection();
+				Statement sql = con.createStatement();
+				String query = "select * from "+seasonbuffer+"_"+type+"_"+"playerAverage order by "+condition+" "+order+" limit "+num;
+				ResultSet rs = sql.executeQuery(query);
+				while (rs.next()) {
+					player = new PlayerVO();
+					player.setName(rs.getString("playerName"));
+					player.setOwingTeam(rs.getString("owingTeam"));
+					player.setLeague(rs.getString("league"));
+					player.setPlayedGames(rs.getInt("playedGames"));
+					player.setGameStartingNum(rs.getInt("gameStartingNum"));
+					player.setReboundNum(rs.getDouble("reboundNum"));
+					player.setAssistNum(rs.getDouble("assistNum"));
+					player.setPresentTime(rs.getDouble("presentTime"));
+					player.setShootHitRate(rs.getDouble("shootHitRate"));
+					player.setThreeHitRate(rs.getDouble("threeHitRate"));
+					player.setFreeThrowHitRate(rs.getDouble("freeThrowHitRate"));
+					player.setOffenReboundNum(rs.getDouble("offenReboundNum"));
+					player.setDefenReboundNum(rs.getDouble("defenReboundNum"));
+					player.setStealNum(rs.getDouble("stealNum"));
+					player.setBlockNum(rs.getDouble("blockNum"));
+					player.setFoulNum(rs.getDouble("foulNum"));
+					player.setTurnOverNum(rs.getDouble("turnOverNum"));
+					player.setScore(rs.getDouble("score"));
+					player.setEfficiency(rs.getDouble("efficiency"));
+					player.setRecentFiveMatchesScoreUpRate(rs
+							.getDouble("recentFiveMatchesScoreUpRate"));
+					player.setRecentFiveMatchesReboundUpRate(rs
+							.getDouble("recentFiveMatchesReboundUpRate"));
+					player.setRecentFiveMatchesAssistUpRate(rs
+							.getDouble("recentFiveMatchesAssistUpRate"));
+					player.setGmScEfficiencyValue(rs
+							.getDouble("GmScEfficiencyValue"));
+					player.setTrueHitRate(rs.getDouble("trueHitRate"));
+					player.setShootEfficiency(rs.getDouble("shootEfficiency"));
+					player.setReboundRate(rs.getDouble("reboundRate"));
+					player.setOffenReboundRate(rs.getDouble("offenReboundRate"));
+					player.setDefenReboundRate(rs.getDouble("defenReboundRate"));
+					player.setAssistRate(rs.getDouble("assistRate"));
+					player.setStealRate(rs.getDouble("stealRate"));
+					player.setBlockRate(rs.getDouble("blockRate"));
+					player.setTurnOverRate(rs.getDouble("turnOverRate"));
+					player.setUsageRate(rs.getDouble("usageRate"));
+					player.setScore_rebound_assist(rs
+							.getDouble("score_rebound_assist"));
+					player.setDoubleDoubleNum(rs.getDouble("doubleDoubleNum"));
+					result.add(player);
+				}
+
+				rs.close();
+				con.close();
+				sql.close();
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+			return result; 
+		}
+
+
+		public ArrayList<PlayerVO> selectPlayersBySeason(String season,String type,
+				String position, String union, String column,
+				String order, int num) {
+			ArrayList<PlayerVO> result = new ArrayList<PlayerVO>();
+			PlayerVO player;
+			String seasonbuffer=season.replace("-", "");
+			try {
+				Connection con = SqlManager.getConnection();
+				Statement sql = con.createStatement();
+				String query = "select * from "+seasonbuffer+"_"+type+"_"+"playerSeason,playershistoric "
+						+ "where playershistoric.position like '%"+position+"%' and league='"+union+"' "
+						+ "order by "+column+" "+order+" limit "+num;
+				ResultSet rs = sql.executeQuery(query);
+				while (rs.next()) {
+					player = new PlayerVO();
+					player.setName(rs.getString("playerName"));
+					player.setOwingTeam(rs.getString("owingTeam"));
+					player.setLeague(rs.getString("league"));
+					player.setPlayedGames(rs.getInt("playedGames"));
+					player.setGameStartingNum(rs.getInt("gameStartingNum"));
+					player.setReboundNum(rs.getDouble("reboundNum"));
+					player.setAssistNum(rs.getDouble("assistNum"));
+					player.setPresentTime(rs.getDouble("presentTime"));
+					player.setShootHitRate(rs.getDouble("shootHitRate"));
+					player.setThreeHitRate(rs.getDouble("threeHitRate"));
+					player.setFreeThrowHitRate(rs.getDouble("freeThrowHitRate"));
+					player.setOffenReboundNum(rs.getDouble("offenReboundNum"));
+					player.setDefenReboundNum(rs.getDouble("defenReboundNum"));
+					player.setStealNum(rs.getDouble("stealNum"));
+					player.setBlockNum(rs.getDouble("blockNum"));
+					player.setFoulNum(rs.getDouble("foulNum"));
+					player.setTurnOverNum(rs.getDouble("turnOverNum"));
+					player.setScore(rs.getDouble("score"));
+					player.setEfficiency(rs.getDouble("efficiency"));
+					player.setRecentFiveMatchesScoreUpRate(rs
+							.getDouble("recentFiveMatchesScoreUpRate"));
+					player.setRecentFiveMatchesReboundUpRate(rs
+							.getDouble("recentFiveMatchesReboundUpRate"));
+					player.setRecentFiveMatchesAssistUpRate(rs
+							.getDouble("recentFiveMatchesAssistUpRate"));
+					player.setGmScEfficiencyValue(rs
+							.getDouble("GmScEfficiencyValue"));
+					player.setTrueHitRate(rs.getDouble("trueHitRate"));
+					player.setShootEfficiency(rs.getDouble("shootEfficiency"));
+					player.setReboundRate(rs.getDouble("reboundRate"));
+					player.setOffenReboundRate(rs.getDouble("offenReboundRate"));
+					player.setDefenReboundRate(rs.getDouble("defenReboundRate"));
+					player.setAssistRate(rs.getDouble("assistRate"));
+					player.setStealRate(rs.getDouble("stealRate"));
+					player.setBlockRate(rs.getDouble("blockRate"));
+					player.setTurnOverRate(rs.getDouble("turnOverRate"));
+					player.setUsageRate(rs.getDouble("usageRate"));
+					player.setScore_rebound_assist(rs
+							.getDouble("score_rebound_assist"));
+					player.setDoubleDoubleNum(rs.getDouble("doubleDoubleNum"));
+					result.add(player);
+				}
+				rs.close();
+				con.close();
+				sql.close();
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+			return result;
+		}
+
+		public ArrayList<PlayerVO> selectPlayersByAverage(String season,String type,String position,
+				String union, String column, String order, int num) {
+			ArrayList<PlayerVO> result = new ArrayList<PlayerVO>();
+			PlayerVO player;
+			String seasonbuffer=season.replace("-", "");
+			try {
+				Connection con = SqlManager.getConnection();
+				Statement sql = con.createStatement();
+				String query = "select * from "+seasonbuffer+"_"+type+"_"+"playerAverage,playershistoric "
+						+ "where playershistoric.position like '%"+position+"%' and league='"+union+"' "
+						+ "order by "+column+" "+order+" limit "+num;
+				ResultSet rs = sql.executeQuery(query);
+				while (rs.next()) {
+					player = new PlayerVO();
+					player.setName(rs.getString("playerName"));
+					player.setOwingTeam(rs.getString("owingTeam"));
+					player.setLeague(rs.getString("league"));
+					player.setPlayedGames(rs.getInt("playedGames"));
+					player.setGameStartingNum(rs.getInt("gameStartingNum"));
+					player.setReboundNum(rs.getDouble("reboundNum"));
+					player.setAssistNum(rs.getDouble("assistNum"));
+					player.setPresentTime(rs.getDouble("presentTime"));
+					player.setShootHitRate(rs.getDouble("shootHitRate"));
+					player.setThreeHitRate(rs.getDouble("threeHitRate"));
+					player.setFreeThrowHitRate(rs.getDouble("freeThrowHitRate"));
+					player.setOffenReboundNum(rs.getDouble("offenReboundNum"));
+					player.setDefenReboundNum(rs.getDouble("defenReboundNum"));
+					player.setStealNum(rs.getDouble("stealNum"));
+					player.setBlockNum(rs.getDouble("blockNum"));
+					player.setFoulNum(rs.getDouble("foulNum"));
+					player.setTurnOverNum(rs.getDouble("turnOverNum"));
+					player.setScore(rs.getDouble("score"));
+					player.setEfficiency(rs.getDouble("efficiency"));
+					player.setRecentFiveMatchesScoreUpRate(rs
+							.getDouble("recentFiveMatchesScoreUpRate"));
+					player.setRecentFiveMatchesReboundUpRate(rs
+							.getDouble("recentFiveMatchesReboundUpRate"));
+					player.setRecentFiveMatchesAssistUpRate(rs
+							.getDouble("recentFiveMatchesAssistUpRate"));
+					player.setGmScEfficiencyValue(rs
+							.getDouble("GmScEfficiencyValue"));
+					player.setTrueHitRate(rs.getDouble("trueHitRate"));
+					player.setShootEfficiency(rs.getDouble("shootEfficiency"));
+					player.setReboundRate(rs.getDouble("reboundRate"));
+					player.setOffenReboundRate(rs.getDouble("offenReboundRate"));
+					player.setDefenReboundRate(rs.getDouble("defenReboundRate"));
+					player.setAssistRate(rs.getDouble("assistRate"));
+					player.setStealRate(rs.getDouble("stealRate"));
+					player.setBlockRate(rs.getDouble("blockRate"));
+					player.setTurnOverRate(rs.getDouble("turnOverRate"));
+					player.setUsageRate(rs.getDouble("usageRate"));
+					player.setScore_rebound_assist(rs
+							.getDouble("score_rebound_assist"));
+					player.setDoubleDoubleNum(rs.getDouble("doubleDoubleNum"));
+					result.add(player);
+				}
+				rs.close();
+				con.close();
+				sql.close();
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+			return result;
+		}
+
+
+		private String getToday() {
+			String result;
+			int year;
+			int month;
+			Calendar cal = Calendar.getInstance();
+			java.text.SimpleDateFormat f = new java.text.SimpleDateFormat("MM-dd");
+			String todayDate = f.format(cal.getTime());
+			year = cal.get(Calendar.YEAR);
+			year -= 2000;
+			month = cal.get(Calendar.MONTH);
+			if (month <= 6) {
+				result = (year - 1) + "-" + year;
+			} else {
+				result = year + "-" + (year + 1);
+			}
+			String todaySeason = result;
+			result = todaySeason + "_" + todayDate;
+			 return result;
+		}
+		
+		private ArrayList<MatchVO> getSeasonMatches(String season,String type) {
+	          MatchDataService match=new MatchData();
+	          return match.getMatchData(season,type,"all", "all", "all");
+		}
+
+		private ArrayList<MatchVO> getTodayMatch() {
+			ArrayList<MatchVO> result = new ArrayList<MatchVO>();
+			String[] buffer = getToday().split("_");
+			String season = buffer[0];
+			String date = buffer[1];
+			MatchDataService theMatch=new MatchData();
+			result=theMatch.getMatchData(season, "all", date, "all", "all");
+			if(result.size()!=0){
+				return result;
+			}
+			
+			ArrayList<MatchVO> mostRecentDateMatches=new ArrayList<MatchVO>();
+			String seasonRecent="";
+			String dateRecent="";
+			boolean isFirst=true;
+				
+			
+			for (MatchVO match : getSeasonMatches(season, "all")) {
+				String theMatchSeason=match.getSeason();
+				String theMatchDate=match.getDate();
+				
+				if(isFirst==true){
+					seasonRecent=theMatchSeason;
+					dateRecent=theMatchDate;
+					isFirst=false;
+					continue;
+				}
+				
+				String sd1=theMatchSeason+"_"+theMatchDate;
+				String sd2=seasonRecent+"_"+dateRecent;
+				if(sd1.compareTo(sd2)==0){
+					mostRecentDateMatches.add(match);
+					continue;
+				}
+				if(isMostRecent(theMatchSeason, theMatchDate, seasonRecent, dateRecent)){
+					mostRecentDateMatches.clear();
+					mostRecentDateMatches.add(match);
+					seasonRecent=theMatchSeason;
+					dateRecent=theMatchDate;
+				}
+			}
+			
+			   return mostRecentDateMatches;
+			
+		}
+		/**
+		 * 
+		 * @param season1
+		 * @param date1
+		 * @param season2
+		 * @param date2
+		 * @return 是否日期一比日期二更靠近现在,由于老师说"默认读入的最后一场比赛就是最近的",所以，日期一与日期二不同为日期一更近
+		 */
+		private boolean isMostRecent(String season1,String date1,String season2,String date2){
+			if(season1.compareTo(season2)<0)
+	  			return false;
+	  		else if(season1.compareTo(season2)>0)
+	  			return true;
+	  		else{
+	  			String month1=date1.split("-")[0];
+	  			String month2=date2.split("-")[0];
+	  			int type1=0;
+	  			int type2=0; //type=0代表在6月前，=1代表在6月后
+	  			if(month1.compareTo("06")>0){
+	  				type1=1;
+	  			}
+	  			if(month2.compareTo("06")>0){
+	  				type2=1;
+	  			}
+	  			
+	  			if(type1==0&&type2==1){
+	  				return true;
+	  			}
+	  			
+	  			if(type1==1&&type2==0){
+	  				return false;
+	  			}
+	  			
+	  			//下面是2个都是6月前或6月后的情况
+	  		     	if(date1.compareTo(date2)<0)
+	  				   return false;
+	  			    else if(date1.compareTo(date2)>0)
+	  				   return true;
+	  			    else 
+	  				   return false;
+	  		     	
+	  		}
+		}
+
+		private void calCulateDayData() {
+
+			ArrayList<MatchVO> theMatches = getTodayMatch();
+			for (MatchVO match : theMatches) {
+
+				String team = null;// 球队名
+				String playerName = null;// 球员名
+				int presentTime = 0;// 在场时间
+				int shootHitNum = 0;// 投篮命中数
+				int shootAttemptNum = 0;// 投篮出手数
+				int threeHitNum = 0;// 三分命中数
+				int threeAttemptNum = 0;// 三分出手数
+				int freeThrowHitNum = 0;// 罚球命中数
+				int freeThrowAttemptNum = 0;// 罚球出手数
+				int offenReboundNum = 0;// 进攻（前场）篮板数
+				int defenReboundNum = 0;// 防守（后场）篮板数
+				int reboundNum = 0;// 总篮板数
+				int assistNum = 0;// 助攻数
+				int stealNum = 0;// 抢断数
+				int blockNum = 0;// 盖帽数
+				int turnOverNum = 0;// 失误数
+				int foulNum = 0;// 犯规数
+				int personScore = 0;// 个人得分
+
+				for (RecordVO record : match.getRecords()) {
+					team = record.getTeam();
+					playerName = record.getPlayerName();
+					PlayerVO thisPlayer;
+					thisPlayer = getPlayerBaseInfo(playerName);
+					PlayerVO player=new PlayerVO();
+					if (thisPlayer != null){
+						player = new PlayerVO(thisPlayer.getName(),
+								thisPlayer.getNumber(), thisPlayer.getPosition(),
+								thisPlayer.getHeight(), thisPlayer.getWeight(),
+								thisPlayer.getBirth(), thisPlayer.getAge(),
+								thisPlayer.getExp(), thisPlayer.getSchool());
+					}
+						
+					presentTime = convertMinuteToSecond(record.getPresentTime());
+					shootHitNum = record.getShootHitNum();// 投篮命中数
+					shootAttemptNum = record.getShootAttemptNum();// 投篮出手数
+					threeHitNum = record.getThreeHitNum();// 三分命中数
+					threeAttemptNum = record.getThreeAttemptNum();// 三分出手数
+					freeThrowHitNum = record.getFreeThrowHitNum();// 罚球命中数
+					freeThrowAttemptNum = record.getFreeThrowAttemptNum();// 罚球出手数
+					offenReboundNum = record.getOffenReboundNum();// 进攻（前场）篮板数
+					defenReboundNum = record.getDefenReboundNum();// 防守（后场）篮板数
+					reboundNum = record.getReboundNum();// 总篮板数
+					assistNum = record.getAssistNum();// 助攻数
+					stealNum = record.getStealNum();// 抢断数
+					blockNum = record.getBlockNum();// 盖帽数
+					turnOverNum = record.getTurnOverNum();// 失误数
+					foulNum = record.getFoulNum();// 犯规数
+					personScore = record.getScore();// 个人得分
+
+					
+					player.setOwingTeam(team);
+					player.setPresentTime(presentTime);
+					player.setShootHitNum(shootHitNum);
+					player.setShootAttemptNum(shootAttemptNum);
+					player.setThreeHitNum(threeHitNum);
+					player.setThreeAttemptNum(threeAttemptNum);
+					player.setFreeThrowHitNum(freeThrowHitNum);
+					player.setFreeThrowAttemptNum(freeThrowAttemptNum);
+					player.setOffenReboundNum(offenReboundNum);
+					player.setDefenReboundNum(defenReboundNum);
+					player.setReboundNum(reboundNum);
+					player.setAssistNum(assistNum);
+					player.setStealNum(stealNum);
+					player.setBlockNum(blockNum);
+					player.setTurnOverNum(turnOverNum);
+					player.setFoulNum(foulNum);
+					player.setScore(personScore);
+
+					// 计算两双
+					int tempDouble = 0;
+					if (personScore >= 10)
+						tempDouble++;
+					if (reboundNum >= 10)
+						tempDouble++;
+					if (assistNum >= 10)
+						tempDouble++;
+					if (stealNum >= 10)
+						tempDouble++;
+					if (blockNum >= 10)
+						tempDouble++;
+					if (tempDouble >= 2)
+						player.addDoubleDoubleNum();
+
+					playersToday.add(player);
+				}
+			}
+		}
+
+		public ArrayList<PlayerVO> getDayHotPlayer(String column, int num) {
+			ArrayList<PlayerVO> result = new ArrayList<PlayerVO>();
+	        if(isGetPlayerToday==false){
+			    calCulateDayData();
+			    isGetPlayerToday=true;
+	        }
+			Collections.sort(playersToday,new SequenceOfPlayer());
+			Collections.sort(playersToday, new SequenceOfPlayer(column, "desc"));
+
+			int count = 0;
+			for (PlayerVO vo : playersToday) {			
+				result.add(vo);
+				count++;
+				if (count >= num)
+					break;
+			}
+
+			return result;
+		}
+
+		public ArrayList<PlayerVO> getSeasonHotPlayer(String season,String type,String column,
+				int num) {
+			return getOrderedPlayersBySeason(season, type, column, "desc", num);
+		}
+
+		public ArrayList<PlayerVO> getBestImprovedPlayer(String season,String type,String column, int num) {
+			return getOrderedPlayersBySeason(season, type, column, "desc", num);
+		}
+
+		public ArrayList<PlayerVO> getPlayersByInitialName(char character) {
+			ArrayList<PlayerVO> result = new ArrayList<PlayerVO>();
+			ArrayList<PlayerVO> thePlayers = getPlayerHistoricBaseInfo();
+			for (PlayerVO vo : thePlayers) {
+				String[] name=vo.getName().split(" ");
+				int size=name.length;
+				String lastName=name[size-1];
+				
+				if (lastName.startsWith(character + ""))
+						result.add(vo);			
+				
+			}
+			return result;
+		}
+
+		public ArrayList<MatchVO> getRecentMatches(String playerName, int num) {
+			ArrayList<MatchVO> result = new ArrayList<MatchVO>();
+			int count = 0;
+			ArrayList<MatchVO> allSeasonMatches=getSeasonMatches("14-15", "all");
+			Collections.sort(allSeasonMatches, new SequenceOfMatch());
+			for (MatchVO vo : allSeasonMatches) {
+				for (RecordVO vv : vo.getRecords()) {
+					if (vv.getPlayerName().equals(playerName)) {
+						result.add(vo);
+						count++;
+						if (count >= num)
+							return result;
+				        break;
+					}
+				}
+			}
+			return result;
+		}
+
+		public ArrayList<MatchVO> getMatches(String playerName) {
+			ArrayList<MatchVO> result = new ArrayList<MatchVO>();
+			ArrayList<MatchVO> allSeasonMatches=getSeasonMatches("14-15", "all");
+			Collections.sort(allSeasonMatches, new SequenceOfMatch());
+			for (MatchVO vo : allSeasonMatches) {
+				for (RecordVO vv : vo.getRecords()) {
+					if (vv.getPlayerName().equals(playerName)){
+						result.add(vo);
+						break;
+					}
+				}
+			}
+			return result;
+		}
+
+		public ArrayList<PlayerVO> getPlayersByTeam(String teamAbLocation) {
+			ArrayList<PlayerVO> result = new ArrayList<PlayerVO>();
+			ArrayList<PlayerVO> thePlayers = getPlayerHistoricBaseInfo();
+			for (PlayerVO vo : thePlayers) {
+				if (vo.getOwingTeam().equals(teamAbLocation))
+					result.add(vo);
+			}
+			return result;
+		}
+		
+
+		private int convertMinuteToSecond(String s) {
+			if(!s.contains(":")){
+				return 0;
+			}
+			String[] temp = s.split(":");
+			int minute = Integer.parseInt(temp[0]);
+			int second = Integer.parseInt(temp[1]);
+			return minute * 60 + second;
+		}
+
+		public static double convertSecondToMinuete(double second) {
+			double minute= second / 60;
+		//	DecimalFormat dec=new DecimalFormat("0.00");
+			return minute;
+		}
+		
+		public static String changeSecondToTime(double second) {
+			double time=convertSecondToMinuete(second);
+			String result;
+			String temp = String.valueOf(time);
+			String[] tempp = temp.split("\\.");
+			if (tempp.length == 2) {
+				result = tempp[0] + ":";
+				double xiaoshu = Double.parseDouble("0." + tempp[1]);
+
+				DecimalFormat dec = new DecimalFormat("0");
+				String xiaoshu60 = dec.format(xiaoshu * 60);
+				result = result + xiaoshu60;
+			} else {
+				result = tempp[0];
+			}
+			return result;
+		}
+	
+	
 
 	public static void main(String[] args) {
 		PlayerData playerDataReader = new PlayerData();
-		playerDataReader.exportToSql();
 		playerDataReader.getPlayerActiveBaseInfo();
 		playerDataReader.getPlayerHistoricBaseInfo();
 		playerDataReader.getPlayerBaseInfo("Aaron Brooks");
