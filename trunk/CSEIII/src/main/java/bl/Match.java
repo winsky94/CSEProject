@@ -135,7 +135,7 @@ public class Match implements MatchBLService {
 		String ENs[] = { "all", "Preseason", "Team", "Playoff" };
 		String EN = CH;
 		for (int i = 0; i < CHs.length; i++) {
-			if (CHs[i].equals(CH)) {
+			if (CHs[i].equals(CH.trim())) {
 				EN = ENs[i];
 				break;
 			}
