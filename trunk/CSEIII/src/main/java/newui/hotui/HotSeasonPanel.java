@@ -90,7 +90,7 @@ public class HotSeasonPanel extends HotFatherPanel implements MouseListener {
 		seasonBox.setForeground(Style.DEEP_BLUE);
 		seasonPnl.add(seasonBox);
 		// ----seasonTypeBox------
-		String[] seasonType = { "全部", "常规赛", "季前赛", "季后赛" };
+		String[] seasonType = {  "季后赛 ","常规赛", "季前赛" };
 		seasonTypeBox = new JComboBox<String>(seasonType);
 		seasonTypeBox.setBackground(Color.white);
 		seasonTypeBox.setFont(new Font("微软雅黑", Font.PLAIN, 15));

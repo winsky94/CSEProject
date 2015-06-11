@@ -68,7 +68,7 @@ public class TeamDetailHistoryPanel extends JPanel {
 		seasonBox = new MyBox(seasonText);
 		funcPnl.add(seasonBox);
 		//
-		String[] seasonTypeBoxText = { "全部", "季前赛", "常规赛", "季后赛" };
+		String[] seasonTypeBoxText = {  "季后赛 ","常规赛", "季前赛"  };
 		seasonTypeBox = new MyBox(seasonTypeBoxText);
 		funcPnl.add(seasonTypeBox);
 		//

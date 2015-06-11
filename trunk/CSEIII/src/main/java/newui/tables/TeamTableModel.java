@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import newui.MyUIDataFormater;
 import newui.Service;
 import vo.TeamVO;
+import bl.Match;
 import blService.TeamBLService;
 
 public class TeamTableModel extends MyTableModel {
@@ -79,11 +80,11 @@ public class TeamTableModel extends MyTableModel {
 
 	public void Refresh(String season, String seasonType, String model) {
 		ArrayList<TeamVO> teamvo;
-		if (model.equals("赛季"))
-			teamvo = team.getTeamSeasonInfo(season, seasonType);
+		if (model.equals("赛季")){
+			teamvo = team.getTeamSeasonInfo(season, Match.changeTypeCHToEN(seasonType));
+		}
 		else {
-			teamvo = team.getTeamAverageInfo(seasonType);
-
+			teamvo = team.getTeamAverageInfo(season, Match.changeTypeCHToEN(seasonType));
 		}
 		if (teamvo != null && teamvo.size() != 0) {
 			// refreshContent(teamvo);
@@ -149,9 +150,9 @@ public class TeamTableModel extends MyTableModel {
 			line.add(vo.getTeamName());
 			line.add(vo.getAbLocation());
 			line.add(vo.getMatchesNum());
-			line.add(MyUIDataFormater.formatTo1(vo.getShootHitRate()*100));
-			line.add(MyUIDataFormater.formatTo1(vo.getThreeHitRate()*100));
-			line.add(MyUIDataFormater.formatTo1(vo.getFreeThrowHitRate()*100));
+			line.add(MyUIDataFormater.formatTo1(vo.getShootHitRate() * 100));
+			line.add(MyUIDataFormater.formatTo1(vo.getThreeHitRate() * 100));
+			line.add(MyUIDataFormater.formatTo1(vo.getFreeThrowHitRate() * 100));
 			line.add(MyUIDataFormater.formatTo1(vo.getOffenReboundNum()));
 			line.add(MyUIDataFormater.formatTo1(vo.getDefenReboundNum()));
 			line.add(MyUIDataFormater.formatTo1(vo.getReboundNum()));
@@ -180,7 +181,7 @@ public class TeamTableModel extends MyTableModel {
 			line.add(MyUIDataFormater.formatTo1(vo.getDefenEfficiency()));
 			line.add(MyUIDataFormater.formatTo1(vo.getAssistRate()));
 			line.add(MyUIDataFormater.formatTo1(vo.getStealEfficiency()));
-			line.add(MyUIDataFormater.formatTo1(vo.getWinRate()*100));
+			line.add(MyUIDataFormater.formatTo1(vo.getWinRate() * 100));
 			content.add(line);
 		}
 	}

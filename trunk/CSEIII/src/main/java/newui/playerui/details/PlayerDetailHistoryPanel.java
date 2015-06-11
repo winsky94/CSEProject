@@ -73,7 +73,7 @@ public class PlayerDetailHistoryPanel extends JPanel {
 		String[] seasonText = (String[])seasons.toArray(new String[size]);
 		seasonBox = new MyBox(seasonText);
 		funcPnl.add(seasonBox);
-		String[] seasonTypeText = { "全部","季前赛","常规赛","季后赛" };// 这是什么
+		String[] seasonTypeText = {  "季后赛 ","常规赛", "季前赛"  };// 这是什么
 		seasonTypeBox = new MyBox(seasonTypeText);
 		funcPnl.add(seasonTypeBox);
 		// ----------------------

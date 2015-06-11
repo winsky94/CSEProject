@@ -162,7 +162,7 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener,
 		seasonBox.addItemListener(this);
 		f2.add(seasonBox);
 		//
-		String[] seasonTypeBoxText = { "全部", "常规赛", "季前赛", "季后赛 " };
+		String[] seasonTypeBoxText = { "季后赛 ","常规赛", "季前赛" };
 		seasonTypeBox = new MyComboBox(seasonTypeBoxText);
 		seasonTypeBox.addItemListener(this);
 		f2.add(seasonTypeBox);
