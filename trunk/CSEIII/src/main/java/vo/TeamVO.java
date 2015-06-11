@@ -51,7 +51,8 @@ public class TeamVO {
 
 	public TeamVO(String teamName, String abLocation, String location,
 			String conference, String partition, String homeCourt,
-			int setUpTime, int matchesNum, double shootHitNum,
+			int setUpTime, 
+			int matchesNum, double shootHitNum,
 			double shootAttemptNum, double threeHitNum, double threeAttemptNum,
 			double freeThrowHitNum, double freeThrowAttemptNum,
 			double offenReboundNum, double defenReboundNum, double reboundNum,
