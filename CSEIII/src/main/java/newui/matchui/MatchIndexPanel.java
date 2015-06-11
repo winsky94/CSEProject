@@ -66,7 +66,7 @@ public class MatchIndexPanel extends FatherPanel {
 		funcPnl.add(seasonLbl);
 		seasonBox = new MyComboBox(seasonText);
 		funcPnl.add(seasonBox);
-		String[] seasonTypeText = { "全部", "季前赛", "常规赛", "季后赛" };
+		String[] seasonTypeText = {  "季后赛 ","常规赛", "季前赛"  };
 		seasonTypeBox = new MyComboBox(seasonTypeText);
 		funcPnl.add(seasonTypeBox);
 		funcPnl.add(new JLabel("       "));
