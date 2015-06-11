@@ -196,9 +196,9 @@ public class ProgressPanel extends HotFatherPanel implements MouseListener {
 	}
 
 	public void Refresh(String sort) {
-		String season = (String) seasonBox.getSelectedItem();
+		String season=(String) seasonBox.getSelectedItem();
 		String seasonType = (String) seasonTypeBox.getSelectedItem();
-		vlist = player.getBestImprovedPlayer(season, seasonType, sort, 5);
+		vlist = player.getBestImprovedPlayer(season,seasonType, sort, 5);
 		if (vlist != null && vlist.size() != 0) {
 			model.setHead(head);
 			PlayerVO topOne = vlist.get(0);
