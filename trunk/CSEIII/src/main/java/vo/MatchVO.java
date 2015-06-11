@@ -360,5 +360,9 @@ public class MatchVO {
 	public void setMatchTime(int matchTime) {
 		this.matchTime = matchTime;
 	}
+	
+	public void setRecords(ArrayList<RecordVO> records){
+		this.records=records;
+	}
 
 }
