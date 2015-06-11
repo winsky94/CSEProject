@@ -388,7 +388,7 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener,
 				if (s.equals("赛季"))
 					vlist = player.getPlayerSeasonInfo(season, seasontype);
 				else
-					vlist = player.getPlayerAverageInfo(season, seasontype);
+					vlist = player.getPlayerAverageInfo(season,seasontype);
 				// vlist.size()==0显示没有符合条件的球员
 				if (vlist != null) {
 					if (isHighInfo)
@@ -471,16 +471,17 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener,
 		String position = locationBox.getSelectedItem().toString();
 		String union = partitionBox.getSelectedItem().toString();
 		String sort = filterRankBox.getSelectedItem().toString();
-		ArrayList<PlayerVO> vlist;
+		ArrayList<PlayerVO> vlist=new ArrayList<PlayerVO>();
 		String type = typeBox.getSelectedItem().toString();
-		if (type.equals("赛季"))
-			vlist = player.selectPlayersUptheTimeSeason(season,
-					(String) seasonTypeBox.getSelectedItem(), position, union,
-					sort, "desc", time, 50);
-		else
-			vlist = player.selectPlayersUptheTimeAverage(
-					(String) seasonTypeBox.getSelectedItem(), position, union,
-					sort, "desc", time, 50);
+		//王宁，如果看到这句话，记得把界面上的在场时间大于_分钟的那个筛选去掉。。。感叹号以显注意！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！
+//		if (type.equals("赛季"))
+//			vlist = player.selectPlayersUptheTimeSeason(season,
+//					(String) seasonTypeBox.getSelectedItem(), position, union,
+//					sort, "desc", time, 50);
+//		else
+//			vlist = player.selectPlayersUptheTimeAverage(
+//					(String) seasonTypeBox.getSelectedItem(), position, union,
+//					sort, "desc", time, 50);
 		// vlist.size()==0显示没有符合条件的球
 		if (ptm.headmodel != 0) {
 			if (isHighInfo == false)

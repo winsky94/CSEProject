@@ -20,8 +20,7 @@ public class InitialThread extends Thread {
 		PlayerBLService p = Service.player;
 		TeamBLService t = Service.team;
 		MatchBLService m = Service.match;
-		p.getPlayerAverageInfo("14-15", "all");
-		p.getPlayerSeasonInfo("14-15", "all");
+		p.getDayHotPlayer("score", 5);
 		MainFrame.getInstance();
 		frame.setStop();
 		double post = System.currentTimeMillis();
