@@ -2,50 +2,76 @@ package dataservice;
 
 import java.util.ArrayList;
 
-import vo.MatchVO;
 import vo.TeamVO;
 
 public interface TeamDataService {
 	/**
-	 * 获得球队的基础信息
+	 * 从数据库中获得球队列表teams
 	 * 
-	 * @return 球队基础信息列表
+	 * @return 球队最基本信息的列表，其他属性值为空，未进行初始化
 	 */
 	public ArrayList<TeamVO> getTeamBaseInfo();
 
 	/**
-	 * 根据球队名称模糊查找球队近期比赛
+	 * 得到球队的该赛季的技术统计数据
 	 * 
-	 * @param teamName
-	 *            球队名称（缩写）
-	 * @return 近期五场比赛的列表
+	 * @param season
+	 *            赛季
+	 * @param type
+	 *            比赛类型
+	 * @return 球队赛季统计数据，vo的所有初始值均进行了初始化
+	 * 
 	 */
-	public ArrayList<MatchVO> getRecentMatches(String teamName);
+	public ArrayList<TeamVO> getTeamSeasonInfo(String season, String type);
 
 	/**
-	 * 根据球队名模糊查找球队的基础信息
+	 * 得到球队的该场均的技术统计数据
+	 * 
+	 * @param season
+	 *            赛季
+	 * @param type
+	 *            比赛类型
+	 * @return 球队场均统计数据，VO的所有初始值均进行了初始化
+	 * 
+	 */
+	public ArrayList<TeamVO> getTeamAverageInfo(String season, String type);
+
+	/**
+	 * 模糊查询球队的基础信息，球队名可以是名称，也可以是缩写，大小写均可
 	 * 
 	 * @param name
-	 *            球队名（缩写）
-	 * @return 球队基础信息列表
+	 *            球队名称
+	 * @return 符合模糊查询条件的球队对象的列表，球队对象只进行了基础信息的初始化与赋值
 	 */
 	public ArrayList<TeamVO> getTeamBaseInfo(String name);
 
 	/**
-	 * 根据球队名找到该球队的所有球员姓名
+	 * 模糊查询球队的某个赛季的信息，球队名可以是名称，也可以是缩写，大小写均可
 	 * 
-	 * @param teamAbLocation
-	 *            球队名（缩写）
-	 * @return 球员姓名列表
+	 * @param season
+	 *            赛季
+	 * @param type
+	 *            比赛类型
+	 * @param name
+	 *            球队名称
+	 * @return 符合模糊查询条件的球队对象的列表
 	 */
-	public ArrayList<String> getPlayersByTeam(String teamAbLocation);
+	public ArrayList<TeamVO> getTeamSeasonInfo(String season, String type,
+			String name);
 
 	/**
-	 * 根据球队名称模糊查找球队全部比赛
+	 * 模糊查询球队的场均技术信息，球队名可以是名称，也可以是缩写，大小写均可
 	 * 
-	 * @param teamName
-	 *            球队名称（缩写）
-	 * @return 近期全部比赛的列表
+	 * @param season
+	 *            赛季
+	 * @param type
+	 *            比赛类型
+	 * @param name
+	 *            球队名称
+	 * 
+	 * @return 符合模糊查询条件的球队对象的列表
 	 */
-	public ArrayList<MatchVO> getMatches(String teamName);
+	public ArrayList<TeamVO> getTeamAverageInfo(String season, String type,
+			String name);
+
 }
