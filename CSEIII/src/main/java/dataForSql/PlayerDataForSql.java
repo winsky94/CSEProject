@@ -24,9 +24,9 @@ import vo.RecordVO;
 import vo.TeamVO;
 import SQLHelper.FileList;
 import SQLHelper.SqlManager;
-import bl.Team;
 import data.MatchData;
 import data.SequenceOfPlayer;
+import data.TeamData;
 import dataservice.MatchDataService;
 
 public class PlayerDataForSql {
@@ -40,7 +40,7 @@ public class PlayerDataForSql {
 	Map<Integer, MatchVO> matches = new HashMap<Integer, MatchVO>(1024);
 
 	public PlayerDataForSql(){
-		teams=Team.getTeamsPartition();
+		teams=TeamData.getTeamsPartition();
 	}
 	
 	private void baseInfoInitActive() {
