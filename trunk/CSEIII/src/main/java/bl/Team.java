@@ -123,12 +123,12 @@ public class Team implements TeamBLService {
 
 	public ArrayList<TeamVO> getTeamSeasonInfo(String season, String type) {
 		// TODO 自动生成的方法存根
-		return teamData.getTeamSeasonInfo(season, type);
+		return teamData.getTeamSeasonInfo(season, Match.changeTypeCHToEN(type));
 	}
 
 	public ArrayList<TeamVO> getTeamAverageInfo(String season, String type) {
 		// TODO 自动生成的方法存根
-		return teamData.getTeamAverageInfo(season, type);
+		return teamData.getTeamAverageInfo(season, Match.changeTypeCHToEN(type));
 	}
 
 	public ArrayList<TeamVO> getTeamBaseInfo(String name) {
@@ -139,13 +139,13 @@ public class Team implements TeamBLService {
 	public ArrayList<TeamVO> getTeamSeasonInfo(String season, String type,
 			String name) {
 		// TODO 自动生成的方法存根
-		return teamData.getTeamSeasonInfo(season, type, name);
+		return teamData.getTeamSeasonInfo(season, Match.changeTypeCHToEN(type), name);
 	}
 
 	public ArrayList<TeamVO> getTeamAverageInfo(String season, String type,
 			String name) {
 		// TODO 自动生成的方法存根
-		return teamData.getTeamAverageInfo(season, type, name);
+		return teamData.getTeamAverageInfo(season, Match.changeTypeCHToEN(type), name);
 	}
 
 	public ArrayList<TeamVO> getOrderedTeamsBySeason(String season,
@@ -158,7 +158,7 @@ public class Team implements TeamBLService {
 		}
 
 		ArrayList<TeamVO> teams = new ArrayList<TeamVO>();
-		teams = getTeamSeasonInfo(season, type);
+		teams = getTeamSeasonInfo(season, Match.changeTypeCHToEN(type));
 		Collections.sort(teams, new SequenceOfTeam(condition, order));
 		if (num < 0) {
 			result = teams;
@@ -181,7 +181,7 @@ public class Team implements TeamBLService {
 		}
 
 		ArrayList<TeamVO> teams = new ArrayList<TeamVO>();
-		teams = getTeamAverageInfo(season, type);
+		teams = getTeamAverageInfo(season, Match.changeTypeCHToEN(type));
 		Collections.sort(teams, new SequenceOfTeam(condition, order));
 		if (num < 0) {
 			result = teams;
@@ -217,7 +217,7 @@ public class Team implements TeamBLService {
 	public ArrayList<TeamVO> getSeasonHotTeam(String season, String type,
 			String column, int num) {
 		// TODO 自动生成的方法存根
-		return getOrderedTeamsBySeason(season, type, column, "desc", num);
+		return getOrderedTeamsBySeason(season, Match.changeTypeCHToEN(type), column, "desc", num);
 	}
 
 	/**
