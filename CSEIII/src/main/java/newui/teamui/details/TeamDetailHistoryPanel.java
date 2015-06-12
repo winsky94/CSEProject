@@ -110,7 +110,7 @@ public class TeamDetailHistoryPanel extends JPanel {
 			public void itemStateChanged(ItemEvent e) {
 				// TODO Auto-generated method stub
 				if (typeBox.getSelectedItem().toString().equals("场均")) {
-					thtm.RefreshAverage((String) seasonTypeBox
+					thtm.RefreshAverage((String)seasonBox.getSelectedItem(),(String) seasonTypeBox
 							.getSelectedItem());
 				} else {
 					thtm.RefreshSeason(seasonBox.getSelectedItem().toString(),
@@ -126,7 +126,8 @@ public class TeamDetailHistoryPanel extends JPanel {
 			public void itemStateChanged(ItemEvent e) {
 				// TODO Auto-generated method stub
 				if (typeBox.getSelectedItem().toString().equals("场均")) {
-					thtm.RefreshAverage(Match
+					System.out.println();
+					thtm.RefreshAverage((String)seasonBox.getSelectedItem(),Match
 							.changeTypeCHToEN((String) seasonTypeBox
 									.getSelectedItem()));
 				} else {
@@ -145,7 +146,7 @@ public class TeamDetailHistoryPanel extends JPanel {
 			public void itemStateChanged(ItemEvent e) {
 				// TODO Auto-generated method stub
 				if (typeBox.getSelectedItem().toString().equals("场均")) {
-					thtm.RefreshAverage((String) seasonTypeBox
+					thtm.RefreshAverage((String)seasonBox.getSelectedItem(),(String) seasonTypeBox
 							.getSelectedItem());
 				} else {
 					thtm.RefreshSeason(seasonBox.getSelectedItem().toString(),
