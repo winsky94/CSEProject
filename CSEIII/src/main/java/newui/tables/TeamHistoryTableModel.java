@@ -76,13 +76,13 @@ public class TeamHistoryTableModel extends MyTableModel {
 		Refresh(vo, tname);
 	}
 
-	public void RefreshAverage(String seasonType) {
+	public void RefreshAverage(String season,String seasonType) {
 		ArrayList<PlayerVO> vo = new ArrayList<PlayerVO>();
 		ArrayList<PlayerVO> teamMember1=clone(teamMember);
 		for (int i = 0; i < teamMember1.size(); i++) {
 			PlayerVO v = teamMember1.get(i);
 			ArrayList<PlayerVO> playerVO = player.getPlayerAverageInfo(
-					seasonType, v.getName());
+					season,seasonType);
 			if (playerVO == null || playerVO.size() == 0) {
 				teamMember1.remove(i);
 				i--;
