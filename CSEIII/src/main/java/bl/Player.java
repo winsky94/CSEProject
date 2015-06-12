@@ -128,11 +128,11 @@ public class Player implements PlayerBLService{
 	public ArrayList<PlayerVO> getSeasonHotPlayer(String season,String type,String column,
 			int num) {
 
-		return player.getSeasonHotPlayer(season, type, column, num);
+		return player.getSeasonHotPlayer(season, Match.changeTypeCHToEN(type), column, num);
 	}
 
 	public ArrayList<PlayerVO> getBestImprovedPlayer(String season,String type,String column, int num) {
-		return player.getBestImprovedPlayer(season, type, column, num);
+		return player.getBestImprovedPlayer(season, Match.changeTypeCHToEN(type), column, num);
 	}
 
 	public ArrayList<PlayerVO> getPlayersByInitialName(char character) {
