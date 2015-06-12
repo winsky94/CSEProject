@@ -233,7 +233,7 @@ public class MatchDetailPanel extends FatherPanel {
 		card.RefershScore(score, line);
 		textpane.refresh(info, line);
 		
-		//MatchDetailPanel.this.repaint();
+		MatchDetailPanel.this.repaint();
 	//	MatchDetailPanel.this.revalidate();
 		
 	}
