@@ -26,7 +26,7 @@ public class TeamTableModel extends MyTableModel {
 
 	String[] headbase = { "球队名称", "简称", "比赛场数", "投篮命中率%", "三分命中率%", "罚球命中率%",
 			"进攻篮板数", "防守篮板数", "篮板数", "助攻数", "抢断数", "盖帽数", "失误数", "犯规数", "比赛得分" };
-	String[] headhigh = { "球队名称", "简称", "进攻篮板效率", "防守篮板效率", "进攻回合", "进攻效率",
+	String[] headhigh = { "球队名称", "简称", "进攻篮板效率%", "防守篮板效率%", "进攻回合", "进攻效率",
 			"防守效率", "助攻率", "抢断效率", "胜率%" };
 
 	public TeamTableModel(int model) {
@@ -174,8 +174,8 @@ public class TeamTableModel extends MyTableModel {
 			ArrayList<Object> line = new ArrayList<Object>();
 			line.add(vo.getTeamName());
 			line.add(vo.getAbLocation());
-			line.add(MyUIDataFormater.formatTo1(vo.getOffenReboundEfficiency()));
-			line.add(MyUIDataFormater.formatTo1(vo.getDefenReboundEfficiency()));
+			line.add(MyUIDataFormater.formatTo1(vo.getOffenReboundEfficiency()*100));
+			line.add(MyUIDataFormater.formatTo1(vo.getDefenReboundEfficiency()*100));
 			line.add(MyUIDataFormater.formatTo1(vo.getOffenRound()));
 			line.add(MyUIDataFormater.formatTo1(vo.getOffenEfficiency()));
 			line.add(MyUIDataFormater.formatTo1(vo.getDefenEfficiency()));
@@ -196,5 +196,9 @@ public class TeamTableModel extends MyTableModel {
 		} else {
 			content.clear();
 		}
+	}
+	
+	public int getHeadModel(){
+		return headmodel;
 	}
 }
