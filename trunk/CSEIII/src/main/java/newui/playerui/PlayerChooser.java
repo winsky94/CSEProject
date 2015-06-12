@@ -145,8 +145,7 @@ public class PlayerChooser extends JDialog {
 			if (isA) {
 				owner.namePnl.aLbl.setText(temp.getVO().getName());
 				owner.namePnl.aLbl.setVO(temp.getVO());
-				ImageIcon i = new ImageIcon("image/player/portrait/"
-						+ temp.getVO().getName() + ".png");
+				ImageIcon i =Player.getPlayerPortraitImage( temp.getVO().getName());
 				i.setImage(i.getImage().getScaledInstance(168, 135,
 						Image.SCALE_SMOOTH));
 				owner.namePnl.aImgLbl.setIcon(i);
@@ -156,8 +155,7 @@ public class PlayerChooser extends JDialog {
 			} else {
 				owner.namePnl.bLbl.setText(temp.getVO().getName());
 				owner.namePnl.bLbl.setVO(temp.getVO());
-				ImageIcon i = new ImageIcon("image/player/portrait/"
-						+ temp.getVO().getName() + ".png");
+				ImageIcon i = Player.getPlayerPortraitImage( temp.getVO().getName());
 				i.setImage(i.getImage().getScaledInstance(168, 135,
 						Image.SCALE_SMOOTH));
 				owner.namePnl.bImgLbl.setIcon(i);

@@ -15,6 +15,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import bl.Player;
 import newui.Style;
 import newui.VOLabel;
 import newui.mainui.MainFrame;
@@ -99,11 +100,11 @@ public class PKNamePanel extends JPanel implements MouseListener {
 		bTeamLbl=new MyLabel("?/?");
 		bInfoPnl.add(bTeamLbl);
 		//----imgLbl---------------------------
-		ImageIcon aImg=new ImageIcon("image/player/portrait/"+father.defaultVO.getName()+".png");
+		ImageIcon aImg=Player.getPlayerPortraitImage(father.defaultVO.getName());
 		aImg.setImage(aImg.getImage().getScaledInstance(168,135,Image.SCALE_SMOOTH ));
 		aImgLbl.setIcon(aImg);
 		//
-		ImageIcon bImg=new ImageIcon("image/player/portrait/null.png");
+		ImageIcon bImg=Player.getPlayerPortraitImage("null");
 		bImg.setImage(bImg.getImage().getScaledInstance(168,135,Image.SCALE_SMOOTH ));
 		bImgLbl.setIcon(bImg);
 		//--------------------------------------
