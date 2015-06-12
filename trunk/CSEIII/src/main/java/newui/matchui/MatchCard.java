@@ -197,7 +197,7 @@ public class MatchCard extends JPanel implements MouseListener {
 				LiveWebInc cc=new LiveWebInc();
 				String s=line.get(2).split("/")[1];
 				cc.setTeam(line.get(4),line.get(3), s.substring(0, 3), s.substring(3, 6));
-				LiveWebThread th=new LiveWebThread(cc,line.get(0),p);
+				LiveWebThread th=new LiveWebThread(cc,line.get(0),p,s.substring(0, 3), s.substring(3, 6));
 				th.startThread();
 			}
 			

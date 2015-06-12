@@ -9,6 +9,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
@@ -193,6 +194,14 @@ public class MatchIndexPanel extends FatherPanel {
 			//today no game
 			// show no game or recent game tips
 		}else{
+			Calendar time=Calendar.getInstance();
+			String month=(time.get(Calendar.MONTH)+1)+"";
+			String day=(time.get(Calendar.DATE)+1)+"";
+			if(month.length()==1)
+				month="0"+month;
+			if(day.length()==1)
+				day="0"+day;
+			String date=month+"-"+day;
 			//only process ing game now
 			// other need to translate to matchvo if over
 			ArrayList<MatchVO> list=new ArrayList<MatchVO>();
@@ -205,14 +214,12 @@ public class MatchIndexPanel extends FatherPanel {
 					//no start
 					//String season, String date, String type,
 					//String visitingTeam, String homeTeam
-					MatchVO v=new MatchVO("14-15",s[0].substring(4, 6)+"-"
-							+s[0].substring(6,8),"Playoff",s[1].substring(0, 3),
+					MatchVO v=new MatchVO("14-15",date,"Playoff",s[1].substring(0, 3),
 							s[1].substring(3, 6));
 					list.add(v);
 				}else if(line.get(1).equals("2")){
 					//ing need to start thread
-					MatchVO v=new MatchVO("14-15",s[0].substring(4, 6)+"-"
-							+s[0].substring(6,8),"Playoff",s[1].substring(0, 3),
+					MatchVO v=new MatchVO("14-15",date,"Playoff",s[1].substring(0, 3),
 							s[1].substring(3, 6));
 					list.add(v);
 				}else if(line.get(1).equals("3")){
@@ -221,8 +228,7 @@ public class MatchIndexPanel extends FatherPanel {
 					ArrayList<String> detail=getDetailScore(line.get(0));
 					String[] ss=detail.get(0).split("-");
 					detail.remove(0);
-					MatchVO v=new MatchVO("14-15",s[0].substring(4, 6)+"-"
-							+s[0].substring(6,8),"Playoff",s[1].substring(0, 3),
+					MatchVO v=new MatchVO("14-15",date,"Playoff",s[1].substring(0, 3),
 							s[1].substring(3, 6),Integer.parseInt(ss[0]),
 							Integer.parseInt(ss[1]),detail);
 					list.add(v);
