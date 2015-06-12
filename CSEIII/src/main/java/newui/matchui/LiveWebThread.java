@@ -18,6 +18,7 @@ public class LiveWebThread extends Thread{
 	private boolean stop=false;
 	private LiveWebInc c;
 	private String gameid="";
+	private String htm,vtm;
 	private int size=0;
 	private int line=1;
 	private String regex="[\\d]+-[\\d]+";//比分
@@ -26,12 +27,13 @@ public class LiveWebThread extends Thread{
 	private MatchDetailPanel ac;
 	Pattern p;Matcher m;
 	private boolean islasts=false;
-	public LiveWebThread(LiveWebInc c,String id,MatchDetailPanel s) {
+	public LiveWebThread(LiveWebInc c,String id,MatchDetailPanel s,String vtm,String htm) {
 		super();
 		this.c = c;
 		this.gameid=id;
 		this.ac=s;
 		p=Pattern.compile(regex);
+		this.htm=htm;this.vtm=vtm;
 		//Matcher m=p.matcher(destStr);
 	}
 
@@ -51,6 +53,11 @@ public class LiveWebThread extends Thread{
 						m=p.matcher(s.get(i));
 						while(m.find()){
 							lastscore=m.group();
+							//调整比分顺序
+							if(s.get(i).substring(0, 3).equals(htm)){
+								String[] ss=lastscore.split("-");
+								lastscore=ss[1]+"-"+ss[0];
+							}
 							islasts=true;
 						}
 						
@@ -143,7 +150,8 @@ public class LiveWebThread extends Thread{
 				//need day Change;  make day change function available
 			//	mPanel.initLiveData(season,m+"-"+d, s.substring(0, 3)+"-"+ s.substring(3, 6));
 				mm.setIsLive(true);
-				LiveWebThread th=new LiveWebThread(cc,line.get(0),mm);
+				LiveWebThread th=new LiveWebThread(cc,line.get(0),mm,s.substring(0, 3),
+						s.substring(3, 6));
 				th.startThread();
 			}
 		}
