@@ -165,10 +165,16 @@ public class TeamIndexPanel extends FatherPanel implements MouseListener {
 				String type = typeBox.getSelectedItem().toString();
 				String season = seasonBox.getSelectedItem().toString();
 				String seasonType = seasonTypeBox.getSelectedItem().toString();
+//				ttm.Refresh(season, seasonType, type);
+//				table.revalidate();
+//				table.repaint();
+				int headModel=ttm.getHeadModel();
+				ttm=new TeamTableModel(headModel);
 				ttm.Refresh(season, seasonType, type);
+				table.setModel(ttm);
 				table.revalidate();
 				table.repaint();
-
+				CellRender();
 			}
 		});
 		typeBox.addItemListener(new ItemListener() {
@@ -185,7 +191,7 @@ public class TeamIndexPanel extends FatherPanel implements MouseListener {
 			}
 
 		});
-
+		
 	}
 
 	public void mouseClicked(MouseEvent e) {
