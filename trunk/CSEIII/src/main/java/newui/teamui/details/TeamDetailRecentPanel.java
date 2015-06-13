@@ -68,16 +68,21 @@ public class TeamDetailRecentPanel extends JPanel {
 		add(titleLbl, BorderLayout.NORTH);
 		team = Service.team;
 		matches = team.getRecentMatches(abbrName,5);
-		// -------------------
 		cardPnl = new JPanel();
 		cardPnl.setOpaque(false);
 		add(cardPnl, BorderLayout.CENTER);
-		cardPnl.setLayout(new GridLayout(1, 5));
-		cardPnl.add(new TinyCard(matches.get(0), abbrName));
-		cardPnl.add(new TinyCard(matches.get(1), abbrName));
-		cardPnl.add(new TinyCard(matches.get(2), abbrName));
-		cardPnl.add(new TinyCard(matches.get(3), abbrName));
-		cardPnl.add(new TinyCard(matches.get(4), abbrName));
+		// -------------------
+		int matchNum = matches.size();
+		if (matchNum == 0) {
+			JLabel noMatchLbl = new JLabel("最近没有进行比赛。");
+			noMatchLbl.setFont(new Font("华文细黑", Font.PLAIN, 18));
+			noMatchLbl.setForeground(Style.DEEP_BLUE);
+			cardPnl.add(noMatchLbl);
+		} else {
+			cardPnl.setLayout(new GridLayout(1, matchNum));
+			for (int i = 0; i < matchNum; i++)
+				cardPnl.add(new TinyCard(matches.get(i), abbrName));
+		}
 	}
 
 	protected void paintComponent(Graphics g) {
