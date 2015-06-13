@@ -39,15 +39,19 @@ public class TeamDataForSql {
 		MatchDataService match=new MatchData();
 		ArrayList<String> seasons=match.getAllSeasons();
 		String[] types={"Preseason","Team","Playoff"};
-		for(int i=0;i<seasons.size();i++){
-			String season = seasons.get(i);
-			for(int j=0;j<types.length;j++){
-				String type=types[j];
-				teamDataForSql.exportCalculatedDataToSql(season,type);
-				System.out.println(season+"_"+type+"好啦！");
-			}
+//		for(int i=0;i<seasons.size();i++){
+//			String season = seasons.get(i);
+//			for(int j=0;j<types.length;j++){
+//				String type=types[j];
+//				teamDataForSql.exportCalculatedDataToSql(season,type);
+//				System.out.println(season+"_"+type+"好啦！");
+//			}
+//		}
+		for(int j=0;j<types.length;j++){
+			String type=types[j];
+			teamDataForSql.exportCalculatedDataToSql("14-15",type);
+			System.out.println("14-15"+"_"+type+"好啦！");
 		}
-		
 		System.out.println("好啦");
 		
 	}
