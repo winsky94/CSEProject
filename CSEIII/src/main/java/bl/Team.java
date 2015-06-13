@@ -45,10 +45,15 @@ public class Team implements TeamBLService {
 //		 result = team.getTeamSeasonInfo("10-11", "Team", "NJN");
 //		 result=team.getOrderedTeamsByAverage(season,type, "score", "desc", 5);
 //		 result = team.getSeasonHotTeam("12-13", "Playoff", "score", 5);
-		team.getRecentMatches("POR", 3);
+		ArrayList<MatchVO> matches=new ArrayList<MatchVO>();
+		matches=team.getRecentMatches("BOS", 82);
 		long end = System.currentTimeMillis();
 		System.out.println("结果大小：" + result.size());
 
+		for(int i=0;i<matches.size();i++){
+			System.out.println(matches.get(i).getDate());
+		}
+		
 //		for (TeamVO vo : result) {
 //			// System.out.println(vo.getAbLocation() + " " + vo.getScore());
 //			System.out.println(vo.getAbLocation());
