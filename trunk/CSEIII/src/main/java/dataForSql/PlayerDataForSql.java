@@ -1142,6 +1142,7 @@ public class PlayerDataForSql {
 				for(int j=0;j<type.length;j++){
 					exportSeasonInfoToSql(season[i], type[j]);
 					exportAverageInfoToSql(season[i], type[j]);
+					System.out.println(season[i]+"_"+type[j]+"好啦！");
 				}
 			}
 		}
