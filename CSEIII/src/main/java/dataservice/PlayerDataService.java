@@ -45,6 +45,8 @@ public interface PlayerDataService{
     
     public ArrayList<PlayerVO> getPlayerRecentAverageInfo(String name);
     
+    public double getRankInNBA(String name,String condition);
+    
     public ArrayList<PlayerVO> getOrderedPlayersBySeason(String season,String type,
 			String condition, String order, int num);
     

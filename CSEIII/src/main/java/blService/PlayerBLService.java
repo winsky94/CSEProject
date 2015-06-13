@@ -62,6 +62,14 @@ public interface PlayerBLService {
 	public ArrayList<PlayerVO> getPlayerAverageInfo(String season,String type,String name);
 
 	public ArrayList<PlayerVO> getPlayerRecentAverageInfo(String name);
+	
+	/**
+	 * 返回该球员在最近一个赛季中场均数据的排名情况
+	 * @param name
+	 * @param condition
+	 * @return
+	 */
+	public double getRankInNBA(String name,String condition);
 	/**
 	 * 根据某一项技术分析项，将球员按某个赛季的该项数据进行升降序排序
 	 * 
