@@ -88,6 +88,10 @@ public class Player implements PlayerBLService{
 	public ArrayList<PlayerVO> getPlayerRecentAverageInfo(String name){
 		return player.getPlayerRecentAverageInfo(name);
 	}
+	
+	public double getRankInNBA(String name,String condition){
+		return player.getRankInNBA(name, changePlayerCHToEN(condition));
+	}
 
 	public ArrayList<PlayerVO> getOrderedPlayersBySeason(String season,String type,
 			String condition, String order, int num) {

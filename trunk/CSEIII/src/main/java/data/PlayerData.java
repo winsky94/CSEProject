@@ -590,6 +590,39 @@ public class PlayerData  implements PlayerDataService{
 			return null;
 		}
 		
+		private ArrayList<PlayerVO> getRecentAverageInfo(String name){
+			String[] season=new String[]{"14-15","13-14","12-13","11-12","10-11"};
+			String[] type=new String[]{"Playoff","Team","Preseason"};
+			ArrayList<PlayerVO> result;
+			for(int i=0;i<season.length;i++){
+				for(int j=0;j<type.length;j++){
+					result=getPlayerAverageInfo(season[i], type[j], name);
+					if(result.size()!=0)
+						return getPlayerAverageInfo(season[i], type[j]);
+				}
+			}
+			return null;
+		}
+		
+		public double getRankInNBA(String name,String condition){
+			ArrayList<PlayerVO> players=getRecentAverageInfo(name);
+			if(players==null)
+				return 0;
+			else{
+				int rank=0;
+				int size=players.size();
+				Collections.sort(players,new SequenceOfPlayer(condition, "desc"));
+				for(int i=0;i<size;i++){
+					if(players.get(i).getName().equals(name)){
+						rank=i+1;
+						break;
+					}
+				}
+				return ((double)(size-rank+1)/size)*100;
+			}
+		}
+		
+		
 		public ArrayList<PlayerVO> getOrderedPlayersBySeason(String season,String type,
 				String condition, String order, int num) {
 			ArrayList<PlayerVO> result = new ArrayList<PlayerVO>();
@@ -1236,7 +1269,8 @@ public class PlayerData  implements PlayerDataService{
 //		System.out.println(playerDataReader.getDayHotPlayer("score", 5).size());
 //	    playerDataReader.getPlayersByTeam("BKN");
 //		playerDataReader.getRecentMatches("Kobe Bryant", 5);
-		playerDataReader.getPlayerRecentAverageInfo("32823473");
+//		playerDataReader.getPlayerRecentAverageInfo("32823473");
+		System.out.println(playerDataReader.getRankInNBA("Kobe Bryant", "desc"));
 		long end = System.currentTimeMillis();
 		System.out.println("运行时间：" + (end - start) + "毫秒");// 应该是end - start
 	}
