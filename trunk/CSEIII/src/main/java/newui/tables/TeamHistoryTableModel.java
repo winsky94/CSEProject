@@ -80,14 +80,13 @@ public class TeamHistoryTableModel extends MyTableModel {
 		ArrayList<PlayerVO> vo = new ArrayList<PlayerVO>();
 		ArrayList<PlayerVO> teamMember1=clone(teamMember);
 		for (int i = 0; i < teamMember1.size(); i++) {
-			PlayerVO v = teamMember1.get(i);
 			ArrayList<PlayerVO> playerVO = player.getPlayerAverageInfo(
 					season,seasonType);
 			if (playerVO == null || playerVO.size() == 0) {
 				teamMember1.remove(i);
 				i--;
 			} else {
-				vo.add(playerVO.get(0));
+				vo.add(playerVO.get(i));
 			}
 		}
 		Refresh(vo, tname);
