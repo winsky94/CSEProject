@@ -35,15 +35,17 @@ public class Team implements TeamBLService {
 		TeamBLService team = new Team();
 		// result = team.getTeamBaseInfo();
 		long start = System.currentTimeMillis();
-		result = team.getTeamAverageInfo(season,"Playoff");
-		System.out.println("结果大小：" + result.size());
-		result = team.getTeamAverageInfo(season,type);
-		System.out.println("结果大小：" + result.size());
+//		result = team.getTeamAverageInfo(season,"Playoff");
+//		System.out.println("结果大小：" + result.size());
+//		result = team.getTeamAverageInfo(season,type);
+//		System.out.println("结果大小：" + result.size());
+		
 //		 result = team.getTeamAverageInfo(season,"Team", "NOP");
 //		 result=team.getTeamSeasonInfo("12-13", "Team");
 //		 result = team.getTeamSeasonInfo("10-11", "Team", "NJN");
 //		 result=team.getOrderedTeamsByAverage(season,type, "score", "desc", 5);
 //		 result = team.getSeasonHotTeam("12-13", "Playoff", "score", 5);
+		team.getRecentMatches("POR", 3);
 		long end = System.currentTimeMillis();
 		System.out.println("结果大小：" + result.size());
 
@@ -210,7 +212,7 @@ public class Team implements TeamBLService {
 	public ArrayList<MatchVO> getMatches(String teamName) {
 		// TODO 自动生成的方法存根
 		ArrayList<MatchVO> result = new ArrayList<MatchVO>();
-		result = match.getMatchesByTeam("all", "all", teamName);
+		result = match.getMatchesByTeam("14-15", "Playoff", teamName);
 		return result;
 	}
 
