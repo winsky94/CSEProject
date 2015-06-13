@@ -43,7 +43,7 @@ public class PlayerHistoryTableModel extends AbstractTableModel {
 
 	public void Refresh(String pname) {
 		player = Service.player;
-		match = player.getMatches(pname);
+		match = player.getMatches("14-15","Team",pname,30);
 		if (match != null && match.size() != 0)
 			Refresh(match, pname);
 

@@ -44,7 +44,7 @@ public class PlayerDetailHistoryPanel extends JPanel {
 	MyBox seasonBox,seasonTypeBox;
 	PlayerVO vo;
 
-	public PlayerDetailHistoryPanel(PlayerVO vo) {
+	public PlayerDetailHistoryPanel(final PlayerVO vo) {
 		this.vo = vo;
 		GridBagLayout gbl = new GridBagLayout();
 		GridBagConstraints gbc = new GridBagConstraints();
@@ -73,7 +73,7 @@ public class PlayerDetailHistoryPanel extends JPanel {
 		String[] seasonText = (String[])seasons.toArray(new String[size]);
 		seasonBox = new MyBox(seasonText);
 		funcPnl.add(seasonBox);
-		String[] seasonTypeText = {  "季后赛 ","常规赛", "季前赛"  };// 这是什么
+		String[] seasonTypeText = {  "常规赛","季后赛", "季前赛"  };// 这是什么
 		seasonTypeBox = new MyBox(seasonTypeText);
 		funcPnl.add(seasonTypeBox);
 		// ----------------------
@@ -99,6 +99,7 @@ public class PlayerDetailHistoryPanel extends JPanel {
 		add(jsp);
 		phtm.Refresh(vo.getName());
 		table.revalidate();
+		table.repaint();
 		table.addMouseListener(new MouseAdapter(){
 			public void mouseClicked(MouseEvent e){
 				if(e.getClickCount()==2){
@@ -108,33 +109,33 @@ public class PlayerDetailHistoryPanel extends JPanel {
 				}
 			}
 		});
-//		seasonBox.addItemListener(new ItemListener() {
-//			public void itemStateChanged(ItemEvent e) {
-//				// TODO Auto-generated method stub
-//				String season = seasonBox.getSelectedItem().toString();
-//				String seasonType = seasonTypeBox.getSelectedItem().toString();
-//				ArrayList<MatchVO> matches=new ArrayList<MatchVO>();
-//				matches=Service.player.getMatches(season, seasonType,vo.getName());
-//				phtm.Refresh(matches,vo.getName());
-//				table.revalidate();
-//				table.repaint();
-//
-//			}
-//
-//		});
-//		seasonTypeBox.addItemListener(new ItemListener() {
-//			public void itemStateChanged(ItemEvent e) {
-//				// TODO Auto-generated method stub
-//				String season = seasonBox.getSelectedItem().toString();
-//				String seasonType = seasonTypeBox.getSelectedItem().toString();
-//				ArrayList<MatchVO> matches=new ArrayList<MatchVO>();
-//				matches=Service.player.getMatches(season, seasonType,vo.getName());
-//				phtm.Refresh(matches,vo.getName());
-//				table.revalidate();
-//				table.repaint();
-//
-//			}
-//		});
+		seasonBox.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				// TODO Auto-generated method stub
+				String season = seasonBox.getSelectedItem().toString();
+				String seasonType = seasonTypeBox.getSelectedItem().toString();
+				ArrayList<MatchVO> matches=new ArrayList<MatchVO>();
+				matches=Service.player.getMatches(season, seasonType,vo.getName(),30);
+				phtm.Refresh(matches,vo.getName());
+				table.revalidate();
+				table.repaint();
+                table.validate();
+			}
+
+		});
+		seasonTypeBox.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				// TODO Auto-generated method stub
+				String season = seasonBox.getSelectedItem().toString();
+				String seasonType = seasonTypeBox.getSelectedItem().toString();
+				ArrayList<MatchVO> matches=new ArrayList<MatchVO>();
+				matches=Service.player.getMatches(season, seasonType,vo.getName(),30);
+				phtm.Refresh(matches,vo.getName());
+				table.revalidate();
+				table.repaint();
+
+			}
+		});
 
 	}
 

@@ -61,6 +61,7 @@ public interface PlayerBLService {
 
 	public ArrayList<PlayerVO> getPlayerAverageInfo(String season,String type,String name);
 
+	public ArrayList<PlayerVO> getPlayerRecentAverageInfo(String name);
 	/**
 	 * 根据某一项技术分析项，将球员按某个赛季的该项数据进行升降序排序
 	 * 
@@ -189,6 +190,16 @@ public interface PlayerBLService {
 	 * @return 比赛列表
 	 */
 	public ArrayList<MatchVO> getMatches(String playerName);// 可以模糊
+	
+	/**
+	 * 根据赛季和比赛类型得到当前球员的比赛
+	 * @param season
+	 * @param type
+	 * @param playerName
+	 * @param num
+	 * @return
+	 */
+	public ArrayList<MatchVO> getMatches(String season,String type,String playerName, int num);
 
 	/**
 	 * 根据球队缩写，找到该球队中的全部球员
