@@ -30,7 +30,7 @@ public class BaseInfoPlayerThread extends Thread{
                 tou=new ImageIcon("src/data/players/portrait/"+s+".png");
 			tou.setImage(tou.getImage().getScaledInstance(
 					50, 40
-				, Image.SCALE_DEFAULT));
+				, Image.SCALE_SMOOTH));
 			table.setValueAt(tou, i, 0);
 			
 			
