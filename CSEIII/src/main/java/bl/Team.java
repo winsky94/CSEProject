@@ -212,7 +212,7 @@ public class Team implements TeamBLService {
 	public ArrayList<MatchVO> getMatches(String teamName) {
 		// TODO 自动生成的方法存根
 		ArrayList<MatchVO> result = new ArrayList<MatchVO>();
-		result = match.getMatchesByTeam("14-15", "Playoff", teamName);
+		result = match.getMatchesByTeam("14-15", "all", teamName);
 		return result;
 	}
 
