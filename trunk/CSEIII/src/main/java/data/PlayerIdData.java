@@ -116,7 +116,10 @@ public class PlayerIdData implements PlayerIdDataService{
 			ResultSet resultSet = sql.executeQuery(query);
 			
 			resultSet.next();
-				
+			
+			if(resultSet.getRow()==0)
+				return "";
+			
 			name = resultSet.getString("name");
 			
 			resultSet.close();
