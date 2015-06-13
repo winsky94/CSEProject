@@ -1,6 +1,7 @@
 package newui.playerui;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Image;
 import java.io.File;
@@ -19,6 +20,7 @@ import newui.playerui.details.PlayerStatsPanel;
 
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.SpiderWebPlot;
 import org.jfree.data.category.DefaultCategoryDataset;
 
 import vo.PlayerVO;
@@ -49,10 +51,11 @@ public class PlayerDetailPanel extends FatherPanel {
 		gbc.gridx = 0;
 		gbc.gridy = 1;
 		gbc.gridwidth = 1;
-		gbc.gridheight = 3;
+		gbc.gridheight = 6;
 		gbc.weightx = 0.1;
-		gbc.weighty = 30;
+		gbc.weighty = 60;
 		gbl.setConstraints(spiderPnl, gbc);
+		spiderPnl.setPreferredSize(new Dimension(290, 290));
 		add(spiderPnl);
 		// ------actionPicLbl--------
 
@@ -62,14 +65,14 @@ public class PlayerDetailPanel extends FatherPanel {
 			actionIconName = "unknown";
 		ImageIcon i = new ImageIcon("image/player/action/" + actionIconName
 				+ ".png");
-		i.setImage(i.getImage().getScaledInstance(300, 478, Image.SCALE_SMOOTH));
+		i.setImage(i.getImage().getScaledInstance(280, 418, Image.SCALE_SMOOTH));
 		actionPicLbl = new JLabel(i);
 		gbc.gridx = 0;
-		gbc.gridy = 4;
+		gbc.gridy = 7;
 		gbc.gridwidth = 1;
-		gbc.gridheight = 7;
+		gbc.gridheight =4;
 		gbc.weightx = 0.1;
-		gbc.weighty = 70;
+		gbc.weighty = 15;
 		gbl.setConstraints(actionPicLbl, gbc);
 		add(actionPicLbl);
 		// ----------------
@@ -100,9 +103,12 @@ public class PlayerDetailPanel extends FatherPanel {
 	}
 
 	JFreeChart createChart() {
-//		pservice.getPlayerAverageInfo(season, "all", name);
-//		DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-//		dataset.addValue(value, rowKey, columnKey);
-		return null;
+		DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+		dataset.addValue(pservice.getRankInNBA(name, "得分"), name, "得分");
+		dataset.addValue(pservice.getRankInNBA(name, "篮板数"), name, "篮板");
+		dataset.addValue(pservice.getRankInNBA(name, "助攻数"), name, "助攻");
+		dataset.addValue(pservice.getRankInNBA(name, "盖帽数"), name, "盖帽");
+		dataset.addValue(pservice.getRankInNBA(name, "抢断数"), name, "抢断");
+		return new JFreeChart(new SpiderWebPlot(dataset));
 	}
 }
