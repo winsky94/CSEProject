@@ -33,6 +33,8 @@ public interface PlayerDataService{
 	 */
     public ArrayList<PlayerVO> getPlayerBaseInfoForVague(String name);
     
+    public ArrayList<PlayerVO> getPlayerActiveBaseInfoForVague(String name);
+    
     public ArrayList<PlayerVO> getPlayerSeasonInfo(String season,String type);
     
     public ArrayList<PlayerVO> getPlayerSeasonInfo(String season,String type,String name);

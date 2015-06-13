@@ -35,9 +35,9 @@ public class PKChart extends JPanel {
 		aBigger = false;
 		// ---------------------------------
 		player = Service.player;
-		aVO = player.getPlayerSeasonInfo(Match.getCurrentSeason(), "all",
+		aVO = player.getPlayerSeasonInfo(Match.getCurrentSeason(), "Team",
 				father.namePnl.aLbl.getText()).get(0);
-		bVO = player.getPlayerSeasonInfo(Match.getCurrentSeason(), "all",
+		bVO = player.getPlayerSeasonInfo(Match.getCurrentSeason(), "Team",
 				father.namePnl.bLbl.getText()).get(0);
 		// --------------------------------------
 		GridBagLayout gbl = new GridBagLayout();

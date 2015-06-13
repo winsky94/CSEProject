@@ -63,6 +63,10 @@ public class Player implements PlayerBLService{
     	return player.getPlayerBaseInfoForVague(name);
     }
     
+    public ArrayList<PlayerVO> getPlayerActiveBaseInfoForVague(String name){
+    	return player.getPlayerActiveBaseInfoForVague(name);
+    }
+    
 	
 	public ArrayList<PlayerVO> getPlayerSeasonInfo(String season,String type){    
 		return player.getPlayerSeasonInfo(season, Match.changeTypeCHToEN(type));

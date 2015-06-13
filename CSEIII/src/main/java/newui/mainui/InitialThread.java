@@ -21,6 +21,7 @@ public class InitialThread extends Thread {
 		TeamBLService t = Service.team;
 		MatchBLService m = Service.match;
 		p.getDayHotPlayer("score", 5);
+		p.getRecentMatches("Kobe Bryant", 5);
 		MainFrame.getInstance();
 		frame.setStop();
 		double post = System.currentTimeMillis();
