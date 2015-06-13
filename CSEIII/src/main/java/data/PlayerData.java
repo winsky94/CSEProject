@@ -575,6 +575,21 @@ public class PlayerData  implements PlayerDataService{
 		return result;
 		}
 
+		
+		public ArrayList<PlayerVO> getPlayerRecentAverageInfo(String name){
+			String[] season=new String[]{"14-15","13-14","12-13","11-12","10-11"};
+			String[] type=new String[]{"Playoff","Team","Preseason"};
+			ArrayList<PlayerVO> result;
+			for(int i=0;i<season.length;i++){
+				for(int j=0;j<type.length;j++){
+					result=getPlayerAverageInfo(season[i], type[j], name);
+					if(result.size()!=0)
+						return result;
+				}
+			}
+			return null;
+		}
+		
 		public ArrayList<PlayerVO> getOrderedPlayersBySeason(String season,String type,
 				String condition, String order, int num) {
 			ArrayList<PlayerVO> result = new ArrayList<PlayerVO>();
@@ -1126,6 +1141,25 @@ public class PlayerData  implements PlayerDataService{
 			}
 			return result;
 		}
+		
+		public ArrayList<MatchVO> getMatches(String season,String type,String playerName, int num) {
+			ArrayList<MatchVO> result = new ArrayList<MatchVO>();
+			int count = 0;
+			ArrayList<MatchVO> allSeasonMatches=getSeasonMatches(season, type);
+			Collections.sort(allSeasonMatches, new SequenceOfMatch());
+			for (MatchVO vo : allSeasonMatches) {
+				for (RecordVO vv : vo.getRecords()) {
+					if (vv.getPlayerName().equals(playerName)) {
+						result.add(vo);
+						count++;
+						if (count >= num)
+							return result;
+				        break;
+					}
+				}
+			}
+			return result;
+		}
 
 		public ArrayList<MatchVO> getMatches(String playerName) {
 			ArrayList<MatchVO> result = new ArrayList<MatchVO>();
@@ -1201,7 +1235,8 @@ public class PlayerData  implements PlayerDataService{
 //		System.out.println(playerDataReader.selectPlayersBySeason("12-13", "Preseason", "F", "E", "score", "desc", 5).size());
 //		System.out.println(playerDataReader.getDayHotPlayer("score", 5).size());
 //	    playerDataReader.getPlayersByTeam("BKN");
-		playerDataReader.getRecentMatches("Kobe Bryant", 5);
+//		playerDataReader.getRecentMatches("Kobe Bryant", 5);
+		playerDataReader.getPlayerRecentAverageInfo("32823473");
 		long end = System.currentTimeMillis();
 		System.out.println("运行时间：" + (end - start) + "毫秒");// 应该是end - start
 	}

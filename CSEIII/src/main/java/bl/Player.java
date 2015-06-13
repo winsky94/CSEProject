@@ -84,6 +84,10 @@ public class Player implements PlayerBLService{
 	public ArrayList<PlayerVO> getPlayerAverageInfo(String season,String type,String name){
 		return player.getPlayerAverageInfo(season, Match.changeTypeCHToEN(type), name);
 	}
+	
+	public ArrayList<PlayerVO> getPlayerRecentAverageInfo(String name){
+		return player.getPlayerRecentAverageInfo(name);
+	}
 
 	public ArrayList<PlayerVO> getOrderedPlayersBySeason(String season,String type,
 			String condition, String order, int num) {
@@ -149,6 +153,10 @@ public class Player implements PlayerBLService{
 
 	public ArrayList<MatchVO> getMatches(String playerName) {
 		return player.getMatches(playerName);
+	}
+	
+	public ArrayList<MatchVO> getMatches(String season,String type,String playerName, int num){
+		return player.getMatches(season, Match.changeTypeCHToEN(type), playerName, num);
 	}
 
 	public ArrayList<PlayerVO> getPlayersByTeam(String teamAbLocation) {

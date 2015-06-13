@@ -43,6 +43,8 @@ public interface PlayerDataService{
     
     public ArrayList<PlayerVO> getPlayerAverageInfo(String season,String type,String name);
     
+    public ArrayList<PlayerVO> getPlayerRecentAverageInfo(String name);
+    
     public ArrayList<PlayerVO> getOrderedPlayersBySeason(String season,String type,
 			String condition, String order, int num);
     
@@ -68,6 +70,8 @@ public interface PlayerDataService{
     public ArrayList<MatchVO> getRecentMatches(String playerName, int num);
     
     public ArrayList<MatchVO> getMatches(String playerName);
+    
+    public ArrayList<MatchVO> getMatches(String season,String type,String playerName, int num);
     
     public ArrayList<PlayerVO> getPlayersByTeam(String teamAbLocation);
 			
