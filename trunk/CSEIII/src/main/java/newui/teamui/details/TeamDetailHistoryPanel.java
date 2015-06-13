@@ -102,8 +102,14 @@ public class TeamDetailHistoryPanel extends JPanel {
 		gbc.weighty = 10;
 		gbl.setConstraints(jsp, gbc);
 		add(jsp);
-		// 注意 bl层方法的参数是球队缩写 这个是咩
 		thtm.Refresh(abbrName);
+		if (typeBox.getSelectedItem().toString().equals("场均")) {
+			thtm.RefreshAverage((String)seasonBox.getSelectedItem(),(String) seasonTypeBox
+					.getSelectedItem());
+		} else {
+			thtm.RefreshSeason(seasonBox.getSelectedItem().toString(),
+					(String) seasonTypeBox.getSelectedItem());
+		}
 		table.revalidate();
 
 		seasonBox.addItemListener(new ItemListener() {
@@ -126,7 +132,6 @@ public class TeamDetailHistoryPanel extends JPanel {
 			public void itemStateChanged(ItemEvent e) {
 				// TODO Auto-generated method stub
 				if (typeBox.getSelectedItem().toString().equals("场均")) {
-					System.out.println();
 					thtm.RefreshAverage((String)seasonBox.getSelectedItem(),Match
 							.changeTypeCHToEN((String) seasonTypeBox
 									.getSelectedItem()));
