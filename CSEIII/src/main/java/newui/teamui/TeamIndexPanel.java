@@ -165,16 +165,21 @@ public class TeamIndexPanel extends FatherPanel implements MouseListener {
 				String type = typeBox.getSelectedItem().toString();
 				String season = seasonBox.getSelectedItem().toString();
 				String seasonType = seasonTypeBox.getSelectedItem().toString();
-//				ttm.Refresh(season, seasonType, type);
-//				table.revalidate();
-//				table.repaint();
-				int headModel=ttm.getHeadModel();
-				ttm=new TeamTableModel(headModel);
 				ttm.Refresh(season, seasonType, type);
-				table.setModel(ttm);
+				//可以动态的增加表格的行，但是表头大小会变==
+				ttm.fireTableStructureChanged();// JTable刷新结构
+				ttm.fireTableDataChanged();// 刷新JTable数据
 				table.revalidate();
 				table.repaint();
+				
+//				int headModel=ttm.getHeadModel();
+//				ttm=new TeamTableModel(headModel);
+//				ttm.Refresh(season, seasonType, type);
+//				table.setModel(ttm);
+//				table.revalidate();
+//				table.repaint();
 				CellRender();
+				MyTableCellRenderer.adjustTableColumnWidths(table);// 自动设置列宽
 			}
 		});
 		typeBox.addItemListener(new ItemListener() {
