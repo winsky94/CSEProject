@@ -1095,7 +1095,7 @@ public class PlayerData  implements PlayerDataService{
 
 		public ArrayList<PlayerVO> getPlayersByInitialName(char character) {
 			ArrayList<PlayerVO> result = new ArrayList<PlayerVO>();
-			ArrayList<PlayerVO> thePlayers = getPlayerHistoricBaseInfo();
+			ArrayList<PlayerVO> thePlayers = getPlayerActiveBaseInfo();
 			for (PlayerVO vo : thePlayers) {
 				String[] name=vo.getName().split(" ");
 				int size=name.length;
