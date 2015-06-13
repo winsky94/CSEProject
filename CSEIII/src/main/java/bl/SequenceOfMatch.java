@@ -15,7 +15,7 @@ public	class SequenceOfMatch implements Comparator<MatchVO> {
       
     	  String s1=a1.getSeason()+"_"+a1.getDate();
     	  String s2=a2.getSeason()+"_"+a2.getDate();
-          return compareDate(s1, s2);
+          return compareDate(s2, s1);
       
       }
       
