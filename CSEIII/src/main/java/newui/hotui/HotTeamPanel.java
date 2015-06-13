@@ -43,7 +43,7 @@ public class HotTeamPanel extends HotFatherPanel implements MouseListener {
 	BottomButton scoreBtn, reboundBtn, assistBtn, blockBtn, stealBtn,
 			threeRateBtn, shootRateBtn, freeRateBtn, currentBtn;
 	// ---------------------
-	JPanel seasonPnl;
+
 	JComboBox<String> seasonBox, seasonTypeBox;
 	// ---------------------
 	String[] head = { "排名", "", "球队名称", "球队缩写", "所属联盟", "场均得分" };
@@ -59,17 +59,6 @@ public class HotTeamPanel extends HotFatherPanel implements MouseListener {
 		GridBagConstraints bc = new GridBagConstraints();
 		bc.fill = GridBagConstraints.BOTH;
 		bestPnl.setLayout(bl);
-		// -------seasonPnl-------------
-		seasonPnl = new JPanel();
-		seasonPnl.setBackground(Color.white);
-		gbc.gridx = 0;
-		gbc.gridy = 0;
-		gbc.gridwidth = 10;
-		gbc.gridheight = 1;
-		gbc.weightx = 10;
-		gbc.weighty = 0.1;
-		gbl.setConstraints(seasonPnl, gbc);
-		add(seasonPnl);
 		// ---seasonBox-----
 		JLabel seasonLbl = new JLabel("赛季");
 		seasonLbl.setFont(new Font("微软雅黑", Font.PLAIN, 15));
@@ -216,7 +205,7 @@ public class HotTeamPanel extends HotFatherPanel implements MouseListener {
 			model.setHead(head);
 			TeamVO topOne = vlist.get(0);
 			ImageIcon bestTeamIco = Team.getTeamImage(topOne.getAbLocation());
-			bestTeamIco.setImage(bestTeamIco.getImage().getScaledInstance(150, 150, Image.SCALE_SMOOTH));
+			bestTeamIco.setImage(bestTeamIco.getImage().getScaledInstance(160, 160, Image.SCALE_SMOOTH));
 			teamIcon.setIcon(bestTeamIco);
 			teamNameLbl.setText(Team.changeTeamNameENToCH(topOne
 					.getAbLocation()));
@@ -374,6 +363,7 @@ public class HotTeamPanel extends HotFatherPanel implements MouseListener {
 				line.add(num);
 				num++;
 				ImageIcon bestTeamIco = Team.getTeamImage(v.getAbLocation());
+				bestTeamIco.setImage(bestTeamIco.getImage().getScaledInstance(63, 63, Image.SCALE_SMOOTH));
 				// 设置宽高
 
 				line.add(bestTeamIco);

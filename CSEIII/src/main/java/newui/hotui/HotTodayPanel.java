@@ -26,6 +26,7 @@ import newui.tables.HotTableModel;
 import newui.tables.MyTableCellRenderer;
 import newui.teamui.TeamDetailPanel;
 import vo.PlayerVO;
+import bl.Player;
 import bl.Team;
 import blService.PlayerBLService;
 
@@ -174,7 +175,8 @@ public class HotTodayPanel extends HotFatherPanel implements MouseListener {
 		if (vlist != null && vlist.size() != 0) {
 			model.setHead(head);
 			PlayerVO topOne = vlist.get(0);
-			bestHead.setIcon(new ImageIcon("src/data/players/portrait/"+ topOne.getName()+".png"));
+			ImageIcon bestHeadIcon = Player.getPlayerPortraitImage(topOne.getName());
+			bestHead.setIcon(bestHeadIcon);
 			bestName.setText(topOne.getName());
 			positionAndTeamName.setText(topOne.getPosition() + "/"
 					+ topOne.getOwingTeam());
@@ -313,19 +315,21 @@ public class HotTodayPanel extends HotFatherPanel implements MouseListener {
 				ArrayList<Object> line = new ArrayList<Object>();
 				line.add(num);
 				num++;
-				ImageIcon tou = new ImageIcon("src/data/players/portrait/"+ v.getName()+".png");
-				// 设置宽高
-				ImageIcon icon = new ImageIcon(
-						tou.getImage()
-								.getScaledInstance(
-								/*
-								 * table.getColumn(table.getColumnName(0))
-								 * .getWidth()
-								 */100, 80
-								/* currentTable.getRowHeight(i) */,
-										Image.SCALE_SMOOTH));
+//				ImageIcon tou = new ImageIcon("src/data/players/portrait/"+ v.getName()+".png");
+//				// 设置宽高
+//				ImageIcon icon = new ImageIcon(
+//						tou.getImage()
+//								.getScaledInstance(
+//								/*
+//								 * table.getColumn(table.getColumnName(0))
+//								 * .getWidth()
+//								 */100, 80
+//								/* currentTable.getRowHeight(i) */,
+//										Image.SCALE_SMOOTH));
+				ImageIcon tou = Player.getPlayerPortraitImage(v.getName());
+				tou.setImage(tou.getImage().getScaledInstance(100,80, Image.SCALE_SMOOTH));
 
-				line.add(icon);
+				line.add(tou);
 				line.add(v.getName());
 				line.add(v.getOwingTeam());
 				line.add(v.getPosition());
