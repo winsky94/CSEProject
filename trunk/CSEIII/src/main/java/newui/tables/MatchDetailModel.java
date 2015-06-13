@@ -9,8 +9,8 @@ import newui.MyUIDataFormater;
 import vo.RecordVO;
 
 public class MatchDetailModel extends AbstractTableModel {
-	String[] head = { "姓名", "位置", "分钟", "命中", "出手", "投篮命中率%", "三分命中", "三分出手",
-			"三分命中率%", "罚球命中", "罚球出手", "罚球命中率%", "进攻", "防守", "篮板", "助攻", "抢断",
+	String[] head = { "姓名", "位置", "分钟", "命中", "出手", "投篮%", "三分命中", "三分出手",
+			"三分%", "罚球命中", "罚球出手", "罚球%", "进攻", "防守", "篮板", "助攻", "抢断",
 			"盖帽", "失误", "犯规", "得分" };
 	ArrayList<ArrayList<Object>> content = new ArrayList<ArrayList<Object>>();
 	// 最后一行统计
@@ -82,7 +82,7 @@ public class MatchDetailModel extends AbstractTableModel {
 			// }
 			shoot = MyUIDataFormater.formatTo1(v.getShootHitRate() * 100);
 			shootRate += Double.parseDouble(shoot);
-			shoot = shoot + '%';
+			shoot = shoot ;
 			line.add(v.getShootHitNum());
 			shootNum += v.getShootHitNum();
 			line.add(v.getShootAttemptNum());
@@ -94,7 +94,7 @@ public class MatchDetailModel extends AbstractTableModel {
 			// .getThreeAttemptNum()) * 100);
 			three = MyUIDataFormater.formatTo1(v.getThreeHitRate() * 100);
 			threeRate += Double.parseDouble(three);
-			three = three + '%';
+			three = three ;
 			line.add(v.getThreeHitNum());
 			threeNum += v.getThreeHitNum();
 			line.add(v.getThreeAttemptNum());
@@ -106,7 +106,7 @@ public class MatchDetailModel extends AbstractTableModel {
 			// .getFreeThrowAttemptNum()) * 100);
 			free = MyUIDataFormater.formatTo1(v.getFreeThrowHitRate());
 			freeRate += Double.parseDouble(free);
-			free = free + '%';
+			free = free ;
 			line.add(v.getFreeThrowHitNum());
 			freeNum += v.getFreeThrowHitNum();
 			line.add(v.getFreeThrowAttemptNum());
@@ -144,9 +144,9 @@ public class MatchDetailModel extends AbstractTableModel {
 		String t = "0.0";
 		String f = "0.0";
 		if (n != 0) {
-			s = df.format(shootRate / n) + "%";
-			t = df.format(threeRate / n) + "%";
-			f = df.format(freeRate / n) + "%";
+			s = df.format(shootRate / n) ;
+			t = df.format(threeRate / n);
+			f = df.format(freeRate / n) ;
 		}
 		last.add(shootNum);
 		last.add(shootAtm);
