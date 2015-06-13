@@ -36,13 +36,13 @@ public class MatchData implements MatchDataService {
 		MatchData matchData = new MatchData();
 		// matchData.exportToSql();
 		System.out.println("MatchData.main()");
-		matchData.addIndex("records");
+//		matchData.addIndex("records");
 		// ArrayList<MatchVO> result = matchData.getMatchData("14-15",
 		// "Playoff",
 		// "all", "all", "all");
 		long start = System.currentTimeMillis();
-		ArrayList<MatchVO> result = matchData.getMatchData("all", "all", "all",
-				"all", "all");
+//		ArrayList<MatchVO> result = matchData.getMatchData("all", "all", "all",
+//				"all", "all");
 		// System.out.println("---------------------------------");
 		// MatchVO matchVO=result.get(1);
 		// System.out.println(matchVO.getDate());
@@ -58,6 +58,7 @@ public class MatchData implements MatchDataService {
 		// ArrayList<String> season=new ArrayList<String>();
 		// season=matchData.getAllSeasons();
 		// System.out.println(season.get(0));
+		matchData.getMatchesByTeam("14-15", "all", "PHX");
 		long end = System.currentTimeMillis();
 		System.out.println("运行时间：" + (end - start) + "毫秒");
 	}
@@ -192,6 +193,8 @@ public class MatchData implements MatchDataService {
 				}
 			}
 			resultSet = sql.executeQuery(query);
+			Statement sql1 = connection.createStatement();
+			Statement sql2 = connection.createStatement();
 			while (resultSet.next()) {
 				int matchID = resultSet.getInt("matchID");
 				String currentSeason = resultSet.getString("season");
@@ -202,7 +205,7 @@ public class MatchData implements MatchDataService {
 				int visitingScore = resultSet.getInt("visitingScore");
 				int homeScore = resultSet.getInt("homeScore");
 				ArrayList<String> detailScores = new ArrayList<String>();
-				Statement sql1 = connection.createStatement();
+//				Statement sql1 = connection.createStatement();
 				ResultSet rs1 = sql1
 						.executeQuery("select score from detailscores where matchID="
 								+ matchID);
@@ -211,12 +214,14 @@ public class MatchData implements MatchDataService {
 					detailScores.add(rs1.getString("score"));
 				}
 				rs1.close();
-				sql1.close();
+//				sql1.close();
 
 				ArrayList<RecordVO> records = new ArrayList<RecordVO>();
-				Statement sql2 = connection.createStatement();
+//				Statement sql2 = connection.createStatement();
 				ResultSet rs2 = sql2
-						.executeQuery("select * from records where matchID="
+						.executeQuery("select team,playerName,position,presentTime,shootHitNum,shootAttemptNum,shootHitRate,"
+								+ "threeHitNum,threeAttemptNum,threeHitRate,freeThrowHitNum,freeThrowAttemptNum,freeThrowHitRate,offenReboundNum,defenReboundNum,"
+								+ "reboundNum,assistNum,stealNum,blockNum,turnOverNum,foulNum,score from records where matchID="
 								+ matchID);
 				RecordVO vo;
 				while (rs2.next()) {
@@ -242,13 +247,15 @@ public class MatchData implements MatchDataService {
 					records.add(vo);
 				}
 				rs2.close();
-				sql2.close();
+				
 
 				MatchVO matchVO = new MatchVO(currentSeason, date, currentType,
 						visitingTeam, homeTeam, visitingScore, homeScore,
 						detailScores, records);
 				result.add(matchVO);
 			}
+			sql1.close();
+			sql2.close();
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
