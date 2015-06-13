@@ -26,7 +26,7 @@ public class MySpiderWebPlot extends SpiderWebPlot {
 	private static final int DEFAULT_GAP = 20;
 	private static final double THRESHOLD = 15;
 
-	MySpiderWebPlot(CategoryDataset createCategoryDataset) {
+	public MySpiderWebPlot(CategoryDataset createCategoryDataset) {
 		super(createCategoryDataset);
 	}
 
