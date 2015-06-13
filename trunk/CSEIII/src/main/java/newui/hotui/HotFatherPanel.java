@@ -15,6 +15,7 @@ public class HotFatherPanel extends JPanel{
 	private static final long serialVersionUID = 1L;
 	GridBagLayout gbl;
 	GridBagConstraints gbc;
+	JPanel seasonPnl;
 	JPanel bottomBar;
 	JPanel bestPnl;
 	JScrollPane jsp;
@@ -26,28 +27,39 @@ public class HotFatherPanel extends JPanel{
 		gbc=new GridBagConstraints();
 		gbc.fill=GridBagConstraints.BOTH;
 		setLayout(gbl);
+		// -------seasonPnl-------------
+				seasonPnl = new JPanel();
+				seasonPnl.setBackground(Color.white);
+				gbc.gridx = 0;
+				gbc.gridy = 0;
+				gbc.gridwidth = 10;
+				gbc.gridheight = 1;
+				gbc.weightx = 10;
+				gbc.weighty = 0.001;
+				gbl.setConstraints(seasonPnl, gbc);
+				add(seasonPnl);
 		//---------------------
 		bestPnl=new JPanel();
 		bestPnl.setBackground(Color.white);
 		gbc.gridx=0;
 		gbc.gridy=1;
 		gbc.gridwidth=10;
-		gbc.gridheight=3;
+		gbc.gridheight=1;
 		gbc.weightx=10;
-		gbc.weighty=3;
+		gbc.weighty=1;
 		gbl.setConstraints(bestPnl, gbc);
 		add(bestPnl);
 		//----------------------
 		gbc.insets=new Insets(0, 2, 1, 2);
 		jsp=new JScrollPane();
-		gbc.gridy=4;
-		gbc.gridheight=5;
-		gbc.weighty=5;
+		gbc.gridy=6;
+		gbc.gridheight=25;
+		gbc.weighty=25;
 		gbl.setConstraints(jsp, gbc);
 		add(jsp);
 		//----------------------
 		bottomBar=new JPanel();
-		gbc.gridy=9;
+		gbc.gridy=31;
 		gbc.gridheight=1;
 		gbc.weighty=1;
 		gbl.setConstraints(bottomBar, gbc);

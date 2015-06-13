@@ -57,8 +57,8 @@ public class HotIndexPanel extends FatherPanel implements MouseListener{
 		//-----------------------------------
 		downPnl=new JPanel();
 		gbc.gridy = 2;
-		gbc.gridheight = 10;
-		gbc.weighty = 5;
+		gbc.gridheight = 15;
+		gbc.weighty = 15;
 		gbl.setConstraints(downPnl, gbc);
 		add(downPnl);
 		downPnl.removeAll();

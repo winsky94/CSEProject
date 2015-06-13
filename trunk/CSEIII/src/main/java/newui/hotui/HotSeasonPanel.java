@@ -27,7 +27,7 @@ import newui.tables.HotTableModel;
 import newui.tables.MyTableCellRenderer;
 import newui.teamui.TeamDetailPanel;
 import vo.PlayerVO;
-import bl.Match;
+import bl.Player;
 import bl.Team;
 import blService.MatchBLService;
 import blService.PlayerBLService;
@@ -51,7 +51,7 @@ public class HotSeasonPanel extends HotFatherPanel implements MouseListener {
 	JTable table;
 	HotSeasonModel model;
 	// ---------------------
-	JPanel seasonPnl;
+
 	JComboBox<String> seasonBox, seasonTypeBox;
 
 	// ---------------------
@@ -62,17 +62,7 @@ public class HotSeasonPanel extends HotFatherPanel implements MouseListener {
 		GridBagConstraints bc = new GridBagConstraints();
 		bc.fill = GridBagConstraints.BOTH;
 		bestPnl.setLayout(bl);
-		// -------seasonPnl-------------
-		seasonPnl = new JPanel();
-		seasonPnl.setBackground(Color.white);
-		gbc.gridx = 0;
-		gbc.gridy = 0;
-		gbc.gridwidth = 10;
-		gbc.gridheight = 1;
-		gbc.weightx = 10;
-		gbc.weighty = 0.1;
-		gbl.setConstraints(seasonPnl, gbc);
-		add(seasonPnl);
+		
 		// ---seasonBox-----
 		JLabel seasonLbl = new JLabel("赛季");
 		seasonLbl.setFont(new Font("微软雅黑", Font.PLAIN, 15));
@@ -230,7 +220,9 @@ public class HotSeasonPanel extends HotFatherPanel implements MouseListener {
 		if (vlist != null && vlist.size() != 0) {
 			model.setHead(head);
 			PlayerVO topOne = vlist.get(0);
-			bestHead.setIcon(new ImageIcon("src/data/players/portrait/"+ topOne.getName()+".png"));
+			ImageIcon bestHeadIcon = Player.getPlayerPortraitImage(topOne.getName());
+			//bestHeadIcon.setImage(bestHeadIcon.getImage().getScaledInstance(150,150, Image.SCALE_SMOOTH));
+			bestHead.setIcon(bestHeadIcon);
 			bestName.setText(topOne.getName());
 			positionAndTeamName.setText(topOne.getPosition() + "/"
 					+ topOne.getOwingTeam());
@@ -390,19 +382,9 @@ public class HotSeasonPanel extends HotFatherPanel implements MouseListener {
 				ArrayList<Object> line = new ArrayList<Object>();
 				line.add(num);
 				num++;
-				ImageIcon tou = new ImageIcon("src/data/players/portrait/"+ v.getName()+".png");
-				// 设置宽高
-				ImageIcon icon = new ImageIcon(
-						tou.getImage()
-								.getScaledInstance(
-								/*
-								 * table.getColumn(table.getColumnName(0))
-								 * .getWidth()
-								 */100, 80
-								/* currentTable.getRowHeight(i) */,
-										Image.SCALE_SMOOTH));
-
-				line.add(icon);
+				ImageIcon tou = Player.getPlayerPortraitImage(v.getName());
+				tou.setImage(tou.getImage().getScaledInstance(78,63, Image.SCALE_SMOOTH));
+				line.add(tou);
 				line.add(v.getName());
 				line.add(v.getOwingTeam());
 				line.add(v.getPosition());
