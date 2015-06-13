@@ -44,8 +44,9 @@ public class PKChart extends JPanel {
 		GridBagConstraints gbc = new GridBagConstraints();
 		gbc.fill = GridBagConstraints.BOTH;
 		setLayout(gbl);
+		setBackground(Color.white);
 		// ------------titleLbl------------------
-		JLabel titleLbl = new JLabel("赛季数据");
+		JLabel titleLbl = new JLabel("赛季数据",JLabel.CENTER);
 		titleLbl.setFont(new Font("微软雅黑", Font.PLAIN, 15));
 		titleLbl.setForeground(Style.BACK_GREY);
 		gbc.gridx = 0;
