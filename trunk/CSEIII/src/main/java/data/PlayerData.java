@@ -243,6 +243,58 @@ public class PlayerData  implements PlayerDataService{
 		}
 		return pArrayList;
 	}
+	
+	public ArrayList<PlayerVO> getPlayerActiveBaseInfoForVague(String name) {
+
+		ArrayList<PlayerVO> pArrayList = new ArrayList<PlayerVO>();
+		Connection con;
+		try {
+			con = SqlManager.getConnection();
+			Statement sql = con.createStatement();
+			if (name.contains("'"))
+				name.replace("'", "''");
+			String query = "select * from playersactive where name like'%"
+					+ name + "%'";
+			ResultSet resultSet = sql.executeQuery(query);
+			PlayerVO player;
+			while (resultSet.next()) {
+				String thename;
+				String number;
+				String position;
+				String height;
+				int weight;
+				String birth;
+				int age;
+				int exp;
+				String school;
+				String owingTeam;
+
+				thename = resultSet.getString("name");
+				number = resultSet.getString("number");
+				position = resultSet.getString("position");
+				height = resultSet.getString("height");
+				weight = resultSet.getInt("weight");
+				birth = resultSet.getString("birth");
+				age = resultSet.getInt("age");
+				exp = resultSet.getInt("exp");
+				school = resultSet.getString("school");
+				owingTeam=resultSet.getString("owingTeam");
+
+				player = new PlayerVO(thename, number, position, height,
+						weight, birth, age, exp, school,owingTeam);
+				pArrayList.add(player);
+			}
+			resultSet.close();
+			sql.close();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return pArrayList;
+	}
 		    
 		
 		public ArrayList<PlayerVO> getPlayerSeasonInfo(String season,String type){
@@ -1148,7 +1200,8 @@ public class PlayerData  implements PlayerDataService{
 //		System.out.println(playerDataReader.getPlayerAverageInfo("13-14", "Playoff").size());
 //		System.out.println(playerDataReader.selectPlayersBySeason("12-13", "Preseason", "F", "E", "score", "desc", 5).size());
 //		System.out.println(playerDataReader.getDayHotPlayer("score", 5).size());
-	    playerDataReader.getPlayersByTeam("BKN");
+//	    playerDataReader.getPlayersByTeam("BKN");
+		playerDataReader.getRecentMatches("Kobe Bryant", 5);
 		long end = System.currentTimeMillis();
 		System.out.println("运行时间：" + (end - start) + "毫秒");// 应该是end - start
 	}

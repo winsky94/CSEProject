@@ -28,6 +28,13 @@ public interface PlayerBLService {
 	 * @return 球员的基本信息列表
 	 */
 	public ArrayList<PlayerVO> getPlayerBaseInfo(String name);
+	
+	/**
+	 * 模糊查找本赛季活跃球员的基本信息
+	 * @param name
+	 * @return
+	 */
+	public ArrayList<PlayerVO> getPlayerActiveBaseInfoForVague(String name);
 	/**
 	 * 得到球员的某个赛季的技术统计数据
 	 * 

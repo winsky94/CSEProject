@@ -192,7 +192,7 @@ public class PlayerChooser extends JDialog {
 	class jtfListener implements KeyListener {
 
 		public void keyTyped(KeyEvent e) {
-			ArrayList<PlayerVO> searchResult = p.getPlayerBaseInfo(jtf
+			ArrayList<PlayerVO> searchResult = p.getPlayerActiveBaseInfoForVague(jtf
 					.getText());
 			// refreshJsp(searchResult);
 			RefreshThread thre = new RefreshThread(searchResult);
