@@ -57,29 +57,30 @@ public class MatchData implements MatchDataService {
 		// season=matchData.getAllSeasons();
 		// System.out.println(season.get(0));
 
-//		ArrayList<MatchVO> matches = new ArrayList<MatchVO>();
-//		matches = matchData.getMatchesByTeam("all", "all", "BKN");
-//		// matches = matchData.getMatchData("all", "all", "all", "all", "all");
-//		for (int i = 0; i < matches.size(); i++) {
-//			MatchVO vo = matches.get(i);
-//			System.out.println("赛季：" + vo.getSeason());
-//			System.out.println("类型：" + vo.getType());
-//			System.out.println("日期：" + vo.getDate());
-//			System.out.println("主队：" + vo.getHomeTeam());
-//			System.out.println("客队：" + vo.getVisitingTeam());
-//			System.out.println("节数：" + vo.getDetailScores().size());
-//			System.out.println("记录：" + vo.getRecords().size());
-//			System.out.println("------------------------------------------");
-//		}
-		
-//		ArrayList<String> seasons=new ArrayList<String>();
-//		seasons=matchData.getAllSeasons();
-//		long end = System.currentTimeMillis();
-//		System.out.println("运行时间：" + (end - start) + "毫秒");
-//
-//		for(int i=0;i<seasons.size();i++){
-//			System.out.println(seasons.get(i));
-//		}
+		// ArrayList<MatchVO> matches = new ArrayList<MatchVO>();
+		// matches = matchData.getMatchesByTeam("all", "all", "BKN");
+		// // matches = matchData.getMatchData("all", "all", "all", "all",
+		// "all");
+		// for (int i = 0; i < matches.size(); i++) {
+		// MatchVO vo = matches.get(i);
+		// System.out.println("赛季：" + vo.getSeason());
+		// System.out.println("类型：" + vo.getType());
+		// System.out.println("日期：" + vo.getDate());
+		// System.out.println("主队：" + vo.getHomeTeam());
+		// System.out.println("客队：" + vo.getVisitingTeam());
+		// System.out.println("节数：" + vo.getDetailScores().size());
+		// System.out.println("记录：" + vo.getRecords().size());
+		// System.out.println("------------------------------------------");
+		// }
+
+		// ArrayList<String> seasons=new ArrayList<String>();
+		// seasons=matchData.getAllSeasons();
+		// long end = System.currentTimeMillis();
+		// System.out.println("运行时间：" + (end - start) + "毫秒");
+		//
+		// for(int i=0;i<seasons.size();i++){
+		// System.out.println(seasons.get(i));
+		// }
 		System.out.println("好啦！");
 	}
 
@@ -120,68 +121,18 @@ public class MatchData implements MatchDataService {
 			Statement sql1 = connection.createStatement();
 			ArrayList<RecordVO> records = new ArrayList<RecordVO>();
 			resultSet = sql.executeQuery(query);
-			resultSet.next();
-			int matchID = resultSet.getInt("matchID");
-			String currentSeason = resultSet.getString("season");
-			String currentDate = resultSet.getString("date");
-			String currentType = resultSet.getString("type");
-			String currentVisitingTeam = resultSet.getString("visitingTeam");
-			String currentHomeTeam = resultSet.getString("homeTeam");
-			int visitingScore = resultSet.getInt("visitingScore");
-			int homeScore = resultSet.getInt("homeScore");
-			RecordVO vo = new RecordVO(resultSet.getString("team"),
-					resultSet.getString("playerName"),
-					resultSet.getString("position"),
-					resultSet.getString("presentTime"),
-					resultSet.getInt("shootHitNum"),
-					resultSet.getInt("shootAttemptNum"),
-					resultSet.getDouble("shootHitRate"),
-					resultSet.getInt("threeHitNum"),
-					resultSet.getInt("threeAttemptNum"),
-					resultSet.getDouble("threeHitRate"),
-					resultSet.getInt("freeThrowHitNum"),
-					resultSet.getInt("freeThrowAttemptNum"),
-					resultSet.getDouble("freeThrowHitRate"),
-					resultSet.getInt("offenReboundNum"),
-					resultSet.getInt("defenReboundNum"),
-					resultSet.getInt("reboundNum"),
-					resultSet.getInt("assistNum"),
-					resultSet.getInt("stealNum"), resultSet.getInt("blockNum"),
-					resultSet.getInt("turnOverNum"),
-					resultSet.getInt("foulNum"), resultSet.getInt("score"));
-			records.add(vo);
-
-			while (resultSet.next()) {
-				int nextMatchID = resultSet.getInt("matchID");
-				if (nextMatchID != matchID) {
-					// ============================================================
-					ArrayList<String> detailScores = new ArrayList<String>();
-					ResultSet rs1 = sql1
-							.executeQuery("select score from detailscores where matchID="
-									+ matchID);
-					detailScores = new ArrayList<String>();
-					while (rs1.next()) {
-						detailScores.add(rs1.getString("score"));
-					}
-					rs1.close();
-					// ===========================================================
-					MatchVO matchVO = new MatchVO(currentSeason, currentDate,
-							currentType, currentVisitingTeam, currentHomeTeam,
-							visitingScore, homeScore, detailScores, records);
-					matches.add(matchVO);
-					records = new ArrayList<RecordVO>();
-					detailScores = new ArrayList<String>();
-					matchID = nextMatchID;
-					currentSeason = resultSet.getString("season");
-					currentDate = resultSet.getString("date");
-					currentType = resultSet.getString("type");
-					currentVisitingTeam = resultSet.getString("visitingTeam");
-					currentHomeTeam = resultSet.getString("homeTeam");
-					visitingScore = resultSet.getInt("visitingScore");
-					homeScore = resultSet.getInt("homeScore");
-				}
-
-				vo = new RecordVO(resultSet.getString("team"),
+			if (resultSet.next()) {
+				// resultSet.next();
+				int matchID = resultSet.getInt("matchID");
+				String currentSeason = resultSet.getString("season");
+				String currentDate = resultSet.getString("date");
+				String currentType = resultSet.getString("type");
+				String currentVisitingTeam = resultSet
+						.getString("visitingTeam");
+				String currentHomeTeam = resultSet.getString("homeTeam");
+				int visitingScore = resultSet.getInt("visitingScore");
+				int homeScore = resultSet.getInt("homeScore");
+				RecordVO vo = new RecordVO(resultSet.getString("team"),
 						resultSet.getString("playerName"),
 						resultSet.getString("position"),
 						resultSet.getString("presentTime"),
@@ -203,23 +154,80 @@ public class MatchData implements MatchDataService {
 						resultSet.getInt("turnOverNum"),
 						resultSet.getInt("foulNum"), resultSet.getInt("score"));
 				records.add(vo);
+
+				while (resultSet.next()) {
+					int nextMatchID = resultSet.getInt("matchID");
+					if (nextMatchID != matchID) {
+						// ============================================================
+						ArrayList<String> detailScores = new ArrayList<String>();
+						ResultSet rs1 = sql1
+								.executeQuery("select score from detailscores where matchID="
+										+ matchID);
+						detailScores = new ArrayList<String>();
+						while (rs1.next()) {
+							detailScores.add(rs1.getString("score"));
+						}
+						rs1.close();
+						// ===========================================================
+						MatchVO matchVO = new MatchVO(currentSeason,
+								currentDate, currentType, currentVisitingTeam,
+								currentHomeTeam, visitingScore, homeScore,
+								detailScores, records);
+						matches.add(matchVO);
+						records = new ArrayList<RecordVO>();
+						detailScores = new ArrayList<String>();
+						matchID = nextMatchID;
+						currentSeason = resultSet.getString("season");
+						currentDate = resultSet.getString("date");
+						currentType = resultSet.getString("type");
+						currentVisitingTeam = resultSet
+								.getString("visitingTeam");
+						currentHomeTeam = resultSet.getString("homeTeam");
+						visitingScore = resultSet.getInt("visitingScore");
+						homeScore = resultSet.getInt("homeScore");
+					}
+
+					vo = new RecordVO(resultSet.getString("team"),
+							resultSet.getString("playerName"),
+							resultSet.getString("position"),
+							resultSet.getString("presentTime"),
+							resultSet.getInt("shootHitNum"),
+							resultSet.getInt("shootAttemptNum"),
+							resultSet.getDouble("shootHitRate"),
+							resultSet.getInt("threeHitNum"),
+							resultSet.getInt("threeAttemptNum"),
+							resultSet.getDouble("threeHitRate"),
+							resultSet.getInt("freeThrowHitNum"),
+							resultSet.getInt("freeThrowAttemptNum"),
+							resultSet.getDouble("freeThrowHitRate"),
+							resultSet.getInt("offenReboundNum"),
+							resultSet.getInt("defenReboundNum"),
+							resultSet.getInt("reboundNum"),
+							resultSet.getInt("assistNum"),
+							resultSet.getInt("stealNum"),
+							resultSet.getInt("blockNum"),
+							resultSet.getInt("turnOverNum"),
+							resultSet.getInt("foulNum"),
+							resultSet.getInt("score"));
+					records.add(vo);
+				}
+				// ============================================================
+				ArrayList<String> detailScores = new ArrayList<String>();
+				ResultSet rs1 = sql1
+						.executeQuery("select score from detailscores where matchID="
+								+ matchID);
+				detailScores = new ArrayList<String>();
+				while (rs1.next()) {
+					detailScores.add(rs1.getString("score"));
+				}
+				rs1.close();
+				// ===========================================================
+				MatchVO matchVO = new MatchVO(currentSeason, currentDate,
+						currentType, currentVisitingTeam, currentHomeTeam,
+						visitingScore, homeScore, detailScores, records);
+				matches.add(matchVO);
+				sql1.close();
 			}
-			// ============================================================
-			ArrayList<String> detailScores = new ArrayList<String>();
-			ResultSet rs1 = sql1
-					.executeQuery("select score from detailscores where matchID="
-							+ matchID);
-			detailScores = new ArrayList<String>();
-			while (rs1.next()) {
-				detailScores.add(rs1.getString("score"));
-			}
-			rs1.close();
-			// ===========================================================
-			MatchVO matchVO = new MatchVO(currentSeason, currentDate,
-					currentType, currentVisitingTeam, currentHomeTeam,
-					visitingScore, homeScore, detailScores, records);
-			matches.add(matchVO);
-			sql1.close();
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
@@ -261,68 +269,17 @@ public class MatchData implements MatchDataService {
 			Statement sql1 = connection.createStatement();
 			ArrayList<RecordVO> records = new ArrayList<RecordVO>();
 			resultSet = sql.executeQuery(query);
-			resultSet.next();
-			int matchID = resultSet.getInt("matchID");
-			String currentSeason = resultSet.getString("season");
-			String date = resultSet.getString("date");
-			String currentType = resultSet.getString("type");
-			String visitingTeam = resultSet.getString("visitingTeam");
-			String homeTeam = resultSet.getString("homeTeam");
-			int visitingScore = resultSet.getInt("visitingScore");
-			int homeScore = resultSet.getInt("homeScore");
-			RecordVO vo = new RecordVO(resultSet.getString("team"),
-					resultSet.getString("playerName"),
-					resultSet.getString("position"),
-					resultSet.getString("presentTime"),
-					resultSet.getInt("shootHitNum"),
-					resultSet.getInt("shootAttemptNum"),
-					resultSet.getDouble("shootHitRate"),
-					resultSet.getInt("threeHitNum"),
-					resultSet.getInt("threeAttemptNum"),
-					resultSet.getDouble("threeHitRate"),
-					resultSet.getInt("freeThrowHitNum"),
-					resultSet.getInt("freeThrowAttemptNum"),
-					resultSet.getDouble("freeThrowHitRate"),
-					resultSet.getInt("offenReboundNum"),
-					resultSet.getInt("defenReboundNum"),
-					resultSet.getInt("reboundNum"),
-					resultSet.getInt("assistNum"),
-					resultSet.getInt("stealNum"), resultSet.getInt("blockNum"),
-					resultSet.getInt("turnOverNum"),
-					resultSet.getInt("foulNum"), resultSet.getInt("score"));
-			records.add(vo);
 
-			while (resultSet.next()) {
-				int nextMatchID = resultSet.getInt("matchID");
-				if (nextMatchID != matchID) {
-					// ============================================================
-					ArrayList<String> detailScores = new ArrayList<String>();
-					ResultSet rs1 = sql1
-							.executeQuery("select score from detailscores where matchID="
-									+ matchID);
-					detailScores = new ArrayList<String>();
-					while (rs1.next()) {
-						detailScores.add(rs1.getString("score"));
-					}
-					rs1.close();
-					// ===========================================================
-					MatchVO matchVO = new MatchVO(currentSeason, date,
-							currentType, visitingTeam, homeTeam, visitingScore,
-							homeScore, detailScores, records);
-					result.add(matchVO);
-					records = new ArrayList<RecordVO>();
-					detailScores = new ArrayList<String>();
-					matchID = nextMatchID;
-					currentSeason = resultSet.getString("season");
-					date = resultSet.getString("date");
-					currentType = resultSet.getString("type");
-					visitingTeam = resultSet.getString("visitingTeam");
-					homeTeam = resultSet.getString("homeTeam");
-					visitingScore = resultSet.getInt("visitingScore");
-					homeScore = resultSet.getInt("homeScore");
-				}
-
-				vo = new RecordVO(resultSet.getString("team"),
+			if (resultSet.next()) {
+				int matchID = resultSet.getInt("matchID");
+				String currentSeason = resultSet.getString("season");
+				String date = resultSet.getString("date");
+				String currentType = resultSet.getString("type");
+				String visitingTeam = resultSet.getString("visitingTeam");
+				String homeTeam = resultSet.getString("homeTeam");
+				int visitingScore = resultSet.getInt("visitingScore");
+				int homeScore = resultSet.getInt("homeScore");
+				RecordVO vo = new RecordVO(resultSet.getString("team"),
 						resultSet.getString("playerName"),
 						resultSet.getString("position"),
 						resultSet.getString("presentTime"),
@@ -344,23 +301,78 @@ public class MatchData implements MatchDataService {
 						resultSet.getInt("turnOverNum"),
 						resultSet.getInt("foulNum"), resultSet.getInt("score"));
 				records.add(vo);
+
+				while (resultSet.next()) {
+					int nextMatchID = resultSet.getInt("matchID");
+					if (nextMatchID != matchID) {
+						// ============================================================
+						ArrayList<String> detailScores = new ArrayList<String>();
+						ResultSet rs1 = sql1
+								.executeQuery("select score from detailscores where matchID="
+										+ matchID);
+						detailScores = new ArrayList<String>();
+						while (rs1.next()) {
+							detailScores.add(rs1.getString("score"));
+						}
+						rs1.close();
+						// ===========================================================
+						MatchVO matchVO = new MatchVO(currentSeason, date,
+								currentType, visitingTeam, homeTeam,
+								visitingScore, homeScore, detailScores, records);
+						result.add(matchVO);
+						records = new ArrayList<RecordVO>();
+						detailScores = new ArrayList<String>();
+						matchID = nextMatchID;
+						currentSeason = resultSet.getString("season");
+						date = resultSet.getString("date");
+						currentType = resultSet.getString("type");
+						visitingTeam = resultSet.getString("visitingTeam");
+						homeTeam = resultSet.getString("homeTeam");
+						visitingScore = resultSet.getInt("visitingScore");
+						homeScore = resultSet.getInt("homeScore");
+					}
+
+					vo = new RecordVO(resultSet.getString("team"),
+							resultSet.getString("playerName"),
+							resultSet.getString("position"),
+							resultSet.getString("presentTime"),
+							resultSet.getInt("shootHitNum"),
+							resultSet.getInt("shootAttemptNum"),
+							resultSet.getDouble("shootHitRate"),
+							resultSet.getInt("threeHitNum"),
+							resultSet.getInt("threeAttemptNum"),
+							resultSet.getDouble("threeHitRate"),
+							resultSet.getInt("freeThrowHitNum"),
+							resultSet.getInt("freeThrowAttemptNum"),
+							resultSet.getDouble("freeThrowHitRate"),
+							resultSet.getInt("offenReboundNum"),
+							resultSet.getInt("defenReboundNum"),
+							resultSet.getInt("reboundNum"),
+							resultSet.getInt("assistNum"),
+							resultSet.getInt("stealNum"),
+							resultSet.getInt("blockNum"),
+							resultSet.getInt("turnOverNum"),
+							resultSet.getInt("foulNum"),
+							resultSet.getInt("score"));
+					records.add(vo);
+				}
+				// ============================================================
+				ArrayList<String> detailScores = new ArrayList<String>();
+				ResultSet rs1 = sql1
+						.executeQuery("select score from detailscores where matchID="
+								+ matchID);
+				detailScores = new ArrayList<String>();
+				while (rs1.next()) {
+					detailScores.add(rs1.getString("score"));
+				}
+				rs1.close();
+				// ===========================================================
+				MatchVO matchVO = new MatchVO(currentSeason, date, currentType,
+						visitingTeam, homeTeam, visitingScore, homeScore,
+						detailScores, records);
+				result.add(matchVO);
+				sql1.close();
 			}
-			// ============================================================
-			ArrayList<String> detailScores = new ArrayList<String>();
-			ResultSet rs1 = sql1
-					.executeQuery("select score from detailscores where matchID="
-							+ matchID);
-			detailScores = new ArrayList<String>();
-			while (rs1.next()) {
-				detailScores.add(rs1.getString("score"));
-			}
-			rs1.close();
-			// ===========================================================
-			MatchVO matchVO = new MatchVO(currentSeason, date, currentType,
-					visitingTeam, homeTeam, visitingScore, homeScore,
-					detailScores, records);
-			result.add(matchVO);
-			sql1.close();
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
@@ -435,68 +447,18 @@ public class MatchData implements MatchDataService {
 			Statement sql1 = connection.createStatement();
 			ArrayList<RecordVO> records = new ArrayList<RecordVO>();
 			resultSet = sql.executeQuery(query);
-			resultSet.next();
-			int matchID = resultSet.getInt("matchID");
-			String currentSeason = resultSet.getString("season");
-			String currentDate = resultSet.getString("date");
-			String currentType = resultSet.getString("type");
-			String currentVisitingTeam = resultSet.getString("visitingTeam");
-			String currentHomeTeam = resultSet.getString("homeTeam");
-			int visitingScore = resultSet.getInt("visitingScore");
-			int homeScore = resultSet.getInt("homeScore");
-			RecordVO vo = new RecordVO(resultSet.getString("team"),
-					resultSet.getString("playerName"),
-					resultSet.getString("position"),
-					resultSet.getString("presentTime"),
-					resultSet.getInt("shootHitNum"),
-					resultSet.getInt("shootAttemptNum"),
-					resultSet.getDouble("shootHitRate"),
-					resultSet.getInt("threeHitNum"),
-					resultSet.getInt("threeAttemptNum"),
-					resultSet.getDouble("threeHitRate"),
-					resultSet.getInt("freeThrowHitNum"),
-					resultSet.getInt("freeThrowAttemptNum"),
-					resultSet.getDouble("freeThrowHitRate"),
-					resultSet.getInt("offenReboundNum"),
-					resultSet.getInt("defenReboundNum"),
-					resultSet.getInt("reboundNum"),
-					resultSet.getInt("assistNum"),
-					resultSet.getInt("stealNum"), resultSet.getInt("blockNum"),
-					resultSet.getInt("turnOverNum"),
-					resultSet.getInt("foulNum"), resultSet.getInt("score"));
-			records.add(vo);
 
-			while (resultSet.next()) {
-				int nextMatchID = resultSet.getInt("matchID");
-				if (nextMatchID != matchID) {
-					// ============================================================
-					ArrayList<String> detailScores = new ArrayList<String>();
-					ResultSet rs1 = sql1
-							.executeQuery("select score from detailscores where matchID="
-									+ matchID);
-					detailScores = new ArrayList<String>();
-					while (rs1.next()) {
-						detailScores.add(rs1.getString("score"));
-					}
-					rs1.close();
-					// ===========================================================
-					MatchVO matchVO = new MatchVO(currentSeason, currentDate,
-							currentType, currentVisitingTeam, currentHomeTeam,
-							visitingScore, homeScore, detailScores, records);
-					matches.add(matchVO);
-					records = new ArrayList<RecordVO>();
-					detailScores = new ArrayList<String>();
-					matchID = nextMatchID;
-					currentSeason = resultSet.getString("season");
-					currentDate = resultSet.getString("date");
-					currentType = resultSet.getString("type");
-					currentVisitingTeam = resultSet.getString("visitingTeam");
-					currentHomeTeam = resultSet.getString("homeTeam");
-					visitingScore = resultSet.getInt("visitingScore");
-					homeScore = resultSet.getInt("homeScore");
-				}
-
-				vo = new RecordVO(resultSet.getString("team"),
+			if (resultSet.next()) {
+				int matchID = resultSet.getInt("matchID");
+				String currentSeason = resultSet.getString("season");
+				String currentDate = resultSet.getString("date");
+				String currentType = resultSet.getString("type");
+				String currentVisitingTeam = resultSet
+						.getString("visitingTeam");
+				String currentHomeTeam = resultSet.getString("homeTeam");
+				int visitingScore = resultSet.getInt("visitingScore");
+				int homeScore = resultSet.getInt("homeScore");
+				RecordVO vo = new RecordVO(resultSet.getString("team"),
 						resultSet.getString("playerName"),
 						resultSet.getString("position"),
 						resultSet.getString("presentTime"),
@@ -518,23 +480,80 @@ public class MatchData implements MatchDataService {
 						resultSet.getInt("turnOverNum"),
 						resultSet.getInt("foulNum"), resultSet.getInt("score"));
 				records.add(vo);
+
+				while (resultSet.next()) {
+					int nextMatchID = resultSet.getInt("matchID");
+					if (nextMatchID != matchID) {
+						// ============================================================
+						ArrayList<String> detailScores = new ArrayList<String>();
+						ResultSet rs1 = sql1
+								.executeQuery("select score from detailscores where matchID="
+										+ matchID);
+						detailScores = new ArrayList<String>();
+						while (rs1.next()) {
+							detailScores.add(rs1.getString("score"));
+						}
+						rs1.close();
+						// ===========================================================
+						MatchVO matchVO = new MatchVO(currentSeason,
+								currentDate, currentType, currentVisitingTeam,
+								currentHomeTeam, visitingScore, homeScore,
+								detailScores, records);
+						matches.add(matchVO);
+						records = new ArrayList<RecordVO>();
+						detailScores = new ArrayList<String>();
+						matchID = nextMatchID;
+						currentSeason = resultSet.getString("season");
+						currentDate = resultSet.getString("date");
+						currentType = resultSet.getString("type");
+						currentVisitingTeam = resultSet
+								.getString("visitingTeam");
+						currentHomeTeam = resultSet.getString("homeTeam");
+						visitingScore = resultSet.getInt("visitingScore");
+						homeScore = resultSet.getInt("homeScore");
+					}
+
+					vo = new RecordVO(resultSet.getString("team"),
+							resultSet.getString("playerName"),
+							resultSet.getString("position"),
+							resultSet.getString("presentTime"),
+							resultSet.getInt("shootHitNum"),
+							resultSet.getInt("shootAttemptNum"),
+							resultSet.getDouble("shootHitRate"),
+							resultSet.getInt("threeHitNum"),
+							resultSet.getInt("threeAttemptNum"),
+							resultSet.getDouble("threeHitRate"),
+							resultSet.getInt("freeThrowHitNum"),
+							resultSet.getInt("freeThrowAttemptNum"),
+							resultSet.getDouble("freeThrowHitRate"),
+							resultSet.getInt("offenReboundNum"),
+							resultSet.getInt("defenReboundNum"),
+							resultSet.getInt("reboundNum"),
+							resultSet.getInt("assistNum"),
+							resultSet.getInt("stealNum"),
+							resultSet.getInt("blockNum"),
+							resultSet.getInt("turnOverNum"),
+							resultSet.getInt("foulNum"),
+							resultSet.getInt("score"));
+					records.add(vo);
+				}
+				// ============================================================
+				ArrayList<String> detailScores = new ArrayList<String>();
+				ResultSet rs1 = sql1
+						.executeQuery("select score from detailscores where matchID="
+								+ matchID);
+				detailScores = new ArrayList<String>();
+				while (rs1.next()) {
+					detailScores.add(rs1.getString("score"));
+				}
+				rs1.close();
+				// ===========================================================
+				MatchVO matchVO = new MatchVO(currentSeason, currentDate,
+						currentType, currentVisitingTeam, currentHomeTeam,
+						visitingScore, homeScore, detailScores, records);
+				matches.add(matchVO);
+				sql1.close();
 			}
-			// ============================================================
-			ArrayList<String> detailScores = new ArrayList<String>();
-			ResultSet rs1 = sql1
-					.executeQuery("select score from detailscores where matchID="
-							+ matchID);
-			detailScores = new ArrayList<String>();
-			while (rs1.next()) {
-				detailScores.add(rs1.getString("score"));
-			}
-			rs1.close();
-			// ===========================================================
-			MatchVO matchVO = new MatchVO(currentSeason, currentDate,
-					currentType, currentVisitingTeam, currentHomeTeam,
-					visitingScore, homeScore, detailScores, records);
-			matches.add(matchVO);
-			sql1.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
