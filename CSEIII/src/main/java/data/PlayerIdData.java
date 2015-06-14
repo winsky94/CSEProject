@@ -144,12 +144,6 @@ public class PlayerIdData implements PlayerIdDataService{
 		System.out.println(playerDataReader.getPlayerName(76002));
 		long end2 = System.currentTimeMillis();
 		System.out.println("运行时间：" + (end2 - end1) + "毫秒");// 应该是end - start
-		try {
-			Thread.sleep(4000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		System.out.println(playerDataReader.getPlayerName(51));
 		long end3 = System.currentTimeMillis();
 		System.out.println("运行时间：" + (end3 - end2-3000) + "毫秒");// 应该是end - start
