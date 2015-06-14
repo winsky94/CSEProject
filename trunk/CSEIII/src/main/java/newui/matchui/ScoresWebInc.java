@@ -29,7 +29,7 @@ public class ScoresWebInc {
 	 *separate them 
 	 * */
 	ArrayList<String> game_id_list;
-	String fileName="";//�����ļ���  ͬһ���һ���ļ���  һ������һ��txt
+	String fileName="";
 	
 	String scoreUrl="http://stats.nba.com/stats/scoreboardV2?DayOffset=0&LeagueID=00&gameDate=";
 	String gameDate="05%2F12%2F2015";
@@ -45,10 +45,10 @@ public class ScoresWebInc {
 	static String gameType="Playoffs";//Preseason   Regular+Season
 	static String recordType="Playoff";
 	//��ӦPlayoff Preseason Team
-	String gameIDPattern="\"[\\d]{10}\""; //�����scoreboard  �����ظ�
+	String gameIDPattern="\"[\\d]{10}\""; //scoreboard
 	String linescorePattern="[A-Z]{3}\",(\"[\\w \\.]*\",){2}\"[\\d]*-[\\d]*\"(,(null|[\\d]*)){15}"; //�����Summary
 	//e.gCLE","Cleveland","Cavaliers","3-2",25,29,26,26,0,0,0,0,0,0,0,0,0,0,106
-	String typeIDPattern=gameIDPattern; //�������ظ�
+	String typeIDPattern=gameIDPattern; //
 	
 	String playerPattern="[A-Z]{3}\",\"[\\w. ]*\",[\\d]*,\"[\\w. ]*\",\"[A-Z]?\",\"\",((\"[\\d]*:[\\d]*\")|[\\d]*)(,-?[\\d]*(\\.[\\d]{3})?){19}";
 	boolean isChange=false;
@@ -109,7 +109,7 @@ public class ScoresWebInc {
 		String[] homt=sumList.get(1).replace("\"", "").split(",");
 		String vsteam=vist[0]+"-"+homt[0];
 		String vsscore=vist[18]+"-"+homt[18];
-		//���ж�
+		//比赛类型
 		String type=recordType;
 		ArrayList<String> descore=new ArrayList<String>();
 		for(int i=4;i<18;i++){
