@@ -15,9 +15,12 @@ import java.util.ArrayList;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 
 import newui.Service;
 import newui.Style;
+import newui.statsui.FangChaTableModel;
 
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
@@ -47,6 +50,9 @@ public class PlayerStatsPanel extends JPanel {
 	JPanel funcPnl, bottomPnl;
 	JPanel infoPnl;
 	ChartPanel chartPnl;
+	JScrollPane jsp;
+	JTable table;
+	FangChaTableModel ftm;
 	// ----------------
 	JComboBox<String> itemBox;
 	MyLabel typeLbl;
@@ -148,7 +154,15 @@ public class PlayerStatsPanel extends JPanel {
 		infoPnl = new JPanel();
 		infoPnl.setBackground(Color.white);
 		bottomPnl.add(infoPnl);
+		infoPnl.setLayout(new GridLayout(2,1));
+		JLabel tableTitle=new JLabel("方差汇总表",JLabel.CENTER);
+		tableTitle.setFont(new Font("微软雅黑",Font.PLAIN,15));
+		infoPnl.add(tableTitle);
 		// -----------------------
+		ftm=new FangChaTableModel(player.singleElementVarianceAnalysis(pname));
+		table=new JTable(ftm);
+		jsp=new JScrollPane(table);
+		infoPnl.add(jsp);
 
 	}
 

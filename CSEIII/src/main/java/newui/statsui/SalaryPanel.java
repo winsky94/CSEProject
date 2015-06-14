@@ -93,7 +93,7 @@ public class SalaryPanel extends FatherPanel {
 		}
 		DefaultXYDataset xydataset = new DefaultXYDataset();
 		xydataset.addSeries("points", data);
-		JFreeChart chart = ChartFactory.createScatterPlot("img", "x", "y",
+		JFreeChart chart = ChartFactory.createScatterPlot("Linear Regression", "", "",
 				xydataset, PlotOrientation.VERTICAL, false, false, false);
 		return chart;
 	}

@@ -26,7 +26,7 @@ public class PlayerPKPanel extends JPanel {
 	// -----------------------
 	public PKNamePanel namePnl;
 	public JPanel chartPnl;
-	public JPanel statsPnl;
+	//public JPanel statsPnl;
 	PlayerVO defaultVO;
 	public PlayerPKPanel(PlayerVO d) {
 		defaultVO = d;
@@ -55,10 +55,10 @@ public class PlayerPKPanel extends JPanel {
 		gbl.setConstraints(chartPnl, gbc);
 		add(chartPnl);
 		// -----------
-		statsPnl = new JPanel();
-		gbc.gridy = 6;
-		gbl.setConstraints(statsPnl, gbc);
-		add(statsPnl);
+//		statsPnl = new JPanel();
+//		gbc.gridy = 6;
+//		gbl.setConstraints(statsPnl, gbc);
+//		add(statsPnl);
 
 	}
 

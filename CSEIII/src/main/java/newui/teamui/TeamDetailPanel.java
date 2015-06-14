@@ -96,7 +96,7 @@ public class TeamDetailPanel extends FatherPanel {
 				playerIcon=new ImageIcon("src/data/players/portrait/"+ players.get(i).getName()+".png");
 			playerIcon.setImage(playerIcon.getImage().getScaledInstance(
 					58, 46
-				, Image.SCALE_DEFAULT));
+				, Image.SCALE_SMOOTH));
 			JLabel temp = new MyLabel(players.get(i).getName(), playerIcon, JLabel.LEFT);
 			playerPortraits.add(temp);
 			playerPnl.add(playerPortraits.get(i));
