@@ -204,7 +204,7 @@ public class MatchDetailPanel extends FatherPanel {
 		table.revalidate();
 		contentPnl.add(jsp);
 	}
-	public void changeLive(){
+	void changeLive(){
 		contentPnl.removeAll();
 		if(!isLive){
 		contentPnl.add(new HistoryLiveTextPanel(vo.getVisitingTeam(),
