@@ -79,4 +79,5 @@ public interface PlayerDataService{
 			
     public ArrayList<double[]> singleElementVarianceAnalysis();
     
+    public ArrayList<String> singleElementVarianceAnalysis(String name);
 }

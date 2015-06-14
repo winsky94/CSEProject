@@ -223,4 +223,11 @@ public interface PlayerBLService {
 	 * @return xy坐标的list
 	 */
 	public ArrayList<double[]> singleElementVarianceAnalysis();
+	
+	/**
+	 * 返回单球员的单因素方差分析
+	 * @param name
+	 * @return
+	 */
+	public ArrayList<String> singleElementVarianceAnalysis(String name);
 }
