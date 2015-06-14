@@ -1437,8 +1437,28 @@ public class PlayerData  implements PlayerDataService{
 			 
 
 //			  System.out.println((count++)+" "+player.getName()+" "+xy[0]+"年   "+xy[1]+" 总偏差平方和="+ST+" 水平间偏差="+SA+" 水平内偏差="+Se+" VA="+VA+" Ve="+Ve);
-			 
-			result.add("");
+			DecimalFormat df = new DecimalFormat("0.00");
+			result.add("因素(水平间)");
+			result.add("误差(水平内)");
+			result.add("总和");
+			result.add(df.format(SA));
+			result.add(String.valueOf(df.format(fA)));
+			result.add(df.format(VA));
+			result.add(df.format(FA));
+			result.add("7.709");
+			String xianzhuxing="";
+			if(FA>21.198)
+				xianzhuxing="**";
+			else if(FA>7.709&&FA<21.198)
+				xianzhuxing="*";
+			result.add(xianzhuxing);
+			result.add(df.format(Se));
+			result.add(String.valueOf(df.format(fe)));
+			result.add(df.format(Ve));
+			result.add("21.198");
+			result.add(df.format(ST));
+			result.add(String.valueOf(fA+fe));
+			
 			
 			return result;
 			
