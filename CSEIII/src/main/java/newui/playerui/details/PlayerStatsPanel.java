@@ -143,10 +143,10 @@ public class PlayerStatsPanel extends JPanel {
 		// // ---绘图---------------
 		chartPnl = new ChartPanel(createChart(
 				(String) itemBox.getSelectedItem(), isCurrent));
-		chartPnl = new ChartPanel(null);
 		bottomPnl.add(chartPnl);
 		// ---数据-----------------
 		infoPnl = new JPanel();
+		infoPnl.setBackground(Color.white);
 		bottomPnl.add(infoPnl);
 		// -----------------------
 
