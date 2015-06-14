@@ -93,6 +93,20 @@ public class PlayerStatistic {
 	 * @return 方差汇总表的各项数据
 	 */
 	public ArrayList<String> getVariance() {
+		PlayerData player = new PlayerData();
+		PlayerSalaryData ps = new PlayerSalaryData();
+		ArrayList<PlayerVO> players = player.getPlayerAverageInfo("13-14",
+				"Playoff");
+		for (int i = 0; i < players.size(); i++) {
+			PlayerVO vo = players.get(i);
+			double salary = (double) ps.getSalary("14-15", vo.getName());
+			if (salary == 0) {
+				continue;
+			}
+			Y.add(salary / 1000000);
+			initX("score_rebound_assist", vo);
+		}
+		
 		ArrayList<String> result = new ArrayList<String>();
 		double xAvg = calculateAvg(getX());
 		double yAvg = calculateAvg(getY());
@@ -149,11 +163,11 @@ public class PlayerStatistic {
 		// System.out.println("方差：" + Ve);
 		// System.out.println("a:"+a);
 		// System.out.println("b:"+b);
-		// System.out.println("F值：" + F);
-		// System.out.println("拟合度：" + r2);
+		 System.out.println("F值：" + F);
+		 System.out.println("拟合度：" + r2);
 		// System.out.println("标准残差：" + Sy);
-		result.add(MyUIDataFormater.formatTo3(F));
-		result.add(MyUIDataFormater.formatTo3(r2));
+		result.add(MyUIDataFormater.formatTo4(F));
+		result.add(MyUIDataFormater.formatTo4(r2));
 		return result;
 	}
 
