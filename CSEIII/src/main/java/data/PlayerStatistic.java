@@ -60,7 +60,7 @@ public class PlayerStatistic {
 	 * @return hashMap中key值是 "matchNum","score", "rebound", "assist",
 	 *         "efficiency", "GmScEfficiencyValue",
 	 *         "score_rebound_assist","steal","foul"
-	 *         hashMap中value是一个Arraylist，第一个元素是F值，第二个元素是拟合度，第三个元素是回归系数
+	 *         hashMap中value是一个Arraylist，第一个元素是F值，第二个元素是拟合度，第三个元素是回归系数 
 	 */
 	public HashMap<String, ArrayList<String>> start() {
 		HashMap<String, ArrayList<String>> result = new HashMap<String, ArrayList<String>>();
