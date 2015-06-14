@@ -1,4 +1,4 @@
-Name:Tom VanArsdale
+Name:Tom Van Arsdale
 Number:4
 Position:F
 Height:6-5

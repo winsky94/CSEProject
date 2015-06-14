@@ -1,4 +1,4 @@
-Name:Norm VanLier
+Name:Norm Van Lier
 Number:4
 Position:G
 Height:6-1

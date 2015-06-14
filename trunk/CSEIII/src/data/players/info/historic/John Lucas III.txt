@@ -1,4 +1,4 @@
-Name:John LucasIII
+Name:John Lucas III
 Number:9
 Position:G
 Height:5-11

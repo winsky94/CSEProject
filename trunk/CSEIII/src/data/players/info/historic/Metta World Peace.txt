@@ -1,4 +1,4 @@
-Name:Metta WorldPeace
+Name:Metta World Peace
 Number:
 Position:
 Height:
