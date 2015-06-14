@@ -1327,8 +1327,8 @@ public class PlayerData  implements PlayerDataService{
 				 continue;
 			 }
 			 result.add(xy);
-			  System.out.println((count++)+" "+player.getName()+" "+xy[0]+"年   "+xy[1]+" 总偏差平方和="+ST+" 水平间偏差="+SA+" 水平内偏差="+Se+" VA="+VA+" Ve="+Ve);
-			  
+//			  System.out.println((count)+" "+player.getName()+" "+xy[0]+"年   "+xy[1]+" 总偏差平方和="+ST+" 水平间偏差="+SA+" 水平内偏差="+Se+" VA="+VA+" Ve="+Ve);
+			  count++;
 			}
 			
 			return result;
