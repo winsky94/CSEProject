@@ -90,8 +90,8 @@ public class LiveWebThread extends Thread{
 				if(isOverLastLine){
 				if(!ss[0].equals(ss[1])){
 					//调用get技术统计方法
-					ScoresWebInc web=new ScoresWebInc();
-					web.getGameInfoById(gameid, date);
+					//ScoresWebInc web=new ScoresWebInc();
+					//web.getGameInfoById(gameid, date);
 					this.stop=true;
 				}else{
 					isOverLastLine=false;
