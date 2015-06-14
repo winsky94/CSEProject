@@ -32,6 +32,7 @@ import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.category.DefaultCategoryDataset;
 
 import vo.MatchVO;
+import vo.PlayerVO;
 import vo.RecordVO;
 import blService.PlayerBLService;
 
@@ -57,7 +58,7 @@ public class PlayerStatsPanel extends JPanel {
 
 	//
 	public PlayerStatsPanel(String pname) {
-		player =Service.player;
+		player = Service.player;
 		name = pname;
 		isCurrent = true;
 		GridBagLayout gbl = new GridBagLayout();
@@ -139,9 +140,9 @@ public class PlayerStatsPanel extends JPanel {
 		gbc.weighty = 10;
 		gbl.setConstraints(bottomPnl, gbc);
 		add(bottomPnl);
-//		// ---绘图---------------
-//		chartPnl = new ChartPanel(createChart(
-//				(String) itemBox.getSelectedItem(), isCurrent));
+		// // ---绘图---------------
+		chartPnl = new ChartPanel(createChart(
+				(String) itemBox.getSelectedItem(), isCurrent));
 		chartPnl = new ChartPanel(null);
 		bottomPnl.add(chartPnl);
 		// ---数据-----------------
@@ -215,6 +216,62 @@ public class PlayerStatsPanel extends JPanel {
 		// ---------------------------------------------------------------
 		// ---------------------------------------------------------------
 		else {
+			ArrayList<ArrayList<PlayerVO>> list = new ArrayList<ArrayList<PlayerVO>>();
+			list.add(player.getPlayerAverageInfo("10-11", "all", item));
+			list.add(player.getPlayerAverageInfo("11-12", "all", item));
+			list.add(player.getPlayerAverageInfo("12-13", "all", item));
+			list.add(player.getPlayerAverageInfo("13-14", "all", item));
+			list.add(player.getPlayerAverageInfo("14-15", "all", item));
+			String[] years = { "2010", "2011", "2012", "2013", "2014" };
+			if (item.equals("得分")) {
+				for (int i = 0; i < 5; i++) {
+					if (list.get(i).size() == 0)
+						dataset.addValue(0.0, name, years[i]);
+					else
+						dataset.addValue(list.get(i).get(0).getScore(), name,
+								years[i]);
+				}
+				return makeChart("近五年得分","年","得分",dataset);
+			} else if (item.equals("篮板")) {
+				for (int i = 0; i < 5; i++) {
+					if (list.get(i).size() == 0)
+						dataset.addValue(0.0, name, years[i]);
+					else
+						dataset.addValue(list.get(i).get(0).getReboundNum(), name,
+								years[i]);
+				}
+				return makeChart("近五年篮板","年","篮板数",dataset);
+
+			} else if (item.equals("助攻")) {
+				for (int i = 0; i < 5; i++) {
+					if (list.get(i).size() == 0)
+						dataset.addValue(0.0, name, years[i]);
+					else
+						dataset.addValue(list.get(i).get(0).getAssistNum(), name,
+								years[i]);
+				}
+				return makeChart("近五年助攻","年","助攻数",dataset);
+
+			} else if (item.equals("三分%")) {
+				for (int i = 0; i < 5; i++) {
+					if (list.get(i).size() == 0)
+						dataset.addValue(0.0, name, years[i]);
+					else
+						dataset.addValue(list.get(i).get(0).getThreeHitRate(), name,
+								years[i]);
+				}
+				return makeChart("近五年三分%","年","三分%",dataset);
+
+			} else if (item.equals("罚球%")) {
+				for (int i = 0; i < 5; i++) {
+					if (list.get(i).size() == 0)
+						dataset.addValue(0.0, name, years[i]);
+					else
+						dataset.addValue(list.get(i).get(0).getFreeThrowHitRate(), name,
+								years[i]);
+				}
+				return makeChart("近五年罚球%","年","罚球%",dataset);
+			}
 
 		}
 		return null;
