@@ -16,13 +16,11 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import newui.Service;
 import newui.Style;
 import newui.mainui.MainFrame;
 import newui.teamui.TeamDetailPanel;
 import vo.MatchVO;
 import bl.Team;
-import blService.TeamBLService;
 
 public class MatchCard extends JPanel implements MouseListener {
 
@@ -33,7 +31,6 @@ public class MatchCard extends JPanel implements MouseListener {
 	JLabel dateLbl, detailLbl,liveLbl, homeIcon, visitingIcon, homeNameLbl,
 			visitingNameLbl, homeScoreLbl, visitingScoreLbl;
 	JPanel topPnl, detailScoresPnl;
-	private TeamBLService team;
 	private boolean isHomeHigh = true;
 	private MatchVO vo;
 	private boolean isLive=false;
@@ -47,7 +44,6 @@ public class MatchCard extends JPanel implements MouseListener {
 	// 显示单场比赛信息
 	public MatchCard(MatchVO vo) {
 		this.vo = vo;
-		team = Service.team;
 		GridBagLayout gbl = new GridBagLayout();
 		GridBagConstraints gbc = new GridBagConstraints();
 		gbc.fill = GridBagConstraints.BOTH;
@@ -187,7 +183,7 @@ public class MatchCard extends JPanel implements MouseListener {
 	public void mouseClicked(MouseEvent e) {
 		if (e.getSource() == detailLbl||e.getSource()==liveLbl){// 注意，这里应当传一个比赛的特征值过去
 			MatchDetailPanel p=new MatchDetailPanel(vo);
-			MainFrame.getInstance().setContentPanel(p);
+			MainFrame.setContentPanel(p);
 			p.setIsLive(isLive);
 			if(e.getSource()==liveLbl){
 				p.changeLive();
@@ -207,7 +203,7 @@ public class MatchCard extends JPanel implements MouseListener {
 			String name = vo.getVisitingTeam();
 			if (e.getSource() == homeIcon)
 				name = vo.getHomeTeam();
-			MainFrame.getInstance().setContentPanel(new TeamDetailPanel(name));
+			MainFrame.setContentPanel(new TeamDetailPanel(name));
 		}
 	}
 
