@@ -39,10 +39,10 @@ public class PlayerSalaryData {
 		}
 	}
 
-	private void readInfoFromFile() {
+	private void readInfoFromFile(String season) {
 		PlayerSalary ps;
 		try {
-			File file = new File("src/data/players/14-15.txt");
+			File file = new File("src/data/players/Salary/"+season+".txt");
 			if (!file.exists()) {
 				System.err.println("file does not exist!");
 				return;
@@ -72,17 +72,23 @@ public class PlayerSalaryData {
 	}
 
 	public void exportToSql() {
-		try {
-			readInfoFromFile();
-			Connection con = SqlManager.getConnection();
-			con.setAutoCommit(false);
+	  try {
+		 Connection con = SqlManager.getConnection();
+		 con.setAutoCommit(false);
+		 String[] seasons=new String[]{"10-11","11-12","12-13","13-14","14-15"};
+		 for(int i=0;i<seasons.length;i++){
+			String season=seasons[i];
+			players.clear();
+			readInfoFromFile(season);			
 			Statement sql = con.createStatement();
-			sql.execute("drop table if exists playersalary");
-			sql.execute("create table playersalary(no int not null auto_increment,"
+			season=season.replace("-", "_");
+			sql.execute("drop table if exists playersalary"+season);
+			sql.execute("create table playersalary"+season+"(no int not null auto_increment,"
 					+ "name varchar(40) not null default 'null',"
 					+ "salary int not null default 0,primary key(no));");
+			sql.close();
 			PreparedStatement statement = con
-					.prepareStatement("INSERT INTO playersalary VALUES(?, ?,?)");
+					.prepareStatement("INSERT INTO playersalary"+season+" VALUES(?, ?,?)");
 			int count = 1;
 
 			for (PlayerSalary player : players) {
@@ -95,8 +101,8 @@ public class PlayerSalaryData {
 			}
 			statement.executeBatch();
 			con.commit();
-
 			statement.close();
+		 }	
 			con.close();
 		} catch (java.lang.ClassNotFoundException e) {
 			System.err.println("ClassNotFoundException:" + e.getMessage());
@@ -107,12 +113,14 @@ public class PlayerSalaryData {
 
 	}
 
-	public int getSalary(String name){
+	public int getSalary(String season,String name){
 		int salary=0;
 		try {
 			con = SqlManager.getConnection();
 			Statement sql = con.createStatement();
-			String query = "select * from playersalary where name='"+name+"' limit 1";
+			season=season.replace("-", "_");
+			name=name.replace("'", "''");
+			String query = "select * from playersalary"+season+" where name='"+name+"' limit 1";
 			ResultSet resultSet = sql.executeQuery(query);
 			if(resultSet.next()){
 				salary = resultSet.getInt("salary");
@@ -135,6 +143,7 @@ public class PlayerSalaryData {
 		PlayerSalaryData p=new PlayerSalaryData();
 		long start = System.currentTimeMillis();
 		p.exportToSql();
+		System.out.println(p.getSalary("14-15", "Kobe Bryant"));
 		long end = System.currentTimeMillis();
 		System.out.println("运行时间：" + (end - start) + "毫秒");// 应该是end - start
 	}
