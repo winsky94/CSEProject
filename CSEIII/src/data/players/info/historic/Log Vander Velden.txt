@@ -1,4 +1,4 @@
-Name:Log VanderVelden
+Name:Log Vander Velden
 Number:25
 Position:F
 Height:6-8
