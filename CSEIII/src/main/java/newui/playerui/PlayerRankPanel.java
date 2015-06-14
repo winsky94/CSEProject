@@ -474,14 +474,12 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener,
 		ArrayList<PlayerVO> vlist=new ArrayList<PlayerVO>();
 		String type = typeBox.getSelectedItem().toString();
 		//王宁，如果看到这句话，记得把界面上的在场时间大于_分钟的那个筛选去掉。。。感叹号以显注意！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！
-//		if (type.equals("赛季"))
-//			vlist = player.selectPlayersUptheTimeSeason(season,
-//					(String) seasonTypeBox.getSelectedItem(), position, union,
-//					sort, "desc", time, 50);
-//		else
-//			vlist = player.selectPlayersUptheTimeAverage(
-//					(String) seasonTypeBox.getSelectedItem(), position, union,
-//					sort, "desc", time, 50);
+		if (type.equals("赛季"))
+			vlist = player.selectPlayersBySeason(season,
+					(String) seasonTypeBox.getSelectedItem(), position, union, sort, "desc", 50);
+		else
+			vlist = player.selectPlayersByAverage(season,
+					(String) seasonTypeBox.getSelectedItem(), position, union, sort, "desc", 50);
 		// vlist.size()==0显示没有符合条件的球
 		if (ptm.headmodel != 0) {
 			if (isHighInfo == false)
