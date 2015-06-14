@@ -57,7 +57,7 @@ public class PlayerStatistic {
 	}
 
 	/**
-	 * @return hashMap中key值是"reboundNum", "efficiency", "GmScEfficiencyValue",
+	 * @return hashMap中key值是 "efficiency", "GmScEfficiencyValue",
 	 *         "score_rebound_assist" value是一个Arraylist，第一个元素是F值，第二个元素是拟合度
 	 */
 	public HashMap<String, ArrayList<Double>> start() {
@@ -66,7 +66,7 @@ public class PlayerStatistic {
 		PlayerSalaryData ps = new PlayerSalaryData();
 		ArrayList<PlayerVO> players = player.getPlayerAverageInfo("13-14",
 				"Playoff");
-		String[] type = { "reboundNum", "efficiency", "GmScEfficiencyValue",
+		String[] type = { "efficiency", "GmScEfficiencyValue",
 				"score_rebound_assist" };
 		for (int index = 0; index < type.length; index++) {
 			String flag = type[index];
@@ -88,6 +88,16 @@ public class PlayerStatistic {
 		return result;
 	}
 
+	public ArrayList<ArrayList<Double>> getFangchaHuiZong() {
+		ArrayList<ArrayList<Double>> result=new ArrayList<ArrayList<Double>>();
+		ArrayList<Double> temp1=new ArrayList<Double>();
+		ArrayList<Double> temp2=new ArrayList<Double>();
+		
+		result.add(temp1);
+		result.add(temp2);
+		return result;
+	}
+
 	public ArrayList<Double> lineAnalysis() {
 		ArrayList<Double> result = new ArrayList<Double>();
 		double xAvg = calculateAvg(getX());
@@ -101,7 +111,7 @@ public class PlayerStatistic {
 		double Ve = Se / (double) X.size();
 		double F = calculateF(Vr, Ve);
 		double r2 = Sr / (Sr + Se);
-//		double Sy = calculateSy(Se, X.size());
+		// double Sy = calculateSy(Se, X.size());
 		// System.out.println("样本容量：" + X.size());
 		// System.out.println("回归偏差平方和：" + Sr);
 		// System.out.println("剩余偏差平方和：" + Se);
@@ -118,9 +128,7 @@ public class PlayerStatistic {
 	}
 
 	public void initX(String flag, PlayerVO vo) {
-		if (flag.equals("reboundNum")) {
-			X.add(vo.getReboundNum());
-		} else if (flag.equals("efficiency")) {
+		if (flag.equals("efficiency")) {
 			X.add(vo.getEfficiency());
 		} else if (flag.equals("GmScEfficiencyValue")) {
 			X.add(vo.getGmScEfficiencyValue());
