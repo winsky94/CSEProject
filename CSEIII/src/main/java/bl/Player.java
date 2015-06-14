@@ -167,6 +167,10 @@ public class Player implements PlayerBLService{
 		return player.getPlayersByTeam(teamAbLocation);
 	}
 	
+	public ArrayList<double[]> singleElementVarianceAnalysis(){
+		return player.singleElementVarianceAnalysis();
+	}
+	
 
 	public static double convertSecondToMinuete(double second) {
 		double minute= second / 60;
