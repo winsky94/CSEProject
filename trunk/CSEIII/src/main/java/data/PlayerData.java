@@ -782,9 +782,24 @@ public class PlayerData  implements PlayerDataService{
 			try {
 				Connection con = SqlManager.getConnection();
 				Statement sql = con.createStatement();
-				String query = "select * from "+seasonbuffer+"_"+type+"_"+"playerSeason,playershistoric "
-						+ "where playershistoric.position like '%"+position+"%' and league='"+union+"' "
-						+ "order by "+column+" "+order+" limit "+num;
+				String query = "select * from "+seasonbuffer+"_"+type+"_"+"playerSeason ";
+
+				int flag=0;
+				if(!position.equals("all")){
+					query+="where position like '%"+position+"%' ";
+					flag=1;
+				}
+				if(!union.equals("all")){
+					if(flag==0){
+						query+="where league='"+union+"' ";
+					}
+					else{
+						query+="and league='"+union+"' ";
+					}
+				}
+				query+="order by "+column+" "+order+" limit "+num;
+					
+					
 				ResultSet rs = sql.executeQuery(query);
 				while (rs.next()) {
 					player = new PlayerVO();
@@ -853,8 +868,8 @@ public class PlayerData  implements PlayerDataService{
 			try {
 				Connection con = SqlManager.getConnection();
 				Statement sql = con.createStatement();
-				String query = "select * from "+seasonbuffer+"_"+type+"_"+"playerAverage,playershistoric "
-						+ "where playershistoric.position like '%"+position+"%' and league='"+union+"' "
+				String query = "select * from "+seasonbuffer+"_"+type+"_"+"playerAverage "
+						+ "where position like '%"+position+"%' and league='"+union+"' "
 						+ "order by "+column+" "+order+" limit "+num;
 				ResultSet rs = sql.executeQuery(query);
 				while (rs.next()) {
@@ -1524,7 +1539,7 @@ public class PlayerData  implements PlayerDataService{
 //		playerDataReader.getRecentMatches("Kobe Bryant", 5);
 //		playerDataReader.getPlayerRecentAverageInfo("32823473");
 //		System.out.println(playerDataReader.getRankInNBA("Kobe Bryant", "desc"));
-		playerDataReader.singleElementVarianceAnalysis();
+//		playerDataReader.singleElementVarianceAnalysis();
 		long end = System.currentTimeMillis();
 		System.out.println("运行时间：" + (end - start) + "毫秒");// 应该是end - start
 	}
