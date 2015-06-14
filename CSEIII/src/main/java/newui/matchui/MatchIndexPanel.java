@@ -293,9 +293,10 @@ public class MatchIndexPanel extends FatherPanel {
 			}
 		}
 		}
-		for(int i=descore.size();i<=5;i++)
+		if(descore.size()<5){
+		for(int i=descore.size();i<5;i++)
 			descore.add("0-0");
-		
+		}
 		return descore;
 	}
 }
