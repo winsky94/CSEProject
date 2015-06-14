@@ -166,7 +166,7 @@
 76096,John Barber
 2571,Leandro Barbosa
 76097,Stephen Bardo
-200826,JoseJuan Barea
+200826,Jose Juan Barea
 200745,Andrea Bargnani
 76098,Cliff Barker
 76099,Tom Barker
@@ -321,7 +321,7 @@
 76195,Manute Bol
 76196,Bill Bolger
 76197,Doug Bolstorff
-76203,GeorgeH. BonSalle
+76203,George H. Bon Salle
 76198,Phil Bond
 1603,Walter Bond
 1121,Dexter Boney
@@ -559,7 +559,7 @@
 76351,M.L. Carr
 76352,Bob Carrington
 201960,DeMarre Carroll
-76353,JoeBarry Carroll
+76353,Joe Barry Carroll
 2679,Matt Carroll
 1131,Jimmy Carruth
 1853,Anthony Carter
@@ -799,7 +799,7 @@
 76518,Charlie Davis
 76519,Charlie Davis
 905,Dale Davis
-76521,DoubleD Davis
+76521,Double D Davis
 202334,Ed Davis
 76522,Edward Davis
 1023,Emanual Davis
@@ -832,7 +832,7 @@
 103,Todd Day
 201948,Austin Daye
 76543,Darren Daye
-201986,Nando DeColo
+201986,Nando De Colo
 76545,Dave DeBusschere
 692,Andrew DeClercq
 76551,Nate DeLong
@@ -843,7 +843,7 @@
 76546,Archie Dees
 143,Terry Dehere
 76548,Red Dehnert
-219,Vinny DelNegro
+219,Vinny Del Negro
 183,Bison Dele
 2568,Carlos Delfino
 960,Tony Delk
@@ -1043,7 +1043,7 @@
 201936,Tyreke Evans
 101137,Daniel Ewing
 121,Patrick Ewing
-201607,Patrick EwingJr.
+201607,Patrick Ewing Jr.
 203957,Dante Exum
 201963,Christian Eyenga
 203105,Festus Ezeli
@@ -1175,7 +1175,7 @@
 2429,Dan Gadzuric
 202070,Tony Gaffney
 101184,Deng Gai
-76769,ElmerR. Gainer
+76769,Elmer R. Gainer
 76770,Corey Gaines
 2558,Reece Gaines
 202178,Sundiata Gaines
@@ -1437,7 +1437,7 @@
 202376,Luke Harangody
 358,Anfernee Hardaway
 896,Tim Hardaway
-203501,Tim HardawayJr.
+203501,Tim Hardaway Jr.
 201935,James Harden
 76945,Reggie Harding
 76946,Charlie Hardnett
@@ -1507,7 +1507,7 @@
 202351,Lazar Hayward
 2217,Brendan Haywood
 76981,Spencer Haywood
-76982,JohnW. Hazen
+76982,John W. Hazen
 76983,Walt Hazzard
 101129,Luther Head
 1049,Shane Heal
@@ -1823,7 +1823,7 @@
 77175,Caldwell Jones
 279,Charles Jones
 77178,Charles Jones
-1869,CharlesR. Jones
+1869,Charles R. Jones
 2563,Dahntay Jones
 1800,Damon Jones
 203199,DeQuan Jones
@@ -2160,7 +2160,7 @@
 77419,John Lucas
 203564,Kalin Lucas
 77420,Maurice Lucas
-101249,John LucasIII
+101249,John Lucas III
 77421,Ted Luckenbill
 1731,Tyronn Lue
 77422,Jim Luisi
@@ -2255,7 +2255,7 @@
 77482,Al Masino
 193,Anthony Mason
 2046,Desmond Mason
-2427,Roger MasonJr.
+2427,Roger Mason Jr.
 763,Tony Massenburg
 77483,Eddie Mast
 77484,Wes Matthews
@@ -2277,10 +2277,10 @@
 201564,O.J. Mayo
 77496,Travis Mays
 77497,Matt Mazza
-201601,Luc MbahaMoute
+201601,Luc Mbah a Moute
 2788,DJ Mbenga
 77498,Bob McAdoo
-203949,JamesMichael McAdoo
+203949,James Michael McAdoo
 77499,Ken McBride
 203492,Ray McCallum
 737,Bob McCann
@@ -2559,7 +2559,7 @@
 77691,Calvin Natt
 77692,Kenny Natt
 77693,Willie Naulls
-2434,JuanCarlos Navarro
+2434,Juan Carlos Navarro
 202380,Hamady Ndiaye
 77694,Craig Neal
 202390,Gary Neal
@@ -2709,7 +2709,7 @@
 202718,Chandler Parsons
 1097,Zarko Paspalj
 77806,Marty Passaglia
-77807,GeorgeA. Pastushok
+77807,George A. Pastushok
 77808,Myles Patrick
 77809,Stan Patrick
 1754,Andrae Patterson
@@ -2924,12 +2924,12 @@
 77947,Gene Rhodes
 1518,Rodrick Rhodes
 779,Glen Rice
-203318,Glen RiceJr.
+203318,Glen Rice Jr.
 201181,Chris Richard
 77950,Clint Richardson
 2202,Jason Richardson
 200978,Jeremy Richardson
-77952,MichealRay Richardson
+77952,Micheal Ray Richardson
 2369,Norman Richardson
 71,Pooh Richardson
 2047,Quentin Richardson
@@ -2975,7 +2975,7 @@
 77984,Rick Robey
 2774,Bernard Robinson
 997,Chris Robinson
-77986,CliffT. Robinson
+77986,Cliff T. Robinson
 361,Clifford Robinson
 764,David Robinson
 1944,Eddie Robinson
@@ -3578,7 +3578,7 @@
 202327,Ekpe Udoh
 2137,Ime Udoka
 2757,Beno Udrih
-101146,RokoLeni Ukic
+101146,Roko Leni Ukic
 78392,Wes Unseld
 78393,Hal Uplinger
 78394,Kelvin Upshaw
@@ -3588,15 +3588,15 @@
 78395,Darnell Valentine
 78396,Ron Valentine
 78397,John Vallely
-78398,Dick VanArsdale
-78399,Tom VanArsdale
-78401,Butch VanBredaKolff
-78400,Jan VanBredaKolff
-89,Nick VanExel
-1496,Keith VanHorn
-78406,Norm VanLier
+78398,Dick Van Arsdale
+78399,Tom Van Arsdale
+78401,Butch Van Breda Kolff
+78400,Jan Van Breda Kolff
+89,Nick Van Exel
+1496,Keith Van Horn
+78406,Norm Van Lier
 78402,Gene Vance
-78403,Log VanderVelden
+78403,Log Vander Velden
 78405,Ernie Vandeweghe
 78404,Kiki Vandeweghe
 78407,Nick Vanos
@@ -3623,7 +3623,7 @@
 78419,Gary Voce
 78420,Floyd Volker
 78421,Alexander Volkov
-78422,Whitey VonNieda
+78422,Whitey Von Nieda
 203943,Noah Vonleh
 2063,Jake Voskuhl
 78423,Danny Vranes
@@ -3822,7 +3822,7 @@
 78549,Gus Williams
 78550,Guy Williams
 1006,Herb Williams
-73,HotRod Williams
+73,Hot Rod Williams
 1715,Jason Williams
 101214,Jawad Williams
 2398,Jay Williams
@@ -3914,7 +3914,7 @@
 906,Haywoode Workman
 78616,Mark Workman
 78617,Tom Workman
-1897,Metta WorldPeace
+1897,Metta World Peace
 78618,Sam Worthen
 1460,James Worthy
 101120,Antoine Wright
