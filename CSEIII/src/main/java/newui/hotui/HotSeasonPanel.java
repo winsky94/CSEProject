@@ -7,6 +7,8 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Image;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -19,6 +21,7 @@ import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 
+import newui.MyUIDataFormater;
 import newui.Service;
 import newui.Style;
 import newui.mainui.MainFrame;
@@ -53,6 +56,11 @@ public class HotSeasonPanel extends HotFatherPanel implements MouseListener {
 	// ---------------------
 
 	JComboBox<String> seasonBox, seasonTypeBox;
+	private String[] sortsCH = { "场均得分", "场均篮板", "场均助攻", "场均盖帽", "场均抢断",
+			"三分命中率", "投篮命中率", "罚球命中率" };
+	private String[] sortsEN = { "score", "reboundNum", "assistNum",
+			"blockNum", "stealNum", "threeHitRate", "shootHitRate",
+			"freeThrowHitRate" };
 
 	// ---------------------
 	public HotSeasonPanel() {
@@ -62,17 +70,17 @@ public class HotSeasonPanel extends HotFatherPanel implements MouseListener {
 		GridBagConstraints bc = new GridBagConstraints();
 		bc.fill = GridBagConstraints.BOTH;
 		bestPnl.setLayout(bl);
-		
+
 		// ---seasonBox-----
 		JLabel seasonLbl = new JLabel("赛季");
 		seasonLbl.setFont(new Font("微软雅黑", Font.PLAIN, 15));
 		seasonLbl.setForeground(Style.DEEP_BLUE);
 		seasonPnl.add(seasonLbl);
 		//
-		MatchBLService match =Service.match;
-		ArrayList<String> allSeason=new ArrayList<String>();
-		allSeason=match.getAllSeasons();
-		int size=allSeason.size();
+		MatchBLService match = Service.match;
+		ArrayList<String> allSeason = new ArrayList<String>();
+		allSeason = match.getAllSeasons();
+		int size = allSeason.size();
 		String[] season = (String[]) allSeason.toArray(new String[size]);
 		seasonBox = new JComboBox<String>(season);
 		seasonBox.setBackground(Color.white);
@@ -80,7 +88,7 @@ public class HotSeasonPanel extends HotFatherPanel implements MouseListener {
 		seasonBox.setForeground(Style.DEEP_BLUE);
 		seasonPnl.add(seasonBox);
 		// ----seasonTypeBox------
-		String[] seasonType = {  "季后赛 ","常规赛", "季前赛" };
+		String[] seasonType = { "季后赛 ", "常规赛", "季前赛" };
 		seasonTypeBox = new JComboBox<String>(seasonType);
 		seasonTypeBox.setBackground(Color.white);
 		seasonTypeBox.setFont(new Font("微软雅黑", Font.PLAIN, 15));
@@ -208,27 +216,45 @@ public class HotSeasonPanel extends HotFatherPanel implements MouseListener {
 		jsp.getViewport().add(table);
 		thr = new HotThread(this, "score");
 		Refresh("score");
-//		thr.startThread();
+		// thr.startThread();
+
+		seasonBox.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				// TODO Auto-generated method stub
+				Refresh(changeSortCHToEN(currentBtn.getText()));
+				thr = new HotThread(HotSeasonPanel.this, currentBtn.getText());
+			}
+
+		});
+		seasonTypeBox.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				// TODO Auto-generated method stub
+				Refresh(changeSortCHToEN(currentBtn.getText()));
+				thr = new HotThread(HotSeasonPanel.this, currentBtn.getText());
+			}
+		});
 
 	}
 
 	public void Refresh(String sort) {
 		// 默认筛选 按得分
-		// 目前写死了是14-15赛季
 		vlist = player.getSeasonHotPlayer((String) seasonBox.getSelectedItem(),
 				(String) seasonTypeBox.getSelectedItem(), sort, 5);
 		if (vlist != null && vlist.size() != 0) {
 			model.setHead(head);
 			PlayerVO topOne = vlist.get(0);
-			ImageIcon bestHeadIcon = Player.getPlayerPortraitImage(topOne.getName());
-			//bestHeadIcon.setImage(bestHeadIcon.getImage().getScaledInstance(150,150, Image.SCALE_SMOOTH));
+			ImageIcon bestHeadIcon = Player.getPlayerPortraitImage(topOne
+					.getName());
+			// bestHeadIcon.setImage(bestHeadIcon.getImage().getScaledInstance(150,150,
+			// Image.SCALE_SMOOTH));
 			bestHead.setIcon(bestHeadIcon);
 			bestName.setText(topOne.getName());
 			positionAndTeamName.setText(topOne.getPosition() + "/"
 					+ topOne.getOwingTeam());
 			// data.setText(topOne.getScore()+"");
 			ImageIcon bestTeamIco = Team.getTeamImage(topOne.getOwingTeam());
-			bestTeamIco.setImage(bestTeamIco.getImage().getScaledInstance(150, 150, Image.SCALE_SMOOTH));
+			bestTeamIco.setImage(bestTeamIco.getImage().getScaledInstance(150,
+					150, Image.SCALE_SMOOTH));
 			bestTeamIcon.setIcon(bestTeamIco);
 			if (sort.equals("score")) {
 				data.setText(topOne.getScore() + "");
@@ -339,7 +365,18 @@ public class HotSeasonPanel extends HotFatherPanel implements MouseListener {
 		}
 		currentBtn.setBackground(Style.HOT_REDFOCUS);
 		// 需等待四s 再开启
-//		thr.startThread();
+		// thr.startThread();
+	}
+
+	private String changeSortCHToEN(String CH) {
+		String EN = CH;
+		for (int i = 0; i < sortsCH.length; i++) {
+			if (sortsCH[i].equals(CH)) {
+				EN = sortsEN[i];
+				break;
+			}
+		}
+		return EN;
 	}
 
 	public void mousePressed(MouseEvent e) {
@@ -383,7 +420,8 @@ public class HotSeasonPanel extends HotFatherPanel implements MouseListener {
 				line.add(num);
 				num++;
 				ImageIcon tou = Player.getPlayerPortraitImage(v.getName());
-				tou.setImage(tou.getImage().getScaledInstance(78,63, Image.SCALE_SMOOTH));
+				tou.setImage(tou.getImage().getScaledInstance(78, 63,
+						Image.SCALE_SMOOTH));
 				line.add(tou);
 				line.add(v.getName());
 				line.add(v.getOwingTeam());
@@ -399,11 +437,11 @@ public class HotSeasonPanel extends HotFatherPanel implements MouseListener {
 				else if (currentBtn == stealBtn)
 					line.add(v.getStealNum());
 				else if (currentBtn == threeRateBtn)
-					line.add(v.getThreeHitRate());
+					line.add(MyUIDataFormater.formatTo1(v.getThreeHitRate()*100));
 				else if (currentBtn == shootRateBtn)
-					line.add(v.getShootHitRate());
+					line.add(MyUIDataFormater.formatTo1(v.getShootHitRate()*100));
 				else
-					line.add(v.getFreeThrowHitRate());
+					line.add(MyUIDataFormater.formatTo1(v.getFreeThrowHitRate()*100));
 				content.add(line);
 			}
 

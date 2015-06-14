@@ -7,6 +7,8 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Image;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -51,6 +53,8 @@ public class ProgressPanel extends HotFatherPanel implements MouseListener {
 	String[] head = { "排名", "", "球员名称", "所属球队", "位置", "场均得分", "提升率" };
 	DecimalFormat dec = new DecimalFormat("0.00");
 	JComboBox<String> seasonBox, seasonTypeBox;
+	private String[] sortsCH = { "场均得分", "场均篮板", "场均助攻" };
+	private String[] sortsEN = { "score", "reboundNum", "assistNum" };
 
 	public ProgressPanel() {
 
@@ -182,16 +186,33 @@ public class ProgressPanel extends HotFatherPanel implements MouseListener {
 		Refresh("recentFiveMatchesScoreUpRate");
 		// thr.startThread();
 
+		seasonBox.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				// TODO Auto-generated method stub
+				Refresh(changeSortCHToEN(currentBtn.getText()));
+				thr = new HotThread(ProgressPanel.this, currentBtn.getText());
+			}
+
+		});
+		seasonTypeBox.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				// TODO Auto-generated method stub
+				Refresh(changeSortCHToEN(currentBtn.getText()));
+				thr = new HotThread(ProgressPanel.this, currentBtn.getText());
+			}
+		});
+
 	}
 
 	public void Refresh(String sort) {
-		String season=(String) seasonBox.getSelectedItem();
+		String season = (String) seasonBox.getSelectedItem();
 		String seasonType = (String) seasonTypeBox.getSelectedItem();
-		vlist = player.getBestImprovedPlayer(season,seasonType, sort, 5);
+		vlist = player.getBestImprovedPlayer(season, seasonType, sort, 5);
 		if (vlist != null && vlist.size() != 0) {
 			model.setHead(head);
 			PlayerVO topOne = vlist.get(0);
-			ImageIcon bestHeadIcon = Player.getPlayerPortraitImage(topOne.getName());
+			ImageIcon bestHeadIcon = Player.getPlayerPortraitImage(topOne
+					.getName());
 			bestHead.setIcon(bestHeadIcon);
 			bestName.setText(topOne.getName());
 			positionAndTeamName.setText(topOne.getPosition() + "/"
@@ -285,6 +306,17 @@ public class ProgressPanel extends HotFatherPanel implements MouseListener {
 		// thr.startThread();
 	}
 
+	private String changeSortCHToEN(String CH) {
+		String EN = CH;
+		for (int i = 0; i < sortsCH.length; i++) {
+			if (sortsCH[i].equals(CH)) {
+				EN = sortsEN[i];
+				break;
+			}
+		}
+		return EN;
+	}
+
 	public void mousePressed(MouseEvent e) {
 		// TODO Auto-generated method stub
 
@@ -326,7 +358,8 @@ public class ProgressPanel extends HotFatherPanel implements MouseListener {
 				line.add(num);
 				num++;
 				ImageIcon tou = Player.getPlayerPortraitImage(v.getName());
-				tou.setImage(tou.getImage().getScaledInstance(78,63, Image.SCALE_SMOOTH));
+				tou.setImage(tou.getImage().getScaledInstance(78, 63,
+						Image.SCALE_SMOOTH));
 				line.add(tou);
 				line.add(v.getName());
 				line.add(v.getOwingTeam());
