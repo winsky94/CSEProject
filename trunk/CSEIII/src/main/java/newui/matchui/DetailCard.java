@@ -237,7 +237,7 @@ public class DetailCard extends JPanel implements MouseListener {
 	}
 
 	public void RefershScore(String score, int line) {
-		System.out.println(score+""+line);
+		//System.out.println(score+""+line);
 		if (score != "") {
 			detailPnl.removeAll();
 			int vs = 0, hs = 0;

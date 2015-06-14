@@ -82,6 +82,8 @@ public class LiveWebThread extends Thread{
 				if(s.get(0).contains("00:00.0"))
 					{line+=1;size=0;
 					 isOverLastLine=true;
+					}else{
+						isOverLastLine=false;
 					}
 			if(line>4){
 				String[] ss=lastscore.split("-");
@@ -91,12 +93,15 @@ public class LiveWebThread extends Thread{
 					ScoresWebInc web=new ScoresWebInc();
 					web.getGameInfoById(gameid, date);
 					this.stop=true;
+				}else{
+					isOverLastLine=false;
 				}
 				}
 				
 			}
 			try {
 				//System.out.println("我到这里啦");
+			if(!isOverLastLine)
 				this.sleep(3000);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
