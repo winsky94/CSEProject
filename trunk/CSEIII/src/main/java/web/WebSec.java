@@ -20,21 +20,8 @@ import javax.imageio.ImageIO;
  *
  */
 public class WebSec {
-	public static void main(String[] args) {
-		
-	//	String destdir=getURLContent("http://www.nba.com/","gbk");
-		//Pattern p=Pattern.compile("<a[\\s\\S]+?</a>");
-		//��ȡ�����ӵ�ַ
-		//String rest="href=\"(.+?)\"";
-		//String rest="href=\"([\\w\\s./:]+?)\"";
-		//String url="http://stats.nba.com/media/players/230x185/201158.png";
-		//String path="active/";
-		//String fileName="test.png";
-		//SavePic(url,path,fileName);
-		
-	}
 	
-	//��ȡƥ����ַ�list
+	//获取destStr中与正则相匹配的List
 	public static ArrayList<String> getMatcherSubstrs(String destStr,String regex){
 		Pattern p=Pattern.compile(regex);
 		Matcher m=p.matcher(destStr);
@@ -45,12 +32,12 @@ public class WebSec {
 		}
 		return result;
 	}
-	//���urlString��Ӧ��ҳԴ������
+	//打开指定url的网页内容
 	public static String getURLContent(String urlString,String charset){
 		StringBuilder sb=new StringBuilder();
 		try {
 			URL url=new URL(urlString);
-			//��������
+			
 			BufferedReader reader=new BufferedReader(new InputStreamReader(url.openStream(),Charset.forName(charset)));
 			String temp="";
 			while((temp=reader.readLine())!=null){
@@ -59,17 +46,17 @@ public class WebSec {
 			}
 		} catch (MalformedURLException e) {
 			// TODO Auto-generated catch block
-			System.out.println("û�����");
+			System.out.println("无数据");
 			//e.printStackTrace();
 		}catch (IOException e) {
 			// TODO Auto-generated catch block
-			System.out.println("û�����");
+			System.out.println("无数据");
 			//e.printStackTrace();
 		}
 		return sb.toString();
 	}
 	
-	
+	//根据url和文件名保存网络图片
 	public static void SavePic(String url,String path,String fileName){
 		try {
 			URL urlConect=new URL(url);
