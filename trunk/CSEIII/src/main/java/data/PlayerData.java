@@ -1336,7 +1336,7 @@ public class PlayerData  implements PlayerDataService{
 		}
 		
 
-		public double convertHeight(String height){
+		public static double convertHeight(String height){
 			double result=0;
 			String[] buffer=height.split("-");
 			result+=Integer.parseInt(buffer[0]);
