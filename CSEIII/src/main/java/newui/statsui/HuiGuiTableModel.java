@@ -12,8 +12,8 @@ public class HuiGuiTableModel extends AbstractTableModel{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	String[][] content=new String[3][10];
-	String[] title={"因素","出场次数","得分","篮板","助攻","抢断","失误","效率值","GmSc效率值","得分-篮板-助攻"};
+	String[][] content=new String[3][11];
+	String[] title={"因素","出场次数","得分","篮板","助攻","抢断","犯规","盖帽","效率值","GmSc效率值","得分-篮板-助攻"};
 	public HuiGuiTableModel() {
 		PlayerStatistic ps=new PlayerStatistic();
 		HashMap<String, ArrayList<String>> map=ps.start();
@@ -26,6 +26,7 @@ public class HuiGuiTableModel extends AbstractTableModel{
 		ArrayList<String> malist=map.get("matchNum");
 		ArrayList<String> stlist=map.get("steal");
 		ArrayList<String> folist=map.get("foul");
+		ArrayList<String> bllist=map.get("block");
 		content[0][0]="F值";
 		content[1][0]="拟合度";
 		content[2][0]="回归系数";
@@ -53,17 +54,21 @@ public class HuiGuiTableModel extends AbstractTableModel{
 		content[1][6]=folist.get(1);
 		content[2][6]=folist.get(2);
 		
-		content[0][7]=efflist.get(0);
-		content[1][7]=efflist.get(1);
-		content[2][7]=efflist.get(2);
+		content[0][7]=bllist.get(0);
+		content[1][7]=bllist.get(1);
+		content[2][7]=bllist.get(2);
 		
-		content[0][8]=gmsclist.get(0);
-		content[1][8]=gmsclist.get(1);
-		content[2][8]=gmsclist.get(2);
+		content[0][8]=efflist.get(0);
+		content[1][8]=efflist.get(1);
+		content[2][8]=efflist.get(2);
 		
-		content[0][9]=scorelist.get(0);
-		content[1][9]=scorelist.get(1);
-		content[2][9]=scorelist.get(2);
+		content[0][9]=gmsclist.get(0);
+		content[1][9]=gmsclist.get(1);
+		content[2][9]=gmsclist.get(2);
+		
+		content[0][10]=scorelist.get(0);
+		content[1][10]=scorelist.get(1);
+		content[2][10]=scorelist.get(2);
 	}
 	@Override
 	public int getRowCount() {
@@ -72,7 +77,7 @@ public class HuiGuiTableModel extends AbstractTableModel{
 
 	@Override
 	public int getColumnCount() {
-		return 10;
+		return 11;
 	}
 	public String getColumnName(int c){
 		return title[c];
