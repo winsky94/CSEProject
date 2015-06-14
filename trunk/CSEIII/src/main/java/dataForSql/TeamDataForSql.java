@@ -177,6 +177,7 @@ public class TeamDataForSql {
 	}
 
 	private void exportCalculatedDataToSql(String season, String type) {
+		int test=1;
 		createTable(season,type);
 		String tableBaseName=season.replace("-", "")+"_"+type+"_";
 		String tableAverageName=tableBaseName+"TeamAverage";
@@ -225,6 +226,7 @@ public class TeamDataForSql {
 				seasonStatement.setDouble(30, vo.getStealEfficiency());
 				seasonStatement.setDouble(31, vo.getAssistRate());
 				seasonStatement.addBatch();
+				System.out.println(test++);
 			}
 			
 
@@ -263,6 +265,7 @@ public class TeamDataForSql {
 				averageStatement.setDouble(30, vo.getStealEfficiency());
 				averageStatement.setDouble(31, vo.getAssistRate());
 				averageStatement.addBatch();
+				System.out.println(test++);
 			}
 			seasonStatement.executeBatch();
 			averageStatement.executeBatch();
