@@ -3,6 +3,7 @@ package data;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import newui.MyUIDataFormater;
 import vo.PlayerVO;
 
 public class PlayerStatistic {
@@ -12,8 +13,8 @@ public class PlayerStatistic {
 	public static void main(String[] args) {
 		PlayerStatistic playerStatistic = new PlayerStatistic();
 		System.out.println(playerStatistic.start().get("GmScEfficiencyValue")
-				.get(1));
-		;
+				.get(0));
+		playerStatistic.getVariance();
 	}
 
 	public ArrayList<Double> testX() {
@@ -31,7 +32,6 @@ public class PlayerStatistic {
 			}
 			y.add(salary);
 			x.add(vo.getScore_rebound_assist());
-			// System.out.println(vo.getEfficiency());
 		}
 		return x;
 	}
@@ -60,8 +60,8 @@ public class PlayerStatistic {
 	 * @return hashMap中key值是 "efficiency", "GmScEfficiencyValue",
 	 *         "score_rebound_assist" value是一个Arraylist，第一个元素是F值，第二个元素是拟合度
 	 */
-	public HashMap<String, ArrayList<Double>> start() {
-		HashMap<String, ArrayList<Double>> result = new HashMap<String, ArrayList<Double>>();
+	public HashMap<String, ArrayList<String>> start() {
+		HashMap<String, ArrayList<String>> result = new HashMap<String, ArrayList<String>>();
 		PlayerData player = new PlayerData();
 		PlayerSalaryData ps = new PlayerSalaryData();
 		ArrayList<PlayerVO> players = player.getPlayerAverageInfo("13-14",
@@ -79,7 +79,7 @@ public class PlayerStatistic {
 				Y.add(salary / 1000000);
 				initX(flag, vo);
 			}
-			ArrayList<Double> temp = lineAnalysis();
+			ArrayList<String> temp = lineAnalysis();
 			result.put(flag, temp);
 			X = new ArrayList<Double>();
 			Y = new ArrayList<Double>();
@@ -88,18 +88,48 @@ public class PlayerStatistic {
 		return result;
 	}
 
-	public ArrayList<ArrayList<Double>> getFangchaHuiZong() {
-		ArrayList<ArrayList<Double>> result=new ArrayList<ArrayList<Double>>();
-		ArrayList<Double> temp1=new ArrayList<Double>();
-		ArrayList<Double> temp2=new ArrayList<Double>();
+	/**
+	 * 得到方差汇总表
+	 * @return 方差汇总表的各项数据
+	 */
+	public ArrayList<String> getVariance() {
+		ArrayList<String> result = new ArrayList<String>();
+		double xAvg = calculateAvg(getX());
+		double yAvg = calculateAvg(getY());
+		double b = calculateL(getX(), getY(), xAvg, yAvg)
+				/ (double) calculateL(getX(), getX(), xAvg, xAvg);
+		double a = yAvg - b * xAvg;
+		double Sr = calculateSr(yAvg, a, b);
+		double Se = calculateSe(a, b);
+		double Vr = Sr / 1;
+		double Ve = Se / (double) X.size();
+		double F = calculateF(Vr, Ve);
+
+		result.add("回归");
+		result.add("随机");
+		result.add("总和");
 		
-		result.add(temp1);
-		result.add(temp2);
+		result.add(MyUIDataFormater.formatTo3(Sr));
+		result.add("1");
+		result.add(MyUIDataFormater.formatTo3(Vr));
+		result.add(MyUIDataFormater.formatTo3(F));
+		result.add("3.889");
+		result.add("**");
+		
+		result.add(MyUIDataFormater.formatTo3(Se));
+		result.add((getX().size() - 2) + "");
+		result.add(MyUIDataFormater.formatTo3(Ve));
+		result.add("");
+		result.add("6.763");
+		result.add("");
+		
+		result.add(MyUIDataFormater.formatTo3(Sr + Se));
+		result.add("199");
 		return result;
 	}
 
-	public ArrayList<Double> lineAnalysis() {
-		ArrayList<Double> result = new ArrayList<Double>();
+	public ArrayList<String> lineAnalysis() {
+		ArrayList<String> result = new ArrayList<String>();
 		double xAvg = calculateAvg(getX());
 		double yAvg = calculateAvg(getY());
 		double b = calculateL(getX(), getY(), xAvg, yAvg)
@@ -122,8 +152,8 @@ public class PlayerStatistic {
 		// System.out.println("F值：" + F);
 		// System.out.println("拟合度：" + r2);
 		// System.out.println("标准残差：" + Sy);
-		result.add(F);
-		result.add(r2);
+		result.add(MyUIDataFormater.formatTo3(F));
+		result.add(MyUIDataFormater.formatTo3(r2));
 		return result;
 	}
 
