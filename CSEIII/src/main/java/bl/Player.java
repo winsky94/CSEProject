@@ -171,6 +171,10 @@ public class Player implements PlayerBLService{
 		return player.singleElementVarianceAnalysis();
 	}
 	
+	public ArrayList<String> singleElementVarianceAnalysis(String name){
+		return player.singleElementVarianceAnalysis(name);
+	}
+	
 
 	public static double convertSecondToMinuete(double second) {
 		double minute= second / 60;
