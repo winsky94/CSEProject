@@ -44,6 +44,9 @@ public class FangChaTableModel extends AbstractTableModel{
 	public int getColumnCount() {
 		return 7;
 	}
+	public String getColumnName(int c){
+		return title[c];
+	}
 	@Override
 	public Object getValueAt(int r, int c) {
 		return content[r][c];
