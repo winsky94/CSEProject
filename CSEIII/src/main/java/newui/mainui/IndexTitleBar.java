@@ -132,7 +132,6 @@ public class IndexTitleBar extends JPanel implements MouseListener {
 	public void mouseClicked(MouseEvent e) {
 		if (e.getSource() == indexBtn){
 			MainFrame.getInstance().setContentPanel(new IndexPanel());
-			IndexPanel.startT();
 		
 		}
 		else if (e.getSource() == teamBtn)
