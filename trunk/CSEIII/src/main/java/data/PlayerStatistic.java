@@ -31,7 +31,7 @@ public class PlayerStatistic {
 				continue;
 			}
 			y.add(salary);
-			x.add(vo.getScore_rebound_assist());
+			x.add(vo.getGmScEfficiencyValue());
 		}
 		return x;
 	}
@@ -50,8 +50,7 @@ public class PlayerStatistic {
 				continue;
 			}
 			y.add(salary / 1000000);
-			x.add(vo.getScore_rebound_assist());
-			// System.out.println(vo.getEfficiency());
+			x.add(vo.getGmScEfficiencyValue());
 		}
 		return y;
 	}
@@ -59,7 +58,7 @@ public class PlayerStatistic {
 	/**
 	 * @return hashMap中key值是 "matchNum","score", "rebound", "assist",
 	 *         "efficiency", "GmScEfficiencyValue",
-	 *         "score_rebound_assist","steal","foul"
+	 *         "score_rebound_assist","steal","foul","block"
 	 *         hashMap中value是一个Arraylist，第一个元素是F值，第二个元素是拟合度，第三个元素是回归系数 
 	 */
 	public HashMap<String, ArrayList<String>> start() {
@@ -70,7 +69,7 @@ public class PlayerStatistic {
 				"Playoff");
 		String[] type = { "matchNum", "score", "rebound", "assist",
 				"efficiency", "GmScEfficiencyValue", "score_rebound_assist",
-				"steal", "foul" };
+				"steal", "foul" ,"block"};
 		for (int index = 0; index < type.length; index++) {
 			String flag = type[index];
 			for (int i = 0; i < players.size(); i++) {
@@ -195,6 +194,8 @@ public class PlayerStatistic {
 			X.add(vo.getStealNum());
 		} else if (flag.equals("foul")) {
 			X.add(vo.getFoulNum());
+		}else if(flag.equals("block")){
+			X.add(vo.getBlockNum());
 		}
 
 	}
