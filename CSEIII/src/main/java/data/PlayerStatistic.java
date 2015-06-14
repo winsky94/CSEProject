@@ -135,9 +135,9 @@ public class PlayerStatistic {
 		result.add(MyUIDataFormater.formatTo3(Se));
 		result.add((getX().size() - 2) + "");
 		result.add(MyUIDataFormater.formatTo3(Ve));
-		result.add("");
+//		result.add("");
 		result.add("6.763");
-		result.add("");
+//		result.add("");
 
 		result.add(MyUIDataFormater.formatTo3(Sr + Se));
 		result.add("199");
