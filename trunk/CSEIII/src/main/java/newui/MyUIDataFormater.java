@@ -38,4 +38,14 @@ public class MyUIDataFormater {
 		return dec.format(originalNum);
 	}
 	
+	/**
+	 * 将传入的double型小数转为保留四位小数并作为一个string返回
+	 * @param originalNum 原始的double型小数
+	 * @return
+	 */
+	public static String formatTo4(double originalNum) {
+		DecimalFormat dec = new DecimalFormat("0.0000");
+		return dec.format(originalNum);
+	}
+	
 }
