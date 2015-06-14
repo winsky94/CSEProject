@@ -30,8 +30,8 @@ public class HotTableModel extends AbstractTableModel{
 
 	public Object getValueAt(int rowIndex, int columnIndex) {
 		// TODO Auto-generated method stub
-		System.out.println(rowIndex+":"+columnIndex);
-		System.out.println("你报错啊："+content.size());
+		//System.out.println(rowIndex+":"+columnIndex);
+		//System.out.println("你报错啊："+content.size());
 		return content.get(rowIndex).get(columnIndex);
 	}
 	public String getColumnName(int col) {
