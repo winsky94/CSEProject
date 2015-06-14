@@ -70,19 +70,16 @@ public class HuiGuiTableModel extends AbstractTableModel{
 		content[1][10]=scorelist.get(1);
 		content[2][10]=scorelist.get(2);
 	}
-	@Override
 	public int getRowCount() {
 		return 3;
 	}
 
-	@Override
 	public int getColumnCount() {
 		return 11;
 	}
 	public String getColumnName(int c){
 		return title[c];
 	}
-	@Override
 	public Object getValueAt(int rowIndex, int columnIndex) {
 		return content[rowIndex][columnIndex];
 	}

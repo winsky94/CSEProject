@@ -78,7 +78,7 @@ public class AboutDialog extends JDialog {
 		exit.setFocusPainted(false);
 		exit.addActionListener(new ActionListener() {
 			
-			@Override
+			
 			public void actionPerformed(ActionEvent e) {
 				AboutDialog.this.dispose();
 			}

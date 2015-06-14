@@ -36,18 +36,18 @@ public class FangChaTableModel extends AbstractTableModel{
 		content[2][5]="";
 		content[2][6]="";
 	}
-	@Override
+	
 	public int getRowCount() {
 		return 3;
 	}
-	@Override
+
 	public int getColumnCount() {
 		return 7;
 	}
 	public String getColumnName(int c){
 		return title[c];
 	}
-	@Override
+	
 	public Object getValueAt(int r, int c) {
 		return content[r][c];
 	}
