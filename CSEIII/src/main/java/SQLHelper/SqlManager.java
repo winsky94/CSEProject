@@ -19,7 +19,7 @@ public class SqlManager {
 		// String password = "12345a";
 		//
 		// Connection c = DriverManager.getConnection(url,userName,password);
-
+	
 		String driverName = "com.mysql.jdbc.Driver";
 		String userName = "root";
 		String userPasswd = "12345a";

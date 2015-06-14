@@ -147,8 +147,12 @@ public class LiveWebInc {
 	 * 	
 	 * 
 	 * */
+	static int[] step={10,20,30,40};
+	static int lastline=1;
+	static int i=0;
 	public ArrayList<String>  getGameLive(String gameID,int line
 			){
+		
 		ArrayList<String> result=new ArrayList<String>();
 		
 		String url1="http://china.nba.com/wap/static/data/game/playbyplay_";
@@ -156,6 +160,28 @@ public class LiveWebInc {
 		String dir=WebSec.getURLContent(realrul, "utf-8");
 		ArrayList<String> res=WebSec.getMatcherSubstrs(dir,liveRex);
 		ArrayList<String> idlist=WebSec.getMatcherSubstrs(dir, teamRex);
+//		int tt=res.size();
+//		
+//		if((i<step.length&&step[i]<tt)&&lastline==line){
+//			tt=step[i];
+//			i++;
+//			if(i>=4);
+//				i=5;
+//			
+//		}else{
+//			if(i>=step.length||step[i]>=tt){
+//				tt=res.size();
+//				i=0;
+//				lastline=line+1;
+//			}else{
+//				lastline=line;
+//				i=0;
+//				
+//			}
+//		}
+//		
+//		
+//		System.out.println(tt);
 		for(int i=0;i<res.size();i++){
 			String record="";
 			String s=res.get(i);
