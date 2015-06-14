@@ -54,8 +54,8 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener,
 	JTable table;
 	PlayerTableModel ptm;
 	// ---------------
-	JLabel refreshLbl, filterLbl, modeLbl, fieldLbl, timeLbl;
-	JTextField timeField;
+	JLabel refreshLbl, filterLbl, modeLbl, fieldLbl;
+//	JTextField timeField;
 	JComboBox<String> locationBox, partitionBox, filterRankBox, seasonBox,
 			seasonTypeBox, typeBox;
 	Font font = new Font("微软雅黑", Font.PLAIN, 13);
@@ -119,31 +119,31 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener,
 		filterRankBox.addItemListener(this);
 		f1.add(new JLabel("       "));
 		// -------timeLbl------
-		timeLbl = new MyJLabel("在场时间大于(分钟)：");
-		f1.add(timeLbl);
-		timeField = new JTextField(5);
-		f1.add(timeField);
-		timeField.addFocusListener(new FocusAdapter() {
-			public void focusLost(FocusEvent e) {
-				String text = timeField.getText();
-				int t = -1;
-				try {
-					t = Integer.parseInt(text);
-				} catch (Exception ex) {
-					// 不处理
-				}
-				if (t != lastTime)
-					Filter();
-			}
-		});
-
-		timeField.addKeyListener(new KeyAdapter() {
-			public void keyPressed(KeyEvent e) {
-				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-					Filter();
-				}
-			}
-		});
+//		timeLbl = new MyJLabel("在场时间大于(分钟)：");
+//		f1.add(timeLbl);
+//		timeField = new JTextField(5);
+//		f1.add(timeField);
+//		timeField.addFocusListener(new FocusAdapter() {
+//			public void focusLost(FocusEvent e) {
+//				String text = timeField.getText();
+//				int t = -1;
+//				try {
+//					t = Integer.parseInt(text);
+//				} catch (Exception ex) {
+//					// 不处理
+//				}
+//				if (t != lastTime)
+//					Filter();
+//			}
+//		});
+//
+//		timeField.addKeyListener(new KeyAdapter() {
+//			public void keyPressed(KeyEvent e) {
+//				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+//					Filter();
+//				}
+//			}
+//		});
 		// -----filterLbl-----
 		filterLbl = new MyJLabel("筛选", new ImageIcon(
 				"image/player/filterWhite.png"));
@@ -455,17 +455,17 @@ public class PlayerRankPanel extends FatherPanel implements MouseListener,
 	}
 
 	public void Filter() {
-		int time = 0;
-		if (timeField.getText() != null || !(timeField.getText().equals(""))
-				|| timeField.getText() != "") {
-
-			try {
-				time = Integer.parseInt(timeField.getText());
-			} catch (NumberFormatException nfe) {
-				time = 0;
-			}
-		}
-		lastTime = time;
+//		int time = 0;
+//		if (timeField.getText() != null || !(timeField.getText().equals(""))
+//				|| timeField.getText() != "") {
+//
+//			try {
+//				time = Integer.parseInt(timeField.getText());
+//			} catch (NumberFormatException nfe) {
+//				time = 0;
+//			}
+//		}
+//		lastTime = time;
 		// 执行筛选
 		String season = seasonBox.getSelectedItem().toString();
 		String position = locationBox.getSelectedItem().toString();
