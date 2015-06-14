@@ -42,7 +42,7 @@ public class PlayerSalaryData {
 	private void readInfoFromFile() {
 		PlayerSalary ps;
 		try {
-			File file = new File("C:/Users/Administrator/Desktop/Salary/14-15.txt");
+			File file = new File("src/data/players/14-15.txt");
 			if (!file.exists()) {
 				System.err.println("file does not exist!");
 				return;
