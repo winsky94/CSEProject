@@ -172,6 +172,8 @@ public class PKChart extends JPanel {
 			bScore = bVO.getScore() / bVO.getPlayedGames();
 		if (aScore > bScore)
 			aBigger = true;
+		else
+			aBigger=false;
 		aScorePnl.add(new DataLabel(MyUIDataFormater.formatTo1(aScore)));
 		aScorePnl.add(new MyRect((int) aScore, aBigger));
 		bScorePnl.add(new MyRect((int) bScore, !aBigger));
@@ -187,6 +189,8 @@ public class PKChart extends JPanel {
 			bScore = bVO.getReboundNum() / bVO.getPlayedGames();
 		if (aScore > bScore)
 			aBigger = true;
+		else
+			aBigger=false;
 		aReboundPnl.add(new DataLabel(MyUIDataFormater.formatTo1(aScore)));
 		aReboundPnl.add(new MyRect((int) aScore, aBigger));
 		bReboundPnl.add(new MyRect((int) bScore, !aBigger));
@@ -202,6 +206,8 @@ public class PKChart extends JPanel {
 			bScore = bVO.getAssistNum() / bVO.getPlayedGames();
 		if (aScore > bScore)
 			aBigger = true;
+		else
+			aBigger=false;
 		aAssistPnl.add(new DataLabel(MyUIDataFormater.formatTo1(aScore)));
 		aAssistPnl.add(new MyRect((int) aScore, aBigger));
 		bAssistPnl.add(new MyRect((int) bScore, !aBigger));
@@ -211,6 +217,8 @@ public class PKChart extends JPanel {
 		bScore = bVO.getThreeHitRate() * 100;
 		if (aScore > bScore)
 			aBigger = true;
+		else
+			aBigger=false;
 		aTpPnl.add(new DataLabel(MyUIDataFormater.formatTo1(aScore)));
 		aTpPnl.add(new MyRect((int) aScore, aBigger));
 		bTpPnl.add(new MyRect((int) bScore, !aBigger));
@@ -220,6 +228,8 @@ public class PKChart extends JPanel {
 		bScore = bVO.getFreeThrowHitRate() * 100;
 		if (aScore > bScore)
 			aBigger = true;
+		else
+			aBigger=false;
 		aFsPnl.add(new DataLabel(MyUIDataFormater.formatTo1(aScore)));
 		aFsPnl.add(new MyRect((int) aScore, aBigger));
 		bFsPnl.add(new MyRect((int) bScore, !aBigger));
