@@ -155,7 +155,7 @@ public class PlayerStatsPanel extends JPanel {
 		infoPnl.setBackground(Color.white);
 		bottomPnl.add(infoPnl);
 		infoPnl.setLayout(new GridLayout(2,1));
-		JLabel tableTitle=new JLabel("方差汇总表",JLabel.CENTER);
+		JLabel tableTitle=new JLabel("球龄对Gmsc效率值的显著性影响分析方差汇总表",JLabel.CENTER);
 		tableTitle.setFont(new Font("微软雅黑",Font.PLAIN,15));
 		infoPnl.add(tableTitle);
 		// -----------------------
