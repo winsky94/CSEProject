@@ -1336,6 +1336,14 @@ public class PlayerData  implements PlayerDataService{
 		}
 		
 
+		public double convertHeight(String height){
+			double result=0;
+			String[] buffer=height.split("-");
+			result+=Integer.parseInt(buffer[0]);
+			String b="0."+buffer[1];
+			result+=Integer.parseInt(b);
+			return result;
+		}
 		private int convertMinuteToSecond(String s) {
 			if(!s.contains(":")){
 				return 0;
