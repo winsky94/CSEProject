@@ -12,8 +12,8 @@ public class PlayerStatistic {
 
 	public static void main(String[] args) {
 		PlayerStatistic playerStatistic = new PlayerStatistic();
-		System.out.println(playerStatistic.start().get("GmScEfficiencyValue")
-				.get(0));
+		System.out.println("在main方法中调用"
+				+ playerStatistic.start().get("GmScEfficiencyValue").get(0));
 		playerStatistic.getVariance();
 	}
 
@@ -66,8 +66,8 @@ public class PlayerStatistic {
 		PlayerSalaryData ps = new PlayerSalaryData();
 		ArrayList<PlayerVO> players = player.getPlayerAverageInfo("13-14",
 				"Playoff");
-		String[] type = { "efficiency", "GmScEfficiencyValue",
-				"score_rebound_assist" };
+		String[] type = { "score", "rebound", "assist", "efficiency",
+				"GmScEfficiencyValue", "score_rebound_assist" };
 		for (int index = 0; index < type.length; index++) {
 			String flag = type[index];
 			for (int i = 0; i < players.size(); i++) {
@@ -90,6 +90,7 @@ public class PlayerStatistic {
 
 	/**
 	 * 得到方差汇总表
+	 * 
 	 * @return 方差汇总表的各项数据
 	 */
 	public ArrayList<String> getVariance() {
@@ -106,7 +107,7 @@ public class PlayerStatistic {
 			Y.add(salary / 1000000);
 			initX("score_rebound_assist", vo);
 		}
-		
+
 		ArrayList<String> result = new ArrayList<String>();
 		double xAvg = calculateAvg(getX());
 		double yAvg = calculateAvg(getY());
@@ -122,21 +123,21 @@ public class PlayerStatistic {
 		result.add("回归");
 		result.add("随机");
 		result.add("总和");
-		
+
 		result.add(MyUIDataFormater.formatTo3(Sr));
 		result.add("1");
 		result.add(MyUIDataFormater.formatTo3(Vr));
 		result.add(MyUIDataFormater.formatTo3(F));
 		result.add("3.889");
 		result.add("**");
-		
+
 		result.add(MyUIDataFormater.formatTo3(Se));
 		result.add((getX().size() - 2) + "");
 		result.add(MyUIDataFormater.formatTo3(Ve));
 		result.add("");
 		result.add("6.763");
 		result.add("");
-		
+
 		result.add(MyUIDataFormater.formatTo3(Sr + Se));
 		result.add("199");
 		return result;
@@ -163,8 +164,8 @@ public class PlayerStatistic {
 		// System.out.println("方差：" + Ve);
 		// System.out.println("a:"+a);
 		// System.out.println("b:"+b);
-		 System.out.println("F值：" + F);
-		 System.out.println("拟合度：" + r2);
+		// System.out.println("F值：" + F);
+		// System.out.println("拟合度：" + r2);
 		// System.out.println("标准残差：" + Sy);
 		result.add(MyUIDataFormater.formatTo4(F));
 		result.add(MyUIDataFormater.formatTo4(r2));
@@ -172,7 +173,13 @@ public class PlayerStatistic {
 	}
 
 	public void initX(String flag, PlayerVO vo) {
-		if (flag.equals("efficiency")) {
+		if (flag.equals("score")) {
+			X.add(vo.getScore());
+		} else if (flag.equals("rebound")) {
+			X.add(vo.getReboundNum());
+		} else if (flag.equals("assist")) {
+			X.add(vo.getAssistNum());
+		} else if (flag.equals("efficiency")) {
 			X.add(vo.getEfficiency());
 		} else if (flag.equals("GmScEfficiencyValue")) {
 			X.add(vo.getGmScEfficiencyValue());
