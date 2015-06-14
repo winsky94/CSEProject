@@ -77,5 +77,6 @@ public interface PlayerDataService{
     
     public ArrayList<PlayerVO> getPlayersByTeam(String teamAbLocation);
 			
+    public ArrayList<double[]> singleElementVarianceAnalysis();
     
 }

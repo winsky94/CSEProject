@@ -1,5 +1,6 @@
 package data;
 
+import java.lang.reflect.Array;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -10,6 +11,8 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+
+import com.mysql.jdbc.Buffer;
 
 import vo.MatchVO;
 import vo.PlayerVO;
@@ -371,11 +374,12 @@ public class PlayerData  implements PlayerDataService{
 			ArrayList<PlayerVO> result = new ArrayList<PlayerVO>();
 			PlayerVO player;
 			String seasonbuffer=season.replace("-", "");
+			String namebuffer=name.replace("'", "''");
 			try {
 				Connection con = SqlManager.getConnection();
 				Statement sql = con.createStatement();
 				String query = "select * from "+seasonbuffer+"_"+type+"_"+"playerSeason where name "
-						+ "like'%"+ name + "%'";
+						+ "like'%"+ namebuffer + "%'";
 				ResultSet rs = sql.executeQuery(query);
 				while (rs.next()) {
 					player = new PlayerVO();
@@ -513,11 +517,12 @@ public class PlayerData  implements PlayerDataService{
 			ArrayList<PlayerVO> result = new ArrayList<PlayerVO>();
 		PlayerVO player;
 		String seasonbuffer=season.replace("-", "");
+		String namebuffer=name.replace("'", "''");
 		try {
 			Connection con = SqlManager.getConnection();
 			Statement sql = con.createStatement();
 			String query = "select * from "+seasonbuffer+"_"+type+"_"+"playerAverage where name "
-					+ "like'%"+ name + "%'";
+					+ "like'%"+ namebuffer + "%'";
 			ResultSet rs = sql.executeQuery(query);
 			while (rs.next()) {
 				player = new PlayerVO();
@@ -1227,6 +1232,109 @@ public class PlayerData  implements PlayerDataService{
 			return result;
 		}
 		
+		public ArrayList<double[]> singleElementVarianceAnalysis(){
+			int m=2;
+			int n=3*2;
+			ArrayList<double[]> result=new ArrayList<double[]>();
+			double[] xy=new double[2];
+			double A1[]=new double[3];
+			double A2[]=new double[3];
+//			double A3[]=new double[3];
+			String[] season=new String[]{"10-11","14-15"};
+			String[] type=new String[]{"Preseason","Team","Playoff"};
+			boolean isFiveFull=true;
+			int count=1;
+			ArrayList<PlayerVO> players=getPlayerActiveBaseInfo();
+			Collections.sort(players, new SequenceOfPlayer("exp","asc"));
+			ArrayList<Integer> random=new ArrayList<Integer>(){{add(25);add(27);add(30);add(32);add(35);add(37);add(40);add(42);add(45);add(47);add(50);add(52);}};
+			for(PlayerVO player:players){
+				xy=new double[2];
+				isFiveFull=true;
+				xy[0]=player.getExp();
+				for(int i=0;i<3;i++){
+					ArrayList<PlayerVO> buffer=getPlayerAverageInfo(season[0], type[i], player.getName());
+					if(buffer.size()==0){
+						isFiveFull=false;
+						break;
+					}						
+					else
+					    A1[i]=buffer.get(0).getGmScEfficiencyValue();
+				}
+				if(isFiveFull==false)
+					continue;
+				for(int i=0;i<3;i++){
+					ArrayList<PlayerVO> buffer=getPlayerAverageInfo(season[1], type[i], player.getName());
+					if(buffer.size()==0){
+						isFiveFull=false;
+						break;
+					}
+					else
+					    A2[i]=buffer.get(0).getGmScEfficiencyValue();
+				}
+				if(isFiveFull==false)
+					continue;
+//				for(int i=0;i<3;i++){
+//					ArrayList<PlayerVO> buffer=getPlayerAverageInfo(season[2], type[i], player.getName());
+//					if(buffer.size()==0){
+//						isFiveFull=false;
+//						break;
+//					}
+//					else
+//					    A3[i]=buffer.get(0).getGmScEfficiencyValue();
+//				}
+//				if(isFiveFull==false)
+//					continue;
+			double x1i=0;  double x1j2=0;  double x12=0;
+			double x2i=0;  double x2j2=0;  double x22=0;
+//			double x3i=0;  double x3j2=0;  double x32=0;
+			for(int i=0;i<3;i++){
+				x1i+=A1[i];
+				x1j2+=Math.pow(A1[i], 2);
+			}
+			for(int i=0;i<3;i++){
+				x2i+=A2[i];
+				x2j2+=Math.pow(A2[i], 2);
+			}
+//			for(int i=0;i<3;i++){
+//				x3i+=A3[i];
+//				x3j2+=Math.pow(A3[i], 2);
+//			}
+			
+			double xii=x1i+x2i;
+			double C=Math.pow(xii, 2)/n;
+			double QT=x1j2+x2j2;
+			x12=Math.pow(x1i, 2);
+			x22=Math.pow(x2i, 2);
+//			x32=Math.pow(x3i, 2);
+			double QA=(x12+x22)/3;
+			double ST=QT-C;
+			double SA=QA-C;
+			double Se=ST-SA;
+			double fA=m-1;
+			double fe=n-m;
+			double VA=SA/fA;
+			double Ve=Se/fe;
+			double FA=VA/Ve;
+			
+			double F_05_1_4=7.709;
+			double F_01_1_4=21.198;
+		    
+			 xy[1]=FA;
+			 
+			 if(random.size()!=0&&count==random.get(0)){
+				 random.remove(0);
+				 count++;
+				 continue;
+			 }
+			 result.add(xy);
+//			  System.out.println((count++)+" "+player.getName()+" "+xy[0]+"年   "+xy[1]);
+			  
+			}
+			
+			return result;
+			
+		}
+		
 
 		private int convertMinuteToSecond(String s) {
 			if(!s.contains(":")){
@@ -1278,7 +1386,8 @@ public class PlayerData  implements PlayerDataService{
 //	    playerDataReader.getPlayersByTeam("BKN");
 //		playerDataReader.getRecentMatches("Kobe Bryant", 5);
 //		playerDataReader.getPlayerRecentAverageInfo("32823473");
-		System.out.println(playerDataReader.getRankInNBA("Kobe Bryant", "desc"));
+//		System.out.println(playerDataReader.getRankInNBA("Kobe Bryant", "desc"));
+		playerDataReader.singleElementVarianceAnalysis();
 		long end = System.currentTimeMillis();
 		System.out.println("运行时间：" + (end - start) + "毫秒");// 应该是end - start
 	}

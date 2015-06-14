@@ -217,4 +217,10 @@ public interface PlayerBLService {
 	 * @return 球员名字列表
 	 */
 	public ArrayList<PlayerVO> getPlayersByTeam(String teamAbLocation);
+	
+	/**
+	 * 球龄与Gmsc效率值的单总体方差分析
+	 * @return xy坐标的list
+	 */
+	public ArrayList<double[]> singleElementVarianceAnalysis();
 }
