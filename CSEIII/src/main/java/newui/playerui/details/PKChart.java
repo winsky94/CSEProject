@@ -26,19 +26,20 @@ public class PKChart extends JPanel {
 	private static final long serialVersionUID = 1L;
 	PlayerBLService player;
 	PlayerVO aVO, bVO;
-	ADataPanel aScorePnl, aReboundPnl, aAssistPnl, aTpPnl, aFsPnl;
-	BDataPanel bScorePnl, bReboundPnl, bAssistPnl, bTpPnl, bFsPnl;
-	DataLabel scoreTitle, reboundTitle, assistTitle, tpTitle, fsTitle;
+	ADataPanel aScorePnl, aReboundPnl, aAssistPnl, aBlockPnl, aStealPnl,
+			aTpPnl, aFsPnl;
+	BDataPanel bScorePnl, bReboundPnl, bAssistPnl, bBlockPnl, bStealPnl,
+			bTpPnl, bFsPnl;
+	DataLabel scoreTitle, reboundTitle, assistTitle, blockTitle, stealTitle,
+			tpTitle, fsTitle;
 	boolean aBigger;
 
 	public PKChart(PlayerPKPanel father) {
 		aBigger = false;
 		// ---------------------------------
 		player = Service.player;
-		aVO = player.getPlayerSeasonInfo(Match.getCurrentSeason(), "Team",
-				father.namePnl.aLbl.getText()).get(0);
-		bVO = player.getPlayerSeasonInfo(Match.getCurrentSeason(), "Team",
-				father.namePnl.bLbl.getText()).get(0);
+		aVO = player.getPlayerRecentAverageInfo(father.namePnl.aLbl.getText()).get(0);
+		bVO = player.getPlayerRecentAverageInfo(father.namePnl.bLbl.getText()).get(0);
 		// --------------------------------------
 		GridBagLayout gbl = new GridBagLayout();
 		GridBagConstraints gbc = new GridBagConstraints();
@@ -46,7 +47,7 @@ public class PKChart extends JPanel {
 		setLayout(gbl);
 		setBackground(Color.white);
 		// ------------titleLbl------------------
-		JLabel titleLbl = new JLabel("赛季数据",JLabel.CENTER);
+		JLabel titleLbl = new JLabel("赛季数据", JLabel.CENTER);
 		titleLbl.setFont(new Font("微软雅黑", Font.PLAIN, 15));
 		titleLbl.setForeground(Style.BACK_GREY);
 		gbc.gridx = 0;
@@ -67,7 +68,7 @@ public class PKChart extends JPanel {
 		gbl.setConstraints(aScorePnl, gbc);
 		add(aScorePnl);
 		//
-		scoreTitle = new DataLabel("场均得分");
+		scoreTitle = new DataLabel("得分");
 		gbc.gridx = 5;
 		gbc.gridwidth = 1;
 		gbc.weightx = 1;
@@ -87,7 +88,7 @@ public class PKChart extends JPanel {
 		gbl.setConstraints(aReboundPnl, gbc);
 		add(aReboundPnl);
 		//
-		reboundTitle = new DataLabel("场均篮板");
+		reboundTitle = new DataLabel("篮板");
 		gbc.gridx = 5;
 		gbc.gridwidth = 1;
 		gbc.weightx = 1;
@@ -107,7 +108,7 @@ public class PKChart extends JPanel {
 		gbl.setConstraints(aAssistPnl, gbc);
 		add(aAssistPnl);
 		//
-		assistTitle = new DataLabel("场均助攻");
+		assistTitle = new DataLabel("助攻");
 		gbc.gridx = 5;
 		gbc.gridwidth = 1;
 		gbc.weightx = 1;
@@ -121,9 +122,49 @@ public class PKChart extends JPanel {
 		gbl.setConstraints(bAssistPnl, gbc);
 		add(bAssistPnl);
 		// Layer4-----------------------------
-		aTpPnl = new ADataPanel();
+		aBlockPnl = new ADataPanel();
 		gbc.gridx = 0;
 		gbc.gridy = 4;
+		gbl.setConstraints(aBlockPnl, gbc);
+		add(aBlockPnl);
+		//
+		blockTitle = new DataLabel("盖帽");
+		gbc.gridx = 5;
+		gbc.gridwidth = 1;
+		gbc.weightx = 1;
+		gbl.setConstraints(blockTitle, gbc);
+		add(blockTitle);
+		//
+		bBlockPnl = new BDataPanel();
+		gbc.gridx = 6;
+		gbc.gridwidth = 5;
+		gbc.weightx = 5;
+		gbl.setConstraints(bBlockPnl, gbc);
+		add(bBlockPnl);
+		// Layer4-----------------------------
+		aStealPnl = new ADataPanel();
+		gbc.gridx = 0;
+		gbc.gridy = 5;
+		gbl.setConstraints(aStealPnl, gbc);
+		add(aStealPnl);
+		//
+		stealTitle = new DataLabel("抢断");
+		gbc.gridx = 5;
+		gbc.gridwidth = 1;
+		gbc.weightx = 1;
+		gbl.setConstraints(stealTitle, gbc);
+		add(stealTitle);
+		//
+		bStealPnl = new BDataPanel();
+		gbc.gridx = 6;
+		gbc.gridwidth = 5;
+		gbc.weightx = 5;
+		gbl.setConstraints(bStealPnl, gbc);
+		add(bStealPnl);
+		// Layer6-----------------------------
+		aTpPnl = new ADataPanel();
+		gbc.gridx = 0;
+		gbc.gridy = 6;
 		gbl.setConstraints(aTpPnl, gbc);
 		add(aTpPnl);
 		//
@@ -140,10 +181,10 @@ public class PKChart extends JPanel {
 		gbc.weightx = 5;
 		gbl.setConstraints(bTpPnl, gbc);
 		add(bTpPnl);
-		// Layer5-----------------------------
+		// Layer7-----------------------------
 		aFsPnl = new ADataPanel();
 		gbc.gridx = 0;
-		gbc.gridy = 5;
+		gbc.gridy = 7;
 		gbl.setConstraints(aFsPnl, gbc);
 		add(aFsPnl);
 		//
@@ -162,79 +203,107 @@ public class PKChart extends JPanel {
 		add(bFsPnl);
 		// -------layer1--------------------
 		double aScore, bScore;
-		if (aVO.getPlayedGames() == 0)
-			aScore = 0.0;
-		else
-			aScore = aVO.getScore() / aVO.getPlayedGames();
-		if (bVO.getPlayedGames() == 0)
-			bScore = 0.0;
-		else
-			bScore = bVO.getScore() / bVO.getPlayedGames();
+//		if (aVO.getPlayedGames() == 0)
+//			aScore = 0.0;
+//		else
+//			aScore = aVO.getScore() / aVO.getPlayedGames();
+//		if (bVO.getPlayedGames() == 0)
+//			bScore = 0.0;
+//		else
+//			bScore = bVO.getScore() / bVO.getPlayedGames();
+		aScore=aVO.getScore();
+		bScore=bVO.getScore();
 		if (aScore > bScore)
 			aBigger = true;
 		else
-			aBigger=false;
+			aBigger = false;
 		aScorePnl.add(new DataLabel(MyUIDataFormater.formatTo1(aScore)));
 		aScorePnl.add(new MyRect((int) aScore, aBigger));
 		bScorePnl.add(new MyRect((int) bScore, !aBigger));
 		bScorePnl.add(new DataLabel(MyUIDataFormater.formatTo1(bScore)));
 		// -------layer2--------------------
-		if (aVO.getPlayedGames() == 0)
-			aScore = 0.0;
-		else
-			aScore = aVO.getReboundNum() / aVO.getPlayedGames();
-		if (bVO.getPlayedGames() == 0)
-			bScore = 0.0;
-		else
-			bScore = bVO.getReboundNum() / bVO.getPlayedGames();
+//		if (aVO.getPlayedGames() == 0)
+//			aScore = 0.0;
+//		else
+//			aScore = aVO.getReboundNum() / aVO.getPlayedGames();
+//		if (bVO.getPlayedGames() == 0)
+//			bScore = 0.0;
+//		else
+//			bScore = bVO.getReboundNum() / bVO.getPlayedGames();
+		aScore=aVO.getReboundNum();
+		bScore=bVO.getReboundNum();
 		if (aScore > bScore)
 			aBigger = true;
 		else
-			aBigger=false;
+			aBigger = false;
 		aReboundPnl.add(new DataLabel(MyUIDataFormater.formatTo1(aScore)));
 		aReboundPnl.add(new MyRect((int) aScore, aBigger));
 		bReboundPnl.add(new MyRect((int) bScore, !aBigger));
 		bReboundPnl.add(new DataLabel(MyUIDataFormater.formatTo1(bScore)));
 		// -------layer3-------------------
-		if (aVO.getPlayedGames() == 0)
-			aScore = 0.0;
-		else
-			aScore = aVO.getAssistNum() / aVO.getPlayedGames();
-		if (bVO.getPlayedGames() == 0)
-			bScore = 0.0;
-		else
-			bScore = bVO.getAssistNum() / bVO.getPlayedGames();
+//		if (aVO.getPlayedGames() == 0)
+//			aScore = 0.0;
+//		else
+//			aScore = aVO.getAssistNum() / aVO.getPlayedGames();
+//		if (bVO.getPlayedGames() == 0)
+//			bScore = 0.0;
+//		else
+//			bScore = bVO.getAssistNum() / bVO.getPlayedGames();
+		aScore=aVO.getAssistNum();
+		bScore=bVO.getAssistNum();
 		if (aScore > bScore)
 			aBigger = true;
 		else
-			aBigger=false;
+			aBigger = false;
 		aAssistPnl.add(new DataLabel(MyUIDataFormater.formatTo1(aScore)));
 		aAssistPnl.add(new MyRect((int) aScore, aBigger));
 		bAssistPnl.add(new MyRect((int) bScore, !aBigger));
 		bAssistPnl.add(new DataLabel(MyUIDataFormater.formatTo1(bScore)));
-		// -------layer4-------------------
+		//--------layer4-------------------
+		aScore=aVO.getBlockNum();
+		bScore=bVO.getBlockNum();
+		if (aScore > bScore)
+			aBigger = true;
+		else
+			aBigger = false;
+		aBlockPnl.add(new DataLabel(MyUIDataFormater.formatTo1(aScore)));
+		aBlockPnl.add(new MyRect((int) aScore, aBigger));
+		bBlockPnl.add(new MyRect((int) bScore, !aBigger));
+		bBlockPnl.add(new DataLabel(MyUIDataFormater.formatTo1(bScore)));
+		//--------layer5-------------------
+		aScore=aVO.getStealNum();
+		bScore=bVO.getStealNum();
+		if (aScore > bScore)
+			aBigger = true;
+		else
+			aBigger = false;
+		aStealPnl.add(new DataLabel(MyUIDataFormater.formatTo1(aScore)));
+		aStealPnl.add(new MyRect((int) aScore, aBigger));
+		bStealPnl.add(new MyRect((int) bScore, !aBigger));
+		bStealPnl.add(new DataLabel(MyUIDataFormater.formatTo1(bScore)));
+		// -------layer6-------------------
 		aScore = aVO.getThreeHitRate() * 100;
 		bScore = bVO.getThreeHitRate() * 100;
 		if (aScore > bScore)
 			aBigger = true;
 		else
-			aBigger=false;
+			aBigger = false;
 		aTpPnl.add(new DataLabel(MyUIDataFormater.formatTo1(aScore)));
 		aTpPnl.add(new MyRect((int) aScore, aBigger));
 		bTpPnl.add(new MyRect((int) bScore, !aBigger));
 		bTpPnl.add(new DataLabel(MyUIDataFormater.formatTo1(bScore)));
-		// -------layer5-------------------
+		// -------layer7-------------------
 		aScore = aVO.getFreeThrowHitRate() * 100;
 		bScore = bVO.getFreeThrowHitRate() * 100;
 		if (aScore > bScore)
 			aBigger = true;
 		else
-			aBigger=false;
+			aBigger = false;
 		aFsPnl.add(new DataLabel(MyUIDataFormater.formatTo1(aScore)));
 		aFsPnl.add(new MyRect((int) aScore, aBigger));
 		bFsPnl.add(new MyRect((int) bScore, !aBigger));
 		bFsPnl.add(new DataLabel(MyUIDataFormater.formatTo1(bScore)));
-		
+
 		revalidate();
 	}
 
@@ -247,7 +316,7 @@ public class PKChart extends JPanel {
 		Color fillColor;
 
 		public MyRect(int w, boolean isBlue) {
-			width = w*3;
+			width = w * 4;
 			setPreferredSize(new Dimension(width, 30));
 			if (isBlue)
 				fillColor = Style.DEEP_BLUE;
