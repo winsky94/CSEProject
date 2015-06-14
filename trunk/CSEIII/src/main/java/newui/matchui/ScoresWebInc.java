@@ -146,8 +146,7 @@ public class ScoresWebInc {
 		
 		String season="14-15";
 		
-		//writeToFile(season,date,vsteam,vsscore,type,descore,vistPInfo,homePInfo);
-		//文件目录待商定
+		writeToFile(season,date,vsteam,vsscore,type,descore,vistPInfo,homePInfo);
 		}
 		
 		
@@ -163,7 +162,7 @@ public class ScoresWebInc {
 		getGameID(month+"%2F"+day+"%2F"+year);
 		int n=game_id_list.size();
 		for(String s:game_id_list){
-			System.out.println(s);
+			//System.out.println(s);
 		
 			ArrayList<String> dd=DayChange(month,day);
 			String date=dd.get(0)+"-"+dd.get(1);
@@ -249,15 +248,7 @@ public class ScoresWebInc {
 	}
 	
 	
-	public String getType(String day,String month,String year){
-		String type="";
-		
-		
-		
-		
-		return type;
-		
-	}
+
 	
 	
 	public void writeToFile(String season,String date,String vteam,String vscore,String type,
@@ -333,12 +324,9 @@ public class ScoresWebInc {
 		
 
 	}
-	//��ʱ�洢��txt�� �����ṩֱ�ӷ��ض���ķ���
+	//获取技术统计内容
 	public  ArrayList<String>  getBoxScoreData(String type,String season,String gameID){
-		//String boxUrl="http://stats.nba.com/stats/boxscoretraditionalv2?EndPeriod=10&EndRange=28800&"
-		//		+ "GameID=0041400215&RangeType=2&Season="
-		//		+ "2014-15&SeasonType="
-		//		+ "Playoffs&StartPeriod=1&StartRange=0";
+	
 		String boxUrl1="http://stats.nba.com/stats/boxscoretraditionalv2?EndPeriod=10&EndRange=28800&GameID=";
 		String boxUrl2="&RangeType=2&Season=";
 		String boxUrl3="&SeasonType=";
@@ -346,13 +334,7 @@ public class ScoresWebInc {
 		String url=boxUrl1+gameID+boxUrl2+season+boxUrl3+type+boxUrl4;
 		String dir=WebSec.getURLContent(url, "gbk");
 		ArrayList<String> ply=WebSec.getMatcherSubstrs(dir,playerPattern);
-	//	ArrayList<String> tol=WebSec.getMatcherSubstrs(dir, total);
-		//for(String s:ply)
-		//	System.out.println(s);
-	//	for(String s:tol)
-		//	System.out.println(s);
-	//	ArrayList<ArrayList<String>> pt=new ArrayList<ArrayList<String>>();
-	//	pt.add(ply);pt.add(tol);
+	
 		return ply;
 		
 	}
