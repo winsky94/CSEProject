@@ -119,14 +119,12 @@ public class ScoresWebInc {
 			}
 		}
 		
-		//ArrayList<ArrayList<String>> box=getBoxScoreData(gameType,season, s);
+		
 		ArrayList<String> vistPInfo=new ArrayList<String>();
 		ArrayList<String> homePInfo=new ArrayList<String>();
 	
 		ArrayList<String> pInfo=getBoxScoreData(gameType,season, s);
-		
-	//	ArrayList<String> tInfo=box.get(1);
-		//�����Ա���
+	
 	
 		
 		for(int j=0;j<pInfo.size();j++){
@@ -145,10 +143,11 @@ public class ScoresWebInc {
 			else
 				vistPInfo.add(pp);
 			}
-		//ArrayList<String> dd=DayChange(month,day);
-		//String date=dd.get(0)+"-"+dd.get(1);
+		
 		String season="14-15";
-		writeToFile(season,date,vsteam,vsscore,type,descore,vistPInfo,homePInfo);
+		
+		//writeToFile(season,date,vsteam,vsscore,type,descore,vistPInfo,homePInfo);
+		//文件目录待商定
 		}
 		
 		

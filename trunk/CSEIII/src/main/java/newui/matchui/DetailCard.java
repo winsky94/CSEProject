@@ -237,6 +237,7 @@ public class DetailCard extends JPanel implements MouseListener {
 	}
 
 	public void RefershScore(String score, int line) {
+		System.out.println(score+""+line);
 		if (score != "") {
 			detailPnl.removeAll();
 			int vs = 0, hs = 0;
@@ -333,7 +334,7 @@ public class DetailCard extends JPanel implements MouseListener {
 			detailPnl.add(dl);
 		}
 		if (isHomeEqual) {
-			System.out.println("I'm here");
+			
 			homeScore.setForeground(Style.BACK_GREY);
 			visitingScore.setForeground(Style.BACK_GREY);
 		} else {

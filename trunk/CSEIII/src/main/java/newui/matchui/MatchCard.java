@@ -10,6 +10,7 @@ import java.awt.Image;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -192,8 +193,14 @@ public class MatchCard extends JPanel implements MouseListener {
 			if(isLive){
 				LiveWebInc cc=new LiveWebInc();
 				String s=line.get(2).split("/")[1];
+				Calendar c=Calendar.getInstance();
+				int m=c.get(Calendar.MONTH);int d=c.get(Calendar.DATE);
+				String mm=m+"";String dd=d+"";
+				if(mm.length()==1)mm="0"+mm;
+				if(dd.length()==1)dd="0"+dd;
 				cc.setTeam(line.get(4),line.get(3), s.substring(0, 3), s.substring(3, 6));
-				LiveWebThread th=new LiveWebThread(cc,line.get(0),p,s.substring(0, 3), s.substring(3, 6));
+				LiveWebThread th=new LiveWebThread(cc,line.get(0),p,s.substring(0, 3), s.substring(3, 6),
+						mm+"-"+dd);
 				th.startThread();
 			}
 			

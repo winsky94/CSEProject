@@ -28,15 +28,19 @@ public class LiveWebThread extends Thread{
 	Pattern p;Matcher m;
 	private boolean islasts=false;
 	String date="";
-	public LiveWebThread(LiveWebInc c,String id,MatchDetailPanel s,String vtm,String htm) {
+	private boolean isOverLastLine=false;
+	public LiveWebThread(LiveWebInc c,String id,MatchDetailPanel s,String vtm,
+			String htm,String date) {
 		super();
 		this.c = c;
 		this.gameid=id;
 		this.ac=s;
 		p=Pattern.compile(regex);
 		this.htm=htm;this.vtm=vtm;
+		this.date=date;
 		//Matcher m=p.matcher(destStr);
 	}
+	
 
 	//判断今日是否有比赛  然后去爬取直播
 	//什么时候庭呢！
@@ -63,30 +67,33 @@ public class LiveWebThread extends Thread{
 						}
 						
 					}
-						
-				
 				}
-					//ac.getString(s.get(i));
-				//ac.refresh(res, line);
+					
 				ac.RefreshLiveAndScore(res, line, lastscore);
+				islasts=false;
 				ac.revalidate();
 				ac.repaint();
 				size=s.size();
 				
 				
 			}
-			System.out.println(s.size());
+			//System.out.println(s.size());
 			if(s.size()>0)
 				if(s.get(0).contains("00:00.0"))
-					{line+=1;size=0;islasts=false;}
+					{line+=1;size=0;
+					 isOverLastLine=true;
+					}
 			if(line>4){
 				String[] ss=lastscore.split("-");
+				if(isOverLastLine){
 				if(!ss[0].equals(ss[1])){
 					//调用get技术统计方法
+					ScoresWebInc web=new ScoresWebInc();
+					web.getGameInfoById(gameid, date);
 					this.stop=true;
 				}
-				else
-					islasts=false;
+				}
+				
 			}
 			try {
 				//System.out.println("我到这里啦");
@@ -122,7 +129,8 @@ public class LiveWebThread extends Thread{
 		if(d.length()==1) {d="0"+d;}
 		if(td.length()==1) td="0"+td;//to eng nab need to min one day
 		//not complete day change
-			
+		td="4";
+		d="5";
 		String date=m+"%2F"+td+"%2F2015";
 		ArrayList<ArrayList<String>> IdAndStatus=live.getGameStatus(date);
 		if(IdAndStatus.size()==0)
@@ -154,7 +162,7 @@ public class LiveWebThread extends Thread{
 			//	mPanel.initLiveData(season,m+"-"+d, s.substring(0, 3)+"-"+ s.substring(3, 6));
 				mm.setIsLive(true);
 				LiveWebThread th=new LiveWebThread(cc,line.get(0),mm,s.substring(0, 3),
-						s.substring(3, 6));
+						s.substring(3, 6),m+"-"+d);
 				th.startThread();
 			}
 		}
