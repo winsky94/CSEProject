@@ -13,7 +13,7 @@ public class PlayerStatistic {
 	public static void main(String[] args) {
 		PlayerStatistic playerStatistic = new PlayerStatistic();
 		System.out.println("在main方法中调用，"
-				+ playerStatistic.start().get("score").get(1));
+				+ playerStatistic.start().get("foul").get(1));
 		playerStatistic.getVariance();
 	}
 
@@ -57,9 +57,10 @@ public class PlayerStatistic {
 	}
 
 	/**
-	 * @return hashMap中key值是 "score", "rebound", "assist",
-	 *         "efficiency","GmScEfficiencyValue", "score_rebound_assist"
-	 *         hashMap中value是一个Arraylist，第一个元素是F值，第二个元素是拟合度
+	 * @return hashMap中key值是 "matchNum","score", "rebound", "assist",
+	 *         "efficiency", "GmScEfficiencyValue",
+	 *         "score_rebound_assist","steal","foul"
+	 *         hashMap中value是一个Arraylist，第一个元素是F值，第二个元素是拟合度，第三个元素是回归系数
 	 */
 	public HashMap<String, ArrayList<String>> start() {
 		HashMap<String, ArrayList<String>> result = new HashMap<String, ArrayList<String>>();
@@ -67,8 +68,9 @@ public class PlayerStatistic {
 		PlayerSalaryData ps = new PlayerSalaryData();
 		ArrayList<PlayerVO> players = player.getPlayerAverageInfo("13-14",
 				"Playoff");
-		String[] type = { "score", "rebound", "assist", "efficiency",
-				"GmScEfficiencyValue", "score_rebound_assist" };
+		String[] type = { "matchNum", "score", "rebound", "assist",
+				"efficiency", "GmScEfficiencyValue", "score_rebound_assist",
+				"steal", "foul" };
 		for (int index = 0; index < type.length; index++) {
 			String flag = type[index];
 			for (int i = 0; i < players.size(); i++) {
@@ -135,9 +137,9 @@ public class PlayerStatistic {
 		result.add(MyUIDataFormater.formatTo3(Se));
 		result.add((getX().size() - 2) + "");
 		result.add(MyUIDataFormater.formatTo3(Ve));
-//		result.add("");
+		// result.add("");
 		result.add("6.763");
-//		result.add("");
+		// result.add("");
 
 		result.add(MyUIDataFormater.formatTo3(Sr + Se));
 		result.add("199");
@@ -170,6 +172,7 @@ public class PlayerStatistic {
 		// System.out.println("标准残差：" + Sy);
 		result.add(MyUIDataFormater.formatTo4(F));
 		result.add(MyUIDataFormater.formatTo4(r2));
+		result.add(MyUIDataFormater.formatTo3(b));
 		return result;
 	}
 
@@ -186,6 +189,12 @@ public class PlayerStatistic {
 			X.add(vo.getGmScEfficiencyValue());
 		} else if (flag.equals("score_rebound_assist")) {
 			X.add(vo.getScore_rebound_assist());
+		} else if (flag.equals("matchNum")) {
+			X.add((double) vo.getPlayedGames());
+		} else if (flag.equals("steal")) {
+			X.add(vo.getStealNum());
+		} else if (flag.equals("foul")) {
+			X.add(vo.getFoulNum());
 		}
 
 	}
