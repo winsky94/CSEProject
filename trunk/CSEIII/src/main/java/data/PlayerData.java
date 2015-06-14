@@ -312,6 +312,7 @@ public class PlayerData  implements PlayerDataService{
 					player.setName(rs.getString("name"));
 					player.setOwingTeam(rs.getString("owingTeam"));
 					player.setLeague(rs.getString("league"));
+					player.setPosition(rs.getString("position"));
 					player.setPlayedGames(rs.getInt("playedGames"));
 					player.setGameStartingNum(rs.getInt("gameStartingNum"));
 					player.setReboundNum(rs.getDouble("reboundNum"));
@@ -381,6 +382,7 @@ public class PlayerData  implements PlayerDataService{
 					player.setName(rs.getString("name"));
 					player.setOwingTeam(rs.getString("owingTeam"));
 					player.setLeague(rs.getString("league"));
+					player.setPosition(rs.getString("position"));
 					player.setPlayedGames(rs.getInt("playedGames"));
 					player.setGameStartingNum(rs.getInt("gameStartingNum"));
 					player.setReboundNum(rs.getDouble("reboundNum"));
@@ -452,6 +454,7 @@ public class PlayerData  implements PlayerDataService{
 					player.setName(rs.getString("name"));
 					player.setOwingTeam(rs.getString("owingTeam"));
 					player.setLeague(rs.getString("league"));
+					player.setPosition(rs.getString("position"));
 					player.setPlayedGames(rs.getInt("playedGames"));
 					player.setGameStartingNum(rs.getInt("gameStartingNum"));
 					player.setReboundNum(rs.getDouble("reboundNum"));
@@ -521,6 +524,7 @@ public class PlayerData  implements PlayerDataService{
 				player.setName(rs.getString("name"));
 				player.setOwingTeam(rs.getString("owingTeam"));
 				player.setLeague(rs.getString("league"));
+				player.setPosition(rs.getString("position"));
 				player.setPlayedGames(rs.getInt("playedGames"));
 				player.setGameStartingNum(rs.getInt("gameStartingNum"));
 				player.setReboundNum(rs.getDouble("reboundNum"));
@@ -638,6 +642,7 @@ public class PlayerData  implements PlayerDataService{
 					player.setName(rs.getString("name"));
 					player.setOwingTeam(rs.getString("owingTeam"));
 					player.setLeague(rs.getString("league"));
+					player.setPosition(rs.getString("position"));
 					player.setPlayedGames(rs.getInt("playedGames"));
 					player.setGameStartingNum(rs.getInt("gameStartingNum"));
 					player.setReboundNum(rs.getDouble("reboundNum"));
@@ -707,6 +712,7 @@ public class PlayerData  implements PlayerDataService{
 					player.setName(rs.getString("name"));
 					player.setOwingTeam(rs.getString("owingTeam"));
 					player.setLeague(rs.getString("league"));
+					player.setPosition(rs.getString("position"));
 					player.setPlayedGames(rs.getInt("playedGames"));
 					player.setGameStartingNum(rs.getInt("gameStartingNum"));
 					player.setReboundNum(rs.getDouble("reboundNum"));
@@ -780,6 +786,7 @@ public class PlayerData  implements PlayerDataService{
 					player.setName(rs.getString("name"));
 					player.setOwingTeam(rs.getString("owingTeam"));
 					player.setLeague(rs.getString("league"));
+					player.setPosition(rs.getString("position"));
 					player.setPlayedGames(rs.getInt("playedGames"));
 					player.setGameStartingNum(rs.getInt("gameStartingNum"));
 					player.setReboundNum(rs.getDouble("reboundNum"));
@@ -850,6 +857,7 @@ public class PlayerData  implements PlayerDataService{
 					player.setName(rs.getString("name"));
 					player.setOwingTeam(rs.getString("owingTeam"));
 					player.setLeague(rs.getString("league"));
+					player.setPosition(rs.getString("position"));
 					player.setPlayedGames(rs.getInt("playedGames"));
 					player.setGameStartingNum(rs.getInt("gameStartingNum"));
 					player.setReboundNum(rs.getDouble("reboundNum"));

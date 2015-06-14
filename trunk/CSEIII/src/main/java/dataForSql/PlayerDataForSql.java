@@ -859,6 +859,7 @@ public class PlayerDataForSql {
 						+ "name varchar(40) not null default 'null',"
 						+ "owingTeam varchar(20) not null default 'null',"
 						+ "league varchar(20) not null default 'null',"
+						+ "position varchar(20) not null default 'null',"
 						+ "playedGames int not null default 0,"
 						+ "gameStartingNum int not null default 0,"
 						+ "reboundNum double not null default 0,"
@@ -893,7 +894,7 @@ public class PlayerDataForSql {
 						+ "doubleDoubleNum double not null default 0,"
 						+ "primary key(playerID));");
 				PreparedStatement statement = con
-						.prepareStatement("INSERT INTO  "+seasonbuffer+"_"+type+"_"+"playerSeason"+" VALUES(?, ?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+						.prepareStatement("INSERT INTO  "+seasonbuffer+"_"+type+"_"+"playerSeason"+" VALUES(?, ?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
 				int count = 1;
 
 				ArrayList<PlayerVO> players=getPlayerSeasonInfo(season, type);
@@ -903,38 +904,39 @@ public class PlayerDataForSql {
 					statement.setString(2, player.getName().replace("''", "'"));
 					statement.setString(3, player.getOwingTeam());
 					statement.setString(4, player.getLeague());
-					statement.setInt(5, player.getPlayedGames());
-					statement.setInt(6, player.getGameStartingNum());
-					statement.setDouble(7, player.getReboundNum());
-					statement.setDouble(8, player.getAssistNum());
-					statement.setDouble(9, player.getPresentTime());
-					statement.setDouble(10, player.getShootHitRate());
-					statement.setDouble(11, player.getThreeHitRate());
-					statement.setDouble(12, player.getFreeThrowHitRate());                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
-					statement.setDouble(13, player.getOffenReboundNum());
-					statement.setDouble(14, player.getDefenReboundNum());
-					statement.setDouble(15, player.getStealNum());
-					statement.setDouble(16, player.getBlockNum());
-					statement.setDouble(17, player.getFoulNum());
-					statement.setDouble(18, player.getTurnOverNum());
-					statement.setDouble(19, player.getScore());
-					statement.setDouble(20, player.getEfficiency());
-					statement.setDouble(21, player.getRecentFiveMatchesScoreUpRate());
-					statement.setDouble(22, player.getRecentFiveMatchesReboundUpRate());
-					statement.setDouble(23, player.getRecentFiveMatchesAssistUpRate());
-					statement.setDouble(24, player.getGmScEfficiencyValue());
-					statement.setDouble(25, player.getTrueHitRate());
-					statement.setDouble(26, player.getShootHitEfficiency());
-					statement.setDouble(27, player.getReboundRate());
-					statement.setDouble(28, player.getOffenReboundRate());
-					statement.setDouble(29, player.getDefenReboundRate());
-					statement.setDouble(30, player.getAssistRate());
-					statement.setDouble(31, player.getStealRate());
-					statement.setDouble(32, player.getBlockRate());
-					statement.setDouble(33, player.getTurnOverRate());
-					statement.setDouble(34, player.getUsageRate());
-					statement.setDouble(35, player.getScore_rebound_assist());
-					statement.setDouble(36, player.getDoubleDoubleNum());
+					statement.setString(5, player.getPosition());
+					statement.setInt(6, player.getPlayedGames());
+					statement.setInt(7, player.getGameStartingNum());
+					statement.setDouble(8, player.getReboundNum());
+					statement.setDouble(9, player.getAssistNum());
+					statement.setDouble(10, player.getPresentTime());
+					statement.setDouble(11, player.getShootHitRate());
+					statement.setDouble(12, player.getThreeHitRate());
+					statement.setDouble(13, player.getFreeThrowHitRate());                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
+					statement.setDouble(14, player.getOffenReboundNum());
+					statement.setDouble(15, player.getDefenReboundNum());
+					statement.setDouble(16, player.getStealNum());
+					statement.setDouble(17, player.getBlockNum());
+					statement.setDouble(18, player.getFoulNum());
+					statement.setDouble(19, player.getTurnOverNum());
+					statement.setDouble(20, player.getScore());
+					statement.setDouble(21, player.getEfficiency());
+					statement.setDouble(22, player.getRecentFiveMatchesScoreUpRate());
+					statement.setDouble(23, player.getRecentFiveMatchesReboundUpRate());
+					statement.setDouble(24, player.getRecentFiveMatchesAssistUpRate());
+					statement.setDouble(25, player.getGmScEfficiencyValue());
+					statement.setDouble(26, player.getTrueHitRate());
+					statement.setDouble(27, player.getShootHitEfficiency());
+					statement.setDouble(28, player.getReboundRate());
+					statement.setDouble(29, player.getOffenReboundRate());
+					statement.setDouble(30, player.getDefenReboundRate());
+					statement.setDouble(31, player.getAssistRate());
+					statement.setDouble(32, player.getStealRate());
+					statement.setDouble(33, player.getBlockRate());
+					statement.setDouble(34, player.getTurnOverRate());
+					statement.setDouble(35, player.getUsageRate());
+					statement.setDouble(36, player.getScore_rebound_assist());
+					statement.setDouble(37, player.getDoubleDoubleNum());
 					statement.addBatch();
 
 					System.out.println(count - 1);
@@ -962,6 +964,7 @@ public class PlayerDataForSql {
 						+ "name varchar(40) not null default 'null',"
 						+ "owingTeam varchar(20) not null default 'null',"
 						+ "league varchar(20) not null default 'null',"
+						+ "position varchar(20) not null default 'null',"
 						+ "playedGames int not null default 0,"
 						+ "gameStartingNum int not null default 0,"
 						+ "reboundNum double not null default 0,"
@@ -996,7 +999,7 @@ public class PlayerDataForSql {
 						+ "doubleDoubleNum double not null default 0,"
 						+ "primary key(playerID));");
 				PreparedStatement statement = con
-						.prepareStatement("INSERT INTO  "+seasonbuffer+"_"+type+"_"+"playerAverage"+" VALUES(?, ?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+						.prepareStatement("INSERT INTO  "+seasonbuffer+"_"+type+"_"+"playerAverage"+" VALUES(?, ?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
 				int count = 1;
 
 				for (PlayerVO player : getPlayerAverageInfo(season, type)) {
@@ -1005,38 +1008,39 @@ public class PlayerDataForSql {
 					statement.setString(2, player.getName().replace("''", "'"));
 					statement.setString(3, player.getOwingTeam());
 					statement.setString(4, player.getLeague());
-					statement.setInt(5, player.getPlayedGames());
-					statement.setInt(6, player.getGameStartingNum());
-					statement.setDouble(7, player.getReboundNum());
-					statement.setDouble(8, player.getAssistNum());
-					statement.setDouble(9, player.getPresentTime());
-					statement.setDouble(10, player.getShootHitRate());
-					statement.setDouble(11, player.getThreeHitRate());
-					statement.setDouble(12, player.getFreeThrowHitRate());                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
-					statement.setDouble(13, player.getOffenReboundNum());
-					statement.setDouble(14, player.getDefenReboundNum());
-					statement.setDouble(15, player.getStealNum());
-					statement.setDouble(16, player.getBlockNum());
-					statement.setDouble(17, player.getFoulNum());
-					statement.setDouble(18, player.getTurnOverNum());
-					statement.setDouble(19, player.getScore());
-					statement.setDouble(20, player.getEfficiency());
-					statement.setDouble(21, player.getRecentFiveMatchesScoreUpRate());
-					statement.setDouble(22, player.getRecentFiveMatchesReboundUpRate());
-					statement.setDouble(23, player.getRecentFiveMatchesAssistUpRate());
-					statement.setDouble(24, player.getGmScEfficiencyValue());
-					statement.setDouble(25, player.getTrueHitRate());
-					statement.setDouble(26, player.getShootHitEfficiency());
-					statement.setDouble(27, player.getReboundRate());
-					statement.setDouble(28, player.getOffenReboundRate());
-					statement.setDouble(29, player.getDefenReboundRate());
-					statement.setDouble(30, player.getAssistRate());
-					statement.setDouble(31, player.getStealRate());
-					statement.setDouble(32, player.getBlockRate());
-					statement.setDouble(33, player.getTurnOverRate());
-					statement.setDouble(34, player.getUsageRate());
-					statement.setDouble(35, player.getScore_rebound_assist());
-					statement.setDouble(36, player.getDoubleDoubleNum());
+					statement.setString(5, player.getPosition());
+					statement.setInt(6, player.getPlayedGames());
+					statement.setInt(7, player.getGameStartingNum());
+					statement.setDouble(8, player.getReboundNum());
+					statement.setDouble(9, player.getAssistNum());
+					statement.setDouble(10, player.getPresentTime());
+					statement.setDouble(11, player.getShootHitRate());
+					statement.setDouble(12, player.getThreeHitRate());
+					statement.setDouble(13, player.getFreeThrowHitRate());                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
+					statement.setDouble(14, player.getOffenReboundNum());
+					statement.setDouble(15, player.getDefenReboundNum());
+					statement.setDouble(16, player.getStealNum());
+					statement.setDouble(17, player.getBlockNum());
+					statement.setDouble(18, player.getFoulNum());
+					statement.setDouble(19, player.getTurnOverNum());
+					statement.setDouble(20, player.getScore());
+					statement.setDouble(21, player.getEfficiency());
+					statement.setDouble(22, player.getRecentFiveMatchesScoreUpRate());
+					statement.setDouble(23, player.getRecentFiveMatchesReboundUpRate());
+					statement.setDouble(24, player.getRecentFiveMatchesAssistUpRate());
+					statement.setDouble(25, player.getGmScEfficiencyValue());
+					statement.setDouble(26, player.getTrueHitRate());
+					statement.setDouble(27, player.getShootHitEfficiency());
+					statement.setDouble(28, player.getReboundRate());
+					statement.setDouble(29, player.getOffenReboundRate());
+					statement.setDouble(30, player.getDefenReboundRate());
+					statement.setDouble(31, player.getAssistRate());
+					statement.setDouble(32, player.getStealRate());
+					statement.setDouble(33, player.getBlockRate());
+					statement.setDouble(34, player.getTurnOverRate());
+					statement.setDouble(35, player.getUsageRate());
+					statement.setDouble(36, player.getScore_rebound_assist());
+					statement.setDouble(37, player.getDoubleDoubleNum());
 					statement.addBatch();
 
 					System.out.println(count - 1);
