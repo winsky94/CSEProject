@@ -30,21 +30,7 @@ public class ScoresWebInc {
 	 * */
 	ArrayList<String> game_id_list;
 	String fileName="";//�����ļ���  ͬһ���һ���ļ���  һ������һ��txt
-	/**
-	 * �ļ�������ʾ��13-14
-	 * �ļ�����ʾ����_����_����  e.g13-14_01-01_CHA-LAC
-	 * �ļ����ݸ�ʽ���ֺž�ΪӢ��
-	 * ע��һ��ʮ�µ׵����һ���ܶ�������ʼ ��ǰ��ֻ��10�·�
-	 * 
-	 * ����;�������;�ȷ�;��������(Playoff Preseason Team);
-	 * ��һ�ڱȷ�;�ڶ��ڱȷ�;����ڱȷ�;��n�ڱȷ�;
-	 * ����1��д(mainly visit team)Ϊɶ����û�ֺ���
-	 * ��Ա��;λ��;COMMENT��;MIN;FGM;FGA;FG_PCT;FG3M;FG3A;FG3_PCT;FTM;FTA;FT_PCT;
-	 * OREB;DREB;REB;AST;STL;BLK;TO;PF;PTS;PLUS_MINUS
-	 * ���ķ���
-	 * ��Ա��;λ��;��;�ڳ�ʱ��;Ͷ��������;Ͷ��������;Ͷ��������;���������;��ֳ�����;���������;����������;���������;
-	 * ����������;��������;����������;��������;����;������;��ñ��;ʧ����;������;�÷�;Ч��?;
-	 * */
+	
 	String scoreUrl="http://stats.nba.com/stats/scoreboardV2?DayOffset=0&LeagueID=00&gameDate=";
 	String gameDate="05%2F12%2F2015";
 	
@@ -63,8 +49,6 @@ public class ScoresWebInc {
 	String linescorePattern="[A-Z]{3}\",(\"[\\w \\.]*\",){2}\"[\\d]*-[\\d]*\"(,(null|[\\d]*)){15}"; //�����Summary
 	//e.gCLE","Cleveland","Cavaliers","3-2",25,29,26,26,0,0,0,0,0,0,0,0,0,0,106
 	String typeIDPattern=gameIDPattern; //�������ظ�
-	//�����traditional�ļ�  
-	//��ȡ������Ա���
 	
 	String playerPattern="[A-Z]{3}\",\"[\\w. ]*\",[\\d]*,\"[\\w. ]*\",\"[A-Z]?\",\"\",((\"[\\d]*:[\\d]*\")|[\\d]*)(,-?[\\d]*(\\.[\\d]{3})?){19}";
 	boolean isChange=false;
@@ -78,7 +62,7 @@ public class ScoresWebInc {
 		//10��30�� ��ʼ������  4��20�˿�ʼ������ 2012��Ϊ����
 		//ע��15�� 5��6����δ��ȥ
 		String[] month={"10","11","12","01","02","03","04","05","06"};
-		season="2010-11";
+		season="2014-15";
 		//26 16
 		for(int i=3;i<month.length;i++){
 			int m=Integer.parseInt(month[i]);
@@ -105,9 +89,9 @@ public class ScoresWebInc {
 				String day=j+"";
 				if(day.length()==1)
 					day="0"+day;
-				String year="2010";
+				String year="2014";
 				if(m<10)
-					year="2011";
+					year="2015";
 					
 				 scoreSec.setDate(day,month[i],year);
 			}
@@ -118,11 +102,61 @@ public class ScoresWebInc {
 		
 	}
 	
+	public void getGameInfoById (String s,String date){
+		ArrayList<String> sumList=getScoreSummary(s);
+		if(sumList.size()!=0){
+		String[] vist=sumList.get(0).replace("\"", "").split(",");
+		String[] homt=sumList.get(1).replace("\"", "").split(",");
+		String vsteam=vist[0]+"-"+homt[0];
+		String vsscore=vist[18]+"-"+homt[18];
+		//���ж�
+		String type=recordType;
+		ArrayList<String> descore=new ArrayList<String>();
+		for(int i=4;i<18;i++){
+			if(!(vist[i].equals("0")||vist[i].equals("null"))){
+				String scor=vist[i]+"-"+homt[i];
+				descore.add(scor);
+			}
+		}
+		
+		//ArrayList<ArrayList<String>> box=getBoxScoreData(gameType,season, s);
+		ArrayList<String> vistPInfo=new ArrayList<String>();
+		ArrayList<String> homePInfo=new ArrayList<String>();
+	
+		ArrayList<String> pInfo=getBoxScoreData(gameType,season, s);
+		
+	//	ArrayList<String> tInfo=box.get(1);
+		//�����Ա���
+	
+		
+		for(int j=0;j<pInfo.size();j++){
+			String pp=pInfo.get(j);
+			int index=pp.indexOf(",");
+			index=pp.indexOf(",",index+1);
+			//if(pp.contains(":")){
+				index=pp.indexOf(",",index+1);
+			//}
+			pp=pp.substring(index+2);
+			pp=pp.replace("\"","");
+			//if(pp.contains(":"))
+			pp=pp.replace(",,", ",");
+			if(pInfo.get(j).contains(homt[0]))
+				homePInfo.add(pp);
+			else
+				vistPInfo.add(pp);
+			}
+		//ArrayList<String> dd=DayChange(month,day);
+		//String date=dd.get(0)+"-"+dd.get(1);
+		String season="14-15";
+		writeToFile(season,date,vsteam,vsscore,type,descore,vistPInfo,homePInfo);
+		}
+		
+		
+	}
+	
 	public  void setDate(String day,String month,String year){
-		//����12-13��������ʾ��
-		//��ǰ-����-����  10��-10~4-4~6  �����ޱ���  Preseaon Team���·��ж�  Playoff��CommonSeries�ļ��ж� �б�Ҫ�� û�а�  
-		//�������·��ж�
-		File file=new File("10-11");
+		
+		File file=new File("14-15");
 		if(!file.exists()){
 			file.mkdirs();
 		}
@@ -131,63 +165,14 @@ public class ScoresWebInc {
 		int n=game_id_list.size();
 		for(String s:game_id_list){
 			System.out.println(s);
-			ArrayList<String> sumList=getScoreSummary(s);
-			if(sumList.size()!=0){
-			String[] vist=sumList.get(0).replace("\"", "").split(",");
-			String[] homt=sumList.get(1).replace("\"", "").split(",");
-			String vsteam=vist[0]+"-"+homt[0];
-			String vsscore=vist[18]+"-"+homt[18];
-			//���ж�
-			String type=recordType;
-			ArrayList<String> descore=new ArrayList<String>();
-			for(int i=4;i<18;i++){
-				if(!(vist[i].equals("0")||vist[i].equals("null"))){
-					String scor=vist[i]+"-"+homt[i];
-					descore.add(scor);
-				}
-			}
-			
-			//ArrayList<ArrayList<String>> box=getBoxScoreData(gameType,season, s);
-			ArrayList<String> vistPInfo=new ArrayList<String>();
-			ArrayList<String> homePInfo=new ArrayList<String>();
-		
-			ArrayList<String> pInfo=getBoxScoreData(gameType,season, s);
-			
-		//	ArrayList<String> tInfo=box.get(1);
-			//�����Ա���
-		
-			
-			for(int j=0;j<pInfo.size();j++){
-				String pp=pInfo.get(j);
-				int index=pp.indexOf(",");
-				index=pp.indexOf(",",index+1);
-				//if(pp.contains(":")){
-					index=pp.indexOf(",",index+1);
-				//}
-				pp=pp.substring(index+2);
-				pp=pp.replace("\"","");
-				//if(pp.contains(":"))
-				pp=pp.replace(",,", ",");
-				if(pInfo.get(j).contains(homt[0]))
-					homePInfo.add(pp);
-				else
-					vistPInfo.add(pp);
-			}
-			//��������
-			/*
-			for(int i=0;i<tInfo.size();i++){
-				String t=tInfo.get(i);
-				if(t.contains(vist[0])){
-					int index=
-				}
-			}*/
-			
 		
 			ArrayList<String> dd=DayChange(month,day);
 			String date=dd.get(0)+"-"+dd.get(1);
-			String season="10-11";
-			writeToFile(season,date,vsteam,vsscore,type,descore,vistPInfo,homePInfo);
-			}
+			String season="14-15";
+			getGameInfoById ( s, date);
+			//writeToFile(season,date,vsteam,vsscore,type,descore,vistPInfo,homePInfo);
+			//}
+			
 		}
 	}
 	

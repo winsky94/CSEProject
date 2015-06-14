@@ -27,6 +27,7 @@ public class LiveWebThread extends Thread{
 	private MatchDetailPanel ac;
 	Pattern p;Matcher m;
 	private boolean islasts=false;
+	String date="";
 	public LiveWebThread(LiveWebInc c,String id,MatchDetailPanel s,String vtm,String htm) {
 		super();
 		this.c = c;
@@ -80,8 +81,10 @@ public class LiveWebThread extends Thread{
 					{line+=1;size=0;islasts=false;}
 			if(line>4){
 				String[] ss=lastscore.split("-");
-				if(!ss[0].equals(ss[1]))
+				if(!ss[0].equals(ss[1])){
+					//调用get技术统计方法
 					this.stop=true;
+				}
 				else
 					islasts=false;
 			}
