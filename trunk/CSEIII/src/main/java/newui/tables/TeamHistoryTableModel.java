@@ -199,19 +199,19 @@ public class TeamHistoryTableModel extends MyTableModel {
 
 		last.add(tname + "全队");
 		if (n == 0) {
-			last.add(0);
+			last.add("-");
 			last.add("-");
 			last.add("-");
 			last.add(0.0);// 投篮命中率
 			last.add(0.0);// 三分命中率
 			last.add(0.0);// 罚球命中率
 		} else {
-			last.add(present / n);
 			last.add("-");
 			last.add("-");
-			last.add(MyUIDataFormater.formatTo3(shootHitRate / n));
-			last.add(MyUIDataFormater.formatTo3(threeHitRate / n));
-			last.add(MyUIDataFormater.formatTo3(freeHitRate / n));
+			last.add("-");
+			last.add(MyUIDataFormater.formatTo3(shootHitRate*100 / n));
+			last.add(MyUIDataFormater.formatTo3(threeHitRate*100 / n));
+			last.add(MyUIDataFormater.formatTo3(freeHitRate*100 / n));
 		}
 		last.add(MyUIDataFormater.formatTo1(offendNum));
 		last.add(MyUIDataFormater.formatTo1(defendNum));
