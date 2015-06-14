@@ -1246,7 +1246,7 @@ public class PlayerData  implements PlayerDataService{
 			int count=1;
 			ArrayList<PlayerVO> players=getPlayerActiveBaseInfo();
 			Collections.sort(players, new SequenceOfPlayer("exp","asc"));
-			ArrayList<Integer> random=new ArrayList<Integer>(){{add(25);add(27);add(30);add(32);add(35);add(37);add(40);add(42);add(45);add(47);add(50);add(52);add(56);}};
+			ArrayList<Integer> random=new ArrayList<Integer>()                                                       {{add(36);add(42);add(45);add(46);add(47);add(52);add(53);add(56);}};
 			for(PlayerVO player:players){
 				xy=new double[2];
 				isFiveFull=true;
@@ -1357,7 +1357,7 @@ public class PlayerData  implements PlayerDataService{
 					else
 					    A1[i]=buffer.get(0).getGmScEfficiencyValue();
 				}
-				if(A1[0]==0&&A1[1]==0&&A1[3]==0)
+				if(A1[0]==0&&A1[1]==0&&A1[2]==0)
 				   return new ArrayList<String>(){{add("因素(水平间)");add("误差(水平内)");add("总和");add("0");add("0");add("0");add("0");add("0");add("");add("0");add("0");add("0");add("0");add("0");add("0");}};
 
 				int a=0;
@@ -1384,7 +1384,7 @@ public class PlayerData  implements PlayerDataService{
 					    A2[i]=buffer.get(0).getGmScEfficiencyValue();
 				}
 				
-				if(A2[0]==0&&A2[1]==0&&A2[3]==0)
+				if(A2[0]==0&&A2[1]==0&&A2[2]==0)
 					   return new ArrayList<String>(){{add("因素(水平间)");add("误差(水平内)");add("总和");add("0");add("0");add("0");add("0");add("0");add("");add("0");add("0");add("0");add("0");add("0");add("0");}};
 
 
