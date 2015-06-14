@@ -1246,7 +1246,7 @@ public class PlayerData  implements PlayerDataService{
 			int count=1;
 			ArrayList<PlayerVO> players=getPlayerActiveBaseInfo();
 			Collections.sort(players, new SequenceOfPlayer("exp","asc"));
-			ArrayList<Integer> random=new ArrayList<Integer>(){{add(25);add(27);add(30);add(32);add(35);add(37);add(40);add(42);add(45);add(47);add(50);add(52);}};
+			ArrayList<Integer> random=new ArrayList<Integer>(){{add(25);add(27);add(30);add(32);add(35);add(37);add(40);add(42);add(45);add(47);add(50);add(52);add(56);}};
 			for(PlayerVO player:players){
 				xy=new double[2];
 				isFiveFull=true;
@@ -1327,9 +1327,118 @@ public class PlayerData  implements PlayerDataService{
 				 continue;
 			 }
 			 result.add(xy);
-//			  System.out.println((count++)+" "+player.getName()+" "+xy[0]+"年   "+xy[1]+" 总偏差平方和="+ST+" 水平间偏差="+SA+" 水平内偏差="+Se+" VA="+VA+" Ve="+Ve);
+			  System.out.println((count++)+" "+player.getName()+" "+xy[0]+"年   "+xy[1]+" 总偏差平方和="+ST+" 水平间偏差="+SA+" 水平内偏差="+Se+" VA="+VA+" Ve="+Ve);
 			  
 			}
+			
+			return result;
+			
+		}
+		
+		public ArrayList<String> singleElementVarianceAnalysis(String name){
+			int m=2;
+			int n=3*2;
+			ArrayList<String> result=new ArrayList<String>();
+			double[] xy=new double[2];
+			double A1[]=new double[3];
+			double A2[]=new double[3];
+			String[] season=new String[]{"10-11","14-15"};
+			String[] type=new String[]{"Preseason","Team","Playoff"};
+			boolean isFiveFull=true;
+			int count=1;
+			PlayerVO player=getPlayerBaseInfo(name);
+				xy=new double[2];
+				xy[0]=player.getExp();
+				for(int i=0;i<3;i++){
+					ArrayList<PlayerVO> buffer=getPlayerAverageInfo(season[0], type[i], player.getName());
+					if(buffer.size()==0){
+						A1[i]=0;
+					}						
+					else
+					    A1[i]=buffer.get(0).getGmScEfficiencyValue();
+				}
+				if(A1[0]==0&&A1[1]==0&&A1[3]==0)
+				   return new ArrayList<String>(){{add("因素(水平间)");add("误差(水平内)");add("总和");add("0");add("0");add("0");add("0");add("0");add("");add("0");add("0");add("0");add("0");add("0");add("0");}};
+
+				int a=0;
+				int len=0;
+				for(int i=0;i<3;i++){
+				  if(A1[i]!=0){
+				     a+=A1[i];
+				     len++;
+				  }  
+				}
+				
+				double avg=(double)a/len;
+				for(int i=0;i<3;i++){
+				   if(A1[i]==0)
+					   A1[i]=avg;
+				}
+				   
+				for(int i=0;i<3;i++){
+					ArrayList<PlayerVO> buffer=getPlayerAverageInfo(season[1], type[i], player.getName());
+					if(buffer.size()==0){
+						A2[i]=0;
+					}
+					else
+					    A2[i]=buffer.get(0).getGmScEfficiencyValue();
+				}
+				
+				if(A2[0]==0&&A2[1]==0&&A2[3]==0)
+					   return new ArrayList<String>(){{add("因素(水平间)");add("误差(水平内)");add("总和");add("0");add("0");add("0");add("0");add("0");add("");add("0");add("0");add("0");add("0");add("0");add("0");}};
+
+
+					   a=0;
+					   len=0;
+						for(int i=0;i<3;i++){
+						  if(A2[i]!=0){
+						     a+=A2[i];
+						     len++;
+						  }  
+						}
+						
+						avg=(double)a/len;
+						for(int i=0;i<3;i++){
+						   if(A2[i]==0)
+							   A2[i]=avg;
+						}
+
+			double x1i=0;  double x1j2=0;  double x12=0;
+			double x2i=0;  double x2j2=0;  double x22=0;
+
+			for(int i=0;i<3;i++){
+				x1i+=A1[i];
+				x1j2+=Math.pow(A1[i], 2);
+			}
+			for(int i=0;i<3;i++){
+				x2i+=A2[i];
+				x2j2+=Math.pow(A2[i], 2);
+			}
+			
+			double xii=x1i+x2i;
+			double C=Math.pow(xii, 2)/n;
+			double QT=x1j2+x2j2;
+			x12=Math.pow(x1i, 2);
+			x22=Math.pow(x2i, 2);
+			double QA=(x12+x22)/3;
+			double ST=QT-C;
+			double SA=QA-C;
+			double Se=ST-SA;
+			double fA=m-1;
+			double fe=n-m;
+			double VA=SA/fA;
+			double Ve=Se/fe;
+			double FA=VA/Ve;
+			
+			double F_05_1_4=7.709;
+			double F_01_1_4=21.198;
+		    
+			 xy[1]=FA;
+			 
+
+//			  System.out.println((count++)+" "+player.getName()+" "+xy[0]+"年   "+xy[1]+" 总偏差平方和="+ST+" 水平间偏差="+SA+" 水平内偏差="+Se+" VA="+VA+" Ve="+Ve);
+			 
+			result.add("");
 			
 			return result;
 			
