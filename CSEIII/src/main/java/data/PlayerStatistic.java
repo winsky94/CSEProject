@@ -12,8 +12,8 @@ public class PlayerStatistic {
 
 	public static void main(String[] args) {
 		PlayerStatistic playerStatistic = new PlayerStatistic();
-		System.out.println("在main方法中调用"
-				+ playerStatistic.start().get("GmScEfficiencyValue").get(0));
+		System.out.println("在main方法中调用，"
+				+ playerStatistic.start().get("score").get(1));
 		playerStatistic.getVariance();
 	}
 
@@ -57,8 +57,9 @@ public class PlayerStatistic {
 	}
 
 	/**
-	 * @return hashMap中key值是 "efficiency", "GmScEfficiencyValue",
-	 *         "score_rebound_assist" value是一个Arraylist，第一个元素是F值，第二个元素是拟合度
+	 * @return hashMap中key值是 "score", "rebound", "assist",
+	 *         "efficiency","GmScEfficiencyValue", "score_rebound_assist"
+	 *         hashMap中value是一个Arraylist，第一个元素是F值，第二个元素是拟合度
 	 */
 	public HashMap<String, ArrayList<String>> start() {
 		HashMap<String, ArrayList<String>> result = new HashMap<String, ArrayList<String>>();
