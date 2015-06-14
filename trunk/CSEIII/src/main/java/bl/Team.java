@@ -44,18 +44,18 @@ public class Team implements TeamBLService {
 //		 result=team.getTeamSeasonInfo("12-13", "Team");
 //		 result = team.getTeamSeasonInfo("10-11", "Team", "NJN");
 //		 result=team.getOrderedTeamsByAverage(season,type, "score", "desc", 5);
-//		 result = team.getSeasonHotTeam("12-13", "Playoff", "score", 5);
-		ArrayList<MatchVO> matches=new ArrayList<MatchVO>();
-		matches=team.getRecentMatches("BOS", 82);
+		 result = team.getSeasonHotTeam("14-15", "Playoff", "score", 5);
+//		ArrayList<MatchVO> matches=new ArrayList<MatchVO>();
+//		matches=team.getRecentMatches("BOS", 82);
 		long end = System.currentTimeMillis();
 		System.out.println("结果大小：" + result.size());
 
-		for(int i=0;i<matches.size();i++){
-			System.out.println(matches.get(i).getDate());
-		}
+//		for(int i=0;i<matches.size();i++){
+//			System.out.println(matches.get(i).getDate());
+//		}
 		
-//		for (TeamVO vo : result) {
-//			// System.out.println(vo.getAbLocation() + " " + vo.getScore());
+		for (TeamVO vo : result) {
+			 System.out.println(vo.getAbLocation() + " " + vo.getScore());
 //			System.out.println(vo.getAbLocation());
 //			System.out.println("winRate：" + vo.getWinRate());
 //			System.out.println("shootHitNum：" + vo.getShootHitNum());
@@ -86,8 +86,8 @@ public class Team implements TeamBLService {
 //					+ vo.getDefenReboundEfficiency());
 //			System.out.println("stealEfficiency:" + vo.getStealEfficiency());
 //			System.out.println("assistRate:" + vo.getAssistRate());
-//			System.out.println("----------------------------------");
-//		}
+			System.out.println("----------------------------------");
+		}
 
 		System.out.println("执行时间：" + (end - start) + "毫秒");
 	}
@@ -165,7 +165,7 @@ public class Team implements TeamBLService {
 		}
 
 		ArrayList<TeamVO> teams = new ArrayList<TeamVO>();
-		teams = getTeamSeasonInfo(season, Match.changeTypeCHToEN(type));
+		teams = getTeamAverageInfo(season, Match.changeTypeCHToEN(type));
 		Collections.sort(teams, new SequenceOfTeam(condition, order));
 		if (num < 0) {
 			result = teams;
