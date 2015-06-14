@@ -7,6 +7,8 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Image;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -19,6 +21,7 @@ import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 
+import newui.MyUIDataFormater;
 import newui.Service;
 import newui.Style;
 import newui.mainui.MainFrame;
@@ -26,7 +29,6 @@ import newui.tables.HotTableModel;
 import newui.tables.MyTableCellRenderer;
 import newui.teamui.TeamDetailPanel;
 import vo.TeamVO;
-import bl.Match;
 import bl.Team;
 import blService.MatchBLService;
 import blService.TeamBLService;
@@ -52,6 +54,12 @@ public class HotTeamPanel extends HotFatherPanel implements MouseListener {
 	TeamBLService team;
 	ArrayList<TeamVO> vlist;
 
+	private String[] sortsCH = { "场均得分", "场均篮板", "场均助攻", "场均盖帽", "场均抢断",
+			"三分命中率", "投篮命中率", "罚球命中率" };
+	private String[] sortsEN = { "score", "reboundNum", "assistNum",
+			"blockNum", "stealNum", "threeHitRate", "shootHitRate",
+			"freeThrowHitRate" };
+
 	public HotTeamPanel() {
 
 		team = Service.team;
@@ -65,10 +73,10 @@ public class HotTeamPanel extends HotFatherPanel implements MouseListener {
 		seasonLbl.setForeground(Style.DEEP_BLUE);
 		seasonPnl.add(seasonLbl);
 		//
-		MatchBLService match =Service.match;
-		ArrayList<String> allSeason=new ArrayList<String>();
-		allSeason=match.getAllSeasons();
-		int size=allSeason.size();
+		MatchBLService match = Service.match;
+		ArrayList<String> allSeason = new ArrayList<String>();
+		allSeason = match.getAllSeasons();
+		int size = allSeason.size();
 		String[] season = (String[]) allSeason.toArray(new String[size]);
 		seasonBox = new JComboBox<String>(season);
 		seasonBox.setBackground(Color.white);
@@ -76,7 +84,7 @@ public class HotTeamPanel extends HotFatherPanel implements MouseListener {
 		seasonBox.setForeground(Style.DEEP_BLUE);
 		seasonPnl.add(seasonBox);
 		// ----seasonTypeBox------
-		String[] seasonType = {  "季后赛 ","常规赛", "季前赛"  };
+		String[] seasonType = { "季后赛 ", "常规赛", "季前赛" };
 		seasonTypeBox = new JComboBox<String>(seasonType);
 		seasonTypeBox.setBackground(Color.white);
 		seasonTypeBox.setFont(new Font("微软雅黑", Font.PLAIN, 15));
@@ -192,20 +200,35 @@ public class HotTeamPanel extends HotFatherPanel implements MouseListener {
 		}
 		jsp.getViewport().add(table);
 		thr = new HotThread(this, "score");
-		Refresh("sort");
-//		thr.startThread();
+		Refresh("score");
+		// thr.startThread();
 
+		seasonBox.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				// TODO Auto-generated method stub
+				Refresh(changeSortCHToEN(currentBtn.getText()));
+				thr = new HotThread(HotTeamPanel.this, currentBtn.getText());
+			}
+
+		});
+		seasonTypeBox.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				// TODO Auto-generated method stub
+				Refresh(changeSortCHToEN(currentBtn.getText()));
+				thr = new HotThread(HotTeamPanel.this, currentBtn.getText());
+			}
+		});
 	}
 
 	public void Refresh(String sort) {
-		// 目前写死了是14-15
 		vlist = team.getSeasonHotTeam((String) seasonBox.getSelectedItem(),
 				(String) seasonTypeBox.getSelectedItem(), sort, 5);
 		if (vlist != null && vlist.size() != 0) {
 			model.setHead(head);
 			TeamVO topOne = vlist.get(0);
 			ImageIcon bestTeamIco = Team.getTeamImage(topOne.getAbLocation());
-			bestTeamIco.setImage(bestTeamIco.getImage().getScaledInstance(160, 160, Image.SCALE_SMOOTH));
+			bestTeamIco.setImage(bestTeamIco.getImage().getScaledInstance(160,
+					160, Image.SCALE_SMOOTH));
 			teamIcon.setIcon(bestTeamIco);
 			teamNameLbl.setText(Team.changeTeamNameENToCH(topOne
 					.getAbLocation()));
@@ -216,22 +239,27 @@ public class HotTeamPanel extends HotFatherPanel implements MouseListener {
 				unionLbl.setText("东部联盟");
 			else
 				unionLbl.setText("西部联盟");
-			if (sort.equals("score")) {
-				data.setText(topOne.getScore() + "");
-			} else if (sort.equals("reboundNum")) {
-				data.setText(topOne.getReboundNum() + "");
-			} else if (sort.equals("assistNum")) {
-				data.setText(topOne.getAssistNum() + "");
-			} else if (sort.equals("blockNum")) {
-				data.setText(topOne.getBlockNum() + "");
-			} else if (sort.equals("stealNum")) {
-				data.setText(topOne.getStealNum() + "");
-			} else if (sort.equals("threeHitRate")) {
-				data.setText(topOne.getThreeHitRate() + "");
-			} else if (sort.equals("shootHitRate")) {
-				data.setText(topOne.getShootHitRate() + "");
+			if (sort.equals("score") || sort.equals("场均得分")) {
+				data.setText(MyUIDataFormater.formatTo1(topOne.getScore()));
+			} else if (sort.equals("reboundNum") || sort.equals("场均篮板")) {
+				data.setText(MyUIDataFormater.formatTo1(topOne.getReboundNum()));
+			} else if (sort.equals("assistNum") || sort.equals("场均助攻")) {
+				data.setText(MyUIDataFormater.formatTo1(topOne.getAssistNum()));
+			} else if (sort.equals("blockNum") || sort.equals("场均盖帽")) {
+				data.setText(MyUIDataFormater.formatTo1(topOne.getBlockNum()));
+			} else if (sort.equals("stealNum") || sort.equals("场均抢断")) {
+				data.setText(MyUIDataFormater.formatTo1(topOne.getStealNum()));
+			} else if (sort.equals("threeHitRate") || sort.equals("三分命中率")) {
+				data.setText(MyUIDataFormater.formatTo1(topOne
+						.getThreeHitRate() * 100));
+			} else if (sort.equals("shootHitRate") || sort.equals("投篮命中率")) {
+				data.setText(MyUIDataFormater.formatTo1(topOne
+						.getShootHitRate() * 100));
+			} else if (sort.equals("freeThrowHitRate") || sort.equals("罚球命中率")) {
+				data.setText(MyUIDataFormater.formatTo1(topOne
+						.getFreeThrowHitRate() * 100));
 			} else {
-				data.setText(topOne.getFreeThrowHitRate() + "");
+				System.err.println("刷新内容不匹配，为:" + sort);
 			}
 			model.Refresh(vlist);
 			table.revalidate();
@@ -319,7 +347,7 @@ public class HotTeamPanel extends HotFatherPanel implements MouseListener {
 
 		}
 		currentBtn.setBackground(Style.HOT_BLUEFOCUS);
-//		thr.startThread();
+		// thr.startThread();
 	}
 
 	public void mousePressed(MouseEvent e) {
@@ -349,6 +377,17 @@ public class HotTeamPanel extends HotFatherPanel implements MouseListener {
 
 	}
 
+	private String changeSortCHToEN(String CH) {
+		String EN=CH;
+		for(int i=0;i<sortsCH.length;i++){
+			if(sortsCH[i].equals(CH)){
+				EN=sortsEN[i];
+				break;
+			}
+		}
+		return EN;
+	}
+
 	class HotTeamModel extends HotTableModel {
 		public HotTeamModel(String[] head) {
 			super(head);
@@ -363,7 +402,8 @@ public class HotTeamPanel extends HotFatherPanel implements MouseListener {
 				line.add(num);
 				num++;
 				ImageIcon bestTeamIco = Team.getTeamImage(v.getAbLocation());
-				bestTeamIco.setImage(bestTeamIco.getImage().getScaledInstance(63, 63, Image.SCALE_SMOOTH));
+				bestTeamIco.setImage(bestTeamIco.getImage().getScaledInstance(
+						63, 63, Image.SCALE_SMOOTH));
 				// 设置宽高
 
 				line.add(bestTeamIco);
@@ -374,21 +414,21 @@ public class HotTeamPanel extends HotFatherPanel implements MouseListener {
 				else
 					line.add("西部联盟");
 				if (currentBtn == scoreBtn) {
-					line.add(v.getScore());
+					line.add(MyUIDataFormater.formatTo1(v.getScore()));
 				} else if (currentBtn == reboundBtn)
-					line.add(v.getReboundNum());
+					line.add(MyUIDataFormater.formatTo1(v.getReboundNum()));
 				else if (currentBtn == assistBtn)
-					line.add(v.getAssistNum());
+					line.add(MyUIDataFormater.formatTo1(v.getAssistNum()));
 				else if (currentBtn == blockBtn)
-					line.add(v.getBlockNum());
+					line.add(MyUIDataFormater.formatTo1(v.getBlockNum()));
 				else if (currentBtn == stealBtn)
-					line.add(v.getStealNum());
+					line.add(MyUIDataFormater.formatTo1(v.getStealNum()));
 				else if (currentBtn == threeRateBtn)
-					line.add(v.getThreeHitRate());
+					line.add(MyUIDataFormater.formatTo1(v.getThreeHitRate() * 100));
 				else if (currentBtn == shootRateBtn)
-					line.add(v.getShootHitRate());
+					line.add(MyUIDataFormater.formatTo1(v.getShootHitRate() * 100));
 				else
-					line.add(v.getFreeThrowHitRate());
+					line.add(MyUIDataFormater.formatTo1(v.getFreeThrowHitRate() * 100));
 				content.add(line);
 			}
 
