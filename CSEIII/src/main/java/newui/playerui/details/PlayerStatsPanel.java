@@ -217,13 +217,14 @@ public class PlayerStatsPanel extends JPanel {
 		// ---------------------------------------------------------------
 		else {
 			ArrayList<ArrayList<PlayerVO>> list = new ArrayList<ArrayList<PlayerVO>>();
-			list.add(player.getPlayerAverageInfo("10-11", "all", item));
-			list.add(player.getPlayerAverageInfo("11-12", "all", item));
-			list.add(player.getPlayerAverageInfo("12-13", "all", item));
-			list.add(player.getPlayerAverageInfo("13-14", "all", item));
-			list.add(player.getPlayerAverageInfo("14-15", "all", item));
+			
 			String[] years = { "2010", "2011", "2012", "2013", "2014" };
 			if (item.equals("得分")) {
+				list.add(player.getPlayerAverageInfo("10-11", "Team", item));
+				list.add(player.getPlayerAverageInfo("11-12", "Team", item));
+				list.add(player.getPlayerAverageInfo("12-13", "Team", item));
+				list.add(player.getPlayerAverageInfo("13-14", "Team", item));
+				list.add(player.getPlayerAverageInfo("14-15", "Team", item));
 				for (int i = 0; i < 5; i++) {
 					if (list.get(i).size() == 0)
 						dataset.addValue(0.0, name, years[i]);
@@ -233,6 +234,11 @@ public class PlayerStatsPanel extends JPanel {
 				}
 				return makeChart("近五年得分","年","得分",dataset);
 			} else if (item.equals("篮板")) {
+				list.add(player.getPlayerAverageInfo("10-11", "Team", "篮板数"));
+				list.add(player.getPlayerAverageInfo("11-12", "Team", "篮板数"));
+				list.add(player.getPlayerAverageInfo("12-13", "Team", "篮板数"));
+				list.add(player.getPlayerAverageInfo("13-14", "Team", "篮板数"));
+				list.add(player.getPlayerAverageInfo("14-15", "Team", "篮板数"));
 				for (int i = 0; i < 5; i++) {
 					if (list.get(i).size() == 0)
 						dataset.addValue(0.0, name, years[i]);
@@ -243,6 +249,11 @@ public class PlayerStatsPanel extends JPanel {
 				return makeChart("近五年篮板","年","篮板数",dataset);
 
 			} else if (item.equals("助攻")) {
+				list.add(player.getPlayerAverageInfo("10-11", "Team", "助攻数"));
+				list.add(player.getPlayerAverageInfo("11-12", "Team", "助攻数"));
+				list.add(player.getPlayerAverageInfo("12-13", "Team", "助攻数"));
+				list.add(player.getPlayerAverageInfo("13-14", "Team", "助攻数"));
+				list.add(player.getPlayerAverageInfo("14-15", "Team", "助攻数"));
 				for (int i = 0; i < 5; i++) {
 					if (list.get(i).size() == 0)
 						dataset.addValue(0.0, name, years[i]);
@@ -253,6 +264,11 @@ public class PlayerStatsPanel extends JPanel {
 				return makeChart("近五年助攻","年","助攻数",dataset);
 
 			} else if (item.equals("三分%")) {
+				list.add(player.getPlayerAverageInfo("10-11", "Team", "三分命中率"));
+				list.add(player.getPlayerAverageInfo("11-12", "Team", "三分命中率"));
+				list.add(player.getPlayerAverageInfo("12-13", "Team", "三分命中率"));
+				list.add(player.getPlayerAverageInfo("13-14", "Team", "三分命中率"));
+				list.add(player.getPlayerAverageInfo("14-15", "Team", "三分命中率"));
 				for (int i = 0; i < 5; i++) {
 					if (list.get(i).size() == 0)
 						dataset.addValue(0.0, name, years[i]);
@@ -263,6 +279,11 @@ public class PlayerStatsPanel extends JPanel {
 				return makeChart("近五年三分%","年","三分%",dataset);
 
 			} else if (item.equals("罚球%")) {
+				list.add(player.getPlayerAverageInfo("10-11", "Team", "罚球命中率"));
+				list.add(player.getPlayerAverageInfo("11-12", "Team", "罚球命中率"));
+				list.add(player.getPlayerAverageInfo("12-13", "Team", "罚球命中率"));
+				list.add(player.getPlayerAverageInfo("13-14", "Team", "罚球命中率"));
+				list.add(player.getPlayerAverageInfo("14-15", "Team", "罚球命中率"));
 				for (int i = 0; i < 5; i++) {
 					if (list.get(i).size() == 0)
 						dataset.addValue(0.0, name, years[i]);
