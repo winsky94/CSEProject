@@ -5,9 +5,10 @@ import java.util.ArrayList;
 import vo.LiveMatchDetailVO;
 import blService.LiveTxtBLService;
 import data.LiveTxtData;
+import dataservice.LiveTxtDataService;
 
 public class LiveTxt implements LiveTxtBLService {
-	private LiveTxtData liveTxtData;
+	public LiveTxtDataService liveTxtData;
 
 	public LiveTxt() {
 		liveTxtData = new LiveTxtData();
@@ -37,6 +38,10 @@ public class LiveTxt implements LiveTxtBLService {
 			String teams) {
 		// TODO Auto-generated method stub
 		return liveTxtData.getLiveTxt(season, date, teams);
+	}
+	
+	public void addToSql(String s){
+		liveTxtData.addToSql(s);
 	}
 
 }
