@@ -33,7 +33,7 @@ public class SalaryPanel extends FatherPanel {
 	PlayerStatistic ps;
 	public SalaryPanel() {
 		ps = new PlayerStatistic();
-		titleLbl = new JLabel("球员薪水与效率的回归分析");
+		titleLbl = new JLabel("球员薪水与在场表现的回归分析");
 		titleLbl.setFont(new Font("微软雅黑", Font.PLAIN, 20));
 		gbc.gridx = 0;
 		gbc.gridy = 1;
