@@ -22,6 +22,7 @@ public class LiveTxtData implements LiveTxtDataService {
 	private Statement sql = null;
 	private ResultSet resultSet = null;
 	private int partNum = -1;// 比赛总节数 ！！！注意最后导入数据库时导的总节数不是从vo中拿的，而是使用此变量
+	static int count=0;
 
 	public static void main(String[] args) {
 		LiveTxtData liveTxtData = new LiveTxtData();
@@ -138,6 +139,25 @@ public class LiveTxtData implements LiveTxtDataService {
 		return files;
 	}
 
+	public void addToSql(String s){
+		try {
+			connection = SqlManager.getConnection();
+			connection.setAutoCommit(false);
+			PreparedStatement preStatement = connection
+					.prepareStatement("INSERT INTO matchLive VALUES(?,?,?,?,?,?,?)");
+			preStatement.setString(count, s);
+			connection.commit();
+		} catch (ClassNotFoundException e) {
+			// TODO 自动生成的 catch 块
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO 自动生成的 catch 块
+			e.printStackTrace();
+		} finally {
+			closeMySql();
+		}
+	}
+	
 	private void exportToSql() {
 		ArrayList<String> files = new ArrayList<String>();
 		files = getMatchLiveFiles();

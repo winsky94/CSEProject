@@ -55,6 +55,7 @@ public class LiveTextPanel extends JPanel implements ActionListener,MouseListene
 	String season;
 	String date;
 	String teams;
+	
     
     public LiveTextPanel(String team1,String team2,String season,String date){
     	partNum=1;
@@ -176,6 +177,7 @@ public class LiveTextPanel extends JPanel implements ActionListener,MouseListene
 	    	for(int i=data.size()-1;i>=0;i--){
 	    		String s=data.get(i);
 		    	matches.get(partNum).add(0,new LiveMatchDetailVO("null", "null", "null", partNum, partNum, s));
+		    	aa
 	    	}
 		    mtm.add(data);
 	        jt.revalidate();

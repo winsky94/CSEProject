@@ -18,4 +18,10 @@ public interface LiveTxtDataService {
 	 */
 	public ArrayList<LiveMatchDetailVO> getLiveTxt(String season, String date,
 			String teams);
+	
+	/**
+	 * 边直播边往数据库里加直播数据
+	 * @param s
+	 */
+	public void addToSql(String s);
 }
