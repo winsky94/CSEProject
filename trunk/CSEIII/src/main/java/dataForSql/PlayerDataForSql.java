@@ -1150,6 +1150,12 @@ public class PlayerDataForSql {
 				}
 			}
 		}
+		
+		public void exportLiveToSql(String season,String seasonType){
+			exportSeasonInfoToSql(season, seasonType);
+			exportAverageInfoToSql(season, seasonType);
+		}
+		
 		public static void main(String[] args) {
 			PlayerDataForSql playerData=new PlayerDataForSql();
 			playerData.allInit();
