@@ -868,9 +868,25 @@ public class PlayerData  implements PlayerDataService{
 			try {
 				Connection con = SqlManager.getConnection();
 				Statement sql = con.createStatement();
-				String query = "select * from "+seasonbuffer+"_"+type+"_"+"playerAverage "
-						+ "where position like '%"+position+"%' and league='"+union+"' "
-						+ "order by "+column+" "+order+" limit "+num;
+				String query = "select * from "+seasonbuffer+"_"+type+"_"+"playerAverage ";
+//						+ "where position like '%"+position+"%' and league='"+union+"' "
+//						+ "order by "+column+" "+order+" limit "+num;
+				
+				int flag=0;
+				if(!position.equals("all")){
+					query+="where position like '%"+position+"%' ";
+					flag=1;
+				}
+				if(!union.equals("all")){
+					if(flag==0){
+						query+="where league='"+union+"' ";
+					}
+					else{
+						query+="and league='"+union+"' ";
+					}
+				}
+				query+="order by "+column+" "+order+" limit "+num;
+				
 				ResultSet rs = sql.executeQuery(query);
 				while (rs.next()) {
 					player = new PlayerVO();
