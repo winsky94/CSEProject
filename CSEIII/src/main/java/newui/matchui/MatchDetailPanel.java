@@ -50,7 +50,7 @@ public class MatchDetailPanel extends FatherPanel {
 		card = new DetailCard(v);
 		gbc.gridy = 1;
 		gbc.gridheight = 4;
-		gbc.weighty = 4;
+		gbc.weighty = 0.5;
 		gbl.setConstraints(card, gbc);
 		add(card);
 		// ----titlePnl--------
