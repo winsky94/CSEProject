@@ -6,9 +6,12 @@ import java.awt.Font;
 import java.util.ArrayList;
 
 import javax.swing.JLabel;
+import javax.swing.JTable;
 
 import newui.FatherPanel;
 import newui.Service;
+import newui.Style;
+import newui.tables.MyTableCellRenderer;
 
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
@@ -77,4 +80,5 @@ public class AgePanel extends FatherPanel {
 		plot.addRangeMarker(valuemarker2, Layer.BACKGROUND);
 		return chart;
 	}
+	
 }
