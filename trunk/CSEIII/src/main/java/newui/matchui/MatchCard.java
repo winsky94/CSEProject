@@ -248,7 +248,11 @@ public class MatchCard extends JPanel implements MouseListener {
 		f.repaint();
 	}
 	public void setLive(boolean is){
-		this.isLive=is;
+		if(this.line!=null)
+			this.isLive=is;
+		else {
+			this.isLive=false;
+		}
 	}
 	
 	public void setGameID(ArrayList<String> line){
