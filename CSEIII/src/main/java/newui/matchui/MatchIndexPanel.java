@@ -277,6 +277,7 @@ public class MatchIndexPanel extends FatherPanel {
 	
 		ScoresWebInc inc=new ScoresWebInc();
 		ArrayList<String> sumList=inc.getScoreSummary(gameid);
+		
 		ArrayList<String> descore=new ArrayList<String>();
 		if(sumList.size()!=0){
 		String[] vist=sumList.get(0).replace("\"", "").split(",");
