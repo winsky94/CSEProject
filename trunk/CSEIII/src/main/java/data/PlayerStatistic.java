@@ -89,6 +89,17 @@ public class PlayerStatistic {
 
 		return result;
 	}
+	
+	/**
+	 * 预估球员下一赛季的薪水
+	 * @param a 回归截距
+	 * @param b 回归系数
+	 * @param x 上一赛季的场均效率、GmSc效率值或者得分_篮板_助攻（1：1：1）
+	 * @return 线性回归预估的下一赛季的薪水
+	 */
+	public double getEstimatedSalary(double a,double b,double x){
+		return calculateY(a, b, x);
+	}
 
 	/**
 	 * 得到方差汇总表
