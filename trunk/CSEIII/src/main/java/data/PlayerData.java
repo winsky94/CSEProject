@@ -1178,7 +1178,7 @@ public class PlayerData  implements PlayerDataService{
 
 		public ArrayList<PlayerVO> getSeasonHotPlayer(String season,String type,String column,
 				int num) {
-			return getOrderedPlayersBySeason(season, type, column, "desc", num);
+			return getOrderedPlayersByAverage(season, type, column, "desc", num);
 		}
 
 		public ArrayList<PlayerVO> getBestImprovedPlayer(String season,String type,String column, int num) {
