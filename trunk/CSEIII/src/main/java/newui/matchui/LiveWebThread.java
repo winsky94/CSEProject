@@ -7,6 +7,8 @@ import java.util.regex.Pattern;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
+import data.MatchData;
+import dataForSql.PlayerDataForSql;
 import vo.MatchVO;
 
 /*
@@ -83,7 +85,6 @@ public class LiveWebThread extends Thread{
 					{line+=1;size=0;
 					 isOverLastLine=true;
 					}else{
-						
 						isOverLastLine=false;
 					}
 			if(line>4){
@@ -91,8 +92,7 @@ public class LiveWebThread extends Thread{
 				if(isOverLastLine){
 				if(!ss[0].equals(ss[1])){
 					//调用get技术统计方法
-					//ScoresWebInc web=new ScoresWebInc();
-					//web.getGameInfoById(gameid, date);
+					SaveToSql();
 					this.stop=true;
 				}else{
 					isOverLastLine=false;
@@ -119,6 +119,21 @@ public class LiveWebThread extends Thread{
 	
 	public void stopThread(){
 		this.stop=true;
+	}
+	
+	
+	public void SaveToSql(){
+		//调用get技术统计方法
+		ScoresWebInc web=new ScoresWebInc();
+		String path=web.getGameInfoById(gameid, date);
+		MatchData match=new MatchData();
+		if(!path.equals("")){
+			match.exportLiveToSql(path);
+		}
+		PlayerDataForSql p=new PlayerDataForSql();
+		String season=web.getSeason(date);
+		p.exportLiveToSql(season, "Playoff");
+		
 	}
 	public static void main(String[] args) {
 		//ArrayList<LiveWebThread>

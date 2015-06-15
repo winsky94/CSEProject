@@ -5,6 +5,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -58,9 +59,7 @@ public class ScoresWebInc {
 	}
 	public static void main(String[] args) {
 		ScoresWebInc scoreSec=new ScoresWebInc();
-		//�����ж�  �ܱ�4 14-15
-		//10��30�� ��ʼ������  4��20�˿�ʼ������ 2012��Ϊ����
-		//ע��15�� 5��6����δ��ȥ
+	
 		String[] month={"10","11","12","01","02","03","04","05","06"};
 		season="2014-15";
 		//26 16
@@ -102,7 +101,8 @@ public class ScoresWebInc {
 		
 	}
 	
-	public void getGameInfoById (String s,String date){
+	public String getGameInfoById (String s,String date){
+		String path="";
 		ArrayList<String> sumList=getScoreSummary(s);
 		if(sumList.size()!=0){
 		String[] vist=sumList.get(0).replace("\"", "").split(",");
@@ -144,11 +144,26 @@ public class ScoresWebInc {
 				vistPInfo.add(pp);
 			}
 		
-		String season="14-15";
+		String seasons=getSeason(date);;
 		
-		writeToFile(season,date,vsteam,vsscore,type,descore,vistPInfo,homePInfo);
+		 path=writeToFile(season,date,vsteam,vsscore,type,descore,vistPInfo,homePInfo);
 		}
+		return path;
 		
+	}
+	
+	public String getSeason(String date){
+		   
+			String[] d=date.split("-");
+			int year=Calendar.getInstance().get(Calendar.YEAR);
+			String y=(year+"").substring(2,4);
+			
+			if(Integer.parseInt(d[0])>=10){
+				y+=("-"+((year+1)+"").substring(2, 4));
+			}else{
+				y=((year-1)+"").substring(2, 4)+"-"+y;
+			}
+			return y;
 		
 	}
 	
@@ -251,9 +266,9 @@ public class ScoresWebInc {
 
 	
 	
-	public void writeToFile(String season,String date,String vteam,String vscore,String type,
+	public String writeToFile(String season,String date,String vteam,String vscore,String type,
 			ArrayList<String> detail,ArrayList<String> vInfo,ArrayList<String> hInfo){
-		
+		String path="src/matches";
 		String s=date+","+vteam+","+vscore+","+type+",";
 		String score="";
 		for(String ss:detail)
@@ -279,7 +294,8 @@ public class ScoresWebInc {
 			}else if(hInfo.size()==0){
 				tip="_lh";
 			}
-			File file=new File(season+"/"+season+"_"+date+"_"+vteam+tip+".txt");
+			path+=season+"_"+date+"_"+vteam+tip+".txt";
+			File file=new File(path);
 			if(!file.exists())
 				try {
 					file.createNewFile();
@@ -297,7 +313,7 @@ public class ScoresWebInc {
 			e.printStackTrace();
 		}
 		
-		
+		return path;
 		
 		
 		
