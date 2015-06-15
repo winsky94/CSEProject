@@ -27,11 +27,9 @@ public class Match extends UnicastRemoteObject implements MatchDataService {
 		Match match;
 		try {
 			match = new Match();
-			ArrayList<MatchPO> matches = match.getMatchData("13-14", "01-01",
-					"LAC", "all");
-			for (MatchPO po : matches) {
-				System.out.println(po.getDetailScores().get(0));
-			}
+			ArrayList<MatchPO> result = match.getMatchData("all", "all","all",
+					"all");
+			System.out.println(result.size());
 		} catch (RemoteException e) {
 			// TODO 自动生成的 catch 块
 			e.printStackTrace();
