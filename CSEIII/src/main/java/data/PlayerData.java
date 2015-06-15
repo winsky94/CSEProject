@@ -1243,6 +1243,8 @@ public class PlayerData  implements PlayerDataService{
 					if(isin==true)
 						break;
 				}
+				if(isin==true)
+					break;
 			}
 			if(isin==false)
 				return result;
