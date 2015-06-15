@@ -56,10 +56,10 @@ public class MatchCardThread extends Thread{
 		for (int i=0;i<matchlist.size();i++) {
 			MatchVO m=matchlist.get(i);
 			MatchCard card1 = new MatchCard(m);
-			if(m.getDetailScores()==null||m.getHomeScore()==0){
+		
 				card1.setLive(true);
 				card1.setGameID(line.get(i));
-			}
+			
 			p.add(card1);
 			pp.revalidate();
 			
