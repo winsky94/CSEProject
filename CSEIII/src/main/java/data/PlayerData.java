@@ -587,7 +587,6 @@ public class PlayerData  implements PlayerDataService{
 		}
 		
 		private boolean isIn(String season,String type,String name){
-			PlayerVO player;
 			String seasonbuffer=season.replace("-", "");
 			String namebuffer=name.replace("'", "''");
 			boolean result=true;
@@ -597,6 +596,7 @@ public class PlayerData  implements PlayerDataService{
 				String query = "select * from "+seasonbuffer+"_"+type+"_"+"playerAverage where name="
 						+ "'"+ namebuffer + "' limit 1";
 				ResultSet rs = sql.executeQuery(query);
+				rs.next();
 				if(rs.getRow()==0)
 					result=false;
 
@@ -1600,7 +1600,7 @@ public class PlayerData  implements PlayerDataService{
 		playerDataReader.getPlayerRecentAverageInfo("32823473");
 //		System.out.println(playerDataReader.getRankInNBA("Kobe Bryant", "desc"));
 //		playerDataReader.singleElementVarianceAnalysis();
-		playerDataReader.getRecentMatches("Aaron Miles", 5);
+		System.out.println(playerDataReader.getRecentMatches("Kobe Bryant", 5).size());
 		long end = System.currentTimeMillis();
 		System.out.println("运行时间：" + (end - start) + "毫秒");// 应该是end - start
 	}
