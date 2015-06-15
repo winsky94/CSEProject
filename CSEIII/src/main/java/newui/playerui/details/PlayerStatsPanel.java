@@ -21,6 +21,7 @@ import javax.swing.JTable;
 import newui.Service;
 import newui.Style;
 import newui.statsui.FangChaTableModel;
+import newui.tables.MyTableCellRenderer;
 
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
@@ -154,14 +155,15 @@ public class PlayerStatsPanel extends JPanel {
 		infoPnl = new JPanel();
 		infoPnl.setBackground(Color.white);
 		bottomPnl.add(infoPnl);
-		infoPnl.setLayout(new GridLayout(2,1));
-		JLabel tableTitle=new JLabel("球龄对Gmsc效率值的显著性影响分析方差汇总表",JLabel.CENTER);
-		tableTitle.setFont(new Font("微软雅黑",Font.PLAIN,15));
+		infoPnl.setLayout(new GridLayout(2, 1));
+		JLabel tableTitle = new JLabel("球龄对Gmsc效率值的显著性影响分析方差汇总表", JLabel.CENTER);
+		tableTitle.setFont(new Font("微软雅黑", Font.PLAIN, 15));
 		infoPnl.add(tableTitle);
 		// -----------------------
-		ftm=new FangChaTableModel(player.singleElementVarianceAnalysis(pname));
-		table=new JTable(ftm);
-		jsp=new JScrollPane(table);
+		ftm = new FangChaTableModel(player.singleElementVarianceAnalysis(pname));
+		table = new JTable(ftm);
+		CellRender(table);
+		jsp = new JScrollPane(table);
 		infoPnl.add(jsp);
 
 	}
@@ -238,7 +240,7 @@ public class PlayerStatsPanel extends JPanel {
 			list.add(player.getPlayerAverageInfo("14-15", "Team", name));
 			String[] years = { "2010", "2011", "2012", "2013", "2014" };
 			if (item.equals("得分")) {
-				
+
 				for (int i = 0; i < 5; i++) {
 					if (list.get(i).size() == 0)
 						dataset.addValue(0.0, name, years[i]);
@@ -246,46 +248,46 @@ public class PlayerStatsPanel extends JPanel {
 						dataset.addValue(list.get(i).get(0).getScore(), name,
 								years[i]);
 				}
-				return makeChart("近五年得分","年","得分",dataset);
+				return makeChart("近五年得分", "年", "得分", dataset);
 			} else if (item.equals("篮板")) {
 				for (int i = 0; i < 5; i++) {
 					if (list.get(i).size() == 0)
 						dataset.addValue(0.0, name, years[i]);
 					else
-						dataset.addValue(list.get(i).get(0).getReboundNum(), name,
-								years[i]);
+						dataset.addValue(list.get(i).get(0).getReboundNum(),
+								name, years[i]);
 				}
-				return makeChart("近五年篮板","年","篮板数",dataset);
+				return makeChart("近五年篮板", "年", "篮板数", dataset);
 
 			} else if (item.equals("助攻")) {
 				for (int i = 0; i < 5; i++) {
 					if (list.get(i).size() == 0)
 						dataset.addValue(0.0, name, years[i]);
 					else
-						dataset.addValue(list.get(i).get(0).getAssistNum(), name,
-								years[i]);
+						dataset.addValue(list.get(i).get(0).getAssistNum(),
+								name, years[i]);
 				}
-				return makeChart("近五年助攻","年","助攻数",dataset);
+				return makeChart("近五年助攻", "年", "助攻数", dataset);
 
 			} else if (item.equals("三分%")) {
 				for (int i = 0; i < 5; i++) {
 					if (list.get(i).size() == 0)
 						dataset.addValue(0.0, name, years[i]);
 					else
-						dataset.addValue(list.get(i).get(0).getThreeHitRate(), name,
-								years[i]);
+						dataset.addValue(list.get(i).get(0).getThreeHitRate(),
+								name, years[i]);
 				}
-				return makeChart("近五年三分%","年","三分%",dataset);
+				return makeChart("近五年三分%", "年", "三分%", dataset);
 
 			} else if (item.equals("罚球%")) {
 				for (int i = 0; i < 5; i++) {
 					if (list.get(i).size() == 0)
 						dataset.addValue(0.0, name, years[i]);
 					else
-						dataset.addValue(list.get(i).get(0).getFreeThrowHitRate(), name,
-								years[i]);
+						dataset.addValue(list.get(i).get(0)
+								.getFreeThrowHitRate(), name, years[i]);
 				}
-				return makeChart("近五年罚球%","年","罚球%",dataset);
+				return makeChart("近五年罚球%", "年", "罚球%", dataset);
 			}
 
 		}
@@ -338,6 +340,18 @@ public class PlayerStatsPanel extends JPanel {
 			super(text);
 			setFont(font);
 			setForeground(Style.DEEP_BLUE);
+		}
+	}
+
+	public void CellRender(JTable table) {
+		table.setSelectionBackground(new Color(225, 255, 255));// 设置选择行的颜色——淡蓝色
+		table.setFont(new Font("微软雅黑", 0, 12));
+		table.getTableHeader().setFont(new Font("微软雅黑", 0, 14));
+		table.getTableHeader().setForeground(Color.white);
+		table.getTableHeader().setBackground(Style.FOCUS_BLUE);
+		MyTableCellRenderer tcr = new MyTableCellRenderer();
+		for (int i = 0; i < table.getColumnCount(); i++) {
+			table.getColumn(table.getColumnName(i)).setCellRenderer(tcr);
 		}
 	}
 }
