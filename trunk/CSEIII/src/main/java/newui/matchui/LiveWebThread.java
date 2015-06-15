@@ -79,10 +79,11 @@ public class LiveWebThread extends Thread{
 			}
 			//System.out.println(s.size());
 			if(s.size()>0)
-				if(s.get(0).contains("00:00.0"))
+				if(s.get(0).contains("本节比赛结束"))
 					{line+=1;size=0;
 					 isOverLastLine=true;
 					}else{
+						
 						isOverLastLine=false;
 					}
 			if(line>4){
