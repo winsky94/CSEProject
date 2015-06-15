@@ -188,6 +188,7 @@ public class MatchIndexPanel extends FatherPanel {
 		}
 	}
 	public void TodayMatchRefresh(){
+		boolean isTodayLive=true;
 		LiveWebInc c=new LiveWebInc();
 		ArrayList<ArrayList<String>> result=c.getGameStatus(c.getTodayEDate());
 		if(result.size()==0){
@@ -196,7 +197,7 @@ public class MatchIndexPanel extends FatherPanel {
 		}else{
 			Calendar time=Calendar.getInstance();
 			String month=(time.get(Calendar.MONTH)+1)+"";
-			String day=(time.get(Calendar.DATE)+1)+"";
+			String day=(time.get(Calendar.DATE))+"";
 			if(month.length()==1)
 				month="0"+month;
 			if(day.length()==1)
@@ -210,21 +211,8 @@ public class MatchIndexPanel extends FatherPanel {
 			for(ArrayList<String> line:result){
 			//	gameid.add(line.get(0));
 				String[] s=line.get(2).split("/");
-//			if(line.get(1).equals("1")){
-//					//no start
-//					//String season, String date, String type,
-//					//String visitingTeam, String homeTeam
-//					MatchVO v=new MatchVO("14-15",date,"Playoff",s[1].substring(0, 3),
-//							s[1].substring(3, 6));
-//					list.add(v);
-//				}else if(line.get(1).equals("2")){
-//					//ing need to start thread
-//					MatchVO v=new MatchVO("14-15",date,"Playoff",s[1].substring(0, 3),
-//							s[1].substring(3, 6));
-//					list.add(v);
-//				}else if(line.get(1).equals("3")){
-					//over all can process from sql
-					// or through web get the detai score
+				if(!line.get(1).equals("3")){
+//			
 					ArrayList<String> detail=getDetailScore(line.get(0));
 					String[] ss=detail.get(0).split("-");
 					detail.remove(0);
@@ -233,13 +221,18 @@ public class MatchIndexPanel extends FatherPanel {
 							Integer.parseInt(ss[1]),detail);
 					list.add(v);
 					
-				//}
+				}else{
+					isTodayLive=false;
+					searchRefresh("all","all",date);
+				}
 			}
+			if(isTodayLive){
 			JPanel BIGPNL = new JPanel();
 			BIGPNL.setBackground(Color.white);
 			jsp.getViewport().add(BIGPNL);
 			MatchCardThread th = new MatchCardThread(list, BIGPNL, jsp, result);
 			th.start();
+			}
 		}
 	}
 
