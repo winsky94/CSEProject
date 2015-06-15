@@ -31,6 +31,8 @@ import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.JTableHeader;
 
+import bl.LiveTxt;
+import blService.LiveTxtBLService;
 import newui.Style;
 import vo.LiveMatchDetailVO;
 
@@ -55,7 +57,7 @@ public class LiveTextPanel extends JPanel implements ActionListener,MouseListene
 	String season;
 	String date;
 	String teams;
-	
+	LiveTxtBLService livetext=new LiveTxt();
     
     public LiveTextPanel(String team1,String team2,String season,String date){
     	partNum=1;
@@ -177,7 +179,7 @@ public class LiveTextPanel extends JPanel implements ActionListener,MouseListene
 	    	for(int i=data.size()-1;i>=0;i--){
 	    		String s=data.get(i);
 		    	matches.get(partNum).add(0,new LiveMatchDetailVO("null", "null", "null", partNum, partNum, s));
-		    	aa
+		    	livetext.addToSql(s);
 	    	}
 		    mtm.add(data);
 	        jt.revalidate();
