@@ -272,7 +272,7 @@ public class TeamWindow extends JWindow implements MouseListener {
 
 		public MyButton(String name) {
 			super(name,JLabel.LEFT);
-			ImageIcon i=Team.getTeamImage(name);
+			ImageIcon i=Team.getTeamImage(Team.changeTeamNameCHToEN(name));
 			i.setImage(i.getImage().getScaledInstance(35,35, Image.SCALE_SMOOTH));
 			setIcon(i);
 			setFont(font);
