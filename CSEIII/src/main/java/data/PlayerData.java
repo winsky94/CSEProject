@@ -12,6 +12,8 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.omg.CORBA.IRObject;
+
 import com.mysql.jdbc.Buffer;
 
 import vo.MatchVO;
@@ -582,6 +584,33 @@ public class PlayerData  implements PlayerDataService{
 		}
 
 		return result;
+		}
+		
+		private boolean isIn(String season,String type,String name){
+			PlayerVO player;
+			String seasonbuffer=season.replace("-", "");
+			String namebuffer=name.replace("'", "''");
+			boolean result=true;
+			try {
+				Connection con = SqlManager.getConnection();
+				Statement sql = con.createStatement();
+				String query = "select * from "+seasonbuffer+"_"+type+"_"+"playerAverage where name="
+						+ "'"+ namebuffer + "' limit 1";
+				ResultSet rs = sql.executeQuery(query);
+				if(rs.getRow()==0)
+					result=false;
+
+				rs.close();
+				sql.close();	
+				con.close();
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return result;
 		}
 
 		
@@ -1203,7 +1232,21 @@ public class PlayerData  implements PlayerDataService{
 		public ArrayList<MatchVO> getRecentMatches(String playerName, int num) {
 			ArrayList<MatchVO> result = new ArrayList<MatchVO>();
 			int count = 0;
-			ArrayList<MatchVO> allSeasonMatches=getSeasonMatches("14-15", "all");
+			String[] season=new String[]{"14-15","13-14","12-13","11-12","10-11"};
+			String[] type=new String[]{"Playoff","Team","Preseason"};
+			int i=0;
+			int j=0;
+			boolean isin=false;
+			for(i=0;i<season.length;i++){
+				for(j=0;j<type.length;j++){
+					isin=isIn(season[i], type[j], playerName);
+					if(isin==true)
+						break;
+				}
+			}
+			if(isin==false)
+				return result;
+			ArrayList<MatchVO> allSeasonMatches=getSeasonMatches(season[i], type[j]);
 			Collections.sort(allSeasonMatches, new SequenceOfMatch());
 			for (MatchVO vo : allSeasonMatches) {
 				for (RecordVO vv : vo.getRecords()) {
@@ -1277,7 +1320,7 @@ public class PlayerData  implements PlayerDataService{
 			int count=1;
 			ArrayList<PlayerVO> players=getPlayerActiveBaseInfo();
 			Collections.sort(players, new SequenceOfPlayer("exp","asc"));
-			ArrayList<Integer> random=new ArrayList<Integer>()                                                       {{add(36);add(42);add(45);add(46);add(47);add(52);add(53);add(56);}};
+			ArrayList<Integer> random=new ArrayList<Integer>()                                                                                                                       {{add(36);add(42);add(45);add(46);add(47);add(52);add(53);add(56);}};
 			for(PlayerVO player:players){
 				xy=new double[2];
 				isFiveFull=true;
@@ -1551,11 +1594,11 @@ public class PlayerData  implements PlayerDataService{
 //		System.out.println(playerDataReader.getPlayerAverageInfo("13-14", "Playoff").size());
 //		System.out.println(playerDataReader.selectPlayersBySeason("12-13", "Preseason", "F", "E", "score", "desc", 5).size());
 //		System.out.println(playerDataReader.getDayHotPlayer("score", 5).size());
-//	    playerDataReader.getPlayersByTeam("BKN");
-//		playerDataReader.getRecentMatches("Kobe Bryant", 5);
-//		playerDataReader.getPlayerRecentAverageInfo("32823473");
+//	    playerDataReader.getPlayersByTeam("BKN");		playerDataReader.getRecentMatches("Kobe Bryant", 5);
+		playerDataReader.getPlayerRecentAverageInfo("32823473");
 //		System.out.println(playerDataReader.getRankInNBA("Kobe Bryant", "desc"));
 //		playerDataReader.singleElementVarianceAnalysis();
+		playerDataReader.getRecentMatches("Aaron Miles", 5);
 		long end = System.currentTimeMillis();
 		System.out.println("运行时间：" + (end - start) + "毫秒");// 应该是end - start
 	}
