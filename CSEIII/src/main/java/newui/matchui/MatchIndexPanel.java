@@ -236,7 +236,7 @@ public class MatchIndexPanel extends FatherPanel {
 				//}
 			}
 			JPanel BIGPNL = new JPanel();
-			BIGPNL.setBackground(Color.red);
+			BIGPNL.setBackground(Color.white);
 			jsp.getViewport().add(BIGPNL);
 			MatchCardThread th = new MatchCardThread(list, BIGPNL, jsp, result);
 			th.start();
