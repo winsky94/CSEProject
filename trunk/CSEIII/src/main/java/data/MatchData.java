@@ -20,8 +20,7 @@ import dataservice.MatchDataService;
 
 /**
  * 从文件中读取数据，用于将比赛数据读到数据库中 数据分为三个表存储
- * matches：存储比赛的编号、赛季、日期、主客队名称、比分等（主客队和相应的比分都分开存）
- * records：存储比赛的每个球员的比赛ID、所属球队名称以及一些基本的技术数据 detail
+ * matches：存储比赛的编号、赛季、日期、主客队名称、比分（主客队和相应的比分都分开存）和技术统计记录
  * Scores：存储比赛的ID，每节的比分信息(考虑到加时赛，所以一节比分是一个元组)
  */
 public class MatchData implements MatchDataService {
@@ -796,7 +795,7 @@ public class MatchData implements MatchDataService {
 					+ "score varchar(20) not null default 'null',"
 					+ "primary key(detailID));");
 
-			// 创建records表
+			// 创建matches表
 			sql.execute("create table matches(recordID int not null auto_increment,"
 					+ "matchID int not null default -1,"
 					+ "season varchar(20) not null default 'null',"
@@ -927,6 +926,176 @@ public class MatchData implements MatchDataService {
 				}
 				System.out.println(test++);
 			}
+			// matchesStatement.executeBatch();
+			detailScoreStatement.executeBatch();
+			recordsStatement.executeBatch();
+			con.commit();
+			// matchesStatement.close();
+			detailScoreStatement.close();
+			recordsStatement.close();
+			con.close();
+		} catch (java.lang.ClassNotFoundException e) {
+			System.err.println("ClassNotFoundException:" + e.getMessage());
+		} catch (SQLException ex) {
+			ex.printStackTrace();
+		}
+	}
+
+	public void exportLiveToSql(String fileName) {
+		MatchVO matchVO = readFromMatchFile(fileName);
+		try {
+			Connection con = SqlManager.getConnection();
+			con.setAutoCommit(false);
+			Statement sql = con.createStatement();
+			// sql.execute("drop table if exists matches");
+			sql.execute("drop table if exists detailScores");
+			sql.execute("drop table if exists matches");
+
+			// // 创建matches表
+			// sql.execute("create table matches(matchID int not null auto_increment,"
+			// + "season varchar(20) not null default 'null',"
+			// + "date varchar(20) not null default 'null',"
+			// + "type varchar(20) not null default 'null',"
+			// + "visitingTeam varchar(20) not null default 'null',"
+			// + "visitingScore int not null default 0,"
+			// + "homeTeam varchar(20) not null default 'null',"
+			// + "homeScore int not null default 0,"
+			// + "time int not null default 0," + "primary key(matchID));");
+			//
+			// 创建detailScores表
+			sql.execute("create table detailScores(detailID int not null auto_increment,"
+					+ "matchID int not null default -1,"
+					+ "part int not null default -1,"
+					+ "score varchar(20) not null default 'null',"
+					+ "primary key(detailID));");
+
+			// 创建matches表
+			sql.execute("create table matches(recordID int not null auto_increment,"
+					+ "matchID int not null default -1,"
+					+ "season varchar(20) not null default 'null',"
+					+ "date varchar(20) not null default 'null',"
+					+ "type varchar(20) not null default 'null',"
+					+ "visitingTeam varchar(20) not null default 'null',"
+					+ "visitingScore int not null default 0,"
+					+ "homeTeam varchar(20) not null default 'null',"
+					+ "homeScore int not null default 0,"
+					+ "time int not null default 0,"
+					+ "team varchar(20) not null default 'null',"
+					+ "playerName varchar(40) not null default 'null',"
+					+ "presentTime varchar(20) not null default 'null',"
+					+ "position varchar(20) not null default 'null',"
+					+ "shootHitNum int not null default 0,"
+					+ "shootAttemptNum int not null default 0,"
+					+ "shootHitRate double not null default 0,"
+					+ "threeHitNum int not null default 0,"
+					+ "threeAttemptNum int not null default 0,"
+					+ "threeHitRate double not null default 0,"
+					+ "freeThrowHitNum int not null default 0,"
+					+ "freeThrowAttemptNum int not null default 0,"
+					+ "freeThrowHitRate double not null default 0,"
+					+ "offenReboundNum int not null default 0,"
+					+ "defenReboundNum int not null default 0,"
+					+ "reboundNum int not null default 0,"
+					+ "assistNum int not null default 0,"
+					+ "stealNum int not null default 0,"
+					+ "blockNum int not null default 0,"
+					+ "turnOverNum int not null default 0,"
+					+ "foulNum int not null default 0,"
+					+ "score int not null default 0,"
+					+ "primary key(recordID));");
+
+			// index分别表示各表的id
+			int scoreIndex = 1;
+			int recordIndex = 1;
+
+			int test = 1;// 用于标示数据录入过程的，无多大实际意义
+
+			sql.close();
+			// PreparedStatement matchesStatement = con
+			// .prepareStatement("INSERT INTO matches VALUES(?,?,?,?,?,?,?,?,?)");
+			PreparedStatement detailScoreStatement = con
+					.prepareStatement("INSERT INTO detailScores VALUES(?, ?,?,?)");
+			PreparedStatement recordsStatement = con
+					.prepareStatement("INSERT INTO matches VALUES(?,?,?,?,?,? ,?, ?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+
+			// 向matches表中插入数据
+			if (matchVO == null) {
+				return;
+			}
+			String visitingTeam = matchVO.getVisitingTeam();
+			String homeTeam = matchVO.getHomeTeam();
+			int visitingScore = matchVO.getVisitingScore();
+			int homeScore = matchVO.getHomeScore();
+			int parts = matchVO.getDetailScores().size();
+			if (parts <= 4) {
+				time = 48;
+			} else {
+				time = 48 + (parts - 4) * 5;
+			}
+			time = time * 60;
+			// matchesStatement.setInt(1, matchVO.getMatchID());
+			// matchesStatement.setString(2, matchVO.getSeason());
+			// matchesStatement.setString(3, matchVO.getDate());
+			// matchesStatement.setString(4, matchVO.getType());
+			// matchesStatement.setString(5, visitingTeam);
+			// matchesStatement.setInt(6, visitingScore);
+			// matchesStatement.setString(7, homeTeam);
+			// matchesStatement.setInt(8, homeScore);
+			// matchesStatement.setInt(9, time);
+			// matchesStatement.addBatch();
+			//
+			// 向detailScores表中插入数据
+			ArrayList<String> detailScore = matchVO.getDetailScores();
+			int partIndex = 1;
+			for (String s : detailScore) {
+				detailScoreStatement.setInt(1, scoreIndex);
+				detailScoreStatement.setInt(2, matchVO.getMatchID());
+				detailScoreStatement.setInt(3, partIndex);
+				detailScoreStatement.setString(4, s);
+				detailScoreStatement.addBatch();
+				partIndex++;
+				scoreIndex++;
+			}
+
+			// 向records表中插入数据
+			ArrayList<RecordVO> records = matchVO.getRecords();
+			for (RecordVO recordPO : records) {
+				recordsStatement.setInt(1, recordIndex);
+				recordsStatement.setInt(2, matchVO.getMatchID());
+				recordsStatement.setString(3, matchVO.getSeason());
+				recordsStatement.setString(4, matchVO.getDate());
+				recordsStatement.setString(5, matchVO.getType());
+				recordsStatement.setString(6, visitingTeam);
+				recordsStatement.setInt(7, visitingScore);
+				recordsStatement.setString(8, homeTeam);
+				recordsStatement.setInt(9, homeScore);
+				recordsStatement.setInt(10, time);
+				recordsStatement.setString(11, recordPO.getTeam());
+				recordsStatement.setString(12, recordPO.getPlayerName());
+				recordsStatement.setString(13, recordPO.getPresentTime());
+				recordsStatement.setString(14, recordPO.getPosition());
+				recordsStatement.setInt(15, recordPO.getShootHitNum());
+				recordsStatement.setInt(16, recordPO.getShootAttemptNum());
+				recordsStatement.setDouble(17, recordPO.getShootHitRate());
+				recordsStatement.setInt(18, recordPO.getThreeHitNum());
+				recordsStatement.setInt(19, recordPO.getThreeAttemptNum());
+				recordsStatement.setDouble(20, recordPO.getThreeHitRate());
+				recordsStatement.setInt(21, recordPO.getFreeThrowHitNum());
+				recordsStatement.setInt(22, recordPO.getFreeThrowAttemptNum());
+				recordsStatement.setDouble(23, recordPO.getFreeThrowHitRate());
+				recordsStatement.setInt(24, recordPO.getOffenReboundNum());
+				recordsStatement.setInt(25, recordPO.getDefenReboundNum());
+				recordsStatement.setInt(26, recordPO.getReboundNum());
+				recordsStatement.setInt(27, recordPO.getAssistNum());
+				recordsStatement.setInt(28, recordPO.getStealNum());
+				recordsStatement.setInt(29, recordPO.getBlockNum());
+				recordsStatement.setInt(30, recordPO.getTurnOverNum());
+				recordsStatement.setInt(31, recordPO.getFoulNum());
+				recordsStatement.setInt(32, recordPO.getScore());
+				recordsStatement.addBatch();
+				recordIndex++;
+			}
+			System.out.println(test++);
 			// matchesStatement.executeBatch();
 			detailScoreStatement.executeBatch();
 			recordsStatement.executeBatch();
