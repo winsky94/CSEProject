@@ -257,21 +257,24 @@ public class HotSeasonPanel extends HotFatherPanel implements MouseListener {
 					150, Image.SCALE_SMOOTH));
 			bestTeamIcon.setIcon(bestTeamIco);
 			if (sort.equals("score")) {
-				data.setText(topOne.getScore() + "");
+				data.setText(MyUIDataFormater.formatTo1(topOne.getScore()));
 			} else if (sort.equals("reboundNum")) {
-				data.setText(topOne.getReboundNum() + "");
+				data.setText(MyUIDataFormater.formatTo1(topOne.getReboundNum()));
 			} else if (sort.equals("assistNum")) {
-				data.setText(topOne.getAssistNum() + "");
+				data.setText(MyUIDataFormater.formatTo1(topOne.getAssistNum()));
 			} else if (sort.equals("blockNum")) {
-				data.setText(topOne.getBlockNum() + "");
+				data.setText(MyUIDataFormater.formatTo1(topOne.getBlockNum()));
 			} else if (sort.equals("stealNum")) {
-				data.setText(topOne.getStealNum() + "");
+				data.setText(MyUIDataFormater.formatTo1(topOne.getStealNum()));
 			} else if (sort.equals("threeHitRate")) {
-				data.setText(topOne.getThreeHitRate() + "");
+				data.setText(MyUIDataFormater.formatTo1(topOne
+						.getThreeHitRate() * 100));
 			} else if (sort.equals("shootHitRate")) {
-				data.setText(topOne.getShootHitRate() + "");
+				data.setText(MyUIDataFormater.formatTo1(topOne
+						.getShootHitRate() * 100));
 			} else {
-				data.setText(topOne.getFreeThrowHitRate() + "");
+				data.setText(MyUIDataFormater.formatTo1(topOne
+						.getFreeThrowHitRate() * 100));
 			}
 			model.Refresh(vlist);
 			table.revalidate();
@@ -427,21 +430,21 @@ public class HotSeasonPanel extends HotFatherPanel implements MouseListener {
 				line.add(v.getOwingTeam());
 				line.add(v.getPosition());
 				if (currentBtn == scoreBtn) {
-					line.add(v.getScore());
+					line.add(MyUIDataFormater.formatTo1(v.getScore()));
 				} else if (currentBtn == reboundBtn)
-					line.add(v.getReboundNum());
+					line.add(MyUIDataFormater.formatTo1(v.getReboundNum()));
 				else if (currentBtn == assistBtn)
-					line.add(v.getAssistNum());
+					line.add(MyUIDataFormater.formatTo1(v.getAssistNum()));
 				else if (currentBtn == blockBtn)
-					line.add(v.getBlockNum());
+					line.add(MyUIDataFormater.formatTo1(v.getBlockNum()));
 				else if (currentBtn == stealBtn)
-					line.add(v.getStealNum());
+					line.add(MyUIDataFormater.formatTo1(v.getStealNum()));
 				else if (currentBtn == threeRateBtn)
-					line.add(MyUIDataFormater.formatTo1(v.getThreeHitRate()*100));
+					line.add(MyUIDataFormater.formatTo1(v.getThreeHitRate() * 100)+"%");
 				else if (currentBtn == shootRateBtn)
-					line.add(MyUIDataFormater.formatTo1(v.getShootHitRate()*100));
+					line.add(MyUIDataFormater.formatTo1(v.getShootHitRate() * 100)+"%");
 				else
-					line.add(MyUIDataFormater.formatTo1(v.getFreeThrowHitRate()*100));
+					line.add(MyUIDataFormater.formatTo1(v.getFreeThrowHitRate() * 100)+"%");
 				content.add(line);
 			}
 
