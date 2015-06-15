@@ -1,5 +1,7 @@
 package newui.statsui;
 
+import java.awt.BasicStroke;
+import java.awt.Color;
 import java.awt.Font;
 import java.util.ArrayList;
 
@@ -12,7 +14,10 @@ import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.chart.plot.ValueMarker;
+import org.jfree.chart.plot.XYPlot;
 import org.jfree.data.xy.DefaultXYDataset;
+import org.jfree.ui.Layer;
 
 import blService.PlayerBLService;
 
@@ -61,6 +66,15 @@ public class AgePanel extends FatherPanel {
 		JFreeChart chart = ChartFactory.createScatterPlot(
 				"SingleElementVarianceAnalysis", "Exp", "Fa", xydataset,
 				PlotOrientation.VERTICAL, false, false, false);
+		XYPlot plot=chart.getXYPlot();
+		ValueMarker valuemarker1= new ValueMarker(6.503); 
+		ValueMarker valuemarker2= new ValueMarker(17.288); 
+		valuemarker1.setPaint(Color.GREEN);
+		valuemarker1.setStroke(new BasicStroke(3.0f)); 
+		valuemarker2.setPaint(Color.GREEN);
+		valuemarker2.setStroke(new BasicStroke(3.0f)); 
+		plot.addRangeMarker(valuemarker1, Layer.BACKGROUND);
+		plot.addRangeMarker(valuemarker2, Layer.BACKGROUND);
 		return chart;
 	}
 }
