@@ -57,9 +57,10 @@ public class MatchCardThread extends Thread{
 			MatchVO m=matchlist.get(i);
 			MatchCard card1 = new MatchCard(m);
 		
+				
+				if(line!=null)
+					card1.setGameID(line.get(i));
 				card1.setLive(true);
-				card1.setGameID(line.get(i));
-			
 			p.add(card1);
 			pp.revalidate();
 			
