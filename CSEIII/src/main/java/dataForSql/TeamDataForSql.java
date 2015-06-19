@@ -27,35 +27,38 @@ import dataservice.MatchDataService;
  * 从文件中读取数据，用于将球队的基本数据存储到数据库中 表名：teams
  */
 public class TeamDataForSql {
-	Connection connection = null;
-	Statement sql = null;
-	ResultSet resultSet = null;
+	private Connection connection = null;
+	private Statement sql = null;
+	private ResultSet resultSet = null;
 	private ArrayList<TeamVO> teamBaseList = new ArrayList<TeamVO>();
 	private Map<String, TeamVO> teamsBaseInfo = new LinkedHashMap<String, TeamVO>();
 	private MatchDataService matchData;
 
 	public static void main(String[] args) {
 		TeamDataForSql teamDataForSql=new TeamDataForSql();
-		MatchDataService match=new MatchData();
-		ArrayList<String> seasons=match.getAllSeasons();
-		String[] types={"Preseason","Team","Playoff"};
-//		for(int i=0;i<seasons.size();i++){
-//			String season = seasons.get(i);
-//			for(int j=0;j<types.length;j++){
-//				String type=types[j];
-//				teamDataForSql.exportCalculatedDataToSql(season,type);
-//				System.out.println(season+"_"+type+"好啦！");
-//			}
-//		}
-		for(int j=0;j<types.length;j++){
-			String type=types[j];
-			teamDataForSql.exportCalculatedDataToSql("14-15",type);
-			System.out.println("14-15"+"_"+type+"好啦！");
-		}
-		System.out.println("好啦");
-		
+		teamDataForSql.run();
 	}
 
+	public void run() {
+		TeamDataForSql teamDataForSql = new TeamDataForSql();
+		MatchDataService match = new MatchData();
+		ArrayList<String> seasons = match.getAllSeasons();
+		String[] types = { "Preseason", "Team", "Playoff" };
+		for (int i = 0; i < seasons.size(); i++) {
+			String season = seasons.get(i);
+			for (int j = 0; j < types.length; j++) {
+				String type = types[j];
+				teamDataForSql.exportCalculatedDataToSql(season, type);
+				System.out.println(season + "_" + type + "好啦！");
+			}
+		}
+		System.out.println("好啦");
+	}
+
+	public TeamDataForSql(int i){
+		//use for init data
+	}
+	
 	public TeamDataForSql() {
 		matchData = new MatchData();
 		teamBaseList = myGetTeamBaseInfo();
@@ -130,7 +133,7 @@ public class TeamDataForSql {
 		return teams;
 	}
 
-	private void exportToSql() {
+	public void exportToSql() {
 		ArrayList<TeamVO> teams = getTeamListFromFile();
 		try {
 			Connection con = SqlManager.getConnection();
@@ -177,24 +180,28 @@ public class TeamDataForSql {
 	}
 
 	private void exportCalculatedDataToSql(String season, String type) {
-		int test=1;
-		createTable(season,type);
-		String tableBaseName=season.replace("-", "")+"_"+type+"_";
-		String tableAverageName=tableBaseName+"TeamAverage";
-		String tableSeasonName=tableBaseName+"TeamSeason";
+		int test = 1;
+		createTable(season, type);
+		String tableBaseName = season.replace("-", "") + "_" + type + "_";
+		String tableAverageName = tableBaseName + "TeamAverage";
+		String tableSeasonName = tableBaseName + "TeamSeason";
 		try {
 			connection = SqlManager.getConnection();
 			connection.setAutoCommit(false);
 			PreparedStatement seasonStatement = connection
-					.prepareStatement("INSERT INTO "+tableSeasonName+" VALUES(?, ?, ?, ?, ?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+					.prepareStatement("INSERT INTO "
+							+ tableSeasonName
+							+ " VALUES(?, ?, ?, ?, ?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
 			PreparedStatement averageStatement = connection
-					.prepareStatement("INSERT INTO "+tableAverageName+" VALUES(?, ?, ?, ?, ?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+					.prepareStatement("INSERT INTO "
+							+ tableAverageName
+							+ " VALUES(?, ?, ?, ?, ?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
 			sql = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
 					ResultSet.CONCUR_READ_ONLY);
 			ArrayList<TeamVO> teamSeasonInfo = getTeamSeasonInfo(season, type);
 			for (int i = 0; i < teamSeasonInfo.size(); i++) {
 				TeamVO vo = teamSeasonInfo.get(i);
-				seasonStatement.setInt(1, (i+1));
+				seasonStatement.setInt(1, (i + 1));
 				seasonStatement.setString(2, vo.getAbLocation());
 				seasonStatement.setString(3, season);
 				seasonStatement.setString(4, type);
@@ -228,12 +235,11 @@ public class TeamDataForSql {
 				seasonStatement.addBatch();
 				System.out.println(test++);
 			}
-			
 
 			ArrayList<TeamVO> teamAverageInfo = getTeamAverageInfo(season, type);
 			for (int i = 0; i < teamAverageInfo.size(); i++) {
 				TeamVO vo = teamAverageInfo.get(i);
-				averageStatement.setInt(1, (i+1));
+				averageStatement.setInt(1, (i + 1));
 				averageStatement.setString(2, vo.getAbLocation());
 				averageStatement.setString(3, season);
 				averageStatement.setString(4, type);
@@ -269,7 +275,7 @@ public class TeamDataForSql {
 			}
 			seasonStatement.executeBatch();
 			averageStatement.executeBatch();
-			
+
 			connection.commit();
 			seasonStatement.close();
 			averageStatement.close();
@@ -633,7 +639,7 @@ public class TeamDataForSql {
 					if (team.equals("NOP") || team.equals("NOH")) {
 						isRecord = recordVO.getTeam().equals("NOP")
 								|| recordVO.getTeam().equals("NOH");
-					}else if (team.equals("BKN") || team.equals("NJN")) {
+					} else if (team.equals("BKN") || team.equals("NJN")) {
 						isRecord = recordVO.getTeam().equals("BKN")
 								|| recordVO.getTeam().equals("NJN");
 					} else {
@@ -761,8 +767,6 @@ public class TeamDataForSql {
 			// isBKNSeason = true;
 		}
 
-		
-		
 		TeamVO teamVO = new TeamVO(teamName, abLocation, location, conference,
 				partition, homeCourt, setUpTime, matchesNum, shootHitNum,
 				shootAttemptNum, threeHitNum, threeAttemptNum, freeThrowHitNum,
@@ -859,16 +863,17 @@ public class TeamDataForSql {
 		return result;
 	}
 
-	private void createTable(String season ,String type) {
+	private void createTable(String season, String type) {
 		try {
-			String tableBaseName=season.replace("-", "")+"_"+type+"_";
-			String tableAverageName=tableBaseName+"TeamAverage";
-			String tableSeasonName=tableBaseName+"TeamSeason";
-			connection=SqlManager.getConnection();
+			String tableBaseName = season.replace("-", "") + "_" + type + "_";
+			String tableAverageName = tableBaseName + "TeamAverage";
+			String tableSeasonName = tableBaseName + "TeamSeason";
+			connection = SqlManager.getConnection();
 			sql = connection.createStatement();
-			
-			sql.execute("drop table if exists "+tableAverageName);
-			sql.execute("create table "+tableAverageName+"(teamDataID int not null auto_increment,"
+
+			sql.execute("drop table if exists " + tableAverageName);
+			sql.execute("create table " + tableAverageName
+					+ "(teamDataID int not null auto_increment,"
 					+ "team varchar(20) not null default 'null',"
 					+ "season varchar(20) not null default 'null',"
 					+ "type varchar(20) not null default 'null',"
@@ -903,8 +908,9 @@ public class TeamDataForSql {
 			sql.close();
 
 			sql = connection.createStatement();
-			sql.execute("drop table if exists "+tableSeasonName);
-			sql.execute("create table "+tableSeasonName+"(teamDataID int not null auto_increment,"
+			sql.execute("drop table if exists " + tableSeasonName);
+			sql.execute("create table " + tableSeasonName
+					+ "(teamDataID int not null auto_increment,"
 					+ "team varchar(20) not null default 'null',"
 					+ "season varchar(20) not null default 'null',"
 					+ "type varchar(20) not null default 'null',"
@@ -941,11 +947,11 @@ public class TeamDataForSql {
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
-		}finally{
+		} finally {
 			closeMySql();
 		}
 	}
-	
+
 	private void closeMySql() {
 		try {
 			if (resultSet != null) {
