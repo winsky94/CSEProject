@@ -20,9 +20,7 @@ public class Init {
 	
 	public void run(){
 		teamDataForSql.exportToSql();
-		
 		matchData.exportToSql();
-		teamDataForSql.run();
 		playerDataForSql.allInit();
 		playerIdData.exportToSql();
 		playerSalaryData.exportToSql();
