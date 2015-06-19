@@ -158,7 +158,7 @@ public class LiveTxtData implements LiveTxtDataService {
 		}
 	}
 	
-	private void exportToSql() {
+	public void exportToSql() {
 		ArrayList<String> files = new ArrayList<String>();
 		files = getMatchLiveFiles();
 		// create table matchLive
